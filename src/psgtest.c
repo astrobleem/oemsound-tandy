@@ -106,7 +106,8 @@ int main(void)
     sn_set_volume(3, 15);   /* silence noise */
 
     /* Fade out */
-    for (unsigned v = 4; v <= 15; ++v) {
+    unsigned v;
+    for (v = 4; v <= 15; ++v) {
         sn_set_volume(0, v);
         sn_set_volume(1, v);
         sn_set_volume(2, v);
