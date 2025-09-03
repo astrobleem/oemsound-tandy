@@ -2,8 +2,8 @@
  * Toolchain: Microsoft C 6.0 (C600)
  * Build:  cl /O /AS /Fepsgtest.exe src\psgtest.c
  */
-#include <dos.h>
-#include <conio.h>
+#include "dos.h"
+#include "conio.h"
 
 /* Tandy PSG port */
 #define SN_PORT 0xC0
