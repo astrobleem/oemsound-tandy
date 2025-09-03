@@ -40,7 +40,7 @@ static void sn_set_noise(unsigned mode)
 /* --- Timing using BIOS tick counter --- */
 static unsigned long get_ticks(void)
 {
-    unsigned long far *ticks = (unsigned long far*)MK_FP(BDA_SEG, BDA_TICKS_OFF);
+    volatile unsigned long far *ticks = (unsigned long far*)MK_FP(BDA_SEG, BDA_TICKS_OFF);
     return *ticks;
 }
 
