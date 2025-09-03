@@ -60,6 +60,10 @@ static void wait_ms(unsigned ms)
 static unsigned freq_to_period(unsigned freq_hz)
 {
     const unsigned long CLK = 3579545UL; /* verify on your board if needed */
+    if (freq_hz == 0) {
+        /* 0 Hz indicates silence; return max period to avoid divide-by-zero */
+        return 1023;
+    }
     unsigned long n = (CLK / 32UL) / (unsigned long)freq_hz;
     if (n < 1UL) n = 1UL;
     if (n > 1023UL) n = 1023UL;
