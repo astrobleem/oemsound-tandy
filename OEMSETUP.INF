@@ -1,0 +1,28 @@
+; OEMSETUP.INF for Tandy PSG Sound Driver
+; Windows 3.0/3.1 Installable Driver Configuration File
+; Compatible with Tandy 1000 series computers with SN76496 PSG
+; 
+; This driver provides MIDI output support for the Tandy PSG sound chip,
+; exposing 3 tone channels plus 1 noise channel as a Windows MIDI device.
+;
+; Installation: Run Windows Setup, choose "Add Unlisted or Updated Driver"
+; from Control Panel > Drivers, then specify the path to this disk.
+
+[disks]
+1 = "Tandy Sound Driver Disk", TANDYSND, TANDYSND
+
+[installable.drivers]
+tandy = 1:TANDYSND.DRV, "driver", "Tandy PSG Sound Driver", "Provides MIDI support for Tandy PSG (SN76496) sound chip"
+
+[tandy]
+1:TANDYSND.DRV = 1:TANDYSND.DRV, system
+profile = system.ini, drivers, tandy, 1:TANDYSND.DRV
+
+[tandy.files]
+1:TANDYSND.DRV
+
+[Default]
+drivers = tandy
+
+[Copy]
+tandy = 1:TANDYSND.DRV
