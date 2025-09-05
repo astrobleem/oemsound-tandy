@@ -1,5 +1,7 @@
 @echo off
-rem Build psgtest.exe with Microsoft C 6.0
-rem Assumes your C600 BIN is on PATH (as in your AUTOEXEC.BAT)
-cl /O /AS /Fepsgtest.exe src\psgtest.c > output.txt
-link /NOI /TINY src\psgtest.obj, psgtest.exe,,;    >link.txt
+set PATH=C:\BIN;C:\WINDOWS;C:\DOS
+set LIB=C:\LIB;C:\INCLUDE;C:\DDK\286\LIB
+set INCLUDE=C:\INCLUDE;C:\DDK\286\INC
+masm ADDNUM.ASM,ADDNUM.OBJ,,; > MASM.TXT
+cl /nologo /c /FoHELLOWOR.OBJ HELLOWOR.C > COMPILER.TXT
+echo. | link HELLOWOR.OBJ ADDNUM.OBJ,HELLOWOR.EXE,,; > LINKER.TXT
