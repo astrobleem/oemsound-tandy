@@ -9,12 +9,22 @@ The code targets 16-bit real-mode DOS/Windows and expects the Microsoft C 6.0 to
 - Testing should use real Tandy 1000 hardware or accurate emulation (e.g. DOSBox‑X with `machine=tandy`).
 
 ## Environment setup
-- Install **DOSBox‑X** or **PCem** and mount this repository and the compiler inside the emulator, e.g.:
-  
-  ```
-  dosbox-x -c "mount c /path/to/repo" -c "mount d /path/to/msc60" -c "c:"
-  ```
-- Verify the toolchain is on the DOS path with `cl /?` and `link /?`.
+- Install **dos2unix**, **unix2dos**, and the `file` utility in the host if editing outside DOS.
+- The repository includes Microsoft C 6.0 toolchain and headers under `BIN`, `INCLUDE`, `LIB`, and Windows 3.1 DDK sampl
+es under `DDK`.
+- Install **DOSBox‑X** or **PCem** and mount this repository inside the emulator, e.g.:
+
+```
+dosbox-x -c "mount c /path/to/repo" -c "c:"
+```
+- Before building, set environment variables:
+
+```
+set PATH=C:\BIN
+set LIB=C:\LIB
+set INCLUDE=C:\INCLUDE
+```
+- Verify the toolchain with `cl /?` and `link /?`.
 - As an open-source alternative, install **Open Watcom** (`wcl`, `wlink`).
 
 ## Coding style
@@ -26,35 +36,37 @@ The code targets 16-bit real-mode DOS/Windows and expects the Microsoft C 6.0 to
 - Functions with no parameters should use `void` in the signature.
 
 ## Build & test
-- Build by running `build.bat` inside the DOS environment:
+Build by running `build.bat` inside the DOS environment:
 
-  ```
-  build
-  ```
-- The script compiles `src\psgtest.c` and links a tiny-model executable using Microsoft C:
+```
+build
+```
+The script compiles `src\psgtest.c` and links a small-model executable using Microsoft C:
 
-  ```
-  cl /O /AS /Fepsgtest.exe src\psgtest.c > output.txt
-  link /NOI /TINY src\psgtest.obj, psgtest.exe,,; >link.txt
-  ```
-- Expected artifacts:
-  - `psgtest.exe` (~1–2 KB) – plays a C major arpeggio, brief noise burst, and fade‑out (~1.5 s total).
-  - `psgtest.obj`, `output.txt`, `link.txt`.
-- To validate a clean build:
-  1. `del *.exe *.obj *.txt`
-  2. `build`
-  3. `psgtest` (confirm audio sequence)
-- When driver sources are added, build `.DRV` files with the Windows 3.1 DDK.
+```
+cl /nologo /c /O /AS src\psgtest.c > output.txt
+echo. | link /NOI psgtest.obj,psgtest.exe,,; > link.txt
+```
+Expected artifacts:
+- `psgtest.exe` (~1–2 KB) – plays a C major arpeggio, brief noise burst, and fade‑out (~1.5 s total).
+- `psgtest.obj`, `output.txt`, `link.txt`.
+To validate a clean build:
+`del *.exe *.obj *.txt`
+`build`
+`psgtest` (confirm audio sequence)
+When driver sources are added, build `.DRV` files with the Windows 3.1 DDK.
 
 ## Test environment / CI
 - The default Linux container lacks a DOS emulator and the 16‑bit MS toolchain, so `build.bat` fails here.
 - To run builds automatically, provide:
-  - A DOS emulator such as **dosbox-x** or **pcem**.
-  - Microsoft C 6.0/7.0 binaries (`cl.exe`, `link.exe`, `lib.exe`) and libraries.
-  - Optionally, `Open Watcom` 16-bit tools (`wcl`, `wlink`) as an open-source alternative.
+- A DOS emulator such as **dosbox-x** or **pcem**.
+- Microsoft C 6.0/7.0 binaries (`cl.exe`, `link.exe`, `lib.exe`) and libraries.
+- Optionally, `Open Watcom` 16-bit tools (`wcl`, `wlink`) as an open-source alternative.
 - CI could invoke: `dosbox-x -c "mount c . & c: & build.bat"` once these dependencies exist.
 
 ## Pull request expectations
 - Keep commits focused and include relevant documentation updates.
 - Verify the build runs in your DOS environment and, when possible, attach the program output.
+- Remove compiled binaries and logs (`*.EXE`, `*.OBJ`, `*.TXT`) before committing.
+- Use DOS 8.3 filenames and maintain CRLF line endings (`unix2dos` can help).
 
