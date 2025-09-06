@@ -1,0 +1,11 @@
+[data]
+version="3.1"
+
+[disks]
+1=.,"Tandy MIDI Mapper Driver Disk",disk1
+
+[installable.drivers]
+TANDYMM=MIDIMAP.DRV,"Tandy MIDI Mapper","Tandy MIDI Mapper Driver",1
+
+[TANDYMM]
+driver=MIDIMAP.DRV
