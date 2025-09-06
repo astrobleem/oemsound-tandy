@@ -3,6 +3,16 @@
 This repository hosts a Windows 3.x sound driver and related utilities for Tandy 1000 machines.
 The code targets 16-bit real-mode DOS/Windows and expects the Microsoft C 6.0 toolchain.
 
+## Quick start checklist
+- Run `sudo apt-get update && sudo apt-get install -y dosbox-x dos2unix file`
+  to make sure DOSBox-X and line-ending tools are available.
+- Launch DOSBox-X with this repository mounted and switch to `C:`:
+  `dosbox-x -c "mount c /path/to/repo" -c "c:"`
+- Inside DOSBox-X set `PATH`, `LIB`, and `INCLUDE` for the bundled Microsoft C
+  toolchain (see below).
+- Clean old build artifacts with `del *.exe *.obj *.txt`, then run `build`
+  and execute `psgtest` to verify the expected audio output.
+
 ## Critical build constraints
 - **Do not attempt to build in a standard Linux shell.**
 - Requires a 16-bit DOS environment with Microsoft C 6.0 or 7.0 (`cl.exe`, `link.exe`, `lib.exe`).
