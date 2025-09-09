@@ -5,5 +5,7 @@ set INCLUDE=C:\INCLUDE;C:\DDK\286\INC;C:\DDK\MULTIMED\INC
 del *.EXE *.OBJ *.DRV *.TXT
 cl /nologo /c /O /AS src\PSGTEST.C > OUTPUT.TXT
 echo. | link /NOI PSGTEST.OBJ,PSGTEST.EXE,,; > LINK.TXT
+cl /nologo /c /O /AS src\WAVHYB.C >> OUTPUT.TXT
+echo. | link /NOI WAVHYB.OBJ,WAVHYB.EXE,,; >> LINK.TXT
 cl /nologo /c /AS /Gs src\MIDIMAP.C >> OUTPUT.TXT
 link /NOD MIDIMAP.OBJ,MIDIMAP.DRV,,,src\MIDIMAP.DEF >> LINK.TXT
