@@ -1,0 +1,103 @@
+{
+  "executable": {
+    "bytes": 3999,
+    "sha256": "c5fb46eaa1967b68d6769cb5e948496b8aeabaa09e8656a2afb07a1426432121",
+    "cpu": "/G0 8086",
+    "target": "Windows 3.0 real mode",
+    "compiler_flags": "/nologo /c /G0 /Gw /AS /W3 /Od"
+  },
+  "rebuild_identical": true,
+  "host_assertions_passed": 79,
+  "binary_reachable_instructions_checked": 1057,
+  "native_startup_cases": [
+    {
+      "case": "160-on",
+      "checks": {
+        "exited": true,
+        "observer_passed": true,
+        "unloaded": true,
+        "hidden": true,
+        "startup_concurrent": true,
+        "tones_or_disabled_silence": true,
+        "short_sound": true
+      },
+      "passed": true,
+      "seconds": 5.956,
+      "tone_amplitudes_pcm16": [
+        1313.96,
+        1311.92,
+        1307.95
+      ],
+      "audible_span_s": 0.842,
+      "wave_sha256": "22b0fb2c85b9f492916d85b0f238b7bc5667fbaf4eaf18a6ec79f4c1cbbce7b7"
+    },
+    {
+      "case": "6404-off",
+      "checks": {
+        "exited": true,
+        "observer_passed": true,
+        "unloaded": true,
+        "hidden": true,
+        "startup_concurrent": true,
+        "tones_or_disabled_silence": true,
+        "short_sound": true
+      },
+      "passed": true,
+      "seconds": 5.957,
+      "tone_amplitudes_pcm16": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "audible_span_s": 0,
+      "wave_sha256": "8ba214c5f8845aeb788b627af39e67d3df0b77655eb48063c3d5ff9ff7d12e5b"
+    },
+    {
+      "case": "baseline-on",
+      "checks": {
+        "exited": true,
+        "observer_passed": true,
+        "unloaded": true,
+        "hidden": true,
+        "startup_concurrent": true,
+        "tones_or_disabled_silence": true,
+        "short_sound": true
+      },
+      "passed": true,
+      "seconds": 6.431,
+      "tone_amplitudes_pcm16": [
+        1327.28,
+        1310.22,
+        1312.31
+      ],
+      "audible_span_s": 0.8346875,
+      "wave_sha256": "a439ca556c7b83babfc642a5c6d8812376d2938e8c30ddacbf25e6f976981019"
+    },
+    {
+      "case": "6404-on",
+      "checks": {
+        "exited": true,
+        "observer_passed": true,
+        "unloaded": true,
+        "hidden": true,
+        "startup_concurrent": true,
+        "tones_or_disabled_silence": true,
+        "short_sound": true
+      },
+      "passed": true,
+      "seconds": 5.978,
+      "tone_amplitudes_pcm16": [
+        1328.25,
+        1309.62,
+        1306.8
+      ],
+      "audible_span_s": 0.9027916666666667,
+      "wave_sha256": "17b49d055ccee820adec591f8aab2da291618e158ebb8236c7a26781f8bceea7"
+    }
+  ],
+  "limits": [
+    "Cooperative Windows timers can be delayed by non-yielding tasks.",
+    "Original physical Tandy hardware not tested.",
+    "No claim of full imported-runtime ISA audit."
+  ]
+}
