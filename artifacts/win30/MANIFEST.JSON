@@ -1,0 +1,578 @@
+{
+  "CHORD.WAV": {
+    "bytes": 153644,
+    "sha256": "32003c95c14d3c47bcb1e9ecd5b3567bc0c8f5e62190949ed7d28395c98259d9"
+  },
+  "DEMO.WAV": {
+    "bytes": 588800,
+    "sha256": "f86f50b73b36167fbef77b62f484b050c9a07b89be010ab50e0294a7a74f1b1e"
+  },
+  "DRVTEST.EXE": {
+    "bytes": 5631,
+    "sha256": "f881df63c9048d7edc77ab695015dea85cec149b10146a56506be14254510aaa"
+  },
+  "EVIDENCE/AUDIO-CROP.JSON": {
+    "bytes": 229,
+    "sha256": "7f25cc48b1537a4eec1da031ea1097187444b9ebdc80f00712b2dac9661b20c0"
+  },
+  "EVIDENCE/AUDIT/BINARY_AUDIT.PY": {
+    "bytes": 3212,
+    "sha256": "baa696ecc51a01b48ede1c8de220441b24c053d5effc7f05d90ff78e4cf1c65a"
+  },
+  "EVIDENCE/AUDIT/BINARY_AUDIT.json": {
+    "bytes": 1451,
+    "sha256": "f9e68081d551fecb9b269388b4992b230ccf089f5c69bbd0a122c637daaa11a4"
+  },
+  "EVIDENCE/AUDIT/HOST_LOGIC_RESULT.txt": {
+    "bytes": 54,
+    "sha256": "3405c97411fd5bcf58efd78a744514a4b3dcbe15efdfd7008be266b16328a53a"
+  },
+  "EVIDENCE/AUDIT/HOST_LOGIC_TEST.C": {
+    "bytes": 11342,
+    "sha256": "a5a469fe74f57fa09b82367e343fafb9c314e6a37e7780bd9690c940ddeb341d"
+  },
+  "EVIDENCE/AUDIT/SCOPE.txt": {
+    "bytes": 407,
+    "sha256": "68bf57f9e966f4e47d1eabe0a8e37c80c8f8cfb16d267d4f114439d5f2b4d739"
+  },
+  "EVIDENCE/AUDIT/SUITE03_AUDIT.json": {
+    "bytes": 2847,
+    "sha256": "23bc420fd1f2485c15404c6e77a172ea3bc572bb68bdd451e4861c3f2188088d"
+  },
+  "EVIDENCE/BUILD.JSON": {
+    "bytes": 212,
+    "sha256": "bc9e72ee4cc6a742df6b301984957b1f35567ae868d202fbdac12752e8fa3af4"
+  },
+  "EVIDENCE/BUILD.LOG": {
+    "bytes": 346,
+    "sha256": "7f8f2a1a3f101de32ed33270b91a445bf486f60ef1687d0a9a196fee31fb32b9"
+  },
+  "EVIDENCE/CHIME/160-on/BOOTTEST.LOG": {
+    "bytes": 99,
+    "sha256": "1b51da28824b3c1776beab1dcf92a58c00ff600bfa652dbca215db3cfe5d20b0"
+  },
+  "EVIDENCE/CHIME/160-on/CAPTURE.WAV": {
+    "bytes": 1143596,
+    "sha256": "22b0fb2c85b9f492916d85b0f238b7bc5667fbaf4eaf18a6ec79f4c1cbbce7b7"
+  },
+  "EVIDENCE/CHIME/160-on/RESULT.JSON": {
+    "bytes": 183,
+    "sha256": "f1cc9b574acf7a47207562d094b1c13f3cf964ef4200d4e79d6e1f809c3ed07d"
+  },
+  "EVIDENCE/CHIME/160-on/RUN.CNF": {
+    "bytes": 999,
+    "sha256": "f32c1f27d0f375dcd1529d0682beb0b27f09e11e8f5cb1d3aae47f6158a26a99"
+  },
+  "EVIDENCE/CHIME/6404-off/BOOTTEST.LOG": {
+    "bytes": 93,
+    "sha256": "776a4dcc3e87f5d39c62d63d5a31d124cfe44a42cc6b4dc33053d75ae8596a7f"
+  },
+  "EVIDENCE/CHIME/6404-off/CAPTURE.WAV": {
+    "bytes": 1143788,
+    "sha256": "8ba214c5f8845aeb788b627af39e67d3df0b77655eb48063c3d5ff9ff7d12e5b"
+  },
+  "EVIDENCE/CHIME/6404-off/RESULT.JSON": {
+    "bytes": 179,
+    "sha256": "5b5ab1a96e917686fe61620f7cb15a8ad4a9108a5f6f4056c39a00cd9aa49de4"
+  },
+  "EVIDENCE/CHIME/6404-off/RUN.CNF": {
+    "bytes": 1005,
+    "sha256": "d1dc35dbf40725fcadff1723330a844bc234eb118f5c4feb72a842c3b74a8457"
+  },
+  "EVIDENCE/CHIME/6404-on/BOOTTEST.LOG": {
+    "bytes": 99,
+    "sha256": "3de8174674eb9a910a65a2072bbeb431cd40739b75c72fa7c870f0994e55bf62"
+  },
+  "EVIDENCE/CHIME/6404-on/CAPTURE.WAV": {
+    "bytes": 1147820,
+    "sha256": "17b49d055ccee820adec591f8aab2da291618e158ebb8236c7a26781f8bceea7"
+  },
+  "EVIDENCE/CHIME/6404-on/RESULT.JSON": {
+    "bytes": 183,
+    "sha256": "e698f4f99f501d810bd293190e5fa70a2050b283be6c197032c1c53e09a1c5c5"
+  },
+  "EVIDENCE/CHIME/6404-on/RUN.CNF": {
+    "bytes": 1002,
+    "sha256": "ac656c0b45060a29d3f053ce527459982d31215fb1908b535d997df07de7023f"
+  },
+  "EVIDENCE/CHIME/AUDIO.JSON": {
+    "bytes": 1982,
+    "sha256": "6302f138c5c245e9ea265367facf51d4f4cf0eea03dec6df782744eee549f7bb"
+  },
+  "EVIDENCE/CHIME/AUDIT/BINARY_AUDIT.JSON": {
+    "bytes": 1454,
+    "sha256": "606f0fc1521dbc49eb6f85e73a2ad7fe2da37318cbda29e502a413eda2cbe25c"
+  },
+  "EVIDENCE/CHIME/AUDIT/BINARY_AUDIT.PY": {
+    "bytes": 3218,
+    "sha256": "7ec105f3997329ebd1adcbb22b395090dd79cec977fe054b663711ae8bd84380"
+  },
+  "EVIDENCE/CHIME/AUDIT/HOST_BUILD.LOG": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "EVIDENCE/CHIME/AUDIT/HOST_GENERATED.C": {
+    "bytes": 14882,
+    "sha256": "3682e0747c3b2a1388a145a31b82cff1723960d728f0fffd2fb8325dbfdd4b81"
+  },
+  "EVIDENCE/CHIME/AUDIT/HOST_MOCKS.H": {
+    "bytes": 3644,
+    "sha256": "81d3903cb8146f8b13bf7c89450b5399e7791af6d21cfa6c4cac1f5519cb8f02"
+  },
+  "EVIDENCE/CHIME/AUDIT/HOST_RESULT.TXT": {
+    "bytes": 58,
+    "sha256": "3f9eb04bcf822ae4f7221eebd23f86187b1452ba035bc5c4b693a5771224cdeb"
+  },
+  "EVIDENCE/CHIME/AUDIT/HOST_TESTS.C": {
+    "bytes": 7764,
+    "sha256": "60ab2b68a6c3a920e06a28a29009f46e3bf63a6fc4975023afe782d4254956c7"
+  },
+  "EVIDENCE/CHIME/AUDIT/REVIEW.MD": {
+    "bytes": 4688,
+    "sha256": "5899065cef7f2eb29adbe7846830462289afb33f503e2db6d474be0490f89930"
+  },
+  "EVIDENCE/CHIME/AUDIT/RUN_HOST.PY": {
+    "bytes": 1713,
+    "sha256": "ff4a001eee0dd70c359152fa63547540b3843e7ad9ac6deb8aafa6348f5e8810"
+  },
+  "EVIDENCE/CHIME/AUDIT/SCOPE.JSON": {
+    "bytes": 697,
+    "sha256": "d38c011f3319a27ba690edb291cb2e0ec8edfa086ad994c0c89635b39077d5c8"
+  },
+  "EVIDENCE/CHIME/BUILD.LOG": {
+    "bytes": 340,
+    "sha256": "4b3d0d9d12295af4189f1f9b22b425c0c44374f3890131a2457154cc155c8cc3"
+  },
+  "EVIDENCE/CHIME/CROP.JSON": {
+    "bytes": 351,
+    "sha256": "8c2302d18c0210f14e428c4eb27dd9a9c40f2b4a6821bfa55f03f3e2bcf86a1f"
+  },
+  "EVIDENCE/CHIME/OBSERVER/BOOTTEST.C": {
+    "bytes": 1444,
+    "sha256": "9d3ed3bb695509a7f01961c477e8ff009a53b47757fcc04be3579bd33a9a456f"
+  },
+  "EVIDENCE/CHIME/OBSERVER/BOOTTEST.DEF": {
+    "bytes": 210,
+    "sha256": "b22f0086bb675713965863978b7776621c6d4229f847719d34c56f71f9143cd9"
+  },
+  "EVIDENCE/CHIME/OBSERVER/BOOTTEST.RSP": {
+    "bytes": 92,
+    "sha256": "e70dd61f7aaa1efc9a76b14c851d023cfaa300fd651655e107328547930aa6f7"
+  },
+  "EVIDENCE/CHIME/OBSERVER/BUILD.BAT": {
+    "bytes": 312,
+    "sha256": "be8c54da6240f3fd633abf74926904331d0bdd1a3e0725a18d379852fb3f0098"
+  },
+  "EVIDENCE/CHIME/OBSERVER/BUILD.PY": {
+    "bytes": 2172,
+    "sha256": "1c5919eaf76d4813b6ef383ec98fcc24f13cae284b383a2cec923a8ade925b6f"
+  },
+  "EVIDENCE/CHIME/REBUILD.JSON": {
+    "bytes": 212,
+    "sha256": "4ece1abce15fb517115e23b173856738cffe3f86cc82a869a5871d005886fef2"
+  },
+  "EVIDENCE/CHIME/RESULT.JSON": {
+    "bytes": 212,
+    "sha256": "4ece1abce15fb517115e23b173856738cffe3f86cc82a869a5871d005886fef2"
+  },
+  "EVIDENCE/CHIME/RESULTS.JSON": {
+    "bytes": 799,
+    "sha256": "cc7e17c02fdcd067a3f4c8136a2eeeda6d127a780cc061f1bf4cbcc739345a29"
+  },
+  "EVIDENCE/CHIME/baseline-on/BOOTTEST.LOG": {
+    "bytes": 99,
+    "sha256": "f3c8200ad39c59d0fa84902d1cd07c0d0f555fee9632fcb8c6cc1e0068044dc0"
+  },
+  "EVIDENCE/CHIME/baseline-on/CAPTURE.WAV": {
+    "bytes": 1234796,
+    "sha256": "a439ca556c7b83babfc642a5c6d8812376d2938e8c30ddacbf25e6f976981019"
+  },
+  "EVIDENCE/CHIME/baseline-on/RESULT.JSON": {
+    "bytes": 188,
+    "sha256": "400165ed2ccde4461c07fefd7326d6eaa1465329029b2cb5d74bbd6401cbf993"
+  },
+  "EVIDENCE/CHIME/baseline-on/RUN.CNF": {
+    "bytes": 1014,
+    "sha256": "c67a80809c152f1d6807a80bdff3c1cb2a7bea52ba7764db60f5320714fa1dc9"
+  },
+  "EVIDENCE/COEX/AFTER.SAV": {
+    "bytes": 12,
+    "sha256": "c8c3941e5be29660d87179828ee11cbaa0b4a9462acdef02abf0afbbf7fe7d9f"
+  },
+  "EVIDENCE/COEX/BEFORE.SAV": {
+    "bytes": 12,
+    "sha256": "6874e8e4bf6fc72b5093a805617078692d5e3b5e67eafd3b850ef0f7e00c50fd"
+  },
+  "EVIDENCE/COEX/CAPTURE.WAV": {
+    "bytes": 4408556,
+    "sha256": "73cd5491424a2f27f0b9323ed620d644f7ea369c5bece8b9a7c06216437bc818"
+  },
+  "EVIDENCE/COEX/PSGTRACE.LOG": {
+    "bytes": 454,
+    "sha256": "3d0d73f61d7b800d2cc511cac8d8f591ac31f267134db3b8b581ee458bf2d691"
+  },
+  "EVIDENCE/COEX/RESULT.JSON": {
+    "bytes": 142,
+    "sha256": "484fc2f3ae42551a214a841ce91e9c8ae6d9c1ab53dd16441721e8f2f4f1c098"
+  },
+  "EVIDENCE/COEX/RUN.CNF": {
+    "bytes": 999,
+    "sha256": "65aad7f26f98a79a6e16c52af5b60487cf5ca3ad3b75ccee1d0dd283e8f043d6"
+  },
+  "EVIDENCE/COEX/SOURCE/BUILD.BAT": {
+    "bytes": 304,
+    "sha256": "26c9ae39fbd55bba697e5328ac7540fc47443a8701569ffe15234d581642d532"
+  },
+  "EVIDENCE/COEX/SOURCE/BUILD.PY": {
+    "bytes": 2152,
+    "sha256": "23082940e9a4e54d6ba565de25c106cb6cabbc27051223e14f6e8d9143fafca9"
+  },
+  "EVIDENCE/COEX/SOURCE/COEX.C": {
+    "bytes": 1657,
+    "sha256": "95bd8088901bd1c78650795dc836e6e2a073b562abaa9b3a98cbb87ac31c36f5"
+  },
+  "EVIDENCE/COEX/SOURCE/COEX.DEF": {
+    "bytes": 206,
+    "sha256": "e60d31824a35545b3867742423cd7b485019b14eee7f8d5eae7139d9a492a547"
+  },
+  "EVIDENCE/COEX/SOURCE/COEX.RSP": {
+    "bytes": 76,
+    "sha256": "accad930d7041c9b85ea4641df1fc5bdef72d2da0f80bbf1775467093da99726"
+  },
+  "EVIDENCE/DRIVER/BUILD.LOG": {
+    "bytes": 1302,
+    "sha256": "b320adfbf0327256697282fe748dbe1d28a5679c5c50a943fa9d8e37889e03fe"
+  },
+  "EVIDENCE/DRIVER/CAPTURE.WAV": {
+    "bytes": 1924844,
+    "sha256": "446537f587caaa2932b15944dcdb1e58a02fccaacb3f156595aca591dd417cad"
+  },
+  "EVIDENCE/DRIVER/CROP.JSON": {
+    "bytes": 94,
+    "sha256": "d3d5262c7239e77b1246236f16ea762a0df6be8e3955c0e42ce3ce0f286a7642"
+  },
+  "EVIDENCE/DRIVER/DRVTEST.LOG": {
+    "bytes": 2291,
+    "sha256": "690d7cbc4c4c17bc399d88cf9ba6d86f48686f7dd944e7bbecbdec4976adb5ff"
+  },
+  "EVIDENCE/DRIVER/INTRUD.LOG": {
+    "bytes": 328,
+    "sha256": "17f28d574d40a4fe32e6c0e4f6a7868042d881ff6dd85de666f31479aed66c21"
+  },
+  "EVIDENCE/DRIVER/RESULT.JSON": {
+    "bytes": 216,
+    "sha256": "4aa527b7f51c1e4250592dd58170882a14893564554e8307d586cf3891def7f2"
+  },
+  "EVIDENCE/DRIVER/RUN.CNF": {
+    "bytes": 995,
+    "sha256": "11ed8b8ce1d15ae2277cb9910669c82c0b5a3d69b48195cdf58c6240603bfb40"
+  },
+  "EVIDENCE/FINALGUI/PSGTRACE.LOG": {
+    "bytes": 576,
+    "sha256": "0ae5c33a13309768236e3b574c5fc8e59a5a7e046ca988cdfb088c4b409aa15f"
+  },
+  "EVIDENCE/FINALGUI/RUN.CNF": {
+    "bytes": 976,
+    "sha256": "980be426fc3c4854ff741614f73156ef2363bb0e75d053c327f3fafceedd9ae5"
+  },
+  "EVIDENCE/FINALGUI/kernel_000.raw1.png": {
+    "bytes": 1368,
+    "sha256": "444a3ae03ff72b153acaab8327e37f95b001b6fac2534cc8733e72f8b61c91da"
+  },
+  "EVIDENCE/PSGPLAY/160-test/CAPTURE.WAV": {
+    "bytes": 4030508,
+    "sha256": "21b783c4f903a52a1a76076f6ab00e1fd94b7529eb006f4f3b4ea5accc63bbfa"
+  },
+  "EVIDENCE/PSGPLAY/160-test/PSGTRACE.LOG": {
+    "bytes": 419,
+    "sha256": "b2c0bf80098cabfc6e7ef21f07216afb30939689f80229ece2f136b783c70b76"
+  },
+  "EVIDENCE/PSGPLAY/160-test/RESULT.JSON": {
+    "bytes": 503,
+    "sha256": "0d5001f590d7651e374537376bb585d6e901608d523cf2889b58d7d9966edff4"
+  },
+  "EVIDENCE/PSGPLAY/160-test/RUN.CNF": {
+    "bytes": 1028,
+    "sha256": "107d18090351ed066a6eeeaa81c11f244c4cb6aedb41e0aef8d1417fa97c3f02"
+  },
+  "EVIDENCE/PSGPLAY/3204-test/CAPTURE.WAV": {
+    "bytes": 3384044,
+    "sha256": "55332544832daa7bd21206dd476a814e37d378c5eb74e16cb32b5d1dc3511970"
+  },
+  "EVIDENCE/PSGPLAY/3204-test/PSGTRACE.LOG": {
+    "bytes": 419,
+    "sha256": "84329c8f4359a9f90e7f1773f2da4e726318d5bde87cbc137f12390f0a79073a"
+  },
+  "EVIDENCE/PSGPLAY/3204-test/RESULT.JSON": {
+    "bytes": 504,
+    "sha256": "9b6e0f9b16230b74dff16654d0dbe7fda22327b8e6088e05fa062e8e35120e93"
+  },
+  "EVIDENCE/PSGPLAY/3204-test/RUN.CNF": {
+    "bytes": 1031,
+    "sha256": "22c3b936c60a34fe6c22b3568235e86dc73d226d8d60854dab1bf1fe9cd3949a"
+  },
+  "EVIDENCE/PSGPLAY/6402-test/CAPTURE.WAV": {
+    "bytes": 1839212,
+    "sha256": "f01f17ee9da5df3884afc92d302adb9f4ec7e1f7a7a672774707307c809dfe25"
+  },
+  "EVIDENCE/PSGPLAY/6402-test/PSGTRACE.LOG": {
+    "bytes": 396,
+    "sha256": "6ce4552568da4ac9c00df61ec220c464c249e03a9529d89b28393271f55eeba7"
+  },
+  "EVIDENCE/PSGPLAY/6402-test/RESULT.JSON": {
+    "bytes": 481,
+    "sha256": "9f7a68a395047b5b0728a3d10a8f39b66824e5c1144402823a16d2d1a42fc08d"
+  },
+  "EVIDENCE/PSGPLAY/6402-test/RUN.CNF": {
+    "bytes": 1031,
+    "sha256": "2eecf14497dd6e97526b909754a550898b446729969c04099752f0b039d25237"
+  },
+  "EVIDENCE/PSGPLAY/6404-closetest/CAPTURE.WAV": {
+    "bytes": 1722284,
+    "sha256": "7b51224d952dcde5124c1d521bcfb99a0e6bfe943eb179561a7455fe2c805561"
+  },
+  "EVIDENCE/PSGPLAY/6404-closetest/PSGTRACE.LOG": {
+    "bytes": 306,
+    "sha256": "981f2cbe7c65b8b0110ee3d3d66ee75e076848f59475577366add14f6e522779"
+  },
+  "EVIDENCE/PSGPLAY/6404-closetest/RESULT.JSON": {
+    "bytes": 396,
+    "sha256": "b5afa413beff0168569845c44fbff5e7fa185e66186aada60e57fd99c9d96c92"
+  },
+  "EVIDENCE/PSGPLAY/6404-closetest/RUN.CNF": {
+    "bytes": 1051,
+    "sha256": "34c0dd481c05ed8acd9a571a5f3b746c41f2da5a447d74659370f075a7874fd1"
+  },
+  "EVIDENCE/PSGPLAY/6404-stoptest/CAPTURE.WAV": {
+    "bytes": 1847276,
+    "sha256": "40c10b0bd554c9b4db2eb3cd68f15de410bbb5b8be90b972292d1095ea7b5dc3"
+  },
+  "EVIDENCE/PSGPLAY/6404-stoptest/PSGTRACE.LOG": {
+    "bytes": 342,
+    "sha256": "614b28ccf33ad024ec190441aa8f466396f15c4cc19a31644007d299edfca8d7"
+  },
+  "EVIDENCE/PSGPLAY/6404-stoptest/RESULT.JSON": {
+    "bytes": 431,
+    "sha256": "9a12333c0863afaa212e630542103a57f1d606b36e400ff93fdb2f46838bd64d"
+  },
+  "EVIDENCE/PSGPLAY/6404-stoptest/RUN.CNF": {
+    "bytes": 1047,
+    "sha256": "919959fcf6f86e27840a32b208005a5ef63c60d2a16852c91056f1d81d267aae"
+  },
+  "EVIDENCE/PSGPLAY/6404-test/CAPTURE.WAV": {
+    "bytes": 2197100,
+    "sha256": "e175c45b222f7d91c18eb5bd1e2090019886683fde5fe56457a8c2a4ecf95615"
+  },
+  "EVIDENCE/PSGPLAY/6404-test/PSGTRACE.LOG": {
+    "bytes": 396,
+    "sha256": "fd7e0a543cc02d945768b54b2ae8de20585745a551eb5cd7e049faebc7597d3e"
+  },
+  "EVIDENCE/PSGPLAY/6404-test/RESULT.JSON": {
+    "bytes": 481,
+    "sha256": "7a499c694421d5ba6477e785a26fb1ddb0c10c2b7ff59414ec635e610df45cb5"
+  },
+  "EVIDENCE/PSGPLAY/6404-test/RUN.CNF": {
+    "bytes": 1031,
+    "sha256": "64cf6305964e2a9648c4fb6599be6e50c5733c5e06162d8ea4c571233c2765d6"
+  },
+  "EVIDENCE/PSGPLAY/baseline-test/CAPTURE.WAV": {
+    "bytes": 6211244,
+    "sha256": "1b3489674cff423851be6d5da59dea6b1e6519e9515fa877afa9ea8207cba001"
+  },
+  "EVIDENCE/PSGPLAY/baseline-test/PSGTRACE.LOG": {
+    "bytes": 431,
+    "sha256": "73cab33ba77ecd82021c1e245e8d59da98ade3cfc5c8eecf946f4bd9709abbed"
+  },
+  "EVIDENCE/PSGPLAY/baseline-test/RESULT.JSON": {
+    "bytes": 520,
+    "sha256": "ea99d58e149b0a725bf274cdd45b7a3441091d8e1a91f4ec3a13f34b4fb04ad4"
+  },
+  "EVIDENCE/PSGPLAY/baseline-test/RUN.CNF": {
+    "bytes": 1043,
+    "sha256": "b81de4d8af4a01519424afba115323eec090b97b765a819f7d26642e04563562"
+  },
+  "EVIDENCE/REBUILD.JSON": {
+    "bytes": 212,
+    "sha256": "bc9e72ee4cc6a742df6b301984957b1f35567ae868d202fbdac12752e8fa3af4"
+  },
+  "EVIDENCE/VERIFY.JSON": {
+    "bytes": 5354,
+    "sha256": "ff2f4863d215b9cfb4a2d2326e31fad2edbc255685c49683df48ab4a1e3a5f71"
+  },
+  "INTRUD.EXE": {
+    "bytes": 3615,
+    "sha256": "2b0c85316e8821618f8340fccd5b07a4f54dc3426d9d78e78799cdadc6becdd5"
+  },
+  "LICENSE.TXT": {
+    "bytes": 35149,
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  "PROVENANCE.TXT": {
+    "bytes": 307,
+    "sha256": "8e2c1451f02c45e57562605f766969c0ebd63004d2a477ad409047509aa24788"
+  },
+  "PSGPLAY.EXE": {
+    "bytes": 6287,
+    "sha256": "f7a4c9bd479c0ce5ee82398a919e7c77795f646600461800c41af73525190a5d"
+  },
+  "PSGPLAY.MAP": {
+    "bytes": 1755,
+    "sha256": "69df04c233f370947f8f2f3f208306218f3f0feeedff66190fae0f7f151b237c"
+  },
+  "README.TXT": {
+    "bytes": 5087,
+    "sha256": "5b187c7f2590b769adb66551976c9e8644f91854789d23bab8a890c58cdbd3b2"
+  },
+  "SOURCE/BUILD.BAT": {
+    "bytes": 310,
+    "sha256": "5b254cfa3a26ba137f356d96aa21b192aa45eb16990466a3b4c687445584dbcd"
+  },
+  "SOURCE/BUILD.PY": {
+    "bytes": 2167,
+    "sha256": "c6954be937cf37ec3d8ba4d177b6ba75f75d298e48539f443c37f49010f39d5e"
+  },
+  "SOURCE/CHIME/AUDIO.PY": {
+    "bytes": 1774,
+    "sha256": "68faf5524c932fb8a0f481136b6a575a0003463c08fc9c0235b77415f2292324"
+  },
+  "SOURCE/CHIME/BUILD.BAT": {
+    "bytes": 308,
+    "sha256": "60db52ed1b5dd9cb8c4cf4ec4983c721d56fe27a634a48525665a7bac838d8b6"
+  },
+  "SOURCE/CHIME/BUILD.PY": {
+    "bytes": 2169,
+    "sha256": "6a4a5a2b3003b5877205aa88a8e932075fbfbb079843b9433dccad14c980ac38"
+  },
+  "SOURCE/CHIME/README.MD": {
+    "bytes": 5156,
+    "sha256": "123c509bdd0c24e7044df8c99ffe5f7eeb71a219fff9aad83633ece9768023d5"
+  },
+  "SOURCE/CHIME/TCHIME.C": {
+    "bytes": 3913,
+    "sha256": "f5ad2359de7aa35ab452c45c13ab729ad138d1d94a8f8bc2b2287e42f7d849ed"
+  },
+  "SOURCE/CHIME/TCHIME.DEF": {
+    "bytes": 220,
+    "sha256": "c140e756118f4f90a1addc49ec1742791f242514ded1046a28f3f6573901c5c9"
+  },
+  "SOURCE/CHIME/TCHIME.RSP": {
+    "bytes": 84,
+    "sha256": "ba16533d928c1bae1bfd5e041ff0975d68dd5cfab6511682bb41fff406366408"
+  },
+  "SOURCE/CHIME/TESTBOOT.PY": {
+    "bytes": 2302,
+    "sha256": "bbefa82c2de0bac1663d1151617a835212dd4d26d0231a0b90ebb92979ddac24"
+  },
+  "SOURCE/CHIME/TESTS.JSON": {
+    "bytes": 2831,
+    "sha256": "7ad321ca44e2ef5dc73ca6002e1e5747d2e26506af54dd241c655d6c498b99d2"
+  },
+  "SOURCE/DRIVER/ABI.MD": {
+    "bytes": 8143,
+    "sha256": "bb4181cf11d69801d8fcadbb7f7f415f8abaab344d22f52a1a4be3da1e6febc1"
+  },
+  "SOURCE/DRIVER/BUILD.BAT": {
+    "bytes": 680,
+    "sha256": "b6f738345e3df5f308c0601af8d3a114377062997396ce7dd9c6285cbceb5540"
+  },
+  "SOURCE/DRIVER/BUILD.PY": {
+    "bytes": 2257,
+    "sha256": "d00cfb6bac22264e9bd51690b68cf211d93298a4ade3a9732337b31ba55cb2cb"
+  },
+  "SOURCE/DRIVER/DRVTEST.C": {
+    "bytes": 3506,
+    "sha256": "f81f70481d096b7a4a47afe8c83b72b259b172d5c13e71844f5bc18830e86bb5"
+  },
+  "SOURCE/DRIVER/DRVTEST.DEF": {
+    "bytes": 176,
+    "sha256": "80030be219b0b5b592abab17cbf82eae1d466bd9112e7f2da8c54cb654ee90a4"
+  },
+  "SOURCE/DRIVER/DRVTEST.RSP": {
+    "bytes": 88,
+    "sha256": "ea0cb0b3b971f568a38b862d08fc470e3e3f376584f54b55c0125563da6e28a0"
+  },
+  "SOURCE/DRIVER/INTRUD.C": {
+    "bytes": 965,
+    "sha256": "cd0dd3a89d8133e836caa133c30c5060480f79be60c8d6f3261a057b81b44ea4"
+  },
+  "SOURCE/DRIVER/INTRUD.DEF": {
+    "bytes": 179,
+    "sha256": "88e11633710c9dd9cf3681a2b31516d7b25970a0e70eb1f263ad58ecb6501a7d"
+  },
+  "SOURCE/DRIVER/INTRUD.RSP": {
+    "bytes": 84,
+    "sha256": "763e0b946b5123c997f555c91ef88276e64415f29517d4e3354b0f4992d9db45"
+  },
+  "SOURCE/DRIVER/README.MD": {
+    "bytes": 6626,
+    "sha256": "01c8386c594d7607a7c39164f421adb76fd18a1f04f22c553a42e4c94694b6c0"
+  },
+  "SOURCE/DRIVER/SHIM.ASM": {
+    "bytes": 1036,
+    "sha256": "4aa8a05be3dab981077d1723b2c5eaac67a8c8bfd1e46698208d18f0e9d2715d"
+  },
+  "SOURCE/DRIVER/TESTS.JSON": {
+    "bytes": 13445,
+    "sha256": "e33cb500106e3ac852cf8606d5b9a777f3eb320fa029cf90a115377e5fc3a9d3"
+  },
+  "SOURCE/DRIVER/TSOUND.C": {
+    "bytes": 9331,
+    "sha256": "8e5134ad791363e8a1f07f20e9c817ad5782b9f42325d48e34b0dad345351b3a"
+  },
+  "SOURCE/DRIVER/TSOUND.DEF": {
+    "bytes": 608,
+    "sha256": "48dbe3b7683c6eebef98747efc65c539809e8ff0fae0c230486266855faf5a1f"
+  },
+  "SOURCE/DRIVER/TSOUND.RSP": {
+    "bytes": 93,
+    "sha256": "e02c4460b4ba13b26584ded7932503c863828f6ada6209f4952feb9452fd3c06"
+  },
+  "SOURCE/PSGPLAY.C": {
+    "bytes": 8107,
+    "sha256": "7faaf088489f982ce82dd98e16c8e271df52acd41c27343d481d7c99e7370ed0"
+  },
+  "SOURCE/PSGPLAY.DEF": {
+    "bytes": 209,
+    "sha256": "d5284ea335e6cdae426bf628772ce126c49ea44873b2a1b342bcf075ef5e1148"
+  },
+  "SOURCE/PSGPLAY.RSP": {
+    "bytes": 88,
+    "sha256": "4db0498b9c3a99736f19b2256ce64f4ece03381850c9e614a3abe78dd0b20df4"
+  },
+  "SOURCE/README.MD": {
+    "bytes": 5794,
+    "sha256": "7b0905249ebf410de5e2341484dc4cc55732f96eeb36a63a3d455d236667271a"
+  },
+  "SOURCE/TESTWIN.PY": {
+    "bytes": 1994,
+    "sha256": "af223bd4cba61f3608f32b080341764fb03a8b06b41e04d0a7c7f26a4ea4213d"
+  },
+  "SOURCE/VALIDATE.MD": {
+    "bytes": 1675,
+    "sha256": "a4536166844a1d608288a53e369b0d7d34214293840b716f6fe0d579a2102003"
+  },
+  "SOURCE/VERIFY.PY": {
+    "bytes": 2317,
+    "sha256": "f53d07211d57add175be51cea941af6645f5e08c0cd5eda2192e5ee23b2491e2"
+  },
+  "STARTUP.WAV": {
+    "bytes": 422980,
+    "sha256": "ff7f485b521ccec5ce4de8fe1a1504afafb987b2dbb4ca780b0632d91c061051"
+  },
+  "TCHIME.EXE": {
+    "bytes": 3999,
+    "sha256": "c5fb46eaa1967b68d6769cb5e948496b8aeabaa09e8656a2afb07a1426432121"
+  },
+  "TCHIME.MAP": {
+    "bytes": 1756,
+    "sha256": "654d3f8ea54dbd8c02085f252d758dc3bd935c08d8b3c07ce3c3fa38b8554766"
+  },
+  "TSOUND.DRV": {
+    "bytes": 5656,
+    "sha256": "8ece09fb2b21481bf44330f604c0a5eea020cf188ed8acec415049daf02efa98"
+  },
+  "TSOUND.MAP": {
+    "bytes": 1471,
+    "sha256": "674cec285736e2a950da2969de8b31ca0bac83fbaeed51c3325e25069aadbe9f"
+  }
+}
