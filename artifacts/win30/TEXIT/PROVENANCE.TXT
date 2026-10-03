@@ -1,0 +1,6 @@
+Optional pre-exit chime, local only; not published.
+Source commit: ac11122584b4e2983bb5ddd24fe4b66e464a3dc7
+Original Bb4-G4-Eb4 companion phrase; no XP shutdown-transcription claim.
+No TSHELL integration or working OS/startup settings were changed.
+No stock Windows/DDK/toolchain payloads included.
+Existing README/license mismatch remains unresolved; notices are preserved.

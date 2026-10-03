@@ -1,0 +1,47 @@
+# Windows 3.0 real-mode Tandy test profile; installed from user-supplied media.
+[sdl]
+autolock=false
+fullscreen=false
+output=surface
+windowresolution=original
+[dosbox]
+working directory option=force
+working directory default=/workspace/scratch/a84592844d2c/exit-qa04/6404-c
+captures=/workspace/scratch/a84592844d2c/exit-qa04/6404-c/captures
+machine=tandy
+memsize=0
+memsizekb=640
+allow more than 640kb base memory=false
+[cpu]
+core=normal
+# DOSBox-X calls its 8088-compatible four-byte prefetch core 8086_prefetch.
+# 8088 is invalid and silently resets to auto. Do not substitute it.
+cputype=8086_prefetch
+cycles=fixed 20000
+fpu=false
+[render]
+scaler=none
+doublescan=false
+aspect=false
+[dos]
+xms=false
+ems=false
+umb=false
+[serial]
+serial1=serialmouse
+
+[mixer]
+nosound=false
+[midi]
+mididevice=none
+[autoexec]
+@echo off
+mount c "/workspace/scratch/a84592844d2c/exit-qa04/6404-c/guest"
+c:
+set path=c:\windows;z:\
+set temp=c:\windows\temp
+c:\tandy88\reserve
+cd c:\windows
+DX-CAPTURE /A /-V win /r c:\exitobs.exe c
+echo Returned to DOS > C:\EXITDOS.LOG
+exit

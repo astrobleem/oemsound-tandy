@@ -1,0 +1,9 @@
+{
+  "mode": "6404",
+  "case": "a",
+  "exit": 0,
+  "seconds": 19.43,
+  "TEXIT.LOG": "START\nMUTED WINDOW GONE\nCALL ExitWindows\n",
+  "EXITOBS.LOG": "START observer\nLAUNCH allow\nQUERY application TRUE\nENDSESSION TRUE\n",
+  "EXITDOS.LOG": "Returned to DOS\n"
+}

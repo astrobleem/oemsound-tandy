@@ -1,0 +1,4 @@
+START observer
+LAUNCH allow
+QUERY application TRUE
+ENDSESSION TRUE

@@ -1,0 +1,9 @@
+{
+  "mode": "6404",
+  "case": "p",
+  "exit": 0,
+  "seconds": 25.65,
+  "TEXIT.LOG": "START\nMUTED WINDOW GONE\nNO EXIT REQUEST\n",
+  "EXITOBS.LOG": "START observer\nLAUNCH preview\nPASS unloaded\nPASS no exit request\nFIXTURE cleanup exit\n",
+  "EXITDOS.LOG": "Returned to DOS\n"
+}

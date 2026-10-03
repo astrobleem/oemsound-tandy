@@ -1,0 +1,5 @@
+START observer
+LAUNCH allow
+PASS unloaded
+PASS no exit request
+FIXTURE cleanup exit

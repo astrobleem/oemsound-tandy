@@ -1,0 +1,21 @@
+[
+  {
+    "case": "6404-k",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "prompt_accept_exit": true
+    },
+    "tone_amplitudes": [
+      1310.66,
+      1333.63,
+      1310.08
+    ],
+    "audible_span_s": 0.8788125,
+    "wave_sha256": "1f8e131380c84a99899a10601fb46464ee33fc74bc2b5ceb04bcc59752926982"
+  }
+]

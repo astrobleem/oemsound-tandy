@@ -1,0 +1,154 @@
+[
+  {
+    "case": "160-a",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "natural_exit": true
+    },
+    "tone_amplitudes": [
+      1321.92,
+      1311.79,
+      1311.68
+    ],
+    "audible_span_s": 0.93375,
+    "wave_sha256": "2dea0d5d8271550a3bbc0dedfcaacef1748909f050079a18cb3a6c8a4172ac29"
+  },
+  {
+    "case": "6404-a",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "natural_exit": true
+    },
+    "tone_amplitudes": [
+      1309.9,
+      1327.87,
+      1310.51
+    ],
+    "audible_span_s": 0.8778333333333334,
+    "wave_sha256": "a130c036ecab89946aa9fa98ac660a44ea144b5f70755aa98e326e3cf729aea3"
+  },
+  {
+    "case": "6404-b",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "busy_no_exit": true
+    },
+    "tone_amplitudes": [
+      0,
+      0,
+      0
+    ],
+    "audible_span_s": 0,
+    "wave_sha256": "7a84e2391868a4a1a3ccaf5764a6c16e21b7c1b78bf0536733ba0f4153c6aaf2"
+  },
+  {
+    "case": "6404-c",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "confirmation_cancel": true
+    },
+    "tone_amplitudes": [
+      0,
+      0,
+      0
+    ],
+    "audible_span_s": 0,
+    "wave_sha256": "29a29b6d32d5fbbcdd43f7a77500384dd8cb99d6828780413b3b8de0b63b05af"
+  },
+  {
+    "case": "6404-d",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "busy_no_exit": true
+    },
+    "tone_amplitudes": [
+      0,
+      0,
+      0
+    ],
+    "audible_span_s": 0,
+    "wave_sha256": "1d22ff50890f0083537364ced4697aa53c99966add5c2b768ab7f6409e4c1a43"
+  },
+  {
+    "case": "6404-p",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "preview_no_exit": true
+    },
+    "tone_amplitudes": [
+      1336.07,
+      1342.29,
+      1310.51
+    ],
+    "audible_span_s": 0.87775,
+    "wave_sha256": "8a1c1a9c88fed3c2b2dd9f28d85dba317ddd774a383a9bba624b7ba075f0c329"
+  },
+  {
+    "case": "6404-v",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "veto_respected": true
+    },
+    "tone_amplitudes": [
+      1309.9,
+      1327.87,
+      1310.51
+    ],
+    "audible_span_s": 0.8778333333333334,
+    "wave_sha256": "6ffd2d75d7ce03f87ac8f553e13aacc98f166f6896cfa4b673f011ec6a9fd302"
+  },
+  {
+    "case": "baseline-a",
+    "passed": true,
+    "checks": {
+      "process_exit": true,
+      "returned_DOS": true,
+      "observer_no_failure": true,
+      "audio_or_busy_silence": true,
+      "bounded_phrase": true,
+      "natural_exit": true
+    },
+    "tone_amplitudes": [
+      1333.11,
+      1341.49,
+      1309.67
+    ],
+    "audible_span_s": 0.8788125,
+    "wave_sha256": "87edc5f303abdf1ac46d473c5d36edcdd502c00e2c4e0a88fd16bd47e722a64a"
+  }
+]

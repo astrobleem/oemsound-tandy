@@ -1,0 +1,9 @@
+{
+  "mode": "6404",
+  "case": "d",
+  "exit": 0,
+  "seconds": 27.54,
+  "TEXIT.LOG": "BUSY: NO PSG OR EXIT\n",
+  "EXITOBS.LOG": "START observer\nLAUNCH allow\nPASS unloaded\nPASS no exit request\nFIXTURE cleanup exit\n",
+  "EXITDOS.LOG": "Returned to DOS\n"
+}

@@ -1,0 +1,13 @@
+{
+  "source": "/workspace/scratch/a84592844d2c/tandy-exit-chime/src/win30/TEXIT/TEXIT.C",
+  "source_sha256": "27d81331a39a791dce970ed76b59ef2cf7019abe6e2e5f91cfb502b13de6a87c",
+  "changed_production_source": false,
+  "transformations": [
+    "Replace Windows header with host API mocks",
+    "Replace compact confirmation implementation with controlled confirmation result; native GUI checked separately",
+    "Replace inline OUT assembly with timestamped port-byte recorder",
+    "Replace real-mode BIOS hardware-signature dereference with controlled mock"
+  ],
+  "scope": "Host-only branch and lifecycle checks. Preserves WinMain. Does not validate 16-bit code generation, Windows message delivery, PSG hardware settling, port behavior or wall-clock sound cutoff during cooperative task starvation.",
+  "result": 0
+}

@@ -1,0 +1,10 @@
+{
+  "source": "exit-qa04/6404-p/captures/kernel_000.wav",
+  "source_sha256": "8a1c1a9c88fed3c2b2dd9f28d85dba317ddd774a383a9bba624b7ba075f0c329",
+  "first_frame": 100874,
+  "last_frame_exclusive": 203006,
+  "sample_rate": 48000,
+  "duration_s": 2.12775,
+  "alteration": "Only leading/trailing silence trimmed; emulator PCM unchanged",
+  "preview_sha256": "daa1b7fc271845e04c85eed6f8ee28db9a4b47fbb4d079d729d1b281708db712"
+}
