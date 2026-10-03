@@ -1,0 +1,26 @@
+[
+  {
+    "file": "BEATS.EXE",
+    "identical": true,
+    "bytes": 10959,
+    "sha256": "40b78a5e319793407c3e14d4ff08c61ad200b05a313f3485680f385258bfd1fb"
+  },
+  {
+    "file": "MIDIMAP.DRV",
+    "identical": true,
+    "bytes": 3715,
+    "sha256": "4b960b2918561b077c5b1deb6bf8461ac36851b6023f226145c15d4d7bb5dd81"
+  },
+  {
+    "file": "MIDITEST.EXE",
+    "identical": true,
+    "bytes": 7231,
+    "sha256": "96a832c40508c9682bcc78e3bc7abde6588cf80115a76a692e394563e61b4a3c"
+  },
+  {
+    "file": "MIDIINTR.EXE",
+    "identical": true,
+    "bytes": 3583,
+    "sha256": "24b4e3e3673d7315faed44bdf4f26f20c380b8bb6723e1051b3cfa669d06fd59"
+  }
+]

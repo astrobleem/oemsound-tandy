@@ -1,0 +1,14 @@
+PASS driver open cookie
+PASS mouse toggles first cell
+PASS space restores first cell
+PASS pitch plus edits selected cell
+PASS tempo decrease
+PASS tempo increase
+PASS repeat play restarts
+PASS repeated stop mutes
+PASS clear empties pattern
+PASS demo restores pattern
+PASS close mutes
+PASS close returns success
+PASS driver releases owner
+TOTAL_FAILURES=0 STEPS=3

@@ -1,0 +1,17 @@
+Tandy Beats Lab publication layout
+
+Editable source is in src/win30/BEATS. The native executable, paired driver,
+screenshot, native emulator audio, and all sealed evidence are here.
+MILESTONE.ZIP preserves the complete, unchanged standalone package.
+MANIFEST.JSON describes that package's original paths, including SOURCE/.
+The original README's no-publication sentence records the earlier snapshot.
+
+Build from the repository root with your existing licensed DOS toolchain:
+python3 src/win30/BEATS/BUILD.PY --repo . --dosbox <DOSBox-X> --out <new-directory>
+No compiler, Windows, DDK, or guest files are added by this publication.
+
+BEATS calls the paired experimental MIDIMAP.DRV directly. This is not a
+system-wide MIDI runtime, midiOut device, or standard MIDI-file player.
+Do not replace or register a system MIDIMAP.DRV. Accepted SOUND work is unchanged.
+Stop, normal close, and cooperative SOUND ownership have native test evidence.
+Abrupt termination, physical Tandy hardware, and manual CUA remain unqualified.

@@ -1,0 +1,7 @@
+PASS driver open cookie
+PASS two loops completed
+PASS reset leaves all voices off
+PASS close mutes
+PASS close returns success
+PASS driver releases owner
+TOTAL_FAILURES=0 STEPS=17

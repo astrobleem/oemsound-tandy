@@ -1,0 +1,23 @@
+{
+  "executable": "MIDIMAP.DRV",
+  "bytes": 3715,
+  "sha256": "4b960b2918561b077c5b1deb6bf8461ac36851b6023f226145c15d4d7bb5dd81",
+  "code_bytes": 2858,
+  "NE_entry_offset": "0x0",
+  "symbol_roots": 6,
+  "reachable_instructions_checked": 396,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x8c8",
+      "instruction": "jmp    *%cs:0x8cd(%bx)"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0xa",
+      "instruction": "out    %al,$0xc0"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}
