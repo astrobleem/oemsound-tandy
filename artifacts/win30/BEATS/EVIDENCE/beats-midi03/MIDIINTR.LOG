@@ -1,0 +1,6 @@
+Nonowner open got=4 want=4
+Nonowner data got=4 want=4
+Nonowner reset got=4 want=4
+Nonowner close got=4 want=4
+Nonowner SOUND got=4294967295 want=4294967295
+TOTAL_FAILURES got=0 want=0

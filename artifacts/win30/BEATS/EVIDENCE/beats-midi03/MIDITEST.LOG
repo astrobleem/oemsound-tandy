@@ -1,0 +1,120 @@
+Load driver got=1 want=1
+Entry points got=1 want=1
+Device count got=1 want=1
+Bad device got=2 want=2
+Get caps got=0 want=0
+Three voices got=3 want=3
+Version got=257 want=257
+Caps guard got=90 want=90
+Short caps got=0 want=0
+Short caps bounded got=23130 want=23130
+Closed DATA blocked got=4 want=4
+OpenSound first got=3 want=3
+SOUND owner blocks MIDI got=4 want=4
+Failed open writes nothing got=0 want=0
+Callbacks rejected got=8 want=8
+Open got=0 want=0
+Cookie got=21581 want=21581
+Exclusive got=4 want=4
+Sound locked got=4294967295 want=4294967295
+Wrong cookie rejected got=4 want=4
+C4 note on got=0 want=0
+C4 period got=428 want=428
+Max velocity got=0 want=0
+E4 note on got=0 want=0
+G4 note on got=0 want=0
+Polyphony mask got=7 want=7
+Min velocity audible got=14 want=14
+Fourth tone steals got=0 want=0
+Oldest stolen got=72 want=72
+Steal count got=1 want=1
+Old note off ignored got=0 want=0
+New note remains got=72 want=72
+Zero velocity off got=0 want=0
+Voice off got=0 want=0
+Low note rejected got=11 want=11
+High note rejected got=11 want=11
+Bad data rejected got=11 want=11
+High byte rejected got=11 want=11
+Program unsupported got=8 want=8
+Pitch bend unsupported got=8 want=8
+Long data unsupported got=8 want=8
+CC unsupported got=8 want=8
+Hat got=0 want=0
+Noise active got=42 want=42
+Wrong drum off got=0 want=0
+Hat remains got=42 want=42
+Hat off got=0 want=0
+Noise off got=0 want=0
+Snare got=0 want=0
+Channel10 all notes off got=0 want=0
+Noise CC off got=0 want=0
+Channel2 all sound off got=0 want=0
+Channel2 off got=0 want=0
+Channel3 remains got=67 want=67
+Reset got=0 want=0
+Reset silent got=0 want=0
+Repeat reset got=0 want=0
+Owner note got=0 want=0
+Intruder launch got=1 want=1
+Intruder ran got=1 want=1
+Owner note survived got=69 want=69
+Close active got=0 want=0
+Close silent got=0 want=0
+Owner released got=0 want=0
+Repeat close rejected got=4 want=4
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Cycle open got=0 want=0
+Cycle note got=0 want=0
+Cycle close got=0 want=0
+Cycle silent got=0 want=0
+Sound released got=3 want=3
+Reload driver got=1 want=1
+Reload no owner got=0 want=0
+Reload open got=0 want=0
+Reload close got=0 want=0
+TOTAL_FAILURES got=0 want=0
+CHECKS got=119 want=119

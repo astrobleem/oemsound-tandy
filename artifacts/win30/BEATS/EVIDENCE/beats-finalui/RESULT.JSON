@@ -1,0 +1,12 @@
+{
+  "exit": 0,
+  "seconds": 13.45,
+  "mode": "160",
+  "app": "BEATS",
+  "arg": "/uitest",
+  "returned": true,
+  "logs": {
+    "BEATS.LOG": "PASS driver open cookie\nPASS mouse toggles first cell\nPASS space restores first cell\nPASS pitch plus edits selected cell\nPASS tempo decrease\nPASS tempo increase\nPASS repeat play restarts\nPASS repeated stop mutes\nPASS clear empties pattern\nPASS demo restores pattern\nPASS close mutes\nPASS close returns success\nPASS driver releases owner\nTOTAL_FAILURES=0 STEPS=3\n",
+    "RETURN.LOG": "RETURNED\n"
+  }
+}

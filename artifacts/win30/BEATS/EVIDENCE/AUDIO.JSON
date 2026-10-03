@@ -1,0 +1,25 @@
+{
+  "source": "beats-native04/captures/kernel_000.wav",
+  "rate": 48000,
+  "channels": 2,
+  "sample_width": 2,
+  "source_seconds": 14.536,
+  "crop_start": 6.45,
+  "crop_end": 14.536,
+  "processing": "Trim only; original captured PCM unchanged.",
+  "first_chord_fundamental_bins": [
+    {
+      "expected_hz": 130.8,
+      "observed_bin_hz": 133.33
+    },
+    {
+      "expected_hz": 261.6,
+      "observed_bin_hz": 258.33
+    },
+    {
+      "expected_hz": 329.6,
+      "observed_bin_hz": 333.33
+    }
+  ],
+  "post_stop_tail_note": "Native emulator filter/DC decay is retained; driver register-state tests independently prove all voices muted."
+}

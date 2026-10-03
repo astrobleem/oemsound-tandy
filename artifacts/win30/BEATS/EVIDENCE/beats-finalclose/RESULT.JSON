@@ -1,0 +1,12 @@
+{
+  "exit": 0,
+  "seconds": 12.3,
+  "mode": "160",
+  "app": "BEATS",
+  "arg": "/closetest",
+  "returned": true,
+  "logs": {
+    "BEATS.LOG": "PASS driver open cookie\nPASS close mutes\nPASS close returns success\nPASS driver releases owner\nTOTAL_FAILURES=0 STEPS=2\n",
+    "RETURN.LOG": "RETURNED\n"
+  }
+}
