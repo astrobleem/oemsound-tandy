@@ -1,0 +1,9 @@
+{
+  "mode": "6404",
+  "case": "k",
+  "exit": 0,
+  "seconds": 20.75,
+  "TEXIT.LOG": null,
+  "EXITOBS.LOG": "START observer\nLAUNCH allow\nSEND Tab Return accept\nQUERY application TRUE\nENDSESSION TRUE\n",
+  "EXITDOS.LOG": "Returned to DOS\n"
+}

@@ -1,0 +1,9 @@
+{
+  "mode": "6404",
+  "case": "v",
+  "exit": 0,
+  "seconds": 36.14,
+  "TEXIT.LOG": "START\nMUTED WINDOW GONE\nCALL ExitWindows\nVETO OR FAILURE\n",
+  "EXITOBS.LOG": "START observer\nLAUNCH veto\nQUERY veto FALSE\nENDSESSION FALSE\nPASS unloaded\nPASS veto observed\nFIXTURE cleanup exit\n",
+  "EXITDOS.LOG": "Returned to DOS\n"
+}

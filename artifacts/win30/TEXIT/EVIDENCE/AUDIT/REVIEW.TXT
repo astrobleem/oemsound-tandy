@@ -1,0 +1,12 @@
+Exit chime review, 2026-10-02
+Native Windows 3.0 tests establish successful return to DOS and respect for
+application veto (WM_QUERYENDSESSION false / WM_ENDSESSION false).
+PSG mute and window/timer cleanup precede ExitWindows. No forced exit or retry.
+Known PSG app and experimental-driver refusal occurs before hardware writes.
+Unknown writers remain unqualified; this is not a global hardware ownership lock.
+Host mocks cover 66 core checks, with compact prompt mocked separately.
+Native prompt Cancel and Tab/Return accept both tested. At 160 pixels, manual
+layout/default-Cancel check used build03; final cursor-only change is detailed
+in GUI.JSON. Final build04 was used for all nine native acceptance cases.
+Scoped 1796-instruction audit excludes imports and indirect CRT continuations.
+Physical hardware and forced termination remain unqualified.

@@ -1,0 +1,9 @@
+{
+  "mode": "6404",
+  "case": "c",
+  "exit": 0,
+  "seconds": 24.96,
+  "TEXIT.LOG": null,
+  "EXITOBS.LOG": "START observer\nLAUNCH allow\nSEND default Return cancel\nPASS unloaded\nPASS no exit request\nFIXTURE cleanup exit\n",
+  "EXITDOS.LOG": "Returned to DOS\n"
+}

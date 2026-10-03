@@ -1,0 +1,5 @@
+START observer
+LAUNCH preview
+PASS unloaded
+PASS no exit request
+FIXTURE cleanup exit

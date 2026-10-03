@@ -1,0 +1,11 @@
+{
+  "profile": "160x200x16",
+  "manual_observations": [
+    "150x92 compact prompt fully fits; both buttons and text visible",
+    "Cancel has initial focus",
+    "Return cancels and returns to Program Manager"
+  ],
+  "gui_build_sha256": "c4c18dd587168719b298430a5c05a1e2d5ced65d8895a783ca2bceeec42673d9",
+  "final_change": "Final build changes only prompt cursor from inherited to standard arrow; final binary cancellation is retested by native observer",
+  "capture_status": "Desktop screenshots were visually inspected; no valid raw screenshot file was produced. The live wrapper audio is not acceptance evidence."
+}

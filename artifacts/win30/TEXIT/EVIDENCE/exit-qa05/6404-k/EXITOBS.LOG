@@ -1,0 +1,5 @@
+START observer
+LAUNCH allow
+SEND Tab Return accept
+QUERY application TRUE
+ENDSESSION TRUE

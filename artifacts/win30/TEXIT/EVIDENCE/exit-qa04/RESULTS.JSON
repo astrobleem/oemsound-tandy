@@ -1,0 +1,74 @@
+[
+  {
+    "mode": "6404",
+    "case": "a",
+    "exit": 0,
+    "seconds": 19.43,
+    "TEXIT.LOG": "START\nMUTED WINDOW GONE\nCALL ExitWindows\n",
+    "EXITOBS.LOG": "START observer\nLAUNCH allow\nQUERY application TRUE\nENDSESSION TRUE\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  },
+  {
+    "mode": "160",
+    "case": "a",
+    "exit": 0,
+    "seconds": 21.8,
+    "TEXIT.LOG": "START\nMUTED WINDOW GONE\nCALL ExitWindows\n",
+    "EXITOBS.LOG": "START observer\nLAUNCH allow\nQUERY application TRUE\nENDSESSION TRUE\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  },
+  {
+    "mode": "baseline",
+    "case": "a",
+    "exit": 0,
+    "seconds": 23.81,
+    "TEXIT.LOG": "START\nMUTED WINDOW GONE\nCALL ExitWindows\n",
+    "EXITOBS.LOG": "START observer\nLAUNCH allow\nQUERY application TRUE\nENDSESSION TRUE\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  },
+  {
+    "mode": "6404",
+    "case": "v",
+    "exit": 0,
+    "seconds": 36.14,
+    "TEXIT.LOG": "START\nMUTED WINDOW GONE\nCALL ExitWindows\nVETO OR FAILURE\n",
+    "EXITOBS.LOG": "START observer\nLAUNCH veto\nQUERY veto FALSE\nENDSESSION FALSE\nPASS unloaded\nPASS veto observed\nFIXTURE cleanup exit\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  },
+  {
+    "mode": "6404",
+    "case": "p",
+    "exit": 0,
+    "seconds": 25.65,
+    "TEXIT.LOG": "START\nMUTED WINDOW GONE\nNO EXIT REQUEST\n",
+    "EXITOBS.LOG": "START observer\nLAUNCH preview\nPASS unloaded\nPASS no exit request\nFIXTURE cleanup exit\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  },
+  {
+    "mode": "6404",
+    "case": "b",
+    "exit": 0,
+    "seconds": 26.75,
+    "TEXIT.LOG": "BUSY: NO PSG OR EXIT\n",
+    "EXITOBS.LOG": "START observer\nLAUNCH busy\nPASS unloaded\nPASS no exit request\nFIXTURE cleanup exit\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  },
+  {
+    "mode": "6404",
+    "case": "c",
+    "exit": 0,
+    "seconds": 24.96,
+    "TEXIT.LOG": null,
+    "EXITOBS.LOG": "START observer\nLAUNCH allow\nSEND default Return cancel\nPASS unloaded\nPASS no exit request\nFIXTURE cleanup exit\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  },
+  {
+    "mode": "6404",
+    "case": "d",
+    "exit": 0,
+    "seconds": 27.54,
+    "TEXIT.LOG": "BUSY: NO PSG OR EXIT\n",
+    "EXITOBS.LOG": "START observer\nLAUNCH allow\nPASS unloaded\nPASS no exit request\nFIXTURE cleanup exit\n",
+    "EXITDOS.LOG": "Returned to DOS\n"
+  }
+]

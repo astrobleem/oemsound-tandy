@@ -1,0 +1,53 @@
+{
+  "executable": "/workspace/scratch/a84592844d2c/exit-build04/TEXIT.EXE",
+  "bytes": 7103,
+  "sha256": "846f83cdf9f2acb69132efd6269bb7b60e84a20efdc57ccca70a454cc3fc44e2",
+  "code_bytes": 4740,
+  "NE_entry_offset": "0xc33",
+  "ChimeProc_offset": "0x67e",
+  "reachable_instructions_checked": 1796,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0xcbe",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0x1044",
+      "instruction": "jmp    *0x2d2"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0xd0b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xec0",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xd2d",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xe34",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xe5f",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xe83",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x5a1",
+      "instruction": "out    %al,(%dx)"
+    }
+  ],
+  "sole_output_port": "0x00C0",
+  "post_output_NOP_count": 16,
+  "scope": "Direct control-flow reachability from NE entry and exported ChimeProc, including reached near calls and conditional branches. Imported Windows routines, unresolved indirect CRT continuations and unreachable bytes are excluded. This is a scoped audit, not exhaustive ISA or hardware timing certification."
+}

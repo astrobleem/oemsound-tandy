@@ -1,0 +1,7 @@
+START observer
+LAUNCH veto
+QUERY veto FALSE
+ENDSESSION FALSE
+PASS unloaded
+PASS veto observed
+FIXTURE cleanup exit
