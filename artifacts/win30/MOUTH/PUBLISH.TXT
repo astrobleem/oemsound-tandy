@@ -1,0 +1,1 @@
+Publication layout: src/win30/MOUTH contains the unchanged standalone package source. Artifacts here include the validated executable and evidence. MILESTONE.ZIP is the complete unmodified package, preserving original paths and manifests. Original manifest/provenance statements describe the sealed pre-publication package snapshot. No physical Tandy hardware test is claimed.

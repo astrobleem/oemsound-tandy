@@ -1,0 +1,374 @@
+{
+  "build": {
+    "bytes": 9135,
+    "sha256": "3c38bee35d7ff93e1ff53586640bcdff5c9dadee113ee9c9eb7e14e9d4096f70",
+    "cpu": "/G0 8086",
+    "target": "Windows 3.0 real mode",
+    "compiler_flags": "/nologo /c /G0 /Gw /AS /W3 /Od"
+  },
+  "rebuild_identical": true,
+  "cases": [
+    {
+      "case": "160-1",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "peak_pcm16": 4892,
+      "tail_peak_pcm16": 372,
+      "audible_seconds": 2.37
+    },
+    {
+      "case": "3204-1",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "peak_pcm16": 4674,
+      "tail_peak_pcm16": 312,
+      "audible_seconds": 2.556
+    },
+    {
+      "case": "6402-1",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "peak_pcm16": 4655,
+      "tail_peak_pcm16": 373,
+      "audible_seconds": 2.417
+    },
+    {
+      "case": "6404-1",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "peak_pcm16": 4666,
+      "tail_peak_pcm16": 318,
+      "audible_seconds": 2.56
+    },
+    {
+      "case": "6404-2",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "interrupted": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2
+      ],
+      "peak_pcm16": 4666,
+      "tail_peak_pcm16": 66,
+      "audible_seconds": 1.92
+    },
+    {
+      "case": "6404-3",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "repeat_restart": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "peak_pcm16": 4666,
+      "tail_peak_pcm16": 436,
+      "audible_seconds": 2.806
+    },
+    {
+      "case": "6404-4",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "unknown_rejected": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2
+      ],
+      "peak_pcm16": 4666,
+      "tail_peak_pcm16": 111,
+      "audible_seconds": 2.137
+    },
+    {
+      "case": "6404-5",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "interrupted": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2
+      ],
+      "peak_pcm16": 4666,
+      "tail_peak_pcm16": 392,
+      "audible_seconds": 1.039
+    },
+    {
+      "case": "6404-6",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        6,
+        7,
+        8,
+        6,
+        9,
+        0
+      ],
+      "peak_pcm16": 6885,
+      "tail_peak_pcm16": 254,
+      "audible_seconds": 2.689
+    },
+    {
+      "case": "6404-7",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        10,
+        2,
+        11,
+        0
+      ],
+      "peak_pcm16": 4533,
+      "tail_peak_pcm16": 134,
+      "audible_seconds": 2.572
+    },
+    {
+      "case": "6404-8",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        8,
+        4,
+        5,
+        0
+      ],
+      "peak_pcm16": 4746,
+      "tail_peak_pcm16": 131,
+      "audible_seconds": 2.562
+    },
+    {
+      "case": "6404-9",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "unknown_rejected": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [],
+      "peak_pcm16": 0,
+      "tail_peak_pcm16": 0,
+      "audible_seconds": 0
+    },
+    {
+      "case": "baseline-1",
+      "checks": {
+        "exit": true,
+        "no_late_frames": true,
+        "all_four_muted": true,
+        "input_bound": true,
+        "sequence": true,
+        "completed": true,
+        "audio_tail_silent": true,
+        "audio_present_or_rejected": true,
+        "no_pcm_clipping": true
+      },
+      "passed": true,
+      "frames": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "peak_pcm16": 4662,
+      "tail_peak_pcm16": 95,
+      "audible_seconds": 3.188
+    }
+  ],
+  "sound_busy": {
+    "exit": 0,
+    "trace": "1537 INPUT 5\n1537 BUSY 0\n",
+    "no_psg_writes": true
+  },
+  "audio_order": [
+    "HELLO",
+    "TANDY",
+    "YES",
+    "NO"
+  ],
+  "audio_sources": [
+    {
+      "word": "HELLO",
+      "case": "6404-1",
+      "first_sample": 123051,
+      "last_sample": 186839,
+      "source_sha256": "6545e332de158c1a8afdbbc8f71339d33876421dfa26d097b28a1170bc52327d"
+    },
+    {
+      "word": "TANDY",
+      "case": "6404-6",
+      "first_sample": 127066,
+      "last_sample": 186835,
+      "source_sha256": "ccd46700e2dc52bdf57225e2db3e156d638e01a9146a28561e49ca7040c4b5b8"
+    },
+    {
+      "word": "YES",
+      "case": "6404-7",
+      "first_sample": 126953,
+      "last_sample": 178940,
+      "source_sha256": "fc1781da268bfd0e311a4c217a13d69e5fed4be1982a47526e31bcf77f6351d4"
+    },
+    {
+      "word": "NO",
+      "case": "6404-8",
+      "first_sample": 126960,
+      "last_sample": 176290,
+      "source_sha256": "dd40dab3f89199a8825843d41e3acbd1747c5d476e3f1a1de9bef2e02ff4a231"
+    }
+  ],
+  "audio_processing": "Exact captured samples; trim silence/DC tail, retain lead/tail margins, insert half-second zero separators. No synthesis or denoising of the capture.",
+  "visual": "Final EXE native 160-mode video frame. DOSBox output doubles horizontal pixels to 320x200. Original screen capture, not a mockup.",
+  "limitations": [
+    "No human intelligibility assessment or physical Tandy hardware test.",
+    "Only four exact case-insensitive words, not general text-to-speech.",
+    "No dedicated Mouth-specific BIOS tick/IRQ comparison or exhaustive low-memory resource-failure injection. Backend uses only stock Windows message timers and PSG port writes.",
+    "Direct-I/O apps launched later can still contend for PSG hardware; use alone."
+  ],
+  "memory": "512-byte local heap and 2048-byte stack in NE header; one 148x172 compatible bitmap (~13KB at 4bpp) and one memory DC reused; destroyed on WM_DESTROY. No per-frame allocation."
+}
