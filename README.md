@@ -5,7 +5,7 @@ PSG sound toys for Windows 3.0 real mode on the Tandy 1000 EX/HX.**
 
 Turn the Tandy's three square-wave tone voices and noise voice into small
 Windows instruments: play notes, sequence beats, try a MIDI file, watch a
-talking mascot, or add an optional startup/exit phrase.
+talking mascot, play a tiny PSG music video, or add an optional startup/exit phrase.
 
 [Windows sound milestone](artifacts/win30/README.md) |
 [Build guide](src/win30/README.MD) | [Development status](docs/STATUS.MD) |
@@ -50,6 +50,50 @@ It is a four-word sound experiment, not general text-to-speech.
 
 PSGPLAY after stopping. These are actual emulator captures;
 [sources and scope](docs/SHOTS/README.MD) are recorded separately.
+
+## Buddy Holly: PSG video demo
+
+**[Buddy Holly for Windows and DOS](examples/BUDDY/README.TXT)** plays the
+complete converted video with a score-based arrangement for three PSG tone
+voices and noise percussion. The default song range lasts 2:44.7; the full
+video runs 4:01.4, with silent dialogue passages. Original vocals and recorded
+audio are not included.
+
+- **Windows 3.0 real mode:** 64x48, sixteen colors, 4 fps; Space plays the song,
+  Enter plays the whole video, and Escape stops. Keep the five runtime files
+  together, including the app-local MIDIMAP.DRV.
+- **DOS:** 128x96, sixteen colors, 8 fps, centered on a 320x200 Tandy display;
+  a 64x48/4-fps fallback is included. Exit Windows, change to the demo directory
+  and run DOSPLAY; /F selects the full video.
+
+[Windows download](examples/BUDDY/WINPLAY.ZIP) |
+[DOS download](examples/BUDDY/DOSPLAY.ZIP) |
+[Build and conversion guide](examples/BUDDY/BUILD.TXT) |
+[Test evidence](examples/BUDDY/QA)
+
+![Actual Windows 3.0 emulator capture of the Buddy Holly player](examples/BUDDY/QA/WINDOWS.PNG)
+
+Windows player: native 64x48 movie area on the 320x200 desktop.
+
+![Actual Tandy DOS emulator capture with centered Buddy Holly video](examples/BUDDY/QA/DOS.PNG)
+
+DOS player: native 128x96 movie area centered on the 320x200 display.
+Both images are actual emulator captures.
+
+Player/converter source, format documentation and test results are in the demo directory. Playback streams small buffers;
+video conversion happens on a modern host.
+
+The DOS version received positive physical-Tandy feedback. The Windows version
+was reported to struggle with note timing. These reports do not establish
+measured hardware frame rates or exact file hashes. Complete-video runs passed
+in the documented emulator presets; fixed emulator cycles are not calibrated
+8088 MHz or physical disk benchmarks.
+
+The converted video and score arrangement contain third-party creative work.
+Its [attribution and rights notice](examples/BUDDY/ATTRIB.TXT) is separate
+from the project code license;
+publication here does not grant rights to the underlying music or video.
+
 
 ## MIDI through the Tandy PSG
 
@@ -126,3 +170,4 @@ file or driver on physical hardware.
 Contributions and hardware testing are welcome. Include app/driver versions,
 environment and reproducible steps. See the existing [LICENSE](LICENSE),
 component notices and [licensing status](docs/STATUS.MD).
+

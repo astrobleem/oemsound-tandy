@@ -1,0 +1,73 @@
+WINDOWS RELEASE QA - 2026-10-04 UTC
+
+Release: BUILD08 TINYVID.EXE, 13,471 bytes.
+SHA256 f377d96c1ef751c26fa3f0d1ddcbd86934b7f30e9912327ba3d19df0b854728f
+Byte-identical clean rebuild, MSC6 /G0 /Gw /AS /W3 /Od; zero warnings.
+Scoped reachable-code 8086 audit passes. Imported Windows routines and
+unresolved indirect continuations are outside its scope; it is not hardware
+certification. Declared heap2KB/stack4KB and all fixed buffers fit below64KB.
+Frame buffers1536+1536 bytes; music buffer896 bytes; no full-stream preload.
+
+Environment: DOSBox-X normal core, 8086_prefetch, fixed cycles as below,
+Tandy machine, 640KB configured; XMS/EMS/UMB/FPU disabled. User-supplied
+Windows3.0 /R fixture. Actual Trial4 TR43216.DRV (320x200x16), SHA256
+ a22f0d75ec8864e7af65e922cdc2083ce225b19096dfa7c2e416c4e3f1276b61
+Trial4 TR41616 160-mode was separately checked with the real GDI window.
+The fixture reports624KB conventional and574KB free BEFORE Windows loads;
+this is not a measurement of free RAM while the player is running.
+
+Exact final BUILD08 full-video + PSG at3000 cycles:
+- elapsed241451ms for241400ms media, consistent with coarse timer precision
+- all966 video frames; zero dropped frames
+- all1342 music records read;1331 applied,10 overdue states coalesced
+- terminal silence at the exclusive endpoint is not applied; stop mutes
+- max observed music lateness108ms, average31.05ms per applied state
+- max timer/service gap109ms; max GDI frame work55ms
+- read times0ms at this resolution mean below one clock tick, not free I/O
+- no media, GDI or cleanup errors; PSG mask0 and owner0 after stop
+- native WAV captured;324/324 tested sustained lead pitches match all11
+  sections by spectral check. This is objective validation, not an audition.
+
+Quiet8-second REAL-SCORE excerpt comparisons at3000 cycles:
+                 music only    video only     combined
+Elapsed ms             8074          8074         8074
+Music states             65             0           65
+Coalesced states          0             0            0
+Frames                    0            32           32
+Video drops               0             0            0
+Max music lateness ms    92             0           92
+Max service gap ms      109           109          109
+Max GDI draw ms           0            55           55
+These comparisons used BUILD07. Its playback/scheduler/GDI/cleanup source
+is identical to BUILD08; BUILD08 adds only a startup DLL-existence probe.
+
+Additional checks:
+- Same excerpt at1000 cycles:32/32 frames,1 coalesced music state,
+  max lateness120ms, max service gap165ms, max draw165ms, clean stop.
+- Trial4 160-mode:32/32 frames,65 states, no drops/coalescing, clean stop;
+  all controls/status fit. Native screenshot included (emulator doubles
+  logical160 pixels horizontally in its capture).
+- Escape, focus/menu loss, Alt+F4 and Space stop/replay verified with native
+  input. Alt first pauses before close; CLOSED.PNG verifies disappearance.
+- Corrupt video header, truncated video/music, bad future pitch, bad cue
+  range, and live video/music truncation all fail with sound released.
+- Repairing the failed music file then pressing Space restarts successfully.
+- Missing MIDIMAP exposed a Windows loader prompt before startup; BUILD08
+  probes existence first. Missing-driver error30 and present-driver full
+  playback both pass on the final binary. No PSG is acquired if absent.
+- Four exact-source host fault suites simulate DC/bitmap selection failure,
+  partial DIB results, seek/read errors, cleanup call errors, cue crossing
+  during I/O, and auto-start without focus. They are stubs, not physical
+  Win16/API fault injection. All pass.
+- All14 deterministic arranger tests pass, including ties, all voice ranges,
+  silence gates, deterministic output, cue boundaries and overlap rejection.
+- Earlier concurrent functional runs are labeled; their latency figures are
+  not used in the quiet comparison table. Full BUILD08 ran separately.
+
+Physical feedback: the user reports Windows timing struggles and a strong
+positive result with DOS. This is qualitative feedback, not instrumented
+hardware timing. There are no physical8088 or CF-card timing measurements. BIOS/Windows tick
+resolution is about55ms. Cooperative disk/GDI stalls can shorten or miss
+brief articulations; elapsed-time music continues rather than stretching.
+DOS has the larger/faster tested picture and lower observed timing jitter.
+Both programs preserve the full video while defaulting to the song cue.
