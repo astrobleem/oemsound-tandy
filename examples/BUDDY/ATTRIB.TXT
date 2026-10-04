@@ -1,0 +1,22 @@
+THIRD-PARTY CONTENT AND PROVENANCE
+
+Buddy Holly is a song by Weezer, written by Rivers Cuomo. This demonstration
+contains a simplified score-derived PSG arrangement and low-resolution
+converted frames from the Weezer Buddy Holly music video. The composition,
+recording/video and underlying score remain third-party copyrighted works.
+The repository code license does not grant rights to those works or imply
+endorsement by their creators, publishers, labels or other rights holders.
+
+Source video supplied by the user:
+https://archive.org/download/win95-27722/Win95CD27722.iso/FUNSTUFF%2FVIDEOS%2FWEEZER.AVI
+Source SHA256:
+4a5a955539d9f00ae0df20a4fde38f70c0eff359057f8114506222acd7ca1036
+Source characteristics: 320x240 Cinepak, 15 fps, 241.4 seconds.
+A user-supplied seven-page Buddy Holly piano score informed the arrangement.
+No original AVI, score PDF, lyrics, sampled soundtrack, OS, compiler, or SDK
+is bundled. PSG events and frames are derivative media, not public-domain
+assets. Users should assess appropriate permissions for their own reuse.
+
+Player/converter implementation is original project code; MIDIMAP derives
+from the existing oemsound-tandy app-local driver implementation. Existing
+repository licensing applies only where the project has rights to grant it.

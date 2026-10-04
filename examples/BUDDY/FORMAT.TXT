@@ -1,0 +1,35 @@
+TINY VIDEO / PSG STREAM v2
+All multibyte fields little-endian. No pointers or executable payload.
+
+WZV2 video header: 24 bytes, struct <4sHHHHIII
+magic='WZV2', width u16, height u16, fps u16, header_size u16=24,
+frame_count u32, duration_ms u32, frame_bytes u32.
+Pixels follow, top-down, high nibble left pixel, fixed IBM/Tandy RGBI.
+frame_bytes=width*height/2. Windows baseline64x48@4fps, DOS64baseline
+or optional128x96@8fps, preconverted on host. Max duration600000ms;
+frames1..4800, bytes/frame<=6144; validate filelength exactly.
+Frame n offset=24+u32(n)*frame_bytes, timestamp=n*1000/fps.
+
+WZM1 music header:20bytes struct <4sHHIII
+magic='WZM1', header_size u16=20, record_size u16=14,
+event_count u32, duration_ms u32, reserved u32=0.
+Record: struct <I4B4BBB (14 bytes): timestamp_ms u32,
+notes[4] u8, velocities[4] u8, retrigger_mask u8, reserved u8=0.
+Channels0..2 tone; channel3 maps to MIDI channel9 noise.
+Tone notes0/off or45..96, noise0/off or35..81, velocity0..127.
+For note0 velocitymust0; active notes require velocity1..127.
+Time strictly increasing, <=duration. Each event is COMPLETE channel state.
+Retrigger mask lower4bits forces note off/on even if same pitch/velocity.
+Max10000 events. Stream bounded chunks; do not preload all.
+At delayed service, consume overdue records and APPLY ONLY LATEST STATE;
+do not burst through stale note attacks. Music gets priority before and
+after video operations. Windows timer55ms or stockDOSBIOS18.2Hz; no
+highfrequencyPIT/IRQhooks. Video drops to elapsed-time-indexed currentframe.
+Final stop always mutes all fourPSGchannels and restoresownership/display.
+
+WZC1 song cues:16 bytes, struct <4sIII
+magic='WZC1', full_duration_ms u32, song_start_ms u32, song_end_ms u32.
+Exact file length16; full_duration_ms mustmatchmediaheader.
+0<=song_start_ms<song_end_ms<=full_duration_ms.
+Default song plays this range without changing the full video file.
+Full-video option plays0..full_duration_ms including silent dialogue.

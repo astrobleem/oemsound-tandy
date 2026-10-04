@@ -1,0 +1,717 @@
+{
+  "schema_version": 1,
+  "source_video": "weezer-input/WEEZER.AVI",
+  "source_video_duration_ms": 241400,
+  "source_score": "weezer-full/score/buddy_holly_score.json",
+  "beat_unit": "quarter",
+  "score_total_beats": 320,
+  "recording_transposition_semitones": -1,
+  "confidence": "high for section identity/key, high for beat phase within approximately 50\u201380 ms; not a sample-exact performance transcription",
+  "segments": [
+    {
+      "beat_start": 0,
+      "beat_end": 200,
+      "time_start_ms": 35652.1668567,
+      "time_end_ms": 134734.1088499,
+      "seconds_per_beat": 0.495409709966,
+      "tempo_bpm": 121.1118772867,
+      "label": "song_before_video_interruption"
+    },
+    {
+      "beat_start": 200,
+      "beat_end": 320,
+      "time_start_ms": 140953.9989297,
+      "time_end_ms": 200365.3158566,
+      "seconds_per_beat": 0.495094307724,
+      "tempo_bpm": 121.1890321983,
+      "label": "bridge_through_ending"
+    }
+  ],
+  "mute_intervals_ms": [
+    [
+      0,
+      35630
+    ],
+    [
+      134580,
+      140935
+    ],
+    [
+      200365.3158566,
+      241400
+    ]
+  ],
+  "mute_interval_labels": [
+    "Unscored opening dialogue/incidental audio",
+    "Video inserted interruption; music fades before bridge",
+    "Unscored closing dialogue/incidental audio"
+  ],
+  "optional_fades_ms": [
+    {
+      "start": 134430,
+      "end": 134580,
+      "direction": "out"
+    }
+  ],
+  "section_cues": [
+    {
+      "name": "verse_1",
+      "beat_start": 0,
+      "beat_end": 32,
+      "time_start_ms": 35652.167,
+      "time_end_ms": 51505.278
+    },
+    {
+      "name": "prechorus_1",
+      "beat_start": 32,
+      "beat_end": 56,
+      "time_start_ms": 51505.278,
+      "time_end_ms": 63395.111
+    },
+    {
+      "name": "chorus_1",
+      "beat_start": 56,
+      "beat_end": 88,
+      "time_start_ms": 63395.111,
+      "time_end_ms": 79248.221
+    },
+    {
+      "name": "instrumental_link",
+      "beat_start": 88,
+      "beat_end": 104,
+      "time_start_ms": 79248.221,
+      "time_end_ms": 87174.777
+    },
+    {
+      "name": "verse_2",
+      "beat_start": 104,
+      "beat_end": 136,
+      "time_start_ms": 87174.777,
+      "time_end_ms": 103027.887
+    },
+    {
+      "name": "prechorus_2",
+      "beat_start": 136,
+      "beat_end": 160,
+      "time_start_ms": 103027.887,
+      "time_end_ms": 114917.72
+    },
+    {
+      "name": "chorus_2",
+      "beat_start": 160,
+      "beat_end": 200,
+      "time_start_ms": 114917.72,
+      "time_end_ms": 134734.109
+    },
+    {
+      "name": "bridge",
+      "beat_start": 200,
+      "beat_end": 232,
+      "time_start_ms": 140953.999,
+      "time_end_ms": 156797.017
+    },
+    {
+      "name": "solo_and_build",
+      "beat_start": 232,
+      "beat_end": 264,
+      "time_start_ms": 156797.017,
+      "time_end_ms": 172640.035
+    },
+    {
+      "name": "final_chorus",
+      "beat_start": 264,
+      "beat_end": 296,
+      "time_start_ms": 172640.035,
+      "time_end_ms": 188483.052
+    },
+    {
+      "name": "outro",
+      "beat_start": 296,
+      "beat_end": 320,
+      "time_start_ms": 188483.052,
+      "time_end_ms": 200365.316
+    }
+  ],
+  "measure_cues": [
+    {
+      "played_bar": 1,
+      "printed_bar": 1,
+      "beat": 0,
+      "time_ms": 35652.167,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 2,
+      "printed_bar": 2,
+      "beat": 4,
+      "time_ms": 37633.806,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 3,
+      "printed_bar": 3,
+      "beat": 8,
+      "time_ms": 39615.445,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 4,
+      "printed_bar": 4,
+      "beat": 12,
+      "time_ms": 41597.083,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 5,
+      "printed_bar": 5,
+      "beat": 16,
+      "time_ms": 43578.722,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 6,
+      "printed_bar": 6,
+      "beat": 20,
+      "time_ms": 45560.361,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 7,
+      "printed_bar": 7,
+      "beat": 24,
+      "time_ms": 47542.0,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 8,
+      "printed_bar": 8,
+      "beat": 28,
+      "time_ms": 49523.639,
+      "section": "verse_1"
+    },
+    {
+      "played_bar": 9,
+      "printed_bar": 9,
+      "beat": 32,
+      "time_ms": 51505.278,
+      "section": "prechorus_1"
+    },
+    {
+      "played_bar": 10,
+      "printed_bar": 10,
+      "beat": 36,
+      "time_ms": 53486.916,
+      "section": "prechorus_1"
+    },
+    {
+      "played_bar": 11,
+      "printed_bar": 11,
+      "beat": 40,
+      "time_ms": 55468.555,
+      "section": "prechorus_1"
+    },
+    {
+      "played_bar": 12,
+      "printed_bar": 12,
+      "beat": 44,
+      "time_ms": 57450.194,
+      "section": "prechorus_1"
+    },
+    {
+      "played_bar": 13,
+      "printed_bar": 13,
+      "beat": 48,
+      "time_ms": 59431.833,
+      "section": "prechorus_1"
+    },
+    {
+      "played_bar": 14,
+      "printed_bar": 14,
+      "beat": 52,
+      "time_ms": 61413.472,
+      "section": "prechorus_1"
+    },
+    {
+      "played_bar": 15,
+      "printed_bar": 15,
+      "beat": 56,
+      "time_ms": 63395.111,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 16,
+      "printed_bar": 16,
+      "beat": 60,
+      "time_ms": 65376.749,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 17,
+      "printed_bar": 17,
+      "beat": 64,
+      "time_ms": 67358.388,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 18,
+      "printed_bar": 18,
+      "beat": 68,
+      "time_ms": 69340.027,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 19,
+      "printed_bar": 19,
+      "beat": 72,
+      "time_ms": 71321.666,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 20,
+      "printed_bar": 20,
+      "beat": 76,
+      "time_ms": 73303.305,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 21,
+      "printed_bar": 21,
+      "beat": 80,
+      "time_ms": 75284.944,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 22,
+      "printed_bar": 22,
+      "beat": 84,
+      "time_ms": 77266.582,
+      "section": "chorus_1"
+    },
+    {
+      "played_bar": 23,
+      "printed_bar": 23,
+      "beat": 88,
+      "time_ms": 79248.221,
+      "section": "instrumental_link"
+    },
+    {
+      "played_bar": 24,
+      "printed_bar": 24,
+      "beat": 92,
+      "time_ms": 81229.86,
+      "section": "instrumental_link"
+    },
+    {
+      "played_bar": 25,
+      "printed_bar": 25,
+      "beat": 96,
+      "time_ms": 83211.499,
+      "section": "instrumental_link"
+    },
+    {
+      "played_bar": 26,
+      "printed_bar": 26,
+      "beat": 100,
+      "time_ms": 85193.138,
+      "section": "instrumental_link"
+    },
+    {
+      "played_bar": 27,
+      "printed_bar": 1,
+      "beat": 104,
+      "time_ms": 87174.777,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 28,
+      "printed_bar": 2,
+      "beat": 108,
+      "time_ms": 89156.416,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 29,
+      "printed_bar": 3,
+      "beat": 112,
+      "time_ms": 91138.054,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 30,
+      "printed_bar": 4,
+      "beat": 116,
+      "time_ms": 93119.693,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 31,
+      "printed_bar": 5,
+      "beat": 120,
+      "time_ms": 95101.332,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 32,
+      "printed_bar": 6,
+      "beat": 124,
+      "time_ms": 97082.971,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 33,
+      "printed_bar": 7,
+      "beat": 128,
+      "time_ms": 99064.61,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 34,
+      "printed_bar": 8,
+      "beat": 132,
+      "time_ms": 101046.249,
+      "section": "verse_2"
+    },
+    {
+      "played_bar": 35,
+      "printed_bar": 9,
+      "beat": 136,
+      "time_ms": 103027.887,
+      "section": "prechorus_2"
+    },
+    {
+      "played_bar": 36,
+      "printed_bar": 10,
+      "beat": 140,
+      "time_ms": 105009.526,
+      "section": "prechorus_2"
+    },
+    {
+      "played_bar": 37,
+      "printed_bar": 11,
+      "beat": 144,
+      "time_ms": 106991.165,
+      "section": "prechorus_2"
+    },
+    {
+      "played_bar": 38,
+      "printed_bar": 12,
+      "beat": 148,
+      "time_ms": 108972.804,
+      "section": "prechorus_2"
+    },
+    {
+      "played_bar": 39,
+      "printed_bar": 13,
+      "beat": 152,
+      "time_ms": 110954.443,
+      "section": "prechorus_2"
+    },
+    {
+      "played_bar": 40,
+      "printed_bar": 14,
+      "beat": 156,
+      "time_ms": 112936.082,
+      "section": "prechorus_2"
+    },
+    {
+      "played_bar": 41,
+      "printed_bar": 15,
+      "beat": 160,
+      "time_ms": 114917.72,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 42,
+      "printed_bar": 16,
+      "beat": 164,
+      "time_ms": 116899.359,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 43,
+      "printed_bar": 17,
+      "beat": 168,
+      "time_ms": 118880.998,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 44,
+      "printed_bar": 18,
+      "beat": 172,
+      "time_ms": 120862.637,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 45,
+      "printed_bar": 19,
+      "beat": 176,
+      "time_ms": 122844.276,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 46,
+      "printed_bar": 20,
+      "beat": 180,
+      "time_ms": 124825.915,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 47,
+      "printed_bar": 21,
+      "beat": 184,
+      "time_ms": 126807.553,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 48,
+      "printed_bar": 22,
+      "beat": 188,
+      "time_ms": 128789.192,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 49,
+      "printed_bar": 27,
+      "beat": 192,
+      "time_ms": 130770.831,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 50,
+      "printed_bar": 28,
+      "beat": 196,
+      "time_ms": 132752.47,
+      "section": "chorus_2"
+    },
+    {
+      "played_bar": 51,
+      "printed_bar": 29,
+      "beat": 200,
+      "time_ms": 140953.999,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 52,
+      "printed_bar": 30,
+      "beat": 204,
+      "time_ms": 142934.376,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 53,
+      "printed_bar": 31,
+      "beat": 208,
+      "time_ms": 144914.753,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 54,
+      "printed_bar": 32,
+      "beat": 212,
+      "time_ms": 146895.131,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 55,
+      "printed_bar": 33,
+      "beat": 216,
+      "time_ms": 148875.508,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 56,
+      "printed_bar": 34,
+      "beat": 220,
+      "time_ms": 150855.885,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 57,
+      "printed_bar": 35,
+      "beat": 224,
+      "time_ms": 152836.262,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 58,
+      "printed_bar": 36,
+      "beat": 228,
+      "time_ms": 154816.64,
+      "section": "bridge"
+    },
+    {
+      "played_bar": 59,
+      "printed_bar": 37,
+      "beat": 232,
+      "time_ms": 156797.017,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 60,
+      "printed_bar": 38,
+      "beat": 236,
+      "time_ms": 158777.394,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 61,
+      "printed_bar": 39,
+      "beat": 240,
+      "time_ms": 160757.771,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 62,
+      "printed_bar": 40,
+      "beat": 244,
+      "time_ms": 162738.148,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 63,
+      "printed_bar": 41,
+      "beat": 248,
+      "time_ms": 164718.526,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 64,
+      "printed_bar": 42,
+      "beat": 252,
+      "time_ms": 166698.903,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 65,
+      "printed_bar": 43,
+      "beat": 256,
+      "time_ms": 168679.28,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 66,
+      "printed_bar": 44,
+      "beat": 260,
+      "time_ms": 170659.657,
+      "section": "solo_and_build"
+    },
+    {
+      "played_bar": 67,
+      "printed_bar": 45,
+      "beat": 264,
+      "time_ms": 172640.035,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 68,
+      "printed_bar": 46,
+      "beat": 268,
+      "time_ms": 174620.412,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 69,
+      "printed_bar": 47,
+      "beat": 272,
+      "time_ms": 176600.789,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 70,
+      "printed_bar": 48,
+      "beat": 276,
+      "time_ms": 178581.166,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 71,
+      "printed_bar": 49,
+      "beat": 280,
+      "time_ms": 180561.544,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 72,
+      "printed_bar": 50,
+      "beat": 284,
+      "time_ms": 182541.921,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 73,
+      "printed_bar": 51,
+      "beat": 288,
+      "time_ms": 184522.298,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 74,
+      "printed_bar": 52,
+      "beat": 292,
+      "time_ms": 186502.675,
+      "section": "final_chorus"
+    },
+    {
+      "played_bar": 75,
+      "printed_bar": 53,
+      "beat": 296,
+      "time_ms": 188483.052,
+      "section": "outro"
+    },
+    {
+      "played_bar": 76,
+      "printed_bar": 54,
+      "beat": 300,
+      "time_ms": 190463.43,
+      "section": "outro"
+    },
+    {
+      "played_bar": 77,
+      "printed_bar": 55,
+      "beat": 304,
+      "time_ms": 192443.807,
+      "section": "outro"
+    },
+    {
+      "played_bar": 78,
+      "printed_bar": 56,
+      "beat": 308,
+      "time_ms": 194424.184,
+      "section": "outro"
+    },
+    {
+      "played_bar": 79,
+      "printed_bar": 57,
+      "beat": 312,
+      "time_ms": 196404.561,
+      "section": "outro"
+    },
+    {
+      "played_bar": 80,
+      "printed_bar": 58,
+      "beat": 316,
+      "time_ms": 198384.939,
+      "section": "outro"
+    }
+  ],
+  "implementation_notes": [
+    "Use an affine map inside each segment. Segments have inclusive beat_start and exclusive beat_end for note starts; the final endpoint beat320 is allowed.",
+    "Beat200 has two endpoint times: the first segment would finish at134734.109ms, while the bridge actually starts at140953.999ms. Evaluate a note ending at200 using its pre-interruption segment; evaluate a note starting at200 using the post-interruption segment.",
+    "Split every sounding interval at segment boundaries, then intersect with mute gates. Do not let a note sustain across the inserted video interruption.",
+    "The original music fade is approximately134430\u2013134600ms; recommended hard PSG gate134580ms intentionally clips the last eighth-note tail before the insertion. Optional volume fade matches the edit better.",
+    "Do not add a pause near171s: this is a notated musical break within solo_and_build and the continuous post-interruption beat grid correctly aligns the final chorus at172640.035ms.",
+    "Preserve all241400ms of video. Keep PSG silent over unscored opening/closing TV dialogue and incidental music, rather than stretching the158.493s score over the entire film.",
+    "Apply recording pitch transposition\u22121 to lead, bass, and harmony. Any separate+12 bass/fifth octave for PSG range is a rendering choice, not a source key change."
+  ],
+  "evidence": {
+    "audio": "Mono extraction from original PCM_u8 11025Hz source; all video music analyzed, no external recording substituted.",
+    "pitch_analysis": "4096-sample STFT,256-sample hop; semitone salience and normalized pitch classes compared with supplied lead and full bass events. Transposition\u22121 wins versus\u22122,0,+1 in every one of11 score sections.",
+    "timing_analysis": "1024-sample STFT,64-sample hop; high-frequency positive spectral flux and half-beat comb optimization, independently fitted before/after the interruption.",
+    "section_validation": "At each of11 sections, selected zero-offset map scores better than perturbations\u22120.5,\u22120.25,\u22120.1,+0.1,+0.25,+0.5s. All80 played bars fit arrangement1\u201326,1\u201322,27\u201358.",
+    "verification_file": "weezer-full/sync/alignment_verification.json",
+    "overview_image": "weezer-full/sync/overview.png",
+    "onsets_image": "weezer-full/sync/onsets.png",
+    "source_visual_context": "weezer-full/sync/storyboard.jpg",
+    "performance_limits": "A piano/vocal reduction cannot reproduce every guitar/percussion detail. Printed rhythm is mapped to a nearly steady live-performance grid; small expressive onset differences remain."
+  }
+}

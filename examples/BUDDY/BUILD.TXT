@@ -1,0 +1,49 @@
+REPRODUCTION
+
+Use your existing licensed Microsoft C 6 / MASM 5.1 / LINK4 toolchain with
+Windows 3.0 headers and libraries. No tools or OS are bundled. The toolchain
+root must contain BIN, INCLUDE, LIB and DDK/286/INC. DOSBox-X is required for
+the host build wrappers. Pass absolute paths. Use a new output directory.
+
+Windows:
+python3 WIN30/source/BUILD.PY --repo /path/to/toolchain --dosbox /path/to/dosbox-x --out /path/to/new-win-build
+DOS:
+python3 DOS/HOST/BUILD.PY /path/to/new-dos-build --repo /path/to/toolchain --dosbox /path/to/dosbox-x
+
+/G0 selects 8086/8088 instructions. Windows uses /Gw /AS /W3 /Od; DOS uses
+/AS /W3 /Os and .8086 assembler. Driver sources are in WIN30/DRIVER; mount the
+toolchain as C: and that directory as D:, then run its BUILD.BAT. The runtime
+driver is the existing released binary; the newly simplified driver batch
+is supplied for convenience and has not been independently rebuilt here.
+
+HOST TESTS (Python 3, host C compiler for TESTWIN)
+python3 WIN30/host/TESTARR.PY
+python3 WIN30/host/TESTWIN.PY
+The 14 arranger checks compare against the included small WZM golden file.
+Four fault-stub suites exercise exact Windows source helpers; they are not
+real Windows API fault injection. See QA for native emulator test coverage.
+The descriptive JSON filenames and host scripts stay on the modern host;
+DOS-target source/runtime names use 8.3. Target C/ASM/BAT inputs use CRLF.
+
+MEDIA REGENERATION (Python 3.11+, Pillow, FFmpeg/ffprobe on PATH)
+python3 WIN30/host/ARRANGE.PY
+python3 WIN30/host/CONVERT.PY /path/to/WEEZER.AVI /path/to/WEEZER.WZV
+For larger DOS video add: --width 128 --height 96 --fps 8
+ARRANGE writes WEEZER.WZM and WEEZER.CUE under WIN30/media by default, and
+also emits arrangement reports. No network fetching occurs in these tools.
+Supply your own source video; consult ATTRIB.TXT before redistributing it.
+
+ISA CHECKS (GNU objdump required; matching LINK map beside each executable)
+python3 WIN30/source/AUDIT.PY /path/to/TINYVID.EXE
+python3 DOS/HOST/AUDIT.PY /path/to/DOSPLAY.EXE
+These scoped reachable-code audits do not certify imported OS routines,
+unresolved indirect continuations, or physical hardware compatibility.
+
+Final binaries: Windows BUILD08 and DOS BUILD06, both byte-identically
+rebuilt before original delivery. Publication changes host path options and
+documentation only; runtime source and binary behavior are unchanged.
+
+Publication validation: the relocated configurable DOS build wrapper was
+run with explicit toolchain/DOSBox paths and reproduced the exact BUILD06
+binary hash. All 14 arranger tests and four Windows fault suites also pass
+from this overlay.

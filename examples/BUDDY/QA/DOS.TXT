@@ -1,0 +1,67 @@
+DOS PLAYER QA - 2026-10-04 UTC
+
+Final executable: BUILD06 / DOSPLAY.EXE, 13,669 bytes.
+SHA256 a63ccdecd0ba11d8b48358c7fdf5fba67c23a33a65ac51edeaff58accc328340
+Rebuilt byte-identically with the existing Microsoft C 6 / MASM 5.1 tools.
+/G0, small model, .8086; zero compiler and assembler warnings.
+Final image + BSS + stack: 24,992 bytes. Stack: 4,096 bytes.
+Buffers: 6,144-byte video and 896-byte music, with bounded small state.
+DOS CRT can initially reserve available conventional heap; these numbers
+are static storage, not a claim that DOS reserves only 25 KB.
+
+Emulator: DOSBox-X 2026.08.31 b13702c, normal core, 8086_prefetch,
+640 KB configured, FPU/XMS/EMS/UMB disabled, fixed cycles as below.
+Its guest MEM reports 624 KB conventional, 592 KB free before playback.
+Flags/PUSH SP probe reports 8086-class behavior. This is emulator evidence,
+not certification of real 4.77 MHz 8088 hardware or CF/disk throughput.
+
+Whole-file and song tests (final score/beatmap)
+- Exact final BUILD06, full /F at 3000 cycles: elapsed 241,450 ms; all 1,932 frames rendered,
+  zero frame drops; all 1,342 records read, 1,341 states applied, zero
+  states coalesced. The terminal silence state exactly at cueEnd is
+  intentionally excluded; cleanup mutes all channels unconditionally;
+  maximum music lateness 54 ms; maximum service gap 55 ms.
+- Supplementary BUILD04 default song at conservative 1000 cycles: elapsed 164,720 ms, matching
+  the selected 164,713 ms range to BIOS tick precision; all 1,318 relevant
+  frames rendered, zero drops; 1,340 states applied, zero coalesced;
+  maximum music lateness 54 ms, maximum service gap 55 ms.
+  Two preroll records were scanned and collapsed into initial state; the
+  later full-video terminal silence record remains outside the song cue.
+- Both returned to the original BIOS mode 3 and issued all four mute
+  latches. The software mute mask is 0; the PSG has no register readback.
+
+Baseline comparison
+- BUILD04 64 x 48 @ 4 fps, 8-second synthetic diagnostic track, at both
+  3000 and 1000 cycles: all 32 frames, zero video/music drops, 53 ms maximum
+  music lateness and 55 ms maximum service gap. Thus 128 x 96 @ 8 fps also
+  sustained its full rate for much longer real-content runs at both presets.
+- Earlier 16-second BUILD03 comparisons at each size/preset also rendered
+  every frame, but a terminal statistics underflow affected the baseline
+  maximum-gap counters. Those counters are superseded by BUILD04 results.
+- Read/draw times are counted in BIOS ticks; zero ticks means below about
+  54.925 ms, not zero work. The emulator host filesystem is not real media.
+
+Final exclusive-end and cleanup regression checks
+Final BUILD06 refuses music service at/after cueEnd, and checks cueEnd
+again after a video read before drawing. It keeps the DOS critical-error
+FAIL handler active through logging, then restores the prior vectors.
+The exact final binary completed the full-length test above, plus:
+- Synthetic cue ending at exactly 750 ms with an active note-on there:
+  six earlier states applied, seven records read ahead, and the exact-end
+  state was not applied. End result: mode 3 and mute mask 0.
+- Mid-play video file truncated by the host: error 15, mode 3 and mute 0.
+Supplementary prior-build checks covered the same boundary at 64/1000,
+Escape and Space stop, out-of-order timestamps, out-of-range pitch,
+malformed video length and invalid cue range. All tested failures stopped
+cleanly. The full conservative song comparison used BUILD04; BUILD05/06
+only tightened terminal checks and kept the FAIL handler through logging.
+Real removable-media critical errors and launching from inside actual
+Windows were not induced; their guards are present in the final source.
+
+Physical feedback
+The user reports a strong positive DOS result and Windows timing struggles.
+This qualitative feedback does not establish measured frame rate or jitter.
+
+Native screenshot
+DOS.PNG is the actual 320 x 200 emulator display with centered 128 x 96 video.
+It is not a mockup. No WAV, OS fixture, or toolchain is included here.
