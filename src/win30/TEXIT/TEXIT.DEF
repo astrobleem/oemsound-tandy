@@ -8,3 +8,5 @@ STACKSIZE 2048
 EXPORTS
  ChimeProc @1
  ConfirmProc @2
+
+ NoticeProc @3

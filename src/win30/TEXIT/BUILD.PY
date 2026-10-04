@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build only the one-shot startup chime, using the repository's existing DOS tools."""
+"""Build only the one-shot pre-exit chime, using the repository's existing DOS tools."""
 import argparse, hashlib, json, os, shutil, subprocess, time
 from pathlib import Path
 p=argparse.ArgumentParser()
@@ -11,7 +11,7 @@ if out.exists():p.error('--out must be new')
 for n in ('BIN/CL.EXE','BIN/LINK4.EXE','LIB/SLIBCEW.LIB','LIB/LIBW.LIB'):
  if not (repo/n).is_file():p.error('Missing existing toolchain input: '+n)
 out.mkdir(parents=True)
-for n in ('TEXIT.C','TEXIT.DEF','TEXIT.RSP','BUILD.BAT'):
+for n in ('TEXIT.C','TNOTICE.C','TNOTICE.H','TEXIT.DEF','TEXIT.RSP','BUILD.BAT'):
  shutil.copyfile(Path(__file__).parent/n,out/n)
 config="""[sdl]
 fullscreen=false
@@ -52,3 +52,4 @@ if not passed or not (out/'TEXIT.EXE').is_file():raise SystemExit('Build failed;
 exe=(out/'TEXIT.EXE').read_bytes()
 result={'bytes':len(exe),'sha256':hashlib.sha256(exe).hexdigest(),'cpu':'/G0 8086','target':'Windows 3.0 real mode','compiler_flags':'/nologo /c /G0 /Gw /AS /W3 /Od'}
 (out/'RESULT.JSON').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+
