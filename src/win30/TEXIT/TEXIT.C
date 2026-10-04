@@ -2,6 +2,8 @@
    Windows 3.0 real mode / 8086. No IRQ/PIT changes or resident helper. */
 #define WINVER 0x0300
 #include <windows.h>
+#include "TNOTICE.H"
+/* Compact status notices for 160-pixel displays. */
 #define TIMER 1
 static DWORD began;
 static unsigned phase;
@@ -212,8 +214,8 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE previous, LPSTR cmd, int show)
     }
     if (busy()) {
         logResult("BUSY: NO PSG OR EXIT\r\n");
-        if (!testmode) MessageBox(NULL, "Close other PSG apps first.\nUse plain Exit if TSOUND is loaded.",
-            "Exit cancelled", MB_OK);
+        if (!testmode) TinyNotice(NULL, inst, "Exit cancelled",
+            "Sound is busy.\nUse silent exit.");
         return 7;
     }
     logResult("START\r\n");
@@ -237,8 +239,8 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE previous, LPSTR cmd, int show)
     logResult("CALL ExitWindows\r\n");
     exited = ExitWindows(0L, 0);
     logResult(exited ? "RETURN TRUE\r\n" : "VETO OR FAILURE\r\n");
-    if (!exited && !testmode) MessageBox(NULL,
-        "Windows is still running.\nExit was cancelled or failed.",
-        "Exit Windows", MB_OK);
+    if (!exited && !testmode) TinyNotice(NULL, inst, "Exit Windows",
+        "Exit canceled.\nWindows stays.");
     return exited ? 0 : 5;
 }
+
