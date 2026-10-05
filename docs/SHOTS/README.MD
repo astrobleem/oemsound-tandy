@@ -49,3 +49,23 @@ commit `41c0e96477eaaeae45bd686e2360a73889f5439d`.
 
 PNG SHA-256:
 `c071d6a93d25338af3d37675d652847c9068a5d5175759c871e37de8122b594b`.
+
+
+## BUDCAP 0.4
+
+[BUDCAP04.PNG](BUDCAP04.PNG) is a lossless PNG encoding of the accepted
+[BUDCAP 0.4 FISHCAP.BMP](../../examples/BUDDY/BUDCAP/VERIFY/FISHCAP.BMP),
+retained at source revision `c7641deeaf9234116993465064e8dd9c2c23cd35`.
+The 320x200 frame shows the 256x160 video area and opening fish-dialogue
+caption during sampled speech in the emulator. Its dimensions and decoded
+RGB pixels are identical to the BMP; no crop, scaling, redraw or retouching
+was applied. This format conversion adds no new runtime test, listening
+result, physical-hardware evidence or timing claim. See the
+[accepted QA scope](../../examples/BUDDY/BUDCAP/QA.TXT).
+
+- Source BMP SHA-256:
+  `bba6f027f0600955b97f3572a251d442d89ddda9ec4abce17e2966f9b72bb1fb`
+- PNG SHA-256:
+  `82551c993463711807953240ddb45643404e9f8f39eef9ee862a2ee11dc4355b`
+- Decoded RGB pixel SHA-256 (both files):
+  `be43571a09d8d7ad7fb28976330957b040f15f04282581979edf3d8edbb65e04`

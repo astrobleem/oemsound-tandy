@@ -13,9 +13,18 @@ Source SHA256:
 4a5a955539d9f00ae0df20a4fde38f70c0eff359057f8114506222acd7ca1036
 Source characteristics: 320x240 Cinepak, 15 fps, 241.4 seconds.
 A user-supplied seven-page Buddy Holly piano score informed the arrangement.
-No original AVI, score PDF, lyrics, sampled soundtrack, OS, compiler, or SDK
-is bundled. PSG events and frames are derivative media, not public-domain
-assets. Users should assess appropriate permissions for their own reuse.
+The original WINPLAY and DOSPLAY packages contain converted frames and a
+PSG arrangement, without sampled soundtrack or subtitles. The later
+BUDCAP04 package also contains a full-video subtitle track and four short
+sampled dialogue excerpts (10.60 seconds total); it does not play the
+original recorded song vocals. Those words and recordings remain
+third-party copyrighted material. No original AVI, full soundtrack WAV,
+score PDF, OS, compiler or SDK is added by BUDCAP04.
+
+PSG events, converted frames, captions and dialogue clips are not
+public-domain assets. Users should assess appropriate permissions for
+their own reuse. Publication here makes no new grant over the underlying
+composition, video, words or recordings.
 
 Player/converter implementation is original project code; MIDIMAP derives
 from the existing oemsound-tandy app-local driver implementation. Existing
