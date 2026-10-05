@@ -1,0 +1,47 @@
+BUDENV02 EXPERIMENTAL OVERLAY - REPRODUCTION
+
+Keep the accepted BUDCAP04 archive and installation unchanged. This overlay
+omits its video, speech PCM, captions and cue. Prepare a NEW DOS folder:
+
+  python HOST/PREPARE.PY /path/to/BUDCAP04.ZIP /path/to/new/BUDENV02
+
+In a repository checkout the baseline is examples/BUDDY/BUDCAP04.ZIP.
+PREPARE verifies its exact SHA256 and every copied media file against
+MEDIA.json, verifies the selected EXE/score, and refuses existing outputs.
+It performs no download and never changes the baseline. Run RUN.BAT from
+the new folder in plain DOS. Do not run alongside Windows or sound TSRs.
+
+BUILD THE PLAYER
+Supply lawful external Microsoft C6/MASM/LINK4 tools, headers and libraries:
+  python HOST/BUILD.PY /tmp/budenv-build --repo /path/to/toolchain --dosbox /path/to/dosbox-x
+  python HOST/AUDIT.PY /tmp/budenv-build/BUDTALK.EXE
+Compare the rebuilt EXE to BUDTALK.EXE (22,759 bytes). The build requires
+/G0 8088 code generation. No compiler, SDK, OS or emulator is bundled.
+
+HOST CHECKS
+  python arrangement/SOURCE/TESTARR.PY
+  python arrangement/SOURCE/TESTEXPR.PY
+  python test_synth.py
+  python review/test_catchup.py
+  python HOST/TESTCUE.PY
+The arranger uses the pinned existing public project's score/beatmap JSON;
+these retain third-party provenance and are not newly licensed media.
+Regenerate the main arrangement with python arrangement/SOURCE/ARRANGE.PY.
+Then reproduce the selected short opening into a NEW output folder:
+  python opening-cue/ADD-CUE.PY arrangement/WEEZER.WZM opening-cue/CUE.json arrangement/INSTRMAP.H /tmp/cue02
+Compare the new WEEZER.WZM and INSTRMAP.H against WEEZER.WZM and
+SOURCE/INSTRMAP.H. HOST/TESTCUE.PY automates these exact byte comparisons.
+The root WEEZER.WZM and SOURCE/INSTRMAP.H are the selected BUDENV02 pair.
+The arrangement folder is the expressive main-song intermediate only.
+
+NATIVE TESTS (using the NEW prepared full DOS directory)
+  python HOST/TEST.PY /path/to/new/BUDENV02 /tmp/budenv-full --dosbox /path/to/dosbox-x --case full --cycles 3000
+For a lower emulator budget use --cycles 240. Other cases are preview,
+bad-pcm, no-captions and bad-captions. Budgets are not calibrated MHz.
+The full test covers all 241.4 seconds, caption/speech counts, score events,
+bounded envelope writes, muted outputs and restored display on completion.
+
+Historical evidence is retained under VERIFY. BUDENV01 receipts are prior
+core evidence, not fresh BUDENV02 runs. Publication checks are separate.
+No raw reference recordings, video frames, source AVI/PDF or game assets
+are included. See ATTRIB.TXT, OPENING.TXT and QA.TXT for limits.

@@ -1,0 +1,49 @@
+BUDENV02 OPENING-CUE REVISION QA
+
+BUDENV01 remains a separate immutable checkpoint. This revision changes
+only its build marker, three WZM records for six opening notes, and one
+instrument-map entry. Every main-song record, instrument curve, hardware
+routine, caption routine, video, caption, speech PCM and CUE is unchanged.
+The original BUDCAP04 archive remains unchanged as well.
+
+Build: Microsoft C6 /G0 /AS /W3 /Os, MASM .8086, 4096-byte stack.
+BUDTALK.EXE 22,759 bytes, SHA256
+ab437290da4bb5eb38812bc18d3ec36b57e3cdcc35e0dc38a0f94c887015d373
+Scoped direct-control-flow audit: 6,653 instructions, zero post-8088
+suspects. It does not certify indirect targets or physical hardware.
+
+Opening test at fixed 3000: all three new states applied, no skips,
+no video drops, four caption updates, normal shutdown. All six added notes
+use the original soft harmony envelope. Maximum envelope writes per pass: 3.
+Speaker and Tandy DAC opening capture tracks contain exactly zero samples
+with nonzero value. PSG handles the cue without sampled opening speech.
+Five opening video/caption samples are pixel-identical to the control.
+
+Full 241.4-second run at fixed 240: PASS, all 1,456 music states applied
+(1,457 records read), zero skipped states, 84 caption updates, four speech
+clips complete, zero speech lateness/deadline guards/unexpected frame drops.
+926 frames drawn + 40 deliberate speech-held skips; 62,142 PCM samples,
+1,458 clock catch-up samples skipped, exactly matching BUDENV01 at 240.
+Maximum music lateness 54 ms and service gap 55 ms. Maximum active envelope
+gap 1 BIOS tick, zero missed active envelope ticks, at most 4 writes/pass.
+All frame, speech and timing outcomes match BUDENV01; differences are the
+expected three score states, six note starts and 51 PSG writes for the cue.
+PSG/speaker muted and prior display mode 3 restored.
+
+All runs: DOSBox-X Tandy, normal core, 8086_prefetch, 640 KB, no XMS/EMS/UMB.
+Budgets are not MHz and are uncalibrated to physical 8088 hardware.
+BUDENV01's two full runs, stop/error/fallback tests and host tests are
+retained under VERIFY/BUDENV01. They are prior core evidence, not new
+BUDENV02 runs. Data-only revision tests prove unchanged later score and
+media, minimum 61 ms score spacing and silence over all four speech windows.
+
+Opening harmony is a source-supported approximate A-flat-major to
+B-flat-major reduction at 0.28-3.30s. Exact choir voicing/lead/vowel attacks
+are unresolved under narration. The 3.30 s endpoint is chosen for the short
+requested cue, not a claim that all source music ends there. See OPENING.TXT.
+
+Opening preview is raw emulator audio with only a start/end crop. No EQ,
+noise removal, compression, reverb, resampling or gain is used. Source
+reference includes the announcer and is not loudness-matched to the PSG
+preview. Physical-machine sound quality and the existing speech whine
+remain unverified/unresolved. This experimental overlay is published separately; no CF write was made.

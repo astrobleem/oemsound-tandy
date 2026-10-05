@@ -1,0 +1,27 @@
+BUDENV02 OPENING DOO-WOP CUE
+
+Source: the exact user-supplied video, SHA256
+4a5a955539d9f00ae0df20a4fde38f70c0eff359057f8114506222acd7ca1036
+
+0.28-2.18s: A-flat major; PSG MIDI 56,60,63 (Ab3,C4,Eb4).
+2.18-3.30s: B-flat major; PSG MIDI 58,62,65 (Bb3,D4,F4).
+Three original soft harmony envelopes, with noise muted.
+
+Stable spectral families support these chords beneath the announcer.
+This is a conservative chord-tone reduction, not a singer-by-singer
+transcription. The bass-family notes are voiced an octave higher for the
+PSG reduction. Exact vocal octaves, top-line melody and vowel reattacks
+are unresolved. No direct audition was possible during analysis.
+The chosen 3.30-second cutoff matches the requested short cue; additional
+opening tonal material exists later and is not silently guessed here.
+
+Only three WZM records are inserted; every main-song record remains
+byte-identical to BUDENV01. Its expressive arrangement and envelopes are
+unchanged. Video, all 84 caption cues, speech PCM and CUE bytes remain
+identical. The four existing sampled-speech windows are PSG-silent.
+This explicitly adds music inside the formerly silent opening interval;
+it does not add any sampled opening narration.
+
+BIOS-clock application can be up to 55 ms late, unchanged from BUDENV01.
+Original-source audio excerpts are excluded from this public overlay and
+are not copied into DOS speech playback.

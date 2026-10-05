@@ -1,0 +1,26 @@
+THIRD-PARTY CONTENT AND PROVENANCE
+
+Buddy Holly is a song by Weezer, written by Rivers Cuomo. This experimental
+overlay contains a simplified score-derived PSG arrangement and project
+code. The local preparation step copies converted video, captions and
+four accepted short speech clips from the exact existing BUDCAP04 archive.
+Composition, recording/video, score, captions
+and other underlying expressive content remain third-party works. The
+code license does not grant rights to those works or imply endorsement.
+
+The original video and seven-page piano score were supplied by the user.
+No original AVI, PDF, operating system, compiler, SDK, TMNT executable,
+song, bank, instrument preset, or game driver is bundled. The accepted
+converted BUDCAP04 video/caption/PCM bytes remain unchanged and are not
+duplicated in this overlay. No source-audio excerpts are included. Derivative
+media are not public-domain assets; assess permissions for further reuse.
+
+Pinned project baseline: astrobleem/oemsound-tandy
+c7641deeaf9234116993465064e8dd9c2c23cd35
+https://github.com/astrobleem/oemsound-tandy
+Original BUDCAP04.ZIP retained unmodified as the control.
+
+All new instrument curves and phrase-aware arrangement logic are authored
+for this experiment. Only general synthesis ideas were informed by earlier
+research. Existing project code licensing is included in LICENSE.TXT and
+applies only where the project has rights to grant it.
