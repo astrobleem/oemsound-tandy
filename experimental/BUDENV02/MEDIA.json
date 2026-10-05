@@ -1,0 +1,12 @@
+{
+  "baseline_zip_sha256": "0ea79bf57992e408115c9b4daeb36daee224a0ea56a36dd0b1fcdc2d0ef8b75d",
+  "baseline_repository_path": "examples/BUDDY/BUDCAP04.ZIP",
+  "media_sha256": {
+    "WEEZER.WZV": "48e29162b17afe70abe971ab4989a50beec90f1dad2727180076af259a90f15d",
+    "WEEZER.LRC": "195329b037de7c7b8be6399f5a5ac7f4a745387bcd692dfe2d3d5ab1e2367af1",
+    "DIALOG.PCM": "265e28831f1029ab7508d5989b057022fee3a0efb1f026d3676ebd6d3a65f5da",
+    "WEEZER.CUE": "d3446413fdffcf9a2a65d8a6a1f77e3e6aeade4ad8f521b74b1f8880f7689905"
+  },
+  "selected_player_sha256": "ab437290da4bb5eb38812bc18d3ec36b57e3cdcc35e0dc38a0f94c887015d373",
+  "selected_score_sha256": "5bdb7a848362e9d9d7af863819db2b5a74492960e58533848cb67e633604f7e8"
+}
