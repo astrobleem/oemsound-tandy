@@ -1,191 +1,351 @@
 # OEMSound-Tandy
 
-**Mini MIDI, Mini Piano, joystick music, an eight-step sequencer and native
-PSG sound toys for Windows 3.0 real mode on the Tandy 1000 EX/HX.**
+**Native instruments, PSG music and a subtitled music-video demo for the
+Tandy 1000.**
 
-Turn the Tandy's three square-wave tone voices and noise voice into small
-Windows instruments: play notes, sequence beats, try a MIDI file, watch a
-talking mascot, play a tiny PSG music video, or add an optional startup/exit phrase.
+Play MIDI files, tap out a tune, sequence eight-step patterns or watch a
+four-minute music video on an 8088. This project explores the Tandy's
+**three square-wave tone voices and one noise voice**, with small Windows
+3.0 real-mode apps and standalone DOS experiments for the original EX/HX.
 
-[Windows sound milestone](artifacts/win30/README.md) |
-[Build guide](src/win30/README.MD) | [Development status](docs/STATUS.MD) |
-[Display and Start-menu companion](https://github.com/astrobleem/oemdisplay-tandy)
+[Try it](#try-it) · [Buddy Holly / BUDCAP](#buddy-holly--budcap-04) ·
+[Expressive previews](#expressive-instrument-previews) ·
+[Instruments](#windows-instruments-and-sound-toys) ·
+[How MIDI works](#midi-through-the-tandy-psg) ·
+[Hardware status](#verification-and-hardware-status) ·
+[Windows XT desktop](https://github.com/astrobleem/oemdisplay-tandy)
 
-## Instruments and sound toys
+| Mini Piano · logical 160×200 | Tandy Beats Lab · 320×200×16 |
+| --- | --- |
+| ![Mini Piano 0.1 native emulator capture with thirteen keys and Panic control](docs/SHOTS/PIANO.PNG) | ![Tandy Beats Lab native emulator capture with four lanes and eight steps](docs/SHOTS/BEATS.PNG) |
 
-- **[Mini MIDI](src/win30/MINIMIDI/README.MD):** compact MIDI-file player with
-  path entry/Browse, Play/restart, Stop/Escape, progress and sent/skipped-message
-  counters. Supports Standard MIDI Files type 0/1, tempo changes and running status.
-- **[Mini Piano](src/win30/PIANO/README.MD):** play with mouse press/drag or PC
-  keys A/W/S/E/D/F/T/G/Y/H/U/J/K; octave buttons/arrows cover C3 through C7.
-  Three simultaneous PSG notes, with Panic/Escape and focus-loss cleanup.
-- **[JOYMIDI](src/win30/JOYMIDI/README.MD):** joystick-to-note instrument with
-  Range, Center, Arm, Mute/Panic, port selection and input display. X selects
-  C4..C5 chromatic pitch; Y selects next-note velocity. Button 1 plays, button 2
-  disarms. Starts muted and uses session-only calibration.
-- **[Tandy Beats Lab](artifacts/win30/BEATS/README.MD):** four lanes and eight
-  steps, three melodic voices plus noise percussion, 40–240 BPM, editable
-  pitch/rests, Play/Stop, Demo/Clear and keyboard navigation.
-- **[Automatic Mouth](src/win30/MOUTH/README.MD):** an original GDI mascot with
-  synchronized mouth poses and hand-authored HELLO, TANDY, YES and NO sounds.
-  Speak/Enter and Stop/Escape control its buzzy electronic syllables.
-- **[PSGPLAY](src/win30/README.MD):** native Play/Stop test layering C4, E4 and
-  G4 on the three tone voices, with replay and final mute.
+*Actual emulator captures; Mini Piano's columns are doubled by the capture
+path. Pictures show the UI, not sound quality or physical timing.
+[Screenshot provenance](docs/SHOTS/README.MD).*
 
-![Mini Piano 0.1 native emulator capture at logical 160x200](docs/SHOTS/PIANO.PNG)
+## What is here
 
-Mini Piano 0.1: thirteen visible keys, octave controls and Panic on a logical
-160x200 desktop (the emulator doubles columns in this capture).
+- **Windows instruments:** Mini MIDI file playback, Mini Piano, joystick
+  notes, Beats Lab, PSGPLAY and the Automatic Mouth mascot.
+- **App-local MIDI-to-PSG playback:** three melodic voices, velocity mapping,
+  voice stealing, basic noise percussion and guarded ownership/cleanup.
+- **Public BUDCAP 0.4:** a 256×160, 4 fps DOS video demo with 84 subtitle
+  cues, PSG music and four short sampled PC-speaker dialogue clips.
+- **Expressive private previews:** BUDENV02 adds a more detailed DOS
+  arrangement and short opening cue. The completed WININST 1.2 Windows
+  test kit adds original instrument families, envelopes and optional vibrato.
+- **Desktop sounds:** optional startup and pre-exit phrases, with integration
+  in the companion Windows XT shell.
+- **Source and evidence:** component build instructions, scoped native tests,
+  audio captures and an experimental Windows 3.0 SOUND driver.
 
-![Actual Beats Lab native emulator capture](docs/SHOTS/BEATS.PNG)
+This is experimental software. Available runtime packages and newer
+build-from-source previews are listed separately below.
 
-Beats Lab playing its compact pattern on the 320x200 sixteen-color desktop.
+## Try it
 
-![Actual Automatic Mouth native emulator capture](docs/SHOTS/MOUTH.PNG)
+| Start with | Available files | Where it runs |
+| --- | --- | --- |
+| **Current public Buddy Holly demo** | [BUDCAP04.ZIP](examples/BUDDY/BUDCAP04.ZIP) and [source / run guide](examples/BUDDY/BUDCAP/README.md) | Plain DOS, outside Windows |
+| **Original Windows video player** | [WINPLAY.ZIP](examples/BUDDY/WINPLAY.ZIP) and [instructions](examples/BUDDY/README.TXT) | Windows 3.0 real mode |
+| **Beats Lab** | [Runtime, source and verification](artifacts/win30/BEATS/README.MD) | Windows 3.0 real mode |
+| **PSGPLAY and the early sound milestone** | [MILESTONE.ZIP](artifacts/win30/MILESTONE.ZIP) and [package notes](artifacts/win30/README.md) | Windows 3.0 real mode; read the separate driver-test limits |
+| **Mini MIDI, Mini Piano, JOYMIDI** | [Mini MIDI source](src/win30/MINIMIDI/README.MD), [Mini Piano source](src/win30/PIANO/README.MD), [JOYMIDI source](src/win30/JOYMIDI/README.MD) | Build required; newer apps are not automatically in the older milestone ZIP |
 
-Automatic Mouth's HELLO frame with the drawn mascot and native controls.
-It is a four-word sound experiment, not general text-to-speech.
+### Windows app basics
 
-![Actual PSGPLAY native emulator capture](docs/SHOTS/PSGPLAY.PNG)
+1. Use a backed-up, working **Windows 3.0 real-mode / 640 KB** Tandy setup
+   or an isolated emulator guest. Keep your display driver's guarded launcher
+   and video-memory reservation.
+2. Extract or build the selected app into its own DOS directory. For an
+   app-local MIDI instrument, keep its executable and the **matching
+   MIDIMAP.DRV together**.
+3. Launch through **Program Manager → File → Run**, following the component's
+   guide. Sound apps do not install the display driver or desktop shell.
+4. Run one PSG producer at a time. **Close Beats Lab before another instrument**;
+   it keeps its SOUND lease while open. Use Stop, Escape or Panic as documented.
 
-PSGPLAY after stopping. These are actual emulator captures;
-[sources and scope](docs/SHOTS/README.MD) are recorded separately.
+**Do not register the app-local MIDIMAP.DRV in SYSTEM.INI or copy it into
+WINDOWS\SYSTEM.** The separate TSOUND.DRV experiment has its own isolated
+test-install and rollback procedure; it is not a general replacement
+recommendation.
 
-## Buddy Holly: PSG video demo
+## Buddy Holly / BUDCAP 0.4
 
-### Latest DOS version: BUDCAP 0.4
+The current public DOS demo plays the **complete 241.4-second video at 256×160,
+sixteen colors and 4 fps**, with a score-derived PSG arrangement and
+**84 full-video subtitle cues**. Four short original dialogue excerpts add
+**10.60 seconds of 6 kHz sampled PC-speaker speech**. The music is synthesized
+on the PSG; the song's original recorded vocals are not played.
 
-[Download BUDCAP04.ZIP](examples/BUDDY/BUDCAP04.ZIP) and extract it into a new
-folder. Exit Windows, enter BUDCAP, and run RUN or RUNFULL.
-This accepted DOS version uses 256x160 video at 4 fps, all 84 full-video
-subtitle cues, and four short sampled PC-speaker dialogue clips alongside
-the PSG music. Pictures intentionally hold during sampled speech.
+![BUDCAP 0.4 emulator frame during the opening fish dialogue, with its subtitle](docs/SHOTS/BUDCAP04.PNG)
 
-[Source, reproduction and tests](examples/BUDDY/BUDCAP/README.md) include
-the exact accepted runtime, full-run logs, and an in-speech caption capture.
-Both final emulator runs applied all 1,341 music states, all 84 caption
-updates and all four speech clips with zero skipped music or unintended
-video drops. Dialogue timing remains approximate, the speech whine remains
-unresolved, and these emulator results are not physical-hardware certification.
+*The accepted 0.4 in-speech frame, losslessly converted from its retained
+BMP evidence. No pixels were redrawn. [Capture source and scope](docs/SHOTS/README.MD#budcap-04).*
 
-### Original Windows and DOS versions
+### Run the DOS demo
 
-**[Buddy Holly for Windows and DOS](examples/BUDDY/README.TXT)** plays the
-complete converted video with a score-based arrangement for three PSG tone
-voices and noise percussion. The default song range lasts 2:44.7; the full
-video runs 4:01.4, with silent dialogue passages. Original vocals and recorded
-audio are not included.
+[Download BUDCAP04.ZIP](examples/BUDDY/BUDCAP04.ZIP) and extract into a **new
+directory**. Keep the enclosed `BUDCAP` folder intact. Use DOS 3 or later on
+a Tandy 1000, fully outside Windows and without sound/PIT TSRs. Change into
+`BUDCAP`, then run:
 
-- **Windows 3.0 real mode:** 64x48, sixteen colors, 4 fps; Space plays the song,
-  Enter plays the whole video, and Escape stops. Keep the five runtime files
-  together, including the app-local MIDIMAP.DRV.
-- **DOS:** 128x96, sixteen colors, 8 fps, centered on a 320x200 Tandy display;
-  a 64x48/4-fps fallback is included. Exit Windows, change to the demo directory
-  and run DOSPLAY; /F selects the full video.
+| Command | Playback |
+| --- | --- |
+| `RUN` or `RUNFULL` | Full movie, subtitles and short speech clips |
+| `RUNTEST` | Opening preview, 18–42 seconds |
+| `RUNSONG` | Song range with subtitles; no sampled speech in that range |
+| `NOLYRICS` | Full movie and speech, with subtitles disabled |
 
-[Windows download](examples/BUDDY/WINPLAY.ZIP) |
-[DOS download](examples/BUDDY/DOSPLAY.ZIP) |
-[Build and conversion guide](examples/BUDDY/BUILD.TXT) |
-[Test evidence](examples/BUDDY/QA)
+**Escape, Space or Ctrl+C stops.** Relaunch to restart. Running `BUDTALK`
+without options also selects full playback with subtitles. There is no
+installer or AUTOEXEC/CONFIG edit.
 
-![Actual Windows 3.0 emulator capture of the Buddy Holly player](examples/BUDDY/QA/WINDOWS.PNG)
+### What improved, and what remains
 
-Windows player: native 64x48 movie area on the 320x200 desktop.
+Version 0.4 adds full-video caption coverage, corrects the two opening
+speech excerpts and lets captions advance during speech. The original
+256×160 video, PSG score and movie clock remain unchanged from BUDSWEET.
 
-![Actual Tandy DOS emulator capture with centered Buddy Holly video](examples/BUDDY/QA/DOS.PNG)
+- Both recorded full emulator runs applied **all 1,341 music states, all
+  84 captions and all four speech clips**, with no skipped music events or
+  unintended video drops.
+- The picture **intentionally holds during sampled speech**, for up to
+  4.75 seconds, then catches up. Captions can briefly interrupt speech;
+  some samples are skipped to stay with the movie clock.
+- **PC-speaker PWM whine remains unresolved.** Dialogue subtitle timing is
+  approximate, and the closing clips have not had word-exact listening
+  confirmation. Any offline EQ listening demo is not a DOS runtime filter.
+- Physical EX playback was not newly tested for these exact 0.4 bytes.
+  Fixed emulator budgets are not calibrated 8088 speed measurements.
 
-DOS player: native 128x96 movie area centered on the 320x200 display.
-Both images are actual emulator captures.
+[Source and exact runtime identities](examples/BUDDY/BUDCAP/README.md) ·
+[Full-run and stop/error checks](examples/BUDDY/BUDCAP/QA.TXT) ·
+[Byte-identical reproduction](examples/BUDDY/BUDCAP/REPRODUCE.md)
 
-Player/converter source, format documentation and test results are in the demo directory. Playback streams small buffers;
-video conversion happens on a modern host.
+### Earlier Windows and DOS players
 
-The DOS version received positive physical-Tandy feedback. The Windows version
-was reported to struggle with note timing. These reports do not establish
-measured hardware frame rates or exact file hashes. Complete-video runs passed
-in the documented emulator presets; fixed emulator cycles are not calibrated
-8088 MHz or physical disk benchmarks.
+The [original demo packages](examples/BUDDY/README.TXT) remain available:
 
-The converted video and score arrangement contain third-party creative work.
-Its [attribution and rights notice](examples/BUDDY/ATTRIB.TXT) is separate
-from the project code license;
-publication here does not grant rights to the underlying music or video.
+| Player | Video | Controls / download |
+| --- | --- | --- |
+| Windows 3.0 real mode | 64×48, 16 colors, 4 fps | Space: song; Enter: full video; Escape: stop. [WINPLAY.ZIP](examples/BUDDY/WINPLAY.ZIP) |
+| Original DOS player | 128×96, 16 colors, 8 fps; 64×48 / 4 fps fallback | Run `DOSPLAY`; `/F` selects full video. [DOSPLAY.ZIP](examples/BUDDY/DOSPLAY.ZIP) |
 
+These older players use PSG music with silent dialogue passages; they do
+not include BUDCAP's captions or sampled speech. Keep the Windows player's
+five runtime files together, including its app-local MIDIMAP.DRV.
+
+<details>
+<summary>See the original Windows and DOS captures</summary>
+
+| Original Windows player | Original DOS player |
+| --- | --- |
+| ![Original Windows video player emulator capture, with a 64×48 movie area](examples/BUDDY/QA/WINDOWS.PNG) | ![Original DOS video player emulator capture, with centered 128×96 frames](examples/BUDDY/QA/DOS.PNG) |
+
+Retained emulator captures of the older players, not BUDCAP 0.4.
+[Build and conversion guide](examples/BUDDY/BUILD.TXT) ·
+[Original verification](examples/BUDDY/QA)
+
+</details>
+
+The converted frames, score arrangement, captions and sampled dialogue
+contain third-party creative work. The project code license does not grant
+rights to the underlying song, video, words or recordings. See
+[attribution and media rights](examples/BUDDY/ATTRIB.TXT).
+
+## Expressive instrument previews
+
+*Development status, 5 October 2026. These completed private test kits are
+not published in this repository or included in the public downloads above.
+Physical Tandy acceptance remains open.*
+
+### BUDENV02: expressive Buddy Holly and a short opening cue
+
+The selected DOS preview combines **11 original volume-envelope profiles**
+with a phrase-aware arrangement and a short opening-chord approximation.
+Lead, bass, rhythm guitar, sustained harmony, guitar responses and noise
+percussion have distinct profiles. Section/note-role mappings take effect
+at the next note attack without resetting other held voices.
+
+The arrangement restores 15 score-written solo/backing notes, places
+source-derived guitar responses in written melody rests, and thins some
+generic fifths and hi-hats. Original main-song melody and bass notes,
+timing and velocity remain exact. The short opening cue was selected after
+listening comparisons; its choral voicing is an approximate three-tone
+reduction, and no opening speech samples were added.
+
+Envelopes use the existing **approximately 18.2 Hz BIOS cadence**, with at
+most four changed volume-register writes per update. The DOS preview adds
+no new timer/IRQ ownership, pitch vibrato or PC-speaker bass. Its video,
+84 captions, four speech clips and 241.4-second movie clock are unchanged.
+
+BUDENV02's complete low-budget emulator run and six-second opening test
+passed without skipped score states or missed active envelope ticks.
+Sampled opening frames matched the control pixel-for-pixel. The underlying
+expressive arrangement also passed two full fixed-budget runs and stop/error
+checks. Music A/B previews used constant-gain loudness matching only, with
+no EQ or denoising. Physical timing and sound remain unverified, and the
+original sampled-speech whine remains unresolved.
+
+Public BUDCAP04 is unchanged. The BUDENV source, runtime and listening
+previews are not published here yet.
+
+### WININST 1.2: Windows app-local instrument preview
+
+The Windows instrument layer is now **built and emulator-tested as a
+private kit**, with updated paired versions of Mini MIDI, Mini Piano,
+JOYMIDI and Beats. It preserves the three PSG tone voices plus one noise
+voice and leaves the stock system SOUND.DRV unchanged.
+
+- **Eight original melodic families:** Keys, Organ, Bass, Pad, Reed, Lead,
+  Bell and Hit, plus kick/snare/hat noise envelopes. These are original
+  PSG shapes, not General MIDI instrument replicas.
+- **MIDI Program Change:** selects the family per channel; notes already
+  sounding keep their preset snapshots. Updated Mini MIDI forwards Program
+  Change from files. Piano, JOYMIDI and Beats use the default Keys profile;
+  **no preset-selector UI was added**.
+- **Opt-in envelopes and vibrato:** updated clients explicitly enable the
+  layer and service it from their own Windows task, nominally every 55 ms.
+  Vibrato is optional and preset/note-range dependent. There is no new
+  driver timer callback, IRQ/PIT hook, extra oscillator or sampled voice.
+- **Legacy behavior:** older clients start in rectangular-note mode. The
+  unchanged public Beats executable passed with the new mapper. New clients
+  require their matching 1.2 mapper; existing controls and ownership rules
+  remain. Note Off, all-off, reset and close mute immediately, without tails.
+
+The packaged bytes passed **23 native Windows/DOSBox-X runs** and
+**791,501 synthesis host assertions**. Testing covered Program Change,
+envelopes, eligible vibrato, legacy clients, controls, ownership, cleanup and
+bounded recovery in Windows 3.0 real mode with normal 640 KB memory.
+
+Unloaded synthesis-service intervals measured **55 ms median / 109 ms
+95th percentile**. Deliberate heavy redraw and non-yielding stress delayed
+service by up to **5.71 seconds**. Recovery skips missed envelope steps
+rather than replaying them, but cannot remove the audible pause. This is
+cooperative synthesis, not hard real-time playback or a physical 8088
+performance guarantee. MIDI pitch bend, sustain and ordinary expression
+controllers remain unsupported.
+
+**Public main still contains the earlier MIDIMAP implementation.** The
+following linked app guides and MIDI limits describe that published code;
+the private 1.2 kit and its full validation report are not public downloads.
+
+## Windows instruments and sound toys
+
+| App | What it does | Useful limits |
+| --- | --- | --- |
+| [Mini MIDI](src/win30/MINIMIDI/README.MD) | Browse and play Standard MIDI Files type 0/1, with tempo changes, running status, progress and sent/skipped-message counts | Source preview; files up to 32 KB / 16 tracks; no Pause, seek or playlist |
+| [Mini Piano](src/win30/PIANO/README.MD) | Mouse press/drag or keys A/W/S/E/D/F/T/G/Y/H/U/J/K; octave controls span C3–C7 | Source preview; three simultaneous square-wave notes; Panic/Escape and focus-loss cleanup |
+| [JOYMIDI](src/win30/JOYMIDI/README.MD) | Joystick X chooses pitch, Y chooses next-note velocity; Range, Center, Arm and Mute/Panic | Source preview; single-note instrument, starts muted; physical joystick behavior unverified |
+| [Tandy Beats Lab](artifacts/win30/BEATS/README.MD) | Four lanes, eight steps, 40–240 BPM, pitch/rest editing, Demo/Clear and Play/Stop | Patterns stay in memory; cooperative timing can jitter |
+| [Automatic Mouth](src/win30/MOUTH/README.MD) | Animated mascot with hand-authored HELLO, TANDY, YES and NO sounds; Speak/Enter and Stop/Escape | Four buzzy electronic words, not general text-to-speech |
+| [PSGPLAY](src/win30/README.MD) | Play/Stop test layering C4, E4 and G4, with replay and final mute | Small native sound demonstration |
+
+![Automatic Mouth emulator capture with its mascot and HELLO controls](docs/SHOTS/MOUTH.PNG)
+
+The existing [milestone files](artifacts/win30/README.md) include recorded
+audio, source and test reports. Check the selected component's guide for its
+current build and paired runtime files.
 
 ## MIDI through the Tandy PSG
 
-Mini MIDI, Mini Piano, JOYMIDI and Beats send MIDI messages directly to their
-paired **app-local MIDIMAP.DRV**. The driver provides three melodic square-wave
-voices, velocity-to-volume mapping, voice stealing, channel-10 noise percussion,
-per-channel all-off and normal Reset/Close cleanup.
+In the current public Windows code, Mini MIDI, Mini Piano, JOYMIDI and
+Beats call their paired **app-local MIDIMAP.DRV** directly. It provides:
 
-**This is not a system MIDI device or a General MIDI synthesizer.** There are
-no sampled piano/string patches, external MIDI interface or system-wide Media
-Player integration. Unsupported messages such as program changes, sustain and
-pitch bend do not shape the sound; Mini MIDI skips them. Windows cooperative
-timers can delay playback. [Supported MIDI subset and timing limits](docs/STATUS.MD).
+- Three square-wave melodic voices shared across MIDI channels, with
+  velocity-to-volume mapping and oldest-voice stealing.
+- One basic channel-10 noise/percussion voice.
+- Note On/Off, supported all-off messages, exclusive task ownership and
+  normal Reset/Close cleanup.
 
-Keep the matching **MIDIMAP.DRV beside each app**. **Do not register it in
-SYSTEM.INI or copy it into WINDOWS\SYSTEM.** Close Beats before playing another
-instrument; it holds its SOUND lease while open. Run one PSG producer at a time.
+This is a bounded MIDI-message implementation, **not a system-wide MIDI
+device, physical MIDI interface or General MIDI synthesizer**. There are
+no sampled piano/string patches or Media Player integration. Program
+changes, sustain and pitch bend do not shape the sound; unsupported
+messages are skipped or rejected by the component's documented contract.
+
+Windows cooperative timers and slow drawing can delay notes or cleanup.
+Forced termination and crashes remain outside normal lifecycle coverage.
+[Supported notes, messages, timing and ownership limits](docs/STATUS.MD).
 
 ## Startup and exit sounds
 
-- **[TCHIME](src/win30/CHIME/README.MD):** an original short rising phrase,
-  gentle volume reduction, final mute and automatic exit.
-- **[XPCHIME](src/win30/XPCHIME/README.MD):** a credited three-square-wave
-  arrangement of the XP startup notes, rather than sampled audio.
-- **[TEXIT](src/win30/TEXIT/README.MD):** an original descending pre-exit phrase
-  and compact notices. `/preview` plays without exit; `/go` supports a caller
-  that already confirmed. Windows save prompts and exit vetoes remain active.
+| App | Phrase |
+| --- | --- |
+| [TCHIME](src/win30/CHIME/README.MD) | Original short rising phrase, fading to silence and exiting automatically |
+| [XPCHIME](src/win30/XPCHIME/README.MD) | Credited three-square-wave arrangement of the XP startup notes, not sampled audio |
+| [TEXIT](src/win30/TEXIT/README.MD) | Original descending pre-exit phrase; `/preview` plays without exiting and `/go` supports an already-confirmed caller |
 
-These optional one-shot apps do not require replacing SOUND.DRV. Follow each
-app's guide for manual tryout and opt-in startup. The companion
-[TSHELL](https://github.com/astrobleem/oemdisplay-tandy/blob/main/examples/TSHELL/README.MD)
-offers Tandy/XP/none startup selection and optional exit sound. Exit returns
-to DOS; it does not power off the computer.
+These are optional one-shot apps. Follow their individual tryout and opt-in
+startup instructions. The companion
+[Tandy Start shell](https://github.com/astrobleem/oemdisplay-tandy/blob/main/examples/TSHELL/README.MD)
+offers Tandy/XP/none startup selection and an optional exit sound. Save
+prompts and application exit vetoes remain active. Exit returns to DOS;
+it does not power off the machine.
 
 ## Driver and DOS experiments
 
-- **[TSOUND.DRV](src/win30/DRIVER/README.MD):** restricted Windows 3.0 legacy
-  SOUND API experiment with three bounded voice queues, notes/rests, duration,
-  tempo/articulation/pitch/volume, Start/Stop/Close, counts, threshold events,
-  yielding waits and exclusive ownership. Use only the documented isolated
-  install/rollback procedure; this is separate from app-local MIDI playback.
-- **[PSGTEST](src/psgtest.c):** earlier DOS tone test.
-- **[WAVHYB](src/wavhyb.c):** DOS-side unsigned 8-bit mono PCM experiment using
-  PSG volume modulation and the PC speaker, not a Windows wave driver.
-- **[Legacy MIDIMAP scaffold](src/MIDIMAP.C):** retained earlier driver work;
-  current instruments use the separate paired Beats driver.
+- **[TSOUND.DRV](src/win30/DRIVER/README.MD):** a separate, restricted
+  Windows 3.0 legacy SOUND API driver with three bounded voice queues,
+  notes/rests, timing and articulation controls, threshold events and
+  yielding waits. Use only its documented cloned-guest install/rollback
+  procedure. Unsupported areas include noise, envelopes, SyncAllVoices
+  and a stock system beep.
+- **[PSGTEST](src/psgtest.c):** the earlier standalone DOS tone test.
+- **[WAVHYB](src/wavhyb.c):** a DOS PCM experiment using PSG volume modulation
+  and the PC speaker. It is not a Windows wave driver.
+- **[Legacy MIDIMAP scaffold](src/MIDIMAP.C):** retained earlier work;
+  current instruments use the separate paired Beats implementation.
 
-The SOUND driver has a deliberately limited API. Automatic Mouth does not
-promise intelligible speech, Beats patterns stay in memory, Mini MIDI has no
-Pause/seek/playlist, and JOYMIDI is a single-note instrument. Full contracts,
-test scope and remaining limitations are in [development status](docs/STATUS.MD).
+## Verification and hardware status
 
-## Run, build and hardware status
+| Area | Evidence and remaining limit |
+| --- | --- |
+| Mini MIDI | Reported working, with limited sound quality, on a genuine 8088 Tandy 1000 EX / DOS 6.22 / Windows 3.0 real mode. Not calibrated timing or exact-hash acceptance. |
+| Mini Piano and JOYMIDI | Component emulator/logic tests are documented; physical keyboard latency and joystick behavior remain unverified. |
+| Earlier Buddy Holly players | DOS version received positive physical-Tandy feedback; Windows version was reported to struggle with note timing. Exact hardware frame rates and file hashes were not established. |
+| BUDCAP 0.4 | Two full fixed-budget DOSBox-X runs, stop/error checks and byte-identical publication rebuild. Exact 0.4 physical playback and sound quality remain open. |
+| BUDENV02 / WININST 1.2 | Completed private emulator-tested previews described above. Public downloads are unchanged; physical acceptance is still open. |
+| Legacy SOUND driver | Recorded 105-check isolated native suite and audio captures qualify its tested subset, not complete SOUND compatibility or universal hardware support. |
 
-Use an existing **Windows 3.0 real-mode / 640 KB** setup on known compatible
-Tandy hardware or an isolated Tandy emulator guest. Keep the display driver's
-guarded launcher/video-memory reservation. Launch Windows apps through
-Program Manager > File > Run; sound apps do not install your display or shell.
+Recorded Windows tests use real-mode Windows 3.0, normal 640 KB and no
+XMS/EMS/UMB workaround. DOSBox-X's `8086_prefetch` and cycle settings are
+test configurations, not measurements of a physical 8088. Screenshots,
+logged register writes, heard audio and hardware observations are different
+kinds of evidence.
 
-First-party milestone files are under [artifacts/win30](artifacts/win30/README.md).
-Newer Mini MIDI, Mini Piano and JOYMIDI source previews have their own build
-guides under `src/win30`. Builds use the licensed period Microsoft C/Windows
-tools inside DOSBox-X, orchestrated by Python 3 on the host.
+[Development status](docs/STATUS.MD) ·
+[Mini MIDI tests](src/win30/MINIMIDI/TESTS.MD) ·
+[Mini Piano tests](src/win30/PIANO/TESTS.MD) ·
+[JOYMIDI tests](src/win30/JOYMIDI/TESTS.MD) ·
+[Beats qualification](artifacts/win30/BEATS/VALIDATE.MD)
 
-This is experimental work with emulator evidence and limited hardware reports.
-Mini MIDI was reported working, with limited sound quality, on a genuine 8088
-Tandy 1000 EX running DOS 6.22 and Windows 3.0 real mode. Mini Piano and physical
-joystick/JOYMIDI behavior remain unverified. This does not certify every app,
-file or driver on physical hardware.
+## Build and contribute
 
-[Build instructions](src/win30/README.MD) | [Evidence and compatibility limits](docs/STATUS.MD) |
-[Screenshot provenance](docs/SHOTS/README.MD)
+Use each component's guide; the root DOS batch does not build every app.
+Windows builds use licensed period Microsoft C/Windows inputs inside
+DOSBox-X, orchestrated by Python 3 on the modern host. Python is not a guest
+dependency. Use a fresh output directory and inspect the recorded identities.
 
-Contributions and hardware testing are welcome. Include app/driver versions,
-environment and reproducible steps. See the existing [LICENSE](LICENSE),
-component notices and [licensing status](docs/STATUS.MD).
+[Windows build guide](src/win30/README.MD) ·
+[BUDCAP reproduction](examples/BUDDY/BUDCAP/REPRODUCE.md) ·
+[Original video conversion](examples/BUDDY/BUILD.TXT)
 
+Hardware reports are welcome. Include the machine/RAM, DOS and Windows
+versions, app and paired-driver hashes, exact steps, and what you actually
+heard. Distinguish hardware from emulation and preserve a working backup.
 
+### Licensing and credits
+
+The repository has a [GPLv3 license](LICENSE) and component-specific notices,
+including separately licensed cores. Preserve the notices for the code you
+use; historical licensing discrepancies are recorded in
+[development status](docs/STATUS.MD). This documentation does not relicense
+any component or third-party media.
+
+Buddy Holly is by Weezer, written by Rivers Cuomo. Its music, video and
+related media retain their separate rights and attribution; see the
+[media notice](examples/BUDDY/ATTRIB.TXT). The companion
+[Windows XT project](https://github.com/astrobleem/oemdisplay-tandy) supplies
+the display drivers, desktop shell and games shown alongside these apps.
