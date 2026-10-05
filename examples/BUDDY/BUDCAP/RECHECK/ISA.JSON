@@ -1,0 +1,20 @@
+{
+  "exe": "BUDTALK.EXE",
+  "bytes": 20155,
+  "sha256": "2e866172774626deec2c699ba7df7738671feb9357e752977429c5aebbb38986",
+  "code_segments": [
+    [
+      0,
+      15773
+    ],
+    [
+      15776,
+      15778
+    ]
+  ],
+  "entry": "0x202a",
+  "code_symbol_roots": 218,
+  "reachable_instructions_checked": 6062,
+  "post8088_suspects": [],
+  "scope": "Scoped direct control flow from MZ entry and code MAP symbols; indirect targets and external hardware behavior not certified."
+}

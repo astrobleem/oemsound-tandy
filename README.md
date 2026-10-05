@@ -53,6 +53,23 @@ PSGPLAY after stopping. These are actual emulator captures;
 
 ## Buddy Holly: PSG video demo
 
+### Latest DOS version: BUDCAP 0.4
+
+[Download BUDCAP04.ZIP](examples/BUDDY/BUDCAP04.ZIP) and extract it into a new
+folder. Exit Windows, enter BUDCAP, and run RUN or RUNFULL.
+This accepted DOS version uses 256x160 video at 4 fps, all 84 full-video
+subtitle cues, and four short sampled PC-speaker dialogue clips alongside
+the PSG music. Pictures intentionally hold during sampled speech.
+
+[Source, reproduction and tests](examples/BUDDY/BUDCAP/README.md) include
+the exact accepted runtime, full-run logs, and an in-speech caption capture.
+Both final emulator runs applied all 1,341 music states, all 84 caption
+updates and all four speech clips with zero skipped music or unintended
+video drops. Dialogue timing remains approximate, the speech whine remains
+unresolved, and these emulator results are not physical-hardware certification.
+
+### Original Windows and DOS versions
+
 **[Buddy Holly for Windows and DOS](examples/BUDDY/README.TXT)** plays the
 complete converted video with a score-based arrangement for three PSG tone
 voices and noise percussion. The default song range lasts 2:44.7; the full
@@ -170,4 +187,5 @@ file or driver on physical hardware.
 Contributions and hardware testing are welcome. Include app/driver versions,
 environment and reproducible steps. See the existing [LICENSE](LICENSE),
 component notices and [licensing status](docs/STATUS.MD).
+
 

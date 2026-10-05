@@ -1,0 +1,54 @@
+OPTIONAL BOTTOM-BORDER CAPTIONS
+
+RUN / RUNFULL and BUDTALK with no options enable full-video WEEZER.LRC.
+For explicit player options, /L enables subtitles; NOLYRICS disables them. Missing or invalid caption files
+are ignored; caption_status in the playback log is 0 absent, 1 loaded,
+-1 malformed. Only video with at least a 20-pixel bottom border enables it.
+
+WEEZER.LRC is a small plain ASCII DOS text file (8.3 filename). This is a
+custom simple cue format, NOT standard bracketed LRC syntax:
+
+0|CAPTION TEST
+2000|THE NEXT ORIGINAL DEMO LINE
+4000|
+
+Each line is absolute movie milliseconds, a vertical bar, then text.
+The empty 4000ms cue clears the caption. Text remains until the next cue.
+Timestamps must increase strictly and not exceed movie duration. They do
+not reset in song-only playback: use original full-video timestamps.
+Up to 256 cues, 52 characters each. Long phrases need separate timed lines.
+Blank lines and comment lines beginning # are accepted. Keep comments under
+78 characters. ASCII lowercase is displayed uppercase. Letters, digits,
+spaces, apostrophes, quotes, period, comma, colon, question/exclamation,
+parentheses, slash and dash have glyphs; other punctuation appears as ?.
+No Unicode/music-note symbol support. Use plain supplied text equivalents.
+The cue file is fully loaded before playback; there are no caption disk
+reads during playback and no external font files.
+
+DISPLAY/TIMING
+One 6x8-pixel white uppercase line, centered in bottom border at y 186..193.
+The supplied 256x160 video occupies y20..179 and is never overwritten.
+Each cue change redraws only 8 rows (1280 video bytes), calling the existing
+music service before each 160-byte row. No caption work on unchanged cues.
+Skipped cue intervals select the latest due phrase without drawing stale
+intermediate lines. BIOS time granularity is approximately 54.925 ms.
+Phrase-level subtitles are the recommended mode. Replacing text word by
+word is technically possible, but exact karaoke highlighting is not built.
+Performance tests are emulator stress tests, not a physical-hardware claim.
+
+INTEGRATION
+Compile CAPTION.C alongside the player with MSC 6 /G0 /AS /Os, link CAPTION.
+CAPFONT.H is a built-in, prepacked 5x7 bitmap font with 6x8 character cells.
+CaptionLoad("WEEZER.LRC",duration) runs before startTick is established.
+CaptionService(elapsed(),captionMusic) runs after music/video servicing.
+captionMusic is a wrapper returning musicService(elapsed()). In speech
+integration do not call the PSG music callback while PCM is actively using
+its sound registers. The merged speech service uses CaptionNextTime() to split PCM calls
+at subtitle boundaries, renders with PCM stopped, and catches the source
+sample offset up to the movie clock afterward. A short audible gap may
+occur at these boundaries. No drawing or C callback enters the PWM loop.
+CaptionCount() and CaptionUpdates() support logging. No cleanup required.
+
+Neutral demo captions are test-only; no song subtitles were sourced or
+transcribed for the engine. The final phrase track transforms text supplied
+by the user, with score-aligned song timing and approximate spoken-line timing.

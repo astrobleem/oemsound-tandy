@@ -1,0 +1,7 @@
+{
+  "bytes": 20155,
+  "sha256": "2e866172774626deec2c699ba7df7738671feb9357e752977429c5aebbb38986",
+  "compiler": "Microsoft C 6 /G0 /AS /Os",
+  "assembler": ".8086 MASM 5.1",
+  "stack_bytes": 4096
+}

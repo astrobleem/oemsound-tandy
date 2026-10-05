@@ -1,0 +1,38 @@
+BUDTALK 0.4 / BUDCAP04 QA
+
+Final MSC6 /G0 /AS /Os build, 8086 MASM, 4096-byte stack.
+Executable: 20,155 bytes; SHA256
+2e866172774626deec2c699ba7df7738671feb9357e752977429c5aebbb38986
+Scoped direct-control-flow ISA audit: 6062 instructions, no post-8088
+suspects. Indirect targets and physical hardware are outside this audit.
+
+The accepted source windows are 23.90-24.80 and 28.50-31.95 seconds.
+These replace the wrong 19.8-23.8 introduction excerpt. Two existing
+closing clips remain at 219.95-224.70 and 225.15-226.65 seconds.
+Source extraction decodes from the beginning before exact sample trimming,
+avoiding short-clip seeking loss. Four clips, 63600 samples, 10.60 seconds.
+
+All supplied text is included in 84 full-video caption cues. The 42 sung
+phrases and their timing are unchanged. Dialogue timing is approximate;
+accepted opening audio windows provide the revised Weezer/fish anchors.
+The new PCM-boundary service allows text to advance within speech clips.
+
+Full final runs: DOSBox-X Tandy, 8086_prefetch, 640 KB, no XMS/EMS/UMB;
+fixed 3000 and 240 budgets. These are not physical MHz or sound proof.
+Both: complete 241400-ms movie; all84 captions updated, all4 clips
+completed, zero sample-lateness reports, zero speech deadline guards,
+1341 music states applied, zero skipped, max lateness54ms/servicegap55ms.
+Speaker bits0, PSG mute mask0, textmode3 restored. No unintended drops.
+release3000: 927 frames drawn + 39 deliberate speech-held skips =966; 62850 samples played, 750 skipped for clock catch-up.
+release240: 926 frames drawn + 40 deliberate speech-held skips =966; 62142 samples played, 1458 skipped for clock catch-up.
+
+Escape during the corrected fish clip returned cleanly. No-options launch
+selects the full movie and subtitles. Truncated PCM fails safely before
+playback; malformed subtitles are disabled without stopping valid music.
+Windows rejection and physical EX playback have not been newly exercised.
+Original BUDSWEET video/music/CUE bytes are unchanged.
+
+The whine remains unresolved. Any accompanying processed listening WAV
+uses offline EQ, never a runtime/hardware filter. Capture uses matched
+48000-Hz speaker and mixer settings. Closing speech still lacks word-exact
+listening confirmation. See full logs and SUBTITLE.TXT for remaining limits.
