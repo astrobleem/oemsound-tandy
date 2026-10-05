@@ -1,0 +1,51 @@
+Complete
+version=2
+build=BUDCAP04
+mode=3
+error=0
+width=256
+height=160
+fps=4
+duration_ms=241400
+elapsed_ms=241450
+frames=926
+dropped_frames=40
+music_events_applied=1341
+music_events_skipped=0
+music_events_read=1342
+music_max_late_ms=54
+music_total_late_ms=36304
+service_max_gap_ms=55
+video_read_chunk_bytes=4096
+draw_batch_rows=16
+video_read_max_ticks=1
+music_read_max_ticks=0
+draw_max_ticks=1
+play_start_ms=0
+play_end_ms=241400
+run_elapsed_ms=241450
+prerolled_records=1
+full_range=1
+sound_mask_after_stop=0
+psg_writes=10301
+old_mode=3
+restored_mode=3
+speech_clips=4
+speech_bytes=63600
+speech_completed=4
+speech_guarded=0
+speech_avoided_music=0
+speech_samples=62142
+speech_late=0
+speech_head_skipped_samples=1458
+speech_held_frames=40
+unexpected_video_drops=0
+speaker_bits_after_stop=0
+caption_enabled=1
+caption_status=1
+caption_cues=84
+caption_updates=84
+clip_0_target=23900-24800 actual=23947 samples=5118 reason=0
+clip_1_target=28500-31950 actual=28506 samples=20664 reason=0
+clip_2_target=219950-224700 actual=219974 samples=27708 reason=0
+clip_3_target=225150-226650 actual=225192 samples=8652 reason=0

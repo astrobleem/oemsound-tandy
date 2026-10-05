@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "release_hashes_checked": 32,
+  "video_frames": 966,
+  "music_records": 1342,
+  "caption_cues": 84,
+  "speech_samples": 63600,
+  "archived_full_run_logs_checked": 2
+}

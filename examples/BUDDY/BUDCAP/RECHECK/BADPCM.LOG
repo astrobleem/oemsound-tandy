@@ -1,0 +1,51 @@
+Error
+version=2
+build=BUDCAP04
+mode=3
+error=61
+width=256
+height=160
+fps=4
+duration_ms=241400
+elapsed_ms=0
+frames=0
+dropped_frames=0
+music_events_applied=0
+music_events_skipped=0
+music_events_read=1
+music_max_late_ms=0
+music_total_late_ms=0
+service_max_gap_ms=0
+video_read_chunk_bytes=4096
+draw_batch_rows=16
+video_read_max_ticks=0
+music_read_max_ticks=0
+draw_max_ticks=0
+play_start_ms=18000
+play_end_ms=42000
+run_elapsed_ms=0
+prerolled_records=0
+full_range=0
+sound_mask_after_stop=0
+psg_writes=8
+old_mode=3
+restored_mode=3
+speech_clips=4
+speech_bytes=0
+speech_completed=0
+speech_guarded=0
+speech_avoided_music=0
+speech_samples=0
+speech_late=0
+speech_head_skipped_samples=0
+speech_held_frames=0
+unexpected_video_drops=0
+speaker_bits_after_stop=0
+caption_enabled=1
+caption_status=0
+caption_cues=0
+caption_updates=0
+clip_0_target=23900-24800 actual=0 samples=0 reason=0
+clip_1_target=28500-31950 actual=0 samples=0 reason=0
+clip_2_target=219950-224700 actual=0 samples=0 reason=0
+clip_3_target=225150-226650 actual=0 samples=0 reason=0

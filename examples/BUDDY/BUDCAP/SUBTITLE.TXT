@@ -1,0 +1,27 @@
+FULL-VIDEO SUBTITLES
+
+This track includes the complete text you supplied: the opening
+announcement, drive-in introduction, Weezer introduction, fish line,
+count-in, song lyrics, middle Happy Days announcement, final conversation,
+and cheering/laughing/guitar labels. Captions start at the beginning of
+FULL playback and continue through the ending. There are 84 timed events.
+
+The existing song phrase timings are unchanged. Spoken-line timings are
+approximate, based on your transcript's rough block-ending timestamps,
+with long blocks split into readable lines. They have not been verified
+word-by-word against the recording. The old claim that the fish line was
+at 19.8 seconds was incorrect: that section contains the Weezer introduction.
+You confirmed the revised audition: "Weezer!" at 23.90-24.80 seconds,
+and the complete fish line at 28.50-31.95 seconds. Those caption boundaries
+are updated here. Other spoken timings remain approximate.
+
+Text is displayed as one centered uppercase line beneath the picture.
+Long sentences advance in smaller phrases. The renderer services every
+caption boundary during the dialogue playback as well as during music.
+The player uses the full video's absolute clock, including intro/outro.
+
+Only supplied words are used. Musical-note symbols are omitted, speaker
+brackets use NAME: notation, and all letters display uppercase. These are
+formatting changes for the small DOS font. No new dialogue or lyrics were
+added. Word-for-word coverage checks passed for every supplied spoken block,
+and all 42 sung phrases and their timings were preserved.
