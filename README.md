@@ -15,8 +15,9 @@ Native 320x200 capture, with a 256x160 movie area; no scaling or retouching.
 
 - **Buddy Holly for DOS:** [download BUDCAP04.ZIP](examples/BUDDY/BUDCAP04.ZIP?raw=1)
   and follow the [run instructions below](#buddy-holly-for-dos).
-- **Windows video player:** [WINPLAY.ZIP](examples/BUDDY/WINPLAY.ZIP?raw=1)
-  and [instructions](examples/BUDDY/README.TXT).
+- **Windows 3.x / 16-bit video player:**
+  [WINPLAY.ZIP](examples/BUDDY/WINPLAY.ZIP?raw=1)
+  and [instructions](examples/BUDDY/README.TXT) (Windows 3.0 real mode).
 - **Tandy Beats Lab:** [runtime package](artifacts/win30/BEATS/MILESTONE.ZIP?raw=1)
   and [guide](artifacts/win30/BEATS/README.MD).
 - **PSGPLAY and early sound tests:** [MILESTONE.ZIP](artifacts/win30/MILESTONE.ZIP?raw=1)
@@ -57,9 +58,9 @@ events; exact 0.4 playback on physical hardware remains unverified.
 [Source and QA](examples/BUDDY/BUDCAP/README.md) ·
 [Reproduction](examples/BUDDY/BUDCAP/REPRODUCE.md)
 
-The [earlier players](examples/BUDDY/README.TXT) remain available: Windows
-uses 64x48 video at 4 fps; [DOSPLAY](examples/BUDDY/DOSPLAY.ZIP?raw=1) uses
-128x96 at 8 fps with a smaller fallback. They have PSG music but no BUDCAP
+The [earlier players](examples/BUDDY/README.TXT) remain available: the 16-bit
+Windows 3.0 real-mode player uses 64x48 video at 4 fps;
+[DOSPLAY](examples/BUDDY/DOSPLAY.ZIP?raw=1) uses 128x96 at 8 fps with a smaller fallback. They have PSG music but no BUDCAP
 subtitles or sampled dialogue.
 
 ## Windows instruments
