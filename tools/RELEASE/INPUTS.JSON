@@ -1,0 +1,125 @@
+{
+  "archives": {
+    "BEATS.ZIP": {
+      "files": 79,
+      "identity": {
+        "bytes": 160275,
+        "sha256": "e0b939b79b1ffe1b1bc6ed01166682b5c1a9d6b9d6907a3204af7c73478e7c6d"
+      },
+      "kind": "baseline-source-milestone",
+      "path": "artifacts/win30/BEATS/MILESTONE.ZIP",
+      "runtime": {
+        "BEATS.EXE": {
+          "bytes": 10959,
+          "sha256": "40b78a5e319793407c3e14d4ff08c61ad200b05a313f3485680f385258bfd1fb"
+        },
+        "MIDIINTR.EXE": {
+          "bytes": 3583,
+          "sha256": "24b4e3e3673d7315faed44bdf4f26f20c380b8bb6723e1051b3cfa669d06fd59"
+        },
+        "MIDIMAP.DRV": {
+          "bytes": 3715,
+          "sha256": "4b960b2918561b077c5b1deb6bf8461ac36851b6023f226145c15d4d7bb5dd81"
+        },
+        "MIDITEST.EXE": {
+          "bytes": 7231,
+          "sha256": "96a832c40508c9682bcc78e3bc7abde6588cf80115a76a692e394563e61b4a3c"
+        }
+      }
+    },
+    "BUDENV02.ZIP": {
+      "files": 112,
+      "identity": {
+        "bytes": 249116,
+        "sha256": "531dbd15b221d5487a08bf911a17e544c279676d7bfa3a8d45298946e904824c"
+      },
+      "kind": "experimental-media-free-overlay",
+      "path": "experimental/BUDENV02-OVERLAY.zip",
+      "runtime": {
+        "BUDENV02/BUDTALK.EXE": {
+          "bytes": 22759,
+          "sha256": "ab437290da4bb5eb38812bc18d3ec36b57e3cdcc35e0dc38a0f94c887015d373"
+        }
+      }
+    },
+    "PSGBASE.ZIP": {
+      "files": 145,
+      "identity": {
+        "bytes": 534110,
+        "sha256": "3c574d793ea6a4fed3fc4851a59053c2d058c388a391b1927b60cc1fa190ed1e"
+      },
+      "kind": "baseline-source-milestone",
+      "path": "artifacts/win30/MILESTONE.ZIP",
+      "runtime": {
+        "DRVTEST.EXE": {
+          "bytes": 5631,
+          "sha256": "f881df63c9048d7edc77ab695015dea85cec149b10146a56506be14254510aaa"
+        },
+        "INTRUD.EXE": {
+          "bytes": 3615,
+          "sha256": "2b0c85316e8821618f8340fccd5b07a4f54dc3426d9d78e78799cdadc6becdd5"
+        },
+        "PSGPLAY.EXE": {
+          "bytes": 6287,
+          "sha256": "f7a4c9bd479c0ce5ee82398a919e7c77795f646600461800c41af73525190a5d"
+        },
+        "TCHIME.EXE": {
+          "bytes": 3999,
+          "sha256": "c5fb46eaa1967b68d6769cb5e948496b8aeabaa09e8656a2afb07a1426432121"
+        },
+        "TSOUND.DRV": {
+          "bytes": 5656,
+          "sha256": "8ece09fb2b21481bf44330f604c0a5eea020cf188ed8acec415049daf02efa98"
+        }
+      }
+    },
+    "WININST12.ZIP": {
+      "files": 194,
+      "identity": {
+        "bytes": 314367,
+        "sha256": "dc88a11e51a4395417861217d53df4015f502635b7e6fdef7e12f96444ea8aee"
+      },
+      "kind": "experimental-runtime",
+      "path": "experimental/WININST12.zip",
+      "runtime": {
+        "WININST/RUNTIME/BEATS.EXE": {
+          "bytes": 10991,
+          "sha256": "735e9a733614c14c36fc96aad16efecfa88a1834df0d8bc8d38069b96dd82115"
+        },
+        "WININST/RUNTIME/INSTEST.EXE": {
+          "bytes": 9103,
+          "sha256": "fb67c924235e057071a3edccc904cd46d9994d8df74ac3d2b9ab4da702edb93b"
+        },
+        "WININST/RUNTIME/JOYMIDI.EXE": {
+          "bytes": 16991,
+          "sha256": "8d51fec1cbe3d30e66d1229385e17c64b42ff448c290c36c2ca8c77486f01f0d"
+        },
+        "WININST/RUNTIME/MIDIINTR.EXE": {
+          "bytes": 3583,
+          "sha256": "24b4e3e3673d7315faed44bdf4f26f20c380b8bb6723e1051b3cfa669d06fd59"
+        },
+        "WININST/RUNTIME/MIDIMAP.DRV": {
+          "bytes": 5948,
+          "sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39"
+        },
+        "WININST/RUNTIME/MIDITEST.EXE": {
+          "bytes": 7231,
+          "sha256": "355339df131bb1f771ae4f9415d1b4300b68f1b751baf0530f40f60de494e273"
+        },
+        "WININST/RUNTIME/MINIMIDI.EXE": {
+          "bytes": 20883,
+          "sha256": "7a5bb3a246b3026f7a800fb6a8c93d747bf8c6d7a138d265d7df7a24dd261880"
+        },
+        "WININST/RUNTIME/MINIPIAN.EXE": {
+          "bytes": 15855,
+          "sha256": "754ec651ba993a8d9aaf97b8015d682559bee5c9683f8e2dc7b33eae52c0b981"
+        }
+      }
+    }
+  },
+  "qualification_input_commit": "7b994c5d0072a69840767f1898aecbaea675dc7f",
+  "source_publication": {
+    "bytes": 123373,
+    "sha256": "f4acb9e5a251f373ab292a1c3600d86a3e1705ab82259b62700d668ef38b8c71"
+  }
+}
