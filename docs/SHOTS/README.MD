@@ -2,8 +2,9 @@
 
 These are actual emulator captures from the repository and Mini Piano 0.1
 package, copied byte
-for byte for the README showcase. No new runtime capture, redraw, cosmetic
-correction, photo or generated mockup is added. Native framebuffer decoding
+for byte for the README showcase. The still PNGs add no new runtime capture, redraw, cosmetic
+correction, photo or generated mockup. The animated preview below is a new
+capture of the published BUDCAP04 executable. Native framebuffer decoding
 and emulator row/column duplication are identified below. Capture content was
 visually inspected before reuse. Guest DOS example paths are not host user paths.
 
@@ -69,3 +70,34 @@ result, physical-hardware evidence or timing claim. See the
   `82551c993463711807953240ddb45643404e9f8f39eef9ee862a2ee11dc4355b`
 - Decoded RGB pixel SHA-256 (both files):
   `be43571a09d8d7ad7fb28976330957b040f15f04282581979edf3d8edbb65e04`
+
+
+## BUDCAP 0.4 animated preview
+
+[BUDCAP04.GIF](BUDCAP04.GIF) is a six-second silent excerpt from a genuine
+DOSBox-X runtime capture made on 6 October 2026. It uses the published
+[BUDCAP04.ZIP](../../examples/BUDDY/BUDCAP04.ZIP), validated against its
+32 internal manifest hashes, from public main revision
+`b25d5bce188cf63a3eb7a5ae9bab68147a862cd2`.
+
+- Executable SHA-256:
+  `2e866172774626deec2c699ba7df7738671feb9357e752977429c5aebbb38986`.
+- DOSBox-X 2025.12.01 Windows SDL1, `machine=tandy`, normal core,
+  `cputype=8086_prefetch`, fixed 3000 cycles, 640 KB, XMS/EMS/UMB disabled.
+- Command: `DX-CAPTURE /V BUDTALK /B /P /L` in a fresh extracted guest.
+  Capture excerpt: 17.8-23.8 seconds into the 18-42-second preview run
+  (approximately movie time 35.8-41.8 seconds).
+- Native 320x200 framebuffer, sampled at 4 fps: 24 frames, 250 ms each,
+  looping, 96,530 bytes. All decoded GIF RGB pixels equal the sampled
+  lossless ZMBV capture frames. No crop, scaling, dithering or retouching.
+- GIF SHA-256:
+  `58c9193e3f8454326d1563e215a9972d8e0557cde936f97f1430c6535dbfab99`.
+- Source runtime AVI SHA-256:
+  `0144c622f44329f26560047a8ae9c98f77ef5b08207df69e703d0eb73756fb56`.
+
+The new preview completed with error 0, ten caption updates, two speech
+clips, zero skipped music events and zero unexpected video drops. Normal
+cleanup muted PSG/speaker and restored display mode. This is a short emulator
+visual check, not a new full-run, listening or physical-hardware qualification.
+The GIF contains no sound. The existing [media attribution and rights
+notice](../../examples/BUDDY/ATTRIB.TXT) applies to its underlying video.
