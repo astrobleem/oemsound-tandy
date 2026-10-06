@@ -1,0 +1,51 @@
+{
+  "executable": "TCHIME.EXE",
+  "bytes": 4671,
+  "sha256": "3945627c58be51a932fd6f17c4037ea013530380bcafc09add8e7b792f127e1d",
+  "code_bytes": 3220,
+  "NE_entry_offset": "0x643",
+  "symbol_roots": 2,
+  "reachable_instructions_checked": 1218,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x6ce",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0xa54",
+      "instruction": "jmp    *0x152"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0x71b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x8d0",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x73d",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x844",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x86f",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x893",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xcf",
+      "instruction": "out    %al,(%dx)"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

@@ -1,0 +1,15 @@
+{
+  "app": "MINIPIAN",
+  "arg": "/test",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 19.21966525800235,
+  "returned": true,
+  "logs": {
+    "MINIPIAN.LOG": "PASS controls exist\nPASS starts muted\nEVENT 144 60 100\nPASS A sounds C4\nPASS repeat no duplicate\nPASS shared mouse key\nPASS key release keeps mouse\nEVENT 128 60 0\nEVENT 144 63 100\nPASS mouse glissando D sharp\nEVENT 128 63 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS outside piano off\nEVENT 144 60 100\nPASS drag back sounds\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS mouse release cleanup\nEVENT 144 60 100\nEVENT 144 64 100\nEVENT 144 67 100\nPASS three voices\nEVENT 144 72 100\nPASS fourth steals oldest\nEVENT 128 60 0\nPASS stolen release harmless\nEVENT 128 64 0\nEVENT 128 67 0\nEVENT 128 72 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS chord cleanup\nEVENT 144 60 100\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS octave mutes old\nPASS old hold does not retrigger\nEVENT 144 72 100\nPASS new octave sounds C5\nEVENT 128 72 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nEVENT 144 60 100\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS focus loss cleanup\nEVENT 144 60 100\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS deactivate cleanup\nEVENT 144 60 100\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS capture watchdog cleanup\nEVENT 144 60 100\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS cancelmode cleanup\nEVENT 144 60 100\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS menu entry cleanup\nEVENT 144 61 100\nPASS black W sounds C sharp\nEVENT 128 61 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS Esc panic cleanup\nEVENT 144 60 100\nPASS duplicate launch\nPASS duplicate preserved notes\nEVENT 128 60 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS top octave clamped\nEVENT 144 96 100\nPASS top C7 is note 96\nEVENT 128 96 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS bottom octave clamped\nEVENT 144 48 100\nPASS bottom C3 is note 48\nEVENT 128 48 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS final no owner\nTOTAL_FAILURES=0 SENT=36\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true,
+  "app_sha256": "fc494a8ad396b7225d140dd41c178a81870f1a3d5d1d3be765999c838475de39",
+  "passed": true
+}

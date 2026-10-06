@@ -1,0 +1,43 @@
+
+ BEATS
+
+ Start     Length     Name                   Class
+ 0001:0000 02164H     _TEXT                  CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 00416H     _DATA                  DATA
+ 0002:0426 0000EH     CDATA                  DATA
+ 0002:0434 00000H     XIFB                   DATA
+ 0002:0434 00000H     XIF                    DATA
+ 0002:0434 00000H     XIFE                   DATA
+ 0002:0434 00000H     XIB                    DATA
+ 0002:0434 00000H     XI                     DATA
+ 0002:0434 00000H     XIE                    DATA
+ 0002:0434 00000H     XPB                    DATA
+ 0002:0434 00000H     XP                     DATA
+ 0002:0434 00000H     XPE                    DATA
+ 0002:0434 00000H     XCB                    DATA
+ 0002:0434 00000H     XC                     DATA
+ 0002:0434 00000H     XCE                    DATA
+ 0002:0434 00000H     XCFB                   DATA
+ 0002:0434 00000H     XCF                    DATA
+ 0002:0434 00000H     XCFE                   DATA
+ 0002:0434 0000CH     DBDATA                 DATA
+ 0002:0440 00002H     XIQC                   DATA
+ 0002:0442 00000H     CONST                  CONST
+ 0002:0442 00019H     HDR                    MSG
+ 0002:045B 000B1H     MSG                    MSG
+ 0002:050C 00002H     PAD                    MSG
+ 0002:050E 00001H     EPAD                   MSG
+ 0002:0510 00650H     _BSS                   BSS
+ 0002:0B60 00000H     XOB                    BSS
+ 0002:0B60 00000H     XO                     BSS
+ 0002:0B60 00000H     XOE                    BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:1049 WndProc                 WndProc
+
+Program entry point at 0001:1AB3

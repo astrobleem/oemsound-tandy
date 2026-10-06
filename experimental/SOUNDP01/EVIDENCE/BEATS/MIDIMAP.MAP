@@ -1,0 +1,21 @@
+
+ MIDIMAP
+
+ Start     Length     Name                   Class
+ 0001:0000 00B2BH     _TEXT                  CODE
+ 0002:0000 00084H     _DATA                  DATA
+ 0002:0084 00000H     CONST                  CONST
+ 0002:0084 0005EH     _BSS                   BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:0A04 DEBUGSTATE              DEBUGSTATE
+ 0001:0931 DRIVERPROC              DRIVERPROC
+ 0001:062A MIDIMESSAGE             MIDIMESSAGE
+ 0001:08ED MODMESSAGE              MODMESSAGE
+ 0001:09C1 WEP                     WEP
+
+Program entry point at 0001:0000

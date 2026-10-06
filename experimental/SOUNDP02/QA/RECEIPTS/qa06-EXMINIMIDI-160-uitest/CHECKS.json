@@ -1,0 +1,15 @@
+{
+  "app": "MINIMIDI",
+  "arg": "/uitest",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 8.489344948000507,
+  "returned": true,
+  "logs": {
+    "MINIMIDI.LOG": "EVENT 0 192 0 0\nEVENT 0 144 60 127\nPASS reset success\nPASS reset voices silent\nPASS close success\nPASS owner released\nEVENT 0 192 0 0\nEVENT 0 144 60 127\nPASS repeat play restarts\nEVENT 500 192 48 0\nEVENT 500 144 64 120\nPASS reset success\nPASS reset voices silent\nPASS close success\nPASS owner released\nPASS repeat stop silent\nEVENT 0 192 0 0\nEVENT 0 144 60 127\nPASS replay opens owner\nEVENT 500 192 48 0\nEVENT 500 144 64 120\nPASS reset success\nPASS reset voices silent\nPASS close success\nPASS owner released\nPASS normal exit has no owner\nTOTAL_FAILURES=0 SENT=4 SKIPPED=0 MAX_LATE_MS=49\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true,
+  "app_sha256": "6682e7a8040d3d62411ee31bff9db2ac4c0a21943c15088ebee4b45bff62b5dd",
+  "passed": true
+}

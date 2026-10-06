@@ -1,0 +1,1 @@
+PUSHA SPdelta=0000 PUSHimm SPdelta=0000 C0 shift=0001 66prefix AX=0001 INT6=0000

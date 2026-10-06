@@ -1,0 +1,16 @@
+{
+  "app": "OWNER",
+  "arg": "/test",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 24.37909949099776,
+  "returned": true,
+  "logs": {
+    "TCHIME.LOG": "BUSY OWNER WRITES=0 OWNED=0\nCOMPLETE WRITES=20 OWNED=0\n",
+    "PSGTRACE.LOG": "MODE 4 DROPPED 0\nTICKS 2087 2691 BIOS 1169627 1169638\nIRQ8 16790354 16790354 IRQ1C F000CC00 F000CC00\nMODE 5 DROPPED 0\nTICKS 12577 16202 BIOS 1169818 1169884\nIRQ8 16790354 16790354 IRQ1C F000CC00 F000CC00\n12962 9F\n12962 BF\n12962 DF\n12962 FF\n12962 8B\n12962 1A\n12962 94\n13566 A3\n13566 15\n13566 B4\n14170 CD\n14170 11\n14170 D4\n15379 9F\n15379 BF\n15379 DF\n15379 FF\n",
+    "XPCHIME.LOG": "BUSY OWNER WRITES=0 OWNED=0\nCOMPLETE WRITES=43 OWNED=0\n",
+    "OWNER.LOG": "PASS real mode\nPASS parent owns SOUND\nPASS timer created\nPASS C:\\TCHIME.EXE /test\nPASS C:\\XPCHIME.EXE /test\nPASS C:\\PSGPLAY.EXE /busytest\nPASS blocked children leave parent lease\nPASS SOUND free after child\nPASS C:\\TCHIME.EXE /test\nPASS SOUND free after child\nPASS C:\\XPCHIME.EXE /test\nPASS SOUND free after child\nPASS C:\\PSGPLAY.EXE /ownertest\nPASS SOUND free after child\nPASS children closed\nTOTAL_FAILURES=0\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true
+}

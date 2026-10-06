@@ -1,0 +1,13 @@
+{
+  "app": "EXITQA",
+  "arg": "/silentveto",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 13.152085365996754,
+  "returned": true,
+  "logs": {
+    "EXITQA.LOG": "PASS timer starts\nPASS window created\nPASS parent owns sound\nPASS launch TEXIT\nPASS confirmation appears\nPASS correct exit choice\nPASS Cancel gets initial focus\nPASS prompt fits screen\nPASS normal exit query received\nPASS application can veto\nPASS confirm closed\nPASS parent retains own lease\nTOTAL_FAILURES=0 QUERIES=1\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true
+}

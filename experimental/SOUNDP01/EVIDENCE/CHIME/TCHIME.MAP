@@ -1,0 +1,43 @@
+
+ TCHIME
+
+ Start     Length     Name                   Class
+ 0001:0000 00C94H     _TEXT                  CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 00146H     _DATA                  DATA
+ 0002:0156 0000EH     CDATA                  DATA
+ 0002:0164 00000H     XIFB                   DATA
+ 0002:0164 00000H     XIF                    DATA
+ 0002:0164 00000H     XIFE                   DATA
+ 0002:0164 00000H     XIB                    DATA
+ 0002:0164 00000H     XI                     DATA
+ 0002:0164 00000H     XIE                    DATA
+ 0002:0164 00000H     XPB                    DATA
+ 0002:0164 00000H     XP                     DATA
+ 0002:0164 00000H     XPE                    DATA
+ 0002:0164 00000H     XCB                    DATA
+ 0002:0164 00000H     XC                     DATA
+ 0002:0164 00000H     XCE                    DATA
+ 0002:0164 00000H     XCFB                   DATA
+ 0002:0164 00000H     XCF                    DATA
+ 0002:0164 00000H     XCFE                   DATA
+ 0002:0164 0000CH     DBDATA                 DATA
+ 0002:0170 00002H     XIQC                   DATA
+ 0002:0172 00000H     CONST                  CONST
+ 0002:0172 00019H     HDR                    MSG
+ 0002:018B 000B1H     MSG                    MSG
+ 0002:023C 00002H     PAD                    MSG
+ 0002:023E 00001H     EPAD                   MSG
+ 0002:0240 00010H     _BSS                   BSS
+ 0002:0250 00000H     XOB                    BSS
+ 0002:0250 00000H     XO                     BSS
+ 0002:0250 00000H     XOE                    BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:01CE ChimeProc               ChimeProc
+
+Program entry point at 0001:0643

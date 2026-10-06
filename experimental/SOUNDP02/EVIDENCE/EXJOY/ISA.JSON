@@ -1,0 +1,66 @@
+{
+  "executable": "JOYMIDI.EXE",
+  "bytes": 17135,
+  "sha256": "bf1417b24973c3483fa1ec266316ed3b839732105d3b752502eaa5a9b22719d4",
+  "code_bytes": 13716,
+  "NE_entry_offset": "0x2ee3",
+  "symbol_roots": 38,
+  "excluded_code_segment_data_symbols": [
+    "__wflags"
+  ],
+  "reachable_instructions_checked": 4588,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x2f6e",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0x2f99",
+      "instruction": "jmp    *0x7ac"
+    },
+    {
+      "offset": "0x3354",
+      "instruction": "jmp    *0x802"
+    },
+    {
+      "offset": "0x196d",
+      "instruction": "jmp    *%cs:0x1972(%bx)"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0x2ecd",
+      "instruction": "out    %al,(%dx)"
+    },
+    {
+      "offset": "0x2ece",
+      "instruction": "in     (%dx),%al"
+    },
+    {
+      "offset": "0x301b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x3144",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x316f",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x31d0",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x303d",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x3193",
+      "instruction": "int    $0x21"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

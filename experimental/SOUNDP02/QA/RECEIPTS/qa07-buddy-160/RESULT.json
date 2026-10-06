@@ -1,0 +1,16 @@
+{
+  "app": "BUDQA",
+  "arg": "/test",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 21.628466777998256,
+  "returned": true,
+  "logs": {
+    "TVSTART.LOG": "",
+    "TINYVID.LOG": "Done: Space song\nversion=2\nmode=3\nduration_ms=4000\nelapsed_ms=4010\nclip_start_ms=0\nclip_end_ms=4000\nmusic_events_applied=3\nmusic_events_skipped=0\nmusic_events_read=4\nmusic_max_late_ms=68\nmusic_total_late_ms=93\ntimer_max_gap_ms=109\nframes=16\ndropped_frames=0\nvideo_read_max_ms=0\nmusic_read_max_ms=0\ndraw_max_ms=55\nsound_mask_after_stop=0\nowner_after_stop=0\nerror=0\ncleanup_error_bits=0\nvideo_errors=0\nmusic_errors=0\n",
+    "TVREADY.LOG": "",
+    "BUDQA.LOG": "PASS launch player\nPASS player window\nPASS Stopped: Space\nPASS owner released\nPASS voices muted\nPASS no playback error\nPASS Stopped: Space\nPASS owner released\nPASS voices muted\nPASS no playback error\nPASS Stopped: Space\nPASS owner released\nPASS voices muted\nPASS no playback error\nPASS Done: Space song\nPASS owner released\nPASS voices muted\nPASS no playback error\nTOTAL_FAILURES=0\n"
+  },
+  "mapper_sha256": "4b960b2918561b077c5b1deb6bf8461ac36851b6023f226145c15d4d7bb5dd81",
+  "stock_sound_unchanged": true
+}

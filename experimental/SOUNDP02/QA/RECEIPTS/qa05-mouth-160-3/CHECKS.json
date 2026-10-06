@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "case": 3,
+  "mode": "160",
+  "frames": [
+    1,
+    2,
+    1,
+    2,
+    3,
+    4,
+    5,
+    0
+  ],
+  "last_four_writes": [
+    159,
+    191,
+    223,
+    255
+  ],
+  "scope": "Exact native fixed-word frame/control sequence and cleanup; no intelligibility claim"
+}

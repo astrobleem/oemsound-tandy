@@ -1,0 +1,14 @@
+{
+  "app": "EXITQA",
+  "arg": "/goveto",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 7.5887180249992525,
+  "returned": true,
+  "logs": {
+    "EXITQA.LOG": "PASS timer starts\nPASS window created\nPASS launch TEXIT\nPASS normal exit query received\nPASS application can veto\nPASS confirm closed\nPASS TEXIT released sound\nTOTAL_FAILURES=0 QUERIES=1\n",
+    "TEXIT.LOG": "START\nMUTED WINDOW GONE\nCALL ExitWindows\nVETO OR FAILURE\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true
+}

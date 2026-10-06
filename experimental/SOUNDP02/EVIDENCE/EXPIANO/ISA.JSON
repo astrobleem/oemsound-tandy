@@ -1,0 +1,58 @@
+{
+  "executable": "MINIPIAN.EXE",
+  "bytes": 15839,
+  "sha256": "fc494a8ad396b7225d140dd41c178a81870f1a3d5d1d3be765999c838475de39",
+  "code_bytes": 12276,
+  "NE_entry_offset": "0x29a3",
+  "symbol_roots": 32,
+  "excluded_code_segment_data_symbols": [
+    "__wflags"
+  ],
+  "reachable_instructions_checked": 3793,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x2a2e",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0x2a59",
+      "instruction": "jmp    *0x69c"
+    },
+    {
+      "offset": "0x2db4",
+      "instruction": "jmp    *0x6f2"
+    },
+    {
+      "offset": "0x1d01",
+      "instruction": "jmp    *%cs:0x1d06(%bx)"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0x2a7b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x2ba4",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x2bcf",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x2c30",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x2a9d",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x2bf3",
+      "instruction": "int    $0x21"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

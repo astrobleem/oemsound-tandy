@@ -1,0 +1,51 @@
+{
+  "executable": "PSGPLAY.EXE",
+  "bytes": 6911,
+  "sha256": "8b5fb0e0273d0e2a254822719b443a4b60a92d7a603b885410b4273d35a735d8",
+  "code_bytes": 5012,
+  "NE_entry_offset": "0xd43",
+  "symbol_roots": 2,
+  "reachable_instructions_checked": 1882,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0xdce",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0x1154",
+      "instruction": "jmp    *0x212"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0xe1b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xfd0",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x86",
+      "instruction": "out    %al,(%dx)"
+    },
+    {
+      "offset": "0xe3d",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xf44",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xf6f",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xf93",
+      "instruction": "int    $0x21"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

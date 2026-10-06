@@ -1,0 +1,51 @@
+{
+  "executable": "XPCHIME.EXE",
+  "bytes": 5215,
+  "sha256": "2f7e2060855375ed59b3f40ad1cca84a724becb3a3ab2b5030bd515b7614b40b",
+  "code_bytes": 3316,
+  "NE_entry_offset": "0x6a3",
+  "symbol_roots": 2,
+  "reachable_instructions_checked": 1253,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x72e",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0xab4",
+      "instruction": "jmp    *0x172"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0x77b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x930",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x79d",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x8a4",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x8cf",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x8f3",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0xcf",
+      "instruction": "out    %al,(%dx)"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

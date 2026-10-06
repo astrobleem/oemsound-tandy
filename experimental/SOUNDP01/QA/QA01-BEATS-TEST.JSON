@@ -1,0 +1,13 @@
+{
+  "app": "BEATS",
+  "arg": "/test",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 11.905305116000818,
+  "returned": true,
+  "logs": {
+    "BEATS.LOG": "PASS two loops completed\nPASS reset leaves all voices off\nPASS close mutes\nPASS close releases lease\nPASS driver releases owner\nTOTAL_FAILURES=0 STEPS=17\n"
+  },
+  "mapper_sha256": "4b960b2918561b077c5b1deb6bf8461ac36851b6023f226145c15d4d7bb5dd81",
+  "stock_sound_unchanged": true
+}

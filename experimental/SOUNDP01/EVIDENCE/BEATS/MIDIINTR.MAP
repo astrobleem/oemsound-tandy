@@ -1,0 +1,39 @@
+
+ MIDIINTR
+
+ Start     Length     Name                   Class
+ 0001:0000 00824H     _TEXT                  CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 00106H     _DATA                  DATA
+ 0002:0116 0000EH     CDATA                  DATA
+ 0002:0124 00000H     XIFB                   DATA
+ 0002:0124 00000H     XIF                    DATA
+ 0002:0124 00000H     XIFE                   DATA
+ 0002:0124 00000H     XIB                    DATA
+ 0002:0124 00000H     XI                     DATA
+ 0002:0124 00000H     XIE                    DATA
+ 0002:0124 00000H     XPB                    DATA
+ 0002:0124 00000H     XP                     DATA
+ 0002:0124 00000H     XPE                    DATA
+ 0002:0124 00000H     XCB                    DATA
+ 0002:0124 00000H     XC                     DATA
+ 0002:0124 00000H     XCE                    DATA
+ 0002:0124 00000H     XCFB                   DATA
+ 0002:0124 00000H     XCF                    DATA
+ 0002:0124 00000H     XCFE                   DATA
+ 0002:0124 0000CH     DBDATA                 DATA
+ 0002:0130 00002H     XIQC                   DATA
+ 0002:0132 00000H     CONST                  CONST
+ 0002:0132 00019H     HDR                    MSG
+ 0002:014B 000B1H     MSG                    MSG
+ 0002:01FC 00002H     PAD                    MSG
+ 0002:01FE 00001H     EPAD                   MSG
+ 0002:0200 00010H     _BSS                   BSS
+ 0002:0210 00000H     XOB                    BSS
+ 0002:0210 00000H     XO                     BSS
+ 0002:0210 00000H     XOE                    BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+Program entry point at 0001:01D3

@@ -1,0 +1,8 @@
+[
+  {
+    "mode": "/test",
+    "passed": true,
+    "exact_events": 36,
+    "app_sha256": "990a2de4caf4243d2daff8f5a1a7c64d45b40e79b241a681331fc7ac72d84d36"
+  }
+]
