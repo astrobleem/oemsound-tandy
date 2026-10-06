@@ -1,0 +1,161 @@
+name: Verify sound download packages
+
+on:
+  pull_request:
+  push:
+    branches: [main, 'dot/sound-package-ci-*']
+    tags: ['sound-v*']
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Existing sound-vMAJOR.MINOR.PATCH-prerelease tag at this exact commit; blank verifies packages only'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sound-packages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' && !startsWith(github.ref, 'refs/tags/') }}
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact public inputs without credentials or proprietary tool directories
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          SOURCE_REPOSITORY: ${{ github.repository }}
+          GIT_TERMINAL_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git init .
+          git remote add origin "https://github.com/${SOURCE_REPOSITORY}.git"
+          git -c protocol.version=2 fetch --filter=blob:none --no-tags --depth=1 origin "$SOURCE_SHA"
+          git sparse-checkout init --no-cone
+          printf '/tools/RELEASE/\n/artifacts/win30/MILESTONE.ZIP\n/artifacts/win30/BEATS/MILESTONE.ZIP\n/experimental/\n' | git sparse-checkout set --no-cone --stdin
+          git -c core.autocrlf=false checkout --detach --force FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          for excluded in BIN LIB INCLUDE DDK DOS; do test ! -e "$excluded"; done
+
+      - name: Test package corruption, exclusions and deterministic output
+        run: python3 tools/RELEASE/TESTPKG.PY
+
+      - name: Package pinned existing binaries and distinct source-only checkpoints
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: python3 tools/RELEASE/PACK.PY --out dist --source-sha "$SOURCE_SHA"
+
+      - name: Verify every output member and asset checksum
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          python3 tools/RELEASE/PACK.PY --verify --out dist --source-sha "$SOURCE_SHA"
+          cd dist
+          sha256sum --check SHA256SUMS
+
+      - name: Upload verified download packages (no native compilation)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: sound-packages-${{ github.sha }}
+          path: |
+            dist/PSGBASE.ZIP
+            dist/BEATS.ZIP
+            dist/WININST12.ZIP
+            dist/BUDENV02.ZIP
+            dist/SOUNDP01.ZIP
+            dist/SOUNDP02.ZIP
+            dist/README.TXT
+            dist/BUILD.JSON
+            dist/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 30
+
+  draft-release:
+    needs: package
+    # Never grant a write token to PR code, even a same-repository PR.
+    if: >-
+      github.repository == 'astrobleem/oemsound-tandy' &&
+      ((github.event_name == 'push' && startsWith(github.ref, 'refs/tags/sound-v')) ||
+       (github.event_name == 'workflow_dispatch' && inputs.release_tag != ''))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    concurrency:
+      group: sound-draft-${{ inputs.release_tag || github.ref_name }}
+      cancel-in-progress: false
+    env:
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
+      SOURCE_SHA: ${{ github.sha }}
+    steps:
+      # Fresh runner: never check out or execute repository/downloaded code here.
+      - name: Download this run's verified packages
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: sound-packages-${{ github.sha }}
+          path: dist
+
+      - name: Independently verify pinned ZIP bytes, asset set and provenance
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          out = Path('dist')
+          # Maintainer-reviewed immutable bytes; source ZIPs use stored members.
+          pinned = {'BEATS.ZIP': [160275, 'e0b939b79b1ffe1b1bc6ed01166682b5c1a9d6b9d6907a3204af7c73478e7c6d'], 'BUDENV02.ZIP': [249116, '531dbd15b221d5487a08bf911a17e544c279676d7bfa3a8d45298946e904824c'], 'PSGBASE.ZIP': [534110, '3c574d793ea6a4fed3fc4851a59053c2d058c388a391b1927b60cc1fa190ed1e'], 'SOUNDP01.ZIP': [245977, '443c4826b77bcb442530f3d7530de57b1cb36d41917a4833306e0d2932a2a08a'], 'SOUNDP02.ZIP': [850460, '92552b29f72e752925bb1d97ad39ae62eacb255c4d7e463f5c8068bc5aae5010'], 'WININST12.ZIP': [314367, 'dc88a11e51a4395417861217d53df4015f502635b7e6fdef7e12f96444ea8aee']}
+          names = set(pinned) | {'README.TXT', 'BUILD.JSON', 'SHA256SUMS'}
+          assert {p.name for p in out.iterdir()} == names
+          assert all(p.is_file() and not p.is_symlink() for p in out.iterdir())
+          for name, expected in pinned.items():
+              data = (out / name).read_bytes()
+              assert [len(data), hashlib.sha256(data).hexdigest()] == expected, name
+          report = json.loads((out / 'BUILD.JSON').read_bytes())
+          assert report['source_commit'] == os.environ['SOURCE_SHA']
+          assert report['kind'] == 'manifest-verified-existing-artifacts'
+          assert report['native_compilation'] is False
+          assert report['fresh_native_qa'] is False
+          assert report['proprietary_tools_included'] is False
+          assert set(report['archives']) == set(pinned)
+          for name, expected in pinned.items():
+              assert [report['archives'][name]['bytes'], report['archives'][name]['sha256']] == expected
+          assert report['archives']['SOUNDP01.ZIP']['kind'] == 'experimental-source-only'
+          assert report['archives']['SOUNDP02.ZIP']['kind'] == 'experimental-source-only'
+          expected = ''.join(hashlib.sha256((out / n).read_bytes()).hexdigest()
+              + '  ' + n + '\n' for n in sorted(names - {'SHA256SUMS'}))
+          assert (out / 'SHA256SUMS').read_text() == expected
+          PY
+
+      - name: Create new draft prerelease for unchanged existing tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^sound-v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)-[0-9A-Za-z]+([.-][0-9A-Za-z]+)*$ ]]
+          gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" > /dev/null
+          tag_sha=$(gh api "repos/$GH_REPO/commits/$RELEASE_TAG" --jq .sha)
+          test "$tag_sha" = "$SOURCE_SHA"
+          existing=$(gh api --paginate "repos/$GH_REPO/releases?per_page=100" --jq '.[] | .tag_name')
+          if printf '%s\n' "$existing" | grep -Fxq -- "$RELEASE_TAG"; then
+            echo 'Release already exists; refusing to update or overwrite it.' >&2
+            exit 1
+          fi
+          printf '%s\n' \
+            "Verified sound download packages from commit $SOURCE_SHA." \
+            "CI: https://github.com/$GH_REPO/actions/runs/${{ github.run_id }}" \
+            'Packages qualified checked-in binaries; no native source compilation or fresh emulator QA.' \
+            'PSGBASE and BEATS preserve baseline-source milestones; WININST12 and BUDENV02 are separate experimental trials.' \
+            'SOUNDP01 and SOUNDP02 are source/evidence only and contain no runtime binaries.' \
+            'No Microsoft compiler, SDK, Windows, system installation or stable promotion is included.' \
+            'Read README.TXT and each kit guide; hardware qualification remains open.' \
+            > release-notes.txt
+          gh release create "$RELEASE_TAG" --repo "$GH_REPO" \
+            --verify-tag --draft --prerelease --latest=false \
+            --title "OEMSound verified packages $RELEASE_TAG" --notes-file release-notes.txt \
+            dist/PSGBASE.ZIP dist/BEATS.ZIP dist/WININST12.ZIP dist/BUDENV02.ZIP \
+            dist/SOUNDP01.ZIP dist/SOUNDP02.ZIP dist/README.TXT dist/BUILD.JSON dist/SHA256SUMS

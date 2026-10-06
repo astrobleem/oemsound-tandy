@@ -113,6 +113,10 @@ WAVHYB's PCM experiment is not a Windows wave driver.
 
 ## Testing and building
 
+[GitHub Actions packages and draft-release guide](docs/CI-PACKAGES.md) explains
+the verified baseline and experimental downloads. CI packages existing qualified
+binaries and separate source-only checkpoints; it does not recompile native code.
+
 Component guides retain emulator tests, audio captures and exact runtime
 identities. Mini MIDI and the earlier DOS video player received qualitative
 physical-Tandy feedback; this does not qualify every app or newer binary.
