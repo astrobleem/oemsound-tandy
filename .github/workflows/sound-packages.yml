@@ -37,7 +37,7 @@ jobs:
           git remote add origin "https://github.com/${SOURCE_REPOSITORY}.git"
           git -c protocol.version=2 fetch --filter=blob:none --no-tags --depth=1 origin "$SOURCE_SHA"
           git sparse-checkout init --no-cone
-          printf '/tools/RELEASE/\n/artifacts/win30/MILESTONE.ZIP\n/artifacts/win30/BEATS/MILESTONE.ZIP\n/experimental/\n' | git sparse-checkout set --no-cone --stdin
+          printf '/.github/workflows/sound-packages.yml\n/tools/RELEASE/\n/artifacts/win30/MILESTONE.ZIP\n/artifacts/win30/BEATS/MILESTONE.ZIP\n/experimental/\n' | git sparse-checkout set --no-cone --stdin
           git -c core.autocrlf=false checkout --detach --force FETCH_HEAD
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
           for excluded in BIN LIB INCLUDE DDK DOS; do test ! -e "$excluded"; done
