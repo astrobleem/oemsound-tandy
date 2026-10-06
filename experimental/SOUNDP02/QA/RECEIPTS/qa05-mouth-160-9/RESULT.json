@@ -1,0 +1,13 @@
+{
+  "app": "MOUTH",
+  "arg": "/9",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 9.440398197999457,
+  "returned": true,
+  "logs": {
+    "MOUTH.LOG": "3020 INPUT 0\n3020 UNKNOWN 0\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true
+}

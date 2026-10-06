@@ -1,0 +1,11 @@
+TCHIME.C
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: TCHIME.OBJ
+Run File [TCHIME.EXE]: TCHIME.EXE
+List File [NUL.MAP]: TCHIME.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: TCHIME.DEF
+PASS

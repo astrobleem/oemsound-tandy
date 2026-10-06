@@ -1,0 +1,54 @@
+{
+  "executable": "MOUTH.EXE",
+  "bytes": 9119,
+  "sha256": "fbca0984c35e26b94b2df8b83cded536a754c9213851bed5be6e251ee4d9e1f9",
+  "code_bytes": 7108,
+  "NE_entry_offset": "0x1573",
+  "symbol_roots": 0,
+  "excluded_code_segment_data_symbols": [
+    "__wflags"
+  ],
+  "reachable_instructions_checked": 1182,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x15fe",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0x1984",
+      "instruction": "jmp    *0x2b2"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0x164b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x1800",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x166d",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x1774",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x179f",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x17c3",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x75",
+      "instruction": "out    %al,(%dx)"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

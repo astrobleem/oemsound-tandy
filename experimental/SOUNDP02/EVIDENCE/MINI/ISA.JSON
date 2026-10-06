@@ -1,0 +1,50 @@
+{
+  "executable": "MINIMIDI.EXE",
+  "bytes": 20355,
+  "sha256": "b277fe72a4579a5b9a0a7d71b1bc7eac0b01dd931e8a3a9da2bf519536af2010",
+  "code_bytes": 16172,
+  "NE_entry_offset": "0x3543",
+  "symbol_roots": 0,
+  "excluded_code_segment_data_symbols": [
+    "__wflags"
+  ],
+  "reachable_instructions_checked": 1442,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x35ce",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0x3bf0",
+      "instruction": "jmp    *0xa82"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0x38b7",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x3a6c",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x38d9",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x39e0",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x3a0b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x3a2f",
+      "instruction": "int    $0x21"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

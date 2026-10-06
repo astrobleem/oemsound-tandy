@@ -1,0 +1,21 @@
+JOYMIDI.C
+JOYCORE.C
+JMCORE.C
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49878 + 420519 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: JOYMIDI.OBJ+JOYCORE.OBJ+JMCORE.OBJ+JOYCAP.OBJ
+Run File [JOYMIDI.EXE]: JOYMIDI.EXE
+List File [D:JOYMIDI.MAP]: JOYMIDI.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: JOYMIDI.DEF
+PASS

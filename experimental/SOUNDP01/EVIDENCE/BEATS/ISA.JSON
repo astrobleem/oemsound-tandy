@@ -1,0 +1,47 @@
+{
+  "executable": "BEATS.EXE",
+  "bytes": 11007,
+  "sha256": "c3f6601ecdf4db4c431d6fed256d2a49633f5b56a89b923051239c326766ea1e",
+  "code_bytes": 8484,
+  "NE_entry_offset": "0x1a73",
+  "symbol_roots": 2,
+  "reachable_instructions_checked": 3138,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "offset": "0x1afe",
+      "instruction": "jmp    *%bx"
+    },
+    {
+      "offset": "0x1ee4",
+      "instruction": "jmp    *0x412"
+    }
+  ],
+  "io_or_interrupt_flag_instructions": [
+    {
+      "offset": "0x1bab",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x1d60",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x1bcd",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x1cd4",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x1cff",
+      "instruction": "int    $0x21"
+    },
+    {
+      "offset": "0x1d23",
+      "instruction": "int    $0x21"
+    }
+  ],
+  "scope": "Direct control-flow reachability from NE entry and public segment-1 symbols, including near calls and conditional branches. Imported Windows routines, unresolved indirect continuations and unreachable bytes excluded; not exhaustive ISA or hardware certification."
+}

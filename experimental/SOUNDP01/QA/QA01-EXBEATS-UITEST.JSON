@@ -1,0 +1,13 @@
+{
+  "app": "BEATS",
+  "arg": "/uitest",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 8.642628895999223,
+  "returned": true,
+  "logs": {
+    "BEATS.LOG": "PASS mouse toggles first cell\nPASS space restores first cell\nPASS pitch plus edits selected cell\nPASS tempo decrease\nPASS tempo increase\nPASS repeat play restarts\nPASS repeated stop mutes\nPASS stop releases mapper\nPASS stopped editor releases SOUND\nPASS play reacquires after stop\nPASS clear empties pattern\nPASS demo restores pattern\nPASS close mutes\nPASS close releases lease\nPASS driver releases owner\nTOTAL_FAILURES=0 STEPS=1\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true
+}

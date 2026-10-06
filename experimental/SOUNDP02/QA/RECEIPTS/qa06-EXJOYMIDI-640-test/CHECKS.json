@@ -1,0 +1,15 @@
+{
+  "app": "JOYMIDI",
+  "arg": "/test",
+  "cycles": 3000,
+  "host_return": 0,
+  "seconds": 14.458950272994116,
+  "returned": true,
+  "logs": {
+    "JOYMIDI.LOG": "PASS window controls\nPASS startup muted\nPASS fixture calibrated\nPASS arm owns driver\nPASS held at arm stays silent\nEVENT 144 66 72\nPASS button note on\nPASS jitter emits nothing\nEVENT 128 66 0\nEVENT 144 72 127\nPASS horizontal changes note\nPASS vertical attack loud\nEVENT 128 72 0\nEVENT 144 60 16\nPASS low note quiet\nEVENT 128 60 0\nPASS release immediate\nEVENT 144 66 72\nPASS repress sounds\nEVENT 128 66 0\nEVENT 176 123 0\nEVENT 176 120 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS panic release\nEVENT 144 66 72\nEVENT 128 66 0\nEVENT 176 123 0\nEVENT 176 120 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS timeout mutes and releases\nPASS recovery requires arm\nEVENT 144 66 72\nEVENT 128 66 0\nEVENT 176 123 0\nEVENT 176 120 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS focus loss mutes\nPASS fixture calibrated\nEVENT 144 66 72\nPASS left port button routing\nPASS duplicate instance launch\nPASS duplicate preserves owner\nPASS no test joystick reads\nPASS close while sounding\nEVENT 128 66 0\nEVENT 176 123 0\nEVENT 176 120 0\nPASS driver reset\nPASS voices silent\nPASS driver close\nPASS owner released\nPASS final no owner\nTOTAL_FAILURES=0 SENT=22 POLLS=51 HARDWARE_POLLS=0\n"
+  },
+  "mapper_sha256": "a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39",
+  "stock_sound_unchanged": true,
+  "app_sha256": "bf1417b24973c3483fa1ec266316ed3b839732105d3b752502eaa5a9b22719d4",
+  "passed": true
+}

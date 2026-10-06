@@ -1,0 +1,1 @@
+PASS 194837 checks; 10231 randomized NoteOns; raw-decode-to-MIDI exact event oracle, jitter, bounds, rate, release, panic, dropout, rearm, stall and wrap.

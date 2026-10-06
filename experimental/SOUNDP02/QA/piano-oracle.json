@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "cases": 100036,
+  "matched_events": 65894,
+  "state_bytes_host": 145,
+  "output_bytes_host": 43,
+  "seed": 8088,
+  "scope": "Production strict C89 ownership core against independent Python reference; no native keyboard or hardware claim."
+}

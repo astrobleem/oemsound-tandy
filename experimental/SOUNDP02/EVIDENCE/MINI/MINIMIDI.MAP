@@ -1,0 +1,44 @@
+
+ MINIMIDI
+
+ Start     Length     Name                   Class
+ 0001:0000 03F2CH     _TEXT                  CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 00A8AH     _DATA                  DATA
+ 0002:0A9A 0000EH     CDATA                  DATA
+ 0002:0AA8 00000H     XIFB                   DATA
+ 0002:0AA8 00000H     XIF                    DATA
+ 0002:0AA8 00000H     XIFE                   DATA
+ 0002:0AA8 00000H     XIB                    DATA
+ 0002:0AA8 00000H     XI                     DATA
+ 0002:0AA8 00000H     XIE                    DATA
+ 0002:0AA8 00000H     XPB                    DATA
+ 0002:0AA8 00000H     XP                     DATA
+ 0002:0AA8 00000H     XPE                    DATA
+ 0002:0AA8 00000H     XCB                    DATA
+ 0002:0AA8 00000H     XC                     DATA
+ 0002:0AA8 00000H     XCE                    DATA
+ 0002:0AA8 00000H     XCFB                   DATA
+ 0002:0AA8 00000H     XCF                    DATA
+ 0002:0AA8 00000H     XCFE                   DATA
+ 0002:0AA8 0000CH     DBDATA                 DATA
+ 0002:0AB4 00002H     XIQC                   DATA
+ 0002:0AB6 00000H     CONST                  CONST
+ 0002:0AB6 00019H     HDR                    MSG
+ 0002:0ACF 000B1H     MSG                    MSG
+ 0002:0B80 00002H     PAD                    MSG
+ 0002:0B82 00001H     EPAD                   MSG
+ 0002:0B90 00430H     _BSS                   BSS
+ 0002:0FC0 00000H     XOB                    BSS
+ 0002:0FC0 00000H     XO                     BSS
+ 0002:0FC0 00000H     XOE                    BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:0E39 BrowseProc              BrowseProc
+ 0001:1E10 WndProc                 WndProc
+
+Program entry point at 0001:3543

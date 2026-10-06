@@ -1,0 +1,2557 @@
+{
+  "base_commit": "b25d5bce188cf63a3eb7a5ae9bab68147a862cd2",
+  "scope": "Unmodified experimental source and historical evidence only; no fresh native qualification",
+  "files": {
+    "experimental/SOUNDP01/EVIDENCE/BEATS/BEATS.MAP": {
+      "bytes": 1753,
+      "sha256": "b160251c38d9a67eb3a10c038f268e529f0713afbf8f1dc643e74998263141d7",
+      "git_blob_sha1": "634aaa510ff83c7787cb6545977e07faae7c4a62"
+    },
+    "experimental/SOUNDP01/EVIDENCE/BEATS/BUILD.LOG": {
+      "bytes": 1729,
+      "sha256": "b3e8d99555adc2dd0cc116780b88310b2b3491ed9404f6ad074aecc8e25e50a8",
+      "git_blob_sha1": "09a648d069548f584241dd302a1551a20124b08f"
+    },
+    "experimental/SOUNDP01/EVIDENCE/BEATS/ISA.JSON": {
+      "bytes": 1228,
+      "sha256": "cca2b6b73ffcfa647711b06d8110cba3453ada91c0652ace246c9e22f935781e",
+      "git_blob_sha1": "d35711644a71d1dc8ade4102167579fc0d2e4a90"
+    },
+    "experimental/SOUNDP01/EVIDENCE/BEATS/MIDIINTR.MAP": {
+      "bytes": 1666,
+      "sha256": "f8da87e043f05ef7c4c464ef3fa19a02bd4dd9dc5b25849a16d1b1ce7960661a",
+      "git_blob_sha1": "9f53dbae2a21e6fe41eb0344dadd08a326620ec9"
+    },
+    "experimental/SOUNDP01/EVIDENCE/BEATS/MIDIMAP.MAP": {
+      "bytes": 618,
+      "sha256": "485720184d6039802d94bc8aabcf6b99328223a94124cc85a6cff112cd2d2fa4",
+      "git_blob_sha1": "dffbdad734b56bc9e1dd24a1b28a0dc28b0d943e"
+    },
+    "experimental/SOUNDP01/EVIDENCE/BEATS/MIDITEST.MAP": {
+      "bytes": 1666,
+      "sha256": "540cdd46ff7ed69969b4bface23aa17f0c5e0d2a4c382d3475789f0479bac591",
+      "git_blob_sha1": "bef98ff7fb6ed7afd256195b0d3ed2361dd296cf"
+    },
+    "experimental/SOUNDP01/EVIDENCE/CHIME/BUILD.LOG": {
+      "bytes": 340,
+      "sha256": "4b3d0d9d12295af4189f1f9b22b425c0c44374f3890131a2457154cc155c8cc3",
+      "git_blob_sha1": "6a0c74fc6d17cfcadee7e7e2c56ce5dcffa58e64"
+    },
+    "experimental/SOUNDP01/EVIDENCE/CHIME/ISA.JSON": {
+      "bytes": 1296,
+      "sha256": "674e8968a01612a310c66645fa8c1534e7f0a1bd393275a48a123749405d9556",
+      "git_blob_sha1": "d8756a27d4e482f8d58014d42b756eef811746de"
+    },
+    "experimental/SOUNDP01/EVIDENCE/CHIME/TCHIME.MAP": {
+      "bytes": 1756,
+      "sha256": "e3d6af62fe5a2b55ed0945c089dc00010e638419325d49fec2357199cc2663bb",
+      "git_blob_sha1": "cbbaebef4679d6c3f24690f665333bf80be2fc81"
+    },
+    "experimental/SOUNDP01/EVIDENCE/EXBEATS/BEATS.MAP": {
+      "bytes": 1753,
+      "sha256": "144e3fd0adde95c1e5928ebbfac7f52b2b4491a3605c229d1f7736011f407e08",
+      "git_blob_sha1": "b55511c953ce295ac6c037a89eee69e9d7cca124"
+    },
+    "experimental/SOUNDP01/EVIDENCE/EXBEATS/BUILD.LOG": {
+      "bytes": 2165,
+      "sha256": "9876ba5ab4fd566989a881adb70a1c6e3779b15794685d9e230857a14cc6c8bb",
+      "git_blob_sha1": "0c26aab8879339212bcc2ac4cf01d747180236ce"
+    },
+    "experimental/SOUNDP01/EVIDENCE/EXBEATS/INSTEST.MAP": {
+      "bytes": 1755,
+      "sha256": "3828c878bb1b360a9c6d05a5d62f479165618239f255f2e370bd8a45d5623096",
+      "git_blob_sha1": "0f500ec1b27c79057c052e27c1aa265cb1384197"
+    },
+    "experimental/SOUNDP01/EVIDENCE/EXBEATS/ISA.JSON": {
+      "bytes": 1228,
+      "sha256": "dd0863e899b7e7e336cfb59387d093a3a516849c844d5f4063e0b698be3ac59a",
+      "git_blob_sha1": "9f1620d307345185dd9a52c38b37c7f215f56aa9"
+    },
+    "experimental/SOUNDP01/EVIDENCE/EXBEATS/MIDIINTR.MAP": {
+      "bytes": 1666,
+      "sha256": "f8da87e043f05ef7c4c464ef3fa19a02bd4dd9dc5b25849a16d1b1ce7960661a",
+      "git_blob_sha1": "9f53dbae2a21e6fe41eb0344dadd08a326620ec9"
+    },
+    "experimental/SOUNDP01/EVIDENCE/EXBEATS/MIDIMAP.MAP": {
+      "bytes": 618,
+      "sha256": "03fddeca12e9a45f02ca17f15d2ba4cf3c90add3ed3707234c428c954bee6fb0",
+      "git_blob_sha1": "81621ac55fc0d0337eb1164f1044da0c10d23a1e"
+    },
+    "experimental/SOUNDP01/EVIDENCE/EXBEATS/MIDITEST.MAP": {
+      "bytes": 1666,
+      "sha256": "5adf1e7206d4c4dca47dd7415812e8b78f733588275af2b800365c9cdc45961c",
+      "git_blob_sha1": "236441f2804d8fae52c079cb79b8b8e477dd9d1c"
+    },
+    "experimental/SOUNDP01/EVIDENCE/PSGPLAY/BUILD.LOG": {
+      "bytes": 346,
+      "sha256": "7f8f2a1a3f101de32ed33270b91a445bf486f60ef1687d0a9a196fee31fb32b9",
+      "git_blob_sha1": "83946a8b242b921d346f3e7706a7d1de8b9ae2da"
+    },
+    "experimental/SOUNDP01/EVIDENCE/PSGPLAY/ISA.JSON": {
+      "bytes": 1298,
+      "sha256": "e129e1eb62865d413399c26e7b26105827445b3539d5743b7d725f09a95be856",
+      "git_blob_sha1": "15067d050e01d95950ff9a9072034d95e457b211"
+    },
+    "experimental/SOUNDP01/EVIDENCE/PSGPLAY/PSGPLAY.MAP": {
+      "bytes": 1755,
+      "sha256": "fe6cfc2b82d5cf6fe5efa92e19a1d0119f99126812fbcecb75ddc4514bac6e7b",
+      "git_blob_sha1": "4710e04b634c9bea199804fae6f25bd625ad0d0e"
+    },
+    "experimental/SOUNDP01/EVIDENCE/XPCHIME/BUILD.LOG": {
+      "bytes": 346,
+      "sha256": "4152cf2b266db7d679c69dd8896d09d1bdc3ce73ab309171c621a6f79c1b28b6",
+      "git_blob_sha1": "6c7067926a004eac506d8944e8b303f8961c5aa2"
+    },
+    "experimental/SOUNDP01/EVIDENCE/XPCHIME/ISA.JSON": {
+      "bytes": 1297,
+      "sha256": "d28c50b53f0389f068805b7ae910aa60edfbed1cf10a2f1934d04da8eebc1a46",
+      "git_blob_sha1": "d7850379e11d10ea31bc0ee1c00b95a949e3e8b7"
+    },
+    "experimental/SOUNDP01/EVIDENCE/XPCHIME/XPCHIME.MAP": {
+      "bytes": 1757,
+      "sha256": "f5f45a262e1b4a7e863f5a88ff02067a805ce2f92a6b1ca77d4dd459a552e818",
+      "git_blob_sha1": "e1f4df3e6f311cc74fc25715ecece4a3f0e83e65"
+    },
+    "experimental/SOUNDP01/INSTR.MD": {
+      "bytes": 8537,
+      "sha256": "3c4d22d720eac6a1534e756bad8107cba14356e85eac859483e318124d3f7e9b",
+      "git_blob_sha1": "5cbbd347536800c3701e4631c81b79b33044202c"
+    },
+    "experimental/SOUNDP01/LICENSE": {
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "git_blob_sha1": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+    },
+    "experimental/SOUNDP01/MANIFEST.JSON": {
+      "bytes": 14681,
+      "sha256": "edbe451cf523dd8ef729a1df862c4eeb63cb2ecb10e5e70e3bbaeca21121dac9",
+      "git_blob_sha1": "19398ac180f88fdbe76edbe240ea730b9de7548f"
+    },
+    "experimental/SOUNDP01/QA/BUILD.BAT": {
+      "bytes": 306,
+      "sha256": "583fae3dfb29b6e993e4c1bdfa6605f60e18219468f981cf7ad04f90e4d0b648",
+      "git_blob_sha1": "2db2f89fe6cadc04b7009e1726e2c2352e146bb9"
+    },
+    "experimental/SOUNDP01/QA/BUILD.LOG": {
+      "bytes": 334,
+      "sha256": "9e617cffb5e882e78bc2413f3626eb5c10a736b83c82c401938e7aa4c9afd401",
+      "git_blob_sha1": "195be868f6599627c3d254a0612300e223e14e64"
+    },
+    "experimental/SOUNDP01/QA/OWNER-160.JSON": {
+      "bytes": 1282,
+      "sha256": "b5044093c9aba0c6c3a3d1f265be35d171c24ce61982d4b801b5f796b755e1e2",
+      "git_blob_sha1": "25695fb29d356f0f25e92352be9ef2bac5028cc4"
+    },
+    "experimental/SOUNDP01/QA/OWNER.C": {
+      "bytes": 2988,
+      "sha256": "7eefedcb7e1e5a9af82a05505897b05491da3f147b50c0befeb758ecdefde3ca",
+      "git_blob_sha1": "c1db545cb6d57fe44d4e3002ba0015ecd9b25df3"
+    },
+    "experimental/SOUNDP01/QA/OWNER.DEF": {
+      "bytes": 219,
+      "sha256": "eb0f4cfe440c282e15ef0bcd892639b02e3778f6c2e84e7779863b1619953963",
+      "git_blob_sha1": "93390d06f9670b317a0371b036001e85f3b3a01f"
+    },
+    "experimental/SOUNDP01/QA/OWNER.RSP": {
+      "bytes": 80,
+      "sha256": "349f35bb5086f639ca4ad84f4c737ec3808c3bd121bb09f399daccb7d9fd78cf",
+      "git_blob_sha1": "9a9180efe3f602dd576dce3eca5ccdef86b349a0"
+    },
+    "experimental/SOUNDP01/QA/QA01-BEATS-CLOSETEST.JSON": {
+      "bytes": 390,
+      "sha256": "33dc2a7a09edce4643efbc329fbc35cd2eee1f1a57f074cf0c505685ada59cfb",
+      "git_blob_sha1": "9f225eda1f195489d06d3ec37656dd6fd9617d89"
+    },
+    "experimental/SOUNDP01/QA/QA01-BEATS-TEST.JSON": {
+      "bytes": 447,
+      "sha256": "140d8a24f5c5bc6885d0181a5becbb20b4bbc6f7b6ec77b8c05febb4fa149229",
+      "git_blob_sha1": "22c529730645c3f61fe0ffc74c968dadf64d2252"
+    },
+    "experimental/SOUNDP01/QA/QA01-BEATS-UITEST.JSON": {
+      "bytes": 734,
+      "sha256": "d52ad5bfd373bf7b14e1c2cb4cc30b51b993d7c2e79ccff0494d715630cac2f5",
+      "git_blob_sha1": "fed5b8479cb6b26e3136764b28725f49e98c548c"
+    },
+    "experimental/SOUNDP01/QA/QA01-EXBEATS-CLOSETEST.JSON": {
+      "bytes": 390,
+      "sha256": "b15b0f75b42e9b399aeca5003ec9e7294d3c89a27918fa51c5e33505ce96bc33",
+      "git_blob_sha1": "5005b7b6480026f0af26f2766d41b548d8622b92"
+    },
+    "experimental/SOUNDP01/QA/QA01-EXBEATS-TEST.JSON": {
+      "bytes": 447,
+      "sha256": "be310172ae8c94ea94fd5f9ab77cb7234275067fba1b8097a9358bb4fb7bb4e5",
+      "git_blob_sha1": "6c50d8e411d6f11234a974ff4b1be7efc45e49e4"
+    },
+    "experimental/SOUNDP01/QA/QA01-EXBEATS-UITEST.JSON": {
+      "bytes": 734,
+      "sha256": "9ad3c7e6a8557df321e6be0e26d3635c5ff40477a8373e922ace71356754a60c",
+      "git_blob_sha1": "7734dbb23e66e264dd403559159c5aa0ccab9f17"
+    },
+    "experimental/SOUNDP01/QA/RUNWIN.PY": {
+      "bytes": 4296,
+      "sha256": "41ac3a397e853284026c3c979a4da48b5acf04e0282d39994839cf43242c01b4",
+      "git_blob_sha1": "30fa43d6c7ef39d4f26e66b6bb95310ccf7321be"
+    },
+    "experimental/SOUNDP01/README.TXT": {
+      "bytes": 4279,
+      "sha256": "0df87eebf3fc3a60ddd1fc812807b93cbbd7c7a4c5cb7d26f5b420852c27cfae",
+      "git_blob_sha1": "66c2d65cd5a1f19d662e56ed5203f6b6ed64ab2e"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/BEATS.C": {
+      "bytes": 14738,
+      "sha256": "3a2e63017607777a1e5a6ea362670893b67b71a554471224a316d7915aa21a00",
+      "git_blob_sha1": "00157b85be49f941cfa5734023a76f86e63fbb81"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/BEATS.DEF": {
+      "bytes": 209,
+      "sha256": "625f42fc1a7b2f69d575c5e655f1b29342d5ab42d72e6fe0d29cc772b17465ff",
+      "git_blob_sha1": "031b4455658bc85d77467e4475626189f7ba12d5"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/BEATS.RSP": {
+      "bytes": 80,
+      "sha256": "663fd0ba6abd36bb33b70aa699c7d578c56cacd09e078251bbfb7305ef9ca3f2",
+      "git_blob_sha1": "8cade06655b7cab5e8a896980ce280214b02fea6"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/BUILD.BAT": {
+      "bytes": 840,
+      "sha256": "3064ba140bf651628f552a93636ae94ee43d0ec13f47f59cda27123813667793",
+      "git_blob_sha1": "dbafc6fc192b2306e6b786b8329dc5599570b21d"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/BUILD.PY": {
+      "bytes": 2265,
+      "sha256": "99ce10920bb9ea3468948456c5504131ed39519aba5418f6e8bcb540f8db84ec",
+      "git_blob_sha1": "696790d649fa8b0d048f1af1d02ec6ae9de034eb"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/ENTRY.ASM": {
+      "bytes": 433,
+      "sha256": "8da0ebf57a69ea3e70f10a83be2048a6cbc342c473b577571aaa615680c6004b",
+      "git_blob_sha1": "f6519b70621698db4807a04b1e88dd14db0c3737"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDIAPI.H": {
+      "bytes": 858,
+      "sha256": "9ccc2fb5e1d4fecebef362ffe3ec52cfac59e381a95aaa4e9e79702c16460713",
+      "git_blob_sha1": "bf90b2d20ed37386ae8ed4abcb58469cc070e7fb"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDIINTR.C": {
+      "bytes": 1055,
+      "sha256": "f2bda533a12183d379e715c8782c5a3c6f69e49a211e624e4a66665706c93342",
+      "git_blob_sha1": "e23c03e1e6cd37633ceb063c1a593fa11581c608"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDIINTR.DEF": {
+      "bytes": 130,
+      "sha256": "7a1da414c754f10600cc3bbf2b1f466731444f89da3e6550e743660e90adfa96",
+      "git_blob_sha1": "5a839ebbafe37e4e353b8e9aabcdd47db4815de6"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDIINTR.RSP": {
+      "bytes": 92,
+      "sha256": "a158b452705ad6dd5d08715868e5c2c417994e5dc43f2c6c6e6d693165a56a84",
+      "git_blob_sha1": "7138b28013c5ba644fa93f8ff69e53f8f1d10773"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDIMAP.C": {
+      "bytes": 6631,
+      "sha256": "a0ff758a1058c5aa542d41435aa8ff097234330016a7069d3c32821226c82651",
+      "git_blob_sha1": "b257e9f4d503244a34c81d7f3a0af89973f9a6a6"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDIMAP.DEF": {
+      "bytes": 232,
+      "sha256": "a8891ffa03d2454f1631554fae9d513f9f16af86a8eb460c58bf0843a360b76a",
+      "git_blob_sha1": "c019696380a6b5f7e222fab88fa66859cbb31d08"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDIMAP.RSP": {
+      "bytes": 98,
+      "sha256": "18073fd9e5fbd1c88ee304a4987a424a71e66dea94ca7802fc9e00e637e0adb9",
+      "git_blob_sha1": "f66886db2756f4d023a8e1b11ab22da84cf384e7"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDITEST.C": {
+      "bytes": 5668,
+      "sha256": "25653b7a299295d453363fef00c12c5df27ffbe13832abafe9106f72780da98f",
+      "git_blob_sha1": "c3a06d9c795ed010a42086f2922636d3bf5b1d16"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDITEST.DEF": {
+      "bytes": 130,
+      "sha256": "f59f6375ce0c2c2b1eed7f52f77bc773c9b1adef05d45d041468e5e6739e1fcc",
+      "git_blob_sha1": "8d4f5f2861863e7ddd6815fe966a275338bb0675"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/MIDITEST.RSP": {
+      "bytes": 92,
+      "sha256": "bd6882ce9eb73e3e1c5e367b52dc664f9a0be739e74a30e39fb14bcce3e4d568",
+      "git_blob_sha1": "035797d4dd085074915f979b6c50b3fcb6dc5ef0"
+    },
+    "experimental/SOUNDP01/SOURCE/BEATS/PERIODS.H": {
+      "bytes": 299,
+      "sha256": "cd1d851db6e99a8537e5ba07bc151dd0b89c8d34423e9521f1ab164b26ac20e1",
+      "git_blob_sha1": "455bab4f8ad6247efe14995ac4410f02f1ac88a0"
+    },
+    "experimental/SOUNDP01/SOURCE/CHIME/BUILD.BAT": {
+      "bytes": 308,
+      "sha256": "60db52ed1b5dd9cb8c4cf4ec4983c721d56fe27a634a48525665a7bac838d8b6",
+      "git_blob_sha1": "b9b18ab72a50c4ef697d44b2a9bdb0d57a211a3c"
+    },
+    "experimental/SOUNDP01/SOURCE/CHIME/BUILD.PY": {
+      "bytes": 2169,
+      "sha256": "6a4a5a2b3003b5877205aa88a8e932075fbfbb079843b9433dccad14c980ac38",
+      "git_blob_sha1": "1f80e405ac8efac87ab4ab0b19cafd1ee8f599ef"
+    },
+    "experimental/SOUNDP01/SOURCE/CHIME/TCHIME.C": {
+      "bytes": 5167,
+      "sha256": "18b01bd9b52c5e1486b3ba5edb1062dfd53b7fb1fb2678725af73ce75da3c9d0",
+      "git_blob_sha1": "3876fdc8b9b1fc2dc8e815369bf02c1fbb275773"
+    },
+    "experimental/SOUNDP01/SOURCE/CHIME/TCHIME.DEF": {
+      "bytes": 220,
+      "sha256": "c140e756118f4f90a1addc49ec1742791f242514ded1046a28f3f6573901c5c9",
+      "git_blob_sha1": "3a7762ee35e862e518cc540be0f31c39b77c2ce7"
+    },
+    "experimental/SOUNDP01/SOURCE/CHIME/TCHIME.RSP": {
+      "bytes": 84,
+      "sha256": "ba16533d928c1bae1bfd5e041ff0975d68dd5cfab6511682bb41fff406366408",
+      "git_blob_sha1": "075aba7a288ab3a672adb41276ba353c2bd4c943"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/BEATS.C": {
+      "bytes": 14879,
+      "sha256": "b41b437634640e73ae72248caf03ba57f14d60c9784040da91233673ec3a6ae0",
+      "git_blob_sha1": "1a0cc95eb015c1ed5422b09be3401c9de2d1beba"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/BEATS.DEF": {
+      "bytes": 209,
+      "sha256": "625f42fc1a7b2f69d575c5e655f1b29342d5ab42d72e6fe0d29cc772b17465ff",
+      "git_blob_sha1": "031b4455658bc85d77467e4475626189f7ba12d5"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/BEATS.RSP": {
+      "bytes": 80,
+      "sha256": "663fd0ba6abd36bb33b70aa699c7d578c56cacd09e078251bbfb7305ef9ca3f2",
+      "git_blob_sha1": "8cade06655b7cab5e8a896980ce280214b02fea6"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/BUILD.BAT": {
+      "bytes": 1005,
+      "sha256": "c95aa8b0b32feb632ae8e2b7249cbc8663e4540bf007e3b9833d1d187914991d",
+      "git_blob_sha1": "11341a12046d9aab558096d9a955a4b635435752"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/BUILD.PY": {
+      "bytes": 2326,
+      "sha256": "a4244b82b81871951f4fd1684e000e809a8b071b997dd196f28fecd4e8ff94e3",
+      "git_blob_sha1": "6fb812fadeed78a330c48371ec25c65857104851"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/ENTRY.ASM": {
+      "bytes": 435,
+      "sha256": "87e82828a804b680ea3396615ce25cc2361ca82227d49130d599f7586ad0cecb",
+      "git_blob_sha1": "b715260511a69744ebdd05490b246f65a60710ed"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/INSTEST.C": {
+      "bytes": 8521,
+      "sha256": "b45c6c4fe18abeb5516f09979bf56635c94b2c0d6b3fd6b0dafd593f556b15d9",
+      "git_blob_sha1": "969f2c9bcac73e95c19f0427695608d5df566a47"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/INSTEST.DEF": {
+      "bytes": 148,
+      "sha256": "388fe59356c8717d483a4c3e0c1be83573ec5c6291435793292c57a77a3816a2",
+      "git_blob_sha1": "8fe312663e9f7d647253027d0721379da8f2a3cd"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/INSTEST.RSP": {
+      "bytes": 88,
+      "sha256": "9b350d8975f0eeda8d491942d062f1ccf0f1f92a358b2a3a194ebeec22fd4239",
+      "git_blob_sha1": "855349c7ab678d4582d6bf78d78e1aa480fc101c"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/INSTR.C": {
+      "bytes": 2005,
+      "sha256": "f9fec1667a81344a1f61a723e42e75cea3741252f7e7c1affd5da8bde7304044",
+      "git_blob_sha1": "c2b04be5f3ccac470bf452146b55e0651664a1f2"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/INSTR.H": {
+      "bytes": 277,
+      "sha256": "6ea84c39964467052b62d5707ea3b5a95f9bae1f73f60f7904e8adcb26804c05",
+      "git_blob_sha1": "14ee8a279095c3831c434ba1d4483f4d18d415b0"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDIAPI.H": {
+      "bytes": 1459,
+      "sha256": "f106aa5524260c6360efed6631c0a111cc753dd4802151d3a0b4d4c275f527c7",
+      "git_blob_sha1": "7a80614f209612cea0bb009ec27a3753ef9d2609"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDIINTR.C": {
+      "bytes": 1055,
+      "sha256": "f2bda533a12183d379e715c8782c5a3c6f69e49a211e624e4a66665706c93342",
+      "git_blob_sha1": "e23c03e1e6cd37633ceb063c1a593fa11581c608"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDIINTR.DEF": {
+      "bytes": 130,
+      "sha256": "7a1da414c754f10600cc3bbf2b1f466731444f89da3e6550e743660e90adfa96",
+      "git_blob_sha1": "5a839ebbafe37e4e353b8e9aabcdd47db4815de6"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDIINTR.RSP": {
+      "bytes": 92,
+      "sha256": "a158b452705ad6dd5d08715868e5c2c417994e5dc43f2c6c6e6d693165a56a84",
+      "git_blob_sha1": "7138b28013c5ba644fa93f8ff69e53f8f1d10773"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDIMAP.C": {
+      "bytes": 10329,
+      "sha256": "6e8c276e0f24b3003e04ed28a05937073388770361b6a905cc875422793137e1",
+      "git_blob_sha1": "75664b3b3a7f45b332d02d77a05c5db1afee49ed"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDIMAP.DEF": {
+      "bytes": 234,
+      "sha256": "969af2c9a6c0118c225fc20fd029af7e4caf77b53d0c2caa22bfca3b808551ee",
+      "git_blob_sha1": "a1876670b4fc5625a9ee202be24f6ce7eb207713"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDIMAP.RSP": {
+      "bytes": 110,
+      "sha256": "27cc6b9ab37c375cffabc4d656bfe8e239a390063842b225e1bae272dd42b8cf",
+      "git_blob_sha1": "dfbdf7bcd03af616adb6f78ca224c9575c9bdda9"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDITEST.C": {
+      "bytes": 5721,
+      "sha256": "31c893e2a987447b479bc597bce83ab7f7a2d6e4b539c4d944916f084664cbb5",
+      "git_blob_sha1": "483d85baa9fe8e80cec07ebf7c9a3e9478a6c1af"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDITEST.DEF": {
+      "bytes": 130,
+      "sha256": "f59f6375ce0c2c2b1eed7f52f77bc773c9b1adef05d45d041468e5e6739e1fcc",
+      "git_blob_sha1": "8d4f5f2861863e7ddd6815fe966a275338bb0675"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/MIDITEST.RSP": {
+      "bytes": 92,
+      "sha256": "bd6882ce9eb73e3e1c5e367b52dc664f9a0be739e74a30e39fb14bcce3e4d568",
+      "git_blob_sha1": "035797d4dd085074915f979b6c50b3fcb6dc5ef0"
+    },
+    "experimental/SOUNDP01/SOURCE/EXBEATS/PERIODS.H": {
+      "bytes": 301,
+      "sha256": "4fbb8b010c03e768909093494f6549f4781f6e80c13984b0592a8305ea5a513e",
+      "git_blob_sha1": "dfc48aa74ff0e276730b7cd4a19cb7ee7040d123"
+    },
+    "experimental/SOUNDP01/SOURCE/PSGPLAY/BUILD.BAT": {
+      "bytes": 310,
+      "sha256": "5b254cfa3a26ba137f356d96aa21b192aa45eb16990466a3b4c687445584dbcd",
+      "git_blob_sha1": "bbe469b22db152afce5a4c86f93fa3cb1470fc08"
+    },
+    "experimental/SOUNDP01/SOURCE/PSGPLAY/BUILD.PY": {
+      "bytes": 2167,
+      "sha256": "c6954be937cf37ec3d8ba4d177b6ba75f75d298e48539f443c37f49010f39d5e",
+      "git_blob_sha1": "34aec448678a6ae3ca91d37daac0f40d6a9c13f2"
+    },
+    "experimental/SOUNDP01/SOURCE/PSGPLAY/PSGPLAY.C": {
+      "bytes": 8987,
+      "sha256": "954794ce860efa55e3d0e6f9d77e0c3dd623007d8a098a0214b294f7031823ef",
+      "git_blob_sha1": "7b4e3eb007f4e16519adba37f27be543d943ada1"
+    },
+    "experimental/SOUNDP01/SOURCE/PSGPLAY/PSGPLAY.DEF": {
+      "bytes": 209,
+      "sha256": "d5284ea335e6cdae426bf628772ce126c49ea44873b2a1b342bcf075ef5e1148",
+      "git_blob_sha1": "b60f1388eee9ae314b7bb30619998fe232b4b2df"
+    },
+    "experimental/SOUNDP01/SOURCE/PSGPLAY/PSGPLAY.RSP": {
+      "bytes": 88,
+      "sha256": "4db0498b9c3a99736f19b2256ce64f4ece03381850c9e614a3abe78dd0b20df4",
+      "git_blob_sha1": "4cb979c12be57d18097e5cc057dc9d641f903a93"
+    },
+    "experimental/SOUNDP01/SOURCE/XPCHIME/BUILD.BAT": {
+      "bytes": 310,
+      "sha256": "e6d226c31f27987fc117d9de198a8e9666bb8b2f0b72871f413020e21688d808",
+      "git_blob_sha1": "2999787347d22aba2cdfc1d65288971169765480"
+    },
+    "experimental/SOUNDP01/SOURCE/XPCHIME/BUILD.PY": {
+      "bytes": 2174,
+      "sha256": "6826d2c7da443c8c59cbdde15a6e8ca3db1b0adbdb33b761776d93534ce17ef0",
+      "git_blob_sha1": "06fa80c9b2abba43cb9b66e6e4fd96344e5ee96b"
+    },
+    "experimental/SOUNDP01/SOURCE/XPCHIME/XPCHIME.C": {
+      "bytes": 5770,
+      "sha256": "45fdff2886bb12eb5c4815d1f61f94f3f6b2bb1039f534ea796e8e92164bcb6e",
+      "git_blob_sha1": "a4fad0f6a85f79989191894b9524772d469e9751"
+    },
+    "experimental/SOUNDP01/SOURCE/XPCHIME/XPCHIME.DEF": {
+      "bytes": 221,
+      "sha256": "2135ccd24b9be37442e191d42f2c152ff3b45f7c964fdb9ecf29b87d3beb48f4",
+      "git_blob_sha1": "c8330310f7041f5404df4707c51986b6705605fe"
+    },
+    "experimental/SOUNDP01/SOURCE/XPCHIME/XPCHIME.RSP": {
+      "bytes": 88,
+      "sha256": "7cb16363a18c3d6eb883531e09aad5b6ec39ab15cbe641335c20d9fa72ff841c",
+      "git_blob_sha1": "71ec80e91f00d1408713c2b5e965de91f42ba718"
+    },
+    "experimental/SOUNDP02/ATTRIB.TXT": {
+      "bytes": 1812,
+      "sha256": "a5826f70139787b4f8b72a71757f60a1b9baea91231df977560752b920ce4da1",
+      "git_blob_sha1": "a33dbca78853cffc5d3841514bb92404ebd43d5d"
+    },
+    "experimental/SOUNDP02/EVIDENCE/BUDDY/BUILD.LOG": {
+      "bytes": 346,
+      "sha256": "78782d633dc42094381f5fd169ad2e3bf6c96128f2afd8ff2ba8d01841200a1e",
+      "git_blob_sha1": "bc02ea8c63e2341611c7a31b9dd3ea026810bc4d"
+    },
+    "experimental/SOUNDP02/EVIDENCE/BUDDY/ISA.JSON": {
+      "bytes": 1293,
+      "sha256": "3a09fc43e21fd2657f96b5d1b5c64f7d4ef7e19bcb300ce60132d309825403e4",
+      "git_blob_sha1": "c09cd4a428c3bcdd178e2bf7515b9111dad5c8b1"
+    },
+    "experimental/SOUNDP02/EVIDENCE/BUDDY/TINYVID.MAP": {
+      "bytes": 1755,
+      "sha256": "9069139b75f14a84910ba4ef629a312188c3fb359a9b8a038942ff913831282e",
+      "git_blob_sha1": "bac80c186dea28ea900243275a53020253eabdd0"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXJOY/BUILD.LOG": {
+      "bytes": 612,
+      "sha256": "f6a89f1988554f8b2f4e30a3aa31c56b4b4027a6ec9dae87a087d88a5d9440f2",
+      "git_blob_sha1": "62b3682f1cc95e4cfb5d97f4775b76c58962ea42"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXJOY/ISA.JSON": {
+      "bytes": 1614,
+      "sha256": "c5192bc989fcbee2db4089d50480928c919a9520ef1f9128fc5dcfad3eae0e2d",
+      "git_blob_sha1": "2b1a046060e53e87cc358c4d46ea6e20b4e148cc"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXJOY/JOYMIDI.MAP": {
+      "bytes": 13574,
+      "sha256": "2730912465177f0121b5ca5a99bdc86e5cea5fc2a9e15de47c46593cc8f77351",
+      "git_blob_sha1": "071662a3cb1db8588a50e660c3f71c8e5953c49e"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXMINI/BUILD.LOG": {
+      "bytes": 367,
+      "sha256": "d7c2d699362c31f06494d42133e30389c65e744a45b062930d8a8cbad340c196",
+      "git_blob_sha1": "495465000cadfe85812639468702a5c17540facc"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXMINI/ISA.JSON": {
+      "bytes": 1294,
+      "sha256": "5aec18e3a4a709a5e970590a76965731c0843ffa2bbd90e10f69173cc33d5918",
+      "git_blob_sha1": "94e7bfbcef4e4213dd4e14e17f86b272126df9d1"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXMINI/MINIMIDI.MAP": {
+      "bytes": 1803,
+      "sha256": "f614b38432bf7002b7b9f1996257b9d9f5fafe0046cf052980b60be14e93070c",
+      "git_blob_sha1": "2d8c747238fdd1a3331d2b67808b7cddbc450161"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXPIANO/BUILD.LOG": {
+      "bytes": 378,
+      "sha256": "4ffb0832b511763d689d8d6115ccb80c717e9b79f15ffb60270074b87bd79698",
+      "git_blob_sha1": "22b29db45a2153abad9ee4f276af66bb01fc9deb"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXPIANO/ISA.JSON": {
+      "bytes": 1457,
+      "sha256": "558505fb3de940d0e37469b363b468a54d614e6fec29149683e8ab9547df95fc",
+      "git_blob_sha1": "2fbab9381964599350b7a11ae0ccccdd2ef3c25b"
+    },
+    "experimental/SOUNDP02/EVIDENCE/EXPIANO/MINIPIAN.MAP": {
+      "bytes": 13723,
+      "sha256": "34c2274df6b438432ddfbb6348c87651f94ddb516528af8ffdc3537348522bd3",
+      "git_blob_sha1": "4e09318624d32a6552fc3e646d974bfad8e731c0"
+    },
+    "experimental/SOUNDP02/EVIDENCE/JOY/BUILD.LOG": {
+      "bytes": 612,
+      "sha256": "f6a89f1988554f8b2f4e30a3aa31c56b4b4027a6ec9dae87a087d88a5d9440f2",
+      "git_blob_sha1": "62b3682f1cc95e4cfb5d97f4775b76c58962ea42"
+    },
+    "experimental/SOUNDP02/EVIDENCE/JOY/ISA.JSON": {
+      "bytes": 1614,
+      "sha256": "914da0382d22cdeae46fe84b143a9e03fdf5c5f6a10857a168dfc68dc6cca12e",
+      "git_blob_sha1": "1b26c09d23acf8f086966a12b0743886038eea9c"
+    },
+    "experimental/SOUNDP02/EVIDENCE/JOY/JOYMIDI.MAP": {
+      "bytes": 13574,
+      "sha256": "82bcadc44765d7b3dca729e5d1e5dba820399f053475d0e7b8ba416762e988eb",
+      "git_blob_sha1": "f12cf0b742031b133c03902be0dbc4a84c1cc1e8"
+    },
+    "experimental/SOUNDP02/EVIDENCE/MINI/BUILD.LOG": {
+      "bytes": 367,
+      "sha256": "d7c2d699362c31f06494d42133e30389c65e744a45b062930d8a8cbad340c196",
+      "git_blob_sha1": "495465000cadfe85812639468702a5c17540facc"
+    },
+    "experimental/SOUNDP02/EVIDENCE/MINI/ISA.JSON": {
+      "bytes": 1294,
+      "sha256": "de8e2905de6a7dadca84d893fe750c050fcaa80c6a2b502cfb06ccf65bd3783d",
+      "git_blob_sha1": "7fabb3432b436e480c05939100253d576c706ddb"
+    },
+    "experimental/SOUNDP02/EVIDENCE/MINI/MINIMIDI.MAP": {
+      "bytes": 1803,
+      "sha256": "7792e05c5dc1742b851f7aa6f5d206bd9040ec3cf82b3f19ee75f1894d0d3e27",
+      "git_blob_sha1": "2cd220179721682293d76ef956b9d884bc82b260"
+    },
+    "experimental/SOUNDP02/EVIDENCE/MOUTH/BUILD.LOG": {
+      "bytes": 334,
+      "sha256": "7ac3f2373a07f720293fcea35df58d2204fe6dea9d43728cf9b1849c0676acff",
+      "git_blob_sha1": "d9ee9005410888ae8706c81b6423a964ae0880f7"
+    },
+    "experimental/SOUNDP02/EVIDENCE/MOUTH/ISA.JSON": {
+      "bytes": 1366,
+      "sha256": "ec653762c0b0037c7b08e960ba6cbb120c43f5d31e02949ed10cfe1255118487",
+      "git_blob_sha1": "106e142be4aa37195233367cc19a69c86b1a9a8b"
+    },
+    "experimental/SOUNDP02/EVIDENCE/MOUTH/MOUTH.MAP": {
+      "bytes": 1755,
+      "sha256": "ec8db4375e2fe01423fb1f1a6b66f012d30bb34411ad408a51128dc1b9862c01",
+      "git_blob_sha1": "abc7a0a4f2df731182144c0d27cf19ace6529c31"
+    },
+    "experimental/SOUNDP02/EVIDENCE/PIANO/BUILD.LOG": {
+      "bytes": 378,
+      "sha256": "4ffb0832b511763d689d8d6115ccb80c717e9b79f15ffb60270074b87bd79698",
+      "git_blob_sha1": "22b29db45a2153abad9ee4f276af66bb01fc9deb"
+    },
+    "experimental/SOUNDP02/EVIDENCE/PIANO/ISA.JSON": {
+      "bytes": 1457,
+      "sha256": "d4a6b1f340426b66202d023a3247c691abed08119f49b680a66c07303dc965cf",
+      "git_blob_sha1": "711f8efd31a5b91f772704fa470e4b063ce71865"
+    },
+    "experimental/SOUNDP02/EVIDENCE/PIANO/MINIPIAN.MAP": {
+      "bytes": 13723,
+      "sha256": "213c25ec35d5d93dfbbc320320e8a5f2a99a29302d0dafaba8825bd525c35363",
+      "git_blob_sha1": "e4081cfaa4022eccd6582d54b42e477a133a9385"
+    },
+    "experimental/SOUNDP02/EVIDENCE/TEXIT/BUILD.LOG": {
+      "bytes": 357,
+      "sha256": "9be0b2a175c62114a316dcd75444fba8af996d91f1c619491ece56274a69d30b",
+      "git_blob_sha1": "f7b65c2ad5d56d737ad34ca56a556c6dd2133a69"
+    },
+    "experimental/SOUNDP02/EVIDENCE/TEXIT/ISA.JSON": {
+      "bytes": 1367,
+      "sha256": "0c37cc7d67e44874cd9596bde80a15867cee3bc07ceb3fd13c8730c020eb0f58",
+      "git_blob_sha1": "cccd4f35ee09e34b5550a008ac5e978dacf49b8f"
+    },
+    "experimental/SOUNDP02/EVIDENCE/TEXIT/TEXIT.MAP": {
+      "bytes": 1850,
+      "sha256": "ca11936babfe47838a1e5d1342facf6e69617094d3d9b867596d82b85e6f0468",
+      "git_blob_sha1": "2181fc3a581b8096e0d6bf59cfc37286d22eb0ae"
+    },
+    "experimental/SOUNDP02/HOST/PREPBUD.PY": {
+      "bytes": 1112,
+      "sha256": "743ee8ce7632cc28809a655c2649717c6586cfbc94801c73b95fd54a7edef971",
+      "git_blob_sha1": "7a711c22e6cda659b4270b0cbc25f4714a7cb19c"
+    },
+    "experimental/SOUNDP02/LICENSE": {
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "git_blob_sha1": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+    },
+    "experimental/SOUNDP02/MANIFEST.JSON": {
+      "bytes": 69638,
+      "sha256": "f72612c6aa937f6fb6d56d783ea77baed9a8289a6087657811d9ada1a4fa7ed1",
+      "git_blob_sha1": "d0fbb6bd9d004f6aaf65d985de2972863ed4216f"
+    },
+    "experimental/SOUNDP02/QA/BUDDATA/README.TXT": {
+      "bytes": 144,
+      "sha256": "d3b5b801dfac8a9837289f16f9010e7cc341c81f05a104a14e35b81818cc0e45",
+      "git_blob_sha1": "905a32998d6c1275041d285b734b87d07133923b"
+    },
+    "experimental/SOUNDP02/QA/BUDQA/BUDQA.C": {
+      "bytes": 3368,
+      "sha256": "13b9f3ee0b1bee959ed488ccfb4136be645241db56f8401c51fd4b40d639ede0",
+      "git_blob_sha1": "3adb8085f8603eb54f997157a1be6406d8c82715"
+    },
+    "experimental/SOUNDP02/QA/BUDQA/BUDQA.DEF": {
+      "bytes": 220,
+      "sha256": "7c54662f29d582f99d548f83eb9e53cc4ba1ff157960386e5eb2ce3a767088c5",
+      "git_blob_sha1": "bc0f91041e9daabad4723bc0a8d98b5e36dda302"
+    },
+    "experimental/SOUNDP02/QA/BUDQA/BUDQA.RSP": {
+      "bytes": 80,
+      "sha256": "65092200dbfcc71584c6117ea9dc80c49f648e40c179edc1658488280a446f59",
+      "git_blob_sha1": "18574ac06da077de24e9e7f0ec59a35334943584"
+    },
+    "experimental/SOUNDP02/QA/BUDQA/BUILD.BAT": {
+      "bytes": 306,
+      "sha256": "c761fd99908dc73c4777fbfe2114bf472ac35e954533a41968e734d3ac2a3218",
+      "git_blob_sha1": "7b1e55f939507dc8f0bd9573f0577e7913475e84"
+    },
+    "experimental/SOUNDP02/QA/BUDQA/BUILD.LOG": {
+      "bytes": 334,
+      "sha256": "9141dd4459a8649803adc23b5db86fa04fd69c396f0049270a92775dfb864687",
+      "git_blob_sha1": "870b91913b46379ef4c9190830ce92ea97d8bb5b"
+    },
+    "experimental/SOUNDP02/QA/BUDQA/BUILD.PY": {
+      "bytes": 2164,
+      "sha256": "46ab47e043ee56b1b857f9be6e358041b14ced272a024d1e592889ef63207ef8",
+      "git_blob_sha1": "9377b5a524f773033d32418778c6def4c7488198"
+    },
+    "experimental/SOUNDP02/QA/EXITQA/BUILD.BAT": {
+      "bytes": 308,
+      "sha256": "7d7ecc3cde5c63967007e143af8765916347d1e1df221424d5031e7f06d9d694",
+      "git_blob_sha1": "a44069eee504735a8724df0e0c66ae95ea57f8b3"
+    },
+    "experimental/SOUNDP02/QA/EXITQA/BUILD.LOG": {
+      "bytes": 340,
+      "sha256": "f7a9e8aff40068461dafb2b3c2edfe3b04712baf87594b51e8fbfdcf85871b82",
+      "git_blob_sha1": "1ef3c7d4488002cac203265a52f1bbc2a024a194"
+    },
+    "experimental/SOUNDP02/QA/EXITQA/BUILD.PY": {
+      "bytes": 2169,
+      "sha256": "3c8cfd2cb8e65c6813254f773b7dd9aa43753abb6ab95fbcfbd807f6832e4703",
+      "git_blob_sha1": "8b9f84d5a0a0779d693de592bd0a5cc4114fb24a"
+    },
+    "experimental/SOUNDP02/QA/EXITQA/EXITQA.C": {
+      "bytes": 4836,
+      "sha256": "893f94660e76edd6af40588d3f2e721dfe9db4743d941dd06437689aa90cf28f",
+      "git_blob_sha1": "6f8ffd109390941cdd2ce9e5bb2dedcb754dbf5b"
+    },
+    "experimental/SOUNDP02/QA/EXITQA/EXITQA.DEF": {
+      "bytes": 222,
+      "sha256": "1e0ab686da5026d375bcdbc5e6264f7399a528fdeb897348ebacb69dfadad023",
+      "git_blob_sha1": "d51e91bdc4ab159aa9fae32a31d71bc81558864d"
+    },
+    "experimental/SOUNDP02/QA/EXITQA/EXITQA.RSP": {
+      "bytes": 84,
+      "sha256": "94773492b67b929395bd3e2de3ca16bbf25f6ab66db73139a79807c4c31ee72d",
+      "git_blob_sha1": "4c569ddd6ca8965d4145fbabd9f9819544e83841"
+    },
+    "experimental/SOUNDP02/QA/PIANO-NATIVEOK.PY": {
+      "bytes": 1896,
+      "sha256": "d9c2d80611c7c544ae85b22af28dae06d3cbb286f034c142cf558cc430ed44aa",
+      "git_blob_sha1": "1c963dbbf6dea460b318bba01dd6acaf22725a71"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-1/CHECKS.json": {
+      "bytes": 274,
+      "sha256": "48766e84c1fba3f59fea6ccbc791a740780bed825a2b797b349e992a43a4da3b",
+      "git_blob_sha1": "56eec5cc9d2f24ebef5b190f818c442d310a321d"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-1/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-1/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-1/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-1/RESULT.json": {
+      "bytes": 1414,
+      "sha256": "fca45e885feaaf9f1494c63aad5ff4b4f6989c8f271ad471188c5c4b3520402a",
+      "git_blob_sha1": "ec4b6fe2cea323be226f5f4ab274674a5535e9c3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-1/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-10/CHECKS.json": {
+      "bytes": 275,
+      "sha256": "3f180f3974fdc4c23112cdd3e6f605ed8a65e56eb9f92001c4899f13affcf981",
+      "git_blob_sha1": "158e0d86c706e22a6355b3cc84d4675e031d070f"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-10/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-10/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-10/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-10/RESULT.json": {
+      "bytes": 1428,
+      "sha256": "cdf5cd45b3edcc19616c2c62eb7ec82d18730d13da9ad2c829cc186aec97bba3",
+      "git_blob_sha1": "a4cfaad6fec9d79527346b063fc786bfed65b82c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-10/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-2/CHECKS.json": {
+      "bytes": 246,
+      "sha256": "dd3816857afe4ced93cecf30b5dc631ee127259a368123a6b5f1b03f7c3c6e00",
+      "git_blob_sha1": "5dfd247c1ea08956034f0902b60a98c2a09a9f44"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-2/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-2/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-2/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-2/RESULT.json": {
+      "bytes": 748,
+      "sha256": "9f7a519bdf02da1b54b4263913ad353b5677ecdd859ca898907467e13fdaa604",
+      "git_blob_sha1": "2cf25037ae31708670809cdc3e9b4e6b8885c909"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-2/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-3/CHECKS.json": {
+      "bytes": 288,
+      "sha256": "fd24d63223db3be584662c61c1577c068b8b30f10445b1f2466a76e38caea952",
+      "git_blob_sha1": "0e2d55e38f25384ab56eca005fddc87121d3c0d4"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-3/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-3/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-3/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-3/RESULT.json": {
+      "bytes": 1878,
+      "sha256": "2079a1c13336a671b60aef8d8b1640272987f9fe7336c72fe1973b3c601d9760",
+      "git_blob_sha1": "d9dabf76a32e3aee427f0458b6d23d1bda96a931"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-3/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-4/CHECKS.json": {
+      "bytes": 246,
+      "sha256": "918a0b6a9dfecd8d6340f27fd5515c7631fa57640148ce88f4cd9116f7c0b945",
+      "git_blob_sha1": "76e87c8080e65229383344317c0f9c31a64a8684"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-4/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-4/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-4/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-4/RESULT.json": {
+      "bytes": 778,
+      "sha256": "8fef69b3dc6b0337e0dadf2c8d45f8c3a48b76e9adb52bb60c625c37f0f41778",
+      "git_blob_sha1": "2d8f32d8976d6ec306f8201c5bb44f9fe46b0b48"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-4/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-5/CHECKS.json": {
+      "bytes": 246,
+      "sha256": "e25523e20f10903edb7a1c0fb63b09ad76dc25183d33ab6b30b33e8d2a37709c",
+      "git_blob_sha1": "49baf5bb803375c3e31b8673b0a09e2d038e48e1"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-5/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-5/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-5/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-5/RESULT.json": {
+      "bytes": 748,
+      "sha256": "28c0116bac20780b4d6aca16f7e9e8f9c4da55f3106cf2819eb9a907d0fc5b59",
+      "git_blob_sha1": "3c1bc7f38647e2bc46a1315229fb2206998e827a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-5/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-6/CHECKS.json": {
+      "bytes": 274,
+      "sha256": "c6a95508347e8dd8a17f0239e0be381e3b7a47d8043020671436a8409d8a0378",
+      "git_blob_sha1": "96b8d0f2dc554b8aac8d185c10add1e6a7b51f05"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-6/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-6/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-6/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-6/RESULT.json": {
+      "bytes": 1410,
+      "sha256": "1e5b9a9bf5d18f32d43d87f107401fd4194a20f5bfacd6bbbf8cec839bd125ee",
+      "git_blob_sha1": "91519cd68e550e8b658547a22950dfa437b1a37f"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-6/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-7/CHECKS.json": {
+      "bytes": 262,
+      "sha256": "66d10a7df9579265223d69966ebfd23ead6064559f876cc10cbbfb14ffa23efb",
+      "git_blob_sha1": "9566275b1baca0a8d5624c2d523605d1bf81a35c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-7/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-7/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-7/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-7/RESULT.json": {
+      "bytes": 1088,
+      "sha256": "445dbfcdc90ba8d82336a3a8c7b8e10555585ae682e05cb0f26e9123938c0992",
+      "git_blob_sha1": "e15b09c7a845c24879ce9273b305c54c4c6660e7"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-7/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-8/CHECKS.json": {
+      "bytes": 260,
+      "sha256": "0081123f0f495975deec04557e6b5ed5d976bb56952d8ac07bbf6d65ec541d5c",
+      "git_blob_sha1": "603c94ab264076f52219dc7f93c00a22ea4b897e"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-8/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-8/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-8/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-8/RESULT.json": {
+      "bytes": 1088,
+      "sha256": "e3b77d7b0c58c8961b0f0754fc838645d7afaba33ebef8cec5323258a54b979e",
+      "git_blob_sha1": "58cec8d7913a6ebff7f413e3710f0d8747389dbf"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-8/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-9/CHECKS.json": {
+      "bytes": 192,
+      "sha256": "6d9361618a1579c13e36d28fbcd0ac9f4214aaefb8a68089f7a9ec3e8dac8b8e",
+      "git_blob_sha1": "628b1ebd0eb28ddd86e113ccd110b14fb7c10671"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-9/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-9/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-9/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-9/RESULT.json": {
+      "bytes": 313,
+      "sha256": "94ea00254cb7e2cef2fe3709e4d325ec62aad2c11184e583350338b5801c0758",
+      "git_blob_sha1": "afa7e1b11691faccfe7997e75013059355c3fee0"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-160-9/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-320-10/CHECKS.json": {
+      "bytes": 275,
+      "sha256": "493a08d1972af2fdccfa42fa8916583dde0b75309b2e4a33ff80281be807530b",
+      "git_blob_sha1": "3ef2f9ac600bc49079b2200a722bfb8fadf6d99a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-320-10/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-320-10/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-320-10/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-320-10/RESULT.json": {
+      "bytes": 1428,
+      "sha256": "d5532276c5fdfde0577ce9c9d11ce832f3486988b33fe45765f48bc8bda7750e",
+      "git_blob_sha1": "4432440822fcf621758e94eebc76b60afd5717f4"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-320-10/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-640-10/CHECKS.json": {
+      "bytes": 275,
+      "sha256": "c498df59f66c1f4fdf39fb02bb846ff45afae75702e3350faab21f8912e7683f",
+      "git_blob_sha1": "ee29c127668b4442d6c65db5c410c72d2caf51fc"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-640-10/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-640-10/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-640-10/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-640-10/RESULT.json": {
+      "bytes": 1428,
+      "sha256": "f46de8d4d635b44b453ee0a11244f0fc759a42ddde3c05d57e432c1a5fe001fd",
+      "git_blob_sha1": "d31b234354596cedfdabb72e59381da8bbbe2eb4"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa05-mouth-640-10/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-160-test/CHECKS.json": {
+      "bytes": 1721,
+      "sha256": "f67e32036869fc3a972613484943aca9faa335c41b4a96e77856453dfa338136",
+      "git_blob_sha1": "cd9ef3847fb9058bad1fc63800e4fb5913aa6bc9"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-160-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-160-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-160-test/ORACLE.json": {
+      "bytes": 1363,
+      "sha256": "d19c5be165205363f5a1bbe3d0d4776a673d7a9e0355f2cc0d34bd817808107b",
+      "git_blob_sha1": "46dffc377f0b7e78db6e6f6c31c3190299952ff4"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-160-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-160-test/RESULT.json": {
+      "bytes": 1619,
+      "sha256": "900363ee23fc9fd21d89f41c51cc135c377081ba4bb9e9ccd8409820559df5e5",
+      "git_blob_sha1": "3598452fd888522c3a5db983c88e978d087f647b"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-160-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-320-test/CHECKS.json": {
+      "bytes": 1721,
+      "sha256": "7688dfcd21f1c74441341677d159729ecf7a93f0f17355e596764647a37905ae",
+      "git_blob_sha1": "fbda36b80b21501b3afa1936412fed5e3f221434"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-320-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-320-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-320-test/ORACLE.json": {
+      "bytes": 1363,
+      "sha256": "d19c5be165205363f5a1bbe3d0d4776a673d7a9e0355f2cc0d34bd817808107b",
+      "git_blob_sha1": "46dffc377f0b7e78db6e6f6c31c3190299952ff4"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-320-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-320-test/RESULT.json": {
+      "bytes": 1619,
+      "sha256": "da11ede7aa42932b598132ded6be60241695c1edfb804e8e96dad5d20fa7ba78",
+      "git_blob_sha1": "3bccae6b4520d48c7d98c4ed7b70607d8175c789"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-320-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-640-test/CHECKS.json": {
+      "bytes": 1721,
+      "sha256": "f67910196abde4ed004f9dc43d3286e3d6398dfefc8871e8b91820fdeb3493c2",
+      "git_blob_sha1": "b102a26ebf6ad15fa8a5dd66497af7deca135cdf"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-640-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-640-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-640-test/ORACLE.json": {
+      "bytes": 1363,
+      "sha256": "d19c5be165205363f5a1bbe3d0d4776a673d7a9e0355f2cc0d34bd817808107b",
+      "git_blob_sha1": "46dffc377f0b7e78db6e6f6c31c3190299952ff4"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-640-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-640-test/RESULT.json": {
+      "bytes": 1619,
+      "sha256": "e2383ff02949586ca3c270c00444d6c2a805b1c62b76dce5a8971953dbda26a5",
+      "git_blob_sha1": "33901be16e103d6e6963262d6fa227f257e25088"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXJOYMIDI-640-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-browsetest/CHECKS.json": {
+      "bytes": 1131,
+      "sha256": "48cef0c4feaac7e80c5b10aedd7690ad5d36d338d553c69e9a53b8ba2d66b31c",
+      "git_blob_sha1": "8259b4b433750f3e5ddf026988c85ee6d01732ab"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-browsetest/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-browsetest/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-browsetest/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-browsetest/RESULT.json": {
+      "bytes": 1029,
+      "sha256": "8b6c429c3e43dd1bac8b7986351651d2a74daee1ad2430af5fc365fdadebf394",
+      "git_blob_sha1": "1fa3b85101e70ee334f53c8cab2e7c633ed7b90f"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-browsetest/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-test/CHECKS.json": {
+      "bytes": 934,
+      "sha256": "b7e9495ef031c18661731aa74c046ee1fd002134c3ceb03ba744a26b16738709",
+      "git_blob_sha1": "b7f7f88d727c079df0e02d8cccf304c021207c75"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-test/RESULT.json": {
+      "bytes": 832,
+      "sha256": "a93896baa33cae84b344c3b5f461eb6d6115e9a153f0233910a8b1c3f425d559",
+      "git_blob_sha1": "dc8086213d3de14b6e4c8dea1412ec61a8f4fd9c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-uitest/CHECKS.json": {
+      "bytes": 1010,
+      "sha256": "500ec2905b711e7fed5650c2d2c42c96332618811863eb430ba9db5b8724363c",
+      "git_blob_sha1": "3d906e045966d08db4fdf7edd339226bce8c1e41"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-uitest/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-uitest/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-uitest/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-uitest/RESULT.json": {
+      "bytes": 908,
+      "sha256": "5938efb3e2fce5ae4425670de4e2080dba3d9731b02435c3b042e822844624f6",
+      "git_blob_sha1": "62958a1f32a8ffc46a8fe6b33cd5c698ba46a184"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-160-uitest/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-320-test/CHECKS.json": {
+      "bytes": 934,
+      "sha256": "819903858238791029912b56f93a7cecd4a9133c1113084ed678d06c544d0107",
+      "git_blob_sha1": "b361ba2cb1b979b5cffd3af39e6345aa293c95d2"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-320-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-320-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-320-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-320-test/RESULT.json": {
+      "bytes": 832,
+      "sha256": "f5d3afb8a5a9bb95d73bc806192d2dafa61be61589ed4aa93213be05e35cd6b4",
+      "git_blob_sha1": "2c88daf601873ba34a055bae7d54a57b1b667c98"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-320-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-640-test/CHECKS.json": {
+      "bytes": 935,
+      "sha256": "33d6942ea6da60d80f6a9181b968fb4ea9249f41bd69e64dc57e319c8cfad1f4",
+      "git_blob_sha1": "7b74b553f8f0a514cd4843d6dbb116cfd6ed3798"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-640-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-640-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-640-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-640-test/RESULT.json": {
+      "bytes": 833,
+      "sha256": "7c7df95f5e91945054db47edff066d0d3a6823cf51f390cb34b1a42ab564437d",
+      "git_blob_sha1": "bb091c3943bb369d6fff4cba354eed3ea5fa6e76"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXMINIMIDI-640-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-160-test/CHECKS.json": {
+      "bytes": 2924,
+      "sha256": "08c1fda2acbb518e9552fb98d354bbad0fc332b87596058bba31a85e4d145e68",
+      "git_blob_sha1": "412f36a3ca5ca600ec8c2819b7de8f9504dfb0f3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-160-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-160-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-160-test/ORACLE.json": {
+      "bytes": 162,
+      "sha256": "fcbfb4811b4dc8abe623cc1eefe0e78d9b4757c734841e2de6bb217ae9b20bff",
+      "git_blob_sha1": "ea22da6d6790d190a11c298cad8dd91bbbad06c1"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-160-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-160-test/RESULT.json": {
+      "bytes": 2822,
+      "sha256": "ada04dde5345f8d3b48b8b01dc5f79f065d97b44e6845a87a570078950b4bcb3",
+      "git_blob_sha1": "5a8e9a9abdef5a0b3511db969e868ff18fc6ebb5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-160-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-320-test/CHECKS.json": {
+      "bytes": 2925,
+      "sha256": "229d2f06d14d044fb00f1e186d67429b0b4e780f3325c4635ae300364c696be0",
+      "git_blob_sha1": "1ca6403acb9fde46d674c3cd9cfb17024eabaee2"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-320-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-320-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-320-test/ORACLE.json": {
+      "bytes": 162,
+      "sha256": "fcbfb4811b4dc8abe623cc1eefe0e78d9b4757c734841e2de6bb217ae9b20bff",
+      "git_blob_sha1": "ea22da6d6790d190a11c298cad8dd91bbbad06c1"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-320-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-320-test/RESULT.json": {
+      "bytes": 2823,
+      "sha256": "253a5b49d0da5b7c782b7a6c64434dea505ee0ac4bb933f53dd6cb4177d408c6",
+      "git_blob_sha1": "27c8405b7451d139aef908b6630e62563588cbb2"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-320-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-640-test/CHECKS.json": {
+      "bytes": 2925,
+      "sha256": "45b4d65e1c698bc8f1b4b1fc269c437062d2536e061605136606594336670694",
+      "git_blob_sha1": "6dad56251cab1acea936813843d701b13a1e4de9"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-640-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-640-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-640-test/ORACLE.json": {
+      "bytes": 162,
+      "sha256": "fcbfb4811b4dc8abe623cc1eefe0e78d9b4757c734841e2de6bb217ae9b20bff",
+      "git_blob_sha1": "ea22da6d6790d190a11c298cad8dd91bbbad06c1"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-640-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-640-test/RESULT.json": {
+      "bytes": 2823,
+      "sha256": "e7bf3488c9900519d0082a92d09da66344fbd6cb0befe35c6b9ad990219e457c",
+      "git_blob_sha1": "23ec770532af5285149beb6254323c79023614f2"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-EXPIANO-640-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-JOYMIDI-160-test/CHECKS.json": {
+      "bytes": 1721,
+      "sha256": "317c6e98ec216e259e5325acab8be88d8f5ee06b2eab484e5ac9d1237d7adfd7",
+      "git_blob_sha1": "a532cd8401310067be695da801e96ff7cb2e12e9"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-JOYMIDI-160-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-JOYMIDI-160-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-JOYMIDI-160-test/ORACLE.json": {
+      "bytes": 1363,
+      "sha256": "9fce6db73ed3a89f2a1dc680ac10bb0bf89a59fa61380738a71f0c57bc4ccfd6",
+      "git_blob_sha1": "ed498a8b3b3de2b1b1ccea88abf48032da473a88"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-JOYMIDI-160-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-JOYMIDI-160-test/RESULT.json": {
+      "bytes": 1619,
+      "sha256": "44e6c0ed611a8c8759b401a73f1151671f34c9d70cc250cc333be133674dd2d8",
+      "git_blob_sha1": "a617a5f0cfd367d41a2c2b01886bc7e17b242939"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-JOYMIDI-160-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-browsetest/CHECKS.json": {
+      "bytes": 1032,
+      "sha256": "32c4e5727425e2a6217cb312b504fa108dad50e9d02224993dc525626cd41cac",
+      "git_blob_sha1": "80998fd87b849bcc19cec1114a8f5b99301a8f0e"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-browsetest/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-browsetest/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-browsetest/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-browsetest/RESULT.json": {
+      "bytes": 930,
+      "sha256": "2db6f8ca83f6592ea0340a7b8f0c156b7c7f9729e5a04d402f7a645b5bd65b03",
+      "git_blob_sha1": "89f1e9fae1ea44b8aec1ce69ebdefcf72dd7bab1"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-browsetest/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-test/CHECKS.json": {
+      "bytes": 835,
+      "sha256": "428c4793b61e57d99f9060abac5e3f20875cbb912ef442ea19c84c812dd51184",
+      "git_blob_sha1": "8113fd20c79e50def1a2e2b9723657cba90538f9"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-test/RESULT.json": {
+      "bytes": 733,
+      "sha256": "9ca888cc2ac635cfb618ec25712753a54324a7b3a6d89fa8c2c93fdba2e27fef",
+      "git_blob_sha1": "73b09fd6ee93255063f122a5a4a6acd700ac960f"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-uitest/CHECKS.json": {
+      "bytes": 919,
+      "sha256": "c0391fcb026c79ea67589dfeca2fc6211fcae4b716f8847bbccb34e3c1f30b13",
+      "git_blob_sha1": "9034551e42f5aa03816569e414068ab24ee1a282"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-uitest/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-uitest/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-uitest/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-uitest/RESULT.json": {
+      "bytes": 817,
+      "sha256": "73254a86f6a4946e8255e5dccdebf58eeee5349bc61bb7fdbdacb71f50ae249f",
+      "git_blob_sha1": "5cbfb84a60433308cea18dff9a40abacaddedf6a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-MINIMIDI-160-uitest/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-PIANO-160-test/CHECKS.json": {
+      "bytes": 2925,
+      "sha256": "abdbc768429b4513c9a486927f86a2b0be13842773843062c42183797c7bf21e",
+      "git_blob_sha1": "8bf4c7a2781769d7a6cdcba0139fe165524c1de0"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-PIANO-160-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-PIANO-160-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-PIANO-160-test/ORACLE.json": {
+      "bytes": 162,
+      "sha256": "0906778c2061e2a9c3a70a19e585643fc0fe5b83e6f5e7636ff0b34bb5d248b1",
+      "git_blob_sha1": "fecf9bb0b682e0431a0e500171a5732ac9a2f758"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-PIANO-160-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-PIANO-160-test/RESULT.json": {
+      "bytes": 2823,
+      "sha256": "d8d40a6e8c9abb21c12bb34c70ab213da5f25c4a18702c0a132a0e56f8010b80",
+      "git_blob_sha1": "3b30a9f1a416e4beb85d2cdc9e11fdcda0e24e4b"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa06-PIANO-160-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-160/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-160/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-160/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-160/RESULT.json": {
+      "bytes": 1195,
+      "sha256": "3aee615f282e6dfc630ed8d3c1822f823451734f9b2048abcf25d5a3dfe43790",
+      "git_blob_sha1": "95a7f8fdbc171030938732808f5c02627a666415"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-160/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-320/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-320/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-320/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-320/RESULT.json": {
+      "bytes": 1195,
+      "sha256": "adbd87e74198fdecef85c0060496675001adc1d443b2c4b0a2a5b05cee9bf101",
+      "git_blob_sha1": "9584f049079d05f4ca76cb1f105afc50f6672d0a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-320/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-640/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-640/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-640/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-640/RESULT.json": {
+      "bytes": 1194,
+      "sha256": "b7059e9c0eb85156eced5c7bf2f81a37157e07f504f7dfc48f9b1e9a4853ddb1",
+      "git_blob_sha1": "6d429824bae7889c3438650f7fd801baa57c32e8"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa07-buddy-640/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-accept/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-accept/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-accept/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-accept/RESULT.json": {
+      "bytes": 505,
+      "sha256": "4841480360e630fda96aaeb708128c42d5388d66ff15d3c9c18a44257b2498fb",
+      "git_blob_sha1": "8891fcdc69fe10d308f805ffdd97ccb42389a5f0"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-accept/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-busypreview/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-busypreview/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-busypreview/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-busypreview/RESULT.json": {
+      "bytes": 533,
+      "sha256": "9b79eb55d6b8a6dcd830eb4fe960f3796715dc87f4ba48d802cef8a832c5902b",
+      "git_blob_sha1": "a7afb3f8b3316e1ddcef3f7528de0508180e7feb"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-busypreview/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-cancel/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-cancel/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-cancel/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-cancel/RESULT.json": {
+      "bytes": 569,
+      "sha256": "7fdf2f55a881d54d35e9297ba47858095da3fe0fe0e4eb13d0b0e97d1ac71825",
+      "git_blob_sha1": "75072e05ba28bb33e62d570f8a1e4d3520269198"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-cancel/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-goveto/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-goveto/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-goveto/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-goveto/RESULT.json": {
+      "bytes": 568,
+      "sha256": "95533654683f806accc1e022f57f5ad008e8755ce07c5ea202096d0e67303848",
+      "git_blob_sha1": "279cf45707b720cb6a83140b031f97d2a426494a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-goveto/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-preview/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-preview/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-preview/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-preview/RESULT.json": {
+      "bytes": 523,
+      "sha256": "c782a87b8b0b9307fc91734e80e307656a2cfbb86b3c2a41a312f089d6b17196",
+      "git_blob_sha1": "ee62560c554531c35746578343f02af3408d59f3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-preview/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-silentveto/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-silentveto/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-silentveto/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-silentveto/RESULT.json": {
+      "bytes": 628,
+      "sha256": "fa03ca99ca018464a4258d5956dd140e2e518d3e4c7472b491646cb219a1ad4f",
+      "git_blob_sha1": "e2c44a5d3818d602f5e6dbf0c83424fe86148643"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-silentveto/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-test/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-test/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-test/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-test/RESULT.json": {
+      "bytes": 594,
+      "sha256": "b37775e2aba491040cf564273e0e81ae3538b7e0ec591644d12e453a8ad05da3",
+      "git_blob_sha1": "b6b995f579af88b49b098d88f9a87483e17159d4"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-test/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-twoprompt/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-twoprompt/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-twoprompt/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-twoprompt/RESULT.json": {
+      "bytes": 698,
+      "sha256": "337a12f5c869ba424fc42eca6b6a633687008b330ec127842a988e87205eb502",
+      "git_blob_sha1": "01b63a537fcb45e7f06106ba1430549b2a2f41bb"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa08-exit-twoprompt/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-320/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-320/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-320/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-320/RESULT.json": {
+      "bytes": 628,
+      "sha256": "a2315b1d8c5e1c4c7fe7baf62602cc9288769318db80bd93bbd9819eaa04ff37",
+      "git_blob_sha1": "4fbd77132449223e37be238b7478fd37ade70fbd"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-320/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-640/CPUCHECK.TXT": {
+      "bytes": 47,
+      "sha256": "bc3adfde8c032146e516a55e2a0ad8372c9dfdc51cbc0a28955fff0134e2e6b9",
+      "git_blob_sha1": "6c300653cac2013a8770abf4af92d0f691a6bb5c"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-640/LATERCPU.TXT": {
+      "bytes": 82,
+      "sha256": "274e539f6b062e97d7cd2ab807a88f095b58e7406cbfb4be7c99e88c5d8402e7",
+      "git_blob_sha1": "155cab479356c7a9e809c6b9894f70d22b275a3a"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-640/RESERVE.TXT": {
+      "bytes": 65,
+      "sha256": "bef8c503e437f67d3607791025127265ea6187bec9cd17cf557d3ea8f583ba24",
+      "git_blob_sha1": "fa4863e23ccbf8067a3427069e802b3249e475b3"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-640/RESULT.json": {
+      "bytes": 628,
+      "sha256": "2cc7a6127535ef4acd2b426a575981acbc6b48fb8e83a98f61f3be53882d8895",
+      "git_blob_sha1": "922b2a361156aba072807894f76d43844b8c4607"
+    },
+    "experimental/SOUNDP02/QA/RECEIPTS/qa09-exit-640/RETURNED.TXT": {
+      "bytes": 10,
+      "sha256": "29a7e48f881b212149a68b0ebbfa9560447e9626d9eb327a7903430182be1189",
+      "git_blob_sha1": "574bc100275ae5bb6667988c22fb4f9e96e34be5"
+    },
+    "experimental/SOUNDP02/QA/RUNMEDIA.PY": {
+      "bytes": 4317,
+      "sha256": "1daf345fb91247df51250a3f47ef234255dad699ef7330c7036b31940bd7a29a",
+      "git_blob_sha1": "c3b49914361f0435beb58f053fb0c4655a509220"
+    },
+    "experimental/SOUNDP02/QA/RUNWIN.PY": {
+      "bytes": 4296,
+      "sha256": "41ac3a397e853284026c3c979a4da48b5acf04e0282d39994839cf43242c01b4",
+      "git_blob_sha1": "30fa43d6c7ef39d4f26e66b6bb95310ccf7321be"
+    },
+    "experimental/SOUNDP02/QA/SUMMARY.json": {
+      "bytes": 5119,
+      "sha256": "66c701e643f69411a43f674ca21dfb51dfdb3d31830745df91b62cd5cb55b138",
+      "git_blob_sha1": "f7b5e5e387079b13adaaa2c3a320d82bf863cde4"
+    },
+    "experimental/SOUNDP02/QA/joyhost.log": {
+      "bytes": 155,
+      "sha256": "1444da9004faf1dd057912f65c21e7d3e05b2a5ba2632fd7adffe7cf937eb50f",
+      "git_blob_sha1": "0c851dc0f35a8b51390db0689bfb0410a82eaba9"
+    },
+    "experimental/SOUNDP02/QA/piano-oracle.json": {
+      "bytes": 264,
+      "sha256": "1ee914d3cca719cd2801338dab34c91cab1a0492e6e520d198c2d2888eca8dde",
+      "git_blob_sha1": "9be0100011d395f0c2594bae3de561ca5fd035bc"
+    },
+    "experimental/SOUNDP02/QA/smf-host.log": {
+      "bytes": 79,
+      "sha256": "78feefa8a8e052de34376580a3e2979a79e13498c1e3a44fafb091f594e45b67",
+      "git_blob_sha1": "71203d88aa8c918ec4291a864bfe220796096bdf"
+    },
+    "experimental/SOUNDP02/README.TXT": {
+      "bytes": 6274,
+      "sha256": "f7bfd7d7121ebdda70c16dafde9620171ff2b188a452db17b30823a953371389",
+      "git_blob_sha1": "a5954a2507191e7f53e1e5be068f6c93e84985a8"
+    },
+    "experimental/SOUNDP02/SOURCE/BUDDY/AUDIT.PY": {
+      "bytes": 3241,
+      "sha256": "595fbe12cc63ceda9c9d5c2dafa5add1d56d5ebe4d429249876073b6072a645b",
+      "git_blob_sha1": "1dadd82e0c1badba20838336cd45d354920029c0"
+    },
+    "experimental/SOUNDP02/SOURCE/BUDDY/BUILD.BAT": {
+      "bytes": 310,
+      "sha256": "eb7c7faab99471f26c92172ae0d2c33f54633bebf393dcbfab2566d702dba041",
+      "git_blob_sha1": "0a8735939a7cbbc03416eec856ca851798de3f7f"
+    },
+    "experimental/SOUNDP02/SOURCE/BUDDY/BUILD.PY": {
+      "bytes": 2185,
+      "sha256": "9527939596d3e29b24f410a4325f03ba8da4e9402be0982428a308e9a31494a9",
+      "git_blob_sha1": "6983aeacae54fd3d087bad7c875024947c80498d"
+    },
+    "experimental/SOUNDP02/SOURCE/BUDDY/MIDIAPI.H": {
+      "bytes": 858,
+      "sha256": "9ccc2fb5e1d4fecebef362ffe3ec52cfac59e381a95aaa4e9e79702c16460713",
+      "git_blob_sha1": "bf90b2d20ed37386ae8ed4abcb58469cc070e7fb"
+    },
+    "experimental/SOUNDP02/SOURCE/BUDDY/TINYVID.C": {
+      "bytes": 18134,
+      "sha256": "5689a849cabef2bfdd6b489a0ea75876cf46abe4fec164f6ac1e4996a4b771cb",
+      "git_blob_sha1": "2f12ef91a4a2cc8f1ee622407f949e8ae5f721f2"
+    },
+    "experimental/SOUNDP02/SOURCE/BUDDY/TINYVID.DEF": {
+      "bytes": 216,
+      "sha256": "a50e26de12c52edce9e1ba883396de8334dffdb5198a5f5b71f2c628d5419dce",
+      "git_blob_sha1": "622b316b1b1a34b98f73e4ce480c10d7b7af5d14"
+    },
+    "experimental/SOUNDP02/SOURCE/BUDDY/TINYVID.RSP": {
+      "bytes": 88,
+      "sha256": "be20f2de53bc86d161d281f6316fb0ec91f248025dab0687b5f2ce626dc7c871",
+      "git_blob_sha1": "3329e0e9ca298d502c6ecda91e77aa10da39480a"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/AUDIT.PY": {
+      "bytes": 3047,
+      "sha256": "652de6aeb6a79c07340ba733fbaec56a82710178bee3fb4e940a7088f339dcb2",
+      "git_blob_sha1": "c653865a1387c94abc0ed2544e6ab12eac85a5e1"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/BUILD.BAT": {
+      "bytes": 396,
+      "sha256": "b1db71447d1d2d13d4f6fdf08a19edd45d82b40487c0a5e454a3c09993c65236",
+      "git_blob_sha1": "ea2e0d8092923135b7fd6e4ebd1811d0d6b7f1ba"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/BUILD.PY": {
+      "bytes": 2196,
+      "sha256": "4ff2206a2581168544b39af75db69763e3d4d28357882c0db4237ced21d0ce9b",
+      "git_blob_sha1": "7dc6575d0c49d885342cf2faf2fadc571e6007eb"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/HOSTTEST.C": {
+      "bytes": 5763,
+      "sha256": "af7f36e4d497c4fe0841e400e67df27542a1261c7ea0b05b28a86221cc19ab3e",
+      "git_blob_sha1": "b7943de691bb2139e09c1afd2f2e2cc564845a73"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JMCORE.C": {
+      "bytes": 3448,
+      "sha256": "6d8256d7dd3deff7f415c1719a1203748e719a0a37072c66c05bb07c399171e3",
+      "git_blob_sha1": "6e6b80cb6c2057e4fb2273fae8cf2f19cc3fc69c"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JMCORE.H": {
+      "bytes": 974,
+      "sha256": "fbab94b242bbf53d81091365cc068c45549c85ecc0cdd4b2df66a5decbe8c4ac",
+      "git_blob_sha1": "fb7c5716eced477054239c5dab93c9ab57ed5299"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JOY-MIT.TXT": {
+      "bytes": 1297,
+      "sha256": "54562d859bd66df673d009ef0e0581f3c68ed7687d0c1242b94a03b8c86e451a",
+      "git_blob_sha1": "1d86f81e6a40782ad174d402ab7f7908752fe586"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JOYCAP.ASM": {
+      "bytes": 646,
+      "sha256": "ec3bb4f96e7b29cbdc1813cb90c1db693077579ead346005fc6adddebf506423",
+      "git_blob_sha1": "db661ee59b24405cff86edfc840057e7ea615ac4"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JOYCORE.C": {
+      "bytes": 1756,
+      "sha256": "6342c3339ad3ac341425fae2744a5a0790efc3eea48ab1a925047ae2afc7ebae",
+      "git_blob_sha1": "c0d47889c346c4e53e7858f97fb650918be7d98a"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JOYCORE.H": {
+      "bytes": 1178,
+      "sha256": "cbbbb094f860c0adbaed9a1e78fc2edcc9fd8b59a1e5dd58351b87be8286e804",
+      "git_blob_sha1": "404cb5cd7675efae9ef82138f5d0b23e5a435138"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JOYMIDI.C": {
+      "bytes": 14615,
+      "sha256": "2872ae531460a7e67b96f5e6239f48523a60af86936a3224368d17467563ff18",
+      "git_blob_sha1": "5fa7a74316089fd99e94a36709b8c88a95cf39c7"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JOYMIDI.DEF": {
+      "bytes": 205,
+      "sha256": "79594db42ff41edefd47c2e8975ed602707e55b3f04f7de4b555ad6220724d5d",
+      "git_blob_sha1": "9473009e4190a1f023fa5cc06df67fad7bd54819"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/JOYMIDI.RSP": {
+      "bytes": 122,
+      "sha256": "9dae316ef2cd43e73a4f44a418f5a0faef6b75c03ebf39cf60378fae2e2e9868",
+      "git_blob_sha1": "25eea4ccb7b4659129d9b68e7b3278ac65a1df97"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/MIDIAPI.H": {
+      "bytes": 1457,
+      "sha256": "2ce56489f49a92bf2a980587d4cfef79c18bd6798e894f9ea550cc5091acf211",
+      "git_blob_sha1": "7060321dfdb223b5a0d6bdb3eba63ee979d8b192"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/ORACLE.PY": {
+      "bytes": 978,
+      "sha256": "82a1ef46147d8ada09f77af85cb1b44ccd8116f21398b14812a272ab505d19fd",
+      "git_blob_sha1": "c99c69d82c93e09f59ecd08b032e0a07d7754c02"
+    },
+    "experimental/SOUNDP02/SOURCE/EXJOY/README.MD": {
+      "bytes": 6163,
+      "sha256": "cdfe5fef395a3caf4fdd9ca66a4ce3a572abb252b5497aaedd2179ecaaa58119",
+      "git_blob_sha1": "f1bcd06efdea2d330d89fa265730c724f395c73a"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/AUDIT.PY": {
+      "bytes": 2909,
+      "sha256": "1f0444ddaa8758fb50355c3c5e551fee5bbbcf57f80bcf836c22c3691f1892fa",
+      "git_blob_sha1": "51d050cb8a2d13ab9398f95eec078669818b52ce"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/BUILD.BAT": {
+      "bytes": 318,
+      "sha256": "0385c3e16861bae293503fbaae191ca74b50eea47320686137ab8157acdfdc4c",
+      "git_blob_sha1": "86f165bd2018dd6a0b310719cdaa1e931cd85919"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/BUILD.PY": {
+      "bytes": 2154,
+      "sha256": "c747b9a5d2d68c2131910d32e3da14484e38595bed5b8d6366c3cc9f554e9875",
+      "git_blob_sha1": "7518c1f1b0f5d5fb400cd79d43da83ca83e53139"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/CORE-MIT.TXT": {
+      "bytes": 1063,
+      "sha256": "1b7073ca79c0f526b7017032b475e99b0443ad0bac029169a2d646a12e533985",
+      "git_blob_sha1": "c2fdc715fa952e0ac2fc62cf2825efb79a2b1101"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/MIDIAPI.H": {
+      "bytes": 1457,
+      "sha256": "2ce56489f49a92bf2a980587d4cfef79c18bd6798e894f9ea550cc5091acf211",
+      "git_blob_sha1": "7060321dfdb223b5a0d6bdb3eba63ee979d8b192"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/MINIMIDI.C": {
+      "bytes": 18732,
+      "sha256": "f3e28768671dcd456dff87179fde45a7f505197ea736742bcf7b662f2720fabc",
+      "git_blob_sha1": "5b90548872e704fd7397b9f73f121a100b91169b"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/MINIMIDI.DEF": {
+      "bytes": 225,
+      "sha256": "86f9a9d53b008c80b9987b49df95b966fa02a1cbf247cfd0fbe8c1014264ef8e",
+      "git_blob_sha1": "980fb8006ad3165ef363e95445bf543186c3e39a"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/MINIMIDI.RSP": {
+      "bytes": 100,
+      "sha256": "20c999ff9fcd7dd571bac02835a5447b750ce99adc3bf1a986e85470e06bbe13",
+      "git_blob_sha1": "fb97cde83dbbde9eaa061f9645728cb09be6c280"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/README.MD": {
+      "bytes": 6183,
+      "sha256": "9b66a0f7e6fb5ceae28368eb7138a335da7a664eacf7d1ed2eb4339201a7e833",
+      "git_blob_sha1": "002fc88f0c39cef075cb3e6abda4941b649f4027"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/SMF.C": {
+      "bytes": 11892,
+      "sha256": "f6486bdec7eea05750b6d480babb3ca937335b6dea7b47ee2b22e56e70b0e31f",
+      "git_blob_sha1": "a77ced386994d13091becac4e217c9c8523f57fd"
+    },
+    "experimental/SOUNDP02/SOURCE/EXMINI/SMF.H": {
+      "bytes": 2150,
+      "sha256": "684a06aaf2a3797aafffb7dd771375001ca65248ca064cf026ab4ee59d6289b8",
+      "git_blob_sha1": "ff659bc410d0a29810e95efe454181265e5da42c"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/AUDIT.PY": {
+      "bytes": 3182,
+      "sha256": "5dbd1f79543b8110c10253e288942694c0bcd024d069c4868e46c76561d6b37b",
+      "git_blob_sha1": "faa34d7fcbe773b5525543c6529960da6134277f"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/BUILD.BAT": {
+      "bytes": 325,
+      "sha256": "7e1e3374773433a3411912b264ff3a5aa30ae85642db35c853f138a5891f8b20",
+      "git_blob_sha1": "3920cd0cbccde3d1369a2b0c874def2b3fa39587"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/BUILD.PY": {
+      "bytes": 2152,
+      "sha256": "b5b8f5b773c70a7ef9df5e014f746b6abc7bf6263758fac768e993e9d15da16b",
+      "git_blob_sha1": "ce1f61bc29211b3c13efdfc85818cdde8c14dc42"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/FUZZ.C": {
+      "bytes": 1047,
+      "sha256": "a6244685c21c6dcc3f767a37afcf29e378aa6f929d974e4feb26818c9dea11d5",
+      "git_blob_sha1": "af0d71ee87b5327a2f4da19823ae071d220efcc5"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/MIDIAPI.H": {
+      "bytes": 1505,
+      "sha256": "f01f0dce58dfaa94b48cb397827f8d6bb636c39fd1adc3d5b7fa8d7f7f9ae00b",
+      "git_blob_sha1": "2dc75068f5cea9199293f1e3d5dde0038cea09d3"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/MINIPIAN.C": {
+      "bytes": 16659,
+      "sha256": "42fc7b1607b4a817a1968a44fa6ec69ad6a3206108c1bcc065703d810aa04f48",
+      "git_blob_sha1": "e55ed241ef3b2414c17d0c215c24a4cab07bb1cc"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/MINIPIAN.DEF": {
+      "bytes": 197,
+      "sha256": "ab9068b8545ae6b476df1000cca0313e3ea5006abe952d302bd49cfdb6746da2",
+      "git_blob_sha1": "60d4e9adee27c63a25bf3784ad3a2d3d19e6a78d"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/MINIPIAN.RSP": {
+      "bytes": 102,
+      "sha256": "cbc54dd2167223bf929a1e6a8ed51ac7b63bbdbb9ac5243a82d33071b24e0042",
+      "git_blob_sha1": "2b6b3ca2a2aa1b7c1154e908d875d1a9df13873b"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/NATIVEOK.PY": {
+      "bytes": 1681,
+      "sha256": "f3818284c5828a4f80dac45a946b96c9caaebf363a79477fae3b6cb18be5d865",
+      "git_blob_sha1": "2a92b3e6cbd40905f0aa4c6241d17d83cf40093e"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/ORACLE.PY": {
+      "bytes": 2959,
+      "sha256": "bda0d8453ab6b1288622a0062db9bbe4b637359d2605796eb5e6df8c46377fbc",
+      "git_blob_sha1": "00302cd76c676d2a6e782a1f05cb54daa6023b3d"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/PIANO.C": {
+      "bytes": 1612,
+      "sha256": "0bd6a64043521cab621060f3c48666bdb954985b677321feccdc73fe1d4ff551",
+      "git_blob_sha1": "3eda59aec4ddf4cf31182532c1da557e3c9fc2e7"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/PIANO.H": {
+      "bytes": 844,
+      "sha256": "092fb929979bf3a43136f6cf9f0649630345f94829a7ae0ce4d0f1455fb4016f",
+      "git_blob_sha1": "833785c7f679a70458d8073662bbd6f041031287"
+    },
+    "experimental/SOUNDP02/SOURCE/EXPIANO/README.MD": {
+      "bytes": 4207,
+      "sha256": "67079860d977708d4845911fe8cf97573fd6a372d1604c6d55b85b88018f7228",
+      "git_blob_sha1": "e431b87e6c40c5132fd1e2a9e5c60847b19bce5a"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/AUDIT.PY": {
+      "bytes": 3084,
+      "sha256": "7d30e059441f60e4f3e44018b69cfb6d1770821704be6bf2105984e74ec9fcc7",
+      "git_blob_sha1": "418a70b2c0cddd185cb14628b41aa340b3c2324c"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/BUILD.BAT": {
+      "bytes": 396,
+      "sha256": "b1db71447d1d2d13d4f6fdf08a19edd45d82b40487c0a5e454a3c09993c65236",
+      "git_blob_sha1": "ea2e0d8092923135b7fd6e4ebd1811d0d6b7f1ba"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/BUILD.MD": {
+      "bytes": 3136,
+      "sha256": "a1b85a6aa75ecc57caed64a79115b1b278d98ac3ff241ca0c5662ad5c2745e37",
+      "git_blob_sha1": "a1160ed33a307ffafb9b685948d66a7d0ef83d98"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/BUILD.PY": {
+      "bytes": 2250,
+      "sha256": "2f1532f95d022c9379036ed07157f5ccf275de547c4b96154717b8405c8c2873",
+      "git_blob_sha1": "075d901868fe60477e2daea96b6ef59f902f31b3"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/HOSTTEST.C": {
+      "bytes": 5763,
+      "sha256": "af7f36e4d497c4fe0841e400e67df27542a1261c7ea0b05b28a86221cc19ab3e",
+      "git_blob_sha1": "b7943de691bb2139e09c1afd2f2e2cc564845a73"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JMCORE.C": {
+      "bytes": 3448,
+      "sha256": "6d8256d7dd3deff7f415c1719a1203748e719a0a37072c66c05bb07c399171e3",
+      "git_blob_sha1": "6e6b80cb6c2057e4fb2273fae8cf2f19cc3fc69c"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JMCORE.H": {
+      "bytes": 974,
+      "sha256": "fbab94b242bbf53d81091365cc068c45549c85ecc0cdd4b2df66a5decbe8c4ac",
+      "git_blob_sha1": "fb7c5716eced477054239c5dab93c9ab57ed5299"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JOY-MIT.TXT": {
+      "bytes": 1322,
+      "sha256": "925a857112f670926918fc73f1631a85f3a3a73504943551195ae89aacac14c1",
+      "git_blob_sha1": "0402ab82cb30473e2ec708ac7c569523dde16bb4"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JOYCAP.ASM": {
+      "bytes": 646,
+      "sha256": "ec3bb4f96e7b29cbdc1813cb90c1db693077579ead346005fc6adddebf506423",
+      "git_blob_sha1": "db661ee59b24405cff86edfc840057e7ea615ac4"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JOYCORE.C": {
+      "bytes": 1756,
+      "sha256": "6342c3339ad3ac341425fae2744a5a0790efc3eea48ab1a925047ae2afc7ebae",
+      "git_blob_sha1": "c0d47889c346c4e53e7858f97fb650918be7d98a"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JOYCORE.H": {
+      "bytes": 1178,
+      "sha256": "cbbbb094f860c0adbaed9a1e78fc2edcc9fd8b59a1e5dd58351b87be8286e804",
+      "git_blob_sha1": "404cb5cd7675efae9ef82138f5d0b23e5a435138"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JOYMIDI.C": {
+      "bytes": 14474,
+      "sha256": "50039edea94dbd6bded3334b271bb0b08fc6d4f40b25e6ca886258774c780145",
+      "git_blob_sha1": "35b3406aa38c374a14ae92cb6a15644e12583d0c"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JOYMIDI.DEF": {
+      "bytes": 205,
+      "sha256": "79594db42ff41edefd47c2e8975ed602707e55b3f04f7de4b555ad6220724d5d",
+      "git_blob_sha1": "9473009e4190a1f023fa5cc06df67fad7bd54819"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/JOYMIDI.RSP": {
+      "bytes": 122,
+      "sha256": "9dae316ef2cd43e73a4f44a418f5a0faef6b75c03ebf39cf60378fae2e2e9868",
+      "git_blob_sha1": "25eea4ccb7b4659129d9b68e7b3278ac65a1df97"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/MIDIAPI.H": {
+      "bytes": 858,
+      "sha256": "9ccc2fb5e1d4fecebef362ffe3ec52cfac59e381a95aaa4e9e79702c16460713",
+      "git_blob_sha1": "bf90b2d20ed37386ae8ed4abcb58469cc070e7fb"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/ORACLE.PY": {
+      "bytes": 991,
+      "sha256": "1ed40bebdeb608abc1576907217b3c1383e8b22484dfee4efb3169e9d584b03f",
+      "git_blob_sha1": "f224cf2e5f6cb67c59ae600ad1667c097d85be8b"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/README.MD": {
+      "bytes": 6192,
+      "sha256": "d5b4302bfab2f72eb0e82f0c2a7a23ef49a4a6691181699a7fa9989f19f3423f",
+      "git_blob_sha1": "304bb24250404acde83017191a84609ef09788e3"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/TESTS.MD": {
+      "bytes": 2205,
+      "sha256": "671ab77f5f6806cd0e2ad59b3408b36d8249c40a5dec77aa4dd2954ab7eb7b78",
+      "git_blob_sha1": "07c0e3fd19ad11ac3fd62245f46f1309acc929f6"
+    },
+    "experimental/SOUNDP02/SOURCE/JOY/TESTWIN.PY": {
+      "bytes": 3017,
+      "sha256": "bbe79553f219f790d83b7032bdbb3bfa607c22f5c5b0ff3c77783f47df742f23",
+      "git_blob_sha1": "127602595a4571ef3527e8de76777f8b7fb4e022"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/AUDIT.PY": {
+      "bytes": 2945,
+      "sha256": "4db8e9cc094291b9b11329bff511b0b5d0fd2d063678feb5b5f9ef058de10cf5",
+      "git_blob_sha1": "eb72d4b3dbf64860c563a12d2a8820b0e533e134"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/BUILD.BAT": {
+      "bytes": 318,
+      "sha256": "0385c3e16861bae293503fbaae191ca74b50eea47320686137ab8157acdfdc4c",
+      "git_blob_sha1": "86f165bd2018dd6a0b310719cdaa1e931cd85919"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/BUILD.PY": {
+      "bytes": 2208,
+      "sha256": "915604a6ae64ca44103492b623a10aa888804ea1e595e328632d1abed7512db7",
+      "git_blob_sha1": "d975bac3a17e9fd5e61b2977e64b598a2c396f96"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/CORE-MIT.TXT": {
+      "bytes": 1084,
+      "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4",
+      "git_blob_sha1": "655b1e3798d134a3965dea299c9afec43cc82e48"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/MIDIAPI.H": {
+      "bytes": 858,
+      "sha256": "9ccc2fb5e1d4fecebef362ffe3ec52cfac59e381a95aaa4e9e79702c16460713",
+      "git_blob_sha1": "bf90b2d20ed37386ae8ed4abcb58469cc070e7fb"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/MINIMIDI.C": {
+      "bytes": 18579,
+      "sha256": "0039a8196e61888b48a51e3aebf931bffeb93a2613f0c4b99fea3ba2d6107545",
+      "git_blob_sha1": "ce3b26fc31d4708e09f7537940090c0af3868d02"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/MINIMIDI.DEF": {
+      "bytes": 225,
+      "sha256": "86f9a9d53b008c80b9987b49df95b966fa02a1cbf247cfd0fbe8c1014264ef8e",
+      "git_blob_sha1": "980fb8006ad3165ef363e95445bf543186c3e39a"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/MINIMIDI.RSP": {
+      "bytes": 100,
+      "sha256": "20c999ff9fcd7dd571bac02835a5447b750ce99adc3bf1a986e85470e06bbe13",
+      "git_blob_sha1": "fb97cde83dbbde9eaa061f9645728cb09be6c280"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/FUZZTEST.C": {
+      "bytes": 3848,
+      "sha256": "d16ada345117c5407ec5d156888f6dba9ea5ccffd7f2aa0857ca3ba3ecd417ce",
+      "git_blob_sha1": "2172f0761e49760da27c4666b277e17889117d48"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/HOSTTEST.C": {
+      "bytes": 1840,
+      "sha256": "8689b3eea4850f0bd5c348030f697e146d426f8a610fe5998ecfd15ffa7920fb",
+      "git_blob_sha1": "beee87b94da3d4c58890f03c49d101ddb8be35dd"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/LICENSE.TXT": {
+      "bytes": 1084,
+      "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4",
+      "git_blob_sha1": "655b1e3798d134a3965dea299c9afec43cc82e48"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/README.MD": {
+      "bytes": 7028,
+      "sha256": "e2e2873d79bcfbc529cb552e6e5c3a436c04d45b5825813cecc23636ac6945c0",
+      "git_blob_sha1": "1b94caa18cb31a2be8d3e5eb23afcef38971de5d"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/SMF.C": {
+      "bytes": 11892,
+      "sha256": "f6486bdec7eea05750b6d480babb3ca937335b6dea7b47ee2b22e56e70b0e31f",
+      "git_blob_sha1": "a77ced386994d13091becac4e217c9c8523f57fd"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/SMF.H": {
+      "bytes": 2149,
+      "sha256": "9ba1c5ad1bb000a0b98e6b0357dabdfa709a38808bee14cd1632acc2b792e731",
+      "git_blob_sha1": "991b15f315a271d5d3289cf2af28c671077ebfda"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/TESTFUZZ.PY": {
+      "bytes": 516,
+      "sha256": "497b44feafcc9fdd35d81c5953e4c7c05ac86bff96ba09dcee267a47c99b456f",
+      "git_blob_sha1": "582cdc0ddabb3e51633e7b2e84ccbbac1260c0cf"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/PARSER/TESTSMF.PY": {
+      "bytes": 14721,
+      "sha256": "dad82e562762f8cf40c41fc844a5eb8d3ea73401e389eba8c832396a779a8fc8",
+      "git_blob_sha1": "36d9ea20b6a8783e439f5bb2f4e7b62af53a50ce"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/README.MD": {
+      "bytes": 6242,
+      "sha256": "53c4b63007f7f0e51ff65d85e708367cb8d3243c2b631da2cfe23d446ee93887",
+      "git_blob_sha1": "2f28618ab4d89d3adb039930093478314c77f95e"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/SMF.C": {
+      "bytes": 11892,
+      "sha256": "f6486bdec7eea05750b6d480babb3ca937335b6dea7b47ee2b22e56e70b0e31f",
+      "git_blob_sha1": "a77ced386994d13091becac4e217c9c8523f57fd"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/SMF.H": {
+      "bytes": 2150,
+      "sha256": "684a06aaf2a3797aafffb7dd771375001ca65248ca064cf026ab4ee59d6289b8",
+      "git_blob_sha1": "ff659bc410d0a29810e95efe454181265e5da42c"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/TESTS.MD": {
+      "bytes": 2056,
+      "sha256": "d75095cc5add50a4578536bd5fbec662659ecae8e473a906e0f01bf43c2f1776",
+      "git_blob_sha1": "a0a82e7a6d61938603536600c748ce86e8a6142e"
+    },
+    "experimental/SOUNDP02/SOURCE/MINI/TESTWIN.PY": {
+      "bytes": 3052,
+      "sha256": "b3ac4706683e3420de25329958962e3b6cc158cd3be4db4e9306975a5749d012",
+      "git_blob_sha1": "5aee50a90c3b2ac5a90363f5cf766d02046d22d5"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/BUILD.BAT": {
+      "bytes": 306,
+      "sha256": "4321f64d9ac58134b12caef55e93096d713e578d98a825c13604f25c284115df",
+      "git_blob_sha1": "7e92d3e7e2957b8505a31d5a9d9696d40a8d55ce"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/BUILD.PY": {
+      "bytes": 2152,
+      "sha256": "0e02d361e7da5fb67dd2d170d9447df91706a4fe859e4654bd44e535d7fe4042",
+      "git_blob_sha1": "630e1187e51ec5853ddc6c7725e4aa7ce48a83fd"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/MOUTH.C": {
+      "bytes": 13467,
+      "sha256": "ce08b233e2392b989dea7658f87db0f8cc7691d4018c481c74f5de7db18f0daa",
+      "git_blob_sha1": "5fa0c94abeefca22d09968ce7f1bc9383e62c1ab"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/MOUTH.DEF": {
+      "bytes": 219,
+      "sha256": "b3813ef14d4b7cfaaf0c70930e59ca317fda2fe5199a892472630123a3315cff",
+      "git_blob_sha1": "14459c4d425d97498f2d47a1b3cdac50109b28bf"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/MOUTH.RSP": {
+      "bytes": 80,
+      "sha256": "de31d68ef4c6b9f08969cd96c76ce560447978043657772a779ea3cfbf767571",
+      "git_blob_sha1": "cfa5cc5f9efaf0bb88a42e288b7b714bbc23be0a"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/README.MD": {
+      "bytes": 5274,
+      "sha256": "9def64b900edeaea8ea6133a14fcd952078ec4a6abc58a2e61d81c8b24b59e5f",
+      "git_blob_sha1": "d9f523bd61c6ac734f159dbe65188cc4b32479aa"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/TESTWIN.PY": {
+      "bytes": 2033,
+      "sha256": "6286579de8daad4b127677c7ca82a084dd3a4cbe486b517331301e67204948fe",
+      "git_blob_sha1": "202142a5e543289b0368dd28db3c7ff751741dec"
+    },
+    "experimental/SOUNDP02/SOURCE/MOUTH/VERIFY.PY": {
+      "bytes": 2127,
+      "sha256": "0a40fad5397e049cf772d204303e6b71ae3c805e0c0f104e9718c7e6c0ee308f",
+      "git_blob_sha1": "20945ddddc9c31259b01271a85c7c83fc8e52392"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/AUDIT.PY": {
+      "bytes": 3221,
+      "sha256": "2feab864e4b206642e8b809fd57e891831f7b7b452d47c05db9e3debec30382e",
+      "git_blob_sha1": "5b64372a314c312795950a46e90eecbabfeaf2fc"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/BUILD.BAT": {
+      "bytes": 325,
+      "sha256": "7e1e3374773433a3411912b264ff3a5aa30ae85642db35c853f138a5891f8b20",
+      "git_blob_sha1": "3920cd0cbccde3d1369a2b0c874def2b3fa39587"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/BUILD.MD": {
+      "bytes": 3683,
+      "sha256": "1318ac8f5f348b64d065e84fa54dd1c46b86ab113c61cf3f0bbb8b12cbfd6969",
+      "git_blob_sha1": "1d85bb88d111e559999c396955ee5ced5635133e"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/BUILD.PY": {
+      "bytes": 2206,
+      "sha256": "b42b1e4ff36e3f993fc607236599552aecabf4d651d91744f072b94ad2e0a193",
+      "git_blob_sha1": "5d84425cf8bc76cf0efa3c048e1dc8164e34383d"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/FUZZ.C": {
+      "bytes": 1047,
+      "sha256": "a6244685c21c6dcc3f767a37afcf29e378aa6f929d974e4feb26818c9dea11d5",
+      "git_blob_sha1": "af0d71ee87b5327a2f4da19823ae071d220efcc5"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/MANIFEST.MD": {
+      "bytes": 1026,
+      "sha256": "37fdeac11f457ffe19660da4fb24266d9130b18298f7bf4c609bd0e510512f9d",
+      "git_blob_sha1": "041f4486c9e25f284681b74d21b9417de572fed7"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/MIDIAPI.H": {
+      "bytes": 906,
+      "sha256": "05c7b5ecd56c7a48323f908177ac14f8ed4d8a2c0ff2891304f09d0b8a26ccc7",
+      "git_blob_sha1": "5421e9d9c23dcd7e0fc13cf62ec2d1a3e7ea5b73"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/MINIPIAN.C": {
+      "bytes": 16429,
+      "sha256": "fbcece427f90b851390187605beedbe8bd296cdfffaf070d6e50a9cef61ee9c7",
+      "git_blob_sha1": "f76d97f3aa47a4098a5441a29555f03c598740ac"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/MINIPIAN.DEF": {
+      "bytes": 197,
+      "sha256": "ab9068b8545ae6b476df1000cca0313e3ea5006abe952d302bd49cfdb6746da2",
+      "git_blob_sha1": "60d4e9adee27c63a25bf3784ad3a2d3d19e6a78d"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/MINIPIAN.RSP": {
+      "bytes": 102,
+      "sha256": "cbc54dd2167223bf929a1e6a8ed51ac7b63bbdbb9ac5243a82d33071b24e0042",
+      "git_blob_sha1": "2b6b3ca2a2aa1b7c1154e908d875d1a9df13873b"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/NATIVEOK.PY": {
+      "bytes": 1719,
+      "sha256": "c32a7d359e3c82ab0e9d104cca911109a4e9c50720c31fec144bfc0669ba18e7",
+      "git_blob_sha1": "805c2fecd4fde989324fb4e9fedf53904746c5d3"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/ORACLE.PY": {
+      "bytes": 3017,
+      "sha256": "e1d5ec06402b97e1e0eed229557ec5293657c5c217cf63ac7e7b1c4e0fbabdab",
+      "git_blob_sha1": "65abec0000c7b4051dc16be0a0c7e08373342931"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/PIANO.C": {
+      "bytes": 1612,
+      "sha256": "0bd6a64043521cab621060f3c48666bdb954985b677321feccdc73fe1d4ff551",
+      "git_blob_sha1": "3eda59aec4ddf4cf31182532c1da557e3c9fc2e7"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/PIANO.H": {
+      "bytes": 844,
+      "sha256": "092fb929979bf3a43136f6cf9f0649630345f94829a7ae0ce4d0f1455fb4016f",
+      "git_blob_sha1": "833785c7f679a70458d8073662bbd6f041031287"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/README.MD": {
+      "bytes": 4242,
+      "sha256": "55a7499cf48c6c60b0562cb01d10e87de9fffda9e167bb54573325adcccc57b1",
+      "git_blob_sha1": "8fd6b2689ea687f0a3376b200f794dc2af1b714e"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/TESTS.MD": {
+      "bytes": 3250,
+      "sha256": "e6ad63827b00986bf5778cd84b7581a7f361b93ca2909d5bd49083dbec74a0fc",
+      "git_blob_sha1": "63698a74b562bf206a15e516e59855dd9652cdeb"
+    },
+    "experimental/SOUNDP02/SOURCE/PIANO/TESTWIN.PY": {
+      "bytes": 2879,
+      "sha256": "c4a3692b29cc89c8b8ab6e7f1a56e37e168b135d6005360c666a43c1caa58a39",
+      "git_blob_sha1": "c4181fbf0f162ba0e25dea4938db5aa6c07f192d"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/AUDIO.PY": {
+      "bytes": 2419,
+      "sha256": "2090a6f73f9bf8967e9e092b5ebce9cd3ccd63ab66316d9892d94dc343c87b47",
+      "git_blob_sha1": "9f8c086cc664ec2ae0c82875fb0c657a9ea06257"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/BUILD.BAT": {
+      "bytes": 318,
+      "sha256": "efaf39c8ea2230d5728a7919d5ad6728723fba870872983986238141fd6e0e49",
+      "git_blob_sha1": "32f4806e5022ef3662e1edb455830a4c13e0eea4"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/BUILD.PY": {
+      "bytes": 2191,
+      "sha256": "2c95a80d78fb35f05c92ab3985719dbd16bb7420d5c1469ab18c76358df2786b",
+      "git_blob_sha1": "4806d0bd4b8349b7ba40478bb1d3b501e5ecd140"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/README.MD": {
+      "bytes": 2308,
+      "sha256": "118edadd7ae22a47745e2346484d9281bb283bf8e91592e5130485fb30a208d9",
+      "git_blob_sha1": "34f52adf32515aa47955d53b60863e0448cceff6"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/TESTS.MD": {
+      "bytes": 1279,
+      "sha256": "b4e7db00c2ac61fd300654f9ef43fa7bfdbff2079644394590a06bc7e7dbe6f2",
+      "git_blob_sha1": "7f9750379062abd5e0dc49df1ea98604243d29a6"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/TESTWIN.PY": {
+      "bytes": 2308,
+      "sha256": "ce5167ae11029ba7e6eb7d621beceb2cbfeb4a87a70ccdf5e5805e218feeae05",
+      "git_blob_sha1": "e92464ca76e554cee2a22347cfbe9d39f4e339fb"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/TEXIT.C": {
+      "bytes": 10039,
+      "sha256": "93ba081846ed7e35769c0e21c6657d47ec3ce4ff9f5ffb6afbddb34805d49225",
+      "git_blob_sha1": "f91c2c0ed83509c38b3376a22e0af14f9c3560e6"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/TEXIT.DEF": {
+      "bytes": 255,
+      "sha256": "f3aab77f940f158144f901f003b7ea160d212559a5a9bd7a13749b86655dd2da",
+      "git_blob_sha1": "27af15b2e3e25913d48c51c68e8453ca05a1277f"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/TEXIT.RSP": {
+      "bytes": 94,
+      "sha256": "cc31b26996b5a152d17331a36e8b265697446bd1edfe5a33e9502101d0584c29",
+      "git_blob_sha1": "715954c072991843fc727a0cca49ab39f0d824c0"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/TNOTICE.C": {
+      "bytes": 5092,
+      "sha256": "be4a1217e92061a3cefc5c61522158eb4019202fc54ecca1e68f7275305aa043",
+      "git_blob_sha1": "81e0d3872e416850de5cea1aa19da4eda6356b00"
+    },
+    "experimental/SOUNDP02/SOURCE/TEXIT/TNOTICE.H": {
+      "bytes": 322,
+      "sha256": "98058c37f3817877d3f7c79c6698ab138aa552fe854651dba5faee8ca41a5b41",
+      "git_blob_sha1": "c152ab352e022f2abe908eca635a655e81a9582b"
+    },
+    "experimental/SOUND-PUBLICATION.md": {
+      "bytes": 2436,
+      "sha256": "0d5a42bfcef08e7963049f6195bf2ae640dbf9c0b3d3b3f48111ea85655e3ce7",
+      "git_blob_sha1": "7fc1684f3e5128ff67cb4da234206e38d37cb1eb"
+    }
+  },
+  "publication_parent_commit": "2605b30cc3f87744d652448e66415d66876e6706"
+}

@@ -1,0 +1,45 @@
+
+ TEXIT
+
+ Start     Length     Name                   Class
+ 0001:0000 01964H     _TEXT                  CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 00336H     _DATA                  DATA
+ 0002:0346 0000EH     CDATA                  DATA
+ 0002:0354 00000H     XIFB                   DATA
+ 0002:0354 00000H     XIF                    DATA
+ 0002:0354 00000H     XIFE                   DATA
+ 0002:0354 00000H     XIB                    DATA
+ 0002:0354 00000H     XI                     DATA
+ 0002:0354 00000H     XIE                    DATA
+ 0002:0354 00000H     XPB                    DATA
+ 0002:0354 00000H     XP                     DATA
+ 0002:0354 00000H     XPE                    DATA
+ 0002:0354 00000H     XCB                    DATA
+ 0002:0354 00000H     XC                     DATA
+ 0002:0354 00000H     XCE                    DATA
+ 0002:0354 00000H     XCFB                   DATA
+ 0002:0354 00000H     XCF                    DATA
+ 0002:0354 00000H     XCFE                   DATA
+ 0002:0354 0000CH     DBDATA                 DATA
+ 0002:0360 00002H     XIQC                   DATA
+ 0002:0362 00000H     CONST                  CONST
+ 0002:0362 00019H     HDR                    MSG
+ 0002:037B 000B1H     MSG                    MSG
+ 0002:042C 00002H     PAD                    MSG
+ 0002:042E 00001H     EPAD                   MSG
+ 0002:0430 000D0H     _BSS                   BSS
+ 0002:0500 00000H     XOB                    BSS
+ 0002:0500 00000H     XO                     BSS
+ 0002:0500 00000H     XOE                    BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:0712 ChimeProc               ChimeProc
+ 0001:01C1 ConfirmProc             ConfirmProc
+ 0001:0D67 NoticeProc              NoticeProc
+
+Program entry point at 0001:1313
