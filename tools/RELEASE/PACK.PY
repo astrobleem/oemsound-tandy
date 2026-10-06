@@ -73,6 +73,15 @@ def verify_original_manifest(path, manifest, prefix=''):
                     'Historical manifest mismatch: ' + name)
 
 
+def verify_original_checksums(path, prefix):
+    with zipfile.ZipFile(path) as archive:
+        for line in archive.read(prefix + 'SHA256SUMS').decode('ascii').splitlines():
+            expected, name = line.split('  ', 1)
+            safe_name(prefix + name)
+            require(hashlib.sha256(archive.read(prefix + name)).hexdigest() == expected,
+                    'Historical checksum mismatch: ' + name)
+
+
 def write_zip(path, files):
     # Stored members avoid compression-library differences across hosts.
     with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_STORED) as archive:
@@ -104,6 +113,9 @@ def build(root, out, source_sha):
         require(len(members) == spec['files'], 'Archive member count changed')
         if name in {'PSGBASE.ZIP', 'BEATS.ZIP'}:
             verify_original_manifest(root / spec['path'], 'MANIFEST.JSON')
+        else:
+            prefix = 'WININST/' if name == 'WININST12.ZIP' else 'BUDENV02/'
+            verify_original_checksums(root / spec['path'], prefix)
         archive_data[name] = data
         records[name] = {'kind': spec['kind'], 'input': spec['path'],
                          **identity(data), 'members': members}

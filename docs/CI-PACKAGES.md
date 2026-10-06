@@ -95,7 +95,8 @@ python tools/RELEASE/PACK.PY --verify --out NEW_OUTPUT --source-sha EXACT_40_CHA
 Tests cover deterministic bytes, unchanged original archives, source inventories,
 wrong provenance, corruption, extra output assets, unsafe paths, duplicate ZIP
 members, symlinks and unqualified runtime files. Package verification additionally
-checks original baseline manifests, all source-publication hashes/Git blob IDs
+checks original baseline manifests, experimental internal checksum lists,
+all source-publication hashes/Git blob IDs
 and an exact runtime allowlist. It rejects compiler/SDK/OS directories and
 library/object/disk/nested-archive file types.
 
