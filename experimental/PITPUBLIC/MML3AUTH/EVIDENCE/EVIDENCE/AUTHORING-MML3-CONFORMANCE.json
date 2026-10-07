@@ -1,0 +1,94 @@
+[
+  {
+    "fixture": "BASIC",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "REPEAT",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "REST",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "VZERO",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "ALLREST",
+    "duration": 500,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "EMPTYP",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "NOPART",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI"
+    ]
+  },
+  {
+    "fixture": "CLIP",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "MIXED",
+    "duration": 1000,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "fixture": "CARRIED",
+    "duration": 496,
+    "exact_streams": [
+      "WZM",
+      "WZI",
+      "WZP"
+    ]
+  },
+  {
+    "invalid_sources": 17
+  }
+]

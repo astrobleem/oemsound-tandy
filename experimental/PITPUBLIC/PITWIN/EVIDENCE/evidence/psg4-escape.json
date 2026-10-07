@@ -1,0 +1,12 @@
+{
+  "lockProtocol": "FileStream OpenOrCreate, ReadWrite, FileShare.None; held for run, file retained",
+  "exit": 0,
+  "timedOut": false,
+  "lock": "C:\\Users\\chad\\Documents\\Codex\\2026-10-06\\tandy-emulator.lock",
+  "run": "psg4-escape",
+  "logs": {
+    "PSGTRACE.LOG": "MODE 1 DROPPED 0\r\nTICKS 329 659 BIOS 943717 943723\r\nIRQ8 15C10354 15C10354 IRQ1C F000CC00 F000CC00\r\n384 8B\r\n384 1A\r\n384 94\r\n604 9F\r\n604 BF\r\n604 DF\r\n604 FF\r\n",
+    "RETURN.LOG": "RETURNED\r\n",
+    "SNDOWN.LOG": "PASS owned=0 pit=0 writes=7 mode=7\r\n"
+  }
+}

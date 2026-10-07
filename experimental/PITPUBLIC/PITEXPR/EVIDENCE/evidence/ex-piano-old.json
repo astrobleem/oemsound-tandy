@@ -1,0 +1,11 @@
+{
+  "exit": 0,
+  "run": "ex-piano-old",
+  "logs": {
+    "RETURN.LOG": "RETURNED\r\n",
+    "MINIPIAN.LOG": "PASS old SOUND declines PIT\r\nEVENT 144 60 100\r\nEVENT 144 64 100\r\nEVENT 144 67 100\r\nEVENT 144 72 100\r\nPASS old SOUND retains PSG\r\nEVENT 128 60 0\r\nEVENT 128 64 0\r\nEVENT 128 67 0\r\nEVENT 128 72 0\r\nPASS driver reset\r\nPASS voices silent\r\nPASS driver close\r\nPASS owner released\r\nPASS final no owner\r\nPASS final PIT off\r\nTOTAL_FAILURES=0 SENT=8\r\n"
+  },
+  "lockProtocol": "FileStream OpenOrCreate, ReadWrite, FileShare.None; held for run, file retained",
+  "timedOut": false,
+  "lock": "C:\\Users\\chad\\Documents\\Codex\\2026-10-06\\tandy-emulator.lock"
+}

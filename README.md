@@ -13,6 +13,14 @@ Native 320x200 capture, with a 256x160 movie area; no scaling or retouching.
 
 ## Try it
 
+**New experimental PIT sound downloads:** [Windows instruments, expressive
+clients, MML3 Fiddle/Beats and DOS PSGTEST](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.20261007).
+These separate emulator-qualified kits include tested runtime bytes, exact
+corresponding source and checksums. Windows PIT music requires the paired SOUND
+extension in a disposable guest; options remain off by default. Read the
+[install/rollback guide and limits](experimental/PITPUBLIC/INSTALL.TXT).
+No private media or proprietary OS/toolchain is included.
+
 - **Buddy Holly for DOS:** [download BUDCAP04.ZIP](examples/BUDDY/BUDCAP04.ZIP?raw=1)
   and follow the [run instructions below](#buddy-holly-for-dos).
 - **Windows 3.x / 16-bit video player:**

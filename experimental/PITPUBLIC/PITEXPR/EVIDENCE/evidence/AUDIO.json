@@ -1,0 +1,154 @@
+{
+  "ex-beat-pit": {
+    "SB": {
+      "sample_rate": 48000,
+      "frames": 527328,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "FM": {
+      "sample_rate": 48000,
+      "frames": 527328,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDYDAC": {
+      "sample_rate": 48000,
+      "frames": 527328,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDY": {
+      "sample_rate": 48000,
+      "frames": 527328,
+      "peak": 11078.0,
+      "first_active_s": 3.2417708333333333,
+      "last_active_s": 7.217458333333333
+    },
+    "SPKR": {
+      "sample_rate": 48000,
+      "frames": 527328,
+      "peak": 9994.0,
+      "first_active_s": 3.2423125,
+      "last_active_s": 7.21775
+    },
+    "simultaneous_nonzero_frames": 20223
+  },
+  "ex-piano-pit": {
+    "SB": {
+      "sample_rate": 48000,
+      "frames": 529584,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "FM": {
+      "sample_rate": 48000,
+      "frames": 529584,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDYDAC": {
+      "sample_rate": 48000,
+      "frames": 529584,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDY": {
+      "sample_rate": 48000,
+      "frames": 529584,
+      "peak": 12315.0,
+      "first_active_s": 4.308208333333333,
+      "last_active_s": 7.976479166666667
+    },
+    "SPKR": {
+      "sample_rate": 48000,
+      "frames": 529584,
+      "peak": 9994.0,
+      "first_active_s": 4.315645833333333,
+      "last_active_s": 7.977791666666667
+    },
+    "simultaneous_nonzero_frames": 28998
+  },
+  "ex-joy-pit": {
+    "SB": {
+      "sample_rate": 48000,
+      "frames": 404640,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "FM": {
+      "sample_rate": 48000,
+      "frames": 404640,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDYDAC": {
+      "sample_rate": 48000,
+      "frames": 404640,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDY": {
+      "sample_rate": 48000,
+      "frames": 404640,
+      "peak": 1634.0,
+      "first_active_s": 3.9614583333333333,
+      "last_active_s": 5.366625
+    },
+    "SPKR": {
+      "sample_rate": 48000,
+      "frames": 404640,
+      "peak": 9994.0,
+      "first_active_s": 3.9620625,
+      "last_active_s": 5.368666666666667
+    },
+    "simultaneous_nonzero_frames": 97
+  },
+  "ex-mini-pit": {
+    "SB": {
+      "sample_rate": 48000,
+      "frames": 379776,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "FM": {
+      "sample_rate": 48000,
+      "frames": 379776,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDYDAC": {
+      "sample_rate": 48000,
+      "frames": 379776,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDY": {
+      "sample_rate": 48000,
+      "frames": 379776,
+      "peak": 11837.0,
+      "first_active_s": 3.268291666666667,
+      "last_active_s": 4.854145833333333
+    },
+    "SPKR": {
+      "sample_rate": 48000,
+      "frames": 379776,
+      "peak": 9994.0,
+      "first_active_s": 3.270875,
+      "last_active_s": 4.856083333333333
+    },
+    "simultaneous_nonzero_frames": 42445
+  }
+}
