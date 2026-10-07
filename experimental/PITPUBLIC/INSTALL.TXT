@@ -6,7 +6,7 @@ Fresh clean packaging preserves tested EXE/DRV bytes; source snapshots are
 from exact reviewed commits. Native code was not rebuilt for publication.
 
 Choose one ZIP, extract to a new DOS directory, read its README.TXT first:
-PITWIN.ZIP: eight Windows clients + paired MIDIMAP/TSOUND, stages 2/3.
+PITWIN.ZIP: seven Windows clients + paired MIDIMAP/TSOUND, stages 2/3.
 PITEXPR.ZIP: expressive Beats, Mini Piano, JoyMIDI and MiniMIDI + paired
   mapper and the same shared TSOUND; stage 4 envelope engine preserved.
 MML3AUTH.ZIP: MML Fiddle + Beats fifth-lane MML3 editor/export + drivers,
@@ -32,7 +32,7 @@ Merely putting TSOUND beside the app will not replace Windows' SOUND module.
    Options DEFAULT OFF: Beats PIT button enables lane five; Mini Piano F3
    selects an extra held pitch; JoyMIDI F3 octave layer needs explicit rearm;
    MiniMIDI PIT button explicitly maps MIDI channel 16. No automatic remap.
-   PSGPLAY F3 or /pit; TCHIME /pit; XPCHIME /pit; TEXIT /pitpreview only for
+   PSGPLAY F3 or /pit; TCHIME /pit; TEXIT /pitpreview only for
    initial listening. Do not use /pitgo until deliberately testing exit.
 5. Stop/Escape and normal close mute and release. If abruptly killed and
    ownership sticks, restart the disposable session. For rollback shut down
@@ -92,3 +92,6 @@ Fresh publication verifies all input receipt hashes, source identities,
 source closure, runtime pins, selected inventory, ZIP readback and checksums.
 CI validates the curated public source pins/closure, not native compilation.
 No guest/emulator was launched for this publication.
+
+XPCHIME is omitted: its Windows XP score reduction has separate rights.
+Original stage3 receipts describe eight clients including that omitted app.

@@ -5,7 +5,7 @@ baseline starter preview. [Download the experimental prerelease](https://github.
 
 | ZIP | Qualified content | Exact original source |
 | --- | --- | --- |
-| PITWIN.ZIP | Eight Windows clients, baseline mapper and shared PIT SOUND capability, stages 2/3 | sound-voice `02eaa8b11b14f1a8e216b7d3a6e7201aa0f5548a` |
+| PITWIN.ZIP | Seven Windows clients, baseline mapper and shared PIT SOUND capability, stages 2/3 | sound-voice `02eaa8b11b14f1a8e216b7d3a6e7201aa0f5548a` |
 | PITEXPR.ZIP | Expressive Beats/Piano/JoyMIDI/MiniMIDI opt-in extra voice, stage4 | expressive-voice `f580eb22f0902e1c018d0335184273d7a4f5d833` |
 | MML3AUTH.ZIP | Fiddle/Beats MML3 fifth-part authoring/playback, stage5 | authoring-voice `d73aca98821d4653f2baaaa9799ba9c147f8a499` |
 | PITDOS.ZIP | PSGTEST `/pit` through DOSSND v1, stage6 | dos-psg-voice `91426b8ff3f5cdc91ebb01f6f7f6a31226c87512` |
@@ -42,3 +42,6 @@ experiments are excluded. Native builds require lawful external period tools.
 
 Original upstream project license is GPLv3; preserve included component MIT
 notices and attribution. No underlying media rights are granted by code notices.
+
+XPCHIME is omitted: its Windows XP score reduction has separate rights.
+Original stage3 receipts describe eight clients including that omitted app.
