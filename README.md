@@ -13,6 +13,18 @@ Native 320x200 capture, with a 256x160 movie area; no scaling or retouching.
 
 ## Try it
 
+**Fresh public sound starter preview:** [release and downloads](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-v0.1.0-preview.20261007).
+Choose **PSGSTART.ZIP** for PSGPLAY/TCHIME or **BEATSTART.ZIP** for baseline
+Beats Lab with its matching app-local MIDIMAP.DRV. Both include corresponding
+source; the release also includes checksums, member provenance and an
+[install/rollback guide](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-v0.1.0-preview.20261007/INSTALL.TXT).
+These fresh clean packages preserve qualified baseline bytes from exact commit
+`5411fe5f9c2cccdbe09900a779ebda382a407a74`; they omit media and experimental
+system-driver installation. Existing CI verifies pinned binaries rather than
+compiling native code. No fresh emulator test or physical hardware qualification
+is claimed, and no system/default installation is required. Older drafts remain
+unchanged. Keep the paired driver beside Beats, outside `WINDOWS/SYSTEM`.
+
 **New experimental PIT sound downloads:** [Windows instruments, expressive
 clients, MML3 Fiddle/Beats and DOS PSGTEST](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.20261007).
 These separate emulator-qualified kits include tested runtime bytes, exact
