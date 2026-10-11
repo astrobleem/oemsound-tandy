@@ -1,0 +1,65 @@
+BEATS.C
+BEATS.C(131) : warning C4135: conversion between different integral types
+BEATS.C(161) : warning C4135: conversion between different integral types
+BEATS.C(359) : warning C4018: '==' : signed/unsigned mismatch
+BEATS.C(365) : warning C4018: '==' : signed/unsigned mismatch
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: BEATS.OBJ
+Run File [BEATS.EXE]: BEATS.EXE
+List File [NUL.MAP]: BEATS.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: BEATS.DEF
+MIDIMAP.C
+INSTR.C
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49824 + 420573 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: ENTRY.OBJ MIDIMAP.OBJ INSTR.OBJ
+Run File [ENTRY.EXE]: MIDIMAP.DRV
+List File [NUL.MAP]: MIDIMAP.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MIDIMAP.DEF
+MIDITEST.C
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: MIDITEST.OBJ
+Run File [MIDITEST.EXE]: MIDITEST.EXE
+List File [NUL.MAP]: MIDITEST.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MIDITEST.DEF
+MIDIINTR.C
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: MIDIINTR.OBJ
+Run File [MIDIINTR.EXE]: MIDIINTR.EXE
+List File [NUL.MAP]: MIDIINTR.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MIDIINTR.DEF
+INSTEST.C
+INSTEST.C(140) : warning C4135: conversion between different integral types
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: INSTEST.OBJ
+Run File [INSTEST.EXE]: INSTEST.EXE
+List File [NUL.MAP]: INSTEST.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: INSTEST.DEF
+PASS

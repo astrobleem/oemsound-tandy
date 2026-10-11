@@ -1,0 +1,92 @@
+{
+  "m3-r-beat-pittest": {
+    "SB": {
+      "sample_rate": 48000,
+      "frames": 340080,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "FM": {
+      "sample_rate": 48000,
+      "frames": 340080,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDYDAC": {
+      "sample_rate": 48000,
+      "frames": 340080,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDY": {
+      "sample_rate": 48000,
+      "frames": 340080,
+      "peak": 11078.0,
+      "first_active_s": 3.7926458333333333,
+      "last_active_s": 3.9766875
+    },
+    "SPKR": {
+      "sample_rate": 48000,
+      "frames": 340080,
+      "peak": 9994.0,
+      "first_active_s": 3.792875,
+      "last_active_s": 3.976958333333333
+    },
+    "simultaneous_nonzero_frames": 5041,
+    "mix": {
+      "sample_rate": 48000,
+      "channels": 2,
+      "peak": 11078,
+      "clipped_samples": 0,
+      "sha256": "7d54a9061200d65379c512c9f0ac8f558d0796833e4935cb5fe590af017d43c1"
+    }
+  },
+  "m3-r-fidl-pittest": {
+    "SB": {
+      "sample_rate": 48000,
+      "frames": 350928,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "FM": {
+      "sample_rate": 48000,
+      "frames": 350928,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDYDAC": {
+      "sample_rate": 48000,
+      "frames": 350928,
+      "peak": 0.0,
+      "first_active_s": null,
+      "last_active_s": null
+    },
+    "TANDY": {
+      "sample_rate": 48000,
+      "frames": 350928,
+      "peak": 14372.0,
+      "first_active_s": 3.9416875,
+      "last_active_s": 4.139104166666667
+    },
+    "SPKR": {
+      "sample_rate": 48000,
+      "frames": 350928,
+      "peak": 9994.0,
+      "first_active_s": 3.943979166666667,
+      "last_active_s": 4.139395833333333
+    },
+    "simultaneous_nonzero_frames": 4232,
+    "mix": {
+      "sample_rate": 48000,
+      "channels": 2,
+      "peak": 14372,
+      "clipped_samples": 0,
+      "sha256": "6a8b994ec05d2f5a52a20cca04682b6e06ca4b2a81a5fa2c3af354b6ef4f6846"
+    }
+  }
+}

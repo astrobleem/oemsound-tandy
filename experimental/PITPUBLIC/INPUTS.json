@@ -1,0 +1,34 @@
+{
+  "PITWIN": {
+    "input": "PIT-VOICE-STAGE3.zip",
+    "bytes": 405331,
+    "sha256": "3b8e3a4069ba70ab207178f2db2d5ce5a8fd86caeb480fc21d2bf592b2c1f2c8",
+    "receipt": "EVIDENCE.json",
+    "receipt_sha256": "c15edc3d02f089071c8fe570dd9ae6a94a17ff200ecf0151411a468a763c0d06",
+    "source_archive_sha256": "ba3203c6b7ebf5c32ed607cf148a26739ed94fe5547d63ad9cf4aae5865912e6"
+  },
+  "PITEXPR": {
+    "input": "PIT-VOICE-STAGE4.zip",
+    "bytes": 394207,
+    "sha256": "1bec690c8a3cc7bc89758a56f807b327aed756ce5616d025f38dfa28059c3ff4",
+    "receipt": "EVIDENCE.json",
+    "receipt_sha256": "ffd2e33cbb9bff519e078eb8d2b74530fb7e06f5f3f504077358eebb847e85a7",
+    "source_archive_sha256": "fdcf7ab31529108c560bfbdb54bafcaa417fb6511a503f3f6e3bf04529495461"
+  },
+  "MML3AUTH": {
+    "input": "PIT-AUTHORING-STAGE5.zip",
+    "bytes": 168429,
+    "sha256": "b327dac088ddb55587729b774257878a9bd8c9b79e0db33fb6879a597acd23b5",
+    "receipt": "MANIFEST.json",
+    "receipt_sha256": "dd3792d75f54f66b3ad8e6f51528d22d1a23eef52f76f2ba46dfc932d08362b0",
+    "source_archive_sha256": "436dd4d701e82e98b6e3dba1f0c8bf03dbc300032f2ab0cf97d5f47f77c98509"
+  },
+  "PITDOS": {
+    "input": "PIT-VOICE-STAGE6.zip",
+    "bytes": 228750,
+    "sha256": "b8a2e77aab41078dd1c496467f38f78e11f646edbb4cc91f69709a6df9dd0362",
+    "receipt": "DELIVERY.json",
+    "receipt_sha256": "dddbd119a992d46b7c9287b3d577808ef708e1c8dc24bc3bbcb90a472b37ee0e",
+    "source_archive_sha256": "19d90c15bc209cc6c318626d7fa13861808396adc474a3e347dfca2702a673ed"
+  }
+}

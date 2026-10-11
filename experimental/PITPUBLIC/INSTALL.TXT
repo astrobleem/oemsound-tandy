@@ -1,0 +1,97 @@
+EXPERIMENTAL PUBLIC PIT SOUND KITS - 7 October 2026
+
+These are ready-to-run, emulator-qualified ORIGINAL sound experiments.
+They are separate from the public baseline PSGSTART/BEATSTART starter kits.
+Fresh clean packaging preserves tested EXE/DRV bytes; source snapshots are
+from exact reviewed commits. Native code was not rebuilt for publication.
+
+Choose one ZIP, extract to a new DOS directory, read its README.TXT first:
+PITWIN.ZIP: seven Windows clients + paired MIDIMAP/TSOUND, stages 2/3.
+PITEXPR.ZIP: expressive Beats, Mini Piano, JoyMIDI and MiniMIDI + paired
+  mapper and the same shared TSOUND; stage 4 envelope engine preserved.
+MML3AUTH.ZIP: MML Fiddle + Beats fifth-lane MML3 editor/export + drivers,
+  stage 5. Original DEFAULT2/PIT.MML examples only; no third-party song.
+PITDOS.ZIP: DOS PSGTEST default or /pit, through DOSSND v1, stage 6.
+
+WINDOWS PREREQUISITES / SETUP / ROLLBACK
+Existing lawful Windows 3.0 REAL MODE / 640 KB Tandy EX/HX guest, DOSBox-X
+machine=tandy and 8086_prefetch, accepted display/reservation launcher.
+These drivers are bounded experiments, not full SOUND or multimedia MIDI.
+For PIT music Windows kits REQUIRE the included version-1 TSOUND capability.
+Merely putting TSOUND beside the app will not replace Windows' SOUND module.
+1. Shut down Windows/emulator. Make a NEW disposable copy of the working
+   guest; keep the original unchanged. Back up the clone's stock SOUND.DRV
+   outside the clone. Resolve the clone's actual SYSTEM.INI sound.drv path.
+2. In the CLONE ONLY, copy included TSOUND.DRV to that existing resolved
+   Windows SYSTEM\SOUND.DRV path, keeping its internal SOUND identity.
+   If the expected setup differs, stop and inspect; no installer is supplied.
+3. Keep each app-local MIDIMAP.DRV beside ITS paired clients. Never register
+   MIDIMAP globally or copy it over WINDOWS\SYSTEM\MIDIMAP.DRV. In MML3AUTH,
+   keep each BEATS/FIDDLE subfolder intact. Preserve accepted display settings.
+4. Launch through Program Manager > File > Run. One producer at a time.
+   Options DEFAULT OFF: Beats PIT button enables lane five; Mini Piano F3
+   selects an extra held pitch; JoyMIDI F3 octave layer needs explicit rearm;
+   MiniMIDI PIT button explicitly maps MIDI channel 16. No automatic remap.
+   PSGPLAY F3 or /pit; TCHIME /pit; TEXIT /pitpreview only for
+   initial listening. Do not use /pitgo until deliberately testing exit.
+5. Stop/Escape and normal close mute and release. If abruptly killed and
+   ownership sticks, restart the disposable session. For rollback shut down
+   and restore stock SOUND.DRV in the clone, or abandon it and use original.
+   Do not alter the working guest, startup files or CF defaults.
+
+MML3 AUTHORING
+Beats: Grid/MML/PIT buttons; on exports explicit MML3 [P], off retains exact
+legacy MML2 output. Copy or NAME.MML Save preserves existing files.
+Fiddle: editor/Open/Save and P section; author explicit MML3/[P], V0 or V1.
+PIT playback needs explicit opt-in AND paired driver capability, including
+empty/all-rest [P]. Missing/busy capabilities refuse, no raw-port fallback.
+Limits: MIDI45..96, 8192 source bytes, 32768 tokens, 4096 notes/rests per part,
+600 seconds. No PIT envelopes, presets, bends or ties. Original instructions
+are in SOURCE/docs/PITAUTH.MD. Apps author MML; movie conversion belongs to
+Maker, and this release does not ship media or claim whole-movie integration.
+
+DOS
+Use an exclusive plain DOS Tandy session, outside Windows and sound/timer
+TSRs. CD PITDOS; run PSGTEST or PSGTEST /pit. Optional PIT adds distinct C5
+while PSG triad holds, off before fade. Escape or Ctrl-C stops/releases.
+An active speaker or tested Windows DOS-child context refuses before I/O.
+This is one cooperative foreground owner, not a system-wide/TSR lock.
+Rollback: exit, delete new folder; no installation or startup changes.
+
+LIMITS
+PIT2 is a fixed on/off speaker voice, no independent hardware amplitude
+control; no simultaneous PIT music and sampled PWM speech. Only ports42/43
+and low two port61 bits are used for PIT, preserving immediate upper bits.
+PIT0/PIT1, IRQ cadence and interrupt vectors are unchanged. Acquisition needs
+quiet speaker; previous unknown PIT mode/divisor is not restored. Windows
+beeps/direct writers can bypass cooperative leases and disturb output.
+TSOUND is restricted: system beep, envelopes/noise API and SyncAllVoices are
+unsupported; Windows system beeps may be silent in this cloned guest.
+Cooperative timers can stall; physical EX audio summing/fidelity, hardware
+joystick/key input, custom-display UI and full system integration remain open.
+TEXIT exit-veto is unqualified. Do not equate DOSBox cycle settings to MHz.
+
+SOURCE / LICENSING / EVIDENCE
+Each ZIP includes corresponding complete selected component SOURCE,
+GPLv3 and original component MIT notices where present. Original authoring
+ATTRIB notes remain historical (including pre-PIT mapper hashes); MANIFEST
+records current exact bytes. No OS, compiler, SDK, guest image, audio, video,
+private upload receipts or copyrighted song assets are bundled. No runtime
+binary is stored in the publication source tree. Original source code is
+preserved; Git source bytes may have different CRLF encoding from historical
+working-tree kits but canonical source text was compared. Historical docs
+saying private/review-only describe the old delivery; this PUBLICATION scope
+supersedes those publication restrictions under the explicit user request.
+
+Native builds require external lawful period Microsoft C6/MASM/linker and
+Windows headers/libs in DOS. No validated Watcom port, no new installs/tools.
+Historical text QA covers 28 stage3 cases plus earlier11, 10 expressive runs,
+25 authoring runs, 31 host+41 native PSGTEST checks. Raw private captures are
+omitted; retained statistical receipts document their original measurements.
+Fresh publication verifies all input receipt hashes, source identities,
+source closure, runtime pins, selected inventory, ZIP readback and checksums.
+CI validates the curated public source pins/closure, not native compilation.
+No guest/emulator was launched for this publication.
+
+XPCHIME is omitted: its Windows XP score reduction has separate rights.
+Original stage3 receipts describe eight clients including that omitted app.

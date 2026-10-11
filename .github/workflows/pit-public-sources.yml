@@ -1,0 +1,32 @@
+name: Verify public PIT source snapshots
+on:
+  push:
+    branches: ['dot/sound-public-experiments-*']
+    tags: ['sound-exp-v*']
+  pull_request:
+    paths: ['experimental/PITPUBLIC/**', 'tools/RELEASE/PITVERIFY.PY', '.github/workflows/pit-public-sources.yml']
+permissions:
+  contents: read
+jobs:
+  source-identities:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Fetch exact curated source without proprietary repository directories
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          SOURCE_REPOSITORY: ${{ github.repository }}
+          GIT_TERMINAL_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git init .
+          git remote add origin "https://github.com/${SOURCE_REPOSITORY}.git"
+          git fetch --filter=blob:none --no-tags --depth=1 origin "$SOURCE_SHA"
+          git sparse-checkout init --no-cone
+          printf '/experimental/PITPUBLIC/\n/tools/RELEASE/PITVERIFY.PY\n' | git sparse-checkout set --no-cone --stdin
+          git -c core.autocrlf=false checkout --detach --force FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          for excluded in BIN LIB INCLUDE DDK DOS; do test ! -e "$excluded"; done
+      - name: Verify curated source identities, type exclusions and local include closure
+        run: python3 tools/RELEASE/PITVERIFY.PY

@@ -1,0 +1,19 @@
+MML Fiddle 0.2 adds an original MML2 noise extension to the existing editor.
+Its UI, parser, tests and demo were authored for this project. No third-party
+song, game asset, sample or parser was copied. The paired original WININST12
+1.2 engine is unchanged; full engine source, interface, period table, assembly
+entry and build recipe are included under the existing project license.
+
+MML1 revision 2 remains pinned in SPEC-PIN.json, byte-identical and tested.
+MML2 noise revision 1 is pinned in SPEC2PIN.json. Its shared conformance archive
+was independently checked before publication, and all bytes in spec2 match
+that exact Library archive. Fixture generators and expected WZM/WZI states
+are host conformance aids; this native app only reads/writes MML source.
+
+All 47 MIDI drum codes35..81 follow the existing mapper channel9 mapping.
+There is no new oscillator, timer hook, driver API, global installation or
+hidden tone-C borrowing. No Windows/compiler/font/display-driver binaries
+are included. The old MMLFIDL01 kit remains a separate frozen release.
+
+Unchanged mapper SHA256:
+a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39

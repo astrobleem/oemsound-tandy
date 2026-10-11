@@ -1,0 +1,12 @@
+{
+  "fiddle_files": 200,
+  "beats_files": 225,
+  "MMLFIDL02.zip": {
+    "bytes": 213995,
+    "sha256": "c5039c54897ca204affbe102ab67d69f3fc31ef23c336846bd00d83f5e609241"
+  },
+  "BEATMML1.zip": {
+    "bytes": 153370,
+    "sha256": "66b0f0802be769398822cd58385d6cd5bb5419473867e7be338b0756bc827c4f"
+  }
+}

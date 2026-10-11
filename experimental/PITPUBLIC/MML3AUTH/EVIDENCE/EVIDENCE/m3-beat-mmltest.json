@@ -1,0 +1,11 @@
+{
+  "exit": 0,
+  "run": "m3-beat-mmltest",
+  "lockProtocol": "FileStream OpenOrCreate, ReadWrite, FileShare.None; held for run, file retained",
+  "lock": "C:\\Users\\chad\\Documents\\Codex\\2026-10-06\\tandy-emulator.lock",
+  "logs": {
+    "BEATS.LOG": "PASS MML view selected\r\nPASS export includes noise\r\nPASS generated text read only\r\nPASS copy succeeds\r\nPASS clipboard text exact\r\nPASS reject path\r\nPASS reject device\r\nPASS save new file\r\nPASS no overwrite\r\nPASS saved file readable\r\nPASS saved bytes exact\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS tempo export saved\r\nPASS MML control fits\r\nPASS MML control fits\r\nPASS MML control fits\r\nPASS MML control fits\r\nPASS MML control fits\r\nPASS MML control fits\r\nPASS view switch preserves playback\r\nPASS MML view keeps playback\r\nPASS export play stop releases sound\r\nPASS empty pattern exports\r\nPASS demo noise restored\r\nPASS close mutes\r\nPASS close releases lease\r\nPASS driver releases owner\r\nTOTAL_FAILURES=0 STEPS=2\r\n",
+    "RETURN.LOG": "RETURNED\r\n"
+  },
+  "timedOut": false
+}

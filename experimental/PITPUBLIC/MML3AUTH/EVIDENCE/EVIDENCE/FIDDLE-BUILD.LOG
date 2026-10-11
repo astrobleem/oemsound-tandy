@@ -1,0 +1,16 @@
+MMLFIDL.C
+MMLFIDL.C(354) : warning C4018: '==' : signed/unsigned mismatch
+MMLFIDL.C(360) : warning C4018: '==' : signed/unsigned mismatch
+MMLFIDL.C(364) : warning C4018: '==' : signed/unsigned mismatch
+MMLFIDL.C(365) : warning C4018: '==' : signed/unsigned mismatch
+MMLCORE.C
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: MMLFIDL.OBJ+MMLCORE.OBJ
+Run File [MMLFIDL.EXE]: MMLFIDL.EXE
+List File [D:MMLFIDL.MAP]: MMLFIDL.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MMLFIDL.DEF
+PASS

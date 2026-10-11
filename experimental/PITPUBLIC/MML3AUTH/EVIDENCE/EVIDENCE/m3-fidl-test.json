@@ -1,0 +1,11 @@
+{
+  "exit": 0,
+  "run": "m3-fidl-test",
+  "lockProtocol": "FileStream OpenOrCreate, ReadWrite, FileShare.None; held for run, file retained",
+  "lock": "C:\\Users\\chad\\Documents\\Codex\\2026-10-06\\tandy-emulator.lock",
+  "logs": {
+    "MMLFIDL.LOG": "PASS editor created\r\nPASS eight presets\r\nPASS timer ready\r\nEVENT 0 192 0 0\r\nEVENT 0 192 0 0\r\nEVENT 0 144 60 100\r\nEVENT 0 193 0 0\r\nEVENT 0 193 48 0\r\nEVENT 0 145 48 100\r\nEVENT 0 194 0 0\r\nEVENT 0 194 96 0\r\nEVENT 0 146 67 100\r\nEVENT 0 153 35 73\r\nEVENT 188 137 35 0\r\nEVENT 250 128 60 0\r\nEVENT 250 144 64 100\r\nEVENT 250 153 42 73\r\nEVENT 438 137 42 0\r\nEVENT 500 128 64 0\r\nEVENT 500 144 67 100\r\nEVENT 500 153 38 73\r\nEVENT 688 137 38 0\r\nEVENT 750 128 67 0\r\nEVENT 750 144 72 100\r\nEVENT 750 153 42 73\r\nEVENT 938 137 42 0\r\nEVENT 1000 130 67 0\r\nEVENT 1000 153 35 73\r\nEVENT 1188 137 35 0\r\nEVENT 1250 128 72 0\r\nEVENT 1250 144 67 100\r\nEVENT 1250 153 42 73\r\nEVENT 1438 137 42 0\r\nEVENT 1500 128 67 0\r\nEVENT 1500 144 64 100\r\nEVENT 1500 153 38 73\r\nEVENT 1688 137 38 0\r\nEVENT 1750 128 64 0\r\nEVENT 1750 144 60 100\r\nEVENT 1750 153 42 73\r\nEVENT 1938 137 42 0\r\nEVENT 2000 129 48 0\r\nEVENT 2250 128 60 0\r\nPASS reset success\r\nPASS voices silent\r\nPASS close success\r\nPASS owner released\r\nPASS playback completed\r\nPASS exit has no owner\r\nTOTAL_FAILURES=0 SENT=40\r\n",
+    "RETURN.LOG": "RETURNED\r\n"
+  },
+  "timedOut": false
+}

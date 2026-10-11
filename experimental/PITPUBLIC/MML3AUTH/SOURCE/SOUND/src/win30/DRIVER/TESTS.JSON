@@ -1,0 +1,689 @@
+{
+  "status": "bounded-subset-smoke-passed",
+  "driver": {
+    "bytes": 5656,
+    "sha256": "8ece09fb2b21481bf44330f604c0a5eea020cf188ed8acec415049daf02efa98",
+    "cpu": "/G0 8086",
+    "target": "Windows 3.0 real mode",
+    "compiler_flags": "/nologo /c /G0 /Gw /Gs /AS /W3 /Od"
+  },
+  "test_exe_sha256": "f881df63c9048d7edc77ab695015dea85cec149b10146a56506be14254510aaa",
+  "checks_passed": 105,
+  "checks_failed": 0,
+  "environment": {
+    "windows": "3.0 real mode",
+    "emulator": "DOSBox-X 2026.08.31 b13702c",
+    "machine": "tandy",
+    "cpu": "8086_prefetch",
+    "cycles": 5000,
+    "conventional_memory_kb": 640,
+    "xms": false,
+    "ems": false,
+    "umb": false
+  },
+  "wave": {
+    "sha256": "446537f587caaa2932b15944dcdb1e58a02fccaacb3f156595aca591dd417cad",
+    "sample_rate": 48000,
+    "channels": 2,
+    "frames": 481200,
+    "approximate_chord_frequencies_hz": [
+      262,
+      330,
+      392
+    ],
+    "tail_ac_rms_pcm16": 1.977,
+    "chord_ac_rms_pcm16": 2809.064
+  },
+  "limitations": [
+    "Original physical Tandy hardware not tested.",
+    "SYSTEM timer exhaustion path not runtime-tested.",
+    "Restricted unsupported noise/envelope/sync/DoBeep contracts; no MIDI/wave or complete SOUND compatibility claim.",
+    "Dense short-note timing remains coarse/bounded.",
+    "Abrupt owner death without CloseSound not runtime-tested."
+  ],
+  "checks": [
+    {
+      "suite": "DRVTEST",
+      "name": "Open",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Exclusive",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "LowHz",
+      "actual": -13,
+      "expected": -13
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Fraction",
+      "actual": -13,
+      "expected": -13
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "BadNote",
+      "actual": -5,
+      "expected": -5
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "BadLength",
+      "actual": -6,
+      "expected": -6
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "BadDots",
+      "actual": -7,
+      "expected": -7
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Queue2",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Note1",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Rest",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Full",
+      "actual": -4,
+      "expected": -4
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ResizeOccupied",
+      "actual": -3,
+      "expected": -3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Count2",
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Flush",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Count0",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Resize32",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Threshold",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "C4",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "E4",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "G4",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Start",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "StartAgain",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "QueueFinished",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "CallbackRan",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ThresholdEvent",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ThresholdClear",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Stop",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "TimerRemoved",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "NoLateCallback",
+      "actual": 17,
+      "expected": 17
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "EnvelopeUnsupported",
+      "actual": -11,
+      "expected": -11
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "NoiseUnsupported",
+      "actual": -15,
+      "expected": -15
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "SyncUnsupported",
+      "actual": -16,
+      "expected": -16
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Reopen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Tone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "Restart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ClosedTimer",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "OwnerOpen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "OwnerLongTone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "OwnerStart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "LaunchIntruder",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "IntruderRan",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "OwnerQueueSurvives",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "OwnerTimerSurvives",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ActiveStop",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ActiveStopEmpty",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ActiveStopTimerGone",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "ActiveStopNoLateCallback",
+      "actual": 56,
+      "expected": 56
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "FinalOpen",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "WaitRest",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "WaitStart",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "WaitQueue",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "DRVTEST",
+      "name": "TOTAL_FAILURES",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerOpen",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerStart",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerStop",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerNote",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerSound",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerResize",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerAccent",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerThreshold",
+      "actual": -1,
+      "expected": -1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerEvent",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "suite": "INTRUD",
+      "name": "NonownerCount",
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "suite": "INTRUD",
+      "name": "TOTAL_FAILURES",
+      "actual": 0,
+      "expected": 0
+    }
+  ],
+  "intruder_exe_sha256": "2b0c85316e8821618f8340fccd5b07a4f54dc3426d9d78e78799cdadc6becdd5"
+}

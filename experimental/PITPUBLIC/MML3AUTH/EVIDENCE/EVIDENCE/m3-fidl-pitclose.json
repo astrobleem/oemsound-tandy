@@ -1,0 +1,11 @@
+{
+  "exit": 0,
+  "run": "m3-fidl-pitclose",
+  "lockProtocol": "FileStream OpenOrCreate, ReadWrite, FileShare.None; held for run, file retained",
+  "lock": "C:\\Users\\chad\\Documents\\Codex\\2026-10-06\\tandy-emulator.lock",
+  "logs": {
+    "MMLFIDL.LOG": "EVENT 0 192 0 0\r\nEVENT 0 144 60 100\r\nEVENT 0 193 0 0\r\nEVENT 0 145 64 100\r\nEVENT 0 194 0 0\r\nEVENT 0 146 67 100\r\nEVENT 0 153 38 73\r\nPASS all five generators\r\nPASS reset success\r\nPASS voices silent\r\nPASS close success\r\nPASS owner released\r\nEVENT 0 192 0 0\r\nEVENT 0 144 60 100\r\nEVENT 0 193 0 0\r\nEVENT 0 145 64 100\r\nEVENT 0 194 0 0\r\nEVENT 0 146 67 100\r\nEVENT 0 153 38 73\r\nPASS P replay rearms\r\nPASS P no preset\r\nPASS reset success\r\nPASS voices silent\r\nPASS close success\r\nPASS owner released\r\nPASS exit has no owner\r\nTOTAL_FAILURES=0 SENT=7\r\n",
+    "RETURN.LOG": "RETURNED\r\n"
+  },
+  "timedOut": false
+}

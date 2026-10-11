@@ -1,0 +1,19 @@
+This extension builds on the project's expressive WININST12 Beats sources,
+with the qualified SOUNDP01 ownership fixes retained. The generated MML view,
+bounded exporter, shared noise contract and added tests were authored for this
+project. Existing project licensing is retained in LICENSE.TXT.
+
+The app-local mapper and original INSTR.C curves are unchanged. Complete
+engine sources, interface, period table, assembly entry and build recipe are
+included. Mapper SHA256:
+a59ddd0c121d89a7d446eccc00e03f9646c3372e9505b9dcd48f6a44cbb5ac39
+
+No third-party tune, sample, game asset or parser was copied. No original
+Buddy movie media is included. Native screenshots show the actual emulator.
+No Windows, SDK/compiler, fonts or proprietary display-driver binaries are
+included. Tests use external authorized local installations only.
+
+Source basis: astrobleem/oemsound-tandy, original WININST12 expressive kit;
+qualified sound-polish ownership work based on main commit
+b25d5bce188cf63a3eb7a5ae9bab68147a862cd2. This is a new isolated test kit; no
+existing stable source archive, disk image or installer pin was replaced.

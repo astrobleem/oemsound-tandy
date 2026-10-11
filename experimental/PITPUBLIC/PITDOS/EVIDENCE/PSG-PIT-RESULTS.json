@@ -1,0 +1,320 @@
+{
+  "native_runs": [
+    {
+      "run": "psg-pit-full",
+      "native_checks": 14,
+      "log": "PASS BASELINE_SEQUENCE_BYTES\nPASS BASELINE_NO_PIT_WRITE\nPASS BASELINE_RELEASE\nPASS BASELINE_PORT_AUDIT\nPASS OPTIONAL_PIT_SEQUENCE\nPASS ONE_PIT_NOTE_PROGRAM\nPASS PIT_RELEASE\nPASS PIT_PORT_AUDIT\nPASS IDEMPOTENT_CLOSE\nPASS INVALID_OPTION_NO_IO\nPASS ONLY_ALLOWED_PORTS\nPASS PRESERVE_IMMEDIATE_61_UPPER_BITS\nPASS UNCHANGED_IRQ_VECTORS\nPASS SPEAKER_OFF\nRESULT checks=14 failures=0 writes=0 reads=0\n",
+      "audio": {
+        "SB": {
+          "sample_rate": 48000,
+          "frames": 321888,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "FM": {
+          "sample_rate": 48000,
+          "frames": 321888,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDYDAC": {
+          "sample_rate": 48000,
+          "frames": 321888,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDY": {
+          "sample_rate": 48000,
+          "frames": 321888,
+          "peak": 11837.0,
+          "first_active_s": 0.004270833333333333,
+          "last_active_s": 3.6462083333333335
+        },
+        "SPKR": {
+          "sample_rate": 48000,
+          "frames": 321888,
+          "peak": 9994.0,
+          "first_active_s": 2.2733125,
+          "last_active_s": 3.0420208333333334
+        },
+        "simultaneous_nonzero_frames": 20854
+      }
+    },
+    {
+      "run": "psg-pit-escape",
+      "native_checks": 7,
+      "log": "PASS ESCAPE_WHILE_PIT_ACTIVE\nPASS ESCAPE_OWNER_RELEASED\nPASS ESCAPE_NO_LATER_SEQUENCE\nPASS ONLY_ALLOWED_PORTS\nPASS PRESERVE_IMMEDIATE_61_UPPER_BITS\nPASS UNCHANGED_IRQ_VECTORS\nPASS SPEAKER_OFF\nRESULT checks=7 failures=0 writes=22 reads=4\n",
+      "audio": {
+        "SB": {
+          "sample_rate": 48000,
+          "frames": 163584,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "FM": {
+          "sample_rate": 48000,
+          "frames": 163584,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDYDAC": {
+          "sample_rate": 48000,
+          "frames": 163584,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDY": {
+          "sample_rate": 48000,
+          "frames": 163584,
+          "peak": 6520.0,
+          "first_active_s": 0.004583333333333333,
+          "last_active_s": 0.4041458333333333
+        },
+        "SPKR": {
+          "sample_rate": 48000,
+          "frames": 163584,
+          "peak": 9792.0,
+          "first_active_s": 0.403875,
+          "last_active_s": 0.40427083333333336
+        },
+        "simultaneous_nonzero_frames": 14
+      }
+    },
+    {
+      "run": "psg-pit-busy",
+      "native_checks": 6,
+      "log": "PASS BUSY_REFUSAL\nPASS BUSY_NO_SOUND_WRITE\nPASS ONLY_ALLOWED_PORTS\nPASS PRESERVE_IMMEDIATE_61_UPPER_BITS\nPASS UNCHANGED_IRQ_VECTORS\nPASS SPEAKER_OFF\nRESULT checks=6 failures=0 writes=0 reads=1\n",
+      "audio": {
+        "SB": {
+          "sample_rate": 48000,
+          "frames": 144576,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "FM": {
+          "sample_rate": 48000,
+          "frames": 144576,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDYDAC": {
+          "sample_rate": 48000,
+          "frames": 144576,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDY": {
+          "sample_rate": 48000,
+          "frames": 144576,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "SPKR": {
+          "sample_rate": 48000,
+          "frames": 144576,
+          "peak": 9994.0,
+          "first_active_s": 0.0020208333333333332,
+          "last_active_s": 0.0028125
+        },
+        "simultaneous_nonzero_frames": 0
+      }
+    },
+    {
+      "run": "psg-pit-note-busy",
+      "native_checks": 7,
+      "log": "PASS PIT_CONFLICT_FAILS_CLOSED\nPASS FOREIGN_PIT_NOT_REPROGRAMMED\nPASS FOREIGN_GATE_PRESERVED\nPASS ONLY_ALLOWED_PORTS\nPASS PRESERVE_IMMEDIATE_61_UPPER_BITS\nPASS UNCHANGED_IRQ_VECTORS\nPASS SPEAKER_OFF\nRESULT checks=7 failures=0 writes=16 reads=2\n",
+      "audio": {
+        "SB": {
+          "sample_rate": 48000,
+          "frames": 163632,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "FM": {
+          "sample_rate": 48000,
+          "frames": 163632,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDYDAC": {
+          "sample_rate": 48000,
+          "frames": 163632,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDY": {
+          "sample_rate": 48000,
+          "frames": 163632,
+          "peak": 6520.0,
+          "first_active_s": 0.0025,
+          "last_active_s": 0.406
+        },
+        "SPKR": {
+          "sample_rate": 48000,
+          "frames": 163632,
+          "peak": 9994.0,
+          "first_active_s": 0.4056875,
+          "last_active_s": 0.4065
+        },
+        "simultaneous_nonzero_frames": 15
+      }
+    },
+    {
+      "run": "psg-pit-audio-default",
+      "native_checks": null,
+      "log": "",
+      "audio": {
+        "SB": {
+          "sample_rate": 48000,
+          "frames": 231840,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "FM": {
+          "sample_rate": 48000,
+          "frames": 231840,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDYDAC": {
+          "sample_rate": 48000,
+          "frames": 231840,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDY": {
+          "sample_rate": 48000,
+          "frames": 231840,
+          "peak": 11837.0,
+          "first_active_s": 0.0019166666666666666,
+          "last_active_s": 1.7768333333333333
+        },
+        "SPKR": {
+          "sample_rate": 48000,
+          "frames": 231840,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "simultaneous_nonzero_frames": 0
+      }
+    },
+    {
+      "run": "psg-pit-audio-pit",
+      "native_checks": null,
+      "log": "",
+      "audio": {
+        "SB": {
+          "sample_rate": 48000,
+          "frames": 231936,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "FM": {
+          "sample_rate": 48000,
+          "frames": 231936,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDYDAC": {
+          "sample_rate": 48000,
+          "frames": 231936,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDY": {
+          "sample_rate": 48000,
+          "frames": 231936,
+          "peak": 11837.0,
+          "first_active_s": 0.0017291666666666666,
+          "last_active_s": 1.7787083333333333
+        },
+        "SPKR": {
+          "sample_rate": 48000,
+          "frames": 231936,
+          "peak": 9994.0,
+          "first_active_s": 0.4058541666666667,
+          "last_active_s": 1.1747916666666667
+        },
+        "simultaneous_nonzero_frames": 20789
+      }
+    },
+    {
+      "run": "psg-pit-windows",
+      "native_checks": 7,
+      "log": "PASS WINDOWS_CHILD_REFUSAL\nPASS ZERO_SOUND_IO\nPASS WINDOWS_DEFAULT_REFUSAL\nPASS DEFAULT_ZERO_SOUND_IO\nPASS ONLY_ALLOWED_PORTS\nPASS PRESERVE_IMMEDIATE_61_UPPER_BITS\nPASS UNCHANGED_IRQ_VECTORS\nRESULT checks=7 failures=0 writes=0 reads=0\n",
+      "audio": {
+        "SB": {
+          "sample_rate": 48000,
+          "frames": 319968,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "FM": {
+          "sample_rate": 48000,
+          "frames": 319968,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDYDAC": {
+          "sample_rate": 48000,
+          "frames": 319968,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "TANDY": {
+          "sample_rate": 48000,
+          "frames": 319968,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "SPKR": {
+          "sample_rate": 48000,
+          "frames": 319968,
+          "peak": 0.0,
+          "first_active_s": null,
+          "last_active_s": null
+        },
+        "simultaneous_nonzero_frames": 0
+      }
+    }
+  ],
+  "native_checks": 41,
+  "host_checks": 31,
+  "source_matches_build": {
+    "PSGTEST.C": true,
+    "PSGTHQA.C": true,
+    "DOSSND.C": true,
+    "DOSSND.H": true,
+    "DOSGUARD.H": true
+  },
+  "build_log": "PSGTEST.C\nDOSSND.C\n\nMicrosoft (R) Segmented-Executable Linker  Version 5.01.17\nCopyright (C) Microsoft Corp 1984-1988.  All rights reserved.\n\nPSGTHQA.C\n\nMicrosoft (R) Segmented-Executable Linker  Version 5.01.17\nCopyright (C) Microsoft Corp 1984-1988.  All rights reserved.\n\nPASS\n",
+  "compiled_files": {
+    "PSGTEST.EXE": "1f7bf52cfcb95060aa978e491046a77756f1ab3988942b3023eac168f6c1d287",
+    "PSGTHQA.EXE": "2977c732a6bb57c09fef2005b51585dc14ae46762a13f3d0d20df5c27007e0df"
+  },
+  "physical_fidelity_qualified": false
+}
