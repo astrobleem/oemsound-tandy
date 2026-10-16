@@ -2,6 +2,12 @@
 #define WINVER 0x0300
 #include <windows.h>
 #include "MIDIAPI.H"
+#include "BQSCHED.C"
+/* Supplied by the backend owner after its exact ABI is agreed/tested.
+ * BuddyQueueBind adapts existing exports; it must not acquire output. */
+#ifdef BUDDY_QUEUE_BRIDGE
+#include "BQBRIDGE.H"
+#endif
 
 #define VIDEO_HEADER 24
 #define MUSIC_HEADER 20
@@ -13,10 +19,7 @@
 #define MAX_DURATION 600000UL
 #define MAX_EVENTS 10000UL
 
-typedef struct {
-    DWORD when;
-    BYTE note[4], velocity[4], retrigger;
-} MUSICSTATE;
+typedef BQSTATE MUSICSTATE;
 
 static HINSTANCE module;
 static MIDIPROC midi;
@@ -37,6 +40,13 @@ static DWORD maxGap,maxLateness,totalLateness,appliedEvents,skippedEvents;
 static DWORD renderedFrames,droppedFrames,maxVideoRead,maxMusicRead,maxDraw;
 static DWORD musicFailures,videoFailures,cleanupError;
 static MUSICSTATE current,nextState;
+static BQSCHED queue;
+static BQOPS queueOps;
+static int queueReady,queueBlocked,paused,usedQueue;
+static DWORD resumePosition;
+static DWORD movieNow(void);
+static void pausePlayback(void);
+static void seekTo(DWORD target);
 static struct { BITMAPINFOHEADER header; RGBQUAD color[16]; } dibInfo;
 
 static WORD wordAt(BYTE *p) { return (WORD)p[0]|((WORD)p[1]<<8); }
@@ -49,20 +59,16 @@ static void statistic(HFILE f,char *key,DWORD value)
     do {digits[n++]=(char)('0'+(unsigned)(value%10));value/=10;}while(value);
     while(n)row[i++]=digits[--n];row[i++]='\r';row[i++]='\n';_lwrite(f,row,i);
 }
-static DWORD data(unsigned channel,unsigned note,unsigned velocity,int on)
-{
-    return midi(0,MODM_DATA,MIDI_COOKIE,
-        (DWORD)((on?0x90:0x80)|(channel==3?9:channel))|
-        ((DWORD)note<<8)|((DWORD)velocity<<16),0L);
-}
 static void releaseSound(void)
 {
     if(soundOpen) {
+        if(queueReady&&BqStop(&queue)!=BQ_OK)cleanupError|=4;
         if(midi(0,MODM_RESET,MIDI_COOKIE,0L,0L))cleanupError|=1;
         if(midi(0,MODM_CLOSE,MIDI_COOKIE,0L,0L))cleanupError|=2;
         if(cleanupError&&!lastError)lastError=38;
         soundOpen=0;
     }
+    queueReady=0;
 }
 static void closeStreams(void)
 {
@@ -74,7 +80,8 @@ static void report(char *reason,DWORD elapsed)
     char path[160];HFILE f;pathFor(path,"TINYVID.LOG");f=_lcreat(path,0);
     if(f==HFILE_ERROR)return;
     _lwrite(f,reason,lstrlen(reason));_lwrite(f,"\r\n",2);
-    statistic(f,"version",2);statistic(f,"mode",mode);
+    statistic(f,"version",3);statistic(f,"mode",mode);
+    statistic(f,"timestamped_queue",usedQueue);
     statistic(f,"duration_ms",duration);statistic(f,"elapsed_ms",elapsed);
     statistic(f,"clip_start_ms",timelineBase);statistic(f,"clip_end_ms",playEnd);
     statistic(f,"music_events_applied",appliedEvents);
@@ -94,8 +101,11 @@ static void report(char *reason,DWORD elapsed)
 }
 static void stop(char *reason)
 {
-    DWORD elapsed=playing?GetTickCount()-startTick:0L;
-    lastElapsed=elapsed;playing=0;releaseSound();closeStreams();finished=1;finishTick=GetTickCount();
+    DWORD position=playing?movieNow():timelineBase+lastElapsed;
+    DWORD elapsed=position>=timelineBase?position-timelineBase:0L;
+    if(elapsed>playEnd-timelineBase)elapsed=playEnd-timelineBase;
+    lastElapsed=elapsed;playing=paused=0;
+    releaseSound();closeStreams();finished=1;finishTick=GetTickCount();
     lstrcpy(status,cleanupError?"Cleanup error":reason);report(reason,elapsed);InvalidateRect(mainWindow,NULL,TRUE);
 }
 static int fail(int code,int music)
@@ -158,6 +168,11 @@ static int openMusic(void)
     duration=musicDuration;length=(DWORD)_llseek(musicFile,0L,2);
     if(length!=MUSIC_HEADER+eventCount*RECORD_SIZE)return fail(27,1);
     if(_llseek(musicFile,MUSIC_HEADER,0)==-1L)return fail(23,1);
+    /* Validate the entire bounded stream before acquiring any output. */
+    if(!fetchEvent())return 0;
+    while(nextValid)if(!fetchEvent())return 0;
+    recordsRead=previousEvent=0;bufferCount=bufferIndex=0;
+    if(_llseek(musicFile,MUSIC_HEADER,0)==-1L)return fail(23,1);
     return fetchEvent();
 }
 static int openCues(void)
@@ -181,31 +196,94 @@ static int acquireSound(void)
     description.hMidi=0;description.dwCallback=description.dwInstance=0L;
     if(midi(0,MODM_OPEN,(DWORD)(LPVOID)&cookie,(DWORD)(LPVOID)&description,0L))
         return fail(32,1);
-    soundOpen=1;if(cookie!=MIDI_COOKIE)return fail(33,1);return 1;
+    soundOpen=1;if(cookie!=MIDI_COOKIE)return fail(33,1);
+#ifdef BUDDY_QUEUE_BRIDGE
+    if(!BuddyQueueBind(module,&queueOps))return fail(45,1);
+    queueReady=1;
+#endif
+    return 1;
+}
+static int applyState(MUSICSTATE *pending)
+{
+    DWORD messages[BQ_MAXMSG];unsigned i,n;
+    n=BqMessages(&current,pending,messages);
+    for(i=0;i<n;i++)
+        if(midi(0,MODM_DATA,MIDI_COOKIE,messages[i],0L))
+            return fail(34,1);
+    current=*pending;return 1;
+}
+/* Reconstruct only current state, then leave the next future snapshot ready.
+ * The caller must acknowledge reset before any reconstructed note is sent. */
+static int musicAt(DWORD target,MUSICSTATE *seed)
+{
+    DWORD lo=0,hi=eventCount,mid;BYTE bytes[4];unsigned i;
+    for(i=0;i<4;i++)seed->note[i]=seed->velocity[i]=0;
+    seed->when=target;seed->retrigger=15;
+    while(lo<hi) {
+        mid=lo+(hi-lo)/2;
+        if(_llseek(musicFile,MUSIC_HEADER+mid*RECORD_SIZE,0)==-1L||
+           _lread(musicFile,bytes,4)!=4)return fail(23,1);
+        if(longAt(bytes)<=target)lo=mid+1;else hi=mid;
+    }
+    recordsRead=lo?lo-1:0;previousEvent=0;
+    bufferCount=bufferIndex=0;nextValid=0;
+    if(_llseek(musicFile,MUSIC_HEADER+recordsRead*RECORD_SIZE,0)==-1L||
+       !fetchEvent())return fail(23,1);
+    if(lo) {
+        *seed=nextState;seed->when=target;seed->retrigger=15;
+        if(!fetchEvent())return 0;
+    }
+    return 1;
+}
+static DWORD movieNow(void)
+{
+    DWORD position;
+    if(queueReady) {
+        if(BqPosition(&queue,&position)!=BQ_OK) {
+            fail(46,1);return timelineBase+lastElapsed;
+        }
+        return position;
+    }
+    position=GetTickCount()-startTick;
+    if(position>=playEnd-timelineBase)return playEnd;
+    return timelineBase+position;
 }
 static int updateMusic(DWORD elapsed)
 {
-    MUSICSTATE pending;DWORD count=0,late;unsigned i;int change;
+    unsigned count=0;DWORD late;int result;
     if(!(mode&1))return 1;
-    while(nextValid&&nextState.when<=elapsed) {
-        pending=nextState;count++;
+    queueBlocked=0;
+    if(queueReady) {
+        result=BqSeed(&queue);
+        if(result==BQ_ERROR)return fail(46,1);
+        if(result==BQ_FULL){queueBlocked=1;return 1;}
+        while(nextValid&&nextState.when<=playEnd&&count<16) {
+            result=BqOffer(&queue,&nextState);
+            if(result==BQ_ERROR)return fail(46,1);
+            if(result==BQ_LATER)return 1;
+            if(result==BQ_FULL){queueBlocked=1;return 1;}
+            appliedEvents++;count++;
+            if(!fetchEvent())return 0;
+        }
+        if(nextValid&&nextState.when<=playEnd) {
+            queueBlocked=1;return 1;
+        }
+        result=BqEnd(&queue);
+        if(result==BQ_ERROR)return fail(46,1);
+        if(result==BQ_FULL)queueBlocked=1;
+        if(result==BQ_DONE)finished=1;
+        return 1;
+    }
+    /* Bound foreground work, preserving every attack in source order. */
+    while(nextValid&&nextState.when<=elapsed&&count<64) {
+        late=elapsed-nextState.when;totalLateness+=late;
+        if(late>maxLateness)maxLateness=late;
+        if(!applyState(&nextState))return 0;
+        appliedEvents++;count++;
         if(!fetchEvent())return 0;
     }
-    if(!count)return 1;
-    appliedEvents++;skippedEvents+=count-1;
-    late=elapsed-pending.when;totalLateness+=late;if(late>maxLateness)maxLateness=late;
-    for(i=0;i<4;i++) {
-        change=current.note[i]!=pending.note[i]||current.velocity[i]!=pending.velocity[i]||
-               (pending.retrigger&(1<<i));
-        if(change&&current.note[i]&&data(i,current.note[i],0,0))return fail(34,1);
-    }
-    for(i=0;i<4;i++) {
-        change=current.note[i]!=pending.note[i]||current.velocity[i]!=pending.velocity[i]||
-               (pending.retrigger&(1<<i));
-        if(change&&pending.note[i]&&data(i,pending.note[i],pending.velocity[i],1))
-            return fail(34,1);
-    }
-    current=pending;return 1;
+    queueBlocked=nextValid&&nextState.when<=elapsed;
+    return 1;
 }
 static int updateVideo(DWORD elapsed)
 {
@@ -232,8 +310,11 @@ static int updateVideo(DWORD elapsed)
 }
 static void play(int full)
 {
-    unsigned i;HFILE marker;char path[160];
-    if(playing)return;fullPlayback=full;releaseSound();closeStreams();lastError=0;finished=0;
+    unsigned i;HFILE marker;char path[160];MUSICSTATE seed;
+    DWORD target=resumePosition;int resume=paused;
+    if(playing)return;
+    fullPlayback=full;releaseSound();closeStreams();lastError=0;
+    finished=paused=queueBlocked=usedQueue=0;
     maxGap=maxLateness=totalLateness=appliedEvents=skippedEvents=0;
     renderedFrames=droppedFrames=maxVideoRead=maxMusicRead=maxDraw=0;
     musicFailures=videoFailures=cleanupError=0;recordsRead=previousEvent=0;
@@ -244,10 +325,53 @@ static void play(int full)
        ((mode&1)&&!acquireSound())) {
         stop("Error: see log");return;
     }
+    if(!resume||target<timelineBase||target>=playEnd)target=timelineBase;
+    timelineBase=target;
+    usedQueue=queueReady;
+    if(mode&1) {
+        if(!musicAt(target,&seed)) {stop("Seek/music error");return;}
+        if(queueReady) {
+            if(BqStart(&queue,&queueOps,target,playEnd,&seed)!=BQ_OK) {
+                fail(46,1);stop("Queue start error");return;
+            }
+        } else if(midi(0,MODM_RESET,MIDI_COOKIE,0L,0L)||
+                  !applyState(&seed)) {
+            fail(34,1);stop("Seek/music error");return;
+        }
+    }
     pathFor(path,"TVSTART.LOG");marker=_lcreat(path,0);if(marker!=HFILE_ERROR)_lclose(marker);
     startTick=GetTickCount();playing=1;lstrcpy(status,"Playing - Esc");
+    if(!updateMusic(target)){stop("Queue/media error");return;}
+    if(!queueBlocked&&!updateVideo(target)) {
+        stop("Video error");return;
+    }
     InvalidateRect(mainWindow,NULL,TRUE);UpdateWindow(mainWindow);
-    startTick=lastTick=GetTickCount();
+    lastTick=GetTickCount();
+}
+static void pausePlayback(void)
+{
+    DWORD position;
+    if(!playing)return;
+    position=movieNow();
+    if(queueReady&&BqPause(&queue,&position)!=BQ_OK) {
+        fail(46,1);stop("Pause flush error");return;
+    }
+    /* stop closes the same owner after the acknowledged queue flush. */
+    if(queueReady)queueReady=0;
+    lastElapsed=position>=timelineBase?position-timelineBase:0L;
+    playing=0;stop("Paused: Space resumes");
+    resumePosition=position;paused=1;finished=0;
+}
+static void seekTo(DWORD target)
+{
+    int resume=playing,full=fullPlayback;
+    DWORD lower=full?0L:songStart;
+    if(!playing&&!paused)return;
+    if(target<lower)target=lower;
+    if(target>=playEnd)target=playEnd-1;
+    stop("Seeking");paused=1;resumePosition=target;
+    play(full);
+    if(!resume&&playing)pausePlayback();
 }
 static void timeText(char *text,DWORD ms)
 {
@@ -267,30 +391,47 @@ long FAR PASCAL WndProc(HWND window,unsigned message,WORD wp,LONG lp)
             {started=1;play(fullPlayback);}
         if(playing) {
             now=GetTickCount();gap=now-lastTick;if(gap>maxGap)maxGap=gap;lastTick=now;
-            elapsed=now-startTick+timelineBase;
-            if(elapsed>=playEnd){stop("Done: Space plays");return 0;}
+            elapsed=movieNow();
+            if(lastError){stop("Clock error");return 0;}
             if(!updateMusic(elapsed)){stop("Media/PSG error");return 0;}
-            elapsed=GetTickCount()-startTick+timelineBase;
-            if(elapsed>=playEnd){stop("Done: Space plays");return 0;}
-            if(!updateVideo(elapsed)){stop("Media/PSG error");return 0;}
-            elapsed=GetTickCount()-startTick+timelineBase;
-            if(elapsed>=playEnd){stop("Done: Space plays");return 0;}
+            if(queueReady?finished:
+               (elapsed>=playEnd&&!queueBlocked)) {
+                stop("Done: Space plays");return 0;
+            }
+            elapsed=movieNow();
+            if(lastError){stop("Clock error");return 0;}
+            if(!queueBlocked&&!updateVideo(elapsed)) {
+                stop("Media/PSG error");return 0;
+            }
+            elapsed=movieNow();
+            if(lastError){stop("Clock error");return 0;}
             if(!updateMusic(elapsed)){stop("Media/PSG error");return 0;}
+            lastElapsed=elapsed-timelineBase;
         } else if(automatic&&finished&&GetTickCount()-finishTick>=2000UL)DestroyWindow(window);
         return 0;
     case WM_KEYDOWN:
-        if(wp==VK_ESCAPE){if(playing)stop("Stopped: Space");}
-        else if(wp==VK_SPACE){if(playing)stop("Stopped: Space");else play(0);}
-        else if(wp==VK_RETURN){if(playing)stop("Restarting full");play(1);}
+        if(wp==VK_ESCAPE){if(playing||paused)stop("Stopped: Space");}
+        else if(wp==VK_SPACE) {
+            if(playing)pausePlayback();
+            else play(paused?fullPlayback:0);
+        } else if(wp==VK_RETURN) {
+            if(playing||paused)stop("Restarting full");
+            paused=0;play(1);
+        } else if(wp==VK_LEFT||wp==VK_RIGHT) {
+            elapsed=playing?movieNow():resumePosition;
+            seekTo(wp==VK_LEFT?(elapsed>5000UL?elapsed-5000UL:0L):
+                   elapsed+5000UL);
+        }
         return 0;
-    case WM_SIZE:if(wp==SIZE_MINIMIZED&&playing)stop("Paused: Space");return 0;
-    case WM_KILLFOCUS:if(playing)stop("Paused: Space");return 0;
-    case WM_SYSKEYDOWN:if(playing)stop("Paused: Space");break;
-    case WM_ACTIVATE:if(!wp&&playing)stop("Paused: Space");return 0;
+    case WM_SIZE:if(wp==SIZE_MINIMIZED&&playing)pausePlayback();return 0;
+    case WM_KILLFOCUS:if(playing)pausePlayback();return 0;
+    case WM_SYSKEYDOWN:if(playing)pausePlayback();break;
+    case WM_ACTIVATE:if(!wp&&playing)pausePlayback();return 0;
     case WM_PAINT:
         dc=BeginPaint(window,&paint);
         if(hadFrame)BitBlt(dc,8,8,WIDTH,HEIGHT,memoryDC,0,0,SRCCOPY);
-        elapsed=playing?GetTickCount()-startTick:lastElapsed;if(elapsed>duration)elapsed=duration;
+        elapsed=playing?movieNow():timelineBase+lastElapsed;
+        if(elapsed>duration)elapsed=duration;
         lstrcpy(time,"Length: ");timeText(total,playEnd>timelineBase?playEnd-timelineBase:0);lstrcat(time,total);
         TextOut(dc,8,62,time,lstrlen(time));TextOut(dc,8,78,status,lstrlen(status));
         TextOut(dc,8,94,playing?"Esc stops":"Enter: full video",playing?9:17);

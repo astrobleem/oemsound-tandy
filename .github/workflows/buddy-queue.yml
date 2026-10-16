@@ -1,0 +1,38 @@
+name: Buddy queue client host contracts
+on:
+  pull_request:
+    paths:
+      - 'examples/BUDDY/WIN30/source/**'
+      - '.github/workflows/buddy-queue.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'examples/BUDDY/WIN30/source/**'
+      - '.github/workflows/buddy-queue.yml'
+permissions:
+  contents: read
+jobs:
+  queue-client-host:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: examples/BUDDY/WIN30/source
+      - name: Test C89 client logic with a synthetic backend
+        shell: pwsh
+        run: |
+          $cc = (Get-Command gcc -ErrorAction SilentlyContinue).Source
+          if (!$cc) {
+            $cc = @('C:/mingw64/bin/gcc.exe',
+                    'C:/msys64/mingw64/bin/gcc.exe',
+                    'C:/msys64/ucrt64/bin/gcc.exe') |
+              Where-Object { Test-Path -LiteralPath $_ } |
+              Select-Object -First 1
+          }
+          if (!$cc) { throw 'Preinstalled Windows GCC was not found.' }
+          python examples/BUDDY/WIN30/source/TESTBQ.PY `
+            --cc $cc --out host-results
+          if ($LASTEXITCODE -ne 0) { throw 'Client contract tests failed.' }
+      # Host logic only. No native driver, emulator, media or binary artifacts.
