@@ -61,4 +61,7 @@ player/provider outputs plus five raw QA programs). Those are distinct build
 scopes, not conflicting counts; the paired run is compile/link evidence and
 does not by itself establish runtime or hardware behavior.
 
-The frozen WINLIB30.ZIP hash above has not been rebuilt for this additive generator; the generator is present in this staging tree only until the parent packages the correction.
+The evidence-corrected WINLIB30.ZIP includes TESTS/NATIVE/MAKEGUIQA.PY.
+Its runtime files are byte-identical to the original 58-check preview. Native
+validation is recorded author-run evidence, not public CI or a reviewer rerun;
+no native test was rerun for this evidence/documentation correction.
