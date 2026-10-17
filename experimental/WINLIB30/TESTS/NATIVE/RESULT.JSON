@@ -1,0 +1,77 @@
+{
+  "scope": "single native Windows3.0 realmode CGA TandyHX8088 emulator case",
+  "checks": 58,
+  "failures": 0,
+  "memory_before": 292992,
+  "memory_after": 292992,
+  "clean_DOS_return": true,
+  "original_BIOS_INT2F_restored": true,
+  "seconds": 178.6089999997057,
+  "runtime": [
+    {
+      "name": "CHIME.SND",
+      "bytes": 96,
+      "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149",
+      "build": "original synthetic QA data"
+    },
+    {
+      "name": "MCITNDY.DLL",
+      "bytes": 11413,
+      "sha256": "e495d11353536720abdeb2fadb7ef8e5d40fa489a8ec4d4ca8dbd8d33911c258",
+      "build": "fresh MSC6 build"
+    },
+    {
+      "name": "MIDICLK.DLL",
+      "bytes": 11062,
+      "sha256": "0c7a6d5a104437d619bb7835fda28dde1266a16b8c3ab7a2d702487b51f4215c",
+      "build": "fresh MSC6 build"
+    },
+    {
+      "name": "MINIPLAY.EXE",
+      "bytes": 22109,
+      "sha256": "00dc26526fd78be1c2f18f713e51390e3f07229697ee4f03d8e7e971dd740654",
+      "build": "fresh MSC6 build"
+    },
+    {
+      "name": "PLUCK.TND",
+      "bytes": 248,
+      "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c",
+      "build": "original synthetic QA data"
+    },
+    {
+      "name": "RAWCLK.DLL",
+      "bytes": 8766,
+      "sha256": "46d66936dc19312c041607ebb34098c22ea3ccccd80a00257485d5a60c57582d",
+      "build": "fresh MSC6 build"
+    },
+    {
+      "name": "STREAM.MID",
+      "bytes": 3100,
+      "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76",
+      "build": "original synthetic QA data"
+    },
+    {
+      "name": "TBRIDGE.EXE",
+      "bytes": 2922,
+      "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f",
+      "build": "fresh MSC6 build"
+    },
+    {
+      "name": "TPLAY.EXE",
+      "bytes": 16625,
+      "sha256": "b1d26b9a6bb22b24efe06d1b8e5af055efb8727037d1d547f6ebcec8ff752d5b",
+      "build": "original tested R4 launcher"
+    }
+  ],
+  "emulator": "private86Box-based FIXBOX, configured4772728Hz640KB",
+  "not_claimed": [
+    "physicalhardware",
+    "listening/audiofidelity",
+    "calibratedCPUtiming",
+    "PCjr",
+    "Windows3.1",
+    "MOD/VGM/VGZ",
+    "automaticbass"
+  ],
+  "external_TSOUND_SHA256": "7461d227846830f3ff604c40cf31ad0e3fb34122a13de6269e86de02cc4209e5"
+}

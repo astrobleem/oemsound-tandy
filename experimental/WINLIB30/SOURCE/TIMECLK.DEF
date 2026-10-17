@@ -1,0 +1,29 @@
+LIBRARY RAWCLK
+DESCRIPTION 'Private Windows-owned bounded PSG frame clock'
+EXETYPE WINDOWS
+CODE FIXED PRELOAD
+DATA FIXED SINGLE PRELOAD
+HEAPSIZE 0
+EXPORTS
+ TCOpen @1
+ TCPush @2
+ TCStart @3
+ TCEnd @4
+ TCClose @5
+ TCDebug @6
+ TCProbe @7
+ TCProbeOff @8
+ TCStamp @9
+ WEP @10 RESIDENTNAME
+ TCResume @11
+ TCClock @12
+ TCWideOpen @13
+ TCPause @14
+ TCUnpause @15
+ TCFlush @16
+ TCRearm @17
+ TCMask @18
+ TCLiveApply @19
+IMPORTS
+ CreateSystemTimer=SYSTEM.2
+ KillSystemTimer=SYSTEM.3

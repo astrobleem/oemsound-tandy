@@ -1,0 +1,58 @@
+{
+  "scope": "MINIPLAY old direct includes vs facade using restored player declarations in both; source expansion only",
+  "equal": true,
+  "expanded_bytes": 67022,
+  "expanded_sha256": "1d329f6c3f74d6d9d3c074db874c0f23c79058ffe3ecd4c932f72dc30f1c0380",
+  "native": "Not a native-build record. Later paired compile/link and the existing 58-check native preview are recorded separately in PROVENANCE.JSON.",
+  "protected_source": [
+    {
+      "name": "RAWAPP.C",
+      "sha256": "ebde64f89e82158339548924dc0a92e878af038c851d85bb74f5a24adee41436"
+    },
+    {
+      "name": "RAWFILE.C",
+      "sha256": "cfc7ee31313233e5d696c097403ad418a6810a306a38eb131cbd201fa899ca56"
+    },
+    {
+      "name": "MDAPI.H",
+      "sha256": "a8339122e6d1e72d742b55319f5c154f61e2856fc21d15a4fc3eb9774c34e011"
+    },
+    {
+      "name": "TIMECLK.H",
+      "sha256": "8c725d1436243070829cd6b30b8cdec06934f220a40122df2bed12e6b51b4544"
+    },
+    {
+      "name": "MCIAPI.H",
+      "sha256": "b9546d9d8c839800a79c7217c79227d865060b1526c92403cdcd5a314d96a8ec"
+    },
+    {
+      "name": "MIDICLK.C",
+      "sha256": "e6814c627ac735e9380934e73da4cf65464bd2656732d27b48b98862e1b45f5e"
+    },
+    {
+      "name": "MIDISYN.C",
+      "sha256": "fa9cd4a15b5da9c4b2c3b5b04165ad3bad8f6a97cbbdf96de019a687f1b5213b"
+    },
+    {
+      "name": "INSTR.C",
+      "sha256": "3d7960b4dd8a1c66f67466748882934d38bc9d2b788ffb3e34aa67604e30b9da"
+    },
+    {
+      "name": "TIMECLK.C",
+      "sha256": "2af3ddd446f68589dcce830823b3d0c00446061074f8734ddf5bc28ceec736f0"
+    },
+    {
+      "name": "CLOCK.ASM",
+      "sha256": "89c5d1d9ecadea50bb50ec53ca67c11e7b084bc721e3cc02b825a82e7db40c77"
+    },
+    {
+      "name": "WINHOOK.ASM",
+      "sha256": "2181cb398c9baf5d26b3dbdd9a21145d67325c5eb49241d87481c2def867052e"
+    },
+    {
+      "name": "TBRIDGE.ASM",
+      "sha256": "35589608781d651d8a42b31fdd84a2f2745baee3fc11c4b3acb1bfe65a4446af"
+    }
+  ],
+  "record_stage": "Historical source-preprocessing equivalence only; this check predates paired compile/link and native qualification."
+}

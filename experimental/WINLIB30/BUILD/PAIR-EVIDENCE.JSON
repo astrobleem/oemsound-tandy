@@ -1,0 +1,176 @@
+{
+  "scope": "Saved fresh MSC6 /G0 compile/link comparison of the direct-header baseline and LWAUDIO facade; no rerun during this documentation correction.",
+  "timestamp": "2026-10-17 (saved READY30 evidence)",
+  "input_sets": {
+    "AUDOLD": "saved direct-header MMLAB input set",
+    "AUDNEW": "saved LWAUDIO-facade MMLAB input set",
+    "comparison": "256 files in each; only MINIPLAY.C differs, by forwarding include only."
+  },
+  "preparation": "PREPBLD.PY stages the paired inputs from audio-adopt/SOURCE; AUDOLD substitutes direct MCIAPI.H and RAWAPP.H includes for the single LWAUDIO.H include. It copies audio-adopt/BUILD/BUILD30.BAT into each job and redirects TMP to the mounted D: drive. PREP.JSON records per-file input hashes.",
+  "runner": "RUNBLD.PY runs DOSBox-X with -nopromptfolder and each saved BUILD.CNF. The config mounts windows-build-view as C: and the job as D:, then runs D:, CD \\MMLAB, BUILD30.BAT. The batch compiles with /G0 /Gw /Gs /AS /W3 /Od and links MINIPLAY, RAWQA, QCHIME, QXP, QEXIT, QPSG, QMOUTH, TIMECLK, MIDICLK, MCITNDY, and TBRIDGE. The eleven output products are seven application EXEs, three provider DLLs, and TBRIDGE.EXE as listed in RESULT.JSON.",
+  "recipe_scope_reconciliation": "BUILD/PLAYER30.BAT and BUILD/PLAYER30.PY in the staged preview are a separate six-product player/provider recipe. They are not the full eleven-product paired recipe. BUILD30.PY is included in the evidence bundle as a recipe reference only; the saved paired runner invoked the per-job BUILD30.BAT.",
+  "jobs": {
+    "AUDNEW": {
+      "status": "PASS",
+      "seconds": 27.515000000130385,
+      "products": [
+        {
+          "name": "MINIPLAY.EXE",
+          "bytes": 22109,
+          "sha256": "00dc26526fd78be1c2f18f713e51390e3f07229697ee4f03d8e7e971dd740654"
+        },
+        {
+          "name": "RAWQA.EXE",
+          "bytes": 19597,
+          "sha256": "1940af15eef4f0e421222a698b2b1d6a2e167509ac16399a4855782652663433"
+        },
+        {
+          "name": "QCHIME.EXE",
+          "bytes": 6749,
+          "sha256": "ec74df6210d2debb9770e7c156bd3050c2ffdcd68959e4a622ed6774c3661485"
+        },
+        {
+          "name": "QXP.EXE",
+          "bytes": 6781,
+          "sha256": "3f6d2ffd496fa103d3f633b3f98215aeb2534db2c25ef6f6f57c32719fc62b21"
+        },
+        {
+          "name": "QEXIT.EXE",
+          "bytes": 10925,
+          "sha256": "e58a1a3bdc9e1d50aba6b0d32c34a7f164a1009a9e47fe9042528815debbd57c"
+        },
+        {
+          "name": "QPSG.EXE",
+          "bytes": 8525,
+          "sha256": "d101d76079571e3d19154421b0b1f17ae56d95ad4a9e441209a3820498453ac8"
+        },
+        {
+          "name": "QMOUTH.EXE",
+          "bytes": 11277,
+          "sha256": "a61c97afc16899df0b803f7677a92e079ebe095989f7048ed5ef4a0bd5fc1e9a"
+        },
+        {
+          "name": "RAWCLK.DLL",
+          "bytes": 8766,
+          "sha256": "46d66936dc19312c041607ebb34098c22ea3ccccd80a00257485d5a60c57582d"
+        },
+        {
+          "name": "MIDICLK.DLL",
+          "bytes": 11062,
+          "sha256": "0c7a6d5a104437d619bb7835fda28dde1266a16b8c3ab7a2d702487b51f4215c"
+        },
+        {
+          "name": "MCITNDY.DLL",
+          "bytes": 11413,
+          "sha256": "e495d11353536720abdeb2fadb7ef8e5d40fa489a8ec4d4ca8dbd8d33911c258"
+        },
+        {
+          "name": "TBRIDGE.EXE",
+          "bytes": 2922,
+          "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
+        }
+      ],
+      "log": {
+        "path": "TESTS/NATIVE/PAIR/AUDNEW.BUILD.LOG",
+        "bytes": 4914,
+        "sha256": "d2e8dc403b00a84c714fb5a1df864964ed64617aa4d00fe08a0d230f180c82dd"
+      }
+    },
+    "AUDOLD": {
+      "status": "PASS",
+      "seconds": 26.79699999978766,
+      "products": [
+        {
+          "name": "MINIPLAY.EXE",
+          "bytes": 22109,
+          "sha256": "00dc26526fd78be1c2f18f713e51390e3f07229697ee4f03d8e7e971dd740654"
+        },
+        {
+          "name": "RAWQA.EXE",
+          "bytes": 19597,
+          "sha256": "1940af15eef4f0e421222a698b2b1d6a2e167509ac16399a4855782652663433"
+        },
+        {
+          "name": "QCHIME.EXE",
+          "bytes": 6749,
+          "sha256": "ec74df6210d2debb9770e7c156bd3050c2ffdcd68959e4a622ed6774c3661485"
+        },
+        {
+          "name": "QXP.EXE",
+          "bytes": 6781,
+          "sha256": "3f6d2ffd496fa103d3f633b3f98215aeb2534db2c25ef6f6f57c32719fc62b21"
+        },
+        {
+          "name": "QEXIT.EXE",
+          "bytes": 10925,
+          "sha256": "e58a1a3bdc9e1d50aba6b0d32c34a7f164a1009a9e47fe9042528815debbd57c"
+        },
+        {
+          "name": "QPSG.EXE",
+          "bytes": 8525,
+          "sha256": "d101d76079571e3d19154421b0b1f17ae56d95ad4a9e441209a3820498453ac8"
+        },
+        {
+          "name": "QMOUTH.EXE",
+          "bytes": 11277,
+          "sha256": "a61c97afc16899df0b803f7677a92e079ebe095989f7048ed5ef4a0bd5fc1e9a"
+        },
+        {
+          "name": "RAWCLK.DLL",
+          "bytes": 8766,
+          "sha256": "46d66936dc19312c041607ebb34098c22ea3ccccd80a00257485d5a60c57582d"
+        },
+        {
+          "name": "MIDICLK.DLL",
+          "bytes": 11062,
+          "sha256": "0c7a6d5a104437d619bb7835fda28dde1266a16b8c3ab7a2d702487b51f4215c"
+        },
+        {
+          "name": "MCITNDY.DLL",
+          "bytes": 11413,
+          "sha256": "e495d11353536720abdeb2fadb7ef8e5d40fa489a8ec4d4ca8dbd8d33911c258"
+        },
+        {
+          "name": "TBRIDGE.EXE",
+          "bytes": 2922,
+          "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
+        }
+      ],
+      "log": {
+        "path": "TESTS/NATIVE/PAIR/AUDOLD.BUILD.LOG",
+        "bytes": 4914,
+        "sha256": "d2e8dc403b00a84c714fb5a1df864964ed64617aa4d00fe08a0d230f180c82dd"
+      }
+    }
+  },
+  "separate_job_note": "READY30/RESULT.JSON also records SHELLNEW as FAIL with no products. It is an unrelated UI job, is not an audio pair member, and is not represented as a pass here.",
+  "supporting_files": {
+    "prep_script": "TESTS/NATIVE/PAIR/PREPBLD.PY",
+    "runner_script": "TESTS/NATIVE/PAIR/RUNBLD.PY",
+    "audio_build_recipe": "TESTS/NATIVE/PAIR/BUILD30.TEMPLATE.BAT",
+    "prepared_input_hashes": "TESTS/NATIVE/PAIR/PREP.JSON",
+    "paired_source_comparison": "TESTS/NATIVE/PAIR/PAIR-CHECK.JSON",
+    "full_job_result": "TESTS/NATIVE/PAIR/RESULT.JSON",
+    "guest_and_host_command_summary": "TESTS/NATIVE/PAIR/BUILD-COMMANDS.TXT",
+    "AUDNEW_actual_batch": "TESTS/NATIVE/PAIR/AUDNEW.BUILD30.BAT",
+    "AUDNEW_transcript": "TESTS/NATIVE/PAIR/AUDNEW.BUILD.LOG",
+    "AUDOLD_actual_batch": "TESTS/NATIVE/PAIR/AUDOLD.BUILD30.BAT",
+    "AUDOLD_transcript": "TESTS/NATIVE/PAIR/AUDOLD.BUILD.LOG"
+  },
+  "native_limit": "Compile/link pair only; not a playback, ABI, emulator, hardware, listening, or compatibility result. The separate native preview case is documented in STATUS.MD.",
+  "private_evidence_note": "The exact saved DOSBox config files are retained in the local audit evidence and are not distributed because they contain machine-specific absolute paths. Their byte counts and SHA-256 values are recorded above.",
+  "workstation_specific_configs": {
+    "AUDNEW": {
+      "saved_locally": true,
+      "bytes": 409,
+      "sha256": "d580dc0a6ee5d20332208057e0790841aceb6036b651c7d5336ee823bebeccf6",
+      "distribution": "not included because file contains machine-specific absolute mount paths"
+    },
+    "AUDOLD": {
+      "saved_locally": true,
+      "bytes": 409,
+      "sha256": "59faccb1b8e92a8dcf88f19fd79b17d5854a58e516eeb150606ad50bf97ccb11",
+      "distribution": "not included because file contains machine-specific absolute mount paths"
+    }
+  }
+}

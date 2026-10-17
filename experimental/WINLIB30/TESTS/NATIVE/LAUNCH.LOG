@@ -1,0 +1,6 @@
+TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.
+TBRIDGE v2 installed
+TPLAY: bridge install return=768.
+TPLAY: owned bridge installed; starting Windows.
+TBRIDGE v2 removed, original BIOS/INT2F vectors restored
+TPLAY: owned bridge removed; Windows return=0.

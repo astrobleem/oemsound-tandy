@@ -1,0 +1,233 @@
+{
+  "scope": "Exact provenance/hash audit for the 58-check native GUI test inputs; this JSON contains metadata only, not the private seed image, Windows tree, R4 ZIP, or test media payloads.",
+  "R4_source_archive": {
+    "logical_name": "TANDY-WINDOWS-AUDIO-APPS-PRIVATE-20261016-R4.zip",
+    "bytes": 3885752,
+    "sha256": "16dba56dc07aa41122058b91bf582c5add1868b6de54a08c4f6d60c0a024857d",
+    "pinned_by": "the original R4 source-input manifest and private preparation recipe"
+  },
+  "seed": {
+    "logical_name": "HOV8088-BASE.IMG",
+    "bytes": 84341760,
+    "sha256": "44b0f07a6a2bbd9b6b85f0818aa42ceb950879c759404127822436174aa47f2c"
+  },
+  "Windows_fixture": {
+    "identity": "read-only stock Windows fixture recorded in private preparation metadata; absolute source location omitted",
+    "file_gates": {
+      "WIN.COM": "CRC32 ce243cef",
+      "SYSTEM/SYSTEM.DRV": "CRC32 3ff05fec",
+      "display": "CGA.DRV with matching CGA fonts"
+    }
+  },
+  "audio_driver": {
+    "name": "TSOUND.DRV",
+    "bytes": 6168,
+    "sha256": "7461d227846830f3ff604c40cf31ad0e3fb34122a13de6269e86de02cc4209e5"
+  },
+  "prepared_guest_image": {
+    "logical_name": "Private prepared test image (not distributed)",
+    "bytes": 84341760,
+    "sha256": "b8a2693afdeca383a5d6a5d3834494284eaa46cab70c5269ee2cce61be3f187f",
+    "prep_record": {
+      "source_record_sha256": "4d3c76bb7742ceb01eda6e778904e7bb5c31e5417314722e0b5f74388f7de090"
+    },
+    "native_GUI_result_source_sha256": "b8a2693afdeca383a5d6a5d3834494284eaa46cab70c5269ee2cce61be3f187f",
+    "hash_match": true,
+    "not_included": true
+  },
+  "generators_and_records": {
+    "PREPFIX.PY": {
+      "source_identity": "private first-party fixture preparation script; source retained in local review evidence",
+      "sha256": "04a05615482826eb65336a1c98ae29db82c221079fd0c29af11112c534db16e2",
+      "role": "constructs the temporary fixture image and copies pinned test members from the verified R4 archive; its source comment labels extracted data as original bounded test fixtures, not songs or sampled media."
+    },
+    "R4 source input manifest": {
+      "sha256": "558c43ea24911da8ed30ecb5a055cdbb762046a4d9063a35ac7471a37dd8307c",
+      "role": "records seed-image and original R4 runtime input pins."
+    },
+    "prepared fixture input record": {
+      "sha256": "4d3c76bb7742ceb01eda6e778904e7bb5c31e5417314722e0b5f74388f7de090",
+      "status": "prepared but not executed by its own preparation script; its base-image hash matches the saved native run result."
+    },
+    "MAKEQA.PY": {
+      "source": "MAKEQA.PY",
+      "sha256": "6e2a48603019b551c9f768f6185e28aa4242a10f7a0f31adfe2acee9565050e5",
+      "role": "contains deterministic first-party byte literals for the three bundled QA files; literals hash-match R4 archive and package RUNTIME files."
+    },
+    "MAKEGUIQA.PY": {
+      "source": "TESTS/NATIVE/MAKEGUIQA.PY",
+      "sha256": "afd5e595945f5c9c7a5bf39c2260ef456f1c1f81438899166e686270e6f87006",
+      "role": "first-party deterministic hex generator for the five additional synthetic GUI-QA fixtures; requires an existing empty output directory and checks every embedded SHA-256 before writing.",
+      "payloads": "STRESS.TND, FX.TND, TYPE0.MID, BAD.TND, FAST.TND"
+    }
+  },
+  "native_harness": {
+    "source": "TESTS/NATIVE/RAWGUI.C",
+    "sha256": "c3911c5b47a623ca8f30703fe896a6382ce2d877fa68c41220a848641fb8922c",
+    "result": "TESTS/NATIVE/RESULT.JSON",
+    "raw_log_sha256": "e18a8aadf28f574dbc4a81816d2e2ac2e7bc5da8d75eb65940722c2f6fabe9bc",
+    "checks": 58,
+    "source_image_hash_matches_prepared_base": true,
+    "saved_original_result_sha256": "a0535128d5e953908387fe11ff2153a08a9fdff9b53efdbdb05778e3c295875b",
+    "raw_log": "TESTS/NATIVE/RAWGUI.LOG",
+    "packaged_result_sha256": "88facd779ac4e1220b2652568be2d54450e1f78c6ff60caebe66a653f65ac41d",
+    "packaged_log_sha256": "e18a8aadf28f574dbc4a81816d2e2ac2e7bc5da8d75eb65940722c2f6fabe9bc"
+  },
+  "assets": [
+    {
+      "name": "CHIME.SND",
+      "bytes": 96,
+      "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149",
+      "archive_member": "RUNTIME/CHIME.SND",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "PLAYER30_runtime_copy": {
+        "path": "RUNTIME/CHIME.SND",
+        "bytes": 96,
+        "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149",
+        "matches_archive": true,
+        "matches_MAKEQA_payload": true
+      },
+      "native_GUI_test_reference": "TESTS/NATIVE/RAWGUI.C uses this path for AGI EOF and sound-release checks.",
+      "MAKEQA.PY": {
+        "path": "MAKEQA.PY",
+        "sha256": "6e2a48603019b551c9f768f6185e28aa4242a10f7a0f31adfe2acee9565050e5",
+        "payload_matches_archive": true
+      },
+      "R4_input_identity": {
+        "source_set": "pinned R4 runtime input set",
+        "bytes": 96,
+        "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149",
+        "matches_archive": true
+      }
+    },
+    {
+      "name": "STRESS.TND",
+      "bytes": 248,
+      "sha256": "8fa1dade58376d43f138fb83c4db7a40047d437ba6079a8c133d88ac4ff894a7",
+      "archive_member": "RUNTIME/STRESS.TND",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "native_GUI_test_reference": "TESTS/NATIVE/RAWGUI.C uses this path for the TND baseline and restart/Stop checks.",
+      "R4_input_identity": {
+        "source_set": "pinned R4 runtime input set",
+        "bytes": 248,
+        "sha256": "8fa1dade58376d43f138fb83c4db7a40047d437ba6079a8c133d88ac4ff894a7",
+        "matches_archive": true
+      },
+      "MAKEGUIQA.PY": {
+        "path": "TESTS/NATIVE/MAKEGUIQA.PY",
+        "payload_matches_archive": true
+      }
+    },
+    {
+      "name": "TYPE0.MID",
+      "bytes": 34,
+      "sha256": "ea10eb7ea2e1310c55581faef0aa021366949444786bf09896a26fa75e26ea1e",
+      "archive_member": "RUNTIME/TYPE0.MID",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "native_GUI_test_reference": "TESTS/NATIVE/RAWGUI.C uses this path to switch back to MIDI and check EOF.",
+      "R4_input_identity": {
+        "source_set": "pinned R4 runtime input set",
+        "bytes": 34,
+        "sha256": "ea10eb7ea2e1310c55581faef0aa021366949444786bf09896a26fa75e26ea1e",
+        "matches_archive": true
+      },
+      "MAKEGUIQA.PY": {
+        "path": "TESTS/NATIVE/MAKEGUIQA.PY",
+        "payload_matches_archive": true
+      }
+    },
+    {
+      "name": "BAD.TND",
+      "bytes": 16,
+      "sha256": "07e84fa411a34dfe391a56a996ad75dba20c8a7c54ad508bbd67d058a369f6fc",
+      "archive_member": "RUNTIME/BAD.TND",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "preparation": "PREPFIX.PY extracts this exact member from the pinned R4 archive into the temporary MMLAB test fixture.",
+      "native_GUI_test_reference": "TESTS/NATIVE/RAWGUI.C uses this path for malformed/expression/fast-input rejection checks.",
+      "MAKEGUIQA.PY": {
+        "path": "TESTS/NATIVE/MAKEGUIQA.PY",
+        "payload_matches_archive": true
+      }
+    },
+    {
+      "name": "FAST.TND",
+      "bytes": 248,
+      "sha256": "7d1f4dfcb5205708069703103eb0ce20d9ddea659fcd7fc0288152830c2d7eea",
+      "archive_member": "RUNTIME/FAST.TND",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "preparation": "PREPFIX.PY extracts this exact member from the pinned R4 archive into the temporary MMLAB test fixture.",
+      "native_GUI_test_reference": "TESTS/NATIVE/RAWGUI.C uses this path for malformed/expression/fast-input rejection checks.",
+      "MAKEGUIQA.PY": {
+        "path": "TESTS/NATIVE/MAKEGUIQA.PY",
+        "payload_matches_archive": true
+      }
+    },
+    {
+      "name": "FX.TND",
+      "bytes": 67,
+      "sha256": "1670ac4bb02e5e4a61d2f32eaf7178178739fde36035c754aeafd5b3680e2f92",
+      "archive_member": "RUNTIME/FX.TND",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "preparation": "PREPFIX.PY extracts this exact member from the pinned R4 archive into the temporary MMLAB test fixture.",
+      "native_GUI_test_reference": "TESTS/NATIVE/RAWGUI.C uses this path for malformed/expression/fast-input rejection checks.",
+      "MAKEGUIQA.PY": {
+        "path": "TESTS/NATIVE/MAKEGUIQA.PY",
+        "payload_matches_archive": true
+      }
+    },
+    {
+      "name": "PLUCK.TND",
+      "bytes": 248,
+      "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c",
+      "archive_member": "RUNTIME/PLUCK.TND",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "PLAYER30_runtime_copy": {
+        "path": "RUNTIME/PLUCK.TND",
+        "bytes": 248,
+        "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c",
+        "matches_archive": true,
+        "matches_MAKEQA_payload": true
+      },
+      "preview_role": "One of the three bundled deterministic QA examples; not a commercial or representative song.",
+      "MAKEQA.PY": {
+        "path": "MAKEQA.PY",
+        "sha256": "6e2a48603019b551c9f768f6185e28aa4242a10f7a0f31adfe2acee9565050e5",
+        "payload_matches_archive": true
+      },
+      "R4_input_identity": {
+        "source_set": "pinned R4 runtime input set",
+        "bytes": 248,
+        "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c",
+        "matches_archive": true
+      }
+    },
+    {
+      "name": "STREAM.MID",
+      "bytes": 3100,
+      "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76",
+      "archive_member": "RUNTIME/STREAM.MID",
+      "classification": "original synthetic QA fixture; test data, not a catalog song or third-party sample",
+      "PLAYER30_runtime_copy": {
+        "path": "RUNTIME/STREAM.MID",
+        "bytes": 3100,
+        "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76",
+        "matches_archive": true,
+        "matches_MAKEQA_payload": true
+      },
+      "preview_role": "One of the three bundled deterministic QA examples; not a commercial or representative song.",
+      "MAKEQA.PY": {
+        "path": "MAKEQA.PY",
+        "sha256": "6e2a48603019b551c9f768f6185e28aa4242a10f7a0f31adfe2acee9565050e5",
+        "payload_matches_archive": true
+      },
+      "R4_input_identity": {
+        "source_set": "pinned R4 runtime input set",
+        "bytes": 3100,
+        "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76",
+        "matches_archive": true
+      }
+    }
+  ],
+  "verification": "Read-only hash and literal comparisons plus execution of MAKEGUIQA.PY in a fresh temporary empty host directory; no compiler or emulator was run. The 58-check native result, GUI log, and input image hash are existing saved evidence.",
+  "distribution_limit": "The three RUNTIME files already in the player mirror remain byte-identical. The five additional original synthetic QA fixtures are reproducible from TESTS/NATIVE/MAKEGUIQA.PY into an explicit empty test directory and are not added to ordinary RUNTIME. No private image/archive or extra audio payload is included."
+}
