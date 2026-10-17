@@ -1,0 +1,2450 @@
+[
+  {
+    "job": "AUDOLD",
+    "batch": "MMLAB/BUILD30.BAT",
+    "products": [
+      "MINIPLAY.EXE",
+      "RAWQA.EXE",
+      "QCHIME.EXE",
+      "QXP.EXE",
+      "QEXIT.EXE",
+      "QPSG.EXE",
+      "QMOUTH.EXE",
+      "RAWCLK.DLL",
+      "MIDICLK.DLL",
+      "MCITNDY.DLL",
+      "TBRIDGE.EXE"
+    ],
+    "sources": [
+      {
+        "name": "MMLAB/AGIGUI.BAT",
+        "sha256": "49e8bc637a4b8fc976fdd9e0499b3c17b2586073281a774778f3364467d4ebb7"
+      },
+      {
+        "name": "MMLAB/AGIGUI.C",
+        "sha256": "1221f1352e51e1fd259f7ffc6ce8b9d5d7e1725ad4bc355f378c335df08f1a34"
+      },
+      {
+        "name": "MMLAB/AGIGUI.DEF",
+        "sha256": "c764ae091df3d82f4953c8f59b78179a4735660e694897b312ed244b817a1685"
+      },
+      {
+        "name": "MMLAB/AGIGUI.RSP",
+        "sha256": "91ef0e90b71b19c080476b8fdc80b9fbd09f910f92330bd01f65d9810e82143e"
+      },
+      {
+        "name": "MMLAB/ALLHAND.BAT",
+        "sha256": "7ee7e5fe596873c2aac5daeaa92aa66e868793495b45b565967fbcf14aad385c"
+      },
+      {
+        "name": "MMLAB/APPCLK.H",
+        "sha256": "863c8ce18eb83ec605268fa0950de9c699a797c13a43c2056a572d03b869266b"
+      },
+      {
+        "name": "MMLAB/APPQA.C",
+        "sha256": "ef2053346e2aeede0793c8c87670719e9d69e380172567014e5ed07b1f7f43b8"
+      },
+      {
+        "name": "MMLAB/APPQA.DEF",
+        "sha256": "ac9bec78d10520137a56da767f86f9a0140bed3670183ae249b5d0a3de12c2b1"
+      },
+      {
+        "name": "MMLAB/APPQA.RSP",
+        "sha256": "cba08848270f97424bcb978a098b071014470634c3ebe32dd206ce572bd0fb5e"
+      },
+      {
+        "name": "MMLAB/APPS1.BAT",
+        "sha256": "ae53d2e00bcc7ab768153a5c5499cd3693acd6b2007bc23fb2c84dc72d0b537e"
+      },
+      {
+        "name": "MMLAB/APPS10.BAT",
+        "sha256": "0622cebedfd13a4509fdb692440ce3365278dea066e64606fc80c0b625ef66aa"
+      },
+      {
+        "name": "MMLAB/APPS11.BAT",
+        "sha256": "aefcc99bfeb18f3eb7135669fe298f0c355ffdf07803757eb9331fbb856af2a5"
+      },
+      {
+        "name": "MMLAB/APPS12.BAT",
+        "sha256": "20ef9401c062183c96f01927316ee8ce8dc85771270b19f53cef6d470a1b558d"
+      },
+      {
+        "name": "MMLAB/APPS13.BAT",
+        "sha256": "aefcc99bfeb18f3eb7135669fe298f0c355ffdf07803757eb9331fbb856af2a5"
+      },
+      {
+        "name": "MMLAB/APPS2.BAT",
+        "sha256": "db819df2ca5e178e6ab6ac667fad101bc56fc88fa166c84a09937d550432c905"
+      },
+      {
+        "name": "MMLAB/APPS3.BAT",
+        "sha256": "aefcc99bfeb18f3eb7135669fe298f0c355ffdf07803757eb9331fbb856af2a5"
+      },
+      {
+        "name": "MMLAB/APPS4.BAT",
+        "sha256": "3349e072210cc0dc8e8b896157791e97e03556b0090ecea21662bb7aaa5d4ca1"
+      },
+      {
+        "name": "MMLAB/APPS5.BAT",
+        "sha256": "25a7544fe4d25033240ad0946cfd352d897cea2b2101096b3697f86ec5c162f2"
+      },
+      {
+        "name": "MMLAB/APPS6.BAT",
+        "sha256": "b049e59cc343d38434b2843a6383965a3cf875c858aa72f4b0830aeee6cde239"
+      },
+      {
+        "name": "MMLAB/APPS7.BAT",
+        "sha256": "6a9e96f97a451a2f4bd92a4ed156aca084b69094fd365b6916fe15d5ded00922"
+      },
+      {
+        "name": "MMLAB/APPS8.BAT",
+        "sha256": "6c7a9cf9f428a4b927a8528e7a772fe87c737fe8b76910139136aab559b194e8"
+      },
+      {
+        "name": "MMLAB/APPS9.BAT",
+        "sha256": "c10e8d5ad77636a991ff7df79c38a7a81c27aff80a4741c5e88d8312a61526b0"
+      },
+      {
+        "name": "MMLAB/APPSALL.BAT",
+        "sha256": "0cd9bc10d2921ff49adf8d7e25559980e2e9c8d21af870e1e43f032702e13d67"
+      },
+      {
+        "name": "MMLAB/ARGBOOT.C",
+        "sha256": "85125ee46b29dd8be498c334f372cdcb24fbc12b73d66ae0dbf9db945bc362e7"
+      },
+      {
+        "name": "MMLAB/ARGBOOT.DEF",
+        "sha256": "c9e06c45214d241731cfd949f346ea51d1210aba8986262ed388647bb668ee7b"
+      },
+      {
+        "name": "MMLAB/ARGBOOT.RSP",
+        "sha256": "d0fbcc97eae1c996e1ca4ebefdc7fbbdc7e74491f7097243d6d8e3b076ab74bb"
+      },
+      {
+        "name": "MMLAB/ASYNC.BAT",
+        "sha256": "b4a5abbfb3887a677847c0bc720083162c57a2f3c5d94396e5d622df6189c7b6"
+      },
+      {
+        "name": "MMLAB/BEATSEQ.H",
+        "sha256": "e4962c1551e8d3b9f428099d483a6353fc7440e61829b94ceba4d37af2ef0afd"
+      },
+      {
+        "name": "MMLAB/BOUND1.BAT",
+        "sha256": "af448048f5094c81fd013348e76c17ca33ca2ae5d4d30f5624c0c94d11e4f248"
+      },
+      {
+        "name": "MMLAB/BQBRIDGE.H",
+        "sha256": "da8bf51281c6a14009de562936bbb303c469892a1eeda842dd53ac3e68f3600e"
+      },
+      {
+        "name": "MMLAB/BQSCHED.C",
+        "sha256": "61a633586ab5c97631039ccda3c9a7344b8265cac78b9e2c5f71a70e55ea9737"
+      },
+      {
+        "name": "MMLAB/BQSCHED.H",
+        "sha256": "774bc6d25a4e8056e943ee51c5ce990efb1ceaf117cbb6a22dc5c0cb6f139912"
+      },
+      {
+        "name": "MMLAB/BUDQ.C",
+        "sha256": "c14c9b138dd34f60f1423996fbad18878aa6bea1b54cbf67116a2d33b6a79ca2"
+      },
+      {
+        "name": "MMLAB/BUDQ.DEF",
+        "sha256": "8c4b59242ae8f70dc2d6084b88bdeb07bbf2333b4f956301bf8cdf35281f136f"
+      },
+      {
+        "name": "MMLAB/BUDQ.RSP",
+        "sha256": "9e95f5574c4ba082e40e71390ebae679c285c89d228d7f108bb6cf0d85a4e3ea"
+      },
+      {
+        "name": "MMLAB/BUDQA.C",
+        "sha256": "df814c5ff3b6ca1abe75360931eda954859fabb8ed36b41755c0e83a2cc463d5"
+      },
+      {
+        "name": "MMLAB/BUDQA.DEF",
+        "sha256": "2f360c06a977fa321934123ed70ab517a08b96fd25a7c1020dcc14cf630c415c"
+      },
+      {
+        "name": "MMLAB/BUDQA.RSP",
+        "sha256": "65092200dbfcc71584c6117ea9dc80c49f648e40c179edc1658488280a446f59"
+      },
+      {
+        "name": "MMLAB/BUDSELF.C",
+        "sha256": "1bc66f73003e4f369b111a172114e2bae22cdb74614446c3093e6aa8e4223ddd"
+      },
+      {
+        "name": "MMLAB/BUDSELF.DEF",
+        "sha256": "85e824f255ca301b4ce8f223d60195ce42518818252409d741c3e3b0e57282f9"
+      },
+      {
+        "name": "MMLAB/BUDSELF.H",
+        "sha256": "dee9d41bc6e58ac504cebafa72224e2ef8c7659072a662212503bd646d4e5fda"
+      },
+      {
+        "name": "MMLAB/BUDSELF.RSP",
+        "sha256": "941b6f8df5907c85636a9a879ed9f4ec2eb78f462ac9345a5f6845df38c41874"
+      },
+      {
+        "name": "MMLAB/BUDWAIT.C",
+        "sha256": "6abe68a296fd72efc14d5702687bccdd42a076b10c4956e6b6b83b4e7adccf5c"
+      },
+      {
+        "name": "MMLAB/BUDWAIT.DEF",
+        "sha256": "6fe9d824b0271a44739eaae7df84c9c0a06c9932d4abd1aca468f0b773088413"
+      },
+      {
+        "name": "MMLAB/BUDWAIT.RSP",
+        "sha256": "8ea6135a054492db540bb10b20c03e61cbe6075c23f22bbae757c67b0ae62671"
+      },
+      {
+        "name": "MMLAB/BUILD.BAT",
+        "sha256": "e5e09c5b0b1be2dfee408bba1db4e7a612282d0ce1f5fe99bed1f5027a1b93fc"
+      },
+      {
+        "name": "MMLAB/BUILD30.BAT",
+        "sha256": "835a7e560c6593c458781f06d2d8f2d8a33648c34c17194b013b206e39a1fe0d"
+      },
+      {
+        "name": "MMLAB/CLOCK.ASM",
+        "sha256": "89c5d1d9ecadea50bb50ec53ca67c11e7b084bc721e3cc02b825a82e7db40c77"
+      },
+      {
+        "name": "MMLAB/CLOCK.BAT",
+        "sha256": "7e757c9f02a4030452a83d07f00add0b23f8ddb8f16ae310a2e2a85aa3e78009"
+      },
+      {
+        "name": "MMLAB/CLOCKALT.C",
+        "sha256": "7271eafcf5b9ff6fe170854e4de95c1abc756d00726f94a7f53c3cc0d15b9b22"
+      },
+      {
+        "name": "MMLAB/CLOCKALT.DEF",
+        "sha256": "b52538a5c5fdf154595d637b8c7f1953bd07eed85c73be30bee344a19728653d"
+      },
+      {
+        "name": "MMLAB/CLOCKALT.RSP",
+        "sha256": "d4a4ada08aca464f0919dbe659fbcf6a21bdfe940cb793ebb4fc5d0e552705c9"
+      },
+      {
+        "name": "MMLAB/CLOCKQA.C",
+        "sha256": "e067c6a68adf0acaf639d69ef8ab5067a4ab8585d1a6245dc12e94e31c1ee48b"
+      },
+      {
+        "name": "MMLAB/CLOCKQA.DEF",
+        "sha256": "1eabee9b0b238f0f57d8f1e3f8400e748abd5c9f6d5e167472fb66e867fd6371"
+      },
+      {
+        "name": "MMLAB/CLOCKQA.RSP",
+        "sha256": "54cbed46a6600b176463ed4b978845807920986dbc12402af43b296c97b3f00a"
+      },
+      {
+        "name": "MMLAB/CORE-MIT.TXT",
+        "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4"
+      },
+      {
+        "name": "MMLAB/DELTA8.BAT",
+        "sha256": "bee61165e631aa218019c17f9c7bc39675ecac23c56712fc2954ae783474ca37"
+      },
+      {
+        "name": "MMLAB/DELTA9.BAT",
+        "sha256": "ef71c230d20fe36fb6038e444eefb65896dbba9269650a613805c888e111be1c"
+      },
+      {
+        "name": "MMLAB/DOSSTAT.ASM",
+        "sha256": "c32c6170cc9ec4678aedc1d998f87357a22b6acf06155cd3b89340c4bc214de2"
+      },
+      {
+        "name": "MMLAB/ENTRY.ASM",
+        "sha256": "fe93a74ff44bcc487f8a02f58ed31f3d0a48ebf5aecab7ddc34e95f7a5617246"
+      },
+      {
+        "name": "MMLAB/FORMAT.BAT",
+        "sha256": "ce211807532e185b5f47fab8f948c2b2d84b28ccabcc8e13d4333f2e51c73465"
+      },
+      {
+        "name": "MMLAB/FULLHAND.BAT",
+        "sha256": "c8ca4329321ac70d85107388038bf559877a66b66bca63c2a27be413d99b67cc"
+      },
+      {
+        "name": "MMLAB/GUARD10.BAT",
+        "sha256": "c4a1f1f0c9098eab7e515fa307b2cb26e1841776ffedbd63f99cbd9c7e4ecb8c"
+      },
+      {
+        "name": "MMLAB/GUI.BAT",
+        "sha256": "00e345820030dc4ce97c2c2907ef1d98fde0efc9572edfaffec66ec77cf0e816"
+      },
+      {
+        "name": "MMLAB/HAND.BAT",
+        "sha256": "d219d63596d4d370962fd21ba43bab550d648a64e24d95fc2add4d09baad075b"
+      },
+      {
+        "name": "MMLAB/HANDQA.C",
+        "sha256": "0dcde2fb7904465978dd5b92c32b934b08b66b7f28f16a63e6d062382f0f90d8"
+      },
+      {
+        "name": "MMLAB/HANDQA.DEF",
+        "sha256": "494b8fc6b7c803f8ddbb2382687d42e88e5f2721efa5713af6149136938428fa"
+      },
+      {
+        "name": "MMLAB/HANDQA.RSP",
+        "sha256": "0d7cb0021ed6fea58a939da1e4791628fcea848a87a3aeab89ef38e0c32abee5"
+      },
+      {
+        "name": "MMLAB/HENTRY.ASM",
+        "sha256": "220ed6c7d9d48da928bf71db931faa2ff6682c4ad1c0022f1ffae1ff1283f712"
+      },
+      {
+        "name": "MMLAB/HIGH.BAT",
+        "sha256": "8139d6d21f35f011e550cc0298cb0b832d9eaab7058da936f4df799a8151eab9"
+      },
+      {
+        "name": "MMLAB/HIIRQ.ASM",
+        "sha256": "f5a3605a88d78f70ea80c73db9d993022f02cd7eb330a17417dc03eaddc485de"
+      },
+      {
+        "name": "MMLAB/HIQA.C",
+        "sha256": "10908ba0f816adbdfe82dc7d74b713e86b121ccec306fdf3256b3750eeeb5535"
+      },
+      {
+        "name": "MMLAB/HIQA.DEF",
+        "sha256": "f60e99ff92ddafcc1d336f7f9dea5aa9a1099944b565ecc2a4f778fc6cf765d7"
+      },
+      {
+        "name": "MMLAB/HIQA.RSP",
+        "sha256": "5b02884d36340058fe59c03ede7b3544eaae1b2870fa3c1ee9d69b89bfc542e1"
+      },
+      {
+        "name": "MMLAB/HIQUAL.C",
+        "sha256": "387808c60ad37edd7b610501381d7171292058af07baa036b3a716672ed7bbf4"
+      },
+      {
+        "name": "MMLAB/HIQUAL.DEF",
+        "sha256": "18db328b7570fb4ed2d9c439f71e72bc33d834ff476226a1d3d2d080c97c041d"
+      },
+      {
+        "name": "MMLAB/HIQUAL.RSP",
+        "sha256": "a12e37c2ccbc41f04821b588f9cca90a9be272e8adbef4a79af30c1c07a0e877"
+      },
+      {
+        "name": "MMLAB/INSTR.C",
+        "sha256": "3d7960b4dd8a1c66f67466748882934d38bc9d2b788ffb3e34aa67604e30b9da"
+      },
+      {
+        "name": "MMLAB/INSTR.H",
+        "sha256": "4af9dd69ce78d2e7752d391ff0c8232a44daf8aa1f20d83b45fa02ab46d10cf7"
+      },
+      {
+        "name": "MMLAB/JMCORE.C",
+        "sha256": "7c6ec25dadb9b0aee0c6104ceba19130cc90896060784829738d5767a9a7cbe1"
+      },
+      {
+        "name": "MMLAB/JMCORE.H",
+        "sha256": "2b4b99638c6192ed904e3173de8c22fa9973b09ba1adfa418a57c0cf44a48f56"
+      },
+      {
+        "name": "MMLAB/JOYCAP.ASM",
+        "sha256": "0edb252ebbeab38c9856a599f88acdcd049066db0ede11a486430d96def62c90"
+      },
+      {
+        "name": "MMLAB/JOYCORE.C",
+        "sha256": "c89ba555bba2531d335722ece1a67e737e53a89fc1965029bdd03f2897cff366"
+      },
+      {
+        "name": "MMLAB/JOYCORE.H",
+        "sha256": "a94127d11161f2e87d9aad97834347d279c6746b0711cb2f930b437d6f1540ed"
+      },
+      {
+        "name": "MMLAB/LAUNCH.BAT",
+        "sha256": "3883382ad8b6c35bd2a1946dbfee106a8a4a5949d2e68ba0edeb230a2caf5ac7"
+      },
+      {
+        "name": "MMLAB/LICENSE.TXT",
+        "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4"
+      },
+      {
+        "name": "MMLAB/LIVEHOLD.C",
+        "sha256": "758f72ac149e87f550c0b931d3de186848602df0826353a384834f357e710215"
+      },
+      {
+        "name": "MMLAB/LIVEHOLD.DEF",
+        "sha256": "6989a4a5c878428aa4c18354cb36e461d1325da1e76d69860a9e325b190345f3"
+      },
+      {
+        "name": "MMLAB/LIVEHOLD.RSP",
+        "sha256": "ed4246b025aec79f2960ae568c149934af85bad2d3c8dfa28542c28397ba0bd4"
+      },
+      {
+        "name": "MMLAB/LIVEMIDI.H",
+        "sha256": "412872225825a54c8226b5273c3286444c12973d2a716ee4a1a3c801b2629cbd"
+      },
+      {
+        "name": "MMLAB/LIVEQA.C",
+        "sha256": "e3dc112e093ef99820d5b929fea320bb6c4f77a326041801d86a28792067e012"
+      },
+      {
+        "name": "MMLAB/LIVEQA.DEF",
+        "sha256": "dfd40d625ecb50cb48305a98553ea5ca6949967edf5c13b7a97683bdb54e36f8"
+      },
+      {
+        "name": "MMLAB/LIVEQA.RSP",
+        "sha256": "739a75dfdad79379522f470dd449fb0cffc7ce58e0814ea9d46e3001d6af4c08"
+      },
+      {
+        "name": "MMLAB/LNG.BAT",
+        "sha256": "a0221a4dac96d5e7371f231b3247528bd73de367b8c9dbd736404f9ac21579b9"
+      },
+      {
+        "name": "MMLAB/LNGQA.C",
+        "sha256": "0f1a5f37f8ec999b470297da46189367b412a4025d945062f11a9a293c29f4a4"
+      },
+      {
+        "name": "MMLAB/LNGQA.DEF",
+        "sha256": "9fc953d6947d015d7f3b52a36a54ea4363bab0f14b660851749b562098af92ba"
+      },
+      {
+        "name": "MMLAB/LNGQA.RSP",
+        "sha256": "989e2e88a14cfb280e9eab57c0edec3932a7d096a8502573ab2191bf8e2b9dec"
+      },
+      {
+        "name": "MMLAB/LQAPI.ASM",
+        "sha256": "cedefabf89fd8ac35f09ef46064f6a1bc80de41446fd075def7d8aac9e1f9747"
+      },
+      {
+        "name": "MMLAB/LQCASE.C",
+        "sha256": "33e33c5ca49f1e0a845f02b0be58e78ca357b94204491e5bc1f80a142b67071e"
+      },
+      {
+        "name": "MMLAB/LQCASE.RSP",
+        "sha256": "abfaae7ac0bf86dd8e8b2f955683345cc9dd8a853a7a149e8bc939749913c923"
+      },
+      {
+        "name": "MMLAB/LWAUDIO.H",
+        "sha256": "ab8c170161d422703a3351e2e01bfbd20ff5d6fd1be364fc527571a96db833ab"
+      },
+      {
+        "name": "MMLAB/MCIALT.C",
+        "sha256": "2123f101eb8974ab73741950c1ac70ecefcaf31db93ae7df0498da78eba41eb6"
+      },
+      {
+        "name": "MMLAB/MCIALT.DEF",
+        "sha256": "e8417d814f6c4b18bc7ca8d29e0d76b4be19307c39211c74788e5c5c99ad1950"
+      },
+      {
+        "name": "MMLAB/MCIALT.RSP",
+        "sha256": "f715018321c6fa9edcd7a98d323aa9c3f51fae723638e859aa6b8e2199e14837"
+      },
+      {
+        "name": "MMLAB/MCIAPI.H",
+        "sha256": "b9546d9d8c839800a79c7217c79227d865060b1526c92403cdcd5a314d96a8ec"
+      },
+      {
+        "name": "MMLAB/MCIPSG.C",
+        "sha256": "a75fcedee621697c7f032ccef4b9e25cc45bca339fc5541f44656ebf18d8f461"
+      },
+      {
+        "name": "MMLAB/MCIPSG.H",
+        "sha256": "5347ed95daccd56caec678c80088e6916fc4132a787df0733dcbf443fbce6982"
+      },
+      {
+        "name": "MMLAB/MCIQA.C",
+        "sha256": "22833284edb02fc284aaa6527c430bd38d9eed2f692bcb927e37da7f452bfeb4"
+      },
+      {
+        "name": "MMLAB/MCIQA.DEF",
+        "sha256": "e11d37031b7ad808c31e1c31e1cbdc2708ef6a4e95bc76f695a2a46166ce45e8"
+      },
+      {
+        "name": "MMLAB/MCIQA.RSP",
+        "sha256": "b8d20cc195d96b99d3f914a59dc53207b873b2078f1fdbe6f1c86814f15dbfe1"
+      },
+      {
+        "name": "MMLAB/MCITNDY.C",
+        "sha256": "ea82d054a859760dd197f3171c992067374790bde3967750685748b106ddd587"
+      },
+      {
+        "name": "MMLAB/MCITNDY.DEF",
+        "sha256": "439ae361352e7550516b7646a38ed2b0946f525044fc02d9971c3de1c0dcf3e0"
+      },
+      {
+        "name": "MMLAB/MCITNDY.RSP",
+        "sha256": "27831edc3d8d7daba9917a0a61dcb98dc63deafc75d67142bcd7bbb91d7d988d"
+      },
+      {
+        "name": "MMLAB/MDALT.C",
+        "sha256": "efb9f0910b4cc0bf4cead112bc52da1c31a1a9e0c18f699b6e72828b9de5d6c1"
+      },
+      {
+        "name": "MMLAB/MDALT.DEF",
+        "sha256": "58fb0acb8229695cf157460e608195a3c2e2b368cac65c7406370af779da3630"
+      },
+      {
+        "name": "MMLAB/MDALT.RSP",
+        "sha256": "f33831b6b0bb98865293cfd9ba0a23232f25116bf58e1ebdb75ea5f52373e1f3"
+      },
+      {
+        "name": "MMLAB/MDAPI.H",
+        "sha256": "a8339122e6d1e72d742b55319f5c154f61e2856fc21d15a4fc3eb9774c34e011"
+      },
+      {
+        "name": "MMLAB/MDDS.C",
+        "sha256": "4f5f1a977d6a8f5cba90e364ddce41158d4f4de9f32601ac636e75ea521c1922"
+      },
+      {
+        "name": "MMLAB/MDDS.RSP",
+        "sha256": "7d9dcde1bfbe548f65bd870094500df65316e8413aec61eb13b938f5d46b0e12"
+      },
+      {
+        "name": "MMLAB/MDQA.C",
+        "sha256": "bc6f6031a97592ecd8249fefbd11a1881e72a827c9e61df32ffbf57e5fd20056"
+      },
+      {
+        "name": "MMLAB/MDQA.DEF",
+        "sha256": "48c9a3d6a2a1eb4899973593898e393efa81dc6b242f948ed35bba904f7e9cb9"
+      },
+      {
+        "name": "MMLAB/MDQA.RSP",
+        "sha256": "f76a0de8e1919d864e5defad06b20b527dc21cafbed6d1c4a29f0cbe1172dd9d"
+      },
+      {
+        "name": "MMLAB/MDREAD.ASM",
+        "sha256": "db581de12a6952c0a3489b8269f9fee4f2fbd5e30849c4bfe3568eb10f41fba5"
+      },
+      {
+        "name": "MMLAB/MIDI10.BAT",
+        "sha256": "d3d7d0a0cdc9203c8424289b42742acd12afbc770a456dbb0297e8029fd25e58"
+      },
+      {
+        "name": "MMLAB/MIDI11.BAT",
+        "sha256": "1a0ada70ba3ff4c9d3aef16a53487453a191a2e7fecbd22305afe888cfa2ca82"
+      },
+      {
+        "name": "MMLAB/MIDI12.BAT",
+        "sha256": "5adb10b924ee82ebe5dd6727e50a62522fb3607e8b3dc7503040de3cc83ac053"
+      },
+      {
+        "name": "MMLAB/MIDI13.BAT",
+        "sha256": "005d3205771f78751e3a45efbe7c7cfb7d84078d7a50440b94223038ace2b3c7"
+      },
+      {
+        "name": "MMLAB/MIDI14.BAT",
+        "sha256": "dcbbe4739241297cef2116098aea92e3287feed29032e49c29fa944da281d3fb"
+      },
+      {
+        "name": "MMLAB/MIDI15.BAT",
+        "sha256": "f5c7aeb85d753debeffe5e2df10fe6556e77b22b2aabc9d8bdb6ec2eca4c0880"
+      },
+      {
+        "name": "MMLAB/MIDI16.BAT",
+        "sha256": "7cb1c1da237e5dd90e57abeac7cd64ebefe335a3def402ea596849c98d7d91d3"
+      },
+      {
+        "name": "MMLAB/MIDI17.BAT",
+        "sha256": "e60f2801afa9adaea7958101fcd139e2cb15771ffef91433492be01a839a0271"
+      },
+      {
+        "name": "MMLAB/MIDI3.BAT",
+        "sha256": "0e2fd0ddcb332285a519f302ff219586ed41e91c83b97b79921e779512cb9b16"
+      },
+      {
+        "name": "MMLAB/MIDI4.BAT",
+        "sha256": "e5e739033e20273c56cdf0864c52ccb7ec0a6d490e170cbc9a413700887a210f"
+      },
+      {
+        "name": "MMLAB/MIDI5.BAT",
+        "sha256": "b97ff81c8f7bb866a39f8c79cb9a876d62f67a6dff1f89ac6e75b8c9cd8de6c3"
+      },
+      {
+        "name": "MMLAB/MIDI6.BAT",
+        "sha256": "b0841bb330fe4ab7cff45c3d955ef420d9c55cc53179f70b35342e7c9456764c"
+      },
+      {
+        "name": "MMLAB/MIDI7.BAT",
+        "sha256": "205e911cd7e2a5363c64ae4dddaf3cdbdaf0edc8377d22a61109c820f0cfa869"
+      },
+      {
+        "name": "MMLAB/MIDI8.BAT",
+        "sha256": "bd1f6c727012a5f720f27dbf637115d069303631fbe613388266265edda56714"
+      },
+      {
+        "name": "MMLAB/MIDI9.BAT",
+        "sha256": "0983b0da725e155840542d727c0b12ff5d22a92b83040ed1e16a4e105c02e6d8"
+      },
+      {
+        "name": "MMLAB/MIDIAPI.H",
+        "sha256": "44ab50a98c273565055b4a258724e61b5b0137213f3d311991d153ec0029bab5"
+      },
+      {
+        "name": "MMLAB/MIDICLK.C",
+        "sha256": "e6814c627ac735e9380934e73da4cf65464bd2656732d27b48b98862e1b45f5e"
+      },
+      {
+        "name": "MMLAB/MIDICLK.DEF",
+        "sha256": "63ce3430460d438aa6baed29308c6e84301a227945ce245bc40c60984c8c9633"
+      },
+      {
+        "name": "MMLAB/MIDICLK.RSP",
+        "sha256": "cd6827f15a8f42549a329a25ca3408b5fe267daa8d7a789859725f397d433145"
+      },
+      {
+        "name": "MMLAB/MIDISYN.C",
+        "sha256": "fa9cd4a15b5da9c4b2c3b5b04165ad3bad8f6a97cbbdf96de019a687f1b5213b"
+      },
+      {
+        "name": "MMLAB/MIDISYN.H",
+        "sha256": "dae6122f431d2fe6455ccbcafdbb0695a7573115dd126dc9f84b34819b2e96b3"
+      },
+      {
+        "name": "MMLAB/MIDQA.C",
+        "sha256": "c68f252ea1aaf18cf156c7599cebfee7d4ea984f9c0e02c35207c56dea84c401"
+      },
+      {
+        "name": "MMLAB/MIDQA.DEF",
+        "sha256": "48759790d832522bfe705aa51352abb920ee8941270fd430b08305df79a4e24f"
+      },
+      {
+        "name": "MMLAB/MIDQA.RSP",
+        "sha256": "41ce8367b9604724bd648c0eadd657dc5468d9b7570dc48c0e4c89dc821945f2"
+      },
+      {
+        "name": "MMLAB/MINIPLAY.C",
+        "sha256": "66a32bde7614160ff5d327d9b2f55afdffb94b92894c1742856e37d63d0fb013"
+      },
+      {
+        "name": "MMLAB/MINIPLAY.DEF",
+        "sha256": "3b7704f261ede30a96b520824e6ec80473c007f19861097880830dbbf1c4e70e"
+      },
+      {
+        "name": "MMLAB/MINIPLAY.RSP",
+        "sha256": "70cdac473dddb6f73fc86608af3d6c78f5c11a11d5bfb87d8c8ab71333e32e65"
+      },
+      {
+        "name": "MMLAB/MINM3.C",
+        "sha256": "52613488793f6b7703c84b30a1b4dbce6717145f0fd72e67648edda3e40ea424"
+      },
+      {
+        "name": "MMLAB/MINM3.DEF",
+        "sha256": "2421cb61e7d1af036ea973b81fbb7cf51bb88b026b60ae28aa946a5656c89740"
+      },
+      {
+        "name": "MMLAB/MINM3.RSP",
+        "sha256": "362d4af34e663c26a934dfc3602003e96abbbb0403bbeb1e88c8e02a594f5cc2"
+      },
+      {
+        "name": "MMLAB/MMAPI.H",
+        "sha256": "0eed3cc8c827800ff015f974c709206494e90430e2e837245cd0273f2effd6ce"
+      },
+      {
+        "name": "MMLAB/MMTANDY4.C",
+        "sha256": "45dec8866c3cc4af5235712f092b80b4f1aa8b0c6fc58ead626d419c6b37383f"
+      },
+      {
+        "name": "MMLAB/MMTANDY4.DEF",
+        "sha256": "46c06bf7add1bbbfe655bbe09cd466136dd125ed6e5f5f195f2fe0d5c50b399f"
+      },
+      {
+        "name": "MMLAB/MMTANDY4.RSP",
+        "sha256": "1ceae51f0cfa54bb513e87bb76b70fb320321063387cf9df987d7e48991b72fc"
+      },
+      {
+        "name": "MMLAB/MQALT.C",
+        "sha256": "67b8280cb097e8bf4639ab3999b6dc14dcd13667235e10d4ba46c5a7febcb74e"
+      },
+      {
+        "name": "MMLAB/MQALT.DEF",
+        "sha256": "59d988845e14072098bb7fd8e9e134835236e9a138258f2fd0e26d12b7e3b88b"
+      },
+      {
+        "name": "MMLAB/MQALT.RSP",
+        "sha256": "43e3513de248b3b3e416d837b3d6a04952a4b69fd4b7db0e5faf9478414d0503"
+      },
+      {
+        "name": "MMLAB/MQQA.C",
+        "sha256": "f5b1df8e8d45430e1ac8179e56654576ccd764d2aa9c6d0f727911dc06b9097c"
+      },
+      {
+        "name": "MMLAB/MQQA.DEF",
+        "sha256": "e3c28a248ef43006ec6d8ed732a67b476a1136ddbf4a626c4bfce3865548d037"
+      },
+      {
+        "name": "MMLAB/MQQA.RSP",
+        "sha256": "74fd698ecc014023e81c8cf3c52479cafeb46dbf1c77945ec9fc36a655c7a6a7"
+      },
+      {
+        "name": "MMLAB/NORMALQA.C",
+        "sha256": "e559cdebd970f4930dbbc498f82841db2284ae1fabb5517e679a313a4eecdb38"
+      },
+      {
+        "name": "MMLAB/NORMALQA.DEF",
+        "sha256": "c40c5a06ee6446879541bb0ccf779301a3d783de6fe29aa8bd11b0d1c07cc260"
+      },
+      {
+        "name": "MMLAB/NORMALQA.RSP",
+        "sha256": "7d35eaae4fa8a065dc75c391c1578129d48e9e230152f8e6b0018398d69b826c"
+      },
+      {
+        "name": "MMLAB/OPSQA.C",
+        "sha256": "3a8190a88b985b2f3439acd887a5e4bea1c772eb9457f7a68fd2afcdb5057441"
+      },
+      {
+        "name": "MMLAB/OPSQA.DEF",
+        "sha256": "389d706283f06a305d01a15457a7c6f6914f45c0eaf8e835def0aef44ef113cf"
+      },
+      {
+        "name": "MMLAB/OPSQA.RSP",
+        "sha256": "4a37c258bfa874de1a6ace7de8d1dab319f0803e2d06e6f637a520190edf339e"
+      },
+      {
+        "name": "MMLAB/PATCH7.BAT",
+        "sha256": "44911d48d0d5f30c44d29507c28186f5f1f7df129654a91f6a4c0fef6ccb256e"
+      },
+      {
+        "name": "MMLAB/PERIODS.H",
+        "sha256": "4fbb8b010c03e768909093494f6549f4781f6e80c13984b0592a8305ea5a513e"
+      },
+      {
+        "name": "MMLAB/PIANO.C",
+        "sha256": "99a4fc4d2a404fa845e22e68df1315e7457d710f76047fd4d8b71dfc03113af1"
+      },
+      {
+        "name": "MMLAB/PIANO.H",
+        "sha256": "49690de949ff194c22226731602085dcfd75fb77be3e4a6c683d29b5bfa88c58"
+      },
+      {
+        "name": "MMLAB/PLAYHAND.C",
+        "sha256": "fec2b618d7fd80feba5cf66bde1cc79ca202c0e5835d209d6670d73b33a965dc"
+      },
+      {
+        "name": "MMLAB/PLAYHAND.DEF",
+        "sha256": "61530886f4223800af6a15fc699f593ef2f01293c67de559d475d752869fade0"
+      },
+      {
+        "name": "MMLAB/PLAYHAND.RSP",
+        "sha256": "f055063d5076e2527eb7087de930d692381e30593e493a421c017054997ae2f6"
+      },
+      {
+        "name": "MMLAB/PSG.ASM",
+        "sha256": "57b5a84664d5bb8a9345e61d09644b2816c32f288bd15154295051ba7bb56341"
+      },
+      {
+        "name": "MMLAB/QBEATS.C",
+        "sha256": "ae4ec59c7d73bb8d4ac7d0153a0ee53ef7e1ecdc75f4b3e0928c502f11ffa07a"
+      },
+      {
+        "name": "MMLAB/QBEATS.DEF",
+        "sha256": "63d4042bec87027ad27715658044499360ba620afeeff187ff78ad9d74d7a029"
+      },
+      {
+        "name": "MMLAB/QBEATS.RSP",
+        "sha256": "d9026ca6147b082d19cd0aaf311d6dbe7d1e6e1713033530ea9ae9c5db58ca9c"
+      },
+      {
+        "name": "MMLAB/QCHIME.C",
+        "sha256": "2d47864ab44b11d1f29ddd147ca72ce2b682fd7d02725772d82b8142670d00c4"
+      },
+      {
+        "name": "MMLAB/QCHIME.DEF",
+        "sha256": "e87bbb5782e97a8c777ade5fb7cbc36ce5acb3b2f800de74037f805c4a50585b"
+      },
+      {
+        "name": "MMLAB/QCHIME.RSP",
+        "sha256": "69b4745bc7e07a704ed8bd26be557095cc151165669a91d43d7f18fb72ebcc27"
+      },
+      {
+        "name": "MMLAB/QEXIT.C",
+        "sha256": "69dcc4f62e50854df96ef2636c253dd90d45ce848d6a064fae7826f8ba811fe1"
+      },
+      {
+        "name": "MMLAB/QEXIT.DEF",
+        "sha256": "f9b9b7bba4fb1332c2e608e86cba21cb9c2130ffb861bd99169ae9a83032a288"
+      },
+      {
+        "name": "MMLAB/QEXIT.RSP",
+        "sha256": "ad442799ba6040fe2b32e7d4dc7efeff3dd58866cf97bb69bc43fa079f6315a6"
+      },
+      {
+        "name": "MMLAB/QJOY.C",
+        "sha256": "5f2c9ee9c5b805826c78e76020c4dfab99b3d4c5738dff391b453e4abf3e7f40"
+      },
+      {
+        "name": "MMLAB/QJOY.DEF",
+        "sha256": "33a9102f16c45baa22a28c190df5d9e806beb4836fa62ba75b4106a77106c5be"
+      },
+      {
+        "name": "MMLAB/QJOY.RSP",
+        "sha256": "cf465a624bf9746c4f4a795ee43530929b7d1bd76cc5b80b17e67e28d1efc704"
+      },
+      {
+        "name": "MMLAB/QMOUTH.C",
+        "sha256": "a9e734635e36d4a4461f54ba9dd4e3ab2a645fccee7ff293901085403554563c"
+      },
+      {
+        "name": "MMLAB/QMOUTH.DEF",
+        "sha256": "925b060bf9ecdb39d1130d1882c974863d782e5150a10e060544fc4c257d0edd"
+      },
+      {
+        "name": "MMLAB/QMOUTH.RSP",
+        "sha256": "a4eacbfbb8b8e93a3b47961a608f0ac77939848110a0db8e6e82eb8a9d7c2bf1"
+      },
+      {
+        "name": "MMLAB/QPIANO.C",
+        "sha256": "3b9e40dad3353cf1f043e008a53f05c4a98d97d877b2249819653e850cd09261"
+      },
+      {
+        "name": "MMLAB/QPIANO.DEF",
+        "sha256": "d2dfe5be1b63d70df69984f4a284f2dbb9c2e84b459c3bf6d0c251e741a10a33"
+      },
+      {
+        "name": "MMLAB/QPIANO.RSP",
+        "sha256": "084d50b7e2e976095e55af325516d4147173eb61f811c60ec67032c7abebd93d"
+      },
+      {
+        "name": "MMLAB/QPSG.C",
+        "sha256": "6f4656ab759d45b6bb7d6a247c21ad00298bfbe2301faf582edda54bf3172b60"
+      },
+      {
+        "name": "MMLAB/QPSG.DEF",
+        "sha256": "1472bae5d2af91adff51252e2e4e9a58ac9b490f5b108df404d8914c4defc63f"
+      },
+      {
+        "name": "MMLAB/QPSG.RSP",
+        "sha256": "9d3cdbffc2c38e16e6e0e1572a2e4e9e8dc638279488b2a68159d5781d28955e"
+      },
+      {
+        "name": "MMLAB/QREG.BAT",
+        "sha256": "5ea5e9d70aaceb4245862a74ddaca88fde0325b4936c88d96b89e6b3b76a194e"
+      },
+      {
+        "name": "MMLAB/QSQA.C",
+        "sha256": "6724548e563750fe5ed0c90a75d0b920ccc7d6e0ee5cc751b19110d1069278fa"
+      },
+      {
+        "name": "MMLAB/QSQA.DEF",
+        "sha256": "df54be12be660fe759158638c2bca6e4e1813934790ffed312e18f920977ebfe"
+      },
+      {
+        "name": "MMLAB/QSQA.RSP",
+        "sha256": "6081933a8b3dae37f95ebfa0743bda8cc87e43b57bacfa0fdd141bb6219ac37d"
+      },
+      {
+        "name": "MMLAB/QUAL7.BAT",
+        "sha256": "384af151ea3a7457c487d45f6f88b0061e403ac94a226f09d161633d7cdb5e2a"
+      },
+      {
+        "name": "MMLAB/QUEUE4.H",
+        "sha256": "e6bf5bc21a4afa7f49835e0ad3f6888e803d0788bb7062035fdbb78eb60f0948"
+      },
+      {
+        "name": "MMLAB/QXP.C",
+        "sha256": "89e5cfd89161d44d396757627ac1dac957bfc2491a1b7a76853d91462f249d5c"
+      },
+      {
+        "name": "MMLAB/QXP.DEF",
+        "sha256": "63ef35414c80094f94179f3fa6bd4541527ebf6d7b88053776683bd7260bdc2b"
+      },
+      {
+        "name": "MMLAB/QXP.RSP",
+        "sha256": "b046b8e5d5bcdf498aa5b4cc0a40d4e2b440e972ad99c830e0923bd85ccc2f8c"
+      },
+      {
+        "name": "MMLAB/RAWAPP.C",
+        "sha256": "ebde64f89e82158339548924dc0a92e878af038c851d85bb74f5a24adee41436"
+      },
+      {
+        "name": "MMLAB/RAWAPP.H",
+        "sha256": "d9aaac4b291096c374b3bd19fde729ddb4ec647e9e6b86286b75a6495a93aba4"
+      },
+      {
+        "name": "MMLAB/RAWFILE.C",
+        "sha256": "cfc7ee31313233e5d696c097403ad418a6810a306a38eb131cbd201fa899ca56"
+      },
+      {
+        "name": "MMLAB/RAWFILE.H",
+        "sha256": "1f59631a54580e97c2f04ac1735fc1c667e970b554f56c774adb83d94e9e0d81"
+      },
+      {
+        "name": "MMLAB/RAWGUI.C",
+        "sha256": "c3911c5b47a623ca8f30703fe896a6382ce2d877fa68c41220a848641fb8922c"
+      },
+      {
+        "name": "MMLAB/RAWGUI.DEF",
+        "sha256": "5bc0dfb7d552eaab7fa22814cc9597f467838ba2075a78427b64857c506b7657"
+      },
+      {
+        "name": "MMLAB/RAWGUI.RSP",
+        "sha256": "73acc3635633ce9b1d08cccc6f90f1e90e04e18fd50fbaf1f8e3fbf05d0697b3"
+      },
+      {
+        "name": "MMLAB/RAWQA.C",
+        "sha256": "9b9ed7d222aa82b656e5ee406ddb7accf75e64f7b6c22dbc5be5d08afa6b9132"
+      },
+      {
+        "name": "MMLAB/RAWQA.DEF",
+        "sha256": "a04ece92d978f7507136433529ab37ed1e8f728eeff4dae37cdf5d89e813ba09"
+      },
+      {
+        "name": "MMLAB/RAWQA.RSP",
+        "sha256": "88ad1d7b0c48ea32f8837a6e30d1d17af778bad2adfc9c6c3e2ba27c2aec299d"
+      },
+      {
+        "name": "MMLAB/RAWSCORE.H",
+        "sha256": "0b781b5a3a618eff82fa3aad852e6da2b8452352082405f6911da676cbfa9ccd"
+      },
+      {
+        "name": "MMLAB/RESERVE.ASM",
+        "sha256": "c424d65b0436ba42bba33aee8b1a54d47655141e6c60ebfbf1e02925df40b542"
+      },
+      {
+        "name": "MMLAB/RESERVE.MD",
+        "sha256": "cd890d7959438e0d5b67953e4d64bf0dd693cd87f04d14def1bdde5ae785b753"
+      },
+      {
+        "name": "MMLAB/RESERVE.PY",
+        "sha256": "96231b79cb9f0d0920989f700a00189d78a896ed49c1093d537ec94a5089a616"
+      },
+      {
+        "name": "MMLAB/SKIN.BAT",
+        "sha256": "2276229d703fd2a59395789c4adccf212e7a3102a058c2253e0dc533315a3abf"
+      },
+      {
+        "name": "MMLAB/SKINQA.C",
+        "sha256": "566771a53ee7182968ec94e60006d8b39a46dafabc6da47020bac16ab34be1c0"
+      },
+      {
+        "name": "MMLAB/SKINQA.DEF",
+        "sha256": "5737ada3d58f65e1381e9eb9cdf67ce2a694a7b404f19c823d69a8025109bce5"
+      },
+      {
+        "name": "MMLAB/SKINQA.RSP",
+        "sha256": "4157549a8df2bdb57836469de16d08f9fc9749ea3888ac0483c67a54ade69a05"
+      },
+      {
+        "name": "MMLAB/SMF.C",
+        "sha256": "27a1bd9b879f999132c1e77c78f09f554c47e853111c9075d09cada0939f0540"
+      },
+      {
+        "name": "MMLAB/SMF.H",
+        "sha256": "1283c8ec525e594ee57499e0bea9db71be4336ce8a8833a76c28efa9176fbca4"
+      },
+      {
+        "name": "MMLAB/TBDOS.C",
+        "sha256": "009e8650d24557c6f09b0d91dc2389f6e45d66796bbc8755d30fc75f160bac6d"
+      },
+      {
+        "name": "MMLAB/TBDOS.RSP",
+        "sha256": "eaea126356a261c2db44e3d1af9e5ce000123b864bb93ccf687fcb2ba2893e20"
+      },
+      {
+        "name": "MMLAB/TBRIDGE.ASM",
+        "sha256": "35589608781d651d8a42b31fdd84a2f2745baee3fc11c4b3acb1bfe65a4446af"
+      },
+      {
+        "name": "MMLAB/TBRIDGE.RSP",
+        "sha256": "b322a3c382f34fe45742fecd13e4a19ae0b2d7d9ab6625c1112af0e6458fe485"
+      },
+      {
+        "name": "MMLAB/TEST11.BAT",
+        "sha256": "9b9a5b58010189473d857efdf8176c05930ce7caa25b6e76c5421c9889a142f6"
+      },
+      {
+        "name": "MMLAB/TESTCORE.C",
+        "sha256": "c55a1b825f584fda66bb233bbaf873a2faf50bf9aabc3fe2f1ac3fab3a8073e5"
+      },
+      {
+        "name": "MMLAB/TIMECLK.C",
+        "sha256": "2af3ddd446f68589dcce830823b3d0c00446061074f8734ddf5bc28ceec736f0"
+      },
+      {
+        "name": "MMLAB/TIMECLK.DEF",
+        "sha256": "f998b06a1230dc8ae6bfd091cdb1657e35607243eb44dceaedd9b60c2db79133"
+      },
+      {
+        "name": "MMLAB/TIMECLK.H",
+        "sha256": "8c725d1436243070829cd6b30b8cdec06934f220a40122df2bed12e6b51b4544"
+      },
+      {
+        "name": "MMLAB/TIMECLK.RSP",
+        "sha256": "7cf185d31975aa07874d61bcdd2f33f183f2589194017484c82b7e01809e4fc1"
+      },
+      {
+        "name": "MMLAB/TNOTICE.C",
+        "sha256": "be4a1217e92061a3cefc5c61522158eb4019202fc54ecca1e68f7275305aa043"
+      },
+      {
+        "name": "MMLAB/TNOTICE.H",
+        "sha256": "98058c37f3817877d3f7c79c6698ab138aa552fe854651dba5faee8ca41a5b41"
+      },
+      {
+        "name": "MMLAB/TPLAY.C",
+        "sha256": "bb9606e0e5445aafcd613cff52e70f465856e027e714f9f475767cca58767a01"
+      },
+      {
+        "name": "MMLAB/TPLAY.RSP",
+        "sha256": "bbe5dfe21637be2ce81fc782b1214185388dab87a299ad3b34522e08bf870f5f"
+      },
+      {
+        "name": "MMLAB/TRACE.BAT",
+        "sha256": "61e12bddc01ef292b4e37d23b88efd59662b3a62e4084391dd7da7cfdc0eaa5b"
+      },
+      {
+        "name": "MMLAB/TSTART.C",
+        "sha256": "5e7914ca85b6ba618f205d451dc631e9cac2ca0ae442ec265e11946d2f1414c4"
+      },
+      {
+        "name": "MMLAB/TSTART.RSP",
+        "sha256": "493332b1d44443cfb0c00fd2bd0c0fd99f22abf6c3f2c3433094ae262fddfc89"
+      },
+      {
+        "name": "MMLAB/UI.BAT",
+        "sha256": "35b7372c924845dcf91530d7b251ef8697585aa0162bc42e00190ac56710187c"
+      },
+      {
+        "name": "MMLAB/UILAUNCH.C",
+        "sha256": "7b59d2ccdaf145731de4830094618633bf033ccc39c17d3d7fe0d516a34f9b8b"
+      },
+      {
+        "name": "MMLAB/UILAUNCH.DEF",
+        "sha256": "afeb0f5cb980b01b5130ed6ce35c20b7fe5ef06ab2f0c8ea7fd25358716a0b60"
+      },
+      {
+        "name": "MMLAB/UILAUNCH.RSP",
+        "sha256": "1f73049c9f70ab4e8eec01b2e001d16683a318f2be16919d0437ce4a4aa3b069"
+      },
+      {
+        "name": "MMLAB/ULDALT.C",
+        "sha256": "4b1a8d703d3022b2ca29ab0a5abbe9ee5276ec01103d50f4c2d3d47407d1a94c"
+      },
+      {
+        "name": "MMLAB/ULDALT.DEF",
+        "sha256": "ac8321528d738a4d73dc0eeb61c166bf25a0251fe75badff57059a8bf5dd7fb3"
+      },
+      {
+        "name": "MMLAB/ULDALT.RSP",
+        "sha256": "cff3815fcf770781e635c5350b3fbec7057588190198ec33a064b934926eac75"
+      },
+      {
+        "name": "MMLAB/UNLOAD.BAT",
+        "sha256": "b2bae26cf27d478e161ffae95e159b9444d1611d51b1107f6c4fe12a08f6e1ff"
+      },
+      {
+        "name": "MMLAB/UNLOADQA.C",
+        "sha256": "76988a0514eddb37351249bd8b52a97917e41ca3f41b333630c3933b59f9f8d8"
+      },
+      {
+        "name": "MMLAB/UNLOADQA.DEF",
+        "sha256": "dd364bcb45d523bd68db8bff0c1393a3bf03bb395a02e3bfd0603816b96741b4"
+      },
+      {
+        "name": "MMLAB/UNLOADQA.RSP",
+        "sha256": "fb8e411a37d761a7065f45b60cb60f00efaa90f2df384a0180434f9fec42d479"
+      },
+      {
+        "name": "MMLAB/WINHOOK.ASM",
+        "sha256": "2181cb398c9baf5d26b3dbdd9a21145d67325c5eb49241d87481c2def867052e"
+      }
+    ]
+  },
+  {
+    "job": "AUDNEW",
+    "batch": "MMLAB/BUILD30.BAT",
+    "products": [
+      "MINIPLAY.EXE",
+      "RAWQA.EXE",
+      "QCHIME.EXE",
+      "QXP.EXE",
+      "QEXIT.EXE",
+      "QPSG.EXE",
+      "QMOUTH.EXE",
+      "RAWCLK.DLL",
+      "MIDICLK.DLL",
+      "MCITNDY.DLL",
+      "TBRIDGE.EXE"
+    ],
+    "sources": [
+      {
+        "name": "MMLAB/AGIGUI.BAT",
+        "sha256": "49e8bc637a4b8fc976fdd9e0499b3c17b2586073281a774778f3364467d4ebb7"
+      },
+      {
+        "name": "MMLAB/AGIGUI.C",
+        "sha256": "1221f1352e51e1fd259f7ffc6ce8b9d5d7e1725ad4bc355f378c335df08f1a34"
+      },
+      {
+        "name": "MMLAB/AGIGUI.DEF",
+        "sha256": "c764ae091df3d82f4953c8f59b78179a4735660e694897b312ed244b817a1685"
+      },
+      {
+        "name": "MMLAB/AGIGUI.RSP",
+        "sha256": "91ef0e90b71b19c080476b8fdc80b9fbd09f910f92330bd01f65d9810e82143e"
+      },
+      {
+        "name": "MMLAB/ALLHAND.BAT",
+        "sha256": "7ee7e5fe596873c2aac5daeaa92aa66e868793495b45b565967fbcf14aad385c"
+      },
+      {
+        "name": "MMLAB/APPCLK.H",
+        "sha256": "863c8ce18eb83ec605268fa0950de9c699a797c13a43c2056a572d03b869266b"
+      },
+      {
+        "name": "MMLAB/APPQA.C",
+        "sha256": "ef2053346e2aeede0793c8c87670719e9d69e380172567014e5ed07b1f7f43b8"
+      },
+      {
+        "name": "MMLAB/APPQA.DEF",
+        "sha256": "ac9bec78d10520137a56da767f86f9a0140bed3670183ae249b5d0a3de12c2b1"
+      },
+      {
+        "name": "MMLAB/APPQA.RSP",
+        "sha256": "cba08848270f97424bcb978a098b071014470634c3ebe32dd206ce572bd0fb5e"
+      },
+      {
+        "name": "MMLAB/APPS1.BAT",
+        "sha256": "ae53d2e00bcc7ab768153a5c5499cd3693acd6b2007bc23fb2c84dc72d0b537e"
+      },
+      {
+        "name": "MMLAB/APPS10.BAT",
+        "sha256": "0622cebedfd13a4509fdb692440ce3365278dea066e64606fc80c0b625ef66aa"
+      },
+      {
+        "name": "MMLAB/APPS11.BAT",
+        "sha256": "aefcc99bfeb18f3eb7135669fe298f0c355ffdf07803757eb9331fbb856af2a5"
+      },
+      {
+        "name": "MMLAB/APPS12.BAT",
+        "sha256": "20ef9401c062183c96f01927316ee8ce8dc85771270b19f53cef6d470a1b558d"
+      },
+      {
+        "name": "MMLAB/APPS13.BAT",
+        "sha256": "aefcc99bfeb18f3eb7135669fe298f0c355ffdf07803757eb9331fbb856af2a5"
+      },
+      {
+        "name": "MMLAB/APPS2.BAT",
+        "sha256": "db819df2ca5e178e6ab6ac667fad101bc56fc88fa166c84a09937d550432c905"
+      },
+      {
+        "name": "MMLAB/APPS3.BAT",
+        "sha256": "aefcc99bfeb18f3eb7135669fe298f0c355ffdf07803757eb9331fbb856af2a5"
+      },
+      {
+        "name": "MMLAB/APPS4.BAT",
+        "sha256": "3349e072210cc0dc8e8b896157791e97e03556b0090ecea21662bb7aaa5d4ca1"
+      },
+      {
+        "name": "MMLAB/APPS5.BAT",
+        "sha256": "25a7544fe4d25033240ad0946cfd352d897cea2b2101096b3697f86ec5c162f2"
+      },
+      {
+        "name": "MMLAB/APPS6.BAT",
+        "sha256": "b049e59cc343d38434b2843a6383965a3cf875c858aa72f4b0830aeee6cde239"
+      },
+      {
+        "name": "MMLAB/APPS7.BAT",
+        "sha256": "6a9e96f97a451a2f4bd92a4ed156aca084b69094fd365b6916fe15d5ded00922"
+      },
+      {
+        "name": "MMLAB/APPS8.BAT",
+        "sha256": "6c7a9cf9f428a4b927a8528e7a772fe87c737fe8b76910139136aab559b194e8"
+      },
+      {
+        "name": "MMLAB/APPS9.BAT",
+        "sha256": "c10e8d5ad77636a991ff7df79c38a7a81c27aff80a4741c5e88d8312a61526b0"
+      },
+      {
+        "name": "MMLAB/APPSALL.BAT",
+        "sha256": "0cd9bc10d2921ff49adf8d7e25559980e2e9c8d21af870e1e43f032702e13d67"
+      },
+      {
+        "name": "MMLAB/ARGBOOT.C",
+        "sha256": "85125ee46b29dd8be498c334f372cdcb24fbc12b73d66ae0dbf9db945bc362e7"
+      },
+      {
+        "name": "MMLAB/ARGBOOT.DEF",
+        "sha256": "c9e06c45214d241731cfd949f346ea51d1210aba8986262ed388647bb668ee7b"
+      },
+      {
+        "name": "MMLAB/ARGBOOT.RSP",
+        "sha256": "d0fbcc97eae1c996e1ca4ebefdc7fbbdc7e74491f7097243d6d8e3b076ab74bb"
+      },
+      {
+        "name": "MMLAB/ASYNC.BAT",
+        "sha256": "b4a5abbfb3887a677847c0bc720083162c57a2f3c5d94396e5d622df6189c7b6"
+      },
+      {
+        "name": "MMLAB/BEATSEQ.H",
+        "sha256": "e4962c1551e8d3b9f428099d483a6353fc7440e61829b94ceba4d37af2ef0afd"
+      },
+      {
+        "name": "MMLAB/BOUND1.BAT",
+        "sha256": "af448048f5094c81fd013348e76c17ca33ca2ae5d4d30f5624c0c94d11e4f248"
+      },
+      {
+        "name": "MMLAB/BQBRIDGE.H",
+        "sha256": "da8bf51281c6a14009de562936bbb303c469892a1eeda842dd53ac3e68f3600e"
+      },
+      {
+        "name": "MMLAB/BQSCHED.C",
+        "sha256": "61a633586ab5c97631039ccda3c9a7344b8265cac78b9e2c5f71a70e55ea9737"
+      },
+      {
+        "name": "MMLAB/BQSCHED.H",
+        "sha256": "774bc6d25a4e8056e943ee51c5ce990efb1ceaf117cbb6a22dc5c0cb6f139912"
+      },
+      {
+        "name": "MMLAB/BUDQ.C",
+        "sha256": "c14c9b138dd34f60f1423996fbad18878aa6bea1b54cbf67116a2d33b6a79ca2"
+      },
+      {
+        "name": "MMLAB/BUDQ.DEF",
+        "sha256": "8c4b59242ae8f70dc2d6084b88bdeb07bbf2333b4f956301bf8cdf35281f136f"
+      },
+      {
+        "name": "MMLAB/BUDQ.RSP",
+        "sha256": "9e95f5574c4ba082e40e71390ebae679c285c89d228d7f108bb6cf0d85a4e3ea"
+      },
+      {
+        "name": "MMLAB/BUDQA.C",
+        "sha256": "df814c5ff3b6ca1abe75360931eda954859fabb8ed36b41755c0e83a2cc463d5"
+      },
+      {
+        "name": "MMLAB/BUDQA.DEF",
+        "sha256": "2f360c06a977fa321934123ed70ab517a08b96fd25a7c1020dcc14cf630c415c"
+      },
+      {
+        "name": "MMLAB/BUDQA.RSP",
+        "sha256": "65092200dbfcc71584c6117ea9dc80c49f648e40c179edc1658488280a446f59"
+      },
+      {
+        "name": "MMLAB/BUDSELF.C",
+        "sha256": "1bc66f73003e4f369b111a172114e2bae22cdb74614446c3093e6aa8e4223ddd"
+      },
+      {
+        "name": "MMLAB/BUDSELF.DEF",
+        "sha256": "85e824f255ca301b4ce8f223d60195ce42518818252409d741c3e3b0e57282f9"
+      },
+      {
+        "name": "MMLAB/BUDSELF.H",
+        "sha256": "dee9d41bc6e58ac504cebafa72224e2ef8c7659072a662212503bd646d4e5fda"
+      },
+      {
+        "name": "MMLAB/BUDSELF.RSP",
+        "sha256": "941b6f8df5907c85636a9a879ed9f4ec2eb78f462ac9345a5f6845df38c41874"
+      },
+      {
+        "name": "MMLAB/BUDWAIT.C",
+        "sha256": "6abe68a296fd72efc14d5702687bccdd42a076b10c4956e6b6b83b4e7adccf5c"
+      },
+      {
+        "name": "MMLAB/BUDWAIT.DEF",
+        "sha256": "6fe9d824b0271a44739eaae7df84c9c0a06c9932d4abd1aca468f0b773088413"
+      },
+      {
+        "name": "MMLAB/BUDWAIT.RSP",
+        "sha256": "8ea6135a054492db540bb10b20c03e61cbe6075c23f22bbae757c67b0ae62671"
+      },
+      {
+        "name": "MMLAB/BUILD.BAT",
+        "sha256": "e5e09c5b0b1be2dfee408bba1db4e7a612282d0ce1f5fe99bed1f5027a1b93fc"
+      },
+      {
+        "name": "MMLAB/BUILD30.BAT",
+        "sha256": "835a7e560c6593c458781f06d2d8f2d8a33648c34c17194b013b206e39a1fe0d"
+      },
+      {
+        "name": "MMLAB/CLOCK.ASM",
+        "sha256": "89c5d1d9ecadea50bb50ec53ca67c11e7b084bc721e3cc02b825a82e7db40c77"
+      },
+      {
+        "name": "MMLAB/CLOCK.BAT",
+        "sha256": "7e757c9f02a4030452a83d07f00add0b23f8ddb8f16ae310a2e2a85aa3e78009"
+      },
+      {
+        "name": "MMLAB/CLOCKALT.C",
+        "sha256": "7271eafcf5b9ff6fe170854e4de95c1abc756d00726f94a7f53c3cc0d15b9b22"
+      },
+      {
+        "name": "MMLAB/CLOCKALT.DEF",
+        "sha256": "b52538a5c5fdf154595d637b8c7f1953bd07eed85c73be30bee344a19728653d"
+      },
+      {
+        "name": "MMLAB/CLOCKALT.RSP",
+        "sha256": "d4a4ada08aca464f0919dbe659fbcf6a21bdfe940cb793ebb4fc5d0e552705c9"
+      },
+      {
+        "name": "MMLAB/CLOCKQA.C",
+        "sha256": "e067c6a68adf0acaf639d69ef8ab5067a4ab8585d1a6245dc12e94e31c1ee48b"
+      },
+      {
+        "name": "MMLAB/CLOCKQA.DEF",
+        "sha256": "1eabee9b0b238f0f57d8f1e3f8400e748abd5c9f6d5e167472fb66e867fd6371"
+      },
+      {
+        "name": "MMLAB/CLOCKQA.RSP",
+        "sha256": "54cbed46a6600b176463ed4b978845807920986dbc12402af43b296c97b3f00a"
+      },
+      {
+        "name": "MMLAB/CORE-MIT.TXT",
+        "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4"
+      },
+      {
+        "name": "MMLAB/DELTA8.BAT",
+        "sha256": "bee61165e631aa218019c17f9c7bc39675ecac23c56712fc2954ae783474ca37"
+      },
+      {
+        "name": "MMLAB/DELTA9.BAT",
+        "sha256": "ef71c230d20fe36fb6038e444eefb65896dbba9269650a613805c888e111be1c"
+      },
+      {
+        "name": "MMLAB/DOSSTAT.ASM",
+        "sha256": "c32c6170cc9ec4678aedc1d998f87357a22b6acf06155cd3b89340c4bc214de2"
+      },
+      {
+        "name": "MMLAB/ENTRY.ASM",
+        "sha256": "fe93a74ff44bcc487f8a02f58ed31f3d0a48ebf5aecab7ddc34e95f7a5617246"
+      },
+      {
+        "name": "MMLAB/FORMAT.BAT",
+        "sha256": "ce211807532e185b5f47fab8f948c2b2d84b28ccabcc8e13d4333f2e51c73465"
+      },
+      {
+        "name": "MMLAB/FULLHAND.BAT",
+        "sha256": "c8ca4329321ac70d85107388038bf559877a66b66bca63c2a27be413d99b67cc"
+      },
+      {
+        "name": "MMLAB/GUARD10.BAT",
+        "sha256": "c4a1f1f0c9098eab7e515fa307b2cb26e1841776ffedbd63f99cbd9c7e4ecb8c"
+      },
+      {
+        "name": "MMLAB/GUI.BAT",
+        "sha256": "00e345820030dc4ce97c2c2907ef1d98fde0efc9572edfaffec66ec77cf0e816"
+      },
+      {
+        "name": "MMLAB/HAND.BAT",
+        "sha256": "d219d63596d4d370962fd21ba43bab550d648a64e24d95fc2add4d09baad075b"
+      },
+      {
+        "name": "MMLAB/HANDQA.C",
+        "sha256": "0dcde2fb7904465978dd5b92c32b934b08b66b7f28f16a63e6d062382f0f90d8"
+      },
+      {
+        "name": "MMLAB/HANDQA.DEF",
+        "sha256": "494b8fc6b7c803f8ddbb2382687d42e88e5f2721efa5713af6149136938428fa"
+      },
+      {
+        "name": "MMLAB/HANDQA.RSP",
+        "sha256": "0d7cb0021ed6fea58a939da1e4791628fcea848a87a3aeab89ef38e0c32abee5"
+      },
+      {
+        "name": "MMLAB/HENTRY.ASM",
+        "sha256": "220ed6c7d9d48da928bf71db931faa2ff6682c4ad1c0022f1ffae1ff1283f712"
+      },
+      {
+        "name": "MMLAB/HIGH.BAT",
+        "sha256": "8139d6d21f35f011e550cc0298cb0b832d9eaab7058da936f4df799a8151eab9"
+      },
+      {
+        "name": "MMLAB/HIIRQ.ASM",
+        "sha256": "f5a3605a88d78f70ea80c73db9d993022f02cd7eb330a17417dc03eaddc485de"
+      },
+      {
+        "name": "MMLAB/HIQA.C",
+        "sha256": "10908ba0f816adbdfe82dc7d74b713e86b121ccec306fdf3256b3750eeeb5535"
+      },
+      {
+        "name": "MMLAB/HIQA.DEF",
+        "sha256": "f60e99ff92ddafcc1d336f7f9dea5aa9a1099944b565ecc2a4f778fc6cf765d7"
+      },
+      {
+        "name": "MMLAB/HIQA.RSP",
+        "sha256": "5b02884d36340058fe59c03ede7b3544eaae1b2870fa3c1ee9d69b89bfc542e1"
+      },
+      {
+        "name": "MMLAB/HIQUAL.C",
+        "sha256": "387808c60ad37edd7b610501381d7171292058af07baa036b3a716672ed7bbf4"
+      },
+      {
+        "name": "MMLAB/HIQUAL.DEF",
+        "sha256": "18db328b7570fb4ed2d9c439f71e72bc33d834ff476226a1d3d2d080c97c041d"
+      },
+      {
+        "name": "MMLAB/HIQUAL.RSP",
+        "sha256": "a12e37c2ccbc41f04821b588f9cca90a9be272e8adbef4a79af30c1c07a0e877"
+      },
+      {
+        "name": "MMLAB/INSTR.C",
+        "sha256": "3d7960b4dd8a1c66f67466748882934d38bc9d2b788ffb3e34aa67604e30b9da"
+      },
+      {
+        "name": "MMLAB/INSTR.H",
+        "sha256": "4af9dd69ce78d2e7752d391ff0c8232a44daf8aa1f20d83b45fa02ab46d10cf7"
+      },
+      {
+        "name": "MMLAB/JMCORE.C",
+        "sha256": "7c6ec25dadb9b0aee0c6104ceba19130cc90896060784829738d5767a9a7cbe1"
+      },
+      {
+        "name": "MMLAB/JMCORE.H",
+        "sha256": "2b4b99638c6192ed904e3173de8c22fa9973b09ba1adfa418a57c0cf44a48f56"
+      },
+      {
+        "name": "MMLAB/JOYCAP.ASM",
+        "sha256": "0edb252ebbeab38c9856a599f88acdcd049066db0ede11a486430d96def62c90"
+      },
+      {
+        "name": "MMLAB/JOYCORE.C",
+        "sha256": "c89ba555bba2531d335722ece1a67e737e53a89fc1965029bdd03f2897cff366"
+      },
+      {
+        "name": "MMLAB/JOYCORE.H",
+        "sha256": "a94127d11161f2e87d9aad97834347d279c6746b0711cb2f930b437d6f1540ed"
+      },
+      {
+        "name": "MMLAB/LAUNCH.BAT",
+        "sha256": "3883382ad8b6c35bd2a1946dbfee106a8a4a5949d2e68ba0edeb230a2caf5ac7"
+      },
+      {
+        "name": "MMLAB/LICENSE.TXT",
+        "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4"
+      },
+      {
+        "name": "MMLAB/LIVEHOLD.C",
+        "sha256": "758f72ac149e87f550c0b931d3de186848602df0826353a384834f357e710215"
+      },
+      {
+        "name": "MMLAB/LIVEHOLD.DEF",
+        "sha256": "6989a4a5c878428aa4c18354cb36e461d1325da1e76d69860a9e325b190345f3"
+      },
+      {
+        "name": "MMLAB/LIVEHOLD.RSP",
+        "sha256": "ed4246b025aec79f2960ae568c149934af85bad2d3c8dfa28542c28397ba0bd4"
+      },
+      {
+        "name": "MMLAB/LIVEMIDI.H",
+        "sha256": "412872225825a54c8226b5273c3286444c12973d2a716ee4a1a3c801b2629cbd"
+      },
+      {
+        "name": "MMLAB/LIVEQA.C",
+        "sha256": "e3dc112e093ef99820d5b929fea320bb6c4f77a326041801d86a28792067e012"
+      },
+      {
+        "name": "MMLAB/LIVEQA.DEF",
+        "sha256": "dfd40d625ecb50cb48305a98553ea5ca6949967edf5c13b7a97683bdb54e36f8"
+      },
+      {
+        "name": "MMLAB/LIVEQA.RSP",
+        "sha256": "739a75dfdad79379522f470dd449fb0cffc7ce58e0814ea9d46e3001d6af4c08"
+      },
+      {
+        "name": "MMLAB/LNG.BAT",
+        "sha256": "a0221a4dac96d5e7371f231b3247528bd73de367b8c9dbd736404f9ac21579b9"
+      },
+      {
+        "name": "MMLAB/LNGQA.C",
+        "sha256": "0f1a5f37f8ec999b470297da46189367b412a4025d945062f11a9a293c29f4a4"
+      },
+      {
+        "name": "MMLAB/LNGQA.DEF",
+        "sha256": "9fc953d6947d015d7f3b52a36a54ea4363bab0f14b660851749b562098af92ba"
+      },
+      {
+        "name": "MMLAB/LNGQA.RSP",
+        "sha256": "989e2e88a14cfb280e9eab57c0edec3932a7d096a8502573ab2191bf8e2b9dec"
+      },
+      {
+        "name": "MMLAB/LQAPI.ASM",
+        "sha256": "cedefabf89fd8ac35f09ef46064f6a1bc80de41446fd075def7d8aac9e1f9747"
+      },
+      {
+        "name": "MMLAB/LQCASE.C",
+        "sha256": "33e33c5ca49f1e0a845f02b0be58e78ca357b94204491e5bc1f80a142b67071e"
+      },
+      {
+        "name": "MMLAB/LQCASE.RSP",
+        "sha256": "abfaae7ac0bf86dd8e8b2f955683345cc9dd8a853a7a149e8bc939749913c923"
+      },
+      {
+        "name": "MMLAB/LWAUDIO.H",
+        "sha256": "ab8c170161d422703a3351e2e01bfbd20ff5d6fd1be364fc527571a96db833ab"
+      },
+      {
+        "name": "MMLAB/MCIALT.C",
+        "sha256": "2123f101eb8974ab73741950c1ac70ecefcaf31db93ae7df0498da78eba41eb6"
+      },
+      {
+        "name": "MMLAB/MCIALT.DEF",
+        "sha256": "e8417d814f6c4b18bc7ca8d29e0d76b4be19307c39211c74788e5c5c99ad1950"
+      },
+      {
+        "name": "MMLAB/MCIALT.RSP",
+        "sha256": "f715018321c6fa9edcd7a98d323aa9c3f51fae723638e859aa6b8e2199e14837"
+      },
+      {
+        "name": "MMLAB/MCIAPI.H",
+        "sha256": "b9546d9d8c839800a79c7217c79227d865060b1526c92403cdcd5a314d96a8ec"
+      },
+      {
+        "name": "MMLAB/MCIPSG.C",
+        "sha256": "a75fcedee621697c7f032ccef4b9e25cc45bca339fc5541f44656ebf18d8f461"
+      },
+      {
+        "name": "MMLAB/MCIPSG.H",
+        "sha256": "5347ed95daccd56caec678c80088e6916fc4132a787df0733dcbf443fbce6982"
+      },
+      {
+        "name": "MMLAB/MCIQA.C",
+        "sha256": "22833284edb02fc284aaa6527c430bd38d9eed2f692bcb927e37da7f452bfeb4"
+      },
+      {
+        "name": "MMLAB/MCIQA.DEF",
+        "sha256": "e11d37031b7ad808c31e1c31e1cbdc2708ef6a4e95bc76f695a2a46166ce45e8"
+      },
+      {
+        "name": "MMLAB/MCIQA.RSP",
+        "sha256": "b8d20cc195d96b99d3f914a59dc53207b873b2078f1fdbe6f1c86814f15dbfe1"
+      },
+      {
+        "name": "MMLAB/MCITNDY.C",
+        "sha256": "ea82d054a859760dd197f3171c992067374790bde3967750685748b106ddd587"
+      },
+      {
+        "name": "MMLAB/MCITNDY.DEF",
+        "sha256": "439ae361352e7550516b7646a38ed2b0946f525044fc02d9971c3de1c0dcf3e0"
+      },
+      {
+        "name": "MMLAB/MCITNDY.RSP",
+        "sha256": "27831edc3d8d7daba9917a0a61dcb98dc63deafc75d67142bcd7bbb91d7d988d"
+      },
+      {
+        "name": "MMLAB/MDALT.C",
+        "sha256": "efb9f0910b4cc0bf4cead112bc52da1c31a1a9e0c18f699b6e72828b9de5d6c1"
+      },
+      {
+        "name": "MMLAB/MDALT.DEF",
+        "sha256": "58fb0acb8229695cf157460e608195a3c2e2b368cac65c7406370af779da3630"
+      },
+      {
+        "name": "MMLAB/MDALT.RSP",
+        "sha256": "f33831b6b0bb98865293cfd9ba0a23232f25116bf58e1ebdb75ea5f52373e1f3"
+      },
+      {
+        "name": "MMLAB/MDAPI.H",
+        "sha256": "a8339122e6d1e72d742b55319f5c154f61e2856fc21d15a4fc3eb9774c34e011"
+      },
+      {
+        "name": "MMLAB/MDDS.C",
+        "sha256": "4f5f1a977d6a8f5cba90e364ddce41158d4f4de9f32601ac636e75ea521c1922"
+      },
+      {
+        "name": "MMLAB/MDDS.RSP",
+        "sha256": "7d9dcde1bfbe548f65bd870094500df65316e8413aec61eb13b938f5d46b0e12"
+      },
+      {
+        "name": "MMLAB/MDQA.C",
+        "sha256": "bc6f6031a97592ecd8249fefbd11a1881e72a827c9e61df32ffbf57e5fd20056"
+      },
+      {
+        "name": "MMLAB/MDQA.DEF",
+        "sha256": "48c9a3d6a2a1eb4899973593898e393efa81dc6b242f948ed35bba904f7e9cb9"
+      },
+      {
+        "name": "MMLAB/MDQA.RSP",
+        "sha256": "f76a0de8e1919d864e5defad06b20b527dc21cafbed6d1c4a29f0cbe1172dd9d"
+      },
+      {
+        "name": "MMLAB/MDREAD.ASM",
+        "sha256": "db581de12a6952c0a3489b8269f9fee4f2fbd5e30849c4bfe3568eb10f41fba5"
+      },
+      {
+        "name": "MMLAB/MIDI10.BAT",
+        "sha256": "d3d7d0a0cdc9203c8424289b42742acd12afbc770a456dbb0297e8029fd25e58"
+      },
+      {
+        "name": "MMLAB/MIDI11.BAT",
+        "sha256": "1a0ada70ba3ff4c9d3aef16a53487453a191a2e7fecbd22305afe888cfa2ca82"
+      },
+      {
+        "name": "MMLAB/MIDI12.BAT",
+        "sha256": "5adb10b924ee82ebe5dd6727e50a62522fb3607e8b3dc7503040de3cc83ac053"
+      },
+      {
+        "name": "MMLAB/MIDI13.BAT",
+        "sha256": "005d3205771f78751e3a45efbe7c7cfb7d84078d7a50440b94223038ace2b3c7"
+      },
+      {
+        "name": "MMLAB/MIDI14.BAT",
+        "sha256": "dcbbe4739241297cef2116098aea92e3287feed29032e49c29fa944da281d3fb"
+      },
+      {
+        "name": "MMLAB/MIDI15.BAT",
+        "sha256": "f5c7aeb85d753debeffe5e2df10fe6556e77b22b2aabc9d8bdb6ec2eca4c0880"
+      },
+      {
+        "name": "MMLAB/MIDI16.BAT",
+        "sha256": "7cb1c1da237e5dd90e57abeac7cd64ebefe335a3def402ea596849c98d7d91d3"
+      },
+      {
+        "name": "MMLAB/MIDI17.BAT",
+        "sha256": "e60f2801afa9adaea7958101fcd139e2cb15771ffef91433492be01a839a0271"
+      },
+      {
+        "name": "MMLAB/MIDI3.BAT",
+        "sha256": "0e2fd0ddcb332285a519f302ff219586ed41e91c83b97b79921e779512cb9b16"
+      },
+      {
+        "name": "MMLAB/MIDI4.BAT",
+        "sha256": "e5e739033e20273c56cdf0864c52ccb7ec0a6d490e170cbc9a413700887a210f"
+      },
+      {
+        "name": "MMLAB/MIDI5.BAT",
+        "sha256": "b97ff81c8f7bb866a39f8c79cb9a876d62f67a6dff1f89ac6e75b8c9cd8de6c3"
+      },
+      {
+        "name": "MMLAB/MIDI6.BAT",
+        "sha256": "b0841bb330fe4ab7cff45c3d955ef420d9c55cc53179f70b35342e7c9456764c"
+      },
+      {
+        "name": "MMLAB/MIDI7.BAT",
+        "sha256": "205e911cd7e2a5363c64ae4dddaf3cdbdaf0edc8377d22a61109c820f0cfa869"
+      },
+      {
+        "name": "MMLAB/MIDI8.BAT",
+        "sha256": "bd1f6c727012a5f720f27dbf637115d069303631fbe613388266265edda56714"
+      },
+      {
+        "name": "MMLAB/MIDI9.BAT",
+        "sha256": "0983b0da725e155840542d727c0b12ff5d22a92b83040ed1e16a4e105c02e6d8"
+      },
+      {
+        "name": "MMLAB/MIDIAPI.H",
+        "sha256": "44ab50a98c273565055b4a258724e61b5b0137213f3d311991d153ec0029bab5"
+      },
+      {
+        "name": "MMLAB/MIDICLK.C",
+        "sha256": "e6814c627ac735e9380934e73da4cf65464bd2656732d27b48b98862e1b45f5e"
+      },
+      {
+        "name": "MMLAB/MIDICLK.DEF",
+        "sha256": "63ce3430460d438aa6baed29308c6e84301a227945ce245bc40c60984c8c9633"
+      },
+      {
+        "name": "MMLAB/MIDICLK.RSP",
+        "sha256": "cd6827f15a8f42549a329a25ca3408b5fe267daa8d7a789859725f397d433145"
+      },
+      {
+        "name": "MMLAB/MIDISYN.C",
+        "sha256": "fa9cd4a15b5da9c4b2c3b5b04165ad3bad8f6a97cbbdf96de019a687f1b5213b"
+      },
+      {
+        "name": "MMLAB/MIDISYN.H",
+        "sha256": "dae6122f431d2fe6455ccbcafdbb0695a7573115dd126dc9f84b34819b2e96b3"
+      },
+      {
+        "name": "MMLAB/MIDQA.C",
+        "sha256": "c68f252ea1aaf18cf156c7599cebfee7d4ea984f9c0e02c35207c56dea84c401"
+      },
+      {
+        "name": "MMLAB/MIDQA.DEF",
+        "sha256": "48759790d832522bfe705aa51352abb920ee8941270fd430b08305df79a4e24f"
+      },
+      {
+        "name": "MMLAB/MIDQA.RSP",
+        "sha256": "41ce8367b9604724bd648c0eadd657dc5468d9b7570dc48c0e4c89dc821945f2"
+      },
+      {
+        "name": "MMLAB/MINIPLAY.C",
+        "sha256": "d976c300b1eb8142b1ec6384d5795f40ff840ca36eb33460ab3679cf3748ff3e"
+      },
+      {
+        "name": "MMLAB/MINIPLAY.DEF",
+        "sha256": "3b7704f261ede30a96b520824e6ec80473c007f19861097880830dbbf1c4e70e"
+      },
+      {
+        "name": "MMLAB/MINIPLAY.RSP",
+        "sha256": "70cdac473dddb6f73fc86608af3d6c78f5c11a11d5bfb87d8c8ab71333e32e65"
+      },
+      {
+        "name": "MMLAB/MINM3.C",
+        "sha256": "52613488793f6b7703c84b30a1b4dbce6717145f0fd72e67648edda3e40ea424"
+      },
+      {
+        "name": "MMLAB/MINM3.DEF",
+        "sha256": "2421cb61e7d1af036ea973b81fbb7cf51bb88b026b60ae28aa946a5656c89740"
+      },
+      {
+        "name": "MMLAB/MINM3.RSP",
+        "sha256": "362d4af34e663c26a934dfc3602003e96abbbb0403bbeb1e88c8e02a594f5cc2"
+      },
+      {
+        "name": "MMLAB/MMAPI.H",
+        "sha256": "0eed3cc8c827800ff015f974c709206494e90430e2e837245cd0273f2effd6ce"
+      },
+      {
+        "name": "MMLAB/MMTANDY4.C",
+        "sha256": "45dec8866c3cc4af5235712f092b80b4f1aa8b0c6fc58ead626d419c6b37383f"
+      },
+      {
+        "name": "MMLAB/MMTANDY4.DEF",
+        "sha256": "46c06bf7add1bbbfe655bbe09cd466136dd125ed6e5f5f195f2fe0d5c50b399f"
+      },
+      {
+        "name": "MMLAB/MMTANDY4.RSP",
+        "sha256": "1ceae51f0cfa54bb513e87bb76b70fb320321063387cf9df987d7e48991b72fc"
+      },
+      {
+        "name": "MMLAB/MQALT.C",
+        "sha256": "67b8280cb097e8bf4639ab3999b6dc14dcd13667235e10d4ba46c5a7febcb74e"
+      },
+      {
+        "name": "MMLAB/MQALT.DEF",
+        "sha256": "59d988845e14072098bb7fd8e9e134835236e9a138258f2fd0e26d12b7e3b88b"
+      },
+      {
+        "name": "MMLAB/MQALT.RSP",
+        "sha256": "43e3513de248b3b3e416d837b3d6a04952a4b69fd4b7db0e5faf9478414d0503"
+      },
+      {
+        "name": "MMLAB/MQQA.C",
+        "sha256": "f5b1df8e8d45430e1ac8179e56654576ccd764d2aa9c6d0f727911dc06b9097c"
+      },
+      {
+        "name": "MMLAB/MQQA.DEF",
+        "sha256": "e3c28a248ef43006ec6d8ed732a67b476a1136ddbf4a626c4bfce3865548d037"
+      },
+      {
+        "name": "MMLAB/MQQA.RSP",
+        "sha256": "74fd698ecc014023e81c8cf3c52479cafeb46dbf1c77945ec9fc36a655c7a6a7"
+      },
+      {
+        "name": "MMLAB/NORMALQA.C",
+        "sha256": "e559cdebd970f4930dbbc498f82841db2284ae1fabb5517e679a313a4eecdb38"
+      },
+      {
+        "name": "MMLAB/NORMALQA.DEF",
+        "sha256": "c40c5a06ee6446879541bb0ccf779301a3d783de6fe29aa8bd11b0d1c07cc260"
+      },
+      {
+        "name": "MMLAB/NORMALQA.RSP",
+        "sha256": "7d35eaae4fa8a065dc75c391c1578129d48e9e230152f8e6b0018398d69b826c"
+      },
+      {
+        "name": "MMLAB/OPSQA.C",
+        "sha256": "3a8190a88b985b2f3439acd887a5e4bea1c772eb9457f7a68fd2afcdb5057441"
+      },
+      {
+        "name": "MMLAB/OPSQA.DEF",
+        "sha256": "389d706283f06a305d01a15457a7c6f6914f45c0eaf8e835def0aef44ef113cf"
+      },
+      {
+        "name": "MMLAB/OPSQA.RSP",
+        "sha256": "4a37c258bfa874de1a6ace7de8d1dab319f0803e2d06e6f637a520190edf339e"
+      },
+      {
+        "name": "MMLAB/PATCH7.BAT",
+        "sha256": "44911d48d0d5f30c44d29507c28186f5f1f7df129654a91f6a4c0fef6ccb256e"
+      },
+      {
+        "name": "MMLAB/PERIODS.H",
+        "sha256": "4fbb8b010c03e768909093494f6549f4781f6e80c13984b0592a8305ea5a513e"
+      },
+      {
+        "name": "MMLAB/PIANO.C",
+        "sha256": "99a4fc4d2a404fa845e22e68df1315e7457d710f76047fd4d8b71dfc03113af1"
+      },
+      {
+        "name": "MMLAB/PIANO.H",
+        "sha256": "49690de949ff194c22226731602085dcfd75fb77be3e4a6c683d29b5bfa88c58"
+      },
+      {
+        "name": "MMLAB/PLAYHAND.C",
+        "sha256": "fec2b618d7fd80feba5cf66bde1cc79ca202c0e5835d209d6670d73b33a965dc"
+      },
+      {
+        "name": "MMLAB/PLAYHAND.DEF",
+        "sha256": "61530886f4223800af6a15fc699f593ef2f01293c67de559d475d752869fade0"
+      },
+      {
+        "name": "MMLAB/PLAYHAND.RSP",
+        "sha256": "f055063d5076e2527eb7087de930d692381e30593e493a421c017054997ae2f6"
+      },
+      {
+        "name": "MMLAB/PSG.ASM",
+        "sha256": "57b5a84664d5bb8a9345e61d09644b2816c32f288bd15154295051ba7bb56341"
+      },
+      {
+        "name": "MMLAB/QBEATS.C",
+        "sha256": "ae4ec59c7d73bb8d4ac7d0153a0ee53ef7e1ecdc75f4b3e0928c502f11ffa07a"
+      },
+      {
+        "name": "MMLAB/QBEATS.DEF",
+        "sha256": "63d4042bec87027ad27715658044499360ba620afeeff187ff78ad9d74d7a029"
+      },
+      {
+        "name": "MMLAB/QBEATS.RSP",
+        "sha256": "d9026ca6147b082d19cd0aaf311d6dbe7d1e6e1713033530ea9ae9c5db58ca9c"
+      },
+      {
+        "name": "MMLAB/QCHIME.C",
+        "sha256": "2d47864ab44b11d1f29ddd147ca72ce2b682fd7d02725772d82b8142670d00c4"
+      },
+      {
+        "name": "MMLAB/QCHIME.DEF",
+        "sha256": "e87bbb5782e97a8c777ade5fb7cbc36ce5acb3b2f800de74037f805c4a50585b"
+      },
+      {
+        "name": "MMLAB/QCHIME.RSP",
+        "sha256": "69b4745bc7e07a704ed8bd26be557095cc151165669a91d43d7f18fb72ebcc27"
+      },
+      {
+        "name": "MMLAB/QEXIT.C",
+        "sha256": "69dcc4f62e50854df96ef2636c253dd90d45ce848d6a064fae7826f8ba811fe1"
+      },
+      {
+        "name": "MMLAB/QEXIT.DEF",
+        "sha256": "f9b9b7bba4fb1332c2e608e86cba21cb9c2130ffb861bd99169ae9a83032a288"
+      },
+      {
+        "name": "MMLAB/QEXIT.RSP",
+        "sha256": "ad442799ba6040fe2b32e7d4dc7efeff3dd58866cf97bb69bc43fa079f6315a6"
+      },
+      {
+        "name": "MMLAB/QJOY.C",
+        "sha256": "5f2c9ee9c5b805826c78e76020c4dfab99b3d4c5738dff391b453e4abf3e7f40"
+      },
+      {
+        "name": "MMLAB/QJOY.DEF",
+        "sha256": "33a9102f16c45baa22a28c190df5d9e806beb4836fa62ba75b4106a77106c5be"
+      },
+      {
+        "name": "MMLAB/QJOY.RSP",
+        "sha256": "cf465a624bf9746c4f4a795ee43530929b7d1bd76cc5b80b17e67e28d1efc704"
+      },
+      {
+        "name": "MMLAB/QMOUTH.C",
+        "sha256": "a9e734635e36d4a4461f54ba9dd4e3ab2a645fccee7ff293901085403554563c"
+      },
+      {
+        "name": "MMLAB/QMOUTH.DEF",
+        "sha256": "925b060bf9ecdb39d1130d1882c974863d782e5150a10e060544fc4c257d0edd"
+      },
+      {
+        "name": "MMLAB/QMOUTH.RSP",
+        "sha256": "a4eacbfbb8b8e93a3b47961a608f0ac77939848110a0db8e6e82eb8a9d7c2bf1"
+      },
+      {
+        "name": "MMLAB/QPIANO.C",
+        "sha256": "3b9e40dad3353cf1f043e008a53f05c4a98d97d877b2249819653e850cd09261"
+      },
+      {
+        "name": "MMLAB/QPIANO.DEF",
+        "sha256": "d2dfe5be1b63d70df69984f4a284f2dbb9c2e84b459c3bf6d0c251e741a10a33"
+      },
+      {
+        "name": "MMLAB/QPIANO.RSP",
+        "sha256": "084d50b7e2e976095e55af325516d4147173eb61f811c60ec67032c7abebd93d"
+      },
+      {
+        "name": "MMLAB/QPSG.C",
+        "sha256": "6f4656ab759d45b6bb7d6a247c21ad00298bfbe2301faf582edda54bf3172b60"
+      },
+      {
+        "name": "MMLAB/QPSG.DEF",
+        "sha256": "1472bae5d2af91adff51252e2e4e9a58ac9b490f5b108df404d8914c4defc63f"
+      },
+      {
+        "name": "MMLAB/QPSG.RSP",
+        "sha256": "9d3cdbffc2c38e16e6e0e1572a2e4e9e8dc638279488b2a68159d5781d28955e"
+      },
+      {
+        "name": "MMLAB/QREG.BAT",
+        "sha256": "5ea5e9d70aaceb4245862a74ddaca88fde0325b4936c88d96b89e6b3b76a194e"
+      },
+      {
+        "name": "MMLAB/QSQA.C",
+        "sha256": "6724548e563750fe5ed0c90a75d0b920ccc7d6e0ee5cc751b19110d1069278fa"
+      },
+      {
+        "name": "MMLAB/QSQA.DEF",
+        "sha256": "df54be12be660fe759158638c2bca6e4e1813934790ffed312e18f920977ebfe"
+      },
+      {
+        "name": "MMLAB/QSQA.RSP",
+        "sha256": "6081933a8b3dae37f95ebfa0743bda8cc87e43b57bacfa0fdd141bb6219ac37d"
+      },
+      {
+        "name": "MMLAB/QUAL7.BAT",
+        "sha256": "384af151ea3a7457c487d45f6f88b0061e403ac94a226f09d161633d7cdb5e2a"
+      },
+      {
+        "name": "MMLAB/QUEUE4.H",
+        "sha256": "e6bf5bc21a4afa7f49835e0ad3f6888e803d0788bb7062035fdbb78eb60f0948"
+      },
+      {
+        "name": "MMLAB/QXP.C",
+        "sha256": "89e5cfd89161d44d396757627ac1dac957bfc2491a1b7a76853d91462f249d5c"
+      },
+      {
+        "name": "MMLAB/QXP.DEF",
+        "sha256": "63ef35414c80094f94179f3fa6bd4541527ebf6d7b88053776683bd7260bdc2b"
+      },
+      {
+        "name": "MMLAB/QXP.RSP",
+        "sha256": "b046b8e5d5bcdf498aa5b4cc0a40d4e2b440e972ad99c830e0923bd85ccc2f8c"
+      },
+      {
+        "name": "MMLAB/RAWAPP.C",
+        "sha256": "ebde64f89e82158339548924dc0a92e878af038c851d85bb74f5a24adee41436"
+      },
+      {
+        "name": "MMLAB/RAWAPP.H",
+        "sha256": "d9aaac4b291096c374b3bd19fde729ddb4ec647e9e6b86286b75a6495a93aba4"
+      },
+      {
+        "name": "MMLAB/RAWFILE.C",
+        "sha256": "cfc7ee31313233e5d696c097403ad418a6810a306a38eb131cbd201fa899ca56"
+      },
+      {
+        "name": "MMLAB/RAWFILE.H",
+        "sha256": "1f59631a54580e97c2f04ac1735fc1c667e970b554f56c774adb83d94e9e0d81"
+      },
+      {
+        "name": "MMLAB/RAWGUI.C",
+        "sha256": "c3911c5b47a623ca8f30703fe896a6382ce2d877fa68c41220a848641fb8922c"
+      },
+      {
+        "name": "MMLAB/RAWGUI.DEF",
+        "sha256": "5bc0dfb7d552eaab7fa22814cc9597f467838ba2075a78427b64857c506b7657"
+      },
+      {
+        "name": "MMLAB/RAWGUI.RSP",
+        "sha256": "73acc3635633ce9b1d08cccc6f90f1e90e04e18fd50fbaf1f8e3fbf05d0697b3"
+      },
+      {
+        "name": "MMLAB/RAWQA.C",
+        "sha256": "9b9ed7d222aa82b656e5ee406ddb7accf75e64f7b6c22dbc5be5d08afa6b9132"
+      },
+      {
+        "name": "MMLAB/RAWQA.DEF",
+        "sha256": "a04ece92d978f7507136433529ab37ed1e8f728eeff4dae37cdf5d89e813ba09"
+      },
+      {
+        "name": "MMLAB/RAWQA.RSP",
+        "sha256": "88ad1d7b0c48ea32f8837a6e30d1d17af778bad2adfc9c6c3e2ba27c2aec299d"
+      },
+      {
+        "name": "MMLAB/RAWSCORE.H",
+        "sha256": "0b781b5a3a618eff82fa3aad852e6da2b8452352082405f6911da676cbfa9ccd"
+      },
+      {
+        "name": "MMLAB/RESERVE.ASM",
+        "sha256": "c424d65b0436ba42bba33aee8b1a54d47655141e6c60ebfbf1e02925df40b542"
+      },
+      {
+        "name": "MMLAB/RESERVE.MD",
+        "sha256": "cd890d7959438e0d5b67953e4d64bf0dd693cd87f04d14def1bdde5ae785b753"
+      },
+      {
+        "name": "MMLAB/RESERVE.PY",
+        "sha256": "96231b79cb9f0d0920989f700a00189d78a896ed49c1093d537ec94a5089a616"
+      },
+      {
+        "name": "MMLAB/SKIN.BAT",
+        "sha256": "2276229d703fd2a59395789c4adccf212e7a3102a058c2253e0dc533315a3abf"
+      },
+      {
+        "name": "MMLAB/SKINQA.C",
+        "sha256": "566771a53ee7182968ec94e60006d8b39a46dafabc6da47020bac16ab34be1c0"
+      },
+      {
+        "name": "MMLAB/SKINQA.DEF",
+        "sha256": "5737ada3d58f65e1381e9eb9cdf67ce2a694a7b404f19c823d69a8025109bce5"
+      },
+      {
+        "name": "MMLAB/SKINQA.RSP",
+        "sha256": "4157549a8df2bdb57836469de16d08f9fc9749ea3888ac0483c67a54ade69a05"
+      },
+      {
+        "name": "MMLAB/SMF.C",
+        "sha256": "27a1bd9b879f999132c1e77c78f09f554c47e853111c9075d09cada0939f0540"
+      },
+      {
+        "name": "MMLAB/SMF.H",
+        "sha256": "1283c8ec525e594ee57499e0bea9db71be4336ce8a8833a76c28efa9176fbca4"
+      },
+      {
+        "name": "MMLAB/TBDOS.C",
+        "sha256": "009e8650d24557c6f09b0d91dc2389f6e45d66796bbc8755d30fc75f160bac6d"
+      },
+      {
+        "name": "MMLAB/TBDOS.RSP",
+        "sha256": "eaea126356a261c2db44e3d1af9e5ce000123b864bb93ccf687fcb2ba2893e20"
+      },
+      {
+        "name": "MMLAB/TBRIDGE.ASM",
+        "sha256": "35589608781d651d8a42b31fdd84a2f2745baee3fc11c4b3acb1bfe65a4446af"
+      },
+      {
+        "name": "MMLAB/TBRIDGE.RSP",
+        "sha256": "b322a3c382f34fe45742fecd13e4a19ae0b2d7d9ab6625c1112af0e6458fe485"
+      },
+      {
+        "name": "MMLAB/TEST11.BAT",
+        "sha256": "9b9a5b58010189473d857efdf8176c05930ce7caa25b6e76c5421c9889a142f6"
+      },
+      {
+        "name": "MMLAB/TESTCORE.C",
+        "sha256": "c55a1b825f584fda66bb233bbaf873a2faf50bf9aabc3fe2f1ac3fab3a8073e5"
+      },
+      {
+        "name": "MMLAB/TIMECLK.C",
+        "sha256": "2af3ddd446f68589dcce830823b3d0c00446061074f8734ddf5bc28ceec736f0"
+      },
+      {
+        "name": "MMLAB/TIMECLK.DEF",
+        "sha256": "f998b06a1230dc8ae6bfd091cdb1657e35607243eb44dceaedd9b60c2db79133"
+      },
+      {
+        "name": "MMLAB/TIMECLK.H",
+        "sha256": "8c725d1436243070829cd6b30b8cdec06934f220a40122df2bed12e6b51b4544"
+      },
+      {
+        "name": "MMLAB/TIMECLK.RSP",
+        "sha256": "7cf185d31975aa07874d61bcdd2f33f183f2589194017484c82b7e01809e4fc1"
+      },
+      {
+        "name": "MMLAB/TNOTICE.C",
+        "sha256": "be4a1217e92061a3cefc5c61522158eb4019202fc54ecca1e68f7275305aa043"
+      },
+      {
+        "name": "MMLAB/TNOTICE.H",
+        "sha256": "98058c37f3817877d3f7c79c6698ab138aa552fe854651dba5faee8ca41a5b41"
+      },
+      {
+        "name": "MMLAB/TPLAY.C",
+        "sha256": "bb9606e0e5445aafcd613cff52e70f465856e027e714f9f475767cca58767a01"
+      },
+      {
+        "name": "MMLAB/TPLAY.RSP",
+        "sha256": "bbe5dfe21637be2ce81fc782b1214185388dab87a299ad3b34522e08bf870f5f"
+      },
+      {
+        "name": "MMLAB/TRACE.BAT",
+        "sha256": "61e12bddc01ef292b4e37d23b88efd59662b3a62e4084391dd7da7cfdc0eaa5b"
+      },
+      {
+        "name": "MMLAB/TSTART.C",
+        "sha256": "5e7914ca85b6ba618f205d451dc631e9cac2ca0ae442ec265e11946d2f1414c4"
+      },
+      {
+        "name": "MMLAB/TSTART.RSP",
+        "sha256": "493332b1d44443cfb0c00fd2bd0c0fd99f22abf6c3f2c3433094ae262fddfc89"
+      },
+      {
+        "name": "MMLAB/UI.BAT",
+        "sha256": "35b7372c924845dcf91530d7b251ef8697585aa0162bc42e00190ac56710187c"
+      },
+      {
+        "name": "MMLAB/UILAUNCH.C",
+        "sha256": "7b59d2ccdaf145731de4830094618633bf033ccc39c17d3d7fe0d516a34f9b8b"
+      },
+      {
+        "name": "MMLAB/UILAUNCH.DEF",
+        "sha256": "afeb0f5cb980b01b5130ed6ce35c20b7fe5ef06ab2f0c8ea7fd25358716a0b60"
+      },
+      {
+        "name": "MMLAB/UILAUNCH.RSP",
+        "sha256": "1f73049c9f70ab4e8eec01b2e001d16683a318f2be16919d0437ce4a4aa3b069"
+      },
+      {
+        "name": "MMLAB/ULDALT.C",
+        "sha256": "4b1a8d703d3022b2ca29ab0a5abbe9ee5276ec01103d50f4c2d3d47407d1a94c"
+      },
+      {
+        "name": "MMLAB/ULDALT.DEF",
+        "sha256": "ac8321528d738a4d73dc0eeb61c166bf25a0251fe75badff57059a8bf5dd7fb3"
+      },
+      {
+        "name": "MMLAB/ULDALT.RSP",
+        "sha256": "cff3815fcf770781e635c5350b3fbec7057588190198ec33a064b934926eac75"
+      },
+      {
+        "name": "MMLAB/UNLOAD.BAT",
+        "sha256": "b2bae26cf27d478e161ffae95e159b9444d1611d51b1107f6c4fe12a08f6e1ff"
+      },
+      {
+        "name": "MMLAB/UNLOADQA.C",
+        "sha256": "76988a0514eddb37351249bd8b52a97917e41ca3f41b333630c3933b59f9f8d8"
+      },
+      {
+        "name": "MMLAB/UNLOADQA.DEF",
+        "sha256": "dd364bcb45d523bd68db8bff0c1393a3bf03bb395a02e3bfd0603816b96741b4"
+      },
+      {
+        "name": "MMLAB/UNLOADQA.RSP",
+        "sha256": "fb8e411a37d761a7065f45b60cb60f00efaa90f2df384a0180434f9fec42d479"
+      },
+      {
+        "name": "MMLAB/WINHOOK.ASM",
+        "sha256": "2181cb398c9baf5d26b3dbdd9a21145d67325c5eb49241d87481c2def867052e"
+      }
+    ]
+  },
+  {
+    "job": "SHELLOLD",
+    "batch": "BUILD.BAT",
+    "products": [
+      "TSHELL.EXE"
+    ],
+    "sources": [
+      {
+        "name": "BUILD.BAT",
+        "sha256": "36a8c4db4df32c301de98e5a3634e08b11e00edde940f5640e1b8c91d6d59e52"
+      },
+      {
+        "name": "DTCORE.C",
+        "sha256": "e8ac15c5e1236549d079e75ce6cdb84b8c526b0fd6d1b11e9b1e4accf443cf72"
+      },
+      {
+        "name": "DTCORE.H",
+        "sha256": "0368337ae099088c30edb5dd3245943fc2c38d0913df9c7c4a284bc68a7c71fe"
+      },
+      {
+        "name": "GRPREAD.C",
+        "sha256": "c70727c378b2934f310cd916623cc22210ac639d2d13855ed2e7a5f66d7340c0"
+      },
+      {
+        "name": "GRPREAD.H",
+        "sha256": "be510602fb11b7a7a9b69e7f77ec729b79df2252b992e12d4a80c378439a6f51"
+      },
+      {
+        "name": "LTWUI.C",
+        "sha256": "e1cbf3afb23403a7dbc51a9e0065cb896c9b3454f479ce1a93a3206771cb16b7"
+      },
+      {
+        "name": "LTWUI.H",
+        "sha256": "c73c30061f82ab28cfee30da1b42e4991014599feabfa3f026e06b350e9dd0e8"
+      },
+      {
+        "name": "LWTANDY.H",
+        "sha256": "765db2a718d7852e11ae349d3d93a08da832195b57f53efdac4881aa94f25a1a"
+      },
+      {
+        "name": "PROGMENU.C",
+        "sha256": "44291d08cd375034c8bf6192f39634be8d55f5048e06a8ffccea55332fc1d703"
+      },
+      {
+        "name": "PROGMENU.H",
+        "sha256": "3ecd00f88b29bd5d5a8cac9bca663b547aca8b2ab8c59158d67f9bced76c641a"
+      },
+      {
+        "name": "RAWREAD.C",
+        "sha256": "d3c045f00d7ea91dffb3fd9940faf27febcf68a643bfca401ba2b537255c1285"
+      },
+      {
+        "name": "RAWREAD.H",
+        "sha256": "b4c6f9017c220de554db8ea34c86126328468750eb8d7dfb32795f0080b266eb"
+      },
+      {
+        "name": "SCFGCORE.C",
+        "sha256": "02431a087fd8230767df2db4e8b8ceeeef916615c7f74515b8667dd36f4b5eb7"
+      },
+      {
+        "name": "SCFGCORE.H",
+        "sha256": "d4129fea968edfe20625d348c6d79ffd5afd4e1b65826ae14dc9b78b449060c0"
+      },
+      {
+        "name": "SVCORE.C",
+        "sha256": "f9231f8c25d3ecb182aa15db0cf24278602f5cadd72917b89e28e4035f03adb6"
+      },
+      {
+        "name": "SVCORE.H",
+        "sha256": "905eb75cd28b9541ae7e5ffdcbc02319ab692d0b4eb72bc0d4a01fed9a9654c3"
+      },
+      {
+        "name": "TNOTICE.C",
+        "sha256": "be4a1217e92061a3cefc5c61522158eb4019202fc54ecca1e68f7275305aa043"
+      },
+      {
+        "name": "TNOTICE.H",
+        "sha256": "98058c37f3817877d3f7c79c6698ab138aa552fe854651dba5faee8ca41a5b41"
+      },
+      {
+        "name": "TSAUX.C",
+        "sha256": "5adf8db7e0f7f055ac4e78b3cc5e567be06cfd9309ba8b7d876e19d4d18cccf9"
+      },
+      {
+        "name": "TSAUX.H",
+        "sha256": "4e172ce041df857579411c5b3fcb1606449c5d23434d62ec0c01e86aa94863f6"
+      },
+      {
+        "name": "TSBOOT.C",
+        "sha256": "2fe8f83534bbebaaa31c39bd7819b74a4decc541cd502e4151a3ac942580e8ed"
+      },
+      {
+        "name": "TSBOOT.H",
+        "sha256": "35edf760bb2d6c63f3055ff00ff47f12e4ce98341f1496284b9401657740f314"
+      },
+      {
+        "name": "TSCP.C",
+        "sha256": "09350eee3c011f4d67284968cb4a75461b6693705f2e65378db3b3e00267458a"
+      },
+      {
+        "name": "TSCP.H",
+        "sha256": "db41733f59d588c345761f8890dd991de34d052c2928df2b374f1e6f4b7e7e98"
+      },
+      {
+        "name": "TSDATE.C",
+        "sha256": "511566292c6ffd951a976e78fc1205d0bc62c126b8495e961b1262fb4b3fb6d6"
+      },
+      {
+        "name": "TSDATE.H",
+        "sha256": "75a2d14406a4f9640a8f55e4b011c7ab61691eb4809d1ef1abd337e8722bd0c8"
+      },
+      {
+        "name": "TSHELL.C",
+        "sha256": "37145fc39748a69316043923abbedf9e2737619fbb3d0857f4f2941149dd5040"
+      },
+      {
+        "name": "TSHELL.DEF",
+        "sha256": "927f19ca0b992e4f8e92d6d38e584bc219e3450be678d74b22b1340dfb72021c"
+      },
+      {
+        "name": "TSHELL.RSP",
+        "sha256": "4d8c15bb457bc6f3c3da6e9261c9efe12234299210ce4781f8e0fabde557605a"
+      },
+      {
+        "name": "TSHOLD.C",
+        "sha256": "07fdc53cf41611d3319afd11a60f3865e566b9aceccbede77dd9c64afb61e378"
+      },
+      {
+        "name": "TSHOLD.H",
+        "sha256": "101d433764c5311b681d5273985bf5da65b6c1d0f9e3642d4e72236455fec19e"
+      },
+      {
+        "name": "TSMENU.C",
+        "sha256": "f96747a11ac1434b85aa9f70f8ab6a21c6c5195127502716af0103cadd675972"
+      },
+      {
+        "name": "TSMENU.H",
+        "sha256": "68d9097e3824fbd1eda21968aad3b1a3ed21f27e346a2e451889f53133773aa0"
+      },
+      {
+        "name": "TSNAMES.C",
+        "sha256": "157333cc99a6c389813509f821f45c520c52f1181c71bc59bdc59437ba8602d6"
+      },
+      {
+        "name": "TSNAMES.H",
+        "sha256": "15da96b33a89b425441bf10edf7e3590a43d44d3980bc6477bd4baba1d1b9734"
+      },
+      {
+        "name": "TSSAVCFG.C",
+        "sha256": "e0a5111958f415687f9148d45c3b4006165191ad5759f4df7be870e96ac32658"
+      },
+      {
+        "name": "TSSAVCFG.H",
+        "sha256": "e31c29e673b618d40027b340f6e6b3b03e9d6950e07a17422901e7948674114b"
+      },
+      {
+        "name": "TSSAVER.C",
+        "sha256": "ba58b89bc064fe50ec9d40be9047ce6ca0ae0e83b501f5f8301625b7ae412d3e"
+      },
+      {
+        "name": "TSSAVER.H",
+        "sha256": "c463b0205aa17ce699f90a5e187e83291afb5d2c08d44037ea2f783838eff36e"
+      },
+      {
+        "name": "TSSVOPT.C",
+        "sha256": "3f329279b662379cccd5b2b6f765f99071eb98d5b04da3fb582c7f7ecb5359c2"
+      },
+      {
+        "name": "TSSVOPT.H",
+        "sha256": "2370ecab8f2540595c7dc0f9515468c8fae9965871f4b36f032183015a95c067"
+      },
+      {
+        "name": "VFAT.C",
+        "sha256": "3dc3260515ce7334a7073895751500a6eea752c2edcba3c049955d7f79ec92ba"
+      },
+      {
+        "name": "VFAT.H",
+        "sha256": "df6f5ed756e1d60472382574013b62d2435b1d94728cbd363ea6c6109778b25a"
+      }
+    ]
+  },
+  {
+    "job": "SHELLNEW",
+    "batch": "BUILD.BAT",
+    "products": [
+      "TSHELL.EXE"
+    ],
+    "sources": [
+      {
+        "name": "BUILD.BAT",
+        "sha256": "36a8c4db4df32c301de98e5a3634e08b11e00edde940f5640e1b8c91d6d59e52"
+      },
+      {
+        "name": "DTCORE.C",
+        "sha256": "e8ac15c5e1236549d079e75ce6cdb84b8c526b0fd6d1b11e9b1e4accf443cf72"
+      },
+      {
+        "name": "DTCORE.H",
+        "sha256": "0368337ae099088c30edb5dd3245943fc2c38d0913df9c7c4a284bc68a7c71fe"
+      },
+      {
+        "name": "GRPREAD.C",
+        "sha256": "c70727c378b2934f310cd916623cc22210ac639d2d13855ed2e7a5f66d7340c0"
+      },
+      {
+        "name": "GRPREAD.H",
+        "sha256": "be510602fb11b7a7a9b69e7f77ec729b79df2252b992e12d4a80c378439a6f51"
+      },
+      {
+        "name": "LTWUI.C",
+        "sha256": "e1cbf3afb23403a7dbc51a9e0065cb896c9b3454f479ce1a93a3206771cb16b7"
+      },
+      {
+        "name": "LTWUI.H",
+        "sha256": "c73c30061f82ab28cfee30da1b42e4991014599feabfa3f026e06b350e9dd0e8"
+      },
+      {
+        "name": "LWTANDY.H",
+        "sha256": "765db2a718d7852e11ae349d3d93a08da832195b57f53efdac4881aa94f25a1a"
+      },
+      {
+        "name": "PROGMENU.C",
+        "sha256": "44291d08cd375034c8bf6192f39634be8d55f5048e06a8ffccea55332fc1d703"
+      },
+      {
+        "name": "PROGMENU.H",
+        "sha256": "3ecd00f88b29bd5d5a8cac9bca663b547aca8b2ab8c59158d67f9bced76c641a"
+      },
+      {
+        "name": "RAWREAD.C",
+        "sha256": "d3c045f00d7ea91dffb3fd9940faf27febcf68a643bfca401ba2b537255c1285"
+      },
+      {
+        "name": "RAWREAD.H",
+        "sha256": "b4c6f9017c220de554db8ea34c86126328468750eb8d7dfb32795f0080b266eb"
+      },
+      {
+        "name": "SCFGCORE.C",
+        "sha256": "02431a087fd8230767df2db4e8b8ceeeef916615c7f74515b8667dd36f4b5eb7"
+      },
+      {
+        "name": "SCFGCORE.H",
+        "sha256": "d4129fea968edfe20625d348c6d79ffd5afd4e1b65826ae14dc9b78b449060c0"
+      },
+      {
+        "name": "SVCORE.C",
+        "sha256": "f9231f8c25d3ecb182aa15db0cf24278602f5cadd72917b89e28e4035f03adb6"
+      },
+      {
+        "name": "SVCORE.H",
+        "sha256": "905eb75cd28b9541ae7e5ffdcbc02319ab692d0b4eb72bc0d4a01fed9a9654c3"
+      },
+      {
+        "name": "TNOTICE.C",
+        "sha256": "be4a1217e92061a3cefc5c61522158eb4019202fc54ecca1e68f7275305aa043"
+      },
+      {
+        "name": "TNOTICE.H",
+        "sha256": "98058c37f3817877d3f7c79c6698ab138aa552fe854651dba5faee8ca41a5b41"
+      },
+      {
+        "name": "TSAUX.C",
+        "sha256": "5adf8db7e0f7f055ac4e78b3cc5e567be06cfd9309ba8b7d876e19d4d18cccf9"
+      },
+      {
+        "name": "TSAUX.H",
+        "sha256": "4e172ce041df857579411c5b3fcb1606449c5d23434d62ec0c01e86aa94863f6"
+      },
+      {
+        "name": "TSBOOT.C",
+        "sha256": "2fe8f83534bbebaaa31c39bd7819b74a4decc541cd502e4151a3ac942580e8ed"
+      },
+      {
+        "name": "TSBOOT.H",
+        "sha256": "35edf760bb2d6c63f3055ff00ff47f12e4ce98341f1496284b9401657740f314"
+      },
+      {
+        "name": "TSCP.C",
+        "sha256": "09350eee3c011f4d67284968cb4a75461b6693705f2e65378db3b3e00267458a"
+      },
+      {
+        "name": "TSCP.H",
+        "sha256": "db41733f59d588c345761f8890dd991de34d052c2928df2b374f1e6f4b7e7e98"
+      },
+      {
+        "name": "TSDATE.C",
+        "sha256": "511566292c6ffd951a976e78fc1205d0bc62c126b8495e961b1262fb4b3fb6d6"
+      },
+      {
+        "name": "TSDATE.H",
+        "sha256": "75a2d14406a4f9640a8f55e4b011c7ab61691eb4809d1ef1abd337e8722bd0c8"
+      },
+      {
+        "name": "TSHELL.C",
+        "sha256": "1f9f6d83defa1352667e3fdc8bf5160917c9986567d466c43c4c4346058aea6f"
+      },
+      {
+        "name": "TSHELL.DEF",
+        "sha256": "927f19ca0b992e4f8e92d6d38e584bc219e3450be678d74b22b1340dfb72021c"
+      },
+      {
+        "name": "TSHELL.RSP",
+        "sha256": "4d8c15bb457bc6f3c3da6e9261c9efe12234299210ce4781f8e0fabde557605a"
+      },
+      {
+        "name": "TSHOLD.C",
+        "sha256": "07fdc53cf41611d3319afd11a60f3865e566b9aceccbede77dd9c64afb61e378"
+      },
+      {
+        "name": "TSHOLD.H",
+        "sha256": "101d433764c5311b681d5273985bf5da65b6c1d0f9e3642d4e72236455fec19e"
+      },
+      {
+        "name": "TSMENU.C",
+        "sha256": "f96747a11ac1434b85aa9f70f8ab6a21c6c5195127502716af0103cadd675972"
+      },
+      {
+        "name": "TSMENU.H",
+        "sha256": "68d9097e3824fbd1eda21968aad3b1a3ed21f27e346a2e451889f53133773aa0"
+      },
+      {
+        "name": "TSNAMES.C",
+        "sha256": "157333cc99a6c389813509f821f45c520c52f1181c71bc59bdc59437ba8602d6"
+      },
+      {
+        "name": "TSNAMES.H",
+        "sha256": "15da96b33a89b425441bf10edf7e3590a43d44d3980bc6477bd4baba1d1b9734"
+      },
+      {
+        "name": "TSSAVCFG.C",
+        "sha256": "e0a5111958f415687f9148d45c3b4006165191ad5759f4df7be870e96ac32658"
+      },
+      {
+        "name": "TSSAVCFG.H",
+        "sha256": "e31c29e673b618d40027b340f6e6b3b03e9d6950e07a17422901e7948674114b"
+      },
+      {
+        "name": "TSSAVER.C",
+        "sha256": "ba58b89bc064fe50ec9d40be9047ce6ca0ae0e83b501f5f8301625b7ae412d3e"
+      },
+      {
+        "name": "TSSAVER.H",
+        "sha256": "c463b0205aa17ce699f90a5e187e83291afb5d2c08d44037ea2f783838eff36e"
+      },
+      {
+        "name": "TSSVOPT.C",
+        "sha256": "3f329279b662379cccd5b2b6f765f99071eb98d5b04da3fb582c7f7ecb5359c2"
+      },
+      {
+        "name": "TSSVOPT.H",
+        "sha256": "2370ecab8f2540595c7dc0f9515468c8fae9965871f4b36f032183015a95c067"
+      },
+      {
+        "name": "VFAT.C",
+        "sha256": "3dc3260515ce7334a7073895751500a6eea752c2edcba3c049955d7f79ec92ba"
+      },
+      {
+        "name": "VFAT.H",
+        "sha256": "df6f5ed756e1d60472382574013b62d2435b1d94728cbd363ea6c6109778b25a"
+      }
+    ]
+  }
+]

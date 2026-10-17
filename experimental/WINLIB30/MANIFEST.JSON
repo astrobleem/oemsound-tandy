@@ -1,9 +1,11 @@
 {
-  "scope": "Win3.0 source adoption and bounded native preview; noOS/ROM/tools/TSOUND/songs",
-  "upstream": "astrobleem/libwintandy@80b1431b9407e7fb14392804d4fdc9b10d9d1bab",
-  "native_checks": 58,
-  "native_failures": 0,
+  "scope": "Isolated player source plus evidence-corrected bounded native preview; original synthetic QA assets only.",
   "files": [
+    {
+      "path": "BUILD/PAIR-EVIDENCE.JSON",
+      "bytes": 7837,
+      "sha256": "70fd11c4d4bf9108ae43f18e5cc4ef56d2c13d635e2fb372e5106501145691c2"
+    },
     {
       "path": "BUILD/PLAYER30.BAT",
       "bytes": 2045,
@@ -16,8 +18,8 @@
     },
     {
       "path": "FACADE/EQUIV.JSON",
-      "bytes": 1852,
-      "sha256": "127caafcffee18cf5fbf31ff5631ec8b577ced3223fa9fb75c4c2c43dad7d651"
+      "bytes": 2105,
+      "sha256": "18b2732b39fae5ef5cb64f2244b66dec6ae3e12e36e90cb7e291d9cc0ed6d94e"
     },
     {
       "path": "FACADE/ERRATUM.JSON",
@@ -71,13 +73,13 @@
     },
     {
       "path": "PROVENANCE.JSON",
-      "bytes": 11158,
-      "sha256": "114db6a576d7fc09b27da83ed1ed3be3264d164a17db2f8ceb4195eba9f4aaaa"
+      "bytes": 13099,
+      "sha256": "b987dbe8f7e595139f3c8a03db7bb3d4d7e9f2d74a3a56b87205b312d60591fa"
     },
     {
       "path": "README.MD",
-      "bytes": 2246,
-      "sha256": "7bf386bb3dd63654c311ae97024c810e9fe54f608f27de2cad49a661a323d857"
+      "bytes": 4132,
+      "sha256": "6b47e95291555ea6e3a4e208117b5faec3a64ce1c67f4cda24dcc6c909b1a941"
     },
     {
       "path": "SOURCE/APPCLK.H",
@@ -311,13 +313,13 @@
     },
     {
       "path": "STATUS.MD",
-      "bytes": 2761,
-      "sha256": "9789cafacae38b0127bae0ee0a6643615b8ffd73e8b89d77a8b6727349244277"
+      "bytes": 4741,
+      "sha256": "0768a77f0f78cf0fabff95a09217ea3e74ca3f786f8c4671903cac9a55126165"
     },
     {
-      "path": "TESTS/FACADE/RUN.PY",
-      "bytes": 1596,
-      "sha256": "da74fec62137ff09f425fceb045bbf083c6e2ba210cafa2a299e4d6ec24507f3"
+      "path": "TESTS/beat_host.c",
+      "bytes": 2645,
+      "sha256": "fc238fab932d3b79fea3fcb8cf56562fef32c2e7fb43e0cf70f4d35aa9785dbf"
     },
     {
       "path": "TESTS/FACADE/facade.c",
@@ -330,14 +332,14 @@
       "sha256": "e8558bb47bff05feaaccb6b3c3de5a8486e7064e05103dec7e62c971c1b77bec"
     },
     {
+      "path": "TESTS/FACADE/RUN.PY",
+      "bytes": 1596,
+      "sha256": "da74fec62137ff09f425fceb045bbf083c6e2ba210cafa2a299e4d6ec24507f3"
+    },
+    {
       "path": "TESTS/FACADE/windows.h",
       "bytes": 353,
       "sha256": "826e1f425dd0212cb6ba86971ea8ad4c58ab8db973b9dfe7180c2f6bcd63b431"
-    },
-    {
-      "path": "TESTS/beat_host.c",
-      "bytes": 2645,
-      "sha256": "fc238fab932d3b79fea3fcb8cf56562fef32c2e7fb43e0cf70f4d35aa9785dbf"
     },
     {
       "path": "TESTS/host.c",
@@ -360,6 +362,106 @@
       "sha256": "7ba8d6bb9ffc6fff18c2b04436b0124b39b013dbb0bc3f5985f7d3416a60fea8"
     },
     {
+      "path": "TESTS/NATIVE/FIXTURE-INPUTS.JSON",
+      "bytes": 11600,
+      "sha256": "1951b141270d047bae56e252f1c94bd235bb2db76bc5acb28c454bf27b0140b8"
+    },
+    {
+      "path": "TESTS/NATIVE/LAUNCH.LOG",
+      "bytes": 306,
+      "sha256": "ee1dba2f3a42f65e9fd11135033c8801e57000e3e46a0aad6fc446c25e3c8fc4"
+    },
+    {
+      "path": "TESTS/NATIVE/MAKEGUIQA.PY",
+      "bytes": 3799,
+      "sha256": "afd5e595945f5c9c7a5bf39c2260ef456f1c1f81438899166e686270e6f87006"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/AUDNEW.BUILD.LOG",
+      "bytes": 4914,
+      "sha256": "d2e8dc403b00a84c714fb5a1df864964ed64617aa4d00fe08a0d230f180c82dd"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/AUDNEW.BUILD30.BAT",
+      "bytes": 2942,
+      "sha256": "835a7e560c6593c458781f06d2d8f2d8a33648c34c17194b013b206e39a1fe0d"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/AUDOLD.BUILD.LOG",
+      "bytes": 4914,
+      "sha256": "d2e8dc403b00a84c714fb5a1df864964ed64617aa4d00fe08a0d230f180c82dd"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/AUDOLD.BUILD30.BAT",
+      "bytes": 2942,
+      "sha256": "835a7e560c6593c458781f06d2d8f2d8a33648c34c17194b013b206e39a1fe0d"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/BUILD-COMMANDS.TXT",
+      "bytes": 795,
+      "sha256": "699d0ec8072458207d103a57d26346de081c2f3f6e7ea7d9036fa3e4da0d4e50"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/BUILD30.PY.REFERENCE",
+      "bytes": 2724,
+      "sha256": "0dd1c8b97abb05f3544ff4d745cb18b1a350514a864ec8f0b4adb2f335f71b05"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/BUILD30.TEMPLATE.BAT",
+      "bytes": 2942,
+      "sha256": "97dbd81e55289f2bba138f98e8da5a3c78e6a861d7b1e03ecb68d832c5014bd3"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/PAIR-CHECK.JSON",
+      "bytes": 322,
+      "sha256": "1dbb0de0a498ed3851a4cde7c3a14f1927248320cd81b84ef55f1814885d4259"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/PREP.JSON",
+      "bytes": 84789,
+      "sha256": "0813f3719c1c2cd6df995ae1c30f06cdd49c629b0f0760b5d32a9f2758f84fc9"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/PREPBLD.PY",
+      "bytes": 3881,
+      "sha256": "8659beaa875433b124c32597cc93bc53e346d54b715430901553aa16c06f5884"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/RESULT.JSON",
+      "bytes": 4265,
+      "sha256": "203407277502cbf3f70f008e8d3f244cdd3c6d3833a31daeae0f23cc7671120e"
+    },
+    {
+      "path": "TESTS/NATIVE/PAIR/RUNBLD.PY",
+      "bytes": 3919,
+      "sha256": "59537c7abd308ef7eda9189384482c4d4e3ee8b151f644eb5e99af52412d18fd"
+    },
+    {
+      "path": "TESTS/NATIVE/RAWGUI.C",
+      "bytes": 4041,
+      "sha256": "c3911c5b47a623ca8f30703fe896a6382ce2d877fa68c41220a848641fb8922c"
+    },
+    {
+      "path": "TESTS/NATIVE/RAWGUI.DEF",
+      "bytes": 128,
+      "sha256": "5bc0dfb7d552eaab7fa22814cc9597f467838ba2075a78427b64857c506b7657"
+    },
+    {
+      "path": "TESTS/NATIVE/RAWGUI.LOG",
+      "bytes": 2342,
+      "sha256": "e18a8aadf28f574dbc4a81816d2e2ac2e7bc5da8d75eb65940722c2f6fabe9bc"
+    },
+    {
+      "path": "TESTS/NATIVE/RAWGUI.RSP",
+      "bytes": 84,
+      "sha256": "73acc3635633ce9b1d08cccc6f90f1e90e04e18fd50fbaf1f8e3fbf05d0697b3"
+    },
+    {
+      "path": "TESTS/NATIVE/RESULT.JSON",
+      "bytes": 2365,
+      "sha256": "88facd779ac4e1220b2652568be2d54450e1f78c6ff60caebe66a653f65ac41d"
+    },
+    {
       "path": "TESTS/run_host.sh",
       "bytes": 241,
       "sha256": "1bfd2e032440d027ce39a692c7faa34a3cdd0869ef60cf1d78eb64799982444f"
@@ -376,8 +478,8 @@
     },
     {
       "path": "WINLIB30.ZIP",
-      "bytes": 138101,
-      "sha256": "12d2e62616975d6bc7d4c41e48492100c14947752fc8ad95faa770ea32350870"
+      "bytes": 183144,
+      "sha256": "d4d73d2d66439d8f0fdb3463027dbec1acbe37d3725aa65fb08894b9e69b4eeb"
     }
   ]
 }

@@ -41,5 +41,36 @@ TPLAY is the original pinned launcher exercised in the case, with source
 included. The external paired TSOUND is the exact public PITWIN identity.
 Existing public packages/defaults remain unchanged.
 
-WINLIB30.ZIP: 138,101 bytes, 96 entries, SHA-256
-`12d2e62616975d6bc7d4c41e48492100c14947752fc8ad95faa770ea32350870`.
+WINLIB30.ZIP: 183,144 bytes, 111 entries, SHA-256
+`d4d73d2d66439d8f0fdb3463027dbec1acbe37d3725aa65fb08894b9e69b4eeb`.
+
+Evidence reconciliation: the top-level `PROVENANCE.JSON` source pins and its
+`native_build` field describe the earlier verified R4/source-only archive.
+They are historical inputs, not a statement that no later build exists. The
+later preview and paired build are separate evidence below and in
+`BUILD/PAIR-EVIDENCE.JSON`. `FACADE/EQUIV.JSON` reports only preprocessing
+equivalence; its `native` value is scoped to that check.
+
+`BUILD/PLAYER30.BAT` and `PLAYER30.PY` build six player/provider products.
+The separately saved `AUDNEW`/`AUDOLD` paired recipe used the fuller
+`audio-adopt/BUILD/BUILD30.BAT` and produced eleven identical products in each
+compile/link run: MINIPLAY, RAWQA, QCHIME, QXP, QEXIT, QPSG, QMOUTH, RAWCLK,
+MIDICLK, MCITNDY, and TBRIDGE. The paired input sets differed only in
+MINIPLAY.C's forwarding include (256 files compared). This count describes
+the full paired recipe, not the six-product recipe shipped here. The pair
+does not imply all eleven are included in the preview archive; its limited
+source slice excludes utility-app source/data.
+
+The preview's CHIME.SND, PLUCK.TND, and STREAM.MID are original synthetic QA
+fixtures. They are not commercial or third-party songs and are not a music
+catalog. The preview ZIP is now rebuilt with evidence corrections and the GUI fixture
+generator. All nine existing runtime files remain byte-identical; the saved
+58-check native result is retained without rerunning unchanged runtime.
+
+The 58-check native harness also addressed CHIME.SND, STRESS.TND, TYPE0.MID,
+FX.TND, BAD.TND, and FAST.TND. `TESTS/NATIVE/FIXTURE-INPUTS.JSON` records the
+first-party generator/source pins, per-file sizes and hashes, and the prepared
+guest-image hash. The native result's source-image hash matches the saved
+prepared-image record. The five additional test-only files are not bundled in
+the ordinary player `RUNTIME`; no private image or extra audio payload is
+added by this metadata update.

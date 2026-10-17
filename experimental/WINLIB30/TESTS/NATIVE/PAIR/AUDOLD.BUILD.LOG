@@ -1,0 +1,158 @@
+MINIPLAY.C
+RAWAPP.C
+RAWFILE.C
+RAWQA.C
+TESTCORE.C
+QCHIME.C
+QXP.C
+QEXIT.C
+QPSG.C
+QMOUTH.C
+QMOUTH.C(62) : warning C4101: 'v' : unreferenced local variable
+TNOTICE.C
+TIMECLK.C
+MIDICLK.C
+MIDISYN.C
+INSTR.C
+MCITNDY.C
+MCIPSG.C
+SMF.C
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49882 + 420499 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49500 + 416786 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49562 + 400340 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49986 + 420395 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49730 + 394026 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: MINIPLAY.OBJ RAWFILE.OBJ RAWAPP.OBJ
+Run File [MINIPLAY.EXE]: MINIPLAY.EXE
+List File [NUL.MAP]: MINIPLAY.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MINIPLAY.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: RAWQA.OBJ RAWFILE.OBJ RAWAPP.OBJ PSG.OBJ TESTCORE.OBJ
+Run File [RAWQA.EXE]: RAWQA.EXE
+List File [NUL.MAP]: RAWQA.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: RAWQA.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: QCHIME.OBJ
+Run File [QCHIME.EXE]: QCHIME.EXE
+List File [NUL.MAP]: QCHIME.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: QCHIME.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: QXP.OBJ
+Run File [QXP.EXE]: QXP.EXE
+List File [NUL.MAP]: QXP.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: QXP.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: QEXIT.OBJ TNOTICE.OBJ
+Run File [QEXIT.EXE]: QEXIT.EXE
+List File [NUL.MAP]: QEXIT.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: QEXIT.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: QPSG.OBJ
+Run File [QPSG.EXE]: QPSG.EXE
+List File [NUL.MAP]: QPSG.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: QPSG.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: QMOUTH.OBJ
+Run File [QMOUTH.EXE]: QMOUTH.EXE
+List File [NUL.MAP]: QMOUTH.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: QMOUTH.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: CLOCK.OBJ WINHOOK.OBJ TIMECLK.OBJ
+Run File [CLOCK.EXE]: RAWCLK.DLL
+List File [NUL.MAP]: RAWCLK.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: TIMECLK.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: ENTRY.OBJ MIDICLK.OBJ MIDISYN.OBJ INSTR.OBJ
+Run File [ENTRY.EXE]: MIDICLK.DLL
+List File [NUL.MAP]: MIDICLK.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MIDICLK.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: ENTRY.OBJ MCITNDY.OBJ MCIPSG.OBJ SMF.OBJ
+Run File [ENTRY.EXE]: MCITNDY.DLL
+List File [NUL.MAP]: MCITNDY.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MCITNDY.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: TBRIDGE.OBJ
+Run File [TBRIDGE.EXE]: TBRIDGE.EXE
+List File [NUL.MAP]: TBRIDGE.MAP
+Libraries [.LIB]: ;
+PASS

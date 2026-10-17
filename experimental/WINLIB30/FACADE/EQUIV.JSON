@@ -3,7 +3,7 @@
   "equal": true,
   "expanded_bytes": 67022,
   "expanded_sha256": "1d329f6c3f74d6d9d3c074db874c0f23c79058ffe3ecd4c932f72dc30f1c0380",
-  "native": "not built or qualified",
+  "native": "Not a native-build record. Later paired compile/link and the existing 58-check native preview are recorded separately in PROVENANCE.JSON.",
   "protected_source": [
     {
       "name": "RAWAPP.C",
@@ -53,5 +53,6 @@
       "name": "TBRIDGE.ASM",
       "sha256": "35589608781d651d8a42b31fdd84a2f2745baee3fc11c4b3acb1bfe65a4446af"
     }
-  ]
+  ],
+  "record_stage": "Historical source-preprocessing equivalence only; this check predates paired compile/link and native qualification."
 }

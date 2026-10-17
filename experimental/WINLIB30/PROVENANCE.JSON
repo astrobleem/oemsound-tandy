@@ -1,6 +1,6 @@
 {
   "archive_sha256": "16dba56dc07aa41122058b91bf582c5add1868b6de54a08c4f6d60c0a024857d",
-  "archive_verifier": "999 manifest files and253source entries passed",
+  "archive_verifier": "999 manifest files and 253 source entries passed",
   "current_source": [
     {
       "file": "SOURCE/MINIPLAY.C",
@@ -233,5 +233,34 @@
       "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
     }
   ],
-  "native_build": "not run; no binaries included"
+  "native_build": "Not run for this historical source-only archive; later paired compile/link and separate bounded native-preview evidence are recorded in STATUS.MD and BUILD/PAIR-EVIDENCE.JSON.",
+  "archive_scope": "Verified original R4 source archive used for the historical source-only adoption record; not the later bounded MINIPLAY preview archive.",
+  "later_paired_build": {
+    "record": "BUILD/PAIR-EVIDENCE.JSON",
+    "result_sha256": "203407277502cbf3f70f008e8d3f244cdd3c6d3833a31daeae0f23cc7671120e",
+    "status": "AUDNEW and AUDOLD compile/link PASS; eleven products each, byte-identical across the pair; unrelated SHELLNEW job failed with no products.",
+    "qualification": "Compile/link comparison only. Native preview evidence is separately stated in STATUS.MD; this pair is not a native/runtime claim.",
+    "supporting_files": "TESTS/NATIVE/PAIR/"
+  },
+  "fixture_inputs": {
+    "record": "TESTS/NATIVE/FIXTURE-INPUTS.JSON",
+    "sha256": "1951b141270d047bae56e252f1c94bd235bb2db76bc5acb28c454bf27b0140b8",
+    "source_prep_sha256": "04a05615482826eb65336a1c98ae29db82c221079fd0c29af11112c534db16e2",
+    "seed_manifest_sha256": "558c43ea24911da8ed30ecb5a055cdbb762046a4d9063a35ac7471a37dd8307c",
+    "prepared_base_image_sha256": "b8a2693afdeca383a5d6a5d3834494284eaa46cab70c5269ee2cce61be3f187f",
+    "native_GUI_result_sha256": "a0535128d5e953908387fe11ff2153a08a9fdff9b53efdbdb05778e3c295875b",
+    "qualification": "Metadata only; no seed image, Windows fixture tree, archive or extra test assets added.",
+    "reproducible_test_fixtures": {
+      "generator": "TESTS/NATIVE/MAKEGUIQA.PY",
+      "generator_sha256": "afd5e595945f5c9c7a5bf39c2260ef456f1c1f81438899166e686270e6f87006",
+      "files": [
+        "STRESS.TND",
+        "FX.TND",
+        "TYPE0.MID",
+        "BAD.TND",
+        "FAST.TND"
+      ],
+      "scope": "original synthetic QA only; output must be an explicit empty directory; ordinary RUNTIME unchanged"
+    }
+  }
 }

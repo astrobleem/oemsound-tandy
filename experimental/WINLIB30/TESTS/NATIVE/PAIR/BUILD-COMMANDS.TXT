@@ -1,0 +1,7 @@
+Saved paired-build invocation (paths redacted, options exact)
+
+Runner: RUNBLD.PY required the slot flag `--granted-180-seconds`; it invoked DOSBox-X with `-nopromptfolder -conf <job>/BUILD.CNF`.
+
+Saved guest autoexec for each AUD job: mount C <windows-build-view>; mount D <AUDNEW-or-AUDOLD-job>; D:; CD \MMLAB; BUILD30.BAT.
+
+The saved BUILD.CNF files and their hashes are retained in local review evidence, because they contain absolute workstation paths. Their shared settings are DOSBox Tandy machine, 16 MB, 8086 prefetch core, fixed 200000 cycles, nosound, and no MIDI device. The guest batch uses `CL /nologo /c /G0 /Gw /Gs /AS /W3 /Od` per C file, MASM `/MX`, and the checked-in LINK4 response files. The exact guest BUILD30.BAT copies and transcripts are adjacent in this folder.

@@ -12,13 +12,33 @@ with its notices and build/test recipes. See [STATUS.MD](STATUS.MD) for the
 current adoption evidence. Historical FACADE notes retain their original
 source-candidate status; they are not a new runtime qualification report.
 
+Evidence has two dates/scopes: the source archive and `current_source` pins in
+`PROVENANCE.JSON` describe the verified R4/source-only adoption snapshot. The
+later paired source build and native preview are recorded separately in
+`STATUS.MD` and `BUILD/PAIR-EVIDENCE.JSON`. `FACADE/EQUIV.JSON` remains a
+preprocessor expansion comparison; its `native` field is scoped to that
+comparison and does not supersede the later build records.
+The exact original synthetic input identities used by the recorded GUI case,
+including test-only files not in ordinary `RUNTIME`, are listed in
+`TESTS/NATIVE/FIXTURE-INPUTS.JSON`. The 58-check harness also uses test-only `STRESS.TND`, `TYPE0.MID`,
+`FX.TND`, `BAD.TND`, and `FAST.TND`. Run
+`python TESTS/NATIVE/MAKEGUIQA.PY EMPTY_DIRECTORY` with an existing empty
+directory to recreate those five inputs. The script verifies its fixed
+SHA-256 pins and refuses missing or non-empty destinations. These are
+original synthetic QA fixtures, not catalog or third-party media, and
+remain outside ordinary `RUNTIME`.
+
 The bounded [native preview archive](WINLIB30.ZIP?raw=1) now includes the
 tested program set, corresponding source, install/build guidance, original
-synthetic scores, native logs and an actual capture. It requires the exact
+synthetic QA fixtures (`CHIME.SND`, `PLUCK.TND`, and `STREAM.MID`), native logs
+and an actual capture. Those three files are original test material, not a
+commercial-song library or representative catalog. It requires the exact
 external TSOUND already published in PITWIN; that driver is not bundled.
 This directory does not replace old Mini MIDI, public PIT kits or their
 pinned files. It makes no permanent Windows configuration changes and includes
-no Microsoft OS/SDK files, tools, fonts, ROMs, songs or samples. Build with
+no Microsoft OS/SDK files, tools, fonts, ROMs, commercial or third-party songs,
+or third-party sample material; its original synthetic QA fixtures are named
+above. Build with
 your separately owned period Microsoft C/MASM/LINK tools inside DOSBox-X,
 following `BUILD/PLAYER30.PY --help`. Preserve the emulator lease rules in
 a shared test environment. Host Python is a build/test tool, not a guest
@@ -33,4 +53,12 @@ implemented by this source snapshot.
 
 Project source uses the included MIT license and embedded notices. Retain
 the Jan Knipperts format/table MIT notice in LICENSE-TNDY.TXT. No GPL Mini
-Piano/QPIANO implementation or original songs are included.
+Piano/QPIANO implementation, commercial song, or third-party song is included.
+
+`BUILD/PLAYER30.PY` and `PLAYER30.BAT` are the six-product player/provider
+recipe. The separate paired adoption record covers eleven products (the six
+player/provider outputs plus five raw QA programs). Those are distinct build
+scopes, not conflicting counts; the paired run is compile/link evidence and
+does not by itself establish runtime or hardware behavior.
+
+The frozen WINLIB30.ZIP hash above has not been rebuilt for this additive generator; the generator is present in this staging tree only until the parent packages the correction.
