@@ -1,9 +1,9 @@
 # Source adoption evidence
 
 Source pin: libwintandy `80b1431b9407e7fb14392804d4fdc9b10d9d1bab`.
-Status on 17 October 2026: fresh MSC6 compile/link passed; native Windows 3.0
-execution and new screenshots are queued behind CF/launcher qualification.
-This is source only, with no new binary release or hardware acceptance claim.
+Status on 17 October 2026: fresh MSC6 compile/link and the native Windows 3.0
+GUI case passed. WINLIB30.ZIP is a bounded native preview with corresponding
+source, not a hardware-qualified replacement or new stable release.
 
 The R4 RAWAPP header-name collision is corrected in the source candidate:
 RAWAPP.H carries player declarations and guarded RAWSCORE.H carries the
@@ -22,7 +22,9 @@ Fresh MINIPLAY is 22,109 bytes, SHA-256
 `00dc26526fd78be1c2f18f713e51390e3f07229697ee4f03d8e7e971dd740654`.
 This identifies a local test build, not a downloadable or qualified release.
 Byte identity across the include change adds no code, static data, or NE
-heap/stack allocation request. New runtime CPU measurements are pending.
+heap/stack allocation request. The native case passed 58 checks with zero failures. Free memory was exactly
+292,992 bytes before and after; original BIOS/INT2F vectors were restored and
+DOS return was clean. New calibrated CPU measurements remain pending.
 
 Recorded host tests pass: raw format 126, MIDI transport 1493, synthesis
 10029, live events 18, beat assertions, and packed-layout/typed-include
@@ -31,7 +33,13 @@ ABI execution, Windows pixels, IRQ scheduling, sound fidelity or hardware
 support. The included HOST/PLAIN.JSON and FACADE notes retain their exact
 scope; the initial missing-UBSan link failures did not run tests.
 
-Native acceptance must cover playback, contention, pause/reset/restart,
-Stop/EOF/close mute and release, bounded queues, UI updates, clean DOS return
-and CPU/RAM cost. Only successfully tested redistributable binaries can be
-added after that gate. Existing public packages/defaults remain unchanged.
+The recorded native GUI case covers MIDI/TND/AGI switching, redraw/restart,
+malformed/fast input refusal, Stop/EOF/close sound release and clean DOS return.
+It does not add a new listening, physical-hardware, PCjr, Windows 3.1 or
+calibrated CPU result. Five program files in the archive are fresh builds;
+TPLAY is the original pinned launcher exercised in the case, with source
+included. The external paired TSOUND is the exact public PITWIN identity.
+Existing public packages/defaults remain unchanged.
+
+WINLIB30.ZIP: 138,101 bytes, 96 entries, SHA-256
+`12d2e62616975d6bc7d4c41e48492100c14947752fc8ad95faa770ea32350870`.

@@ -1,6 +1,8 @@
 {
-  "scope": "source-only experimental Win3.0 player adoption; native tests pending",
+  "scope": "Win3.0 source adoption and bounded native preview; noOS/ROM/tools/TSOUND/songs",
   "upstream": "astrobleem/libwintandy@80b1431b9407e7fb14392804d4fdc9b10d9d1bab",
+  "native_checks": 58,
+  "native_failures": 0,
   "files": [
     {
       "path": "BUILD/PLAYER30.BAT",
@@ -74,8 +76,8 @@
     },
     {
       "path": "README.MD",
-      "bytes": 1946,
-      "sha256": "630d55f9c4a469516efd2659c9442599e6736d678d2d7485fdfe9ff97c8626cb"
+      "bytes": 2214,
+      "sha256": "ed75be2bf06eb8d7f81d6188d037f2fd3daeaab736cb06064a1092c4a0b6dac9"
     },
     {
       "path": "SOURCE/APPCLK.H",
@@ -309,13 +311,13 @@
     },
     {
       "path": "STATUS.MD",
-      "bytes": 2256,
-      "sha256": "3589e07057451b3a3e931e00cd4e9b613292e6a41d022584198a1b886684cbf6"
+      "bytes": 2761,
+      "sha256": "9789cafacae38b0127bae0ee0a6643615b8ffd73e8b89d77a8b6727349244277"
     },
     {
-      "path": "TESTS/beat_host.c",
-      "bytes": 2645,
-      "sha256": "fc238fab932d3b79fea3fcb8cf56562fef32c2e7fb43e0cf70f4d35aa9785dbf"
+      "path": "TESTS/FACADE/RUN.PY",
+      "bytes": 1596,
+      "sha256": "da74fec62137ff09f425fceb045bbf083c6e2ba210cafa2a299e4d6ec24507f3"
     },
     {
       "path": "TESTS/FACADE/facade.c",
@@ -328,14 +330,14 @@
       "sha256": "e8558bb47bff05feaaccb6b3c3de5a8486e7064e05103dec7e62c971c1b77bec"
     },
     {
-      "path": "TESTS/FACADE/RUN.PY",
-      "bytes": 1596,
-      "sha256": "da74fec62137ff09f425fceb045bbf083c6e2ba210cafa2a299e4d6ec24507f3"
-    },
-    {
       "path": "TESTS/FACADE/windows.h",
       "bytes": 353,
       "sha256": "826e1f425dd0212cb6ba86971ea8ad4c58ab8db973b9dfe7180c2f6bcd63b431"
+    },
+    {
+      "path": "TESTS/beat_host.c",
+      "bytes": 2645,
+      "sha256": "fc238fab932d3b79fea3fcb8cf56562fef32c2e7fb43e0cf70f4d35aa9785dbf"
     },
     {
       "path": "TESTS/host.c",
@@ -371,6 +373,11 @@
       "path": "TESTS/synth_host.c",
       "bytes": 2207,
       "sha256": "47ff74fff468c136d25317409a9cc8e848cdcdf55ad3acb936b324b8bfa3961d"
+    },
+    {
+      "path": "WINLIB30.ZIP",
+      "bytes": 138101,
+      "sha256": "12d2e62616975d6bc7d4c41e48492100c14947752fc8ad95faa770ea32350870"
     }
   ]
 }
