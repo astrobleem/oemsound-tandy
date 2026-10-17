@@ -1,0 +1,25 @@
+Isolated Windows3.0 libwintandy audio adoption candidate
+
+Access resolved using an already-present explicitly authorized local Downloads
+archive. All999 manifest files and253 source entries verify against frozen R4.
+The official Library helper was not modified or bypassed. WSL was not needed.
+
+R4 erratum: the static RA* raw-score utility overwrote player RAWAPP.H after
+recorded player binaries had been built. The historical results still describe
+those exact binaries; they do not prove a reproducible uncorrected R4 build.
+Restore guarded player declarations; move unchanged utility body to guarded
+RAWSCORE.H; change the five utility includes only. MINIPLAY now forwards its
+unchanged MCI/raw interface through LWAUDIO.H. No scheduler/IRQ/ownership body
+or patch/event format changes are made. See ERRATUM.JSON for original/new pins.
+
+Existing actual-source host tests pass unsanitized: raw-format126 checks,
+MIDICLK1493, pure renderer10029, live adapter18, and BEATSEQ assertions. The
+installed GCC lacks libubsan; initial sanitizer links failed before tests ran.
+Host layout/typed facade checks pass. No fresh native runtime claim.
+
+BUILD/PLAYER30.PY prepares fresh MSC6 player/RAWQA/provider builds using
+external owned tools. The complete private erratum recipe BUILD30.PY also
+builds the five raw ports whose score data is outside this source slice. It has not been launched:
+CF/launcher and panning qualification retain the explicit emulator slot.
+Fresh builds and native playback/pause/stop/restart/owner cleanup qualification
+are mandatory before publishing new binaries. No CF writes or Windows3.1 work.

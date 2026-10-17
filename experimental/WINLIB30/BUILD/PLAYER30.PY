@@ -1,0 +1,57 @@
+"""Fresh Win3.0 player/provider rebuild using an externally owned DOS toolchain.
+Execution requires the user's explicit emulator slot. Preparing source is not a build.
+"""
+from pathlib import Path
+import argparse,hashlib,json,os,shutil,struct,subprocess
+p=argparse.ArgumentParser(description=__doc__)
+p.add_argument("--dosbox",type=Path,required=True)
+p.add_argument("--toolchain",type=Path,required=True)
+p.add_argument("--out",type=Path,required=True)
+a=p.parse_args(); root=Path(__file__).resolve().parents[1]
+out=a.out.resolve(); tool=a.toolchain.resolve()
+for n in ["BIN/CL.EXE","BIN/LINK4.EXE","BIN/MASM.EXE","LIB/SLIBCEW.LIB","LIB/LIBW.LIB","DDK/286/INC/WINDOWS.H"]:
+ if not (tool/n).is_file():p.error("Missing owned toolchain input "+n)
+if out.exists():p.error("--out must be a new directory")
+(out/"MMLAB").mkdir(parents=True)
+for src in (root/"SOURCE").iterdir():
+ if src.is_file():shutil.copyfile(src,out/"MMLAB"/src.name)
+shutil.copyfile(Path(__file__).with_suffix(".BAT"),out/"MMLAB/PLAYER30.BAT")
+config="""[sdl]
+fullscreen=false
+output=surface
+[dosbox]
+machine=tandy
+memsize=16
+[cpu]
+core=normal
+cputype=8086_prefetch
+cycles=fixed 200000
+[mixer]
+nosound=true
+[midi]
+mididevice=none
+[autoexec]
+@echo off
+mount C "{tool}"
+mount D "{out}"
+D:
+CD \MMLAB
+PLAYER30.BAT
+"""
+(out/"BUILD.CNF").write_text(config.format(tool=tool,out=out))
+env=os.environ.copy();env.update(SDL_VIDEODRIVER="dummy",SDL_AUDIODRIVER="dummy")
+with (out/"HOST.LOG").open("wb") as log:
+ subprocess.run([str(a.dosbox.resolve()),"-nopromptfolder","-conf",str(out/"BUILD.CNF")],stdout=log,stderr=subprocess.STDOUT,env=env,timeout=180,check=True)
+text=(out/"MMLAB/BUILD.LOG").read_text(errors="replace")
+if "PASS" not in text or "FAIL" in text:raise SystemExit("Fresh build failed; inspect BUILD.LOG")
+files=[]
+for name in ["MINIPLAY.EXE","RAWQA.EXE","RAWCLK.DLL","MIDICLK.DLL","MCITNDY.DLL","TBRIDGE.EXE"]:
+ f=out/"MMLAB"/name;data=bytearray(f.read_bytes())
+ if name!="TBRIDGE.EXE":
+  ne=struct.unpack_from("<I",data,0x3c)[0]
+  if data[ne:ne+2]!=b"NE":raise SystemExit("Expected Win16 NE: "+name)
+  struct.pack_into("<H",data,ne+0x3e,0x0300);f.write_bytes(data)
+ files.append({"name":name,"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest()})
+record={"status":"compile/link only; native qualification required","target":"8086 Windows3.0","source":[{"name":f.name,"sha256":hashlib.sha256(f.read_bytes()).hexdigest()} for f in sorted((root/"SOURCE").iterdir()) if f.is_file()],"runtime":files}
+(out/"RESULT.JSON").write_text(json.dumps(record,indent=2))
+print(json.dumps({"status":record["status"],"runtime":files},indent=2))

@@ -1,0 +1,5 @@
+Project MIT license applies to first-party UI/facades and newly written R4
+provider/player/test source. Preserve embedded source notices and CORE-MIT.TXT.
+RAWFILE.C references TNDY-Tracker's format and Hz table; retain the Jan Knipperts
+MIT text in LICENSE-TNDY.TXT. No GPL Mini Piano/QPIANO source or linked derivative
+is included. No Windows/SDK implementation or original songs are included.

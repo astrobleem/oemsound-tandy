@@ -1,0 +1,237 @@
+{
+  "archive_sha256": "16dba56dc07aa41122058b91bf582c5add1868b6de54a08c4f6d60c0a024857d",
+  "archive_verifier": "999 manifest files and253source entries passed",
+  "current_source": [
+    {
+      "file": "SOURCE/MINIPLAY.C",
+      "sha256": "d976c300b1eb8142b1ec6384d5795f40ff840ca36eb33460ab3679cf3748ff3e",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MINIPLAY.DEF",
+      "sha256": "3b7704f261ede30a96b520824e6ec80473c007f19861097880830dbbf1c4e70e",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MINIPLAY.RSP",
+      "sha256": "70cdac473dddb6f73fc86608af3d6c78f5c11a11d5bfb87d8c8ab71333e32e65",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/LWAUDIO.H",
+      "sha256": "ab8c170161d422703a3351e2e01bfbd20ff5d6fd1be364fc527571a96db833ab",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWAPP.H",
+      "sha256": "d9aaac4b291096c374b3bd19fde729ddb4ec647e9e6b86286b75a6495a93aba4",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWAPP.C",
+      "sha256": "ebde64f89e82158339548924dc0a92e878af038c851d85bb74f5a24adee41436",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWFILE.C",
+      "sha256": "cfc7ee31313233e5d696c097403ad418a6810a306a38eb131cbd201fa899ca56",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWFILE.H",
+      "sha256": "1f59631a54580e97c2f04ac1735fc1c667e970b554f56c774adb83d94e9e0d81",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWQA.C",
+      "sha256": "9b9ed7d222aa82b656e5ee406ddb7accf75e64f7b6c22dbc5be5d08afa6b9132",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWQA.DEF",
+      "sha256": "a04ece92d978f7507136433529ab37ed1e8f728eeff4dae37cdf5d89e813ba09",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWQA.RSP",
+      "sha256": "88ad1d7b0c48ea32f8837a6e30d1d17af778bad2adfc9c6c3e2ba27c2aec299d",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/TESTCORE.C",
+      "sha256": "c55a1b825f584fda66bb233bbaf873a2faf50bf9aabc3fe2f1ac3fab3a8073e5",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/PSG.ASM",
+      "sha256": "57b5a84664d5bb8a9345e61d09644b2816c32f288bd15154295051ba7bb56341",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/TIMECLK.C",
+      "sha256": "2af3ddd446f68589dcce830823b3d0c00446061074f8734ddf5bc28ceec736f0",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/TIMECLK.H",
+      "sha256": "8c725d1436243070829cd6b30b8cdec06934f220a40122df2bed12e6b51b4544",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/TIMECLK.DEF",
+      "sha256": "f998b06a1230dc8ae6bfd091cdb1657e35607243eb44dceaedd9b60c2db79133",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/TIMECLK.RSP",
+      "sha256": "7cf185d31975aa07874d61bcdd2f33f183f2589194017484c82b7e01809e4fc1",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/CLOCK.ASM",
+      "sha256": "89c5d1d9ecadea50bb50ec53ca67c11e7b084bc721e3cc02b825a82e7db40c77",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/WINHOOK.ASM",
+      "sha256": "2181cb398c9baf5d26b3dbdd9a21145d67325c5eb49241d87481c2def867052e",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MIDICLK.C",
+      "sha256": "e6814c627ac735e9380934e73da4cf65464bd2656732d27b48b98862e1b45f5e",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MIDICLK.DEF",
+      "sha256": "63ce3430460d438aa6baed29308c6e84301a227945ce245bc40c60984c8c9633",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MIDICLK.RSP",
+      "sha256": "cd6827f15a8f42549a329a25ca3408b5fe267daa8d7a789859725f397d433145",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MDAPI.H",
+      "sha256": "a8339122e6d1e72d742b55319f5c154f61e2856fc21d15a4fc3eb9774c34e011",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MIDISYN.C",
+      "sha256": "fa9cd4a15b5da9c4b2c3b5b04165ad3bad8f6a97cbbdf96de019a687f1b5213b",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MIDISYN.H",
+      "sha256": "dae6122f431d2fe6455ccbcafdbb0695a7573115dd126dc9f84b34819b2e96b3",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/INSTR.C",
+      "sha256": "3d7960b4dd8a1c66f67466748882934d38bc9d2b788ffb3e34aa67604e30b9da",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/INSTR.H",
+      "sha256": "4af9dd69ce78d2e7752d391ff0c8232a44daf8aa1f20d83b45fa02ab46d10cf7",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/PERIODS.H",
+      "sha256": "4fbb8b010c03e768909093494f6549f4781f6e80c13984b0592a8305ea5a513e",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MIDIAPI.H",
+      "sha256": "44ab50a98c273565055b4a258724e61b5b0137213f3d311991d153ec0029bab5",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MCITNDY.C",
+      "sha256": "ea82d054a859760dd197f3171c992067374790bde3967750685748b106ddd587",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MCITNDY.DEF",
+      "sha256": "439ae361352e7550516b7646a38ed2b0946f525044fc02d9971c3de1c0dcf3e0",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MCITNDY.RSP",
+      "sha256": "27831edc3d8d7daba9917a0a61dcb98dc63deafc75d67142bcd7bbb91d7d988d",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MCIAPI.H",
+      "sha256": "b9546d9d8c839800a79c7217c79227d865060b1526c92403cdcd5a314d96a8ec",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MCIPSG.C",
+      "sha256": "a75fcedee621697c7f032ccef4b9e25cc45bca339fc5541f44656ebf18d8f461",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/MCIPSG.H",
+      "sha256": "5347ed95daccd56caec678c80088e6916fc4132a787df0733dcbf443fbce6982",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/SMF.C",
+      "sha256": "27a1bd9b879f999132c1e77c78f09f554c47e853111c9075d09cada0939f0540",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/SMF.H",
+      "sha256": "1283c8ec525e594ee57499e0bea9db71be4336ce8a8833a76c28efa9176fbca4",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/CORE-MIT.TXT",
+      "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/ENTRY.ASM",
+      "sha256": "fe93a74ff44bcc487f8a02f58ed31f3d0a48ebf5aecab7ddc34e95f7a5617246",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/TBRIDGE.ASM",
+      "sha256": "35589608781d651d8a42b31fdd84a2f2745baee3fc11c4b3acb1bfe65a4446af",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/TBRIDGE.RSP",
+      "sha256": "b322a3c382f34fe45742fecd13e4a19ae0b2d7d9ab6625c1112af0e6458fe485",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/RAWSCORE.H",
+      "sha256": "0b781b5a3a618eff82fa3aad852e6da2b8452352082405f6911da676cbfa9ccd",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/APPCLK.H",
+      "sha256": "863c8ce18eb83ec605268fa0950de9c699a797c13a43c2056a572d03b869266b",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/LIVEMIDI.H",
+      "sha256": "412872225825a54c8226b5273c3286444c12973d2a716ee4a1a3c801b2629cbd",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/BEATSEQ.H",
+      "sha256": "e4962c1551e8d3b9f428099d483a6353fc7440e61829b94ceba4d37af2ef0afd",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    },
+    {
+      "file": "SOURCE/LICENSE.TXT",
+      "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4",
+      "provenance": "verified R4 source; see ERRATUM for corrected/new headers and MINIPLAY include"
+    }
+  ],
+  "native_build": "not run; no binaries included"
+}

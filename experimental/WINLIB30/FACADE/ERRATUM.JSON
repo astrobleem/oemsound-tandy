@@ -1,0 +1,9 @@
+{
+  "historical_R3_header_bytes": 155,
+  "historical_R3_header_sha256": "25e6b19b797dec8d5a96a08aa5dae604b6c6f17db088ccc349e43d939d4eab82",
+  "reconstruction": "exact owner-supplied LF declaration text matches frozen SHA; current header adds guards and CRLF",
+  "current_RAWAPP.H_sha256": "d9aaac4b291096c374b3bd19fde729ddb4ec647e9e6b86286b75a6495a93aba4",
+  "original_R4_utility_sha256": "cdf60c2ecef054d1675deecca1e328a6fb793678f71737cf292335b1e6112213",
+  "guarded_RAWSCORE.H_sha256": "0b781b5a3a618eff82fa3aad852e6da2b8452352082405f6911da676cbfa9ccd",
+  "scope": "header collision only; provider, IRQ and ownership bodies unchanged; historical runtime evidence is tied to recorded bytes, not a new build"
+}

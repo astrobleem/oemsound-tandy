@@ -1,0 +1,47 @@
+{
+  "compiler": "MSYS2 UCRT64 GCC16.1.0",
+  "sanitizer": "not available: initial links failed missing libubsan; these runs are unsanitized",
+  "scope": "actual foreground/provider source with fake raw hardware; not native Windows/IRQ/physical timing",
+  "results": [
+    {
+      "name": "raw-format",
+      "compile": 0,
+      "passed": true,
+      "exit_code": 0,
+      "output": "FINAL failures=0 checks=126",
+      "exe_sha256": "c474ada7435828b1f5a4bb7be3a98be9c826db0f8e0f8a9fe7b3946809e29c78"
+    },
+    {
+      "name": "midi-transport",
+      "compile": 0,
+      "passed": true,
+      "exit_code": 0,
+      "output": "PASS actual MIDICLK source model checks=1493",
+      "exe_sha256": "927d7884c5443c3aca4714feba05716c5902001da63a7ce3acf04181bb6bbb49"
+    },
+    {
+      "name": "synth",
+      "compile": 0,
+      "passed": true,
+      "exit_code": 0,
+      "output": "PASS pure renderer checks=10029 failures=0",
+      "exe_sha256": "12bedd9d90be079e9f0832d37650e1064fc7f0f370981243524ba3a30e1f7f1d"
+    },
+    {
+      "name": "live",
+      "compile": 0,
+      "passed": true,
+      "exit_code": 0,
+      "output": "PASS actual live adapter/source checks=18",
+      "exe_sha256": "4026d2431fe6a23381ac0e1706a19140c77b5074c1119c0cd7ea99590653c81a"
+    },
+    {
+      "name": "beat",
+      "compile": 0,
+      "passed": true,
+      "exit_code": 0,
+      "output": "PASS actual BEATSEQ: onset/gate, immutable prepared edits, queued tempo, silent pattern",
+      "exe_sha256": "d119e6bc25134d38bc183b8ee088abcd07f7385681806925c2e48a34daa947d5"
+    }
+  ]
+}

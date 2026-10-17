@@ -1,0 +1,27 @@
+{
+  "scope": "capability audit; no PCjr backend change or qualification",
+  "ui": "LTWUI uses only USER APIs and caller-owned HWNDs; no display geometry, BIOS or hardware port assumptions",
+  "audio_application_api": "MCI/raw-player/MD API exposes Windows handles and event state; application has no hardware port selection; future qualified backend can retain this API",
+  "R4_current_backend": "explicit exact Tandy HX BIOS/IRQ0 preflight; direct0C0h assembly writes; PCjr is not admitted by launcher",
+  "PCjr_audio": "pending source/backend admission, route/ownership/ROM/IRQ tests and native qualification; do not advertise current compatibility",
+  "separate_work": "PCjr Setup/JRGRAB belongs to its existing owner; no duplicate implementation",
+  "target": "Windows3.0; no3.1/protected-mode/RLX scope",
+  "source_pins": [
+    {
+      "path": "SOURCE/TPLAY.C",
+      "sha256": "bb9606e0e5445aafcd613cff52e70f465856e027e714f9f475767cca58767a01"
+    },
+    {
+      "path": "SOURCE/TSTART.C",
+      "sha256": "5e7914ca85b6ba618f205d451dc631e9cac2ca0ae442ec265e11946d2f1414c4"
+    },
+    {
+      "path": "SOURCE/TBRIDGE.ASM",
+      "sha256": "35589608781d651d8a42b31fdd84a2f2745baee3fc11c4b3acb1bfe65a4446af"
+    },
+    {
+      "path": "SOURCE/CLOCK.ASM",
+      "sha256": "89c5d1d9ecadea50bb50ec53ca67c11e7b084bc721e3cc02b825a82e7db40c77"
+    }
+  ]
+}
