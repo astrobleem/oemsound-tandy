@@ -17,7 +17,7 @@ tested program set, corresponding source, install/build guidance, original
 synthetic scores, native logs and an actual capture. It requires the exact
 external TSOUND already published in PITWIN; that driver is not bundled.
 This directory does not replace old Mini MIDI, public PIT kits or their
-pinned files. It installs nothing and includes
+pinned files. It makes no permanent Windows configuration changes and includes
 no Microsoft OS/SDK files, tools, fonts, ROMs, songs or samples. Build with
 your separately owned period Microsoft C/MASM/LINK tools inside DOSBox-X,
 following `BUILD/PLAYER30.PY --help`. Preserve the emulator lease rules in
