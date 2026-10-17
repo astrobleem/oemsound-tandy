@@ -129,4 +129,5 @@ equal free memory before/after (292,992 bytes), successful ownership release,
 restored BIOS/INT2F vectors and clean DOS return. The image itself establishes
 only the pictured state. No listening result or physical-hardware capture is
 claimed. Source is in [libwintandy](https://github.com/astrobleem/libwintandy);
-this caption does not announce a new binary release.
+the bounded native preview is under review in
+[PR 37](https://github.com/astrobleem/oemsound-tandy/pull/37).

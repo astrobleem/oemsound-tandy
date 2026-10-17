@@ -34,7 +34,7 @@ A newer private R4 candidate uses MIDICLK/RAWCLK PIT-cycle deadlines with an
 instrument steps remain 55 ms. This is not a 1-ms realtime or live-input
 latency guarantee. The source adoption is now public in
 [libwintandy](https://github.com/astrobleem/libwintandy), with a fresh MSC6 pair
-and 58-check native Windows 3.0 GUI pass; this is not a new binary release.
+and 58-check native Windows 3.0 GUI pass; this is not a new stable binary release.
 The UI may remain hardware-neutral; the R4 audio target is the specified
 Tandy HX platform only, with PCjr audio support pending. See the
 [versioned sound timing notes](../../docs/SNDTIME.MD). TSOUND
