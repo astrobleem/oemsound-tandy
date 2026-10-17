@@ -12,7 +12,7 @@ measure different parts of playback. None of the releases below promises
 | Mini MIDI 0.1 with its legacy app-local mapper | `SetTimer(PULSE,55)` drives the foreground message pump. Notes are sent when that pump runs. | Existing source/build guide; this player has no R4 prepared-state backend. Its recorded 49-299 ms worst-lateness results still apply to those tested binaries. |
 | Legacy TSOUND SOUND API driver | A stock SYSTEM timer requested at 55 ms has roughly 54.925 ms cadence. This is separate from an application's USER timer. | Restricted SOUND API experiment. It does not take over IRQ0 or program a new PIT clock. |
 | Public PIT sound kits | The Stage 4 expressive producer retains roughly 55 ms steps. The optional PIT2 square-wave voice is off by default. | Published experimental kits with pinned runtime/source pairs. They do not inherit private R4 timing. |
-| Private R4 MIDICLK/RAWCLK and app-local MCI candidate | Foreground work prepares states with PIT-cycle deadlines; the prepared-state minimum spacing is 8 ms. USER refill and Stage 5 instrument steps remain 55 ms. | Private tested runtime plus a separate source adoption candidate. Fresh native adoption builds are pending; no new public R4 release is claimed. |
+| Private R4 MIDICLK/RAWCLK and app-local MCI candidate | Foreground work prepares states with PIT-cycle deadlines; the prepared-state minimum spacing is 8 ms. USER refill and Stage 5 instrument steps remain 55 ms. | Original private runtime plus published source adoption. A fresh MSC6 pair and 58-check native GUI case pass; no new public binary release is claimed here. |
 
 The [sound starter preview](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-v0.1.0-preview.20261007)
 contains PSGSTART.ZIP and BEATSTART.ZIP. The
@@ -64,6 +64,10 @@ cadence and evidence. The private R4 Buddy bridge is a separate version.
 New backend work does not revise historical video, sampled-dialogue or
 music timing results for those older packages. See the
 [Buddy guide](../examples/BUDDY/README.TXT).
+
+MOD/VGM/VGZ integration is authorized and in progress in isolated source
+work; these are not qualified MINIPLAY inputs yet. See the
+[format adoption milestones and backend limits](FORMATS.MD).
 
 ## Hardware and resource ownership
 

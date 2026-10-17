@@ -130,10 +130,19 @@ on its roughly 55 ms cadence, and the option stays off by default.
 A newer private R4 candidate uses MIDICLK/RAWCLK prepared PIT-cycle deadlines
 with an 8 ms minimum spacing between scheduled states. Its Windows USER refill
 and Stage 5 instrument steps remain 55 ms. This does not promise 1 ms timing or
-live-input latency, and it is not a new public download. The R4 UI is hardware
+live-input latency. Its source candidate is now published in
+[libwintandy](https://github.com/astrobleem/libwintandy); this is not a new
+public binary release. The R4 UI is hardware
 neutral; its intended audio target is the specified Tandy HX platform only.
 PCjr audio support is pending. See the versioned [sound timing notes](docs/SNDTIME.MD)
 and [development status](docs/STATUS.MD).
+
+![MINIPLAY playing an original raw test score](docs/SHOTS/MINIPLAY.PNG)
+
+*MINIPLAY source adoption candidate in Windows 3.0 real mode, stock CGA,
+Tandy HX 8088 emulator. Actual lossless window crop from the 58-check native
+GUI run; [version and capture details](docs/SHOTS/README.MD#miniplay-source-adoption-candidate).
+This is a source preview, not a new binary download.*
 
 ## Other sound tools
 

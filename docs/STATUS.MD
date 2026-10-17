@@ -56,10 +56,16 @@ A newer private R4 source candidate schedules prepared states on PIT-cycle
 deadlines with a minimum 8 ms spacing. Its USER refill and Stage 5 instrument
 steps remain 55 ms. The 8 ms rule is not a grid, universal latency guarantee,
 or 1 ms realtime claim; live input remains cooperatively dispatched. A fresh
-native build of this candidate is pending, and there is no new R4 download or
-release claim. The source header collision is corrected in the isolated
-candidate; that does not replace a fresh native build. Its intended audio
-target is the specified Tandy HX platform; PCjr audio
+MSC6 compile/link pair passed, and a fresh native Windows 3.0 GUI case
+passed all 58 checks on the specified Tandy HX fixture. Source is now public
+in [libwintandy](https://github.com/astrobleem/libwintandy); no new binary
+release is claimed here. The source header collision is corrected. In that
+native case, MIDI/TND/AGI switching, redraw, repeated restart, malformed/fast
+input refusal, Stop/EOF/close release and clean DOS return passed. Free memory
+was 292,992 bytes both before and after. Original BIOS/INT2F vectors were
+restored. These are bounded emulator lifecycle/UI results, not a listening,
+physical-hardware or calibrated CPU result. Its intended audio target is the
+specified Tandy HX platform; PCjr audio
 support is pending. The UI can remain hardware-neutral. In this private R4
 candidate, MiniPlay routes MIDI through app-local MCITNDY/MIDICLK and raw
 TND/AGI through RAWAPP/RAWCLK. This is not the legacy MINM3 player or a full
