@@ -69,9 +69,14 @@ TIMING AND FAILURE LIMITS
 -------------------------
 The parser carries an exact integer rational tempo remainder across changes,
 then rounds event deadlines DOWN to the nearest millisecond. There is no
-floating point, new ISR, PIT/PIC programming or high-frequency timer.
-Actual playback uses a cooperative 55 ms Windows timer. Other apps, slow
-video drawing, file processing and logging can delay it substantially.
+floating point, new ISR, PIT/PIC programming or high-frequency timer. This
+Mini MIDI 0.1 source sets `SetTimer(PULSE, 55)` and directly sends messages to
+the legacy app-local mapper. It is not the later R4 MIDICLK/RAWCLK prepared
+queue, so R4's 8 ms minimum spacing does not apply. Other apps, slow video
+drawing, file processing and logging can delay this USER timer substantially.
+Final tests recorded 49..299 ms worst-late values for this version; see
+[TESTS.MD](TESTS.MD). See also the
+[versioned timing notes](../../../docs/SNDTIME.MD).
 A pump handles at most 64 due channel messages before yielding to Windows.
 An event more than one second stale at pump entry causes a muted timing-stop
 instead of an unlimited catch-up burst. Short notes can collapse into a burst

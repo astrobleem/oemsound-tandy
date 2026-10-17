@@ -5,6 +5,12 @@ replacements or physical Tandy 1000 / 4.77 MHz 8088 qualification.
 The main README, stable builds, baseline source and rollback paths remain
 unchanged. Keep existing installations intact and use separate DOS folders.
 
+The separately published [PIT sound kits](PITPUBLIC/README.md) have their own
+release and timing scope. Their Stage 4 expressive producer remains on the
+roughly 55-ms legacy cadence; the optional extra PIT2 voice stays off by
+default. They are not the newer private R4 MIDICLK/RAWCLK prepared-state path.
+See the [versioned sound timing notes](../docs/SNDTIME.MD).
+
 ## Windows 3.0: WININST12
 
 [Download WININST12.zip](WININST12.zip?raw=1), extract it, and read
