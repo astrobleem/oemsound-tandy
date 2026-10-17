@@ -1,14 +1,13 @@
 # README screenshot provenance
 
-These are actual emulator captures from the repository and Mini Piano 0.1
-package, copied byte
-for byte for the README showcase. The still PNGs add no new runtime capture, redraw, cosmetic
-correction, photo or generated mockup. The animated preview below is a new
-capture of the published BUDCAP04 executable. Native framebuffer decoding
-and emulator row/column duplication are identified below. Capture content was
-visually inspected before reuse. Guest DOS example paths are not host user paths.
+Historical README captures below came from the repository and Mini Piano
+0.1 package. Their still PNGs were reused byte-for-byte; reuse adds no new
+runtime test, redraw, retouching or physical-hardware evidence. The BUDCAP
+animated preview and the new MINIPLAY source-adoption capture each have
+separate provenance below. All reused and newly captured content was
+visually inspected. Guest DOS example paths are not host user paths.
 
-Source revision: `d7fd911d6f0213244cd3f89d01c83b739d4297c4`.
+Historical Source revision: `d7fd911d6f0213244cd3f89d01c83b739d4297c4`.
 
 | Asset | Original source | Scope |
 | --- | --- | --- |
@@ -22,6 +21,10 @@ The pictures establish only the pictured UI state, not audio, complete
 application coverage, physical hardware, unpictured updates or timing.
 Historical frames retain their original scope. Stock Windows applications
 shown in captures are compatibility examples; their binaries are not included.
+
+The new MINIPLAY section below records an actual source-adoption runtime
+capture and its lossless rectangle crop. Historical PNG identities and
+version labels above remain unchanged.
 
 ## SHA-256 identities
 
@@ -101,3 +104,30 @@ cleanup muted PSG/speaker and restored display mode. This is a short emulator
 visual check, not a new full-run, listening or physical-hardware qualification.
 The GIF contains no sound. The existing [media attribution and rights
 notice](../../examples/BUDDY/ATTRIB.TXT) applies to its underlying video.
+
+## MINIPLAY source adoption candidate
+
+[MINIPLAY.PNG](MINIPLAY.PNG) shows the actual "Tandy Queued" window with
+STRESS.TND active. It was captured on 17 October 2026 during the fresh
+MINIPLAY/MCITNDY/MIDICLK/RAWCLK adoption's native GUI run. The original test
+score is synthetic; no third-party song or sampled media is shown.
+
+- Windows 3.0 real mode, stock CGA 640x200, 640 KB Tandy HX 8088 profile
+  configured at 4,772,728 Hz in the private 86Box-based FIXBOX fixture.
+  Emulator configuration is not calibrated physical timing.
+- MINIPLAY.EXE: 22,109 bytes, SHA-256
+  `00dc26526fd78be1c2f18f713e51390e3f07229697ee4f03d8e7e971dd740654`.
+- Actual captured frame: 656x400 pixels, SHA-256
+  `098f7388d2097597b9b784a43ba8526d9e747602f65342b6e4aea51af48b3c53`.
+- Lossless crop: source rectangle `(8,38)-(304,234)`, right/bottom exclusive,
+  producing 296x196 pixels. No scaling, redraw, retouching or generated UI.
+- Published PNG SHA-256:
+  `f43aefae8dc0a5c395fca8dd783a3deaa275ddff6ad3e6a3a74f6c4e0df48d2c`.
+
+The separate native log records zero failures in 58 lifecycle/UI checks,
+equal free memory before/after (292,992 bytes), successful ownership release,
+restored BIOS/INT2F vectors and clean DOS return. The image itself establishes
+only the pictured state. No listening result or physical-hardware capture is
+claimed. Source is in [libwintandy](https://github.com/astrobleem/libwintandy);
+the bounded native preview is under review in
+[PR 37](https://github.com/astrobleem/oemsound-tandy/pull/37).

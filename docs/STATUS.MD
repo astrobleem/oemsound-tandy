@@ -32,12 +32,44 @@ unsupported channel messages and out-of-range sounding notes; bounded SysEx
 and most metadata are skipped without being sent to the driver. Songs relying
 on those features will sound different or lose parts.
 
-Mini MIDI supports type-1 track merging and integer tempo calculations, but
-actual playback uses a cooperative roughly 55 ms Windows timer. Slow drawing
-or other apps can delay dispatch; short notes can bunch together. It stops
-and mutes on excessive lateness instead of issuing an unlimited catch-up burst.
-Beats and JOYMIDI have their own bounded timing/filtering behavior. These are
-small instruments and experiments, not precision music clocks.
+Mini MIDI 0.1 sets its own 55 ms Windows USER timer (`SetTimer(PULSE, 55)`)
+and sends MIDI messages directly to the legacy paired mapper. It has no
+prepared-state backend, so the later R4 8 ms spacing does not apply. Slow
+UI work or other apps can delay its pump; short notes can bunch together. It
+stops and mutes on excessive lateness rather than issuing an unlimited catch-up
+burst. Beats and JOYMIDI have their own bounded timing/filtering behavior.
+These are small instruments, not precision music clocks. See
+[versioned sound timing notes](SNDTIME.MD).
+
+The separate legacy TSOUND driver requests a 55 ms stock SYSTEM timer, which
+runs at about 54.925 ms. That callback cadence is distinct from the app's USER
+timer/refill cadence; neither number promises per-note accuracy. The driver
+uses no new interrupt-vector, PIT or PIC programming.
+
+The [public 7 October PIT kits](../experimental/PITPUBLIC/README.md) are
+separate emulator-qualified releases. Their
+Stage 4 expressive producer remains about 55 ms; the optional extra PIT2 voice
+is off by default. These releases do not contain R4's newer MIDICLK/RAWCLK
+prepared-state path.
+
+A newer private R4 source candidate schedules prepared states on PIT-cycle
+deadlines with a minimum 8 ms spacing. Its USER refill and Stage 5 instrument
+steps remain 55 ms. The 8 ms rule is not a grid, universal latency guarantee,
+or 1 ms realtime claim; live input remains cooperatively dispatched. A fresh
+MSC6 compile/link pair passed, and a fresh native Windows 3.0 GUI case
+passed all 58 checks on the specified Tandy HX fixture. Source is now public
+in [libwintandy](https://github.com/astrobleem/libwintandy); no new binary
+release is claimed here. The source header collision is corrected. In that
+native case, MIDI/TND/AGI switching, redraw, repeated restart, malformed/fast
+input refusal, Stop/EOF/close release and clean DOS return passed. Free memory
+was 292,992 bytes both before and after. Original BIOS/INT2F vectors were
+restored. These are bounded emulator lifecycle/UI results, not a listening,
+physical-hardware or calibrated CPU result. Its intended audio target is the
+specified Tandy HX platform; PCjr audio
+support is pending. The UI can remain hardware-neutral. In this private R4
+candidate, MiniPlay routes MIDI through app-local MCITNDY/MIDICLK and raw
+TND/AGI through RAWAPP/RAWCLK. This is not the legacy MINM3 player or a full
+MMSYSTEM/MPLAYER implementation.
 
 
 ## Driver work and earlier DOS experiments

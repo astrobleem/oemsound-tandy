@@ -18,11 +18,26 @@ copy of an existing lawful Windows 3.0 real-mode guest**. App-local MIDIMAP stay
 beside matching clients. [INSTALL.TXT](INSTALL.TXT) describes prerequisites,
 controls, clean setup and rollback; nothing installs automatically or changes CF.
 
-PIT options remain off by default. Sound is fixed on/off; no independent
-amplitude envelope. Speech/PWM shares PIT2 and is mutually exclusive with PIT
-music. System beeps/direct writers can bypass leases. Emulator qualification
-is bounded; physical EX summing/fidelity, real joystick/key input, custom-display
-UI, abrupt termination and complete system integration remain open. TSOUND
+PIT options remain off by default. The optional PIT2 voice adds one extra
+voice; it does not change the default sound profile. The current PIT2 bass
+fallback is not implemented. Any future default change requires a qualified
+capability check and an explicit toggle; this release changes no defaults.
+Stage 4 expression still uses its roughly 55-ms
+producer cadence; it is not the later R4 prepared-state backend. Speech/PWM
+shares PIT2 and is mutually exclusive with PIT music. System beeps/direct
+writers can bypass leases. Emulator qualification is bounded; physical EX
+summing/fidelity, real joystick/key input, custom-display UI, abrupt
+termination and complete system integration remain open.
+
+A newer private R4 candidate uses MIDICLK/RAWCLK PIT-cycle deadlines with an
+8-ms minimum spacing between prepared states. Its USER refill and Stage 5
+instrument steps remain 55 ms. This is not a 1-ms realtime or live-input
+latency guarantee. The source adoption is now public in
+[libwintandy](https://github.com/astrobleem/libwintandy), with a fresh MSC6 pair
+and 58-check native Windows 3.0 GUI pass; this is not a new stable binary release.
+The UI may remain hardware-neutral; the R4 audio target is the specified
+Tandy HX platform only, with PCjr audio support pending. See the
+[versioned sound timing notes](../../docs/SNDTIME.MD). TSOUND
 has restricted SOUND semantics, including unsupported system beep functions.
 
 `SOURCE-PINS.json` identifies every curated source file; `INPUTS.json` records

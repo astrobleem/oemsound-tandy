@@ -27,8 +27,11 @@ Large on-disk files do not imply equivalent RAM allocation. Logs are written
 in the working folder. Use a new folder rather than overwriting other apps.
 
 STATUS
-The user reports a strong positive DOS result and Windows timing struggles.
-DOS is the recommended playback version. These reports are qualitative.
+The Windows 3.0 player is the legacy app-local mapper path with cooperative
+roughly 55-ms USER service; it does not use R4's newer 8-ms prepared-state
+backend. The user reports a strong positive DOS result and Windows timing
+struggles. DOS is the recommended playback version. These reports are
+qualitative. See the [versioned sound timing notes](../../docs/SNDTIME.MD).
 The exact final binaries completed the full video in a 640KB DOSBox-X Tandy
 profile at 3000 cycles with no video drops. Windows coalesced 10 late music
 states; DOS coalesced none. Emulator cycles are not physical CPU MHz.

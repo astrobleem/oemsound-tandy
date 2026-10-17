@@ -41,8 +41,12 @@ must pair OpenSound/CloseSound; normal library teardown mutes in WEP.
 
 SYSTEM.2 and SYSTEM.3 are the stock CreateSystemTimer/KillSystemTimer entry
 points verified in the target Win3.0 binary. A 55-ms request runs at the stock
-~54.925-ms cadence. Our callback preserves all registers, segment registers
-and flags, uses fixed code/data, and never calls DOS, USER, GDI or allocation.
+~54.925-ms callback cadence. This is separate from application USER timers and
+producer/refill loops; it is not a per-note spacing or latency promise. For
+example, legacy Mini MIDI sets its own 55-ms USER timer and calls the paired
+mapper directly. Neither cadence is the newer R4 prepared-state interface.
+Our callback preserves all registers, segment registers and flags, uses fixed
+code/data, and never calls DOS, USER, GDI or allocation.
 There are no driver-owned interrupt-vector, PIT or PIC writes. PSG writes
 use only port C0h after real-mode and ROM-signature checks.
 
