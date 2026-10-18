@@ -1,6 +1,6 @@
 # Tandy Winamp UX3 captures
 
-These are actual unmodified 640x400 PNG captures from the completed native Windows 3.0 real-mode, stock-CGA, Tandy HX 8088 emulator qualification (4.772728 MHz, 640 KiB). No scaling, compositing, recoloring or retouching was applied. They are emulator captures, not physical-machine photographs.
+These are actual unmodified 656x400 PNG captures, including the emulator display border, from the completed native Windows 3.0 real-mode, stock-CGA, Tandy HX 8088 emulator qualification (4.772728 MHz, 640 KiB). No scaling, compositing, recoloring or retouching was applied. They are emulator captures, not physical-machine photographs.
 
 WAMPUI3.PNG is PLUILS3 FRAME18: the seven-entry list is scrolled beyond four songs. WAMPOP3.PNG is PLUIPB3 FRAME11: the Add song browser is visible during an original test study. The directory names refer to original synthetic test material; private studies and commercial songs are not in the public app archive. The helper window named Playlist belongs to the independent QA driver.
 
