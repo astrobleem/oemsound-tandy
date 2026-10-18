@@ -1,0 +1,94 @@
+MINIPLAY.C
+MINIPLAY.C(214) : warning C4135: conversion between different integral types
+RAWFILE.C
+RAWAPP.C
+FMTAPP.C
+FMTAPP.C(25) : warning C4135: conversion between different integral types
+FMTAPP.C(37) : warning C4135: conversion between different integral types
+FMTAPP.C(76) : warning C4061: long/short mismatch in argument : conversion supplied
+FMTCORE.C
+FMTCORE.C(53) : warning C4135: conversion between different integral types
+FMTCORE.C(57) : warning C4135: conversion between different integral types
+VGM.C
+VGMGRP.C
+MODPLAY.C
+MODPLAY.C(354) : warning C4135: conversion between different integral types
+MODPLAY.C(366) : warning C4135: conversion between different integral types
+MODPLAY.C(453) : warning C4135: conversion between different integral types
+GUNZIP.C
+PLLIST.C
+LTWUI.C
+PLBR.C
+PLGUI.C(512) : warning C4101: 'measureVisible' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'modalElapsed' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'bytesNow' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'measureError' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'measureClock' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'n' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'foregroundNow' : unreferenced local variable
+PLLS.C
+PLGUI.C(512) : warning C4101: 'measureVisible' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'modalElapsed' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'bytesNow' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'measureError' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'measureClock' : unreferenced local variable
+PLGUI.C(512) : warning C4101: 'foregroundNow' : unreferenced local variable
+PLPB.C
+PLGUI.C(272) : warning C4135: conversion between different integral types
+PLGUI.C(512) : warning C4101: 'n' : unreferenced local variable
+LWFILE.C
+Microsoft (R) Macro Assembler Version 5.10 
+Copyright (C) Microsoft Corp 1981, 1988.  All rights reserved.
+
+
+  49784 + 416502 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: MINIPLAY.OBJ RAWFILE.OBJ RAWAPP.OBJ FMTAPP.OBJ FMTCORE.OBJ VGM.OBJ VGMGRP.OBJ MODPLAY.OBJ GUNZIP.OBJ+
+Object Modules [.OBJ]: PLLIST.OBJ LTWUI.OBJ
+Run File [MINIPLAY.EXE]: MINIPLAY.EXE
+List File [NUL.MAP]: MINIPLAY.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: MINIPLAY.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: DOSUTIL.OBJ LWFILE.OBJ
+Run File [DOSUTIL.EXE]: LWFILE.DLL
+List File [NUL.MAP]: LWFILE.MAP
+Libraries [.LIB]: C:\LIB\SNOCRTDW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: LWFILE.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: PLBR.OBJ
+Run File [PLBR.EXE]: PLBR.EXE
+List File [NUL.MAP]: PLBR.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: PLBR.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: PLLS.OBJ
+Run File [PLLS.EXE]: PLLS.EXE
+List File [NUL.MAP]: PLLS.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: PLLS.DEF
+
+Microsoft (R) Segmented-Executable Linker  Version 5.01.17
+Copyright (C) Microsoft Corp 1984-1988.  All rights reserved.
+
+Object Modules [.OBJ]: PLPB.OBJ
+Run File [PLPB.EXE]: PLPB.EXE
+List File [NUL.MAP]: PLPB.MAP
+Libraries [.LIB]: C:\LIB\SLIBCEW.LIB C:\LIB\LIBW.LIB
+Definitions File [NUL.DEF]: PLPB.DEF
+PASS

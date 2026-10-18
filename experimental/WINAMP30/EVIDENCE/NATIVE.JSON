@@ -1,0 +1,72 @@
+{
+  "profile": "Disposable Win3.0 real-mode emulator; 8088 at 4.772728MHz,640KB,stock CGA; physical UI acceptance pending",
+  "host_checks": 149,
+  "host_failures": 0,
+  "UI_checks": 396,
+  "native": [
+    {
+      "case": "BROWSER",
+      "checks": 130,
+      "failures": 0,
+      "seconds": 142.76599999982864,
+      "clean_DOS": true,
+      "ownership_released": true,
+      "seed_unchanged": true
+    },
+    {
+      "case": "SCROLL",
+      "checks": 162,
+      "failures": 0,
+      "seconds": 166.625,
+      "clean_DOS": true,
+      "ownership_released": true,
+      "seed_unchanged": true
+    },
+    {
+      "case": "PLAYBACK",
+      "checks": 104,
+      "failures": 0,
+      "seconds": 153.57800000021234,
+      "clean_DOS": true,
+      "ownership_released": true,
+      "seed_unchanged": true
+    },
+    {
+      "case": "EVENTS",
+      "checks": 88,
+      "failures": 0,
+      "seconds": 121.28099999995902,
+      "clean_DOS": true,
+      "ownership_released": true,
+      "seed_unchanged": true
+    }
+  ],
+  "modal": {
+    "visible_interval_ms": 2197,
+    "foreground_before": 7,
+    "foreground_after": 38,
+    "PSG_bytes_before": 252,
+    "PSG_bytes_after": 300,
+    "error": 0,
+    "clock_advanced": true
+  },
+  "event_trace": {
+    "hash": 54622,
+    "writes": 131,
+    "intentional_noise_writes": 3
+  },
+  "production_products": [
+    {
+      "name": "MINIPLAY.EXE",
+      "bytes": 52029,
+      "sha256": "7285ee2e3f7ff321643e4efe233941e8eeda8f89a993ff9ae91e1eb998a54fdb"
+    },
+    {
+      "name": "LWFILE.DLL",
+      "bytes": 14876,
+      "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
+    }
+  ],
+  "browser_implementation_unchanged": true,
+  "build": "MSC6 /G0, MASM5.10, LINK5.01.17; conversion warnings and test-only unused locals retained in BUILD.LOG"
+}

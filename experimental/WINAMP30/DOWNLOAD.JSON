@@ -1,0 +1,18 @@
+{
+  "tag": "tandy-winamp-ux3.20261018",
+  "download": "https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-ux3.20261018/TWUX3.ZIP",
+  "asset": "TWUX3.ZIP",
+  "bytes": 219099,
+  "sha256": "389bab087507339ee1183c6ba7e6fc63a5142a85b1de1be53b085017f43a40c2",
+  "files": 135,
+  "tested_source_head": "ff55b244bd9648bd3e8d83973ac9599333bb9518",
+  "runtime_unchanged_from_physical_UX3": true,
+  "original_public_examples": [
+    "STREAM.MID",
+    "PLUCK.TND",
+    "CHIME.SND",
+    "SHORT.VGM"
+  ],
+  "commercial_private_assets_included": false,
+  "Windows_XT_RC": false
+}

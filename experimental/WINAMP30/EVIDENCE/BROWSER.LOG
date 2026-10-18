@@ -1,0 +1,208 @@
+CHECK SetMessageQueue_64 got=1 want=1
+PHASE 0 case=1 task=9047
+CHECK owner_queue_exactly_64 got=1 want=1
+CHECK player_launch got=1 want=1
+PHASE 1 case=1 task=9047
+CHECK player_visible got=1 want=1
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+CHECK query_native_list got=1 want=1
+CHECK native_list_control_id got=106 want=106
+CHECK native_list_class got=1 want=1
+COUNT initial_default_three native=3 model=3 expected=3
+CHECK native_model_count_agree got=3 want=3
+CHECK initial_default_three got=3 want=3
+CHECK playlist_header_count got=1 want=1
+SELECT initial_selection_first native=0 model=0
+CHECK selection_native_model_agree got=0 want=0
+CHECK initial_selection_first got=0 want=0
+CHECK native_row_read got=1 want=1
+CHECK default_stream_row got=1 want=1
+CHECK native_row_read got=1 want=1
+CHECK default_pluck_row got=1 want=1
+CHECK native_row_read got=1 want=1
+CHECK default_chime_row got=1 want=1
+PHASE 2 case=1 task=9047
+CHECK outside_gesture_posted got=1 want=1
+PHASE 3 case=1 task=9047
+CHECK outside_release_no_Add got=0 want=0
+PHASE 4 case=1 task=9047
+CHECK cancelmode_gesture_posted got=1 want=1
+PHASE 5 case=1 task=9047
+CHECK cancel_before_release_no_Add got=0 want=0
+PHASE 6 case=1 task=9047
+CHECK duplicate_release_without_press got=1 want=1
+PHASE 7 case=1 task=9047
+CHECK duplicate_release_no_Add got=0 want=0
+DRIVER post real Add button down/up pair
+PHASE 10 case=1 task=9047
+POPUP hwnd=1DA4 owner=1A18 visible=0 class=[] title=[]
+POPUP hwnd=1DA4 owner=1A18 visible=1 class=[#32770] title=[Add song]
+CHECK browser_visible got=1 want=1
+CHECK browser_Add_song_title got=1 want=1
+CHECK browser_dialog_class got=1 want=1
+CHECK browser_owner_player got=6680 want=6680
+CHECK browser_owner_disabled got=1 want=1
+CHECK browser_file_edit got=1 want=1
+CHECK browser_file_list got=1 want=1
+CHECK browser_filter_combo got=1 want=1
+CHECK browser_directory_label got=1 want=1
+CHECK browser_sound_filter_selected got=0 want=0
+CHECK browser_initial_MMLAB got=1 want=1
+BUTTON_FLOW down=3 up=4 cancel=1 pressed=1 after=0 Add=1 step=4 errlo=0 errhi=0
+PHASE 11 case=1 task=9047
+CHECK browser_Cancel_posted got=1 want=1
+PHASE 12 case=1 task=9047
+CHECK browser_cancel_return_step got=5 want=5
+CHECK browser_cancel_error_low got=0 want=0
+CHECK browser_cancel_error_high got=0 want=0
+COUNT cancel_preserves_playlist native=3 model=3 expected=3
+CHECK native_model_count_agree got=3 want=3
+CHECK cancel_preserves_playlist got=3 want=3
+CHECK playlist_header_count got=1 want=1
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+PHASE 26 case=1 task=9047
+DRIVER post real Add button down/up pair
+PHASE 10 case=1 task=9047
+POPUP hwnd=1DA4 owner=1A18 visible=0 class=[] title=[]
+POPUP hwnd=1DA4 owner=1A18 visible=1 class=[#32770] title=[Add song]
+CHECK browser_visible got=1 want=1
+CHECK browser_Add_song_title got=1 want=1
+CHECK browser_dialog_class got=1 want=1
+CHECK browser_owner_player got=6680 want=6680
+CHECK browser_owner_disabled got=1 want=1
+CHECK browser_file_edit got=1 want=1
+CHECK browser_file_list got=1 want=1
+CHECK browser_filter_combo got=1 want=1
+CHECK browser_directory_label got=1 want=1
+CHECK browser_sound_filter_selected got=0 want=0
+CHECK browser_initial_MMLAB got=1 want=1
+BUTTON_FLOW down=4 up=5 cancel=1 pressed=1 after=0 Add=2 step=4 errlo=0 errhi=0
+PHASE 13 case=1 task=9047
+BROWSER native index leaf=[COPPER.VGM] index=5
+CHECK browser_real_file_row_found got=1 want=1
+PHASE 14 case=1 task=9047
+CHECK browser_Open_posted got=1 want=1
+PHASE 15 case=1 task=9047
+CHECK successful_add_browser_step got=6 want=6
+CHECK successful_add_error_low got=0 want=0
+CHECK successful_add_error_high got=0 want=0
+COUNT successful_add_count native=4 model=4 expected=4
+CHECK native_model_count_agree got=4 want=4
+CHECK successful_add_count got=4 want=4
+CHECK playlist_header_count got=1 want=1
+SELECT successful_add_selection native=3 model=3
+CHECK selection_native_model_agree got=3 want=3
+CHECK successful_add_selection got=3 want=3
+CHECK native_row_read got=1 want=1
+CHECK successful_add_row got=1 want=1
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+PHASE 27 case=1 task=9047
+DRIVER post real Add button down/up pair
+PHASE 10 case=1 task=9047
+POPUP hwnd=1DA4 owner=1A18 visible=0 class=[] title=[]
+POPUP hwnd=1DA4 owner=1A18 visible=1 class=[#32770] title=[Add song]
+CHECK browser_visible got=1 want=1
+CHECK browser_Add_song_title got=1 want=1
+CHECK browser_dialog_class got=1 want=1
+CHECK browser_owner_player got=6680 want=6680
+CHECK browser_owner_disabled got=1 want=1
+CHECK browser_file_edit got=1 want=1
+CHECK browser_file_list got=1 want=1
+CHECK browser_filter_combo got=1 want=1
+CHECK browser_directory_label got=1 want=1
+CHECK browser_sound_filter_selected got=0 want=0
+CHECK browser_initial_MMLAB got=1 want=1
+BUTTON_FLOW down=5 up=6 cancel=1 pressed=1 after=0 Add=3 step=4 errlo=0 errhi=0
+PHASE 13 case=1 task=9047
+BROWSER native index leaf=[COPPER.VGM] index=5
+CHECK browser_real_file_row_found got=1 want=1
+PHASE 14 case=1 task=9047
+CHECK browser_Open_posted got=1 want=1
+PHASE 15 case=1 task=9047
+CHECK successful_add_browser_step got=6 want=6
+CHECK successful_add_error_low got=0 want=0
+CHECK successful_add_error_high got=0 want=0
+COUNT successful_add_count native=4 model=4 expected=4
+CHECK native_model_count_agree got=4 want=4
+CHECK successful_add_count got=4 want=4
+CHECK playlist_header_count got=1 want=1
+SELECT successful_add_selection native=3 model=3
+CHECK selection_native_model_agree got=3 want=3
+CHECK successful_add_selection got=3 want=3
+CHECK native_row_read got=1 want=1
+CHECK successful_add_row got=1 want=1
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+PHASE 28 case=1 task=9047
+DRIVER post real Add button down/up pair
+PHASE 10 case=1 task=9047
+POPUP hwnd=1DA4 owner=1A18 visible=0 class=[] title=[]
+POPUP hwnd=1DA4 owner=1A18 visible=1 class=[#32770] title=[Add song]
+CHECK browser_visible got=1 want=1
+CHECK browser_Add_song_title got=1 want=1
+CHECK browser_dialog_class got=1 want=1
+CHECK browser_owner_player got=6680 want=6680
+CHECK browser_owner_disabled got=1 want=1
+CHECK browser_file_edit got=1 want=1
+CHECK browser_file_list got=1 want=1
+CHECK browser_filter_combo got=1 want=1
+CHECK browser_directory_label got=1 want=1
+CHECK browser_sound_filter_selected got=0 want=0
+CHECK browser_initial_MMLAB got=1 want=1
+BUTTON_FLOW down=6 up=7 cancel=1 pressed=1 after=0 Add=4 step=4 errlo=0 errhi=0
+PHASE 16 case=1 task=9047
+CHECK missing_filename_edit got=1 want=1
+PHASE 17 case=1 task=9047
+CHECK missing_Open_posted got=1 want=1
+PHASE 18 case=1 task=9047
+POPUP hwnd=2188 owner=1DA4 visible=0 class=[] title=[]
+POPUP hwnd=2000 owner=1DA4 visible=0 class=[] title=[]
+POPUP hwnd=2188 owner=1DA4 visible=1 class=[#32770] title=[File selection]
+POPUP hwnd=2000 owner=1DA4 visible=0 class=[] title=[]
+CHECK missing_notice_visible got=1 want=1
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+PHASE 19 case=1 task=9047
+CHECK missing_notice_dismiss_posted got=1 want=1
+PHASE 20 case=1 task=9047
+PHASE 11 case=1 task=9047
+CHECK browser_Cancel_posted got=1 want=1
+PHASE 12 case=1 task=9047
+CHECK browser_cancel_return_step got=5 want=5
+CHECK browser_cancel_error_low got=0 want=0
+CHECK browser_cancel_error_high got=0 want=0
+COUNT cancel_preserves_playlist native=4 model=4 expected=4
+CHECK native_model_count_agree got=4 want=4
+CHECK cancel_preserves_playlist got=4 want=4
+CHECK playlist_header_count got=1 want=1
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+PHASE 22 case=1 task=9047
+PHASE 23 case=1 task=9047
+CHECK missing_Play_posted got=1 want=1
+PHASE 68 case=1 task=9047
+CHECK missing_Play_refused got=0 want=0
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+SELECT missing_Play_clears_selection native=65535 model=65535
+CHECK selection_native_model_agree got=65535 want=65535
+CHECK missing_Play_clears_selection got=65535 want=65535
+PHASE 24 case=1 task=9047
+CHECK no_selection_native_list got=1 want=1
+CHECK no_selection_Remove_posted got=1 want=1
+PHASE 25 case=1 task=9047
+COUNT no_selection_Remove_unchanged native=4 model=4 expected=4
+CHECK native_model_count_agree got=4 want=4
+CHECK no_selection_Remove_unchanged got=4 want=4
+CHECK playlist_header_count got=1 want=1
+CAPTION actual=[Tandy Winamp] expected=[Tandy Winamp]
+CHECK main_caption_Tandy_Winamp got=1 want=1
+MEMORY cold=244224 dialog=232800 released=244096 final=243520
+CHECK browser_heap_loss_bounded got=1 want=1
+PHASE 90 case=1 task=9047
+CHECK player_closed got=1 want=1
+CHECK close_sound_released got=3 want=3
+FINAL failures=0 checks=130

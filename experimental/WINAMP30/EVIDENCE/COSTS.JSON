@@ -1,0 +1,109 @@
+{
+  "baseline": {
+    "bytes": 47997,
+    "sha256": "6e94d2b8f41cdd7c9dcb2b5f5849f2df1c0713dff1fa10128dbc27f7f19130ab",
+    "segments": [
+      {
+        "index": 1,
+        "initialized_bytes": 41508,
+        "minimum_allocation": 41508,
+        "flags": 7504
+      },
+      {
+        "index": 2,
+        "initialized_bytes": 4989,
+        "minimum_allocation": 10496,
+        "flags": 3153
+      }
+    ],
+    "local_heap": 2048,
+    "stack": 8192,
+    "imports": [
+      "KERNEL",
+      "GDI",
+      "USER",
+      "SOUND"
+    ],
+    "expected_version": "0x300"
+  },
+  "candidate": {
+    "bytes": 52029,
+    "sha256": "7285ee2e3f7ff321643e4efe233941e8eeda8f89a993ff9ae91e1eb998a54fdb",
+    "segments": [
+      {
+        "index": 1,
+        "initialized_bytes": 45018,
+        "minimum_allocation": 45018,
+        "flags": 7504
+      },
+      {
+        "index": 2,
+        "initialized_bytes": 5437,
+        "minimum_allocation": 15008,
+        "flags": 3153
+      }
+    ],
+    "local_heap": 2048,
+    "stack": 8192,
+    "imports": [
+      "KERNEL",
+      "GDI",
+      "USER",
+      "SOUND"
+    ],
+    "expected_version": "0x300"
+  },
+  "browser": {
+    "bytes": 14876,
+    "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c",
+    "segments": [
+      {
+        "index": 1,
+        "initialized_bytes": 13349,
+        "minimum_allocation": 13350,
+        "flags": 7504
+      },
+      {
+        "index": 2,
+        "initialized_bytes": 540,
+        "minimum_allocation": 864,
+        "flags": 3185
+      }
+    ],
+    "local_heap": 4096,
+    "stack": 0,
+    "imports": [
+      "KERNEL",
+      "GDI",
+      "USER"
+    ],
+    "expected_version": "0x300"
+  },
+  "disk_delta": 4032,
+  "data_min_delta": 4512,
+  "path_array": 4096,
+  "model": 4102,
+  "native_peak_memory": "GetFreeSpace samples recorded below; total resident and peak allocation were not calibrated.",
+  "cpu": "No calibrated CPU percentage. While the browser stayed visible for2197ms, foreground calls advanced7->38 and PSG bytes252->300 with clock progress/error0.",
+  "native_memory": {
+    "case": "PLUIBR5",
+    "api": "GetFreeSpace(0)",
+    "cold": 244224,
+    "dialog_open": 232800,
+    "first_cancel_closed": 244096,
+    "after_all_browser_cases": 243520,
+    "observed_open_delta": 11424,
+    "retained_vs_first_closed": 576,
+    "claim": "Observed Win16 free-space samples; not a calibrated total resident-memory or peak-allocation measurement"
+  },
+  "modal_progress": {
+    "visible_interval_ms": 2197,
+    "foreground_before": 7,
+    "foreground_after": 38,
+    "PSG_bytes_before": 252,
+    "PSG_bytes_after": 300,
+    "error": 0,
+    "clock_advanced": true
+  },
+  "deployment_disk_delta_including_browser": 18908
+}

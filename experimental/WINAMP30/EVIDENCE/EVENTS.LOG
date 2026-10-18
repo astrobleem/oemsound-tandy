@@ -1,0 +1,105 @@
+VECTOR reviewer_repro
+CHECK native_gzip_result got=0 want=0
+CHECK native_gzip_used got=1 want=1
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR max_hlit_hdist31
+CHECK native_gzip_result got=0 want=0
+CHECK native_gzip_used got=1 want=1
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR max_hlit_hdist32
+CHECK native_gzip_result got=0 want=0
+CHECK native_gzip_used got=1 want=1
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR valid_distance_hdist31
+CHECK native_gzip_result got=0 want=0
+CHECK native_gzip_used got=4 want=4
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR valid_distance_hdist32
+CHECK native_gzip_result got=0 want=0
+CHECK native_gzip_used got=4 want=4
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR dynamic_reserved30
+CHECK native_gzip_result got=3 want=3
+CHECK native_gzip_used got=0 want=0
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR dynamic_reserved31
+CHECK native_gzip_result got=3 want=3
+CHECK native_gzip_used got=0 want=0
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR fixed_reserved30
+CHECK native_gzip_result got=3 want=3
+CHECK native_gzip_used got=0 want=0
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+VECTOR fixed_reserved31
+CHECK native_gzip_result got=3 want=3
+CHECK native_gzip_used got=0 want=0
+CHECK native_gzip_plain got=1 want=1
+CHECK native_gzip_canary got=90 want=90
+CHECK native_gzip_emitted_A got=65 want=65
+CHECK launch got=1 want=1
+CHECK window got=1 want=1
+CHECK queued_ack got=1 want=1
+CHECK queued_ack got=2 want=2
+STATE actual=VGM PSG expected=VGM PSG
+CHECK state got=1 want=1
+CHECK queued_ack got=3 want=3
+STATE actual=Done expected=Done
+CHECK state got=1 want=1
+CHECK EOF_sound_free got=3 want=3
+CHECK EOF_error got=0 want=0
+CHECK VGM_byte_hash got=54622 want=54622
+CHECK VGM_byte_count got=131 want=131
+CHECK intentional_noise_writes got=3 want=3
+CHECK queued_ack got=4 want=4
+CHECK queued_ack got=5 want=5
+STATE actual=VGM PSG expected=VGM PSG
+CHECK state got=1 want=1
+CHECK queued_ack got=6 want=6
+STATE actual=Done expected=Done
+CHECK state got=1 want=1
+CHECK EOF_sound_free got=3 want=3
+CHECK EOF_error got=0 want=0
+CHECK VGM_byte_hash got=54622 want=54622
+CHECK VGM_byte_count got=131 want=131
+CHECK intentional_noise_writes got=3 want=3
+CHECK queued_ack got=7 want=7
+CHECK queued_ack got=8 want=8
+STATE actual=VGM PSG expected=VGM PSG
+CHECK state got=1 want=1
+CHECK queued_ack got=9 want=9
+STATE actual=Done expected=Done
+CHECK state got=1 want=1
+CHECK EOF_sound_free got=3 want=3
+CHECK EOF_error got=0 want=0
+CHECK VGM_byte_hash got=54622 want=54622
+CHECK VGM_byte_count got=131 want=131
+CHECK intentional_noise_writes got=3 want=3
+CHECK queued_ack got=10 want=10
+CHECK queued_ack got=11 want=11
+CHECK reserved30_refused got=0 want=0
+CHECK reserved30_sound_free got=3 want=3
+CHECK queued_ack got=12 want=12
+CHECK queued_ack got=13 want=13
+CHECK reserved31_refused got=0 want=0
+CHECK reserved31_sound_free got=3 want=3
+MEMORY free_before=247520 free_after=247520
+CHECK no_heap_loss got=1 want=1
+CHECK close_destroyed got=0 want=0
+CHECK close_free got=3 want=3
+FINAL failures=0 checks=88

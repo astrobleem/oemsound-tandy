@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-18",
+  "platform": "User-owned physical Tandy 1000 EX 7.16 MHz 8088; existing qualified Windows 3.0 real-mode stock CGA profile",
+  "package": "UX3; same runtime identities as RUNTIME.JSON",
+  "launch_command": "C:\\TWUX3\\GO",
+  "requested_actions": [
+    "Browse/Add",
+    "Remove a playlist entry",
+    "Scroll past four songs"
+  ],
+  "user_report": "that worked great publish it",
+  "additional_owner_report": "Able to interact with Program Manager while music played back uninterrupted in Tandy Winamp.",
+  "additional_owner_scope": "Qualitative report on this setup; no measured zero-jitter result or generalization to every application/workload.",
+  "acceptance": "Qualitative physical acceptance of the UX3 app after the requested hands-on steps; explicit publication approval.",
+  "limits": [
+    "No new physical instrumented timing, audio capture, memory benchmark or all-format/all-32-slot exhaustive result is implied.",
+    "The report does not establish simultaneous playback with the pending combined display-driver build.",
+    "This is an app release; Windows XT release-candidate qualification remains separate."
+  ]
+}
