@@ -1,0 +1,15 @@
+# Tandy Winamp playlist UI preview
+
+This app preview replaces the four-entry playlist with a bounded 32-entry native Windows list, adds the first-party Windows 3.0 file dialog through Add..., and removes the selected playlist entry through Remove. The window caption stays `Tandy Winamp`; playback and playlist feedback stay in the client area.
+
+A playlist entry holds a canonical DOS path of at most 127 bytes. The path array uses 4096 bytes, with six more bytes for count, selection and the model viewport. USER owns list scrolling, Home/End/Page Up/Page Down and keyboard selection. The portable C89 model has no Windows, sound, clock or allocation calls. The playlist is session-local.
+
+Add uses application-local `LWFILE.DLL`, copied from the first-party Win3.0 COMMDLG example at libwintandy source revision ee71433aee54db96291691c5b8a8b7e434d11539. Its module/output name changes; its implementation and ABI stay intact. No Windows 3.1 COMMDLG import is added. Filters cover MID, VGM, VGZ, MOD, TND and SND, plus All files. Duplicate canonical paths select the existing row. Cancel leaves the list intact; missing/unreadable paths are refused before insertion. The dialog restores DOS working directories and is unloaded after it returns.
+
+Remove changes only the playlist. It never deletes the source file. Removing the currently playing entry leaves its independent active path and audio session running until Stop, EOF or another Play. Removing the last selected item selects the preceding surviving entry; an empty list clears the file field while an active song can finish.
+
+The accepted RAWAPP/RAWFILE, FMTAPP/FMTCORE, VGM/VGMGRP, MODPLAY and GUNZIP sources remain byte-identical to the qualified gzip revision. MCITNDY, MIDICLK, RAWCLK and TBRIDGE are pinned unchanged runtime dependencies. The outer message loop keeps its existing 55ms-throttled foreground service. WM_TIMER also invokes that same service so the dialog's modal loop can replenish the playback queue. No decoder, PSG conversion, IRQ handler, ownership rule or clock scheduling implementation changes.
+
+Redraw batches span only synchronous list mutations. Unchanged text is not repainted. Layout changes happen on resize, and the existing clock display still updates only when the displayed second changes. Wide windows use one button row; narrow windows use two.
+
+Validation receipts and build maps accompany the candidate. Host model tests cover all32 entries, duplicate/full/length boundaries, removal and independent active-path lifetime. Native QA is split into browser, eight-entry scrolling, and playback/removal cases with real controls and separate bounded emulator leases. The prior physical listening acceptance belongs to the baseline build; this UI candidate needs its own physical acceptance before release. No CF or release-candidate staging is part of this preview.

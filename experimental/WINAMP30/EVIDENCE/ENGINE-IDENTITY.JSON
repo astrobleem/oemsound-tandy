@@ -1,0 +1,42 @@
+[
+  {
+    "name": "RAWFILE.C",
+    "sha256": "cfc7ee31313233e5d696c097403ad418a6810a306a38eb131cbd201fa899ca56",
+    "unchanged": true
+  },
+  {
+    "name": "RAWAPP.C",
+    "sha256": "ebde64f89e82158339548924dc0a92e878af038c851d85bb74f5a24adee41436",
+    "unchanged": true
+  },
+  {
+    "name": "FMTAPP.C",
+    "sha256": "0bdd43c594738c8a57a19d2df782e3782db32ae6c1a3cc21f176fb35c1069092",
+    "unchanged": true
+  },
+  {
+    "name": "FMTCORE.C",
+    "sha256": "2a48bb76c5386266f7be681fb3131b8dbfe722ccf2ed395b77a0acb49ada1983",
+    "unchanged": true
+  },
+  {
+    "name": "VGM.C",
+    "sha256": "bc35a2f9413cee3eee236cd22891c269ffd0dda04ee323bd550e1c34bc667492",
+    "unchanged": true
+  },
+  {
+    "name": "VGMGRP.C",
+    "sha256": "c6099d32399de2f0456427bb9286919c5249aa4d7c0d181bfc3e6540e1d2a578",
+    "unchanged": true
+  },
+  {
+    "name": "MODPLAY.C",
+    "sha256": "572f86bdf66166600b2c4e0fe164beb138bf30072437c695f4f16a04d3a7e2c5",
+    "unchanged": true
+  },
+  {
+    "name": "GUNZIP.C",
+    "sha256": "93456cac29bc219a0f9827d660e31d86e2543d130d0dcfa99878abb7431879f1",
+    "unchanged": true
+  }
+]
