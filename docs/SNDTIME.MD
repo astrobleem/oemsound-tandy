@@ -1,110 +1,99 @@
 # Sound timing and version scope
 
-Sound timing depends on the exact player, producer, driver and release.
-An application timer, an instrument step and a scheduled hardware deadline
-measure different parts of playback. None of the releases below promises
-1 ms live-input response under cooperative Windows 3.0.
+[Tandy Winamp UX3](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-ux3.20261018)
+is a public app download with the prepared-state MIDI backend and ordered-burst
+VGM/VGZ/MOD producers. The earlier description of these paths as only a private
+R4 plan is obsolete. Timing still depends on the exact app/provider version.
 
-## Public downloads and development candidates
+## Which clock does what
 
-| Version or path | Producer and playback timing | Availability and limits |
+| Published path | Scheduled output | Foreground service |
 | --- | --- | --- |
-| Mini MIDI 0.1 with its legacy app-local mapper | `SetTimer(PULSE,55)` drives the foreground message pump. Notes are sent when that pump runs. | Existing source/build guide; this player has no R4 prepared-state backend. Its recorded 49-299 ms worst-lateness results still apply to those tested binaries. |
-| Legacy TSOUND SOUND API driver | A stock SYSTEM timer requested at 55 ms has roughly 54.925 ms cadence. This is separate from an application's USER timer. | Restricted SOUND API experiment. It does not take over IRQ0 or program a new PIT clock. |
-| Public PIT sound kits | The Stage 4 expressive producer retains roughly 55 ms steps. The optional PIT2 square-wave voice is off by default. | Published experimental kits with pinned runtime/source pairs. They do not inherit private R4 timing. |
-| Private R4 MIDICLK/RAWCLK and app-local MCI candidate | Foreground work prepares states with PIT-cycle deadlines; the prepared-state minimum spacing is 8 ms. USER refill and Stage 5 instrument steps remain 55 ms. | Original private runtime plus published source adoption. A fresh MSC6 pair and 58-check native GUI case pass; no stable binary release is announced. |
+| Winamp UX3 MIDI | MIDICLK renders prepared PSG states for RAWCLK PIT-cycle deadlines, with an 8 ms minimum state spacing | App-local MCI/USER refill and instrument steps retain an approximately 55 ms cadence |
+| Winamp UX3 VGM/VGZ/MOD | RAWCLK emits ordered groups of at most 16 source/prepared bytes; groups require at least 9,546 PIT cycles | Foreground file reads, bounded parsing, synthesis and queue refill |
+| Mini MIDI 0.1 / legacy mapper | Notes are submitted when that older app's USER timer runs | Requested 55 ms timer; its historical lateness measurements apply to those binaries |
+| Legacy TSOUND SOUND API | Restricted SOUND queues use the existing SYSTEM timer, about 54.925 ms | Separate from the newer app-owned prepared deadline backend |
+| Public PIT/MML3 kits | Optional fixed-level PIT2 speaker square wave; each kit retains its documented producer cadence | Stage 4 expression and older authoring apps do not automatically inherit UX3's deadline transport |
 
-The [sound starter preview](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-v0.1.0-preview.20261007)
-contains PSGSTART.ZIP and BEATSTART.ZIP. The
-[public PIT prerelease](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.20261007)
-contains PITWIN.ZIP, PITEXPR.ZIP, MML3AUTH.ZIP and PITDOS.ZIP.
-Use each package's corresponding source, runtime hashes and install guide.
-These links do not distribute the newer private R4 candidate.
+The newer clock uses an owned timer bridge and prepared records. The interrupt
+path does no file I/O, parsing, synthesis, heap allocation or Windows calls.
+A delayed USER message need not move a deadline that has already been queued.
+It can still delay refill, visible UI and cleanup. The 55 ms foreground refill
+interval is not the timestamp resolution of scheduled output; the 8 ms minimum
+spacing is an admission constraint rather than a measured maximum jitter bound.
 
-## What a prepared deadline improves
+MIDI source timestamps use integer elapsed time. The selected file-playback
+policy can coalesce closely spaced MIDI events into a prepared state. VGM
+groups preserve source write order instead: a stream faster than their bounded
+contract is refused, not silently coalesced. VGM wait conversion and MOD tempo
+calculation retain fractional carry in PIT-cycle units.
 
-In R4, the foreground producer parses events and prepares bounded state
-records before their playback deadlines. RAWCLK owns the scheduled hardware
-delivery. A delayed USER message need not immediately move a deadline that
-is already queued. PIT-cycle timestamps describe this backend clock; they
-do not make the USER message loop run at that precision.
+The VGM/MOD ring holds 512 groups: about 8.53 seconds at 60 Hz or 4.096 seconds
+at minimum spacing. MIDI uses its own bounded event/state queues. Reserve is
+finite; a long foreground stall can starve output. Late admission or multiple
+overdue groups is an explicit failure, without shifting timestamps to catch up.
+These paths do not promise 1 ms response, zero jitter or sample-accurate audio.
 
-The producer must still refill its bounded queue. A long non-yielding task
-can prevent refill, starve playback or delay visible updates and cleanup.
-An 8 ms minimum spacing is an accepted-state constraint, not a measured
-maximum scheduling error, audio fidelity claim or end-to-end latency bound.
-It also does not change Stage 5 expression into an 8 ms instrument engine:
-that instrument's steps remain 55 ms.
+## Formats, UI and shared services
 
-Foreground MIDI input must first reach its producer. Keyboard/joystick
-polling, Windows dispatch, producer work and queue admission all contribute
-latency before the backend can deliver a prepared state. Precise playback
-of queued file events and responsive live input need separate tests.
+MIDI files use the app-local MCITNDY/MIDICLK services. TND/SND use their raw
+reader/player path. VGM/VGZ/MOD use FMTAPP/FMTCORE and negotiated RAWCLK bursts.
+Register streams do not gain MIDI program/envelope behavior, and MOD plays a
+PSG arrangement rather than its sampled timbres. See [formats](FORMATS.MD).
 
-## Players and formats
+Winamp's message loop and timer service keep refilling while its file browser
+runs a modal loop. The native UX3 test observed advancing foreground service,
+PSG output and the displayed clock during a visible browser interval. The owner
+separately reported uninterrupted playback while interacting with Program
+Manager on the real Tandy EX at 7.16 MHz. This is useful evidence for those
+workloads, not every Windows app or a measured physical zero-jitter result.
 
-Mini MIDI 0.1 sends supported MIDI messages directly to its legacy mapper.
-Its bounded file format, voice allocation and message limits remain in the
-[Mini MIDI guide](../src/win30/MINIMIDI/README.MD). Program changes do not
-give that legacy mapper the newer expressive instrument implementation.
+[libwintandy](https://github.com/astrobleem/libwintandy) contains the shared
+services/backend and source-level foreground format integration. The app-local
+MCI command subset is not a complete MMSYSTEM implementation or a registered
+system-wide MIDI/wave device. TPLAY is a guarded DOS launcher; it is not a
+public Windows library API. Unrelated multimedia clients and live input retain
+their own compatibility and latency requirements.
 
-The newer MINIPLAY (Tandy-Winamp) candidate has two paths. MIDI files use the
-app-local MCI-compatible facade and its paired prepared-state providers.
-Raw TND/AGI files use the raw parser/player path. Raw register states do not
-become MIDI events or acquire MIDI program/envelope behavior. The existing
-four-channel raw format does not gain an extra speaker channel.
-
-The app-local MCI facade supports a bounded command subset. It is not a
-complete MMSYSTEM implementation or a system-wide MIDI/wave device. Stock
-MPLAYER compatibility remains unfinished. A successful MINIPLAY test does
-not establish that unrelated Windows multimedia applications work.
-
-Buddy's public WINPLAY/TINYVID and DOS players retain their own documented
-cadence and evidence. The private R4 Buddy bridge is a separate version.
-New backend work does not revise historical video, sampled-dialogue or
-music timing results for those older packages. See the
+Buddy's public Windows/DOS players retain their separately documented timing.
+UX3 does not revise old video, subtitle or sampled-dialogue results. See the
 [Buddy guide](../examples/BUDDY/README.TXT).
 
-MOD/VGM/VGZ integration is authorized and in progress in isolated source
-work; these are not qualified MINIPLAY inputs yet. See the
-[format adoption milestones and backend limits](FORMATS.MD).
+## Ownership and the speaker
 
-## Hardware and resource ownership
+One backend owns the clock/PSG path. Callers respect busy/full, retry only the
+unaccepted suffix, and retain resources until acknowledged close succeeds.
+Pause, reset, Stop, EOF and Close have distinct state/ownership rules. Normal
+stop mutes and releases; direct hardware writers can still bypass cooperative
+ownership.
 
-The shared Windows UI helpers use USER/GDI and can remain hardware neutral.
-The current R4 audio admission and qualification target is the specified
-Tandy HX fixture. PCjr audio support is pending; similar PSG hardware alone
-does not establish matching clocks, audio routing, ownership or stop behavior.
+PIT0 scheduling and PIT2 square-wave generation are separate counters. The
+existing [public PIT kits](../experimental/PITPUBLIC/INSTALL.TXT) implement the
+extra speaker voice through their SOUND owner. It has binary loudness and is
+mutually exclusive with sampled speaker/PWM use. UX3's queued records have no
+speaker state; the older task-checking speaker export cannot be called from
+the IRQ path. This was an unfinished integration, not a user-requested disabled
+Winamp option.
 
-The paired backend has one exclusive clock/PSG owner. A producer must respect
-busy/full results, retry only the unaccepted suffix and retain resources
-until close succeeds. Pause, reset, stop, end-of-file and close have distinct
-state/ownership rules. A caller may not free a busy backend or leave sound
-running after a successful stop. Direct hardware writers outside this
-protocol can still interfere.
+The separate [speaker-assist candidate](SPEAKER.MD) adds a negotiated resident
+lease and speaker sidecar to the existing queue/owner. Its source and host tests
+cover MIDI/MOD allocation, low-note octave fallback, pause/stop/EOF and DOS
+suspension with foreign-speaker preservation. It defaults assistance on in the
+candidate and reports availability. Native/16-bit qualification is pending;
+these changes are not in the published UX3 download. VGM remains a literal PSG
+stream, with no inferred speaker channel.
 
-The public PIT kits' existing extra voice is an optional PIT2 square wave.
-It has binary loudness and is mutually exclusive with sampled speaker/PWM
-use. Its published admission/restoration limits and system-beep conflicts
-remain in [INSTALL.TXT](../experimental/PITPUBLIC/INSTALL.TXT).
+## Reading the results
 
-Automatic low-note fallback through PIT2 is not implemented in R4 or the
-adoption candidate. A future extension needs explicit capability negotiation,
-speaker ownership, deterministic one-voice allocation and tested gate/stop
-behavior. The intended future supported mode enables it by default with a
-toggle only after qualification. Existing public defaults remain unchanged;
-unsupported low notes must not be silently clamped.
+UX3 native tests used Windows 3.0 real mode, an HX 8088 emulator configured at
+4.772728 MHz, 640 KiB and stock CGA. The qualitative owner report used the
+physical Tandy 1000 EX at 7.16 MHz. Neither result qualifies PCjr audio,
+Windows 3.1/protected mode, all formats/workloads or the pending combined
+display-driver build. GitHub CI checks pinned package inputs, without native
+Microsoft-toolchain compilation or a repeated hardware test.
 
-## Reading the evidence
-
-Host tests exercise parsers, synthesis, event handling and contracts. Native
-MSC builds check the segmented 16-bit compiler/linker path. Emulator tests
-check the specified guest and machine model. Audio captures, register/event
-traces, UI screenshots and physical hardware reports establish different
-things; none alone proves all of them.
-
-DOSBox-X cycle settings are not calibrated physical 8088 timings. A screenshot
-shows its captured UI state and does not establish sound or latency. Preserve
-the recorded executable/provider hashes and version labels when comparing
-results. See [development status](STATUS.MD) and
-[screenshot provenance](SHOTS/README.MD).
+Keep runtime hashes and version labels with timing comparisons. Host tests,
+16-bit builds, register traces, screenshots, audio recordings and physical
+reports establish different things. DOSBox-X cycle settings are not calibrated
+physical CPU timings. [UX3 evidence](../experimental/WINAMP30/VALIDATION-UI.MD)
+and [runtime pins](../experimental/WINAMP30/RUNTIME.JSON) identify the release.
