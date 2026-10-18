@@ -83,8 +83,8 @@
   "data_min_delta": 4512,
   "path_array": 4096,
   "model": 4102,
-  "native_peak_memory": "pending native dialog/free-memory readings; minimum allocations exclude USER/GDI allocations",
-  "cpu": "No calibrated CPU percentage claimed; identical audio sources/DLLs, unchanged foreground throttle, modal progress will be measured",
+  "native_peak_memory": "GetFreeSpace samples recorded below; total resident and peak allocation were not calibrated.",
+  "cpu": "No calibrated CPU percentage. While the browser stayed visible for2197ms, foreground calls advanced7->38 and PSG bytes252->300 with clock progress/error0.",
   "native_memory": {
     "case": "PLUIBR5",
     "api": "GetFreeSpace(0)",
@@ -95,5 +95,15 @@
     "observed_open_delta": 11424,
     "retained_vs_first_closed": 576,
     "claim": "Observed Win16 free-space samples; not a calibrated total resident-memory or peak-allocation measurement"
-  }
+  },
+  "modal_progress": {
+    "visible_interval_ms": 2197,
+    "foreground_before": 7,
+    "foreground_after": 38,
+    "PSG_bytes_before": 252,
+    "PSG_bytes_after": 300,
+    "error": 0,
+    "clock_advanced": true
+  },
+  "deployment_disk_delta_including_browser": 18908
 }
