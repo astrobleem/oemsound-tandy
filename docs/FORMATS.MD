@@ -12,7 +12,7 @@ announce the separate speaker-assist candidate as a released feature.
 | --- | --- | --- |
 | MIDI | Standard MIDI File types 0/1, tempo changes, three expressive PSG tones and basic noise percussion | 32,768 bytes, 16 tracks, documented channel-message subset; melodic notes 45..96, percussion notes 35..81 |
 | VGM | The supported SN76496 command/wait subset, preserving ordered register writes and explicit noise retriggers | Version syntax 1.00..1.71; strict 3,579,545 Hz clock, feedback 6, 15-bit shift register, zero variant flags; 60,000 uncompressed bytes |
-| VGZ | The same checked VGM stream, decoded from one bounded gzip member | Stored/fixed/dynamic DEFLATE, CRC32/ISIZE validation; no concatenated members, trailing bytes or header CRC16 |
+| VGZ | The same checked VGM stream, decoded from one bounded gzip member | At most 60,000 compressed and decoded bytes; stored/fixed/dynamic DEFLATE, CRC32/ISIZE validation; no concatenated members, trailing bytes or header CRC16 |
 | MOD | `M.K.` and `4CHN` music arranged onto square-wave PSG tones | Finetune-zero used instruments, supported effects and bounded complete song path; at most three simultaneously audible source lanes |
 | TND / AGI SND | The existing bounded raw-format readers | Their original schemas, ownership and limits remain unchanged |
 
@@ -52,9 +52,9 @@ It is not PCM/PWM sample playback.
 
 UX3's queued backend records PSG state only. Its fifth-voice integration was
 unfinished; there was no user instruction to disable an existing Winamp option.
-A separate [speaker-assist candidate](SPEAKER.MD) now has source and host tests
-for queued speaker state, MIDI/MOD allocation and low-note fallback. Its
-16-bit/native validation is still pending. Those changes do not alter the
+A separate [speaker-assist candidate](SPEAKER.MD) has host, 16-bit build and native
+validation for queued speaker state, MIDI/MOD allocation and low-note fallback.
+Physical speaker listening remains a separate check. Those changes do not alter the
 published UX3 binaries or imply a fifth channel in a VGM register stream.
 
 ## Reuse and evidence

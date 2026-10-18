@@ -79,9 +79,11 @@ The separate [speaker-assist candidate](SPEAKER.MD) adds a negotiated resident
 lease and speaker sidecar to the existing queue/owner. Its source and host tests
 cover MIDI/MOD allocation, low-note octave fallback, pause/stop/EOF and DOS
 suspension with foreign-speaker preservation. It defaults assistance on in the
-candidate and reports availability. Native/16-bit qualification is pending;
-these changes are not in the published UX3 download. VGM remains a literal PSG
-stream, with no inferred speaker channel.
+candidate and reports availability. The paired 16-bit build and native
+routing/lifecycle, old-driver fallback and gzip regressions pass. DOS-suspension
+and foreign-speaker preservation have host tests; physical listening remains a
+separate check. These changes are not in the published UX3 download. VGM remains
+a literal PSG stream, with no inferred speaker channel.
 
 ## Reading the results
 

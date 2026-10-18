@@ -11,24 +11,24 @@ arrangements** through the Tandy PSG.
  · [Install guide](experimental/WINAMP30/INSTALL.TXT)
  · [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-ux3.20261018)
 
-![Tandy Winamp with a scrolling playlist](docs/SHOTS/WAMPUI3.PNG)
+![Tandy Winamp UX3 in color](docs/SHOTS/WAMPCOL.PNG)
 
-*Actual UX3 capture from the Windows 3.0 real-mode emulator test, using stock
-CGA. [Capture details](docs/SHOTS/WINAMP3.MD).*
+*Current released UX3, captured in Windows 3.0 real mode with the qualified
+320x200 color driver. [Genuine capture details](docs/SHOTS/WINAMPCL.MD).*
 
 - **Browse/Add:** choose songs from the Windows file browser.
 - **32-song playlist:** scroll past the visible rows or use Home, End and Page Up/Down.
 - **Remove while playing:** change the list without deleting the song or stopping it.
 - **A proper player window:** the title stays **Tandy Winamp**, with track and status inside.
 
-![Browse/Add open during playback](docs/SHOTS/WAMPOP3.PNG)
+![The Add song browser in color](docs/SHOTS/WAMPCBR.PNG)
 
-*Browse while the music plays. This actual native test also checked continued
-playback after removing the active entry.*
+*The same released app with its Add song browser open. The folder contains
+original synthetic examples.*
 
 On a real **Tandy 1000 EX at 7.16 MHz**, the owner accepted UX3 and reported
-uninterrupted music while using Program Manager. That is the owner's observation
-on that setup. [Hardware report and test record](experimental/WINAMP30/EVIDENCE/PHYSICAL.JSON).
+uninterrupted music while using Program Manager.
+[Hardware report and test record](experimental/WINAMP30/EVIDENCE/PHYSICAL.JSON).
 
 ### Try it
 
@@ -59,9 +59,9 @@ and export the fifth lane in Beats.
 **[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP)**
  · [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
 
-This is square-wave music, separate from sampled speaker speech. Winamp's queued
-speaker/bass integration is being added in a separate candidate; the
-[engineering note](docs/SPEAKER.MD) explains the missing connection and progress.
+This is square-wave music, separate from sampled speaker speech. A separate
+Winamp speaker-assist candidate has native validation; it is not in the UX3
+download. The [engineering note](docs/SPEAKER.MD) explains its scope and progress.
 
 ## Build your own Windows music app
 
