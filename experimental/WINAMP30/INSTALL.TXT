@@ -1,0 +1,68 @@
+TANDY WINAMP UX3
+================
+
+Download TWUX3.ZIP from:
+https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-ux3.20261018
+
+This is the app update accepted on the user's physical Tandy 1000 EX 8088.
+It is separate from the pending Windows XT combined-driver release candidate.
+
+Install in a new C:\TWUX3 folder, keeping the runtime files together.
+The ZIP's TWUX3 top-level folder already has the correct layout. SRC and DEPS
+are source/build material, not programs to launch. No installer changes Windows.
+
+Prerequisites: an existing lawful Windows 3.0 REAL-MODE installation, 640 KB,
+and the qualified paired sound profile. The physically accepted profile is
+C:\W30SND, stock CGA.DRV, SYSTEM\SYSTEM.DRV 2784 bytes CRC32 3ff05fec,
+SYSTEM\TSOUND.DRV 6168 bytes CRC32 f8517207. TSOUND SHA256:
+7461d227846830f3ff604c40cf31ad0e3fb34122a13de6269e86de02cc4209e5
+The separately published PITWIN kit has that TSOUND binary and corresponding
+source/license: https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.20261007
+Follow its isolated-profile instructions; do not replace a working default setup.
+This app package supplies no system driver or Windows files. TSOUND's optional
+PIT2 voice is off. No sampled vocals or commercial song library is included.
+
+SYSTEM.INI [boot] must select system.drv=SYSTEM.DRV and sound.drv=TSOUND.DRV
+once each, plus the qualified display. Stock CGA needs no video reservation.
+The tested physical WIN.COM is 7879 bytes, SHA256:
+7d00588992559e99f7f0690538425f2cf4c28e771e651327ad243c9d07e32fc7
+TPLAY accepts a bounded DOS COM bootstrap length; the exact paired system/sound
+and bridge checks remain in force, along with EX/HX ROM and IRQ0-owner checks.
+Tandy graphics additionally require the matching RESERVE.COM (not included).
+Only the stock-CGA app profile is physically accepted by this UX3 report.
+
+Exit Windows completely. First run this nonresident preflight from DOS:
+  C:\TWUX3\TPLAY C:\W30SND /CHECK
+Then launch:
+  C:\TWUX3\GO
+GO.BAT runs C:\TWUX3\TPLAY.EXE C:\W30SND. For a different already-qualified
+absolute DOS 8.3 Windows directory, use TPLAY with that directory directly.
+Do not bypass a refusal, replace guard bytes, or force-remove another owner.
+TPLAY installs only its owned timer bridge, launches Windows /R and the player,
+then removes that bridge after an ordinary Windows return. It changes no INI.
+No Windows 3.1 COMMDLG is required: keep LWFILE.DLL beside MINIPLAY.EXE.
+
+In the player:
+- The title is Tandy Winamp. Add... opens Browse; choose a supported file.
+- The session playlist holds 32 canonical DOS paths, at most 127 bytes each.
+  Scroll or use Home/End/Page Up/Page Down to reach entries below the visible rows.
+- Duplicate paths select their existing row; Cancel leaves the list intact.
+- Remove changes the list, never the file. An active removed song continues.
+- Play restarts the selected song. Stop releases audio. VGM/VGZ/MOD support
+  Pause/Resume; format details and strict refusals are in FORMATS.MD.
+- Stop and close the player, then exit Windows normally to return to DOS.
+  Keep one sound producer active at a time. Do not run a competing PIT/sound TSR.
+
+STREAM.MID, PLUCK.TND and CHIME.SND are the original synthetic examples already
+distributed in the public libwintandy format preview. SHORT.VGM is that public
+mechanical synthetic fixture. No private Copper studies, commercial music,
+sampled media, OS/ROM/fonts/toolchain or disk image is in this ZIP.
+
+149 host checks, 396 native UI checks and 88 independent audio/event regression
+checks passed before the qualitative physical acceptance. The user's short
+report does not establish an exhaustive all-format/32-slot sweep, calibrated
+physical performance, or pending combined-display-driver compatibility.
+SRC has the current app/browser source, build instructions and qualification.
+DEPS has corresponding unchanged audio/bridge source plus the accepted EX/HX
+TPLAY source and a build recipe. RUNTIME.JSON and MANIFEST.JSON pin the files.
+Preserve the MIT and component-specific notices. No system installation occurs.

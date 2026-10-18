@@ -1,0 +1,52 @@
+[
+  {
+    "name": "CHIME.SND",
+    "bytes": 96,
+    "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149"
+  },
+  {
+    "name": "LWFILE.DLL",
+    "bytes": 14876,
+    "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
+  },
+  {
+    "name": "MCITNDY.DLL",
+    "bytes": 11413,
+    "sha256": "e495d11353536720abdeb2fadb7ef8e5d40fa489a8ec4d4ca8dbd8d33911c258"
+  },
+  {
+    "name": "MIDICLK.DLL",
+    "bytes": 11062,
+    "sha256": "0c7a6d5a104437d619bb7835fda28dde1266a16b8c3ab7a2d702487b51f4215c"
+  },
+  {
+    "name": "MINIPLAY.EXE",
+    "bytes": 52029,
+    "sha256": "7285ee2e3f7ff321643e4efe233941e8eeda8f89a993ff9ae91e1eb998a54fdb"
+  },
+  {
+    "name": "PLUCK.TND",
+    "bytes": 248,
+    "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c"
+  },
+  {
+    "name": "RAWCLK.DLL",
+    "bytes": 10814,
+    "sha256": "0a3528ee7729b50b4bb69d2d4d3caca5c1b92c260030ac29b80ba148975948e0"
+  },
+  {
+    "name": "STREAM.MID",
+    "bytes": 3100,
+    "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
+  },
+  {
+    "name": "TBRIDGE.EXE",
+    "bytes": 2922,
+    "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
+  },
+  {
+    "name": "TPLAY.EXE",
+    "bytes": 17617,
+    "sha256": "926be0ea4c7e91210f1bb7055a35ca8ea0658c1af69714a542a1b2025d277449"
+  }
+]

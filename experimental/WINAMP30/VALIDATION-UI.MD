@@ -19,3 +19,7 @@ The independent regression retains PSG hash 54622, 131 writes and three intentio
 The app grows by 4032 bytes on disk and 4512 bytes in its NE minimum data allocation; its heap and stack reservations remain unchanged. The playlist model occupies 4102 bytes, including a 4096-byte path array. Browser-case `GetFreeSpace(0)` samples were 244224 cold, 232800 with the dialog open, 244096 after first Cancel, and 243520 after all browser cases. These are Win16 free-space observations, not calibrated peak resident memory or CPU measurements.
 
 The QA driver uses a checked 200ms NULL-window timer and returns to GetMessage between finite phases. Native dialog actions require visibility, and completion waits for the API return marker after window destruction. The production browser implementation was unchanged throughout qualification.
+
+## Physical acceptance, 2026-10-18
+
+The user ran the hash-verified UX3 CF copy on the real Tandy 1000 EX after being asked to try Browse/Add, Remove and scrolling past four songs, then reported "that worked great publish it". This is a qualitative user acceptance and explicit publication approval. It is not a measured physical timing/audio/memory result, an exhaustive 32-slot or format sweep, or qualification of simultaneous playback with the pending combined display driver. Runtime bytes are pinned in RUNTIME.JSON; the scoped record is EVIDENCE/PHYSICAL.JSON.

@@ -11,3 +11,5 @@ PLBR, PLLS and PLPB are separate native UI harnesses using PLGUI.C. They write C
 Generate the original native UI fixtures on the host with `python HOST/MAKE_STUDY.PY INPUTS` and `python HOST/MAKE_UIFIX.PY INPUTS`. The latter reproduces the synthetic SHORT.VGM and its F02..F05 aliases byte-for-byte.
 
 Use the shared emulator lease and a bounded owned-process watchdog where the workstation has concurrent emulator users. Native qualification does not install drivers or alter a CF card. The local private pack supplies the tested binaries, original fixtures and logs without Windows/ROM/toolchain files.
+
+The public TWUX3.ZIP app bundle also includes DEPS with the matching audio/bridge source, the accepted EX/HX launcher policy and BUILD.BAT. Build those dependencies with the separately licensed period tools, then apply HOST/NE300.PY to the Windows DLLs. The app/browser build remains the SOURCE/BROWSER layout described above. Runtime pins are RUNTIME.JSON; no fresh rebuild or byte-reproducibility claim is made for this packaging-only publication.
