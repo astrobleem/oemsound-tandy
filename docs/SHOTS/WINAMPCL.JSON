@@ -1,0 +1,18 @@
+{
+  "case": "SPKCOL4",
+  "images": [
+    {
+      "file": "WAMPCOL.PNG",
+      "source": "FRAME04.PNG",
+      "bytes": 3137,
+      "sha256": "a26e41dcee5a65cb237c5a300b378055b7cd70b394301e59f032dac11d48c872"
+    },
+    {
+      "file": "WAMPCBR.PNG",
+      "source": "FRAME07.PNG",
+      "bytes": 2908,
+      "sha256": "fa280ec75cfe17fc7a5949f7bf04050b1d884a44ceafe8a27eadfafa299ce5ab"
+    }
+  ],
+  "scope": "Actual unmodified native frame captures; exact released UX3 binaries; qualified320x200x16 driver; no physical or combined-driver claim"
+}
