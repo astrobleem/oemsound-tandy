@@ -85,8 +85,7 @@ apps here remain separate projects.
 - **[Mini Piano](src/win30/PIANO/README.MD)** — play notes with the keyboard or mouse.
 - **[JOYMIDI](src/win30/JOYMIDI/README.MD)** — turn a joystick into a pitch/velocity instrument.
 - **[Beats Lab](artifacts/win30/BEATS/README.MD)** — build patterns on a four-lane step sequencer.
-- **[BUDCAP 0.4](examples/BUDDY/BUDCAP/README.md)** — 256×160 DOS video at 4 fps,
-  PSG music and subtitles. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
+- **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** — an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256×160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
   · [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
 
 See [validation](experimental/WINAMP30/VALIDATION-UI.MD),
