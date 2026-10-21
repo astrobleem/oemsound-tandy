@@ -1,7 +1,8 @@
 # Windows 3.0 sound ABI investigation
 
-Status: source and binary inspection only. No driver implementation or runtime
-SYSTEM-timer callback test is claimed here. No stock binary/source is included.
+Status: DDK/SDK ABI findings and bounded driver implementation notes. Runtime
+claims are limited to the exact isolated guest run documented below; no
+physical Tandy 1000 EX run is claimed. No stock binary/source is included.
 
 ## Sources and target
 
@@ -37,7 +38,7 @@ Ordinal | Name | Parameters (16-bit words unless noted)
 14 | GetThresholdEvent | none; FAR pointer returned in DX:AX
 15 | GetThresholdStatus | none
 16 | SetVoiceThreshold | voice, count
-17 | DoBeep | one WORD, confirmed by stock ret 2
+17 | DoBeep | one ignored WORD, confirmed by stock ret 2; returns AX 1 after beep, 0 on failure/cancellation/reentry
 18 | MyOpenSound | none; stock internal OpenSound helper
 WEP | Windows exit procedure | one WORD, ret 2
 
@@ -116,25 +117,39 @@ COMM source independently confirms interval then FAR pointer argument
 order, zero-on-failure behavior, and a parameterless callback that restores
 DS. This is stronger evidence than guessing from modern Win32 APIs.
 
-## Recommended bounded next validation
+## Implemented alert path
 
-First build a separate fixed-code/fixed-data library with a register-saving
-callback shim and counter. Test Create/Kill, repeated cycles, exhaustion,
-continued Windows clock/repaint activity and absence of callbacks after kill.
-Only then integrate a three-voice bounded PSG queue backend.
+DoBeep's public ABI is established from the Windows 3.0 DDK `SOUND.DEF` and
+`MDD_BEEP.ASM`: ordinal 17, one caller stack word, callee cleanup (`ret 2`),
+AX 0 when suppressed/reentrant and AX 1 after completion. The sample does not
+read the word, so alert types do not select distinct patterns. The PSG
+implementation uses the verified SYSTEM timer and never borrows the stock
+PC-speaker/PIT busy-wait path. Alerts last two timer ticks, borrow an
+idle/resting/silent voice when possible, and otherwise cover voice 1's hardware
+output while its queue and elapsed musical time continue to advance. At alert
+end, the callback restores the borrowed voice to the note currently due at its
+elapsed time; it does not replay the note from before the alert. Other voices
+continue advancing normally. Calls stay serialized until the original waiter
+consumes completion, preventing a new request from overwriting its result while
+it resumes from Yield. StopSound, CloseSound, and WEP cancel an active alert
+before removing the exact callback timer.
 
-Use fixed ring queues with producer publication protected by brief saved-
-flags critical sections. Never unconditionally STI when restoring caller
-interrupt state. The callback should consume bounded work, update periods,
-volumes and counters, and do nothing else. Preserve accumulated fractional
-milliseconds so note timing does not drift a full 55-ms tick per note.
+PSG write tracing, forced timer-creation failure, elapsed-time queries, and
+completion-race controls are compiled only with `SOUND_TEST` and exported from
+`SNDTEST.DEF`. The normal `TSOUND.DEF` omits these test hooks. DEBUGTICKS and
+DEBUGTIMER remain because they are part of the pre-existing local ABI.
 
-Required semantic tests: ownership, full queue atomic failure, resize while
-active, note/rest/dot/articulation boundaries, low-frequency rejection,
-repeated Start, Stop/Close during playback, final note-off before count zero,
-threshold crossing/read-clear, and safe teardown. Explicitly test behavior
-if owner exits without CloseSound; stock code alone does not establish a
-robust task-death recovery contract.
+The callback uses fixed code/data, saves registers, segments and flags, and
+does bounded state updates and PSG writes only. Queue publication and PSG
+register writes use saved-flags critical sections; the callback never calls
+USER, GDI, DOS or allocation code. Note timing retains fractional tick
+remainder and bounds catch-up work per voice. Focused alert and lifecycle
+results are recorded in `BEEP-TESTS.JSON`.
+
+Open Watcom 1.9 compiled both production and SOUND_TEST TSOUND.C variants,
+DRVTEST.C and INTRUD.C, and assembled SHIM.ASM for 8086 with zero warnings
+or errors. The current revision was not relinked with Open Watcom. The
+Microsoft C 6.0/LINK4 test driver is the binary with a confirmed guest pass.
 
 ## Unresolved full-compatibility limits
 

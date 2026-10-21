@@ -19,6 +19,12 @@
 #define BADDUR (-14)
 #define BADSOURCE (-15)
 #define BADSTATE (-16)
+#ifdef SOUND_TEST
+#define BEEPLOG 32
+#endif
+#define BEEP_PERIOD1 125
+#define BEEP_PERIOD2 149
+#define BEEP_VOLUME 4
 extern unsigned FAR PASCAL CreateSystemTimer(unsigned, FARPROC);
 extern void FAR PASCAL KillSystemTimer(unsigned);
 extern void FAR PASCAL TimerEntry(void);
@@ -37,27 +43,103 @@ static VOICE voices[3];
 static HTASK owner;
 static unsigned timer;
 static volatile unsigned running;
+static unsigned timerEpoch;
+static unsigned timerStarting, timerStopping;
 static unsigned present;
 static unsigned events;
+static volatile unsigned beepActive, beepArmed, beepPhase;
+static volatile unsigned beepDone, beepResult, beepVoice;
+static volatile unsigned beepCallActive;
+#ifdef SOUND_TEST
+static volatile unsigned beepRejects;
+static unsigned failTimerNext;
+static unsigned psgLogHead, psgLogCount;
+static unsigned char psgLog[BEEPLOG];
+static volatile unsigned testHoldBeepReturn, testBeepReturnWaiting;
+static unsigned testHoldTicks;
+static volatile unsigned testHoldBeepActive;
+static unsigned testHoldBeepActiveTicks;
+#endif
 /* Independent resident counter permits callback lifecycle smoke tests. */
 volatile unsigned TimerCount;
 static unsigned freqtab[12] = {
     4186,4435,4699,4978,5274,5588,5920,6272,6645,7040,7459,7902
 };
-static void mute(unsigned v) { PsgByte(0x9f | (v << 5)); }
+/* Called with interrupts disabled by mute() or toneout(). */
+static void psgbyte(unsigned value) {
+#ifdef SOUND_TEST
+    unsigned slot;
+    if (psgLogCount<BEEPLOG) {
+        slot=(psgLogHead+psgLogCount)&(BEEPLOG-1);
+        ++psgLogCount;
+    } else {
+        slot=psgLogHead;
+        psgLogHead=(psgLogHead+1)&(BEEPLOG-1);
+    }
+    psgLog[slot]=(unsigned char)value;
+#endif
+    PsgByte(value);
+}
+static void mute(unsigned v) {
+    unsigned flags;
+    flags=SaveIRQ();
+    psgbyte(0x9f | (v << 5));
+    RestoreIRQ(flags);
+}
 static void muteall(void) {
     unsigned i;
-    if (present) for (i=0;i<4;++i) mute(i);
+    if (present) for (i=0;i<4;++i)
+        if (!(beepActive && beepArmed && i==beepVoice)) mute(i);
 }
 static void toneout(unsigned v,unsigned tone) {
-    unsigned p=tone & 1023;
-    if (!p) { mute(v); return; }
-    PsgByte(0x80 | (v<<5) | (p&15));
-    PsgByte(p>>4);
-    PsgByte(0x90 | (v<<5) | (tone>>12));
+    unsigned p,flags;
+    flags=SaveIRQ(); p=tone & 1023;
+    if (!p) psgbyte(0x9f | (v << 5));
+    else {
+        psgbyte(0x80 | (v<<5) | (p&15));
+        psgbyte(p>>4);
+        psgbyte(0x90 | (v<<5) | (tone>>12));
+    }
+    RestoreIRQ(flags);
+}
+static void musicmute(unsigned v) {
+    if (beepActive && beepArmed && v==beepVoice) return;
+    mute(v);
+}
+static void musictoneout(unsigned v,unsigned tone) {
+    if (beepActive && beepArmed && v==beepVoice) return;
+    toneout(v,tone);
 }
 static int owns(void) { return owner && owner==GetCurrentTask(); }
 static int validvoice(int v) { return v>=1 && v<=3; }
+static int psgready(void) {
+    if (GetWinFlags() & WF_PMODE) return 0;
+    return *(unsigned char FAR *)0xfc000000UL == 0x21;
+}
+static unsigned choosebeepvoice(void) {
+    unsigned i; VOICE *v;
+    for (i=0;i<3;++i) {
+        v=&voices[i];
+        if (!v->active || v->silenced || !v->count ||
+            !v->notes[v->head].tone) return i;
+    }
+    return 0;
+}
+static void restorebeepvoice(unsigned i) {
+    VOICE *v=&voices[i];
+    if (v->count && v->active && !v->silenced)
+        toneout(i,v->notes[v->head].tone);
+}
+static void cancelbeep(void) {
+    if (beepActive && beepArmed) mute(beepVoice);
+    beepActive=0; beepArmed=0; beepPhase=0;
+    if (beepCallActive && !beepDone) {
+        beepDone=1; beepResult=0;
+    }
+#ifdef SOUND_TEST
+    testHoldBeepActive=0; testHoldBeepActiveTicks=0;
+#endif
+}
 static unsigned period(unsigned hz) {
     unsigned long p;
     if (!hz) return 0;
@@ -83,8 +165,34 @@ static int enqueue(int voice,unsigned p,unsigned total,unsigned sounded) {
 /* Called ONLY through register-saving fixed assembly shim. No Windows,
    DOS, allocation, or movable code is used by this routine. */
 void _cdecl Tick(void) {
-    unsigned i,budget,any=0; VOICE *v; NOTE *n;
+    unsigned i,budget,any=0,flags; VOICE *v; NOTE *n;
     ++TimerCount;
+    flags=SaveIRQ();
+#ifdef SOUND_TEST
+    if (beepDone && testHoldBeepReturn && testHoldTicks &&
+        !--testHoldTicks) testHoldBeepReturn=0;
+#endif
+    if (beepActive && beepArmed) {
+#ifdef SOUND_TEST
+        if (testHoldBeepActive) {
+            if (testHoldBeepActiveTicks &&
+                !--testHoldBeepActiveTicks) testHoldBeepActive=0;
+        } else {
+#endif
+        if (beepPhase==1) {
+            toneout(beepVoice,
+                    BEEP_PERIOD2 | (BEEP_VOLUME<<12));
+            beepPhase=2;
+        } else {
+            mute(beepVoice); restorebeepvoice(beepVoice);
+            beepActive=0; beepArmed=0; beepPhase=0;
+            beepDone=1; beepResult=1;
+        }
+#ifdef SOUND_TEST
+        }
+#endif
+    }
+    RestoreIRQ(flags);
     if (!running) return;
     for (i=0;i<3;++i) {
         v=&voices[i];
@@ -93,14 +201,16 @@ void _cdecl Tick(void) {
         while (v->count && budget--) {
             n=&v->notes[v->head];
             if (!v->active) {
-                toneout(i,n->tone); v->active=1; v->silenced=0; v->clocked=1;
+                musictoneout(i,n->tone);
+                v->active=1; v->silenced=0; v->clocked=1;
             }
             if (!v->silenced && v->elapsed >= (unsigned long)n->sounded*1000UL) {
-                mute(i); v->silenced=1;
+                musicmute(i); v->silenced=1;
             }
             if (v->elapsed < (unsigned long)n->total*1000UL) break;
             v->elapsed-=(unsigned long)n->total*1000UL;
-            mute(i); v->head=(v->head+1)%MAXQ; --v->count; v->active=0;
+            musicmute(i); v->head=(v->head+1)%MAXQ; --v->count;
+            v->active=0;
             if (v->threshold && v->count==v->threshold-1) events|=1<<i;
         }
         if (v->count) any=1;
@@ -109,20 +219,65 @@ void _cdecl Tick(void) {
     if (!any) { running=0; muteall(); }
 }
 static void stopinternal(void) {
-    unsigned i,flags,t;
+    unsigned i,flags,t,release;
     flags=SaveIRQ(); running=0; t=timer; timer=0;
+    ++timerEpoch; timerStarting=0; release=0;
+    if (t && !timerStopping) { timerStopping=1; release=1; }
+    cancelbeep();
     for (i=0;i<3;++i) {
         voices[i].head=voices[i].tail=voices[i].count=0;
         voices[i].active=voices[i].silenced=voices[i].clocked=0;
         voices[i].elapsed=0;
     }
     events=0; muteall(); RestoreIRQ(flags);
-    if (t) KillSystemTimer(t);
+    if (t && release) {
+        KillSystemTimer(t);
+        flags=SaveIRQ(); timerStopping=0; RestoreIRQ(flags);
+    }
+}
+static unsigned ensuretimer(void) {
+    unsigned flags,epoch,fail,t,installed,kill;
+    flags=SaveIRQ();
+    if (timer && !timerStopping) {
+        t=timer; RestoreIRQ(flags); return t;
+    }
+    if (timerStarting || timerStopping) {
+        RestoreIRQ(flags); return 0;
+    }
+    timerStarting=1; epoch=timerEpoch;
+#ifdef SOUND_TEST
+    fail=failTimerNext; failTimerNext=0;
+#else
+    fail=0;
+#endif
+    RestoreIRQ(flags);
+    t=fail ? 0 : CreateSystemTimer(55,(FARPROC)TimerEntry);
+    flags=SaveIRQ();
+    if (timerEpoch==epoch) {
+        timerStarting=0;
+        if (t && !timer && !timerStopping) timer=t;
+    }
+    installed=(timerEpoch==epoch && !timerStopping) ? timer : 0;
+    kill=t && (timerEpoch!=epoch || timer!=t);
+    RestoreIRQ(flags);
+    if (kill) KillSystemTimer(t);
+    return installed;
+}
+static void retiretimer(unsigned expected) {
+    unsigned flags,t;
+    flags=SaveIRQ();
+    if (!expected || timer!=expected || running || beepActive ||
+        timerStarting || timerStopping) {
+        RestoreIRQ(flags); return;
+    }
+    t=timer; timer=0; timerStopping=1; ++timerEpoch;
+    RestoreIRQ(flags);
+    KillSystemTimer(t);
+    flags=SaveIRQ(); timerStopping=0; RestoreIRQ(flags);
 }
 int SAPI OpenSound(void) {
     unsigned i;
-    if (owner || (GetWinFlags() & WF_PMODE)) return DVNA;
-    if (*(unsigned char FAR *)0xfc000000UL != 0x21) return DVNA;
+    if (owner || !psgready()) return DVNA;
     owner=GetCurrentTask(); if (!owner) return DVNA;
     present=1; stopinternal();
     for (i=0;i<3;++i) {
@@ -191,15 +346,18 @@ int SAPI SetVoiceAccent(int voice,int tempo,int volume,int mode,int pitch) {
 int SAPI StartSound(void) {
     unsigned flags,i,any=0,t;
     if (!owns()) return DVNA;
-    if (running) return 0;
+    flags=SaveIRQ();
+    if (running) { RestoreIRQ(flags); return 0; }
     for (i=0;i<3;++i) if (voices[i].count) any=1;
+    RestoreIRQ(flags);
     if (!any) return 0;
-    if (!timer) {
-        t=CreateSystemTimer(55,(FARPROC)TimerEntry);
-        if (!t) { muteall(); return OFM; }
-        timer=t;
+    t=ensuretimer();
+    if (!t) { muteall(); return OFM; }
+    flags=SaveIRQ();
+    if (timer!=t || timerStopping) {
+        RestoreIRQ(flags); return OFM;
     }
-    flags=SaveIRQ(); running=1; RestoreIRQ(flags); return 0;
+    running=1; RestoreIRQ(flags); return 0;
 }
 int SAPI StopSound(void) {
     if (!owns()) return DVNA;
@@ -245,9 +403,122 @@ int SAPI WaitSoundState(int state) {
 int SAPI SyncAllVoices(void) { return BADSTATE; }
 int SAPI SetVoiceEnvelope(int v,int shape,int repeat) { return BADSHAPE; }
 int SAPI SetSoundNoise(int source,int duration) { return BADSOURCE; }
-int SAPI DoBeep(unsigned ignored) { return 0; /* unsupported, not success */ }
+/* DDK ordinal 17 has one cleanup word, ignores it, and returns AX 0/1. */
+int SAPI DoBeep(unsigned ignored) {
+    unsigned flags,voice,t,done,result;
+    (void)ignored;
+    if (!present) {
+        if (!psgready()) return 0;
+        present=1;
+    }
+    flags=SaveIRQ();
+    if (beepCallActive) {
+#ifdef SOUND_TEST
+        ++beepRejects;
+#endif
+        RestoreIRQ(flags); return 0;
+    }
+    if (timerStarting || timerStopping) {
+        RestoreIRQ(flags); return 0;
+    }
+    voice=choosebeepvoice();
+    beepVoice=voice; beepPhase=0; beepArmed=0;
+    beepCallActive=1; beepDone=0; beepResult=0; beepActive=1;
+#ifdef SOUND_TEST
+    testBeepReturnWaiting=0;
+#endif
+    RestoreIRQ(flags);
+    t=ensuretimer();
+    if (!t) {
+        flags=SaveIRQ();
+        if (beepActive) cancelbeep();
+        beepCallActive=0; beepDone=0; beepResult=0;
+        RestoreIRQ(flags); return 0;
+    }
+    flags=SaveIRQ();
+    if (!beepActive || timer!=t || timerStopping) {
+        if (beepActive) cancelbeep();
+        beepCallActive=0; beepDone=0; beepResult=0;
+        RestoreIRQ(flags); return 0;
+    }
+    beepPhase=1;
+    toneout(voice,BEEP_PERIOD1 | (BEEP_VOLUME<<12));
+    beepArmed=1;
+    RestoreIRQ(flags);
+    for (;;) {
+        flags=SaveIRQ(); done=beepDone; result=beepResult;
+#ifdef SOUND_TEST
+        if (done && testHoldBeepReturn) {
+            testBeepReturnWaiting=1;
+            RestoreIRQ(flags); Yield(); continue;
+        }
+        testBeepReturnWaiting=0;
+#endif
+        if (done) {
+            beepCallActive=0; beepDone=0; beepResult=0;
+        }
+        RestoreIRQ(flags);
+        if (done) break;
+        Yield();
+    }
+    if (result) retiretimer(t);
+    return (int)result;
+}
 int SAPI MyOpenSound(void) { return OpenSound(); }
 int SAPI WEP(int reason) { stopinternal(); owner=0; return 1; }
-/* Test-only state queries; no hardware or scheduler side effects. */
+/* These two counters are part of the existing resident diagnostic ABI. */
 unsigned SAPI DebugTicks(void) { return TimerCount; }
 unsigned SAPI DebugTimer(void) { return timer; }
+#ifdef SOUND_TEST
+unsigned SAPI DebugPsgCount(void) {
+    unsigned flags,value;
+    flags=SaveIRQ(); value=psgLogCount; RestoreIRQ(flags); return value;
+}
+unsigned SAPI DebugPsgRead(int index) {
+    unsigned flags,value;
+    flags=SaveIRQ(); value=0xffffU;
+    if (index>=0 && (unsigned)index<psgLogCount)
+        value=psgLog[(psgLogHead+(unsigned)index)&(BEEPLOG-1)];
+    RestoreIRQ(flags); return value;
+}
+void SAPI DebugPsgClear(void) {
+    unsigned flags;
+    flags=SaveIRQ(); psgLogHead=psgLogCount=0; RestoreIRQ(flags);
+}
+unsigned SAPI DebugBeepActive(void) {
+    unsigned flags,value;
+    flags=SaveIRQ(); value=beepActive; RestoreIRQ(flags); return value;
+}
+unsigned SAPI DebugBeepRejects(void) { return beepRejects; }
+unsigned long SAPI DebugVoiceElapsed(int voice) {
+    unsigned flags; unsigned long value;
+    if (!validvoice(voice)) return 0;
+    flags=SaveIRQ(); value=voices[voice-1].elapsed;
+    RestoreIRQ(flags); return value;
+}
+void SAPI DebugHoldBeepReturn(void) {
+    unsigned flags;
+    flags=SaveIRQ(); testHoldBeepReturn=1;
+    testBeepReturnWaiting=0; testHoldTicks=40;
+    RestoreIRQ(flags);
+}
+void SAPI DebugHoldBeepActive(void) {
+    unsigned flags;
+    flags=SaveIRQ(); testHoldBeepActive=1;
+    testHoldBeepActiveTicks=20; RestoreIRQ(flags);
+}
+unsigned SAPI DebugBeepReturnWaiting(void) {
+    unsigned flags,value;
+    flags=SaveIRQ(); value=testBeepReturnWaiting;
+    RestoreIRQ(flags); return value;
+}
+void SAPI DebugReleaseBeepReturn(void) {
+    unsigned flags;
+    flags=SaveIRQ(); testHoldBeepReturn=0; testHoldTicks=0;
+    RestoreIRQ(flags);
+}
+void SAPI DebugFailNextTimer(void) {
+    unsigned flags;
+    flags=SaveIRQ(); failTimerNext=1; RestoreIRQ(flags);
+}
+#endif

@@ -26,11 +26,16 @@ ready to install over a working system without the isolated acceptance tests.
 - WaitSoundState yields; waits for current below-threshold conditions.
   State 1 returns a qualifying one-based voice; state 2 waits for all three.
   An impossible wait while not running returns -16 instead of hanging.
+- DoBeep and Windows MessageBeep play a short PSG alert without an OpenSound
+  owner. The DDK's one-word input is ignored, so every MessageBeep type uses
+  the same two-tone pattern. DoBeep returns 1 after completion and 0 on timer
+  failure, cancellation, or reentry. A call owns its completion until its
+  original waiter consumes it; a second request during that interval is
+  rejected.
 
 ## Explicitly unsupported
 
 Envelope returns -11; noise returns -15; SyncAllVoices returns -16.
-DoBeep returns 0 (failure/no beep); it does not claim to produce system beeps.
 These are deliberate restrictions, not placeholder successful stubs.
 Nonowner/invalid-voice mutating operations return -1; query counts return0.
 Invalid or failed calls do not grant another task ownership.
@@ -56,14 +61,33 @@ so very short dense sequences may lag. This is not a precise MIDI clock.
 The allocated SYSTEM timer is retained after a queue naturally finishes and
 removed by Stop/Close/WEP, before any callback code could be unloaded.
 
+An alert creates and retires its own SYSTEM timer when music is idle, or shares
+the music timer while playback runs. It emits PSG periods 125 and 149 at
+attenuation 4, with each phase lasting one timer tick (~54.925 ms). It borrows
+an idle, resting, or already-silent voice; when all three are audible it
+temporarily overlays voice 1. The music scheduler still advances every queue
+and envelope on each timer tick, but suppresses hardware writes for only the
+borrowed voice while the alert is armed. At the end, it restores the register
+state for the note currently due at that voice's musical elapsed time. Other
+voices continue normally, and repeated alerts do not accumulate queue or
+elapsed-time drift. Alerts remain serialized until their original waiter
+consumes completion, so reentry during the completion handoff is rejected.
+StopSound, CloseSound, and WEP cancel an active alert, mute the borrowed voice,
+and wake the waiting caller with 0. The callback does only bounded state
+updates and PSG writes.
+
 ## Build and validation
 
 Use BUILD.PY with --repo pointing at the existing licensed toolchain checkout,
---dosbox pointing at the Linux DOSBox-X launcher, and a new --out directory.
-Build flags: /G0 /Gw /Gs /AS /W3 /Od; MASM .8086; fixed single data segment.
-The intentional linker warning is library name SOUND versus TSOUND.DRV.
-BUILD also builds DRVTEST.EXE, an automatic isolated-guest smoke test that
-writes C:\DRVTEST.LOG and exits Windows after validation.
+--dosbox pointing at DOSBox-X, and a new --out directory. The runner first
+builds a normal production variant with the base TSOUND.DEF and no SOUND_TEST
+macro, then builds the instrumented test candidate with /DSOUND_TEST and
+SNDTEST.DEF. PSG trace logging, completion-race controls, and timer failure
+injection exist only in that explicitly guarded test build. The normal
+TSOUND.DEF does not export these test hooks. Both variants use /G0 /Gw /Gs /AS
+/W3 /Od; MASM is assembled in .8086 mode. BUILD also builds DRVTEST.EXE and
+INTRUD.EXE, then validates only the instrumented candidate in an isolated
+guest.
 
 For testing only, clone an existing guest and replace its stock SOUND.DRV
 with the candidate, retaining all original installations unchanged. Do not
@@ -75,7 +99,7 @@ See ABI.MD for source/binary findings and limitations of the bundled sample.
 
 ## Current isolated result
 
-The exact candidate in TESTS.JSON passed 105 automatic native checks with
+The prior candidate in TESTS.JSON passed 105 automatic native checks with
 640KB, disabled XMS/EMS/UMB and the emulator's 8086-prefetch CPU core. Captured
 PCM contains the three simultaneous tone fundamentals near 262/330/392 Hz,
 repeated 440 Hz test tones and a quiet final tail. This establishes the tested
@@ -84,6 +108,11 @@ A separate task could not open, start, stop, resize, retune or close the
 owner's playback. Active Stop and Close removed their timer; callback counts
 stayed unchanged after Stop while Windows continued running. Abrupt owner
 exit and SYSTEM timer exhaustion remain explicitly unqualified. The test guest and stock binaries are excluded.
+The alert driver build produced separate production and SOUND_TEST variants;
+test-only trace/failure controls are absent from the production map. The latest
+Windows 3.0 guest run passed 211 alert and lifecycle checks with zero failures.
+See BEEP-TESTS.JSON for the exact hashes, logs, audio capture, race/drift
+regressions, and current Open Watcom compile-only result.
 
 ## Isolated install and rollback procedure
 
@@ -109,6 +138,6 @@ exit and SYSTEM timer exhaustion remain explicitly unqualified. The test guest a
    No live file replacement or main installation changes are necessary.
 
 Do not install this candidate as a general-purpose replacement while its
-unsupported features matter: Windows MessageBeep/DoBeep will be silent,
-noise and envelopes are unavailable, and SyncAllVoices rejects the request.
+unsupported features matter: noise and envelopes are unavailable, and
+SyncAllVoices rejects the request.
 The native demo remains available independently of this experimental driver.
