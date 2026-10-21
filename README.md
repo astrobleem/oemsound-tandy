@@ -87,6 +87,8 @@ apps here remain separate projects.
 - **[Beats Lab](artifacts/win30/BEATS/README.MD)** — build patterns on a four-lane step sequencer.
 - **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** — an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256×160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
   · [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
+- **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** — an offline visualization
+  of the Tandy PSG and PC-speaker arrangement.
 
 See [validation](experimental/WINAMP30/VALIDATION-UI.MD),
 [checksums](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-ux3.20261018/SHA256SUMS)
