@@ -75,7 +75,10 @@ then follow the [build guide](experimental/WINAMP30/BUILDING-UI.MD) and
 [API/format boundaries](docs/FORMATS.MD#reuse-and-evidence). The playlist and
 Browse/Add/Remove UI belong to Winamp; `TPLAY` is its guarded DOS launcher.
 
-For separate source-only DOS and portable C89 Tandy components, see [libtandy](https://github.com/astrobleem/libtandy). It covers SN76489-family PSG state, graphics, surfaces, input and cooperative timing; the Windows driver and apps here remain separate projects.
+For separate source-only DOS and portable C89 Tandy components, see
+[libtandy](https://github.com/astrobleem/libtandy). It covers SN76489-family PSG
+state, graphics, surfaces, input and cooperative timing; the Windows driver and
+apps here remain separate projects.
 
 ## More to play with
 
