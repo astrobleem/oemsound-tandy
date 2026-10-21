@@ -55,6 +55,7 @@ static volatile unsigned beepRejects;
 static unsigned failTimerNext;
 static unsigned psgLogHead, psgLogCount;
 static unsigned char psgLog[BEEPLOG];
+static unsigned psgLogTick[BEEPLOG];
 static volatile unsigned testHoldBeepReturn, testBeepReturnWaiting;
 static unsigned testHoldTicks;
 static volatile unsigned testHoldBeepActive;
@@ -77,6 +78,7 @@ static void psgbyte(unsigned value) {
         psgLogHead=(psgLogHead+1)&(BEEPLOG-1);
     }
     psgLog[slot]=(unsigned char)value;
+    psgLogTick[slot]=TimerCount;
 #endif
     PsgByte(value);
 }
@@ -172,14 +174,18 @@ void _cdecl Tick(void) {
     if (beepDone && testHoldBeepReturn && testHoldTicks &&
         !--testHoldTicks) testHoldBeepReturn=0;
 #endif
-    if (beepActive && beepArmed) {
+    if (beepActive) {
 #ifdef SOUND_TEST
         if (testHoldBeepActive) {
             if (testHoldBeepActiveTicks &&
                 !--testHoldBeepActiveTicks) testHoldBeepActive=0;
         } else {
 #endif
-        if (beepPhase==1) {
+        if (beepPhase==0) {
+            toneout(beepVoice,
+                    BEEP_PERIOD1 | (BEEP_VOLUME<<12));
+            beepPhase=1; beepArmed=1;
+        } else if (beepPhase==1) {
             toneout(beepVoice,
                     BEEP_PERIOD2 | (BEEP_VOLUME<<12));
             beepPhase=2;
@@ -436,14 +442,11 @@ int SAPI DoBeep(unsigned ignored) {
         RestoreIRQ(flags); return 0;
     }
     flags=SaveIRQ();
-    if (!beepActive || timer!=t || timerStopping) {
+    if (timer!=t || timerStopping) {
         if (beepActive) cancelbeep();
         beepCallActive=0; beepDone=0; beepResult=0;
         RestoreIRQ(flags); return 0;
     }
-    beepPhase=1;
-    toneout(voice,BEEP_PERIOD1 | (BEEP_VOLUME<<12));
-    beepArmed=1;
     RestoreIRQ(flags);
     for (;;) {
         flags=SaveIRQ(); done=beepDone; result=beepResult;
@@ -479,6 +482,13 @@ unsigned SAPI DebugPsgRead(int index) {
     flags=SaveIRQ(); value=0xffffU;
     if (index>=0 && (unsigned)index<psgLogCount)
         value=psgLog[(psgLogHead+(unsigned)index)&(BEEPLOG-1)];
+    RestoreIRQ(flags); return value;
+}
+unsigned SAPI DebugPsgTick(int index) {
+    unsigned flags,value;
+    flags=SaveIRQ(); value=0xffffU;
+    if (index>=0 && (unsigned)index<psgLogCount)
+        value=psgLogTick[(psgLogHead+(unsigned)index)&(BEEPLOG-1)];
     RestoreIRQ(flags); return value;
 }
 void SAPI DebugPsgClear(void) {
@@ -520,5 +530,22 @@ void SAPI DebugReleaseBeepReturn(void) {
 void SAPI DebugFailNextTimer(void) {
     unsigned flags;
     flags=SaveIRQ(); failTimerNext=1; RestoreIRQ(flags);
+}
+unsigned SAPI DebugTestBeginBeep(void) {
+    unsigned flags;
+    flags=SaveIRQ();
+    if (beepActive || beepCallActive || timerStarting || timerStopping) {
+        RestoreIRQ(flags); return 0;
+    }
+    beepVoice=choosebeepvoice(); beepPhase=0; beepArmed=0;
+    beepDone=0; beepResult=0; beepActive=1;
+    RestoreIRQ(flags); return 1;
+}
+void SAPI DebugTestTick(void) { Tick(); }
+void SAPI DebugTestEndBeep(void) {
+    unsigned flags;
+    flags=SaveIRQ(); cancelbeep();
+    beepCallActive=0; beepDone=0; beepResult=0;
+    RestoreIRQ(flags);
 }
 #endif

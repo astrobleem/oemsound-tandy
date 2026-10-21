@@ -52,7 +52,7 @@ if not passed or not (out/'TSOUND.DRV').is_file() or not (out/'PROD.DRV').is_fil
 exe=(out/'TSOUND.DRV').read_bytes(); prod=(out/'PROD.DRV').read_bytes()
 prodmap=(out/'PROD.MAP').read_text(errors='replace').upper()
 testmap=(out/'TSOUND.MAP').read_text(errors='replace').upper()
-hooks=('DEBUGPSGCOUNT','DEBUGFAILNEXTTIMER','DEBUGVOICEELAPSED','DEBUGBEEPRETURNWAITING','DEBUGHOLDBEEPACTIVE')
+hooks=('DEBUGPSGCOUNT','DEBUGPSGTICK','DEBUGFAILNEXTTIMER','DEBUGVOICEELAPSED','DEBUGBEEPRETURNWAITING','DEBUGHOLDBEEPACTIVE','DEBUGTESTBEGINBEEP','DEBUGTESTTICK','DEBUGTESTENDBEEP')
 if any(h in prodmap or h not in testmap for h in hooks):raise SystemExit('test hooks leaked from or missing in build variants')
 result={'bytes':len(exe),'sha256':hashlib.sha256(exe).hexdigest(),'test_build_macro':'SOUND_TEST','production_bytes':len(prod),'production_sha256':hashlib.sha256(prod).hexdigest(),'production_test_hooks':'absent from map','test_build_test_hooks':'present in map','cpu':'/G0 8086','target':'Windows 3.0 real mode','compiler_flags':'/nologo /c /G0 /Gw /Gs /AS /W3 /Od','test_compiler_define':'/DSOUND_TEST'}
 (out/'RESULT.JSON').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))

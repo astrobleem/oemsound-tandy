@@ -124,20 +124,25 @@ DoBeep's public ABI is established from the Windows 3.0 DDK `SOUND.DEF` and
 AX 0 when suppressed/reentrant and AX 1 after completion. The sample does not
 read the word, so alert types do not select distinct patterns. The PSG
 implementation uses the verified SYSTEM timer and never borrows the stock
-PC-speaker/PIT busy-wait path. Alerts last two timer ticks, borrow an
-idle/resting/silent voice when possible, and otherwise cover voice 1's hardware
-output while its queue and elapsed musical time continue to advance. At alert
-end, the callback restores the borrowed voice to the note currently due at its
-elapsed time; it does not replay the note from before the alert. Other voices
-continue advancing normally. Calls stay serialized until the original waiter
-consumes completion, preventing a new request from overwriting its result while
-it resumes from Yield. StopSound, CloseSound, and WEP cancel an active alert
-before removing the exact callback timer.
+PC-speaker/PIT busy-wait path. The callback starts each PSG phase on a timer
+boundary and keeps it until a later callback, so each tone receives at least
+one full ~54.925-ms callback interval regardless of request alignment. An
+alert takes two tone intervals plus up to one interval before its first tone.
+It borrows an idle/resting/silent voice when possible, and otherwise covers
+voice 1's hardware output while its queue and elapsed musical time continue to
+advance. At alert end, the callback restores the borrowed voice to the note
+currently due at its elapsed time; it does not replay the note from before the
+alert. Other voices continue advancing normally. Calls stay serialized until
+the original waiter consumes completion, preventing a new request from
+overwriting its result while it resumes from Yield. StopSound, CloseSound, and
+WEP cancel an active alert before removing the exact callback timer.
 
-PSG write tracing, forced timer-creation failure, elapsed-time queries, and
-completion-race controls are compiled only with `SOUND_TEST` and exported from
-`SNDTEST.DEF`. The normal `TSOUND.DEF` omits these test hooks. DEBUGTICKS and
-DEBUGTIMER remain because they are part of the pre-existing local ABI.
+PSG write tracing with callback-tick stamps, manual callback stepping for
+before/after-boundary phase tests, forced timer-creation failure, elapsed-time
+queries, and completion-race controls are compiled only with `SOUND_TEST` and
+exported from `SNDTEST.DEF`. The normal `TSOUND.DEF` omits these test hooks.
+DEBUGTICKS and DEBUGTIMER remain because they are part of the pre-existing
+local ABI.
 
 The callback uses fixed code/data, saves registers, segments and flags, and
 does bounded state updates and PSG writes only. Queue publication and PSG

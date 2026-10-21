@@ -63,18 +63,20 @@ removed by Stop/Close/WEP, before any callback code could be unloaded.
 
 An alert creates and retires its own SYSTEM timer when music is idle, or shares
 the music timer while playback runs. It emits PSG periods 125 and 149 at
-attenuation 4, with each phase lasting one timer tick (~54.925 ms). It borrows
-an idle, resting, or already-silent voice; when all three are audible it
-temporarily overlays voice 1. The music scheduler still advances every queue
-and envelope on each timer tick, but suppresses hardware writes for only the
-borrowed voice while the alert is armed. At the end, it restores the register
-state for the note currently due at that voice's musical elapsed time. Other
-voices continue normally, and repeated alerts do not accumulate queue or
-elapsed-time drift. Alerts remain serialized until their original waiter
-consumes completion, so reentry during the completion handoff is rejected.
-StopSound, CloseSound, and WEP cancel an active alert, mute the borrowed voice,
-and wake the waiting caller with 0. The callback does only bounded state
-updates and PSG writes.
+attenuation 4. The callback begins each tone at a timer boundary and changes
+phase only on a later callback, giving each tone at least one full ~54.925-ms
+interval even when a request arrives just before a callback. Startup adds at
+most one callback interval. It borrows an idle, resting, or already-silent
+voice; when all three are audible it temporarily overlays voice 1. The music
+scheduler still advances every queue and envelope on every timer tick, but
+suppresses hardware writes for only the borrowed voice while the alert sounds.
+At the end, it restores the note currently due at that voice's musical elapsed
+time. Other voices continue normally, and repeated alerts do not accumulate
+queue or elapsed-time drift. Alerts remain serialized until their original
+waiter consumes completion, so reentry during the completion handoff is
+rejected. StopSound, CloseSound, and WEP cancel an active alert, mute the
+borrowed voice, and wake the waiting caller with 0. The callback does only
+bounded state updates and PSG writes.
 
 ## Build and validation
 
@@ -110,9 +112,11 @@ stayed unchanged after Stop while Windows continued running. Abrupt owner
 exit and SYSTEM timer exhaustion remain explicitly unqualified. The test guest and stock binaries are excluded.
 The alert driver build produced separate production and SOUND_TEST variants;
 test-only trace/failure controls are absent from the production map. The latest
-Windows 3.0 guest run passed 211 alert and lifecycle checks with zero failures.
-See BEEP-TESTS.JSON for the exact hashes, logs, audio capture, race/drift
-regressions, and current Open Watcom compile-only result.
+Windows 3.0 guest run passed 223 alert and lifecycle checks with zero failures,
+including before/after-callback boundary tests that verify each frequency
+receives a full callback interval. See BEEP-TESTS.JSON for exact hashes, logs,
+corrected audio capture, race/drift regressions, and the current Open Watcom
+compile-only result.
 
 ## Isolated install and rollback procedure
 

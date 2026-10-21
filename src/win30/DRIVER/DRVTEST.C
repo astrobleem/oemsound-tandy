@@ -13,8 +13,9 @@ static unsigned (FAR PASCAL *dt)(void);
 static int (FAR PASCAL *dh)(void);
 static DBEEP dbeep;
 static DBG0 dpc, dactive, drejects;
-static DBG1 dpr;
-static DBGV dpclear, dfail;
+static DBG1 dpr, dpt;
+static DBG0 dbegin;
+static DBGV dpclear, dfail, dstep, dend;
 static DBGEL delapsed;
 static DBG0 dwaiting;
 static DBGV dhold, dholdactive, drelease;
@@ -34,6 +35,36 @@ static int traceis(unsigned char *want,unsigned count) {
  if(dpc()!=count) return 0;
  for(i=0;i<count;++i) if(dpr((int)i)!=want[i]) return 0;
  return 1;
+}
+static int phaseintervals(void) {
+ unsigned first,second,end;
+ if(dpc()!=7) return 0;
+ if(dpt(0)!=dpt(1) || dpt(1)!=dpt(2) ||
+    dpt(3)!=dpt(4) || dpt(4)!=dpt(5)) return 0;
+ first=dpt(0); second=dpt(3); end=dpt(6);
+ return (unsigned)(second-first)>=1 &&
+        (unsigned)(end-second)>=1;
+}
+static void alignmentcase(int after) {
+ char *begin,*first,*second,*pattern,*minimum,*ended;
+ if(after) {
+  begin="AfterTickBegin"; first="AfterTickFirstPhase";
+  second="AfterTickSecondPhase"; pattern="AfterTickPattern";
+  minimum="AfterTickPhaseMinimums"; ended="AfterTickEnded";
+ } else {
+  begin="BeforeTickBegin"; first="BeforeTickFirstPhase";
+  second="BeforeTickSecondPhase"; pattern="BeforeTickPattern";
+  minimum="BeforeTickPhaseMinimums"; ended="BeforeTickEnded";
+ }
+ dpclear();
+ if(after) dstep();
+ result(begin,dbegin(),1);
+ dstep(); result(first,dpc(),3);
+ dstep(); result(second,dpc(),6);
+ dstep(); result(pattern,traceis(beepPattern,7),1);
+ result(minimum,phaseintervals(),1);
+ result(ended,dactive(),0);
+ dend();
 }
 static int tailmutes(void) {
  unsigned n;
@@ -86,7 +117,11 @@ int PASCAL WinMain(HINSTANCE h,HINSTANCE old,LPSTR cmd,int show) {
  dbeep=(DBEEP)GetProcAddress(m,"DOBEEP");
  dpc=(DBG0)GetProcAddress(m,"DEBUGPSGCOUNT");
  dpr=(DBG1)GetProcAddress(m,"DEBUGPSGREAD");
+ dpt=(DBG1)GetProcAddress(m,"DEBUGPSGTICK");
  dpclear=(DBGV)GetProcAddress(m,"DEBUGPSGCLEAR");
+ dbegin=(DBG0)GetProcAddress(m,"DEBUGTESTBEGINBEEP");
+ dstep=(DBGV)GetProcAddress(m,"DEBUGTESTTICK");
+ dend=(DBGV)GetProcAddress(m,"DEBUGTESTENDBEEP");
  dactive=(DBG0)GetProcAddress(m,"DEBUGBEEPACTIVE");
  drejects=(DBG0)GetProcAddress(m,"DEBUGBEEPREJECTS");
  dfail=(DBGV)GetProcAddress(m,"DEBUGFAILNEXTTIMER");
@@ -96,12 +131,14 @@ int PASCAL WinMain(HINSTANCE h,HINSTANCE old,LPSTR cmd,int show) {
  dholdactive=(DBGV)GetProcAddress(m,"DEBUGHOLDBEEPACTIVE");
  drelease=(DBGV)GetProcAddress(m,"DEBUGRELEASEBEEPRETURN");
  dwep=(WEPFN)GetProcAddress(m,"WEP");
- if(!dt || !dh || !dbeep || !dpc || !dpr || !dpclear || !dactive ||
+ if(!dt || !dh || !dbeep || !dpc || !dpr || !dpt || !dpclear ||
+    !dbegin || !dstep || !dend || !dactive ||
     !drejects || !dfail || !delapsed || !dwaiting || !dhold ||
     !dholdactive ||
     !drelease || !dwep) {
   result("candidate exports",0,1); goto end;
  }
+ alignmentcase(0); alignmentcase(1);
  start=GetTickCount(); dpclear(); MessageBeep(MB_OK);
  elapsed=GetTickCount()-start;
  result("NoOpenBeepDurationMs",elapsed>=50UL && elapsed<=250UL,1);
