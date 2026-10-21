@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "scope": "Windows 3.0 real-mode Tandy PSG DoBeep / MessageBeep alert",
+  "abi": {
+    "export": "DoBeep",
+    "ordinal": 17,
+    "arguments": "one ignored 16-bit WORD; callee cleanup ret 2",
+    "return": "AX=1 after completion; AX=0 on timer failure, cancellation, or reentry",
+    "evidence": "Windows 3.0 DDK SOUND.DEF and MDD_BEEP.ASM; stock implementation returns ret 2 and does not inspect the argument",
+    "pattern_selection": "the caller argument does not distinguish alert types; all MessageBeep types use the same PSG pattern"
+  },
+  "build": {
+    "toolchain": "Microsoft C 6.0 / LINK4, DOSBox-X 2025.12.01 Commit 10a5ce7",
+    "target": "Windows 3.0 real mode; 8086 (/G0)",
+    "production_driver": {
+      "bytes": 7704,
+      "sha256": "3b0141ca3191b9743a05d2070939878fa48a6879dae2610291107e20bcf28f61",
+      "test_hooks_in_map": false
+    },
+    "instrumented_test_driver": {
+      "bytes": 9240,
+      "sha256": "f4c8ca63ed89834224213b37c51e07247ebd45b498f6ff7b0f02c5dd6440b346",
+      "macro": "SOUND_TEST",
+      "test_hooks_in_map": true
+    },
+    "commands": [
+      "CL /nologo /c /G0 /Gw /Gs /AS /W3 /Od TSOUND.C",
+      "MASM /Mx SHIM.ASM;",
+      "LINK4 /NOE /NOD @TSOUND.RSP",
+      "CL /nologo /c /DSOUND_TEST /G0 /Gw /Gs /AS /W3 /Od TSOUND.C",
+      "LINK4 /NOE /NOD @SNDTEST.RSP",
+      "CL /nologo /c /G0 /Gw /AS /W3 /Od DRVTEST.C",
+      "LINK4 /NOE /NOD @DRVTEST.RSP",
+      "CL /nologo /c /G0 /Gw /AS /W3 /Od INTRUD.C",
+      "LINK4 /NOE /NOD @INTRUD.RSP"
+    ],
+    "build_runner": "python .\\src\\win30\\DRIVER\\BUILD.PY --repo C:\\Users\\chad\\Documents\\Codex\\2026-10-06\\task-7\\winxt-default-work --dosbox \"C:\\Program Files\\DOSBox-X\\dosbox-x.exe\" --out C:\\Users\\chad\\Documents\\Codex\\2026-10-21\\task-4\\beep-build-r6"
+  },
+  "runtime": {
+    "windows": "Windows 3.0 real mode",
+    "emulator": "DOSBox-X 2025.12.01 Commit 10a5ce7",
+    "machine": "tandy",
+    "cpu": "8086_prefetch",
+    "cycles": "fixed 5000",
+    "conventional_memory_kb": 640,
+    "xms": false,
+    "ems": false,
+    "umb": false,
+    "exit_code": 0,
+    "return_log": "RETURNED",
+    "guest_workspace": "C:\\Users\\chad\\Documents\\Codex\\2026-10-21\\task-4\\beep-runtime-review-r5\\guest"
+  },
+  "checks": {
+    "total": 223,
+    "failed": 0,
+    "suites": {
+      "DRVTEST": {
+        "checks": 195,
+        "failures": 0
+      },
+      "INTRUD": {
+        "checks": 11,
+        "failures": 0
+      },
+      "BEEPRACE": {
+        "checks": 4,
+        "failures": 0
+      },
+      "BEEPCOMP": {
+        "checks": 5,
+        "failures": 0
+      },
+      "OPENBEEP": {
+        "checks": 6,
+        "failures": 0
+      },
+      "BEEPCALL": {
+        "checks": 2,
+        "failures": 0
+      }
+    },
+    "focus": [
+      "Before-tick and after-tick alignment cases use the actual callback state machine with deterministic SOUND_TEST stepping; each PSG tone occupies a distinct callback interval, with at least one complete timer interval between phase writes.",
+      "No-owner Windows MessageBeep and direct ordinal-17 DoBeep produce the bounded PSG pattern and retire an alert-only timer.",
+      "MessageBeep type values use the same pattern, consistent with the ignored ABI word.",
+      "With music active, only the borrowed voice is muted from hardware writes; the callback restores the note due at current elapsed musical time while all voice queues/envelopes continue advancing.",
+      "Four repeated alerts preserve equal elapsed values and note counts across three synchronized voice queues, then all queues complete naturally with no cumulative drift.",
+      "Completion-handoff race: while the first waiter is yielded after tone end but before consuming its result, a second task is rejected; the original waiter then consumes completion.",
+      "OpenSound cancellation and reentry: cancellation ends the alert, a second DoBeep is rejected until the original waiter consumes cancellation, and timer cleanup completes.",
+      "StopSound, CloseSound, WEP, and timer-creation failure leave no active alert, stale timer, or stray PSG write."
+    ],
+    "logs": [
+      "guest/DRVTEST.LOG",
+      "guest/INTRUD.LOG",
+      "guest/BEEPRACE.LOG",
+      "guest/BEEPCOMP.LOG",
+      "guest/OPENBEEP.LOG",
+      "guest/BEEPCALL.LOG",
+      "guest/RETURN.LOG"
+    ]
+  },
+  "design_notes": {
+    "yield": "DoBeep waits by calling Yield so Win16 can schedule the SYSTEM timer callback and other tasks; it does not spin with interrupts disabled or busy-wait on the PIT.",
+    "completion_ownership": "beepCallActive remains set after the timer marks completion and is cleared only when the original DoBeep waiter snapshots and consumes beepResult. This prevents another task from resetting shared completion state during the yield handoff.",
+    "timer_failure": "If CreateSystemTimer fails, the request is canceled, no PSG bytes are emitted, and DoBeep returns 0 immediately.",
+    "music_restore": "The music scheduler advances the borrowed voice's elapsed time and note queue while suppressing only that voice's hardware writes. At beep end it emits the current queue head's tone only if that note is due and audible; it does not replay the pre-beep note.",
+    "phase_timing": "DoBeep reserves the alert and yields. The first PSG tone starts on the next SYSTEM timer callback, then the second tone starts on a later callback and is ended on a subsequent callback. Each frequency therefore remains active for at least one complete callback interval (~54.925 ms), independent of request alignment; startup adds at most one callback interval. Music queues and elapsed time still advance on every callback."
+  },
+  "audio": {
+    "full_capture": "C:\\Users\\chad\\Documents\\Codex\\2026-10-21\\task-4\\beep-runtime-review-r5\\captures\\win_000.wav",
+    "full_capture_sha256": "732c7eac101f68577e20eff303c4f74e7a6b93ad154a8b143e9ca83d81187a84",
+    "full_capture_bytes": 3167084,
+    "review_clip": "C:\\Users\\chad\\Documents\\Codex\\2026-10-21\\task-4\\beep-alert-review-r3.wav",
+    "review_clip_sha256": "485f8545e0d2d148b55b0236a91233c958569915819c740bdc08e288a64c8b52",
+    "review_clip_bytes": 86444,
+    "format": "48 kHz, stereo, signed 16-bit PCM",
+    "review_clip_duration_s": 0.45,
+    "review_clip_tail_silence_s": 0.3,
+    "review_clip_tail_is_zero_samples": true,
+    "extraction": "After the 223-check runtime pass, copied the corrected alert window from 3.06 s to 3.21 s of the new full capture and appended 300 ms digital silence; the earlier full capture was left untouched.",
+    "full_capture_frames": 791760,
+    "full_capture_duration_s": 16.495,
+    "analysis": "20 ms Hann FFT windows show the two alert fundamentals near 900 Hz and 750 Hz in separate successive callback phases."
+  },
+  "open_watcom": {
+    "version": "1.9",
+    "flags": "-bt=windows -0 -ms; SOUND_TEST variant additionally -dSOUND_TEST",
+    "commands": [
+      "set INCLUDE=C:\\WATCOM\\H\\WIN;C:\\WATCOM\\H;C:\\Users\\chad\\Documents\\Codex\\2026-10-06\\task-7\\winxt-default-work\\DDK\\286\\INC",
+      "wcc -bt=windows -0 -ms TSOUND.C",
+      "wcc -bt=windows -0 -ms -dSOUND_TEST TSOUND.C",
+      "wcc -bt=windows -0 -ms DRVTEST.C",
+      "wcc -bt=windows -0 -ms INTRUD.C",
+      "wasm SHIM.ASM"
+    ],
+    "compiled_or_assembled": [
+      "production TSOUND.C: pass, 0 warnings/errors, code size 4129",
+      "SOUND_TEST TSOUND.C: pass, 0 warnings/errors, code size 5047",
+      "DRVTEST.C: pass, 0 warnings/errors, code size 4892",
+      "INTRUD.C: pass, 0 warnings/errors, code size 1492",
+      "SHIM.ASM with WASM: pass, 0 warnings/errors"
+    ],
+    "link": "not performed for this revision",
+    "runtime": "not performed for this revision"
+  },
+  "limitations": [
+    "Physical Tandy 1000 EX hardware was not tested.",
+    "The Open Watcom result for this revision is compile/assemble only; the Microsoft C 6.0/LINK4 binary is the build tested in Windows 3.0."
+  ]
+}
