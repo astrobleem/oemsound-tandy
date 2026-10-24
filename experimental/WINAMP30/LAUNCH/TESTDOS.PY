@@ -38,10 +38,10 @@ def main():
     names = ('HPXY.DRV', 'hpxy.drv', 'CGA.DRV', 'TR51616.DRV',
              'TR53216.DRV', 'TR53204.DRV', 'TR56402.DRV', 'TR56404.DRV',
              'TANDY88.DRV', 'TNDY160.DRV', 'TNDY3204.DRV',
-             'TNDY6402.DRV', 'TNDY6404.DRV')
+             'TNDY6402.DRV', 'TNDY6404.DRV', 'XRSYNC.DRV', 'xrsync.drv')
     for i, name in enumerate(names):
         case('P%02u' % i, boot.replace('HPXY.DRV', name), accepted=True)
-    for i, name in enumerate(('VGA.DRV', 'OTHER.DRV', 'TXTMODE.DRV', 'HPXY.DR_')):
+    for i, name in enumerate(('VGA.DRV', 'OTHER.DRV', 'TXTMODE.DRV', 'HPXY.DR_', 'XRSYNC2.DRV')):
         case('N%02u' % i, boot.replace('HPXY.DRV', name))
     case('DUPDISP', boot + 'display.drv=CGA.DRV\n')
     case('DUPSND', boot + 'sound.drv=TSOUND.DRV\n')

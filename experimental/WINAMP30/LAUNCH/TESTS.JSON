@@ -1,10 +1,10 @@
 {
   "launcher": {
-    "bytes": 18131,
-    "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
+    "bytes": 18145,
+    "sha256": "68b385d3f8a03d68c086100b649e1fe7da4c7ada969aeeb24ea564da3ac219e1"
   },
-  "host_policy_checks": 45,
-  "native_preflight_cases": 28,
+  "host_policy_checks": 49,
+  "native_preflight_cases": 31,
   "graphics_playback": {
     "xr1-final": {
       "checks": [
@@ -98,7 +98,12 @@
       "display": {
         "bytes": 56704,
         "sha256": "9db7bbd8b1e9c30aa0cd766a89ff35abf42697aa3d342c7d7906b3d98f767275"
-      }
+      },
+      "launcher": {
+        "bytes": 18131,
+        "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
+      },
+      "scope": "Previously inspected successful unchanged path; recorded with the previous launcher before the explicit XRSYNC name addition."
     },
     "cga-final": {
       "checks": [
@@ -191,7 +196,12 @@
       "display": {
         "bytes": 45680,
         "sha256": "373ea3517afeda94249761f667129be6164bb739a00f3459adc45a4f72b69de5"
-      }
+      },
+      "launcher": {
+        "bytes": 18131,
+        "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
+      },
+      "scope": "Previously inspected successful unchanged path; recorded with the previous launcher before the explicit XRSYNC name addition."
     }
   },
   "negative_starts": {
@@ -214,6 +224,10 @@
         "return": 0,
         "owned_child_stopped": true,
         "lease_released": true
+      },
+      "launcher": {
+        "bytes": 18131,
+        "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
       }
     },
     "occupied-final": {
@@ -243,6 +257,10 @@
         "return": 0,
         "owned_child_stopped": true,
         "lease_released": true
+      },
+      "launcher": {
+        "bytes": 18131,
+        "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
       }
     },
     "wrongboard-final": {
@@ -266,6 +284,10 @@
         "return": 0,
         "owned_child_stopped": true,
         "lease_released": true
+      },
+      "launcher": {
+        "bytes": 18131,
+        "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
       }
     },
     "failedwin-final": {
@@ -299,11 +321,277 @@
         "return": 0,
         "owned_child_stopped": true,
         "lease_released": true
+      },
+      "launcher": {
+        "bytes": 18131,
+        "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
       }
     }
   },
   "scope": "Installed DOSBox-X, 8086_prefetch, original normal640K Tandy surrogate, Windows3.0 real mode. Actual unchanged UX3 player is launched by RAWGUI test observer through existing TPLAY /TEST path; production GUI entry also captured separately. No new physical-machine test.",
   "preflight": {
+    "passed": 31,
+    "cases": [
+      {
+        "name": "P00",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P01",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=hpxy.drv; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P02",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=CGA.DRV; video reservation=none (stock CGA).\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P03",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TR51616.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P04",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TR53216.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P05",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TR53204.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P06",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TR56402.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P07",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TR56404.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P08",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TANDY88.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P09",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TNDY160.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P10",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TNDY3204.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P11",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TNDY6402.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P12",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=TNDY6404.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P13",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=XRSYNC.DRV; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "P14",
+        "expected": 0,
+        "actual": 0,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=xrsync.drv; video reservation=16KB normal-640K.\nTPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n"
+      },
+      {
+        "name": "N00",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "N01",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "N02",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "N03",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "N04",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "DUPDISP",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "DUPSND",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "WRONGSND",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "WRONGSYS",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY REFUSED: SYSTEM.INI must select generic SYSTEM, paired TSOUND and a qualified display without duplicates.\n"
+      },
+      {
+        "name": "BADTSND",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.\nTPLAY REFUSED: Paired TSOUND.DRV identity mismatch or missing file.\n"
+      },
+      {
+        "name": "BADSYS",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.\nTPLAY REFUSED: SYSTEM.DRV identity mismatch or missing file.\n"
+      },
+      {
+        "name": "BADWIN",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.\nTPLAY REFUSED: WIN.COM missing or outside the DOS COM bootstrap size.\n"
+      },
+      {
+        "name": "ROOTSND",
+        "expected": 1,
+        "actual": 1,
+        "output": "TPLAY: FC00:0000=21 FFFF:000E=ff.\nTPLAY: initial IRQ0=f000:fea5.\nTPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.\nTPLAY REFUSED: Ambiguous root TSOUND.DRV.\n"
+      }
+    ]
+  },
+  "prior_key_automation": "Initial two keyboard-only scripts reached the production GUI but did not drive it reliably; both bounded owned processes were stopped by watchdog. Final native observer runs above completed normally.",
+  "fresh_reservation_launch": {
+    "output": [
+      "TPLAY: FC00:0000=21 FFFF:000E=ff.",
+      "TPLAY: initial IRQ0=f000:fea5.",
+      "TPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.",
+      "TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.",
+      "RESERVE: 16K video overlap reserved. Start Windows with WIN /R.",
+      "TBRIDGE v2 installed",
+      "TPLAY: bridge install return=768.",
+      "TPLAY: owned bridge installed; starting Windows.",
+      "TBRIDGE v2 removed, original BIOS/INT2F vectors restored",
+      "TPLAY: owned bridge removed; Windows return=0."
+    ],
+    "checks": [
+      "entered=1",
+      "winexec=1",
+      "player_found=1",
+      "expected_width=1",
+      "expected_height=1",
+      "play_started=1",
+      "graphics_updates=1",
+      "foreground_audio_service=1",
+      "playing_during_graphics=1",
+      "stop_closed=1",
+      "sound_released=1",
+      "player_closed=1",
+      "all_pass=1"
+    ],
+    "memory_before": {
+      "bda_kb": 624,
+      "first_mcb": 1112,
+      "last_mcb": 2158,
+      "arena_end": 39936,
+      "last_owner": 0,
+      "last_size": 37777,
+      "last_type": 90,
+      "strategy": 0,
+      "block_count": 6,
+      "probe_psp": 2069,
+      "alloc_segment": 0,
+      "alloc_size": 0,
+      "alloc_end": 0,
+      "alias_verified": 0,
+      "mcb_verified": 0,
+      "owner_open_handles": 0
+    },
+    "memory_after": {
+      "bda_kb": 624,
+      "first_mcb": 1112,
+      "last_mcb": 38911,
+      "arena_end": 39936,
+      "last_owner": 4305,
+      "last_size": 1024,
+      "last_type": 53594,
+      "strategy": 0,
+      "block_count": 9,
+      "probe_psp": 4417,
+      "alloc_segment": 0,
+      "alloc_size": 0,
+      "alloc_end": 0,
+      "alias_verified": 0,
+      "mcb_verified": 0,
+      "owner_open_handles": 0
+    },
+    "emulator": {
+      "started": "2026-10-24T08:25:14.738895+00:00",
+      "emulator": "C:\\Program Files\\DOSBox-X\\dosbox-x.exe",
+      "config": "C:\\Users\\chad\\Documents\\Codex\\2026-10-24\\task-4\\native\\xr1-fresh\\RUN.CNF",
+      "emulator_sha256": "769fb38a5a94475488be2107856d9a9fcca65487df35676188f5c2ccd5a2e964",
+      "timeout": 50,
+      "lease_acquired": true,
+      "inventory": "",
+      "pid": 11276,
+      "return": 0,
+      "owned_child_stopped": true,
+      "lease_released": true
+    },
+    "launcher": {
+      "bytes": 18131,
+      "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
+    }
+  },
+  "previous_launcher": {
+    "bytes": 18131,
+    "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
+  },
+  "previous_host_policy_checks": 45,
+  "previous_native_preflight_cases": 28,
+  "previous_preflight": {
     "passed": 28,
     "cases": [
       {
@@ -458,23 +746,52 @@
       }
     ]
   },
-  "prior_key_automation": "Initial two keyboard-only scripts reached the production GUI but did not drive it reliably; both bounded owned processes were stopped by watchdog. Final native observer runs above completed normally.",
-  "fresh_reservation_launch": {
-    "output": [
-      "TPLAY: FC00:0000=21 FFFF:000E=ff.",
-      "TPLAY: initial IRQ0=f000:fea5.",
-      "TPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.",
-      "TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.",
-      "RESERVE: 16K video overlap reserved. Start Windows with WIN /R.",
-      "TBRIDGE v2 installed",
-      "TPLAY: bridge install return=768.",
-      "TPLAY: owned bridge installed; starting Windows.",
-      "TBRIDGE v2 removed, original BIOS/INT2F vectors restored",
-      "TPLAY: owned bridge removed; Windows return=0."
+  "xrsync_integration": {
+    "reviewed_candidate_commit": "e84a17d1562a3f938b5268b8a92fc5e47b176deb",
+    "driver": {
+      "bytes": 60800,
+      "sha256": "ae2d06f69ff68e64f099c3e0af79028e40e7dca89bd442de23eb18d36be4dca1"
+    },
+    "reviewed_alias_matches_built_hpxy": true,
+    "same_exact_reserve_as_reviewed_OEM": {
+      "bytes": 1512,
+      "sha256": "644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8"
+    },
+    "contract": {
+      "logical": [
+        640,
+        256,
+        16
+      ],
+      "viewport": [
+        320,
+        200,
+        16
+      ],
+      "shadow_bands": [
+        64000,
+        17920
+      ],
+      "stage_bytes": 1440,
+      "normal_bios_kb": 624,
+      "guard_paragraphs": 1024
+    },
+    "direct_source_checks": [
+      "XRBUILD.PY still invokes mode320x200x16 and records identical geometry/shadow bands/stage size",
+      "XRBATCH.PY changes synchronous Output bounds/presentation and foreground CURKEEP lease; no new ISR/timer",
+      "RRSYNC.MD and PANSET.PY select native/SYNC-OEM/XRSYNC.DRV with the unchanged exact RESERVE helper",
+      "SYNC-OEM/OEMSETUP.INF selects XRSYNC.DRV with the existing200,96,48 tuple"
     ],
+    "launcher": {
+      "bytes": 18145,
+      "sha256": "68b385d3f8a03d68c086100b649e1fe7da4c7ada969aeeb24ea564da3ac219e1"
+    },
     "checks": [
       "entered=1",
       "winexec=1",
+      "display_module=1",
+      "loaded_display=C:\\WINDOWS\\SYSTEM\\XRSYNC.DRV",
+      "selected_display_file=1",
       "player_found=1",
       "expected_width=1",
       "expected_height=1",
@@ -486,6 +803,24 @@
       "sound_released=1",
       "player_closed=1",
       "all_pass=1"
+    ],
+    "launch": [
+      "TPLAY: FC00:0000=21 FFFF:000E=ff.",
+      "TPLAY: initial IRQ0=f000:fea5.",
+      "TPLAY: display=XRSYNC.DRV; video reservation=16KB normal-640K.",
+      "TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.",
+      "RESERVE: 16K video overlap reserved. Start Windows with WIN /R.",
+      "TBRIDGE v2 installed",
+      "TPLAY: bridge install return=768.",
+      "TPLAY: owned bridge installed; starting Windows.",
+      "TBRIDGE v2 removed, original BIOS/INT2F vectors restored",
+      "TPLAY: owned bridge removed; Windows return=0."
+    ],
+    "postcheck": [
+      "TPLAY: FC00:0000=21 FFFF:000E=ff.",
+      "TPLAY: initial IRQ0=f000:fea5.",
+      "TPLAY: display=XRSYNC.DRV; video reservation=16KB normal-640K.",
+      "TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet."
     ],
     "memory_before": {
       "bda_kb": 624,
@@ -523,15 +858,31 @@
       "mcb_verified": 0,
       "owner_open_handles": 0
     },
-    "emulator": {
-      "started": "2026-10-24T08:25:14.738895+00:00",
+    "wave": {
+      "bytes": 2494316,
+      "sha256": "45f11b191afdae765df0f6bfeed1409cedb48d81deaccc1318ebd431bf4fd544",
+      "rate": 48000,
+      "frames": 623568,
+      "peak": 4105,
+      "rms": 439.9263514923632
+    },
+    "player": {
+      "bytes": 52029,
+      "sha256": "7285ee2e3f7ff321643e4efe233941e8eeda8f89a993ff9ae91e1eb998a54fdb"
+    },
+    "observer": {
+      "bytes": 5375,
+      "sha256": "66d28227e8de3886ff29f4df1003dca1350f78eaa255dcfc271029fa2c1d1d44"
+    },
+    "process": {
+      "started": "2026-10-24T08:35:53.159862+00:00",
       "emulator": "C:\\Program Files\\DOSBox-X\\dosbox-x.exe",
-      "config": "C:\\Users\\chad\\Documents\\Codex\\2026-10-24\\task-4\\native\\xr1-fresh\\RUN.CNF",
+      "config": "C:\\Users\\chad\\Documents\\Codex\\2026-10-24\\task-4\\native\\xrsync-play\\RUN.CNF",
       "emulator_sha256": "769fb38a5a94475488be2107856d9a9fcca65487df35676188f5c2ccd5a2e964",
       "timeout": 50,
       "lease_acquired": true,
       "inventory": "",
-      "pid": 11276,
+      "pid": 33884,
       "return": 0,
       "owned_child_stopped": true,
       "lease_released": true

@@ -1,0 +1,13 @@
+{
+  "started": "2026-10-24T08:33:46.534331+00:00",
+  "emulator": "C:\\Program Files\\DOSBox-X\\dosbox-x.exe",
+  "config": "C:\\Users\\chad\\Documents\\Codex\\2026-10-24\\task-4\\native\\xrsync-build\\BUILD.CNF",
+  "emulator_sha256": "769fb38a5a94475488be2107856d9a9fcca65487df35676188f5c2ccd5a2e964",
+  "timeout": 60,
+  "lease_acquired": true,
+  "inventory": "",
+  "pid": 25752,
+  "return": 0,
+  "owned_child_stopped": true,
+  "lease_released": true
+}

@@ -4,6 +4,7 @@ static HWND player,window;
 static HFILE log;
 static WORD phase,frames,failures;
 static DWORD started;
+static char driverFile[128],expectedDriver[32],driverLog[160];
 static void check(char *name,int okay)
 {
     char b[128];wsprintf(b,"%s=%u\r\n",(LPSTR)name,okay?1:0);
@@ -15,6 +16,24 @@ LONG FAR PASCAL WndProc(HWND w,WORD m,WORD a,LONG b)
         if(!phase){
             player=FindWindow("MiniMCIPlayer",0);
             if(!player){if(GetTickCount()-started>15000UL){check("player_found",0);phase=3;}return 0L;}
+            {
+                HMODULE display;char *base;WORD i;
+                GetProfileString("TPQA","driver","",expectedDriver,
+                                 sizeof(expectedDriver));
+                if(expectedDriver[0]){
+                    display=GetModuleHandle("DISPLAY");
+                    check("display_module",display!=0);
+                    GetModuleFileName(display,driverFile,sizeof(driverFile));
+                    base=driverFile;
+                    for(i=0;driverFile[i];++i)
+                        if(driverFile[i]=='\\')base=driverFile+i+1;
+                    wsprintf(driverLog,"loaded_display=%s\r\n",
+                             (LPSTR)driverFile);
+                    _lwrite(log,driverLog,lstrlen(driverLog));
+                    check("selected_display_file",
+                          lstrcmpi(base,expectedDriver)==0);
+                }
+            }
             check("player_found",1);check("expected_width",(unsigned)GetSystemMetrics(SM_CXSCREEN)==GetProfileInt("TPQA","width",640));
             check("expected_height",(unsigned)GetSystemMetrics(SM_CYSCREEN)==GetProfileInt("TPQA","height",256));
             SendMessage(player,WM_COMMAND,101,0L);

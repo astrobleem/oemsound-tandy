@@ -6,12 +6,15 @@ static unsigned checks;
 int main(void)
 {
     unsigned i;
-    static const char *const names[]={"HPXY.DRV","TANDY88.DRV",
+    static const char *const names[]={"HPXY.DRV","XRSYNC.DRV","TANDY88.DRV",
         "TNDY160.DRV","TNDY3204.DRV","TNDY6402.DRV","TNDY6404.DRV",
         "TR51616.DRV","TR53216.DRV","TR53204.DRV","TR56402.DRV",
         "TR56404.DRV"};
     TEST(TPDisplay("CGA.DRV")==0);TEST(TPDisplay("cga.drv")==0);
     for(i=0;i<sizeof(names)/sizeof(names[0]);++i)TEST(TPDisplay(names[i])==1);
+    TEST(TPDisplay("xrsync.drv")==1);
+    TEST(TPDisplay("XRSYNC2.DRV")==-1);
+    TEST(TPDisplay("XRSYNC.DR_")==-1);
     TEST(TPDisplay("hpxy.drv")==1);TEST(TPDisplay("HPXY.DR_")==-1);
     TEST(TPDisplay("TXTMODE.DRV")==-1);TEST(TPDisplay("VGA.DRV")==-1);
     TEST(TPDisplay("")==-1);TEST(TPDisplay("C:\\HPXY.DRV")==-1);

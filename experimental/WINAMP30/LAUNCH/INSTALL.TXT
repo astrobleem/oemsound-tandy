@@ -8,7 +8,8 @@ From plain DOS, with Windows completely exited:
 For an existing paired sound installation at another absolute DOS 8.3 path:
   C:\TWXT1\GO C:\W30SND
 
-This local candidate fixes the released UX3 launcher for current XR1 HPXY.
+This local candidate fixes the released UX3 launcher for current XR1 HPXY
+and the explicitly reviewed PR155 XRSYNC.DRV candidate.
 It includes the matching first-party RESERVE.COM. TPLAY checks that helper,
 reserves/reuses the video overlap, installs its owned timer bridge, starts
 Windows /R with the player, then removes the bridge on ordinary return.
@@ -28,8 +29,9 @@ https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.2
 This packet supplies no Windows/System driver files or installation changes.
 
 The supported video-memory policy is listed in DEPS\POLICY.MD. Current
-HPXY and stock CGA playback, graphics activity, stop, exit and bridge cleanup
-passed the recorded emulator tests. The player, audio DLLs, browser and
+Current XRSYNC playback, graphics activity, stop, exit and bridge cleanup
+passed with the actual reviewed driver. Earlier HPXY and stock CGA successes
+remain recorded for those unchanged paths. The player, audio DLLs, browser and
 synthetic songs are unchanged UX3 bytes. TESTS.JSON records the exact run.
 
 Add... selects supported files; Play starts, Stop releases audio. Stop and

@@ -38,7 +38,7 @@ static int TPNameEqual(const char *a,const char *b)
 static int TPDisplay(const char *name)
 {
     static const char *const guarded[]={
-        "HPXY.DRV", "TANDY88.DRV", "TNDY160.DRV", "TNDY3204.DRV",
+        "HPXY.DRV", "XRSYNC.DRV", "TANDY88.DRV", "TNDY160.DRV", "TNDY3204.DRV",
         "TNDY6402.DRV", "TNDY6404.DRV", "TR51616.DRV", "TR53216.DRV",
         "TR53204.DRV", "TR56402.DRV", "TR56404.DRV"
     };

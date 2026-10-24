@@ -1,7 +1,7 @@
 TANDY WINAMP TWXT1 - LOCAL LAUNCHER/PACKAGING FIX
 
 Run INSTALL.TXT's two DOS commands for your existing paired Windows profile.
-Current XR1 HPXY now selects the required16 KB video reservation. The exact
+Current XR1 HPXY and reviewed PR155 XRSYNC select the required16 KB video reservation. The exact
 first-party RESERVE.COM is included. CGA remains the unreserved path.
 
 TPLAY.EXE is rebuilt from the supplied DEPS source. MINIPLAY, browser,
