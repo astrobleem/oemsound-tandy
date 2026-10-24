@@ -13,7 +13,7 @@ arrangements** through the Tandy PSG.
 
 ![Tandy Winamp UX3 in color](docs/SHOTS/WAMPCOL.PNG)
 
-*Current released UX3, captured in Windows 3.0 real mode with the qualified
+*Earlier UX3 capture of the unchanged player, in Windows 3.0 real mode with the
 320x200 color driver. [Genuine capture details](docs/SHOTS/WINAMPCL.MD).*
 
 - **Browse/Add:** choose songs from the Windows file browser.
