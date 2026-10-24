@@ -1,0 +1,4 @@
+TPLAY: FC00:0000=21 FFFF:000E=ff.
+TPLAY: initial IRQ0=f000:fea5.
+TPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.
+TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.

@@ -1,0 +1,10 @@
+TPLAY: FC00:0000=21 FFFF:000E=ff.
+TPLAY: initial IRQ0=f000:fea5.
+TPLAY: display=HPXY.DRV; video reservation=16KB normal-640K.
+TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.
+RESERVE: 16K video overlap reserved. Start Windows with WIN /R.
+TBRIDGE v2 installed
+TPLAY: bridge install return=768.
+TPLAY: owned bridge installed; starting Windows.
+TBRIDGE v2 removed, original BIOS/INT2F vectors restored
+TPLAY: owned bridge removed; Windows return=0.
