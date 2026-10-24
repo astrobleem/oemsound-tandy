@@ -1,38 +1,42 @@
-Current download: [Tandy Winamp XT1](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024). [Install guide](INSTALL.TXT).
+# Tandy Winamp XT1
 
-# Tandy Winamp UX3
+**[Download TWXT1.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP)**. The player, TSOUND driver and matching
+RESERVE helper are included. HPXY/XRSYNC video reservation is automatic;
+stock CGA uses the same launch command without reservation.
 
-[Download TWUX3.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-ux3.20261018/TWUX3.ZIP) or open the [release page](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-ux3.20261018).
-The package contains the accepted app, matching audio helpers, corresponding
-first-party source and notices, and already-public original synthetic examples.
-Read [INSTALL.TXT](INSTALL.TXT) before launching on an existing qualified profile.
+## Install and start
 
-- Use **Add...** to browse for a supported MID, VGM, VGZ, MOD, TND or SND file.
-- **Remove** removes a playlist entry; its file stays intact. Removing the active
-  entry lets that song continue until Stop, EOF or another Play.
-- The session playlist holds **32 entries**. Scroll or use Home, End, Page Up and
-  Page Down to reach songs beyond the visible rows.
-- The window title stays **Tandy Winamp**; status stays inside the window.
+1. Extract `TWXT1` to `C:\TWXT1` and exit Windows completely.
+2. Copy the included TSOUND driver to Windows SYSTEM and select it once in
+   SYSTEM.INI, following the [short install guide](INSTALL.TXT).
+3. From plain DOS:
 
-UX3 received qualitative physical acceptance on the user's Tandy 1000 EX after
-the requested Browse/Add, Remove and scroll-past-four steps on 2026-10-18.
-The user reported "that worked great publish it". See the [scoped record](EVIDENCE/PHYSICAL.JSON).
-This does not certify every format, all 32 slots, physical timing, or the pending
-combined display-driver build. Windows XT release-candidate work remains separate.
+   ```dos
+   C:\TWXT1\TPLAY C:\WINDOWS /CHECK
+   ```
 
-Recorded validation passes 149 portable C89 checks, 396 native UI checks and
-88 independent gzip/PSG/refusal/EOF/ownership checks. The native UI cases cover
-the visible browser, scrolling/keyboard navigation, and continued playback while
-browsing and removing the active entry. The production browser and eight parser/
-format source units remain unchanged from their qualified inputs. See
-[behavior](WINAMP-UI.MD), [building](BUILDING-UI.MD), [validation](VALIDATION-UI.MD)
-and [runtime pins](RUNTIME.JSON). Public CI verifies existing package inputs;
-it does not compile the period native toolchain or repeat physical testing.
+   After **preflight PASS**:
 
-The app derives from the published [libwintandy format preview](https://github.com/astrobleem/libwintandy/tree/24ff4f932c0d4d4e2a18a3c49b0ea0a8ff90e71f/examples/FORMATS30).
-The application-local LWFILE browser is the first-party Win3.0 implementation;
-no Win3.1 COMMDLG is needed. Existing MIT and component notices are retained.
-The external TSOUND driver retains its own published license and is not bundled.
-No commercial/private songs, sampled media, Windows, SDK/toolchain, font, ROM or
-disk image is included. MOD support is a bounded PSG arrangement, without sample
-timbres; supported-format limits remain in the package's FORMATS.MD.
+   ```dos
+   C:\TWXT1\GO
+   ```
+
+Use your actual Windows directory; `GO C:\W30SND`, for example, selects it.
+No extra WINXT launcher or separate sound-driver download is needed.
+
+## Using the player
+
+Add... opens the file browser. Remove changes the playlist, not the file;
+an active removed song continues until Stop or its end. Scroll or use
+Home/End/Page Up/Page Down to reach all 32 playlist slots. Stop and close
+the player, then exit Windows normally to return to DOS.
+
+The player/browser/audio bytes are unchanged from UX3. XT1 completes the
+launcher and driver packaging for current Windows XT. Current native
+[test results](LAUNCH/TESTS.JSON) cover HPXY/XRSYNC playback during redraws,
+reservation/reuse and cleanup; the earlier [physical EX report](EVIDENCE/PHYSICAL.JSON)
+retains its original scope.
+
+[Supported formats](../../docs/FORMATS.MD) · [Build and policy](LAUNCH/POLICY.MD) ·
+[Release](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024).
+Source and component notices are included. Historical UX3 packets remain available.

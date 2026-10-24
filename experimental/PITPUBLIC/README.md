@@ -1,62 +1,42 @@
-# Public experimental sound packages
+# Tandy Windows and DOS sound kits
 
-These freshly prepared original sound kits are published separately from the
-baseline starter preview. [Download the experimental prerelease](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.20261007).
+For Tandy 1000 EX/HX, DOS, 640 KB and Windows 3.0 real mode.
 
-| ZIP | Qualified content | Exact original source |
-| --- | --- | --- |
-| PITWIN.ZIP | Seven Windows clients, baseline mapper and shared PIT SOUND capability, stages 2/3 | sound-voice `02eaa8b11b14f1a8e216b7d3a6e7201aa0f5548a` |
-| PITEXPR.ZIP | Expressive Beats/Piano/JoyMIDI/MiniMIDI opt-in extra voice, stage4 | expressive-voice `f580eb22f0902e1c018d0335184273d7a4f5d833` |
-| MML3AUTH.ZIP | Fiddle/Beats MML3 fifth-part authoring/playback, stage5 | authoring-voice `d73aca98821d4653f2baaaa9799ba9c147f8a499` |
-| PITDOS.ZIP | PSGTEST `/pit` through DOSSND v1, stage6 | dos-psg-voice `91426b8ff3f5cdc91ebb01f6f7f6a31226c87512` |
+- **Sound driver and Windows instruments:** [download PITWIN.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITWIN.ZIP).
+  Includes TSOUND.DRV, Mini Piano, Beats, JoyMIDI, MiniMIDI, PSGPLAY and chimes.
+- **Write five-voice music:** [download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP)
+  for Fiddle and Beats MML3 authoring.
+- **Expressive instruments:** [download PITEXPR.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITEXPR.ZIP).
+- **DOS sound test:** [download PITDOS.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITDOS.ZIP).
 
-Every ZIP contains runtime, corresponding selected complete source, original
-license notices, historical text QA and a current scope/manifest. PITEXPR and
-MML3AUTH include the same qualified TSOUND runtime and matching stage3 driver
-source. Windows PIT playback requires installing TSOUND **only in a disposable
-copy of an existing lawful Windows 3.0 real-mode guest**. App-local MIDIMAP stays
-beside matching clients. [INSTALL.TXT](INSTALL.TXT) describes prerequisites,
-controls, clean setup and rollback; nothing installs automatically or changes CF.
+## Install the Windows sound driver
 
-PIT options remain off by default. The optional PIT2 voice adds one extra
-voice; it does not change the default sound profile. The current PIT2 bass
-fallback is not implemented. Any future default change requires a qualified
-capability check and an explicit toggle; this release changes no defaults.
-Stage 4 expression still uses its roughly 55-ms
-producer cadence; it is not the later R4 prepared-state backend. Speech/PWM
-shares PIT2 and is mutually exclusive with PIT music. System beeps/direct
-writers can bypass leases. Emulator qualification is bounded; physical EX
-summing/fidelity, real joystick/key input, custom-display UI, abrupt
-termination and complete system integration remain open.
+Extract PITWIN to `C:\PITWIN` and exit Windows to plain DOS:
 
-A newer private R4 candidate uses MIDICLK/RAWCLK PIT-cycle deadlines with an
-8-ms minimum spacing between prepared states. Its USER refill and Stage 5
-instrument steps remain 55 ms. This is not a 1-ms realtime or live-input
-latency guarantee. The source adoption is now public in
-[libwintandy](https://github.com/astrobleem/libwintandy), with a fresh MSC6 pair
-and 58-check native Windows 3.0 GUI pass; this is not a new stable binary release.
-The UI may remain hardware-neutral; the R4 audio target is the specified
-Tandy HX platform only, with PCjr audio support pending. See the
-[versioned sound timing notes](../../docs/SNDTIME.MD). TSOUND
-has restricted SOUND semantics, including unsupported system beep functions.
+```bat
+COPY C:\PITWIN\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
+```
 
-`SOURCE-PINS.json` identifies every curated source file; `INPUTS.json` records
-historical archive/receipt identities. Git bytes are preserved in this tree;
-source text was compared to the qualified working-tree source archives with
-line endings normalized for comparison only. Runtime bytes are unchanged.
-CI checks public source identities and local include closure. Fresh package
-checks verify all receipt/runtime pins and ZIP inventories; there is no fresh
-native compilation, emulator run or hardware acceptance.
+Use your actual Windows directory. Under `[boot]` in `SYSTEM.INI`, change the
+existing sound line to `sound.drv=TSOUND.DRV`. Keep each app's paired
+MIDIMAP.DRV beside it; this mapper is app-local, not a system MIDI device.
+Start Windows using your usual required display launcher, then use Program
+Manager's **File / Run**, for example `C:\PITWIN\MINIPIAN.EXE`.
+There is no automatic sound installer. Keep MML3AUTH's BEATS/FIDDLE folders intact.
 
-Historical notes that describe private deliveries or review-only publication
-are preserved as evidence, superseded by the user's explicit 7 October public
-publication request. Historical attribution may name pre-PIT mapper hashes;
-current package manifests control runtime identity. Audio/media, private upload
-receipts, proprietary tools/OS/guest files and ongoing Buddy sampled/slideshow
-experiments are excluded. Native builds require lawful external period tools.
+The [short install guide](INSTALL.TXT) covers the optional speaker voice,
+MML3 controls, DOS use and undo. [Winamp](../WINAMP30/INSTALL.TXT) uses this
+same TSOUND filename and its own checked TPLAY launcher.
 
-Original upstream project license is GPLv3; preserve included component MIT
-notices and attribution. No underlying media rights are granted by code notices.
+## Known limits and technical details
 
-XPCHIME is omitted: its Windows XP score reduction has separate rights.
-Original stage3 receipts describe eight clients including that omitted app.
+PIT2 adds one on/off square-wave voice; it is off until selected. It cannot
+run alongside sampled speaker speech. TSOUND has restricted SOUND semantics,
+including unsupported system beeps; direct beep writers can disturb playback.
+These kits have scoped emulator tests, not full physical EX integration.
+Windows 3.1 is not supported.
+
+[Versioned timing and playback details](../../docs/SNDTIME.MD) ·
+[Release notes and optional checksums](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.20261007).
+Source and original component notices are included in each kit. Historical
+source and test records retain their original scope.
