@@ -11,7 +11,8 @@ if out.exists():p.error('--out must be new')
 for n in ('BIN/CL.EXE','BIN/LINK4.EXE','LIB/SLIBCEW.LIB','LIB/LIBW.LIB'):
  if not (repo/n).is_file():p.error('Missing existing toolchain input: '+n)
 out.mkdir(parents=True)
-for n in ('TINYVID.C','MIDIAPI.H','TINYVID.DEF','TINYVID.RSP','BUILD.BAT'):
+for n in ('TINYVID.C','MIDIAPI.H','BQSCHED.C','BQSCHED.H',
+          'TINYVID.DEF','TINYVID.RSP','BUILD.BAT'):
  shutil.copyfile(Path(__file__).parent/n,out/n)
 config="""[sdl]
 fullscreen=false
