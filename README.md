@@ -32,23 +32,35 @@ uninterrupted music while using Program Manager.
 
 ### Try it
 
-Extract `TWXT1` to `C:\TWXT1`. Follow the [install guide](experimental/WINAMP30/INSTALL.TXT)
-to copy the included TSOUND driver and select it once in your Windows profile.
-Exit Windows and run:
+1. [Download TWXT1.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP) and extract its `TWXT1` folder to
+   `C:\TWXT1`. The sound driver and video helper are included.
+2. Exit Windows. Copy the included driver:
 
-```dos
-C:\TWXT1\TPLAY C:\WINDOWS /CHECK
-C:\TWXT1\GO
-```
+   ```dos
+   COPY C:\TWXT1\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
+   ```
 
-HPXY and XRSYNC use the included video guard automatically. Stock CGA uses the
-same command without reservation. The launcher installs and removes its owned
-timer bridge around Windows; it preserves the paired driver and ownership checks.
+   Under `[boot]` in `C:\WINDOWS\SYSTEM.INI`, change the existing sound line
+   to `sound.drv=TSOUND.DRV`. Keep `system.drv=SYSTEM.DRV` and your display/fonts.
+3. From plain DOS, check:
 
-Choose Add... to load your own supported files. Stop and close the player,
-then exit Windows normally to return to DOS. The [install guide](experimental/WINAMP30/INSTALL.TXT)
-covers the sound-profile prerequisites. The ZIP includes corresponding source,
-notices and original synthetic examples.
+   ```dos
+   C:\TWXT1\TPLAY C:\WINDOWS /CHECK
+   ```
+
+   After **preflight PASS**, start:
+
+   ```dos
+   C:\TWXT1\GO
+   ```
+
+Use your actual Windows directory if different; `GO C:\W30SND`, for example,
+starts that installation. HPXY and XRSYNC use the included video reservation
+automatically. Stock CGA uses the same command without reservation.
+The [install guide](experimental/WINAMP30/INSTALL.TXT) covers other paths and undo.
+
+Choose Add... to load songs. Stop and close the player, then exit Windows
+normally. TPLAY removes its owned timer bridge after Windows returns.
 
 MIDI uses the Tandy voices and basic percussion. VGM/VGZ preserves the supported
 PSG register stream. MOD follows supported tracker pitch, volume and effects
@@ -65,7 +77,7 @@ and export the fifth lane in Beats.
  Â· [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
 
 This is square-wave music, separate from sampled speaker speech. A separate
-Winamp speaker-assist candidate has native validation; it is not in the UX3
+Winamp speaker-assist candidate has native validation; it is not in the XT1
 download. The [engineering note](docs/SPEAKER.MD) explains its scope and progress.
 
 ## Build your own Windows music app

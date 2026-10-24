@@ -1,49 +1,50 @@
-TANDY WINAMP XT1
-===============
+TANDY WINAMP XT1 - INSTALL AND PLAY
 
-Download TWXT1.ZIP:
+DOWNLOAD
 https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP
 
-Use Windows 3.0 real mode on a Tandy 1000 EX/HX with normal 640 KB and
-DOS 3.0 or newer. HPXY and XRSYNC Windows XT profiles use the included video
-reservation automatically; stock CGA needs no video reservation.
+Use Windows 3.0 real mode, DOS 3.0+ and normal 640 KB on a Tandy 1000 EX/HX.
+The sound driver and matching video-memory helper are included. HPXY and
+XRSYNC use that helper automatically; stock CGA needs no video reservation.
 
-1. Extract the ZIP at C:\, producing C:\TWXT1. Keep its runtime files together.
-2. Exit Windows completely. In the Windows profile you will use for Winamp,
-   back up SYSTEM.INI, then copy the included sound driver:
-     COPY C:\WINDOWS\SYSTEM.INI C:\WINDOWS\TWXT1.BAK
+INSTALL
+1. Extract the ZIP's TWXT1 folder to C:\TWXT1. Keep its runtime files together.
+2. Exit Windows completely to plain DOS. Copy the sound driver:
      COPY C:\TWXT1\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
-3. Open C:\WINDOWS\SYSTEM.INI in a text editor. In [boot], change the EXISTING
-   sound.drv line to:
+3. In C:\WINDOWS\SYSTEM.INI, change the existing sound.drv line under [boot]:
      sound.drv=TSOUND.DRV
-   Save the file. Keep system.drv=SYSTEM.DRV and your installed display/fonts
-   selected; do not add a second sound.drv line. If this profile already uses
-   the included TSOUND driver, steps 2-3 are already satisfied.
-4. From plain DOS, check and start:
+   Keep system.drv=SYSTEM.DRV and your installed display/fonts. Change the
+   existing line instead of adding a duplicate. If this installation already
+   uses the included TSOUND driver, steps 2-3 are already satisfied.
+4. From plain DOS, check:
      C:\TWXT1\TPLAY C:\WINDOWS /CHECK
+   After preflight PASS, start:
      C:\TWXT1\GO
-   For another Windows directory, substitute it in the copy/edit/check steps
-   and start with, for example:
-     C:\TWXT1\GO C:\W30SND
 
-TPLAY checks the paired drivers, display policy and helper before starting.
-It reserves or reuses the Tandy video overlap, installs its owned timer bridge,
-starts Windows /R with Winamp, then removes the bridge on normal Windows exit.
-Run TPLAY directly from DOS; no additional WINXT launcher needs to be chained.
-The video reservation remains until reboot and is reused without duplicating it.
-TPLAY changes no installation files. Restore your SYSTEM.INI backup to return
-to its previous sound selection; the separately named TSOUND file can remain.
+Use your actual Windows path if different, in the copy/edit/check steps and
+when launching, for example C:\TWXT1\GO C:\W30SND. No separate sound kit or
+helper download is needed. No automatic sound installer is supplied.
 
-In Winamp, Add... selects a supported file, Play starts and Stop releases audio.
-Stop and close the player, then exit Windows normally to return to DOS. Keep
-LWFILE.DLL and the other DLLs beside MINIPLAY.EXE. The synthetic examples are
-included; FORMATS.MD describes MIDI, VGM/VGZ and MOD behavior.
+PLAY
+TPLAY reserves or reuses the Tandy video overlap, loads its timer bridge,
+starts Windows /R and Winamp, then removes its bridge on normal Windows exit.
+Run GO/TPLAY directly from plain DOS; no extra WINXT launcher is needed.
+The video reservation remains until reboot and is reused without duplication.
+Choose Add... for MID, VGM, VGZ, MOD, TND or SND files. The playlist holds
+32 songs; scroll or use Home/End/Page Up/Page Down. Remove changes the list,
+not the song file. Stop and close the player, then exit Windows normally.
+Use one sound producer at a time; do not run a competing sound/timer TSR.
 
-The exact paired SYSTEM.DRV and TSOUND.DRV identities are checked by TPLAY.
-The unchanged player/audio/browser bytes are from UX3. HPXY and actual XRSYNC
-playback during window movement/repaint, stop, sound release, normal exit,
-reservation reuse and failed starts have recorded native emulator results in
-TESTS.JSON. UX3's separate physical EX acceptance remains its original record.
-DEPS/POLICY.MD gives the explicit display policy and developer test details.
-DEPS/TSOUND contains corresponding sound-driver source and its license.
-No Windows, ROMs, proprietary build tools or third-party songs are included.
+TROUBLESHOOTING AND UNDO
+Keep the runtime DLLs, TBRIDGE.EXE, RESERVE.COM and TPLAY together. If CHECK
+refuses, resolve its reported driver, display or ownership problem before
+starting. The paired system/sound checks and reservation refusal remain active.
+To remove TSOUND, exit Windows and restore the previous sound.drv value in
+SYSTEM.INI, normally SOUND.DRV for the stock driver. TSOUND is inactive after
+another sound driver is selected. TPLAY itself changes no installation files.
+
+DETAILS
+FORMATS.MD describes the supported formats. MOD is a PSG arrangement rather
+than sample playback. TESTS.JSON records XT1's HPXY/XRSYNC playback, redraw,
+reservation and cleanup tests. UX3's earlier physical EX report retains its
+original scope. Source, notices and original synthetic examples are included.
