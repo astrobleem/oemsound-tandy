@@ -17,10 +17,12 @@ jobs:
         with:
           ref: ${{ env.SOURCE_SHA }}
           persist-credentials: false
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            experimental/WINAMP30/LAUNCH
-            experimental/PITPUBLIC/PITWIN/SOURCE
-            artifacts/win30/TWXT1.ZIP
+            /.gitattributes
+            /experimental/WINAMP30/LAUNCH/
+            /experimental/PITPUBLIC/PITWIN/SOURCE/
+            /artifacts/win30/TWXT1.ZIP
       - name: Confirm exact reviewed head
         run: test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
       - name: Compile and run C89 policy checks
