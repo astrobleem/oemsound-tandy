@@ -1,14 +1,15 @@
-TANDY WINAMP TWXT1 - LOCAL LAUNCHER/PACKAGING FIX
+TANDY WINAMP XT1
 
-Run INSTALL.TXT's two DOS commands for your existing paired Windows profile.
-Current XR1 HPXY and reviewed PR155 XRSYNC select the required16 KB video reservation. The exact
-first-party RESERVE.COM is included. CGA remains the unreserved path.
+Read INSTALL.TXT, extract to C:\TWXT1, select the included TSOUND driver in
+your Windows 3.0 real-mode profile, then run C:\TWXT1\GO from plain DOS.
 
-TPLAY.EXE is rebuilt from the supplied DEPS source. MINIPLAY, browser,
-audio DLLs, TBRIDGE and synthetic examples are unchanged published UX3 bytes.
-BUILD.JSON, RUNTIME.JSON, MANIFEST.JSON and TESTS.JSON identify this candidate.
+XT1 fixes the launcher and packaging for current Windows XT HPXY and XRSYNC.
+The exact RESERVE.COM and paired TSOUND.DRV are included. CGA uses the same
+command without a video reservation. Unknown display names remain refused.
+
+The player, browser, audio DLLs, TBRIDGE and synthetic examples retain their
+unchanged UX3 bytes. TPLAY.EXE is rebuilt from the supplied DEPS source.
+BUILD.JSON, RUNTIME.JSON, MANIFEST.JSON and TESTS.JSON identify this download.
 DEPS\BLDTPLAY.BAT rebuilds only the launcher with external MSC6/MASM/LINK4.
-DEPS\BUILD.BAT retains the historical full dependency-build recipe.
-SRC records the unchanged UX3 app's source and historical acceptance.
-
-This candidate is local only; existing published releases are unchanged.
+SRC records the unchanged app source; DEPS\TSOUND contains driver source/license.
+Preserve the included component notices.

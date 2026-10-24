@@ -7,6 +7,7 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 BASE_SHA = '389bab087507339ee1183c6ba7e6fc63a5142a85b1de1be53b085017f43a40c2'
+SOUND_SHA = '7461d227846830f3ff604c40cf31ad0e3fb34122a13de6269e86de02cc4209e5'
 RSV_SHA = '644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8'
 SOURCES = ('TPLAY.C', 'TPLAYPOL.H', 'TPLAY.RSP', 'DOSSTAT.ASM', 'BUILD.BAT')
 
@@ -31,11 +32,21 @@ def build(base, native, out, source_commit):
     helper = (HERE / 'RESERVE.COM').read_bytes()
     if hashlib.sha256(helper).hexdigest() != RSV_SHA:
         raise ValueError('Expected the exact first-party XR1 reservation helper')
+    sound = (HERE / 'TSOUND.DRV').read_bytes()
+    if hashlib.sha256(sound).hexdigest() != SOUND_SHA:
+        raise ValueError('Expected the exact tested TSOUND driver')
     with zipfile.ZipFile(base) as z:
         files = {n[len('TWUX3/'):]: z.read(n) for n in z.namelist()
                  if n.startswith('TWUX3/') and not n.endswith('/')}
     files['TPLAY.EXE'] = launcher
     files['RESERVE.COM'] = helper
+    files['TSOUND.DRV'] = sound
+    sound_source = HERE.parents[2] / 'experimental/PITPUBLIC/PITWIN/SOURCE'
+    driver = sound_source / 'src/win30/DRIVER'
+    sound_names = ('ABI.MD', 'BUILD.BAT', 'BUILD.PY', 'DRVTEST.C', 'DRVTEST.DEF', 'DRVTEST.RSP', 'INTRUD.C', 'INTRUD.DEF', 'INTRUD.RSP', 'LEASEQA.C', 'PITAPI.H', 'PITCORE.H', 'PITTEST.C', 'README.MD', 'SHIM.ASM', 'TESTS.JSON', 'TSOUND.C', 'TSOUND.DEF', 'TSOUND.RSP', 'hosttest/windows.h')
+    for name in sound_names:
+        files['DEPS/TSOUND/' + name] = (driver / name).read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n')
+    files['DEPS/TSOUND/LICENSE'] = (sound_source / 'LICENSE').read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n')
     for name in SOURCES:
         if name != 'BUILD.BAT':
             files['DEPS/' + name] = (HERE / name).read_bytes()
@@ -47,7 +58,7 @@ def build(base, native, out, source_commit):
     files['BUILD.JSON'] = (json.dumps({'baseline_ux3': BASE_SHA,
         'source_commit': source_commit, 'launcher_build': record,
         'unchanged_player': identity(files['MINIPLAY.EXE']),
-        'reservation': identity(helper)}, indent=2) + '\n').encode()
+        'reservation': identity(helper), 'paired_sound': identity(sound)}, indent=2) + '\n').encode()
     runtime = [{ 'name': n, **identity(data)} for n, data in sorted(files.items())
                if '/' not in n and n not in ('MANIFEST.JSON', 'RUNTIME.JSON')]
     files['RUNTIME.JSON'] = (json.dumps(runtime, indent=2) + '\n').encode()

@@ -1,4 +1,4 @@
-Current local launcher/package correction: [TWXT1](LAUNCH/INSTALL.TXT).
+Current download: [Tandy Winamp XT1](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024). [Install guide](INSTALL.TXT).
 
 # Tandy Winamp UX3
 

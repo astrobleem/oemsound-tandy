@@ -1,0 +1,31 @@
+name: TPLAY exact-head package and policy
+on:
+  pull_request:
+  push:
+    branches: [main, fix/tplay-current-display]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tplay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+          sparse-checkout: |
+            experimental/WINAMP30/LAUNCH
+            experimental/PITPUBLIC/PITWIN/SOURCE
+            artifacts/win30/TWXT1.ZIP
+      - name: Confirm exact reviewed head
+        run: test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+      - name: Compile and run C89 policy checks
+        run: |
+          gcc -x c -std=c89 -Wall -Wextra -Werror -I experimental/WINAMP30/LAUNCH experimental/WINAMP30/LAUNCH/TESTPOL.C -o /tmp/tplay-policy
+          /tmp/tplay-policy
+      - name: Verify download and reject corrupted packages
+        run: python3 experimental/WINAMP30/LAUNCH/VERIFY.PY --self-test
