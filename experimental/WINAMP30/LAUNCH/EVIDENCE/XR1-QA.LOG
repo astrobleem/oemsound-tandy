@@ -1,0 +1,13 @@
+entered=1
+winexec=1
+player_found=1
+expected_width=1
+expected_height=1
+play_started=1
+graphics_updates=1
+foreground_audio_service=1
+playing_during_graphics=1
+stop_closed=1
+sound_released=1
+player_closed=1
+all_pass=1

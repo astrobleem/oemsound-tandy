@@ -1,0 +1,29 @@
+{
+  "target": "MSC6 / MASM5.10 / LINK4; 8086 DOS small model",
+  "sources": {
+    "TPLAY.C": {
+      "bytes": 8884,
+      "sha256": "ef6db50749ff237a9cabaabfb4132e948eb8631cc5d5485003b4688ccf79aabf"
+    },
+    "TPLAYPOL.H": {
+      "bytes": 2111,
+      "sha256": "a8c2952b40121820b4ec4270f3f051d1bb7ecf99d2ff30858dbc151204e1125e"
+    },
+    "DOSSTAT.ASM": {
+      "bytes": 989,
+      "sha256": "c32c6170cc9ec4678aedc1d998f87357a22b6acf06155cd3b89340c4bc214de2"
+    },
+    "TPLAY.RSP": {
+      "bytes": 67,
+      "sha256": "bbe5dfe21637be2ce81fc782b1214185388dab87a299ad3b34522e08bf870f5f"
+    },
+    "BUILD.BAT": {
+      "bytes": 387,
+      "sha256": "01fb85fb79bca001d37fa780766167c0d12007b0d634d37134688724cad9ef65"
+    }
+  },
+  "runtime": {
+    "bytes": 18131,
+    "sha256": "9f2a57683ff8e93c47f79032abbab35f93942b775523e84f1e629262f876dc18"
+  }
+}

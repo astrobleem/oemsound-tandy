@@ -1,3 +1,5 @@
+Current download: [Tandy Winamp XT1](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024). [Install guide](INSTALL.TXT).
+
 # Tandy Winamp UX3
 
 [Download TWUX3.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-ux3.20261018/TWUX3.ZIP) or open the [release page](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-ux3.20261018).

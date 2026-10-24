@@ -1,0 +1,14 @@
+{
+  "tag": "tandy-winamp-xt1.20261024",
+  "archive": {
+    "path": "artifacts/win30/TWXT1.ZIP",
+    "bytes": 715152,
+    "sha256": "055f872e4af09d5f2a8f8bc961dfadbcf274d56380e827006d5e3d91a3d3b061"
+  },
+  "runtime": {
+    "bytes": 18145,
+    "sha256": "68b385d3f8a03d68c086100b649e1fe7da4c7ada969aeeb24ea564da3ac219e1"
+  },
+  "native_tests": "experimental/WINAMP30/LAUNCH/TESTS.JSON",
+  "guide": "experimental/WINAMP30/LAUNCH/INSTALL.TXT"
+}

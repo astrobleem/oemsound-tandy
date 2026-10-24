@@ -7,9 +7,9 @@ Music players and instruments for the **Tandy 1000 EX/HX** and Windows 3.0.
 Browse your music, build a playlist, and play **MIDI, VGM/VGZ and tracker MOD
 arrangements** through the Tandy PSG.
 
-**[Download Tandy Winamp UX3](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-ux3.20261018/TWUX3.ZIP)**
- · [Install guide](experimental/WINAMP30/INSTALL.TXT)
- · [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-ux3.20261018)
+**[Download Tandy Winamp XT1](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP)**
+ Â· [Install guide](experimental/WINAMP30/INSTALL.TXT)
+ Â· [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024)
 
 ![Tandy Winamp UX3 in color](docs/SHOTS/WAMPCOL.PNG)
 
@@ -32,13 +32,18 @@ uninterrupted music while using Program Manager.
 
 ### Try it
 
-Extract the ZIP's `TWUX3` folder to `C:\TWUX3`. With the matching existing
-Windows 3.0 sound profile at `C:\W30SND`, exit Windows and run:
+Extract `TWXT1` to `C:\TWXT1`. Follow the [install guide](experimental/WINAMP30/INSTALL.TXT)
+to copy the included TSOUND driver and select it once in your Windows profile.
+Exit Windows and run:
 
 ```dos
-C:\TWUX3\TPLAY C:\W30SND /CHECK
-C:\TWUX3\GO
+C:\TWXT1\TPLAY C:\WINDOWS /CHECK
+C:\TWXT1\GO
 ```
+
+HPXY and XRSYNC use the included video guard automatically. Stock CGA uses the
+same command without reservation. The launcher installs and removes its owned
+timer bridge around Windows; it preserves the paired driver and ownership checks.
 
 Choose Add... to load your own supported files. Stop and close the player,
 then exit Windows normally to return to DOS. The [install guide](experimental/WINAMP30/INSTALL.TXT)
@@ -48,7 +53,7 @@ notices and original synthetic examples.
 MIDI uses the Tandy voices and basic percussion. VGM/VGZ preserves the supported
 PSG register stream. MOD follows supported tracker pitch, volume and effects
 using square-wave tones; it does not reproduce sample timbres.
-[Supported formats](docs/FORMATS.MD) · [Playback timing](docs/SNDTIME.MD)
+[Supported formats](docs/FORMATS.MD) Â· [Playback timing](docs/SNDTIME.MD)
 
 ## Make five-voice music
 
@@ -57,7 +62,7 @@ the PSG's **three tones and noise**. Write a fifth `[P]` part in MML3, or edit
 and export the fifth lane in Beats.
 
 **[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP)**
- · [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
+ Â· [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
 
 This is square-wave music, separate from sampled speaker speech. A separate
 Winamp speaker-assist candidate has native validation; it is not in the UX3
@@ -82,16 +87,16 @@ apps here remain separate projects.
 
 ## More to play with
 
-- **[Mini Piano](src/win30/PIANO/README.MD)** — play notes with the keyboard or mouse.
-- **[JOYMIDI](src/win30/JOYMIDI/README.MD)** — turn a joystick into a pitch/velocity instrument.
-- **[Beats Lab](artifacts/win30/BEATS/README.MD)** — build patterns on a four-lane step sequencer.
-- **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** — an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256×160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
-  · [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
-- **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** — an offline visualization
+- **[Mini Piano](src/win30/PIANO/README.MD)** â€” play notes with the keyboard or mouse.
+- **[JOYMIDI](src/win30/JOYMIDI/README.MD)** â€” turn a joystick into a pitch/velocity instrument.
+- **[Beats Lab](artifacts/win30/BEATS/README.MD)** â€” build patterns on a four-lane step sequencer.
+- **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** â€” an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256Ã—160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
+  Â· [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
+- **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** â€” an offline visualization
   of the Tandy PSG and PC-speaker arrangement.
 
 See [validation](experimental/WINAMP30/VALIDATION-UI.MD),
-[checksums](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-ux3.20261018/SHA256SUMS)
+[checksums](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/SHA256SUMS)
 and component notices for exact versions and scope. Winamp and the
 [Windows XT display project](https://github.com/astrobleem/oemdisplay-tandy)
 have separate release gates.
