@@ -48,11 +48,15 @@ PSG register stream. MOD follows supported tracker pitch, volume and effects
 using square-wave tones; it does not reproduce sample timbres.
 [Supported formats](docs/FORMATS.MD) · [Playback timing](docs/SNDTIME.MD)
 
-## Make five-voice music
+## Your Tandy has an extra voice!
 
-**Fiddle and Beats** add an optional **PC-speaker square-wave voice** alongside
-the PSG's **three tones and noise**. Write a fifth `[P]` part in MML3, or edit
-and export the fifth lane in Beats.
+### Tandy FauxBlaster, from Doebelinschmirtz Incorporated!
+
+Behold the Fifth-Voice-inator! **Fiddle and Beats** add an optional
+**PC-speaker square-wave voice** alongside the Tandy PSG's **three tone voices
+and noise channel**. A little extra mischief from the speaker you already own.
+
+Write a fifth `[P]` part in MML3, or edit and export the fifth lane in Beats.
 
 **[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP)**
  · [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
