@@ -1,82 +1,65 @@
-# AI contributor instructions
+# Contributor guidance
 
-This repository hosts a Windows 3.x sound driver and related utilities for Tandy 1000 machines.
-The code targets 16-bit real-mode DOS/Windows and expects the Microsoft C 6.0 toolchain.
+This repository owns the unified Windows 3.0 real-mode SOUND driver,
+applications and packaged source/runtime. Production targets 8086/8088 with
+Microsoft C 6.0, MASM and LINK4. Start with `README.md` and the component's
+build instructions; root `BUILD.BAT` builds only the legacy DOS PSG test.
 
-## Quick start checklist
-- Run `sudo apt-get update && sudo apt-get install -y dosbox-x dos2unix file`
-  to make sure DOSBox-X and line-ending tools are available.
-- Launch DOSBox-X with this repository mounted and switch to `C:`:
-  `dosbox-x -c "mount c /path/to/repo" -c "c:"`
-- Inside DOSBox-X set `PATH`, `LIB`, and `INCLUDE` for the bundled Microsoft C
-  toolchain (see below).
-- Clean old build artifacts with `del *.exe *.obj *.txt`, then run `build`
-  and execute `psgtest` to verify the expected audio output.
+## Ownership and the next PSG bank task
 
-## Critical build constraints
-- **Do not attempt to build in a standard Linux shell.**
-- Requires a 16-bit DOS environment with Microsoft C 6.0 or 7.0 (`cl.exe`, `link.exe`, `lib.exe`).
-- Testing should use real Tandy 1000 hardware or accurate emulation (e.g. DOSBox‑X with `machine=tandy`).
+- `src/win30/DRIVER/` is the canonical unified `SOUND.DRV`. Published
+  Winamp uses MCITNDY -> MIDICLK -> RAWCLK and the existing speaker
+  transport. Instruments do not require another sound driver or timer.
+- Implement portable bank behavior in astrobleem/libtandy `sound/INSTR.C`
+  and `MIDISYN.C` first; read its `docs/PSG-BANKS.md`. Windows integration
+  belongs in astrobleem/libwintandy `libtandywin/AUDIO/SOURCE/`.
+- `experimental/WINLIB30/SOURCE/` is the current Windows engine mirror
+  consumed by `tools/WINAMP/PACK.PY` / `VERIFY.PY`, despite its directory
+  name. Preserve newer paired-speaker fallback, controllers and streamed
+  SMF behavior. Coordinate focused vendor/mirror updates, not wholesale
+  replacement with the older standalone core. Packaged source snapshots
+  are outputs, not independent places to design instrument behavior.
+- Preserve Default exactly, add one contrasting bank, and provide a host
+  A/B audition of identical notes/events. There is no current bank selector;
+  envelope/vibrato flags are not banks. No accepted song edits, SoundFont
+  claims or consumer Python/modern-PC preparation. Developer Python is fine.
+- The separate VGM task is changing player/format/decompression code.
+  This documentation/bank handoff must not change those files or branch.
+  Work in isolated current-main checkouts; do not launch emulators.
+  Local commits are allowed; publication needs explicit approval.
 
-## Environment setup
-- Install **dos2unix**, **unix2dos**, and the `file` utility in the host if editing outside DOS.
-- The repository includes Microsoft C 6.0 toolchain and headers under `BIN`, `INCLUDE`, `LIB`, and Windows 3.1 DDK sampl
-es under `DDK`.
-- Install **DOSBox‑X** or **PCem** and mount this repository inside the emulator, e.g.:
+## Build and verification
 
-```
-dosbox-x -c "mount c /path/to/repo" -c "c:"
-```
-- Before building, set environment variables:
+The component builders require an externally owned toolchain, new private
+output and (where supported) a shared emulator lease. Do not assume old
+`BIN`, `LIB`, `INCLUDE` or `DDK` trees are the current build setup. Open
+Watcom is not a proven drop-in replacement for the published Win16 DLLs.
 
-```
-set PATH=C:\BIN
-set LIB=C:\LIB
-set INCLUDE=C:\INCLUDE
-```
-- Verify the toolchain with `cl /?` and `link /?`.
-- As an open-source alternative, install **Open Watcom** (`wcl`, `wlink`).
+- Driver: `src/win30/DRIVER/BUILD.PY` (`--dosbox`, `--toolchain`, `--lease`,
+  `--out`); backend: `experimental/WINLIB30/SOURCE/BLDRAW.PY`
+  with the same options. Both launch DOSBox-X; do not run them in this task.
+- The current three-DLL native batch is
+  `experimental/WINLIB30/SOURCE/BLDMIDI.BAT`. There is no `BLDMIDI.PY`.
+  Earlier `experimental/WINLIB30/BUILD/PLAYER30.PY` is historical and
+  does not acquire the current shared lease. Do not launch it as a shortcut.
+- Player UI: `experimental/WINAMP30/BUILDING-UI.MD`. Native packet/source
+  verification: `python tools/WINAMP/VERIFY.PY --self-test`. Packaging
+  regressions: `tools/WINAMP/TESTMIDI.PY`, `TESTBASE.PY`, `TESTPIT.PY`.
+- Driver host checks: `python src/win30/DRIVER/HOSTTEST.PY --out <new-output>`.
+  Windows MIDI renderer/controller checks are documented in libwintandy
+  `docs/BUILD.TXT`; host CI coverage is in `.github/workflows/tplay.yml`.
+- On Chad's Windows host compile through
+  `C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py`; never start
+  raw GCC/cc1. Uppercase `.C` files need `-x c`. Host tests do not prove
+  Win16 ABI, native segment sizes, real-time playback or audible quality.
 
-## Coding style
-- Stick to **C89** syntax; avoid C99/C++ extensions and `//` comments.
-- Indent with **4 spaces**; no tabs.
-- Keep lines at **80 columns** or fewer.
-- Use descriptive `static` functions and all-uppercase macros.
-- Prefer explicit integer widths (`unsigned`, `WORD`, `BYTE`) and `const` when possible.
-- Functions with no parameters should use `void` in the signature.
+Use C89 production code and preserve DOS 8.3 runtime names and existing
+line-ending conventions. Keep fixed storage, 16-bit near/far contracts and
+the 640 KB real-mode budget. Measure CODE/DGROUP changes against the current
+MIDI8 receipt in libwintandy before claiming a bank fits. Preserve export
+ordinals, shared SOUND/PIT ownership and existing timer/IRQ boundaries.
 
-## Build & test
-Build by running `build.bat` inside the DOS environment:
-
-```
-build
-```
-The script compiles `src\psgtest.c` and links a small-model executable using Microsoft C:
-
-```
-cl /nologo /c /O /AS src\psgtest.c > output.txt
-echo. | link /NOI psgtest.obj,psgtest.exe,,; > link.txt
-```
-Expected artifacts:
-- `psgtest.exe` (~1–2 KB) – plays a C major arpeggio, brief noise burst, and fade‑out (~1.5 s total).
-- `psgtest.obj`, `output.txt`, `link.txt`.
-To validate a clean build:
-`del *.exe *.obj *.txt`
-`build`
-`psgtest` (confirm audio sequence)
-When driver sources are added, build `.DRV` files with the Windows 3.1 DDK.
-
-## Test environment / CI
-- The default Linux container lacks a DOS emulator and the 16‑bit MS toolchain, so `build.bat` fails here.
-- To run builds automatically, provide:
-- A DOS emulator such as **dosbox-x** or **pcem**.
-- Microsoft C 6.0/7.0 binaries (`cl.exe`, `link.exe`, `lib.exe`) and libraries.
-- Optionally, `Open Watcom` 16-bit tools (`wcl`, `wlink`) as an open-source alternative.
-- CI could invoke: `dosbox-x -c "mount c . & c: & build.bat"` once these dependencies exist.
-
-## Pull request expectations
-- Keep commits focused and include relevant documentation updates.
-- Verify the build runs in your DOS environment and, when possible, attach the program output.
-- Remove compiled binaries and logs (`*.EXE`, `*.OBJ`, `*.TXT`) before committing.
-- Use DOS 8.3 filenames and maintain CRLF line endings (`unix2dos` can help).
-
+Keep commits focused. Never clean with `del *.txt` or delete tracked runtime,
+source, manuals or evidence by wildcard. Generated outputs belong in new
+private directories. Label existing native receipts as recorded evidence;
+do not claim a new native or physical-hardware test from host checks.
