@@ -4,8 +4,8 @@ For Tandy 1000 EX/HX, normal 640 KB, DOS and Windows 3.0 real mode.
 
 Download MML3AUTH.ZIP for Fiddle/Beats authoring, or PITEXPR.ZIP for
 Mini Piano, JoyMIDI, MiniMIDI and expressive Beats:
-https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/MML3AUTH.ZIP
-https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/PITEXPR.ZIP
+https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP
+https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITEXPR.ZIP
 
 Extract the complete kit, keeping its application folders intact. Exit
 Windows to DOS and run the included TWSETUP.EXE. Setup finds Windows and
