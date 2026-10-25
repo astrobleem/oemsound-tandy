@@ -140,6 +140,19 @@ def main():
     exe=a.installer.read_bytes()
     require(ident(exe)==release['installer'], 'Native installer archive pin differs')
     verify_sfx(exe,files)
+    from importlib.machinery import SourceFileLoader
+    pit = SourceFileLoader('current_pit_packets',str(HERE/'PITPACK.PY')).load_module()
+    for kit in ('MML3AUTH','PITEXPR'):
+        path=a.package.parent/(kit+'.ZIP')
+        require(ident(path.read_bytes())==release['assets'][path.name],
+                'Instrument packet archive pin differs: '+kit)
+        pit.verify(path,kit)
+        with zipfile.ZipFile(path) as archive:
+            require(archive.read(kit+'/TWSETUP.EXE')==exe,
+                    'Instrument packet uses another installer')
+            require(archive.read(kit+'/TWXT2.ZIP')==a.package.read_bytes(),
+                    'Instrument packet uses another shared driver package')
+    print('PASS both preserved instrument packets use the same tested installer')
     print('PASS native Setup package, %d identities, exact native/current source pins'%count)
     if a.self_test:
         changes = (('SOUND.DRV',b'wrong'),('RESERVE.COM',b'wrong'),

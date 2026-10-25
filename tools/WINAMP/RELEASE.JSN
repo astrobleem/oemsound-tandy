@@ -1,0 +1,35 @@
+{
+  "tag": "tandy-winamp-xt2.20261025",
+  "source_commit": "991c3dda3d9614395e3d50e9ce77195fb095d339",
+  "package": {
+    "bytes": 1612564,
+    "sha256": "77666b635df602dab2b4a0302f7922caef819247d11d1ed9b616220b10a51aaa"
+  },
+  "installer": {
+    "bytes": 371249,
+    "sha256": "123e98f04b4b61fa58fd79a71feb8eed495e75280bf296ad35d72573a7f07976"
+  },
+  "assets": {
+    "TWXT2.ZIP": {
+      "bytes": 1612564,
+      "sha256": "77666b635df602dab2b4a0302f7922caef819247d11d1ed9b616220b10a51aaa"
+    },
+    "TWSETUP.EXE": {
+      "bytes": 371249,
+      "sha256": "123e98f04b4b61fa58fd79a71feb8eed495e75280bf296ad35d72573a7f07976"
+    },
+    "MML3AUTH.ZIP": {
+      "bytes": 2344413,
+      "sha256": "3ed7fbd22236536dd120b6e84192529c0f8fc05e8ef52c5588b1399af882ba7a"
+    },
+    "PITEXPR.ZIP": {
+      "bytes": 2385450,
+      "sha256": "89f304d7f6eff3471ed6d91b05e163abda00c5ff5a66085968886ad8b8f28d93"
+    }
+  },
+  "native_tests": {
+    "bytes": 67247,
+    "sha256": "3a1760a3ffe58f45a1554caf4861001653a0984ce8afea3927d80d8869de78dc"
+  },
+  "current_baseline": "734040674b7b4ea35b946c5703234e43722492f7"
+}
