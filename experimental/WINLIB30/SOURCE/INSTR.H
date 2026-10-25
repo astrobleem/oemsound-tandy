@@ -1,12 +1,13 @@
 #ifndef TANDY_INSTR_H
 #define TANDY_INSTR_H
-/* Original compact PSG presets. WORD/DWORD are supplied by windows.h. */
+#include "LTPBASE.H"
+/* Original compact PSG presets. */
 typedef struct {
-    DWORD began;
-    WORD period;
-    BYTE velocity,preset;
+    LTP_U32 began;
+    LTP_U16 period;
+    LTP_U8 velocity,preset,modulation;
 } TVOICE;
-void InstStart(TVOICE *,unsigned,unsigned,unsigned,DWORD);
-int InstRead(TVOICE *,DWORD,WORD,WORD *,WORD *);
+void InstStart(TVOICE *,unsigned,unsigned,unsigned,LTP_U32);
+int InstRead(TVOICE *,LTP_U32,LTP_U16,LTP_U16 *,LTP_U16 *);
 
 #endif

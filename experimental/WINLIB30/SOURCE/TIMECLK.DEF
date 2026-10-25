@@ -28,6 +28,16 @@ EXPORTS
  TCBOpen @21
  TCBPush @22
  TCBEnd @23
+ TCXGetCaps @24
+ TCXOpen @25
+ TCXPush @26
+ TCXSetBass @27
+ TCXStatus @28
+ TCXFrameMode @29
+ TCXFramePush @30
+ TCXPairCaps @34
+ TCXPairPush @35
+ TCXPairLive @36
 IMPORTS
  CreateSystemTimer=SYSTEM.2
  KillSystemTimer=SYSTEM.3

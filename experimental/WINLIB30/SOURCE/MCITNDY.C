@@ -5,36 +5,37 @@
 #include "MCIAPI.H"
 #include "SMF.H"
 #include "MCIPSG.H"
+#include "MIDISKIP.H"
 static HTASK owner,opening;static HWND service,notify;static WORD device,serial=1,playing,paused,inPump,count,fileBytes,openStage,refillCalls,maxPumpMs;
-static HGLOBAL storage;static BYTE FAR *bytes;static DWORD length,position;static HMODULE pin;
+static HFILE hfile=-1;static DWORD length,position;static HMODULE pin;
 static int valid(WORD id){return device&&id==device&&owner==GetCurrentTask();}
 static void signal(WORD reason){HWND w=notify;notify=0;if(w&&IsWindow(w))PostMessage(w,MC_NOTIFYMSG,reason,(LONG)device);}
-WORD MCEXPORT MciDebug(WORD q){switch(q){case 1:return count;case 2:return SCDebug(6);case 3:return refillCalls;case 4:return maxPumpMs;case 5:return storage?(WORD)GlobalSize(storage):0;case 6:return fileBytes;case 7:return 1024;case 8:return SCDebug(3);case 9:return SCDebug(2);case 10:return paused;}return openStage;}
+WORD MCEXPORT MciDebug(WORD q){switch(q){case 1:return count;case 2:return SCDebug(6);case 3:return refillCalls;case 4:return maxPumpMs;case 5:return 0;case 6:return fileBytes;case 7:return 1024;case 8:return SCDebug(3);case 9:return SCDebug(2);case 10:return paused;}return openStage;}
 WORD MCEXPORT MciPump(void){WORD r;DWORD then,span;if(!valid(device)||!playing||inPump)return 0;inPump=1;then=GetTickCount();r=SCPump();position=SCPosition();refillCalls++;
  if(r!=1){if(!SCStop()){playing=paused=0;signal(r?MC_FAILURE:MC_SUCCESS);}}
  span=GetTickCount()-then;if(span>maxPumpMs)maxPumpMs=span>65535UL?65535U:(WORD)span;inPump=0;return 0;}
 LONG MCEXPORT MciWnd(HWND w,WORD m,WORD a,LONG b){if(m==WM_TIMER){MciPump();return 0L;}if((m==WM_CLOSE||(m==WM_ENDSESSION&&a))&&valid(device))MciCommand(device,MC_CLOSE,0L,0L);return DefWindowProc(w,m,a,b);}
-static void freeFile(void){smf_close();if(storage){GlobalUnlock(storage);GlobalFree(storage);}storage=0;bytes=0;count=0;}
+static void freeFile(void){smf_close();if(hfile>=0)_lclose(hfile);hfile=-1;count=0;}
+/* The song stays on disk: the parser pulls small per-track windows. */
+static unsigned readAt(DWORD off,unsigned char *dst,unsigned n){
+    if(hfile<0||_llseek(hfile,(LONG)off,0)<0)return 0;
+    return _lread(hfile,dst,n)==n?n:0;}
 static DWORD readFile(LPCSTR name)
 {
-    HFILE f;LONG size;int r;static SMF_EVENT e;WORD s,a,b,ch,group=0;DWORD groupAt=0xffffffffUL;
-    f=_lopen(name,OF_READ|OF_SHARE_DENY_WRITE);if(f<0)return MC_BADFILE;
-    size=_llseek(f,0L,2);_llseek(f,0L,0);
-    if(size<=0L || size>32768L){_lclose(f);return MC_BADFILE;}
-    storage=GlobalAlloc(GMEM_MOVEABLE,(DWORD)size);
-    if(!storage){_lclose(f);return MC_BADFILE;}
-    bytes=GlobalLock(storage);
-    if(!bytes){_lclose(f);GlobalFree(storage);storage=0;return MC_BADFILE;}
-    r=_lread(f,bytes,(WORD)size)==(WORD)size;_lclose(f);
-    if(!r || !smf_open(bytes,(WORD)size))return MC_BADFILE;
+    LONG size;int r;static SMF_EVENT e;WORD group=0;DWORD msg;DWORD groupAt=0xffffffffUL;
+    hfile=_lopen(name,OF_READ|OF_SHARE_DENY_WRITE);if(hfile<0)return MC_BADFILE;
+    size=_llseek(hfile,0L,2);
+    if(size<=0L)return MC_BADFILE;
+    if(!smf_open_stream(readAt,(DWORD)size))return MC_BADFILE;
     length=smf_duration_ms();
     if(!smf_event_count())return MC_BADFILE;
-    count=smf_event_count();fileBytes=(WORD)size;
+    count=smf_event_count();fileBytes=size>65535L?65535U:(WORD)size;
     while((r=smf_next(&e))==1){
-        if(e.ms!=groupAt){groupAt=e.ms;group=0;}if(++group>1024)return MC_BADFILE;
-        s=e.status&0xf0;a=e.data1;b=e.data2;ch=e.status&15;
-        if(!(s==0x80 || s==0xc0 || (s==0xb0 && (a==120 || a==123)) ||
-            (s==0x90 && (!b || (ch==9?(a>=35 && a<=81):(a>=45 && a<=96))))))
+        if(e.ms!=groupAt){groupAt=e.ms;group=0;}
+        msg=(DWORD)e.status|((DWORD)e.data1<<8)|((DWORD)e.data2<<16);
+        if(MSSkipMessage(msg))continue;
+        if(++group>1024)return MC_BADFILE;
+        if(!MSValidMessage(msg,1))
             return MC_UNSUPPORTED;
     }
     return r<0?MC_BADFILE:0L;

@@ -1,14 +1,7 @@
 /* Original 55 ms attenuation curves; no game data or interrupt code.
    Indexed snapshots make each update O(1), even after a long GUI stall. */
-#define WINVER 0x0300
-#ifndef SYNTH_HOST
-#include <windows.h>
-#else
-#include "MIDISYN.H"
-#endif
-#include "MIDIAPI.H"
 #include "INSTR.H"
-static BYTE curves[11][16]={
+static LTP_U8 curves[11][16]={
  {0,0,1,2,3,4,5,6,7,8,8,8,8,8,8,8}, /* keys */
  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, /* organ */
  {0,0,1,1,2,2,3,3,4,4,5,5,5,5,5,5}, /* bass */
@@ -23,27 +16,28 @@ static BYTE curves[11][16]={
 };
 static signed char motion[8]={0,1,2,1,0,-1,-2,-1};
 void InstStart(TVOICE *v,unsigned preset,unsigned volume,
-               unsigned period,DWORD step)
+               unsigned period,LTP_U32 step)
 {
     v->began=step;v->period=period;
-    v->velocity=(BYTE)volume;v->preset=(BYTE)preset;
+    v->velocity=(LTP_U8)volume;v->preset=(LTP_U8)preset;
 }
-int InstRead(TVOICE *v,DWORD step,WORD flags,WORD *period,WORD *volume)
+int InstRead(TVOICE *v,LTP_U32 step,LTP_U16 flags,LTP_U16 *period,LTP_U16 *volume)
 {
-    DWORD elapsed;unsigned n,a,depth;int delta,p;
+    LTP_U32 elapsed;unsigned n,a,depth;int delta,p;
     elapsed=step-v->began;n=elapsed>15UL?15:(unsigned)elapsed;
     a=curves[v->preset][n];
     if(a==15){*volume=15;*period=v->period;return 0;}
     a+=v->velocity;*volume=a>15?15:a;p=v->period;
-    if((flags&SYNTH_VIBRATO) && elapsed>=8UL &&
+    if(((flags&LTP_VIBRATO) || v->modulation) && elapsed>=8UL &&
        (v->preset==3 || v->preset==4 || v->preset==5)) {
         /* A shallow divider-proportional triangle, 8 ticks per cycle.
            Below divider 256 motion is zero, avoiding coarse high-note
            warble. Integer quantization makes exact cents note-dependent. */
-        depth=v->period>>8;
+        depth=(v->period>>8);
+        depth+=depth*v->modulation/127U;
         delta=motion[(unsigned)elapsed&7];
         if(delta<0)p-=(-delta==2)?depth<<1:depth;
         else p+=(delta==2)?depth<<1:delta?depth:0;
     }
-    if(p<1)p=1;if(p>1023)p=1023;*period=(WORD)p;return 1;
+    if(p<1)p=1;if(p>1023)p=1023;*period=(LTP_U16)p;return 1;
 }

@@ -13,9 +13,11 @@ typedef char SMF_BYTE_MUST_BE_8_BITS[(sizeof(unsigned char) == 1) ? 1 : -1];
 #define EV_END     4
 
 typedef struct SMF_TRACK {
-    unsigned start;
-    unsigned end;
-    unsigned pos;
+    SMF_ULONG start;
+    SMF_ULONG end;
+    SMF_ULONG pos;
+    SMF_ULONG wpos;
+    unsigned wlen;
     SMF_ULONG tick;
     SMF_ULONG tempo;
     unsigned char running;
@@ -25,10 +27,13 @@ typedef struct SMF_TRACK {
     unsigned char d2;
     unsigned char length;
     unsigned char done;
+    unsigned char win[SMF_WINDOW];
 } SMF_TRACK;
 
-static const unsigned char SMF_FAR *g_file;
-static unsigned g_size;
+static const unsigned char SMF_FAR *g_mem;
+static SMF_READ g_read;
+static SMF_ULONG g_size;
+static unsigned char g_hdr[8];
 static unsigned g_tracks;
 static unsigned g_division;
 static unsigned g_parsed;
@@ -51,31 +56,60 @@ static int fail(const char *message)
     return 0;
 }
 
+static unsigned mem_read(SMF_ULONG offset, unsigned char *dst, unsigned n)
+{
+    unsigned i;
+
+    if (offset > g_size || n > g_size - offset)
+        return 0;
+    for (i = 0; i < n; ++i)
+        dst[i] = g_mem[(unsigned)offset + i];
+    return n;
+}
+
+/* Load n (<= 8) header bytes at offset into g_hdr. */
+static int header(SMF_ULONG offset, unsigned n)
+{
+    if (g_read(offset, g_hdr, n) != n)
+        return fail("MIDI file read error");
+    return 1;
+}
+
 static unsigned read16(unsigned p)
 {
-    return ((unsigned)g_file[p] << 8) | (unsigned)g_file[p + 1U];
+    return ((unsigned)g_hdr[p] << 8) | (unsigned)g_hdr[p + 1U];
 }
 
 static SMF_ULONG read32(unsigned p)
 {
-    return ((SMF_ULONG)g_file[p] << 24) |
-           ((SMF_ULONG)g_file[p + 1U] << 16) |
-           ((SMF_ULONG)g_file[p + 2U] << 8) |
-           (SMF_ULONG)g_file[p + 3U];
+    return ((SMF_ULONG)g_hdr[p] << 24) |
+           ((SMF_ULONG)g_hdr[p + 1U] << 16) |
+           ((SMF_ULONG)g_hdr[p + 2U] << 8) |
+           (SMF_ULONG)g_hdr[p + 3U];
 }
 
-static int tag(unsigned p, unsigned char a, unsigned char b,
+static int tag(unsigned char a, unsigned char b,
                unsigned char c, unsigned char d)
 {
-    return g_file[p] == a && g_file[p + 1U] == b &&
-           g_file[p + 2U] == c && g_file[p + 3U] == d;
+    return g_hdr[0] == a && g_hdr[1] == b && g_hdr[2] == c && g_hdr[3] == d;
 }
 
 static int get_byte(SMF_TRACK *t, unsigned char *value)
 {
+    unsigned n;
+
     if (t->pos >= t->end)
         return fail("Truncated track event");
-    *value = g_file[t->pos++];
+    if (t->pos < t->wpos || t->pos - t->wpos >= (SMF_ULONG)t->wlen) {
+        n = t->end - t->pos > (SMF_ULONG)SMF_WINDOW ?
+            SMF_WINDOW : (unsigned)(t->end - t->pos);
+        if (g_read(t->pos, t->win, n) != n)
+            return fail("MIDI file read error");
+        t->wpos = t->pos;
+        t->wlen = n;
+    }
+    *value = t->win[(unsigned)(t->pos - t->wpos)];
+    ++t->pos;
     return 1;
 }
 
@@ -163,14 +197,21 @@ static int parse_event(SMF_TRACK *t)
             } else if (type == 81U) {
                 if (length != 3)
                     return fail("Tempo event length is not three");
-                t->tempo = ((SMF_ULONG)g_file[t->pos] << 16) |
-                           ((SMF_ULONG)g_file[t->pos + 1U] << 8) |
-                           (SMF_ULONG)g_file[t->pos + 2U];
+                if (!get_byte(t, &b))
+                    return 0;
+                t->tempo = (SMF_ULONG)b << 16;
+                if (!get_byte(t, &b))
+                    return 0;
+                t->tempo |= (SMF_ULONG)b << 8;
+                if (!get_byte(t, &b))
+                    return 0;
+                t->tempo |= (SMF_ULONG)b;
+                length = 0;
                 if (t->tempo == 0)
                     return fail("Tempo must be nonzero");
                 t->kind = EV_TEMPO;
             }
-            t->pos += (unsigned)length;
+            t->pos += length;
             return 1;
         }
         if (b == 240U || b == 247U) {
@@ -178,7 +219,7 @@ static int parse_event(SMF_TRACK *t)
                 return 0;
             if (length > (SMF_ULONG)(t->end - t->pos))
                 return fail("SysEx event exceeds track boundary");
-            t->pos += (unsigned)length;
+            t->pos += length;
             return 1;
         }
         return fail("Unsupported system status in MIDI file");
@@ -315,6 +356,8 @@ int smf_rewind(void)
     for (i = 0; i < g_tracks; ++i) {
         t = &g_track[i];
         t->pos = t->start;
+        t->wpos = 0;
+        t->wlen = 0;
         t->tick = 0;
         t->running = 0;
         t->done = 0;
@@ -326,7 +369,8 @@ int smf_rewind(void)
 
 void smf_close(void)
 {
-    g_file = 0;
+    g_mem = 0;
+    g_read = 0;
     g_size = 0;
     g_tracks = 0;
     g_division = 0;
@@ -337,32 +381,33 @@ void smf_close(void)
     g_error = "No file open";
 }
 
-int smf_open(const unsigned char SMF_FAR *file, unsigned size)
+static int open_inner(SMF_READ read, SMF_ULONG size)
 {
     unsigned format;
     unsigned declared;
-    unsigned p;
+    SMF_ULONG p;
     SMF_ULONG length;
     static SMF_EVENT event; /* Address passed through a near pointer. */
     int status;
 
-    smf_close();
-    if (file == 0)
-        return fail("Null MIDI file pointer");
+    if (read == 0)
+        return fail("Null MIDI read callback");
     if (size > SMF_MAX_FILE)
-        return fail("MIDI file exceeds 32768 bytes");
+        return fail("MIDI file exceeds 1048576 bytes");
     if (size < 14U)
         return fail("Truncated MIDI header");
-    g_file = file;
+    g_read = read;
     g_size = size;
-    if (!tag(0, 'M', 'T', 'h', 'd'))
-        return fail("Missing MThd header");
+    if (!header(0, 8) || !tag('M', 'T', 'h', 'd'))
+        return g_failed ? 0 : fail("Missing MThd header");
     length = read32(4);
-    if (length < 6 || length > (SMF_ULONG)(g_size - 8U))
+    if (length < 6 || length > g_size - 8U)
         return fail("Invalid MIDI header length");
-    format = read16(8);
-    declared = read16(10);
-    g_division = read16(12);
+    if (!header(8, 6))
+        return 0;
+    format = read16(0);
+    declared = read16(2);
+    g_division = read16(4);
     if (format > 1U)
         return fail("Only format 0 and format 1 are supported");
     if (declared == 0 || declared > SMF_MAX_TRACKS ||
@@ -370,22 +415,24 @@ int smf_open(const unsigned char SMF_FAR *file, unsigned size)
         return fail("Invalid or unsupported track count");
     if (g_division == 0 || (g_division & 32768U) != 0)
         return fail("Only nonzero PPQN timing is supported");
-    p = (unsigned)length + 8U;
+    p = length + 8U;
     while (p < g_size) {
         if (g_size - p < 8U)
-            return fail("Truncated MIDI chunk header");
-        length = read32(p + 4U);
-        if (length > (SMF_ULONG)(g_size - p - 8U))
+            break; /* Fewer than a chunk header left: ignore the padding. */
+        if (!header(p, 8))
+            return 0;
+        length = read32(4);
+        if (length > g_size - p - 8U)
             return fail("MIDI chunk exceeds file boundary");
-        if (tag(p, 'M', 'T', 'r', 'k')) {
+        if (tag('M', 'T', 'r', 'k')) {
             if (g_tracks >= declared)
                 return fail("More tracks than declared in header");
             g_track[g_tracks].start = p + 8U;
-            g_track[g_tracks].end = p + 8U + (unsigned)length;
+            g_track[g_tracks].end = p + 8U + length;
             ++g_tracks;
         }
         /* Unknown bounded chunks are skipped as required by SMF readers. */
-        p += 8U + (unsigned)length;
+        p += 8U + length;
     }
     if (g_tracks != declared)
         return fail("Fewer tracks than declared in header");
@@ -415,3 +462,18 @@ SMF_ULONG smf_duration_ms(void) { return g_duration; }
 unsigned smf_event_count(void) { return g_file_channels; }
 unsigned smf_track_count(void) { return g_tracks; }
 unsigned smf_division(void) { return g_division; }
+
+int smf_open_stream(SMF_READ read, SMF_ULONG size)
+{
+    smf_close();
+    return open_inner(read, size);
+}
+
+int smf_open(const unsigned char SMF_FAR *file, unsigned size)
+{
+    smf_close();
+    if (file == 0)
+        return fail("Null MIDI file pointer");
+    g_mem = file;
+    return open_inner(mem_read, size);
+}
