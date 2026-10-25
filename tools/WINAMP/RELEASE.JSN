@@ -1,35 +1,35 @@
 {
   "tag": "windows-xt",
-  "source_commit": "68fc60510bde5d7f6fa74e3fa806719bff7ead65",
+  "source_commit": "4f0d22c07028fc8d7c14134ceb6c54d399fa3009",
   "package": {
-    "bytes": 2157594,
-    "sha256": "40d00a49ecb4dc177274042c5084a5a3b5ee3d4e59eca81003af8c6c083f72db"
+    "bytes": 2373822,
+    "sha256": "a65e1ae06b3fc874809a907bb94b6420c7e8490e2b8ca3776cbfda28ef81fd79"
   },
   "installer": {
-    "bytes": 383302,
-    "sha256": "19f3a2af3c28b463efe00db0d85d173c7555bac95132a88c8b9cc8fec6c37413"
+    "bytes": 386593,
+    "sha256": "e2cc290d46101a0268530308a0d16cf7d4bc997b9a03fcb0f68fd7882a7ae236"
   },
   "assets": {
     "TWXT2.ZIP": {
-      "bytes": 2157594,
-      "sha256": "40d00a49ecb4dc177274042c5084a5a3b5ee3d4e59eca81003af8c6c083f72db"
+      "bytes": 2373822,
+      "sha256": "a65e1ae06b3fc874809a907bb94b6420c7e8490e2b8ca3776cbfda28ef81fd79"
     },
     "TWSETUP.EXE": {
-      "bytes": 383302,
-      "sha256": "19f3a2af3c28b463efe00db0d85d173c7555bac95132a88c8b9cc8fec6c37413"
+      "bytes": 386593,
+      "sha256": "e2cc290d46101a0268530308a0d16cf7d4bc997b9a03fcb0f68fd7882a7ae236"
     },
     "MML3AUTH.ZIP": {
-      "bytes": 2901496,
-      "sha256": "96f9ce17cf92840956b96366df855256a9ad903d383894d19b9b01d78b7de855"
+      "bytes": 3121015,
+      "sha256": "c78c4487b59cf8e85fa0e5f946db10168ea21a752964bc2dcd0d3b87c25f1c44"
     },
     "PITEXPR.ZIP": {
-      "bytes": 2942533,
-      "sha256": "17345caf47f1c740925dd8f1bd8a05e522a1be54468456d0428574a0a3198866"
+      "bytes": 3162052,
+      "sha256": "625dc5d0eb6bfd68facf07cf45a4722daf7aff9ef71e4925ec3846f264d3ab17"
     }
   },
   "native_tests": {
-    "bytes": 39262,
-    "sha256": "8ac28a889392f86fe801f41f9d8900c7889d3d7f41a3457db3cde8e4a97f6a1e"
+    "bytes": 58758,
+    "sha256": "1af61757b56e64387266850ffee945bab805269814cbca53ae14744c7be281d3"
   },
   "current_baseline": "734040674b7b4ea35b946c5703234e43722492f7"
 }
