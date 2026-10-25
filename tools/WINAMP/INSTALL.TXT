@@ -40,7 +40,9 @@ ownership cannot safely support the launch. Resolve that reported condition
 before trying again. Setup cleans up failed writes internally.
 
 FORMATS
-MIDI uses Tandy voices and basic percussion. Supported VGM/VGZ data preserves
-the PSG register stream. MOD is arranged for PSG square waves and does not
+MIDI streams from disk and supports sustain, volume, expression, pitch bend
+and controller resets. Low bass uses the PC speaker with automatic PSG
+fallback. Tandy voices and percussion share the installed sound driver.
+Supported VGM/VGZ data preserves the PSG register stream. MOD is arranged for PSG square waves and does not
 reproduce sample timbres. Original synthetic examples and corresponding
 source are included. Development test records are in TESTS.JSN.
