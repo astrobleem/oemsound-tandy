@@ -57,6 +57,16 @@
       "sha256": "ad2eec53e1fdaba997567da143bfebec4ef931ec7178b49219fea31ce0532f45"
     },
     {
+      "path": "HOST/TEST_BURST.C",
+      "bytes": 8889,
+      "sha256": "7cd5743eedfb8f46ba30943e26a42c4da25db81c95c93b6a62086fb90c9a3d29"
+    },
+    {
+      "path": "HOST/TEST_PAIR.C",
+      "bytes": 7417,
+      "sha256": "bb6863e0afc50e47c24aa529d58e03e8b78093a53de4302028ed25de14a34e8b"
+    },
+    {
       "path": "LICENSE",
       "bytes": 1084,
       "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4"
@@ -65,6 +75,11 @@
       "path": "LICENSE-TNDY.TXT",
       "bytes": 1070,
       "sha256": "ef1e80ec6ef92aea234d7e0f9b89bf04aa2abb57da9e484bc55dec4a67834eaf"
+    },
+    {
+      "path": "NATIVE/BANKS.JSN",
+      "bytes": 15516,
+      "sha256": "c712b359c4339b96e00a41a97e6b4d64c709a4e556f932f159c1c35f66c8099a"
     },
     {
       "path": "NOTICES.TXT",
@@ -83,8 +98,8 @@
     },
     {
       "path": "SOURCE/APPCLK.H",
-      "bytes": 3329,
-      "sha256": "863c8ce18eb83ec605268fa0950de9c699a797c13a43c2056a572d03b869266b"
+      "bytes": 3625,
+      "sha256": "6b4a6076fed8034830adbaace55eb185d8901b4a711dd68a3d6d4ce28025e3cb"
     },
     {
       "path": "SOURCE/BEATSEQ.H",
@@ -108,13 +123,13 @@
     },
     {
       "path": "SOURCE/INSTR.C",
-      "bytes": 2062,
-      "sha256": "3d7960b4dd8a1c66f67466748882934d38bc9d2b788ffb3e34aa67604e30b9da"
+      "bytes": 2669,
+      "sha256": "c9943748efe1d3fa3ada09c928f94eb1792799833ea930aa31e4308b445c700e"
     },
     {
       "path": "SOURCE/INSTR.H",
-      "bytes": 333,
-      "sha256": "4af9dd69ce78d2e7752d391ff0c8232a44daf8aa1f20d83b45fa02ab46d10cf7"
+      "bytes": 353,
+      "sha256": "8540ba94b1fe9d8d80ac452f3926e607928e6cd629108f8ce9f43c7dfc6daba1"
     },
     {
       "path": "SOURCE/LICENSE.TXT",
@@ -123,8 +138,8 @@
     },
     {
       "path": "SOURCE/LIVEMIDI.H",
-      "bytes": 3194,
-      "sha256": "412872225825a54c8226b5273c3286444c12973d2a716ee4a1a3c801b2629cbd"
+      "bytes": 3661,
+      "sha256": "5d2f7b54a70aa0473d22c7f9a0557fc86459851a9916a7c724b1e7d7bd66fb62"
     },
     {
       "path": "SOURCE/LWAUDIO.H",
@@ -133,28 +148,28 @@
     },
     {
       "path": "SOURCE/MCIAPI.H",
-      "bytes": 1508,
-      "sha256": "b9546d9d8c839800a79c7217c79227d865060b1526c92403cdcd5a314d96a8ec"
+      "bytes": 1543,
+      "sha256": "3cbd927242189dbe29652e036d30dbf394bf2ff0978528d1a5e07e2c1f88458c"
     },
     {
       "path": "SOURCE/MCIPSG.C",
-      "bytes": 3585,
-      "sha256": "a75fcedee621697c7f032ccef4b9e25cc45bca339fc5541f44656ebf18d8f461"
+      "bytes": 3934,
+      "sha256": "0e16ec823519a98c56ab46055b71345efa13239d739e0986fc5bc5e3619d81a4"
     },
     {
       "path": "SOURCE/MCIPSG.H",
-      "bytes": 150,
-      "sha256": "5347ed95daccd56caec678c80088e6916fc4132a787df0733dcbf443fbce6982"
+      "bytes": 170,
+      "sha256": "f610cf7d318c7688c9a53986e5ce871954e2f69b1aaaae7abd441fb85f6a6f32"
     },
     {
       "path": "SOURCE/MCITNDY.C",
-      "bytes": 6171,
-      "sha256": "ea82d054a859760dd197f3171c992067374790bde3967750685748b106ddd587"
+      "bytes": 6437,
+      "sha256": "499dc30ab37c0db6d7f37f44c676f5145824084db6c76d0e3faaae50911bcfc5"
     },
     {
       "path": "SOURCE/MCITNDY.DEF",
-      "bytes": 325,
-      "sha256": "439ae361352e7550516b7646a38ed2b0946f525044fc02d9971c3de1c0dcf3e0"
+      "bytes": 348,
+      "sha256": "91fcbc2695cd7888b82ce745033779f86827f601295fbc068bcb638f281cf156"
     },
     {
       "path": "SOURCE/MCITNDY.RSP",
@@ -163,8 +178,8 @@
     },
     {
       "path": "SOURCE/MDAPI.H",
-      "bytes": 1381,
-      "sha256": "a8339122e6d1e72d742b55319f5c154f61e2856fc21d15a4fc3eb9774c34e011"
+      "bytes": 1955,
+      "sha256": "79d94058236c324b48b2a7b948fa57f98cf9f25d84dec1fcce8c4d480c05d629"
     },
     {
       "path": "SOURCE/MIDIAPI.H",
@@ -173,13 +188,13 @@
     },
     {
       "path": "SOURCE/MIDICLK.C",
-      "bytes": 10170,
-      "sha256": "e6814c627ac735e9380934e73da4cf65464bd2656732d27b48b98862e1b45f5e"
+      "bytes": 13656,
+      "sha256": "d6e10e5e5a91d57936e18f3741725291ce2163b0a14afba8b98fc7ef8486e685"
     },
     {
       "path": "SOURCE/MIDICLK.DEF",
-      "bytes": 552,
-      "sha256": "63ce3430460d438aa6baed29308c6e84301a227945ce245bc40c60984c8c9633"
+      "bytes": 660,
+      "sha256": "7e092282af274d171eae2cb27189c11b29c77345abc0dcb5c02c14532c75d66b"
     },
     {
       "path": "SOURCE/MIDICLK.RSP",
@@ -188,18 +203,18 @@
     },
     {
       "path": "SOURCE/MIDISYN.C",
-      "bytes": 2981,
-      "sha256": "fa9cd4a15b5da9c4b2c3b5b04165ad3bad8f6a97cbbdf96de019a687f1b5213b"
+      "bytes": 8779,
+      "sha256": "321dafe4b8890b273d92ab6e061f214bff4252068b27171bc35b00daf86ba2da"
     },
     {
       "path": "SOURCE/MIDISYN.H",
-      "bytes": 548,
-      "sha256": "dae6122f431d2fe6455ccbcafdbb0695a7573115dd126dc9f84b34819b2e96b3"
+      "bytes": 1389,
+      "sha256": "25c7bb7cd6361e51b90c20d682807c12b7aaeb15ce6c4c8afca73125b053e58b"
     },
     {
       "path": "SOURCE/MINIPLAY.C",
-      "bytes": 20327,
-      "sha256": "d976c300b1eb8142b1ec6384d5795f40ff840ca36eb33460ab3679cf3748ff3e"
+      "bytes": 30738,
+      "sha256": "f3c286a8a3445129d4742c5de5f36aafc161717e86fa08666ae68ec6dfab3869"
     },
     {
       "path": "SOURCE/MINIPLAY.DEF",
@@ -213,8 +228,8 @@
     },
     {
       "path": "SOURCE/PERIODS.H",
-      "bytes": 301,
-      "sha256": "4fbb8b010c03e768909093494f6549f4781f6e80c13984b0592a8305ea5a513e"
+      "bytes": 660,
+      "sha256": "5ae78d5167aae9ca223bcfb0855312f4d6669dc5f3c40ed398cab5c61f80df93"
     },
     {
       "path": "SOURCE/PSG.ASM",
@@ -263,13 +278,13 @@
     },
     {
       "path": "SOURCE/SMF.C",
-      "bytes": 12314,
-      "sha256": "27a1bd9b879f999132c1e77c78f09f554c47e853111c9075d09cada0939f0540"
+      "bytes": 14311,
+      "sha256": "862b239d8485485134980685db9f2b32c832c021cfe80ea5c616f394f62db220"
     },
     {
       "path": "SOURCE/SMF.H",
-      "bytes": 2255,
-      "sha256": "1283c8ec525e594ee57499e0bea9db71be4336ce8a8833a76c28efa9176fbca4"
+      "bytes": 3524,
+      "sha256": "8eccc5645955a2057105148920e4e66afce70da522fd94e52b5f3725ba5b2341"
     },
     {
       "path": "SOURCE/TBRIDGE.ASM",
@@ -288,18 +303,18 @@
     },
     {
       "path": "SOURCE/TIMECLK.C",
-      "bytes": 10368,
-      "sha256": "2af3ddd446f68589dcce830823b3d0c00446061074f8734ddf5bc28ceec736f0"
+      "bytes": 24349,
+      "sha256": "f3bdd89bb83aa9ed612b3daa6d054cd667996d4ceebac2f1a9d3bc188f8ca369"
     },
     {
       "path": "SOURCE/TIMECLK.DEF",
-      "bytes": 472,
-      "sha256": "f998b06a1230dc8ae6bfd091cdb1657e35607243eb44dceaedd9b60c2db79133"
+      "bytes": 729,
+      "sha256": "a9fb0ab6e1afd0547eebd1e152546c999bd6f782ac0b38bd3a860567d1284271"
     },
     {
       "path": "SOURCE/TIMECLK.H",
-      "bytes": 754,
-      "sha256": "8c725d1436243070829cd6b30b8cdec06934f220a40122df2bed12e6b51b4544"
+      "bytes": 784,
+      "sha256": "478d911587645d6d2acb2965dc7b78e8b6e3b67373e8a8a4933395398ff9d193"
     },
     {
       "path": "SOURCE/TIMECLK.RSP",
@@ -308,8 +323,8 @@
     },
     {
       "path": "SOURCE/WINHOOK.ASM",
-      "bytes": 8205,
-      "sha256": "2181cb398c9baf5d26b3dbdd9a21145d67325c5eb49241d87481c2def867052e"
+      "bytes": 8330,
+      "sha256": "6e44cbcb0ce6eb2a29f039aaebd5dc6534ba76d5f1648780c5010b2ae94a3520"
     },
     {
       "path": "STATUS.MD",
@@ -317,9 +332,59 @@
       "sha256": "0768a77f0f78cf0fabff95a09217ea3e74ca3f786f8c4671903cac9a55126165"
     },
     {
-      "path": "TESTS/beat_host.c",
-      "bytes": 2645,
-      "sha256": "fc238fab932d3b79fea3fcb8cf56562fef32c2e7fb43e0cf70f4d35aa9785dbf"
+      "path": "TESTS/AUDITION/AUDHOOK.H",
+      "bytes": 3065,
+      "sha256": "85c460049c500edec2fc1219169aea998c95ec22921d6204356263a073d043a1"
+    },
+    {
+      "path": "TESTS/AUDITION/AUDMAIN.H",
+      "bytes": 2805,
+      "sha256": "385a46e9b1aa66aa52f324dabf9bedc03a1859e1217769a3e66cdc9c30e3646e"
+    },
+    {
+      "path": "TESTS/AUDITION/PSGAUDIT.C",
+      "bytes": 22149,
+      "sha256": "e43dd3f8b143f4ed7968a5935ec51d470bb406e0fd75f5f65d5195a8a056fb7d"
+    },
+    {
+      "path": "TESTS/AUDITION/RUNNOTES.PY",
+      "bytes": 3316,
+      "sha256": "24124b7ca9b842c8b2e59c9adb9282999e72a402c2c3ed941cde9bfd772ae59f"
+    },
+    {
+      "path": "TESTS/BANKFILE.C",
+      "bytes": 2319,
+      "sha256": "486b9faa1dfa8c6cb1d3022978a2e6bef31f4e8070dda0bd06c1d49bafa5a878"
+    },
+    {
+      "path": "TESTS/BANKLIVE.C",
+      "bytes": 1678,
+      "sha256": "b72eab832c1eb010aa1b72294d8e5e2b6f3c15da16c5b7c053c1b42406b7f3c0"
+    },
+    {
+      "path": "TESTS/BANKMD.C",
+      "bytes": 2718,
+      "sha256": "c0f415fa44671e0a31891e19fffbb3ce03560666226f0def7072ae6db67a2b86"
+    },
+    {
+      "path": "TESTS/BANKSC.C",
+      "bytes": 2578,
+      "sha256": "96803f8f7817fbe1f7020ed7a812f09d7c30c308e409097eb6fa177864df0f18"
+    },
+    {
+      "path": "TESTS/BANKTEST.C",
+      "bytes": 13593,
+      "sha256": "71f2dd62af086519188b53e0689332bbf04ebe9fd814f072d7e43a07292b4cac"
+    },
+    {
+      "path": "TESTS/BTRACE.C",
+      "bytes": 11531,
+      "sha256": "b6eaa9ef1d7dbe859a14f959abfd34fe716bc6a08202f9ba2958f9cdc2f235b9"
+    },
+    {
+      "path": "TESTS/FACADE/RUN.PY",
+      "bytes": 1596,
+      "sha256": "da74fec62137ff09f425fceb045bbf083c6e2ba210cafa2a299e4d6ec24507f3"
     },
     {
       "path": "TESTS/FACADE/facade.c",
@@ -332,34 +397,14 @@
       "sha256": "e8558bb47bff05feaaccb6b3c3de5a8486e7064e05103dec7e62c971c1b77bec"
     },
     {
-      "path": "TESTS/FACADE/RUN.PY",
-      "bytes": 1596,
-      "sha256": "da74fec62137ff09f425fceb045bbf083c6e2ba210cafa2a299e4d6ec24507f3"
-    },
-    {
       "path": "TESTS/FACADE/windows.h",
       "bytes": 353,
       "sha256": "826e1f425dd0212cb6ba86971ea8ad4c58ab8db973b9dfe7180c2f6bcd63b431"
     },
     {
-      "path": "TESTS/host.c",
-      "bytes": 268,
-      "sha256": "ad3351213b3337dedd412434b03104f2207d65337d5059801eb884b40335eb11"
-    },
-    {
-      "path": "TESTS/live_host.c",
-      "bytes": 1699,
-      "sha256": "4287d608838a8ebd2505d43f3a5845ba5da4171bff63844df08e90b1ad46e49a"
-    },
-    {
-      "path": "TESTS/mdhost/driver.c",
-      "bytes": 6401,
-      "sha256": "99655e676e29ab68c5adfc21e66e627fb4f71795380ff0cd6c4e639437c316de"
-    },
-    {
-      "path": "TESTS/mdhost/windows.h",
-      "bytes": 523,
-      "sha256": "7ba8d6bb9ffc6fff18c2b04436b0124b39b013dbb0bc3f5985f7d3416a60fea8"
+      "path": "TESTS/FIXTURES/STREAM.MID",
+      "bytes": 3100,
+      "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
     },
     {
       "path": "TESTS/NATIVE/FIXTURE-INPUTS.JSON",
@@ -460,6 +505,41 @@
       "path": "TESTS/NATIVE/RESULT.JSON",
       "bytes": 2365,
       "sha256": "88facd779ac4e1220b2652568be2d54450e1f78c6ff60caebe66a653f65ac41d"
+    },
+    {
+      "path": "TESTS/RUNBANK.PY",
+      "bytes": 2332,
+      "sha256": "2175145505dd8ca6a04f5608a00cc1c88db5ba3c2eaf93bb3e8ca9817ca9c54a"
+    },
+    {
+      "path": "TESTS/beat_host.c",
+      "bytes": 2645,
+      "sha256": "fc238fab932d3b79fea3fcb8cf56562fef32c2e7fb43e0cf70f4d35aa9785dbf"
+    },
+    {
+      "path": "TESTS/host.c",
+      "bytes": 268,
+      "sha256": "ad3351213b3337dedd412434b03104f2207d65337d5059801eb884b40335eb11"
+    },
+    {
+      "path": "TESTS/live_host.c",
+      "bytes": 1820,
+      "sha256": "0c6ad53e879b691eb9ac53c014f00dc5bc13ffcccc3659384b0bf88de99d80f4"
+    },
+    {
+      "path": "TESTS/mci_admission_host.c",
+      "bytes": 5948,
+      "sha256": "b18988c906d187692991ed737c11075583ba7c2f264ea52338261394be49b1fd"
+    },
+    {
+      "path": "TESTS/mdhost/driver.c",
+      "bytes": 6423,
+      "sha256": "af01db12c684efa65659d995bfef9f043f5b9c286142043fd81b872099943257"
+    },
+    {
+      "path": "TESTS/mdhost/windows.h",
+      "bytes": 523,
+      "sha256": "7ba8d6bb9ffc6fff18c2b04436b0124b39b013dbb0bc3f5985f7d3416a60fea8"
     },
     {
       "path": "TESTS/run_host.sh",

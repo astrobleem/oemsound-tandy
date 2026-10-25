@@ -5,7 +5,7 @@ applications and packaged source/runtime. Production targets 8086/8088 with
 Microsoft C 6.0, MASM and LINK4. Start with `README.md` and the component's
 build instructions; root `BUILD.BAT` builds only the legacy DOS PSG test.
 
-## Ownership and the next PSG bank task
+## Ownership and PSG banks
 
 - `src/win30/DRIVER/` is the canonical unified `SOUND.DRV`. Published
   Winamp uses MCITNDY -> MIDICLK -> RAWCLK and the existing speaker
@@ -19,13 +19,15 @@ build instructions; root `BUILD.BAT` builds only the legacy DOS PSG test.
   SMF behavior. Coordinate focused vendor/mirror updates, not wholesale
   replacement with the older standalone core. Packaged source snapshots
   are outputs, not independent places to design instrument behavior.
-- Preserve Default exactly, add one contrasting bank, and provide a host
-  A/B audition of identical notes/events. There is no current bank selector;
+- Preserve Default and Chamber exactly. Host A/B auditions use identical
+  notes/events and gain; tuning needs user direction. Explicit MD/MCI bank
+  setters select the bank;
   envelope/vibrato flags are not banks. No accepted song edits, SoundFont
   claims or consumer Python/modern-PC preparation. Developer Python is fine.
-- The separate VGM task is changing player/format/decompression code.
-  This documentation/bank handoff must not change those files or branch.
-  Work in isolated current-main checkouts; do not launch emulators.
+- Current VGM player/format/decompression code is qualified.
+  Preserve the published VGM streaming/progress/temp behavior.
+  Work in isolated current-main checkouts; native runs require the shared
+  emulator lease, inventory, private inputs and bounded owned cleanup.
   Local commits are allowed; publication needs explicit approval.
 
 ## Build and verification
@@ -37,7 +39,7 @@ Watcom is not a proven drop-in replacement for the published Win16 DLLs.
 
 - Driver: `src/win30/DRIVER/BUILD.PY` (`--dosbox`, `--toolchain`, `--lease`,
   `--out`); backend: `experimental/WINLIB30/SOURCE/BLDRAW.PY`
-  with the same options. Both launch DOSBox-X; do not run them in this task.
+  with the same options. Both launch DOSBox-X; use their guarded lease and inventory checks.
 - The current three-DLL native batch is
   `experimental/WINLIB30/SOURCE/BLDMIDI.BAT`. There is no `BLDMIDI.PY`.
   Earlier `experimental/WINLIB30/BUILD/PLAYER30.PY` is historical and

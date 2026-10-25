@@ -6,7 +6,7 @@
 #include "MCIPSG.H"
 #include "MIDISKIP.H"
 typedef WORD(FAR PASCAL *OPEN)(WORD FAR *);typedef WORD(FAR PASCAL *PUSH)(WORD,DWORD,DWORD,DWORD);typedef WORD(FAR PASCAL *COMMIT)(WORD,DWORD,DWORD,WORD);typedef WORD(FAR PASCAL *ONE)(WORD);typedef WORD(FAR PASCAL *STATUS)(WORD,MDINFO FAR *,WORD);typedef WORD(FAR PASCAL *MODE)(WORD,WORD);
-static HMODULE dll;static WORD handle,have,eof,ended,lastError,pumps;static DWORD committed,lastAccepted;static SMF_EVENT e;static MDINFO info;static char path[144];static OPEN op;static PUSH put;static COMMIT commit;static ONE start,pump,pauseClock,resumeClock,closeClock;static STATUS status;static MODE timing;
+static HMODULE dll;static WORD handle,have,eof,ended,lastError,pumps;static DWORD committed,lastAccepted;static SMF_EVENT e;static MDINFO info;static char path[144];static OPEN op;static PUSH put;static COMMIT commit;static ONE start,pump,pauseClock,resumeClock,closeClock;static STATUS status;static MODE timing,bankFn;static WORD instrumentBank;
 static WORD feed(WORD budget){int r;WORD result;DWORD through,msg;
  while(budget--&&!eof){if(!have){r=smf_step(&e);if(r<0)return 1;if(r==2)continue;if(!r){eof=1;break;}have=1;}
   msg=(DWORD)e.status|((DWORD)e.data1<<8)|((DWORD)e.data2<<16);if(MSSkipMessage(msg)){have=0;continue;}
@@ -18,11 +18,13 @@ static WORD feed(WORD budget){int r;WORD result;DWORD through,msg;
  if(!have){r=smf_next(&e);if(r<0)return 1;if(!r){eof=1;return feed(0);}have=1;}
  if(e.ms){through=e.ms-1;if(through>=committed){result=commit(handle,info.generation,through,0);if(result)return 1;committed=through;}}
  return 0;}
+WORD SCBank(WORD bank){if(bank>MD_BANK_CHAMBER)return 1;
+ if(handle&&bankFn(handle,bank))return 1;instrumentBank=bank;return 0;}
 WORD SCStop(void){if(dll){if(handle&&closeClock(handle))return 1;handle=0;FreeLibrary(dll);dll=0;}return 0;}
 WORD SCStart(void){WORD n,i,last=0;if(SCStop())return 1;n=GetModuleFileName(GetModuleHandle("MCITNDY"),path,sizeof(path));if(!n||n>=sizeof(path)-13)return 1;for(i=0;i<n;i++)if(path[i]=='\\'||path[i]=='/')last=i+1;lstrcpy(path+last,"MIDICLK.DLL");dll=LoadLibrary(path);if(dll<32){dll=0;return 1;}
- op=(OPEN)GetProcAddress(dll,(LPSTR)1L);put=(PUSH)GetProcAddress(dll,(LPSTR)2L);commit=(COMMIT)GetProcAddress(dll,(LPSTR)3L);start=(ONE)GetProcAddress(dll,(LPSTR)4L);pump=(ONE)GetProcAddress(dll,(LPSTR)5L);pauseClock=(ONE)GetProcAddress(dll,(LPSTR)6L);resumeClock=(ONE)GetProcAddress(dll,(LPSTR)7L);closeClock=(ONE)GetProcAddress(dll,(LPSTR)9L);status=(STATUS)GetProcAddress(dll,(LPSTR)10L);timing=(MODE)GetProcAddress(dll,(LPSTR)13L);
- if(!(op&&put&&commit&&start&&pump&&pauseClock&&resumeClock&&closeClock&&status&&timing)){FreeLibrary(dll);dll=0;return 1;}
- if(op(&handle)){handle=0;SCStop();return 1;}status(handle,&info,sizeof(info));timing(handle,1);have=eof=ended=lastError=pumps=0;committed=lastAccepted=0;
+ op=(OPEN)GetProcAddress(dll,(LPSTR)1L);put=(PUSH)GetProcAddress(dll,(LPSTR)2L);commit=(COMMIT)GetProcAddress(dll,(LPSTR)3L);start=(ONE)GetProcAddress(dll,(LPSTR)4L);pump=(ONE)GetProcAddress(dll,(LPSTR)5L);pauseClock=(ONE)GetProcAddress(dll,(LPSTR)6L);resumeClock=(ONE)GetProcAddress(dll,(LPSTR)7L);closeClock=(ONE)GetProcAddress(dll,(LPSTR)9L);status=(STATUS)GetProcAddress(dll,(LPSTR)10L);timing=(MODE)GetProcAddress(dll,(LPSTR)13L);bankFn=(MODE)GetProcAddress(dll,(LPSTR)19L);
+ if(!(op&&put&&commit&&start&&pump&&pauseClock&&resumeClock&&closeClock&&status&&timing&&bankFn)){FreeLibrary(dll);dll=0;return 1;}
+ if(op(&handle)){handle=0;SCStop();return 1;}if(bankFn(handle,instrumentBank)){SCStop();return 1;}status(handle,&info,sizeof(info));timing(handle,1);have=eof=ended=lastError=pumps=0;committed=lastAccepted=0;
  if(!smf_rewind()||feed(4096)||start(handle)){SCStop();return 1;}return 0;}
 WORD SCPump(void){WORD r;if(!handle)return 0;r=pump(handle);status(handle,&info,sizeof(info));pumps++;if(r||info.state==MD_FAILED)return 2;if(info.state==MD_DONE)return 0;if(feed(256))return 2;return 1;}
 DWORD SCPosition(void){if(handle)status(handle,&info,sizeof(info));return info.position;}

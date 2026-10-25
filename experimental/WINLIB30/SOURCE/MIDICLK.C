@@ -15,7 +15,7 @@
 typedef WORD(FAR PASCAL *ZERO)(void);typedef WORD(FAR PASCAL *PUT)(TCFRAME FAR *);typedef WORD(FAR PASCAL *DEBUG)(WORD);typedef DWORD(FAR PASCAL *CLOCK)(void);
 typedef struct {DWORD at,msg;} EVENT;
 static EVENT events[1024];static WORD ehead,ecount,ah,acount,an[1024],frameN,lastSent;
-static MSYN synth,folded;static TCFRAME f;static MDINFO info;
+static WORD instrumentBank;static MSYN synth,folded;static TCFRAME f;static MDINFO info;
 static TCXPAIR pairFrame;static TCXPAIRINFO pairCaps;
 typedef WORD(FAR PASCAL *PAIRCAPS)(WORD,TCXPAIRINFO FAR *,WORD);
 typedef WORD(FAR PASCAL *PAIRPUT)(TCXPAIR FAR *);
@@ -57,8 +57,8 @@ static WORD pairState(void){unsigned i;
  if(sealed)pairFrame.fallbackVolume=65535U;
  return 0;
 }
-static void init(DWORD at){livePending=0;MSReset(&synth);synth.flags=voiceFlags;MSSpeakerMode(&synth,paired?1:LOW_NOTE_FOLD);
- MSReset(&folded);folded.flags=voiceFlags;MSSpeakerMode(&folded,LOW_NOTE_FOLD);ehead=ecount=ah=acount=pending=eof=sealed=lastSent=haveTime=committed=seeded=0;haveFrame=0;origin=when=watermark=lastAt=at;lastClock=fraction=0;clockMS=lastOutput=at;info.state=MD_OPEN;info.flags=(voiceFlags<<8)|policy;info.error=0;info.queued=0;info.position=at;info.accepted=info.delivered=info.coalesced=0;info.generation++;if(!info.generation)info.generation=1;}
+static void init(DWORD at){livePending=0;MSReset(&synth);MSBank(&synth,instrumentBank);synth.flags=voiceFlags;MSSpeakerMode(&synth,paired?1:LOW_NOTE_FOLD);
+ MSReset(&folded);MSBank(&folded,instrumentBank);folded.flags=voiceFlags;MSSpeakerMode(&folded,LOW_NOTE_FOLD);ehead=ecount=ah=acount=pending=eof=sealed=lastSent=haveTime=committed=seeded=0;haveFrame=0;origin=when=watermark=lastAt=at;lastClock=fraction=0;clockMS=lastOutput=at;info.state=MD_OPEN;info.flags=(voiceFlags<<8)|policy;info.error=0;info.queued=0;info.position=at;info.accepted=info.delivered=info.coalesced=0;info.generation++;if(!info.generation)info.generation=1;}
 static void update(void){DWORD d,n,r,now;WORD delta;
  if(info.state!=MD_RUNNING)return;now=rc();d=now-lastClock;lastClock=now;
  while(d){n=d>1000000UL?1000000UL:d;r=n*3000UL+fraction;clockMS+=r/3579545UL;info.position=clockMS;fraction=r%3579545UL;d-=n;}
@@ -80,7 +80,7 @@ static WORD build(void){WORD i;DWORD edge,env;EVENT *e;
 static WORD fill(WORD budget){WORD r;while(budget--){if(acount==1024)return 0;if(!pending){if(sealed)return 0;r=build();if(r==2)return 0;if(r)return 1;}
  r=paired?rpairput(&pairFrame):rput(&f);if(r==2)return 0;if(r)return 1;haveFrame=1;an[(ah+acount)&1023]=frameN;acount++;pending=0;when=nextAt;if(sealed)return rend()?1:0;}return 0;}
 WORD MDAPI MDOpen(WORD FAR *out){HMODULE p;if(!out)return MD_BAD;if(owner)return MD_BUSY;if(load()){if(raw)FreeLibrary(raw);raw=0;p=pin;pin=0;if(p)FreeLibrary(p);return MD_IO;}
- if(ropen()){FreeLibrary(raw);raw=0;p=pin;pin=0;if(p)FreeLibrary(p);return MD_BUSY;}paired=pairMode();owner=GetCurrentTask();handle=serial++;if(!serial)serial=1;info.size=sizeof(info);info.version=MD_VERSION;info.capacity=1024;info.minSpacingMs=8;info.psgTones=3;info.noiseVoices=1;info.flags=0;started=policy=0;voiceFlags=1;init(0);*out=handle;return 0;}
+ if(ropen()){FreeLibrary(raw);raw=0;p=pin;pin=0;if(p)FreeLibrary(p);return MD_BUSY;}paired=pairMode();owner=GetCurrentTask();handle=serial++;if(!serial)serial=1;info.size=sizeof(info);info.version=MD_VERSION;info.capacity=1024;info.minSpacingMs=8;info.psgTones=3;info.noiseVoices=1;info.flags=0;started=policy=0;voiceFlags=1;instrumentBank=MD_BANK_DEFAULT;init(0);*out=handle;return 0;}
 WORD MDAPI MDPush(WORD h,DWORD gen,DWORD at,DWORD msg){
  if(!valid(h))return MD_BUSY;if(gen!=info.generation)return MD_STALE;if(policy!=2)update();if(policy!=2&&info.state==MD_RUNNING&&(LONG)(at-clockMS)<8L)return MD_LATE;if(eof||info.error||((LONG)(at-origin)<0)||at-origin>2147483647UL)return MD_BAD;
  if(committed&&((LONG)(at-watermark)<0||(at==watermark&&(LONG)(when-at)>0)))return MD_BAD;if(haveTime&&(LONG)(at-lastAt)<0)return MD_BAD;if(policy==0&&haveTime&&at!=lastAt&&at-lastAt<8UL)return MD_SPACING;if(ecount==1024)return MD_FULL;
@@ -118,7 +118,18 @@ WORD MDAPI MDClose(WORD h){HMODULE p;if(!valid(h))return MD_BUSY;if(rclose())ret
 WORD MDAPI MDStatus(WORD h,MDINFO FAR *out,WORD size){WORD i;BYTE *s;BYTE FAR *d;if(!valid(h))return MD_BUSY;if(!out||size<sizeof(info))return MD_BAD;MDPump(h);info.queued=ecount;s=(BYTE *)&info;d=(BYTE FAR *)out;for(i=0;i<sizeof(info);i++)d[i]=s[i];return 0;}
 int MDAPI WEP(int reason){return 1;}
 
-WORD MDAPI MDSeed(WORD h,DWORD gen,DWORD at,DWORD msg){if(!valid(h))return MD_BUSY;if(gen!=info.generation)return MD_STALE;if(info.state!=MD_OPEN||haveTime||committed||acount||(LONG)(at-origin)>0||origin-at>2147483647UL||(seeded&&(LONG)(at-seedAt)<0))return MD_BAD;if(MSMessage(&synth,at-origin,msg)||(paired&&MSMessage(&folded,at-origin,msg)))return MD_BAD;seeded=1;seedAt=at;return 0;}
+WORD MDAPI MDSeedBank(WORD h,DWORD gen,DWORD at,DWORD msg,WORD bank){WORD r;
+ if(!valid(h))return MD_BUSY;if(gen!=info.generation)return MD_STALE;
+ if(bank>MD_BANK_CHAMBER||info.state!=MD_OPEN||haveTime||committed||acount||(LONG)(at-origin)>0||origin-at>2147483647UL||(seeded&&(LONG)(at-seedAt)<0))return MD_BAD;
+ if(!MSValidMessage(msg,synth.speakerMode)||(paired&&!MSValidMessage(msg,folded.speakerMode)))return MD_BAD;
+ MSBank(&synth,bank);MSBank(&folded,bank);
+ r=MSMessage(&synth,at-origin,msg)||(paired&&MSMessage(&folded,at-origin,msg));
+ MSBank(&synth,instrumentBank);MSBank(&folded,instrumentBank);
+ if(r)return MD_BAD;seeded=1;seedAt=at;return 0;}
+WORD MDAPI MDSeed(WORD h,DWORD gen,DWORD at,DWORD msg){return MDSeedBank(h,gen,at,msg,instrumentBank);}
+WORD MDAPI MDInstrumentBank(WORD h,WORD bank){if(!valid(h))return MD_BUSY;
+ if(bank>MD_BANK_CHAMBER)return MD_BAD;
+ MSBank(&synth,bank);MSBank(&folded,bank);instrumentBank=bank;return 0;}
 WORD MDAPI MDTiming(WORD h,WORD mode){if(!valid(h))return MD_BUSY;if(info.state!=MD_OPEN||haveTime||committed||mode>2)return MD_BAD;policy=mode;info.flags=(voiceFlags<<8)|mode;return 0;}
 
 DWORD MDAPI MDVersion(void){return 0x00080100UL;}
@@ -126,7 +137,7 @@ DWORD MDAPI MDVersion(void){return 0x00080100UL;}
 WORD MDAPI MDClock(WORD h,DWORD FAR *out){if(!valid(h))return MD_BUSY;if(!out)return MD_BAD;update();*out=clockMS;return 0;}
 WORD MDAPI MDVoiceMode(WORD h,WORD flags){if(!valid(h))return MD_BUSY;if(info.state!=MD_OPEN||haveTime||committed||flags==2||(flags&~3))return MD_BAD;voiceFlags=synth.flags=folded.flags=flags;MSInvalidate(&synth);MSInvalidate(&folded);info.flags=(flags<<8)|policy;return 0;}
 
-WORD MDAPI MDDebug(WORD h,WORD q){if(!valid(h))return 0xffff;if(q==0)return rmask();if(q==1)return 1;if(q==2)return rd(12);if(q==3)return rd(6);return 0xffff;}
+WORD MDAPI MDDebug(WORD h,WORD q){if(!valid(h))return 0xffff;if(q==0)return rmask();if(q==1)return 1;if(q==2)return rd(12);if(q==3)return rd(6);if(q==4)return instrumentBank;return 0xffff;}
 
 /* Raw timeline remains live while owner stages seed/events. MDStart performs
    the atomic prepared-frame replacement and immediate complete-state output.

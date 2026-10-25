@@ -115,7 +115,7 @@ def native_player(directory, source):
 
 def frozen_runtime(files):
     for name,wanted in MIDI_BASE['runtime'].items():
-        require(identity(files[name]) == wanted, 'Published MIDI runtime changed: '+name)
+        require(identity(files[name]) == wanted, 'Fixed current runtime changed: '+name)
 
 
 def current_player_copy(path):
