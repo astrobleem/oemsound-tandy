@@ -1,14 +1,14 @@
 {
-  "format": "Current native MIDI engine and exact DOS ZIP repair/normal GO acceptance",
+  "format": "Native large-file VGM/VGZ player and exact expanded ZIP install acceptance",
   "status": "PASS",
   "release_readiness": {
     "status": "READY"
   },
-  "scope": "239 current BUILD8 native assertions plus exact CANDIDATE5 ZIP native repair, installed23 readback, ordinary GO Play/Stop/Close, normal Windows exit, bridge and IRQ/postflight cleanup. Physical hardware is outside this evidence.",
-  "source_commit": "68fc60510bde5d7f6fa74e3fa806719bff7ead65",
+  "scope": "One current combined run: exact candidate native Repair, installed normal GO, plain VGM Play/Pause/Resume/Stop, VGZ Cancel/Close/reopen, corrupt CRC refusal/retry, full large VGZ loop/EOF and exact PSG checks, normal Windows/DOS return and cleanup. Physical hardware is outside this evidence.",
+  "source_commit": "4f0d22c07028fc8d7c14134ceb6c54d399fa3009",
   "installer": {
-    "bytes": 383302,
-    "sha256": "19f3a2af3c28b463efe00db0d85d173c7555bac95132a88c8b9cc8fec6c37413"
+    "bytes": 386593,
+    "sha256": "e2cc290d46101a0268530308a0d16cf7d4bc997b9a03fcb0f68fd7882a7ae236"
   },
   "clients": {
     "TSHELL.EXE": {
@@ -64,372 +64,1147 @@
     "bytes": 43327,
     "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
   },
-  "compiled_library_source": "379752ed7b1a3b64702dc3fea5b40d35e98197ff",
-  "candidate": {
-    "bytes": 22608,
-    "sha256": "64a9a37f24b629a422324e686adeef9575475a89f78dd2069f3aacc7ceed2fff"
+  "player": {
+    "bytes": 54877,
+    "sha256": "115f5d54c6096ac79c80b8221f080ad9062ab1ae8fd668ea7e0ddc91518c9b79"
   },
-  "native_engine": {
+  "candidate": {
+    "bytes": 27545,
+    "sha256": "195e21abe1f0810cc0f82791dcd6894a6688d11dcb2e9d8cadac460b1c065331"
+  },
+  "native_player_engine": {
     "status": "PASS",
-    "source_commit": "379752ed7b1a3b64702dc3fea5b40d35e98197ff",
-    "source_inputs": 33,
-    "successful_assertions": 239,
+    "player": {
+      "bytes": 54877,
+      "sha256": "115f5d54c6096ac79c80b8221f080ad9062ab1ae8fd668ea7e0ddc91518c9b79"
+    },
+    "sources": {
+      "bytes": 3982,
+      "sha256": "c364285d14a1c30dd15bc5c353920e152d611849066fb47f52198406c7592260"
+    },
+    "source_commit": "4b7bab45b34e94e16d308c2012363a1f93bcd833",
+    "process": {
+      "bytes": 577,
+      "sha256": "0f6bbee7945dd675b825646ed96a52d9df9a65da2377b49be48bbf0423b0cded"
+    },
     "receipt": {
-      "bytes": 16609,
-      "sha256": "f3b16246eca382a785066a1ce155db57bc1aa86debcaadb6cd9d40bc5c96b8a3"
+      "bytes": 4670,
+      "sha256": "dd1cb66c902cf9cddf556d11e67cbaa2499f531ade47b5e919c221566c0e4ac3"
     },
     "proof": {
-      "status": "PASS_CURRENT_BUILD8_ENGINE_AND_ACTUAL_APP_CONTROL",
-      "scope": "Only current BUILD8/source379752ed, OBS10 and successful full RUN10 contribute native acceptance. No earlier failed run inherited. Normal exact-package repair/GO/postflight remains separate.",
-      "script": {
-        "bytes": 12381,
-        "sha256": "7a69c18d2b120b6acae974f009df47a02daa5394b03851a9224ea9a7c9aa0c07"
+      "status": "PASS_CURRENT_LARGE_VGM_UI_FULL_NATIVE_RUN",
+      "scope": "Only this fully successful stopped native run. No UI assertions inherited from RUN1/RUN2/PACK1 failures or MIDI acceptance. Private controller posts edit characters to the owning task queue; no cross-task edit text setter is used. One full generated VGZ, plain open/stop, pause/resume, inflation cancel/close/reopen, corrupt refusal/retry and existing-debug exact PSG/loop/EOF checks.",
+      "verifier": {
+        "bytes": 10964,
+        "sha256": "cfcab88b015566e0f93ba8f6f59819865894ed359949538e78d7de62964dc378"
       },
-      "source_commit": "379752ed7b1a3b64702dc3fea5b40d35e98197ff",
+      "source": "4b7bab45b34e94e16d308c2012363a1f93bcd833",
+      "process": {
+        "file": "PROCESS.JSON",
+        "bytes": 577,
+        "sha256": "0f6bbee7945dd675b825646ed96a52d9df9a65da2377b49be48bbf0423b0cded"
+      },
+      "inputs": {
+        "file": "INPUTS.JSN",
+        "bytes": 10817,
+        "sha256": "cda24164d055bfdf4d9897da72508dd9b4e3da1a1eb05b822ec2ad72659a9c2c"
+      },
+      "controller_log": {
+        "file": "VGMQA.LOG",
+        "bytes": 40010,
+        "sha256": "191f3bae2aefb37a9e7da97a613e5fcdea5b79158c33598fee075f3bba73e0cd"
+      },
+      "assertions": 644,
+      "failures": 0,
+      "timings_ms": {
+        "PLAIN_OPEN_MS": 17247,
+        "CANCEL_UNWIND_MS": 110,
+        "CORRUPT_REFUSAL_MS": 10106,
+        "FULL_VGZ_OPEN_MS": 27078,
+        "FULL_PLAY_MS": 657508
+      },
+      "candidate_player": {
+        "bytes": 54877,
+        "sha256": "115f5d54c6096ac79c80b8221f080ad9062ab1ae8fd668ea7e0ddc91518c9b79"
+      },
+      "player_sources": {
+        "file": "SOURCES.JSN",
+        "bytes": 3982,
+        "sha256": "c364285d14a1c30dd15bc5c353920e152d611849066fb47f52198406c7592260"
+      },
+      "player_build": {
+        "file": "RESULT.JSN",
+        "bytes": 6753,
+        "sha256": "260515603ac9b0e5198c4cb6401c339d5b26919547bfd5612eb03ee3ed1b5c3f"
+      },
+      "controller": {
+        "bytes": 10925,
+        "sha256": "fe1804e8befd97bad02e4d243afcd3cd3eb1c6d7ce7300e8ba878ba3f84f34bf"
+      },
+      "controller_sources": {
+        "file": "SOURCES.JSN",
+        "bytes": 1170,
+        "sha256": "e59149efd0524814b777c7c2bc43780e716f2b7340803a17257943df86ebbcd9"
+      },
+      "controller_build_process": {
+        "file": "PROCESS.JSON",
+        "bytes": 412,
+        "sha256": "372326d03f87565d8a1caa5479554cacf41c9544457f3ac22dba51d4b1d56e10"
+      },
+      "runtime_config": {
+        "file": "RUN.CNF",
+        "bytes": 646,
+        "sha256": "7065224cc470c5326149daecb4b4d4c2fc93e6b4896ec3e1a63c7cddffad1cca"
+      },
+      "batch": {
+        "file": "TEST.BAT",
+        "bytes": 879,
+        "sha256": "1c234577b139d1ea1983b460f05e81a48b152e46886e929e81700a796f9b90b9"
+      },
+      "generated": {
+        "BIG.VGM": {
+          "bytes": 189499,
+          "sha256": "c173952300fa7b3ee98be79206b66c42231b03da68b69fa821cc4ad8bb84ed6a"
+        },
+        "BIG9.VGZ": {
+          "bytes": 81270,
+          "sha256": "5ff03f9d3583514de88883f56de650e89d9ca155fdd358af64ebb32815c25915"
+        },
+        "BADCRC.VGZ": {
+          "bytes": 81270,
+          "sha256": "17b2f8b943d4d9e7c9441fe730cf52c79c7162fc06391f16641e3789d1e15a71"
+        }
+      },
+      "decoded_native_temp": {
+        "file": "TEMP-HASH.JSN",
+        "bytes": 631,
+        "sha256": "e0f08a81091234ed2c2876162c596e431ecd5345a2e3891c12810512ddc4efcb"
+      },
+      "native_PSG": {
+        "bytes": 103074,
+        "WORD_count": 37538,
+        "rotate5_XOR_hash": "40ce",
+        "noise_writes": 354,
+        "core_groups": 34240,
+        "output_bursts": 34241,
+        "actual_source_high2_to1": true
+      },
+      "other22_current_candidate_bytes_and_SYSTEM_INI_verified": true,
+      "private_INIs_exactly_restored": true,
+      "DOS_environment": {
+        "receipt": {
+          "file": "VENV.LOG",
+          "bytes": 142,
+          "sha256": "ff951539c4bfefe5cd5df9de3bc1057e2c1599dfd86809714a1c7fc41279755b"
+        },
+        "TEMP_TMP_unset": true
+      },
+      "cleanup": {
+        "VPREF.LOG": {
+          "file": "VPREF.LOG",
+          "bytes": 222,
+          "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
+        },
+        "VCLEAN.LOG": {
+          "file": "VCLEAN.LOG",
+          "bytes": 222,
+          "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
+        },
+        "VWIN.LOG": {
+          "file": "VWIN.LOG",
+          "bytes": 500,
+          "sha256": "d9e2643cfba9fe2e3541acb92ed0350253604b6f74309969815eea3618758572"
+        },
+        "VGRETURN.TXT": {
+          "file": "VGRETURN.TXT",
+          "bytes": 27,
+          "sha256": "fef161e6d32bebcace69f43762b23c1344dcf8858cb35f5f76905be179ce6f7c"
+        },
+        "VCAP.TXT": {
+          "file": "VCAP.TXT",
+          "bytes": 9,
+          "sha256": "f17a6912afb3ccb5c179d14349743bc9cdd01ff3d187eb7c420e1880ce370cfa"
+        }
+      },
+      "capture_wrapper_status_preserved": "NONZERO",
+      "physical_test": false,
+      "emulator_started_by_verifier": false,
+      "earlier_failed_records_relabelled": false
+    }
+  },
+  "native_install_launch": {
+    "status": "PASS",
+    "package": {
+      "bytes": 2317291,
+      "sha256": "9c982fe428e90a30dbfe2050d4a6ca5d3e24574ff91e94a2f41a181718e788a4"
+    },
+    "installer": {
+      "bytes": 386593,
+      "sha256": "e2cc290d46101a0268530308a0d16cf7d4bc997b9a03fcb0f68fd7882a7ae236"
+    },
+    "process": {
+      "bytes": 577,
+      "sha256": "0f6bbee7945dd675b825646ed96a52d9df9a65da2377b49be48bbf0423b0cded"
+    },
+    "receipt": {
+      "bytes": 4975,
+      "sha256": "4a0dfac47dfb5e66f8bed48fce0cc8a14f3b40a1314abc0ffa970bc3688f6ae6"
+    },
+    "proof": {
+      "status": "PASS_EXACT_CANDIDATE_REPAIR_GO_LARGE_VGM",
+      "source": "4f0d22c07028fc8d7c14134ceb6c54d399fa3009",
+      "candidate": {
+        "bytes": 27545,
+        "sha256": "195e21abe1f0810cc0f82791dcd6894a6688d11dcb2e9d8cadac460b1c065331"
+      },
+      "package": {
+        "bytes": 2317291,
+        "sha256": "9c982fe428e90a30dbfe2050d4a6ca5d3e24574ff91e94a2f41a181718e788a4"
+      },
+      "installer": {
+        "bytes": 386593,
+        "sha256": "e2cc290d46101a0268530308a0d16cf7d4bc997b9a03fcb0f68fd7882a7ae236"
+      },
+      "process": {
+        "bytes": 577,
+        "sha256": "0f6bbee7945dd675b825646ed96a52d9df9a65da2377b49be48bbf0423b0cded"
+      },
+      "engine": {
+        "bytes": 4670,
+        "sha256": "dd1cb66c902cf9cddf556d11e67cbaa2499f531ade47b5e919c221566c0e4ac3"
+      },
+      "native_repair_process": {
+        "bytes": 408,
+        "sha256": "ba56b7da4d8550339cde4b73d920d63b08f3cefaacdcb96ff4b562b962ca3a0f"
+      },
+      "scope_of_prior_run": "Only completed Repair and exact23 installed files; its failed cross-task UI assertions remain failed and are not inherited.",
+      "installed23": {
+        "WINAMP/CHIME.SND": {
+          "bytes": 96,
+          "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149"
+        },
+        "WINXT/FIXXT.EXE": {
+          "bytes": 33001,
+          "sha256": "016d53ab4a77a120577fdd7ecf69399ab51559a53101bc00fdb2c4ebd24dc66a"
+        },
+        "WINAMP/INSTALL.TXT": {
+          "bytes": 3026,
+          "sha256": "9f7cc63d58e843eaa9ccffaf967a645451783a02487de4bbd32da5da8270c85d"
+        },
+        "WINAMP/LWFILE.DLL": {
+          "bytes": 14876,
+          "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
+        },
+        "WINAMP/MCITNDY.DLL": {
+          "bytes": 13036,
+          "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
+        },
+        "WINAMP/MIDICLK.DLL": {
+          "bytes": 16576,
+          "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
+        },
+        "WINAMP/MINIPLAY.EXE": {
+          "bytes": 54877,
+          "sha256": "115f5d54c6096ac79c80b8221f080ad9062ab1ae8fd668ea7e0ddc91518c9b79"
+        },
+        "WINAMP/PLUCK.TND": {
+          "bytes": 248,
+          "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c"
+        },
+        "WINAMP/RAWCLK.DLL": {
+          "bytes": 15464,
+          "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
+        },
+        "WINAMP/README.TXT": {
+          "bytes": 379,
+          "sha256": "37d65c0ef3df8a2d926c49de53d08b05baf32d85a879e5bcfbbfb24cda2d3d25"
+        },
+        "WINAMP/RESERVE.COM": {
+          "bytes": 1512,
+          "sha256": "644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8"
+        },
+        "WINAMP/SETUP.EXE": {
+          "bytes": 43327,
+          "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
+        },
+        "WINAMP/SHORT.VGM": {
+          "bytes": 387,
+          "sha256": "89f204cb51e9aabc86b7e42b31cc9402d3789f0e2ca9d9b410a572b27f4205bc"
+        },
+        "WINDOWS/SYSTEM/SOUND.DRV": {
+          "bytes": 9752,
+          "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
+        },
+        "WINAMP/STREAM.MID": {
+          "bytes": 3100,
+          "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
+        },
+        "WINAMP/TBRIDGE.EXE": {
+          "bytes": 2922,
+          "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
+        },
+        "WINXT/TCHIME.EXE": {
+          "bytes": 5071,
+          "sha256": "6de8cf5c0e00b78a1df0a52d912afdb376b2ef2a8516a2d3ca1303a751603e61"
+        },
+        "WINXT/TEXIT.EXE": {
+          "bytes": 9215,
+          "sha256": "5756639dbb979c758642663ba724f4951be5e2ff658611afd638c808edf39148"
+        },
+        "WINXT/TP.EXE": {
+          "bytes": 12847,
+          "sha256": "e0be284acf93ca6d1ccfe7150fe5ebdd5f16cf18c3c5a02a7aa779841be79a33"
+        },
+        "WINAMP/TPLAY.EXE": {
+          "bytes": 18141,
+          "sha256": "da47875485cd13574c963865c42f8389a48dfa4e8b71a45e9598fa2c81619ec2"
+        },
+        "WINDOWS/TSHELL.EXE": {
+          "bytes": 72323,
+          "sha256": "b024e8f715bd33cb94ab86718a3723e1cf70686187b96bbbf1ce383d606c93b9"
+        },
+        "WINDOWS/TSINPUT.DLL": {
+          "bytes": 6281,
+          "sha256": "d14dde571906bdd27a95030f11647333016eb34864afd22c08c5d2cf80660a80"
+        },
+        "WINXT/XPCHIME.EXE": {
+          "bytes": 5103,
+          "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
+        }
+      },
+      "native_repair_log": {
+        "bytes": 307,
+        "sha256": "594f05f197bcdd1010ec7e122bd65b0d5a5f551d7fb25396a60da045c5ebdf82"
+      },
+      "SYSTEM_INI": {
+        "bytes": 1083,
+        "sha256": "9bb19831f37b36a537c1cea5e39d337fa54cc4e227373d6a6e0264000dd45c40"
+      },
+      "GO": {
+        "bytes": 49,
+        "sha256": "bc322a089509ec7e38ac8d75207218dadd4b9a577106c0c419b33a5fa12961ec"
+      },
+      "consumer_path": "Exact expanded ZIP native SETUP Repair, installed GO, visible player controls, full VGZ loop/EOF, normal Windows exit and TPLAY cleanup",
+      "no_TEMP_TMP_configuration": true,
+      "OS_Setup_repeated": false,
+      "physical_hardware_test": false
+    }
+  },
+  "host": {
+    "checks": 182,
+    "failures": 0,
+    "receipt": {
+      "bytes": 2005,
+      "sha256": "22524d4979acadc1f3c4ee65f81d3a187c793c4322be42d3b79588bd282f3283"
+    },
+    "scope": "57 gzip ring,13 plain,112 large plain/gzip equivalence, loop, cancellation, corrupt and resource refusal checks"
+  },
+  "preserved_MIDI_SOUND_baseline": {
+    "scope": "Prior published native acceptance for unchanged DLLs, SOUND, launcher, installer and current clients; these passes are not relabelled as new VGM tests.",
+    "receipt": {
+      "bytes": 39262,
+      "sha256": "8ac28a889392f86fe801f41f9d8900c7889d3d7f41a3457db3cde8e4a97f6a1e"
+    },
+    "proof": {
+      "format": "Current native MIDI engine and exact DOS ZIP repair/normal GO acceptance",
+      "status": "PASS",
+      "release_readiness": {
+        "status": "READY"
+      },
+      "scope": "239 current BUILD8 native assertions plus exact CANDIDATE5 ZIP native repair, installed23 readback, ordinary GO Play/Stop/Close, normal Windows exit, bridge and IRQ/postflight cleanup. Physical hardware is outside this evidence.",
+      "source_commit": "68fc60510bde5d7f6fa74e3fa806719bff7ead65",
+      "installer": {
+        "bytes": 383302,
+        "sha256": "19f3a2af3c28b463efe00db0d85d173c7555bac95132a88c8b9cc8fec6c37413"
+      },
+      "clients": {
+        "TSHELL.EXE": {
+          "bytes": 72323,
+          "sha256": "b024e8f715bd33cb94ab86718a3723e1cf70686187b96bbbf1ce383d606c93b9"
+        },
+        "TCHIME.EXE": {
+          "bytes": 5071,
+          "sha256": "6de8cf5c0e00b78a1df0a52d912afdb376b2ef2a8516a2d3ca1303a751603e61"
+        },
+        "XPCHIME.EXE": {
+          "bytes": 5103,
+          "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
+        },
+        "TEXIT.EXE": {
+          "bytes": 9215,
+          "sha256": "5756639dbb979c758642663ba724f4951be5e2ff658611afd638c808edf39148"
+        },
+        "TP.EXE": {
+          "bytes": 12847,
+          "sha256": "e0be284acf93ca6d1ccfe7150fe5ebdd5f16cf18c3c5a02a7aa779841be79a33"
+        },
+        "FIXXT.EXE": {
+          "bytes": 33001,
+          "sha256": "016d53ab4a77a120577fdd7ecf69399ab51559a53101bc00fdb2c4ebd24dc66a"
+        },
+        "TSINPUT.DLL": {
+          "bytes": 6281,
+          "sha256": "d14dde571906bdd27a95030f11647333016eb34864afd22c08c5d2cf80660a80"
+        }
+      },
       "sound": {
         "bytes": 9752,
         "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
       },
-      "DLLs": {
-        "RAWCLK.DLL": {
-          "bytes": 15464,
-          "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
-        },
-        "MIDICLK.DLL": {
-          "bytes": 16576,
-          "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
-        },
-        "MCITNDY.DLL": {
-          "bytes": 13036,
-          "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
-        }
+      "rawclk": {
+        "bytes": 15464,
+        "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
       },
-      "native_build": {
+      "midiclk": {
+        "bytes": 16576,
+        "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
+      },
+      "mcitndy": {
+        "bytes": 13036,
+        "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
+      },
+      "launcher": {
+        "bytes": 18141,
+        "sha256": "da47875485cd13574c963865c42f8389a48dfa4e8b71a45e9598fa2c81619ec2"
+      },
+      "setup": {
+        "bytes": 43327,
+        "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
+      },
+      "compiled_library_source": "379752ed7b1a3b64702dc3fea5b40d35e98197ff",
+      "candidate": {
+        "bytes": 22608,
+        "sha256": "64a9a37f24b629a422324e686adeef9575475a89f78dd2069f3aacc7ceed2fff"
+      },
+      "native_engine": {
+        "status": "PASS",
         "source_commit": "379752ed7b1a3b64702dc3fea5b40d35e98197ff",
-        "matched_current_git_source_inputs": 33,
-        "different": [],
-        "sources": {
-          "path": "BUILD8/SOURCES.JSON",
-          "bytes": 5391,
-          "sha256": "4ed28b2cf47c988b56aed820527240fa167b48a63d5fa422d009c8f93561a5df"
+        "source_inputs": 33,
+        "successful_assertions": 239,
+        "receipt": {
+          "bytes": 16609,
+          "sha256": "f3b16246eca382a785066a1ce155db57bc1aa86debcaadb6cd9d40bc5c96b8a3"
         },
-        "result": {
-          "path": "BUILD8/RESULT.JSON",
-          "bytes": 42762,
-          "sha256": "d455b894c65547700a507fe9f03a2b3fc7dd2b87d08a07034244292b8a466bdf"
-        },
-        "process": {
-          "identity": {
-            "path": "BUILD8/PROCESS.JSON",
-            "bytes": 467,
-            "sha256": "8a9152a76b3b1ac96503e3d28d82324d170576ef6f822a104e3a9f50187d3526"
+        "proof": {
+          "status": "PASS_CURRENT_BUILD8_ENGINE_AND_ACTUAL_APP_CONTROL",
+          "scope": "Only current BUILD8/source379752ed, OBS10 and successful full RUN10 contribute native acceptance. No earlier failed run inherited. Normal exact-package repair/GO/postflight remains separate.",
+          "script": {
+            "bytes": 12381,
+            "sha256": "7a69c18d2b120b6acae974f009df47a02daa5394b03851a9224ea9a7c9aa0c07"
           },
-          "pid": 18516,
-          "return": 0,
-          "owned_child_stopped": true,
-          "lease_released": true
-        },
-        "actual_NE": {
-          "RAWCLK.DLL": {
-            "CODE_minimum_bytes": 13800,
-            "DGROUP_minimum_bytes": 27168,
-            "heap_bytes": 0,
-            "stack_bytes": 0,
-            "import_modules": [
-              "SYSTEM",
-              "KERNEL",
-              "SOUND"
-            ],
-            "segments": [
+          "source_commit": "379752ed7b1a3b64702dc3fea5b40d35e98197ff",
+          "sound": {
+            "bytes": 9752,
+            "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
+          },
+          "DLLs": {
+            "RAWCLK.DLL": {
+              "bytes": 15464,
+              "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
+            },
+            "MIDICLK.DLL": {
+              "bytes": 16576,
+              "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
+            },
+            "MCITNDY.DLL": {
+              "bytes": 13036,
+              "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
+            }
+          },
+          "native_build": {
+            "source_commit": "379752ed7b1a3b64702dc3fea5b40d35e98197ff",
+            "matched_current_git_source_inputs": 33,
+            "different": [],
+            "sources": {
+              "path": "BUILD8/SOURCES.JSON",
+              "bytes": 5391,
+              "sha256": "4ed28b2cf47c988b56aed820527240fa167b48a63d5fa422d009c8f93561a5df"
+            },
+            "result": {
+              "path": "BUILD8/RESULT.JSON",
+              "bytes": 42762,
+              "sha256": "d455b894c65547700a507fe9f03a2b3fc7dd2b87d08a07034244292b8a466bdf"
+            },
+            "process": {
+              "identity": {
+                "path": "BUILD8/PROCESS.JSON",
+                "bytes": 467,
+                "sha256": "8a9152a76b3b1ac96503e3d28d82324d170576ef6f822a104e3a9f50187d3526"
+              },
+              "pid": 18516,
+              "return": 0,
+              "owned_child_stopped": true,
+              "lease_released": true
+            },
+            "actual_NE": {
+              "RAWCLK.DLL": {
+                "CODE_minimum_bytes": 13800,
+                "DGROUP_minimum_bytes": 27168,
+                "heap_bytes": 0,
+                "stack_bytes": 0,
+                "import_modules": [
+                  "SYSTEM",
+                  "KERNEL",
+                  "SOUND"
+                ],
+                "segments": [
+                  {
+                    "index": 1,
+                    "kind": "CODE",
+                    "minimum_bytes": 13800,
+                    "flags": 3392,
+                    "code_identity": {
+                      "bytes": 13799,
+                      "sha256": "fc8b400ca2500e736bea2601e2123711caf5496fb3b0d0753329b69159f5979d"
+                    }
+                  },
+                  {
+                    "index": 2,
+                    "kind": "DATA",
+                    "minimum_bytes": 27168,
+                    "flags": 3169,
+                    "code_identity": null
+                  }
+                ]
+              },
+              "MIDICLK.DLL": {
+                "CODE_minimum_bytes": 14352,
+                "DGROUP_minimum_bytes": 12018,
+                "heap_bytes": 0,
+                "stack_bytes": 0,
+                "import_modules": [
+                  "KERNEL"
+                ],
+                "segments": [
+                  {
+                    "index": 1,
+                    "kind": "CODE",
+                    "minimum_bytes": 14352,
+                    "flags": 7504,
+                    "code_identity": {
+                      "bytes": 14351,
+                      "sha256": "c5bbf4014b2e34b279f03bb6794b7219c2e6d37fefe18488ba91da2a555e0ae3"
+                    }
+                  },
+                  {
+                    "index": 2,
+                    "kind": "DATA",
+                    "minimum_bytes": 12018,
+                    "flags": 3169,
+                    "code_identity": null
+                  }
+                ]
+              },
+              "MCITNDY.DLL": {
+                "CODE_minimum_bytes": 10948,
+                "DGROUP_minimum_bytes": 3398,
+                "heap_bytes": 0,
+                "stack_bytes": 0,
+                "import_modules": [
+                  "KERNEL",
+                  "USER"
+                ],
+                "segments": [
+                  {
+                    "index": 1,
+                    "kind": "CODE",
+                    "minimum_bytes": 10948,
+                    "flags": 3392,
+                    "code_identity": {
+                      "bytes": 10947,
+                      "sha256": "6db765a30d8fb2e3aa6f66017eb3ddbee904111b82c5eff2f624e16b3826fa99"
+                    }
+                  },
+                  {
+                    "index": 2,
+                    "kind": "DATA",
+                    "minimum_bytes": 3398,
+                    "flags": 3169,
+                    "code_identity": null
+                  }
+                ]
+              }
+            },
+            "maps": [
               {
-                "index": 1,
-                "kind": "CODE",
-                "minimum_bytes": 13800,
-                "flags": 3392,
-                "code_identity": {
-                  "bytes": 13799,
-                  "sha256": "fc8b400ca2500e736bea2601e2123711caf5496fb3b0d0753329b69159f5979d"
-                }
+                "path": "BUILD8/RAWCLK.MAP",
+                "bytes": 1876,
+                "sha256": "dce0b6e59078ed5e9613aae1ff8d54516f1832c3b999d2f33ea352cd8ce2a57d"
               },
               {
-                "index": 2,
-                "kind": "DATA",
-                "minimum_bytes": 27168,
-                "flags": 3169,
-                "code_identity": null
+                "path": "BUILD8/MIDICLK.MAP",
+                "bytes": 1187,
+                "sha256": "8c4f32184580805b28203f12ac73827f349e582c14d8e726cbefd38b9230456d"
+              },
+              {
+                "path": "BUILD8/MCITNDY.MAP",
+                "bytes": 699,
+                "sha256": "37d2c5657b7943a0fd261a17c4130c6a6f6e21abc600cf76204da4fd0c25a05c"
               }
             ]
           },
-          "MIDICLK.DLL": {
-            "CODE_minimum_bytes": 14352,
-            "DGROUP_minimum_bytes": 12018,
-            "heap_bytes": 0,
-            "stack_bytes": 0,
-            "import_modules": [
-              "KERNEL"
-            ],
-            "segments": [
+          "observer": {
+            "source": {
+              "path": "OBS10/MIDIOBS.C",
+              "bytes": 23262,
+              "sha256": "419e99fcbb496edd03e178ddad1b2ccf7665560df4d0bae2e3bc2a8d4176b5cf"
+            },
+            "sources": {
+              "path": "OBS10/SOURCES.JSON",
+              "bytes": 2519,
+              "sha256": "da11524503084b89fc0abfc40b39b12abffd671b10df47aab87de0bee5356640"
+            },
+            "PIF": {
+              "path": "OBS10/DOSPING.PIF",
+              "bytes": 545,
+              "sha256": "cae0d512a5c5620b0ba220835a4fa479aa516930e6e02cd0c21e712b374358c8"
+            },
+            "PIF_metadata": {
+              "path": "OBS10/PIFMETA.JSN",
+              "bytes": 1602,
+              "sha256": "bfcdd85b18107640204ad43f50c9d67ddc780d2cbc99c6c64581fc72e6866dc4"
+            },
+            "DOS_executable": {
+              "path": "OBS10/DOSPING.EXE",
+              "bytes": 582,
+              "sha256": "f9856989f4ed6775e559e825711ec2766b395a38f4e3cc10de0970444d236c9b"
+            },
+            "runtime": {
+              "path": "OBS10/MIDIOBS.EXE",
+              "bytes": 18573,
+              "sha256": "04744bb9428762f647ec0b9c889efaf81ede0037f8e1236998cb9fc251cdebfb"
+            },
+            "header": {
+              "path": "OBS10/HEADER.JSON",
+              "bytes": 357,
+              "sha256": "cbea58d2b3e80b8be4e55c9514e0f29c8ce7a27347dc3cfaeccc2550426c8978"
+            },
+            "build_log": {
+              "path": "OBS10/OBSBUILD.LOG",
+              "bytes": 1010,
+              "sha256": "084c2848472dc7131cc18c7f127620a75608141d0b0f36a8899470ec553da5b6"
+            },
+            "process": {
+              "identity": {
+                "path": "OBS10/PROCESS.JSON",
+                "bytes": 411,
+                "sha256": "65d447b6062272cf884126add7d3b80333a051cf7d9fb3e14d464855ca34580d"
+              },
+              "pid": 33920,
+              "return": 0,
+              "owned_child_stopped": true,
+              "lease_released": true
+            }
+          },
+          "current_native_run": {
+            "status": "PASS_CURRENT_FULL_RUN",
+            "successful_assertions": 239,
+            "inputs": {
+              "path": "RUN10/INPUTS.JSON",
+              "bytes": 2836,
+              "sha256": "26328faadf15720567e61322488763228cd7b404d1ab73daf40360a8458d7493"
+            },
+            "raw_log": {
+              "path": "RUN10/CROOT/MIDIOBS.LOG",
+              "bytes": 11663,
+              "sha256": "3f7ad2130c212e1638b22c2923b351f193ef191dee10a2c215ce180c1c9e827e"
+            },
+            "process": {
+              "identity": {
+                "path": "RUN10/PROCESS.JSON",
+                "bytes": 409,
+                "sha256": "9713c0975e66171762fee94709b23e229ad575710e18d94a17c4973ea0b8b2ce"
+              },
+              "pid": 30216,
+              "return": 0,
+              "owned_child_stopped": true,
+              "lease_released": true
+            },
+            "preflight_and_normal_return_cleanup": {
+              "MPREF.LOG": {
+                "path": "RUN10/CROOT/MPREF.LOG",
+                "bytes": 222,
+                "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
+              },
+              "MWIN.LOG": {
+                "path": "RUN10/CROOT/MWIN.LOG",
+                "bytes": 500,
+                "sha256": "d9e2643cfba9fe2e3541acb92ed0350253604b6f74309969815eea3618758572"
+              },
+              "MCLEAN.LOG": {
+                "path": "RUN10/CROOT/MCLEAN.LOG",
+                "bytes": 222,
+                "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
+              },
+              "RETURN.TXT": {
+                "path": "RUN10/CROOT/RETURN.TXT",
+                "bytes": 6,
+                "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+              }
+            },
+            "DOS_marker": {
+              "path": "RUN10/CROOT/MIDIDOS.LOG",
+              "bytes": 18,
+              "sha256": "9bd29f78daea5b26e172c6d3435f755796492c82b801926b874a7d331e15f1de"
+            },
+            "DOS_EXE_WinExec_return": 774,
+            "explicit_PIF_fallback_invoked": false,
+            "seven_fixtures": [
               {
-                "index": 1,
-                "kind": "CODE",
-                "minimum_bytes": 14352,
-                "flags": 7504,
-                "code_identity": {
-                  "bytes": 14351,
-                  "sha256": "c5bbf4014b2e34b279f03bb6794b7219c2e6d37fefe18488ba91da2a555e0ae3"
-                }
+                "path": "RUN10/CROOT/MMLAB/FIX/ALLOFF.MID",
+                "bytes": 76,
+                "sha256": "2f2298a683b65e787c90ddf087d9f7c651cccab6785590c11e4f9260c48fe3ee"
               },
               {
-                "index": 2,
-                "kind": "DATA",
-                "minimum_bytes": 12018,
-                "flags": 3169,
-                "code_identity": null
+                "path": "RUN10/CROOT/MMLAB/FIX/BEND.MID",
+                "bytes": 185,
+                "sha256": "b9e3c85e164dc83339c28302f9ca18e58c4982ece711034bbbadeb16494a5b6d"
+              },
+              {
+                "path": "RUN10/CROOT/MMLAB/FIX/EXTRAS.MID",
+                "bytes": 129,
+                "sha256": "fd605f396a6b209c5307fc856aa2da3bb0c7789cc363cb924ac0404f1375056c"
+              },
+              {
+                "path": "RUN10/CROOT/MMLAB/FIX/STEAL.MID",
+                "bytes": 129,
+                "sha256": "2202addf5566a4a82279e78a7606f1f830b8a8cb7c3e5514f619362ace288ed7"
+              },
+              {
+                "path": "RUN10/CROOT/MMLAB/FIX/SUSTAIN.MID",
+                "bytes": 84,
+                "sha256": "b082f86ba0d0647664c9eff68533a207b01b516177ea36e8feea5bb1d9f96140"
+              },
+              {
+                "path": "RUN10/CROOT/MMLAB/FIX/VOLEXPR.MID",
+                "bytes": 90,
+                "sha256": "f68d1f66fa730cbeede53d09e71dd8755b9eb2b0691a32b1e801d063bd8ae218"
+              },
+              {
+                "path": "RUN10/CROOT/MMLAB/FIX/LONGMETA.MID",
+                "bytes": 70065,
+                "sha256": "9c8b64f6620974d2a0ea6d9f22282c026b321aa4cc5198642b943cab26670bad"
+              }
+            ],
+            "GUI": {
+              "Play_before_tick": 38612,
+              "Play_after_tick": 39326,
+              "blocking_Play_ms": 714,
+              "move_repaint_iterations": [
+                1,
+                2,
+                3
+              ],
+              "elapsed_ms": [
+                2911,
+                3625,
+                4339
+              ],
+              "actual_Stop_Close_Sound_PIT_cleanup": "All asserted and passed"
+            },
+            "captures": [
+              {
+                "path": "RUN10/captures/command_000.avi",
+                "bytes": 623708,
+                "sha256": "1fc45011d96741cf4c5c63fbbdfdc0ed1f651fb6d6c49fe7b0093712611b3c2e"
+              },
+              {
+                "path": "RUN10/captures/kernel_000.avi",
+                "bytes": 2146546,
+                "sha256": "102db1adbc0e999ccbf3769919a319f8baf32e332912eff9d1cb43e7baccc2c1"
+              },
+              {
+                "path": "RUN10/captures/kernel_001.avi",
+                "bytes": 77036,
+                "sha256": "4dd690114c9352c416ba6aae589bc1db91c94494f39d80c946152ca70b745901"
+              },
+              {
+                "path": "RUN10/captures/kernel_002.avi",
+                "bytes": 6731064,
+                "sha256": "bd25f11927c069b08a23aabab1f4d74a15d814d60a3ae1c445ee72c9ccdd4062"
+              },
+              {
+                "path": "RUN10/captures/tplay_000.avi",
+                "bytes": 192592,
+                "sha256": "2f9e58e904eace955f630e9a391a13c5b75a6ce273973bd2bc4e2dd0b5b5ddeb"
+              },
+              {
+                "path": "RUN10/captures/tplay_000.wav",
+                "bytes": 9279020,
+                "sha256": "1bf76cd78b95ca19683580ad52580be37a977f3deb73a3bc1e9a51034bc56802"
               }
             ]
           },
-          "MCITNDY.DLL": {
-            "CODE_minimum_bytes": 10948,
-            "DGROUP_minimum_bytes": 3398,
-            "heap_bytes": 0,
-            "stack_bytes": 0,
-            "import_modules": [
-              "KERNEL",
-              "USER"
-            ],
-            "segments": [
-              {
-                "index": 1,
-                "kind": "CODE",
-                "minimum_bytes": 10948,
-                "flags": 3392,
-                "code_identity": {
-                  "bytes": 10947,
-                  "sha256": "6db765a30d8fb2e3aa6f66017eb3ddbee904111b82c5eff2f624e16b3826fa99"
-                }
+          "successful_scoped_assertions": 239,
+          "supplemental_prior_metadata_video_references_not_current_passes": {
+            "NORMVG2": {
+              "process": {
+                "path": "NORMVG2/PROCESS.JSON",
+                "bytes": 657,
+                "sha256": "fd78b575733c6bc7f831324b063181d7cba53f16d8e11402d3f9dc79361296f4"
               },
-              {
-                "index": 2,
-                "kind": "DATA",
-                "minimum_bytes": 3398,
-                "flags": 3169,
-                "code_identity": null
+              "inputs": {
+                "path": "NORMVG2/INPUTS.JSON",
+                "bytes": 3192,
+                "sha256": "52957c504a41722789931ad69cd150a9f606ae72453b5ef549a41b0ea288d12d"
+              },
+              "whole_raw_result": "TIMEOUT_PRESERVED",
+              "status_claim": "SCOPED_VIDEO_REFERENCE_ONLY_NOT_WHOLE_RUN_PASS",
+              "RAW_MCI_files_equal_current": true,
+              "MID_code_body_equal_current": true,
+              "MID_file_equal_current": false,
+              "prior_MID_CODE_flags": [
+                3392
+              ],
+              "current_MID_CODE_flags": [
+                7504
+              ],
+              "precise_scope": "Same RAW/MCI files and same MID instruction body; prior MID fixed CODE metadata, current movable/discardable CODE metadata. Not a current complete package/native-run PASS.",
+              "scope": "Original387-byte SHORT.VGM literal burst path visually Done without error; MID not loaded by this format path. Separate from full MIDI run and queued large-VGM work.",
+              "song": {
+                "path": "NORMVG2/CROOT/WINAMP/SHORT.VGM",
+                "bytes": 387,
+                "sha256": "89f204cb51e9aabc86b7e42b31cc9402d3789f0e2ca9d9b410a572b27f4205bc"
+              },
+              "visual_receipt": {
+                "path": "NORMVG2/FRAMES/FRAMES.JSON",
+                "bytes": 15386,
+                "sha256": "793d747d493294b8bc880aac7926d19c4a64732f58ebd7bb1a3686865a6928ac"
+              },
+              "reviewed_Done_image": {
+                "path": "NORMVG2/FRAMES/F02547.PNG",
+                "bytes": 2805,
+                "sha256": "1f00662f0db5c66639a9681945cf1a7a69797eaf1871cbf7f4170dff3e2ef18d"
+              },
+              "video": {
+                "path": "NORMVG2/captures/kernel_000.avi",
+                "bytes": 8371584,
+                "sha256": "c1a4fcc5d9913dbc62c4ba3d9d9f4dd82741207a58f8e886160a3252f5b8ddde"
               }
-            ]
-          }
-        },
-        "maps": [
-          {
-            "path": "BUILD8/RAWCLK.MAP",
-            "bytes": 1876,
-            "sha256": "dce0b6e59078ed5e9613aae1ff8d54516f1832c3b999d2f33ea352cd8ce2a57d"
+            },
+            "NORM7": {
+              "process": {
+                "path": "NORM7/PROCESS.JSON",
+                "bytes": 655,
+                "sha256": "8eb87cdfef72a9e34c98e05dd3fdb40fea5d2a0cdf7cb6c116f940f888032213"
+              },
+              "inputs": {
+                "path": "NORM7/INPUTS.JSON",
+                "bytes": 3464,
+                "sha256": "d484633e62d0f2f1207f8507f18ee008f6e8bebaafd3726f18d6ba4246c4f5de"
+              },
+              "whole_raw_result": "TIMEOUT_PRESERVED",
+              "status_claim": "SCOPED_VIDEO_REFERENCE_ONLY_NOT_WHOLE_RUN_PASS",
+              "RAW_MCI_files_equal_current": true,
+              "MID_code_body_equal_current": true,
+              "MID_file_equal_current": false,
+              "prior_MID_CODE_flags": [
+                3392
+              ],
+              "current_MID_CODE_flags": [
+                7504
+              ],
+              "precise_scope": "Same RAW/MCI files and same MID instruction body; prior MID fixed CODE metadata, current movable/discardable CODE metadata. Not a current complete package/native-run PASS.",
+              "scope": "Factual Opening-to-Playing video observation only, with prior fixed MID metadata",
+              "video": {
+                "path": "NORM7/captures/kernel_000.avi",
+                "bytes": 4507648,
+                "sha256": "8094085b0296aecec0489927441096697780a67326cd9d6024be45221da40197"
+              },
+              "latency_receipt": {
+                "path": "NORM7/LATENCY/LATENCY.JSN",
+                "bytes": 2544,
+                "sha256": "26348dffe1ff6f46be7a361420126f01e7e3ed9e088e7394e5e0fb127528ccbe"
+              },
+              "opening_seconds": 12.165552,
+              "playing_seconds": 12.799696,
+              "observed_interval_seconds": 0.634144,
+              "song": {
+                "path": "NORM7/CROOT/WINAMP/STREAM.MID",
+                "bytes": 3100,
+                "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
+              }
+            },
+            "NORMBL3": {
+              "process": {
+                "path": "NORMBL3/PROCESS.JSON",
+                "bytes": 657,
+                "sha256": "a99e8ba19b14657f5d0b5eb7f10342cd107c4e362bee890e41eb32c68c83a148"
+              },
+              "inputs": {
+                "path": "NORMBL3/INPUTS.JSON",
+                "bytes": 2254,
+                "sha256": "7d7d91bc5282920971af57f23f07b51b5cf18f7f2c6e96b08e8352d7036c0b6c"
+              },
+              "whole_raw_result": "TIMEOUT_PRESERVED",
+              "status_claim": "SCOPED_VIDEO_REFERENCE_ONLY_NOT_WHOLE_RUN_PASS",
+              "RAW_MCI_files_equal_current": true,
+              "MID_code_body_equal_current": true,
+              "MID_file_equal_current": false,
+              "prior_MID_CODE_flags": [
+                3392
+              ],
+              "current_MID_CODE_flags": [
+                7504
+              ],
+              "precise_scope": "Same RAW/MCI files and same MID instruction body; prior MID fixed CODE metadata, current movable/discardable CODE metadata. Not a current complete package/native-run PASS.",
+              "scope": "Factual Opening-to-Playing video observation only, with prior fixed MID metadata",
+              "video": {
+                "path": "NORMBL3/captures/kernel_000.avi",
+                "bytes": 8372768,
+                "sha256": "8ff02440fb06743a403d526d308ecbe768a91b99d1b3d2f5dc9d1fa8368749ce"
+              },
+              "latency_receipt": {
+                "path": "NORMBL3/LATENCY/LATENCY.JSN",
+                "bytes": 1588,
+                "sha256": "c2826c649ee378d1f43f137d7a8d7a3fb1b6e5f0606493fb7dc16b5cec9acc48"
+              },
+              "opening_seconds": 18.723936,
+              "playing_seconds": 22.044848,
+              "observed_interval_seconds": 3.320912,
+              "song": {
+                "path": "NORMBL3/CROOT/WINAMP/BLONDIE.MID",
+                "bytes": 57716,
+                "sha256": "bd67338aff0948cedfbf3f37fe46e0449c4a224218202346395212746952a620"
+              }
+            }
           },
-          {
-            "path": "BUILD8/MIDICLK.MAP",
-            "bytes": 1187,
-            "sha256": "8c4f32184580805b28203f12ac73827f349e582c14d8e726cbefd38b9230456d"
-          },
-          {
-            "path": "BUILD8/MCITNDY.MAP",
-            "bytes": 699,
-            "sha256": "37d2c5657b7943a0fd261a17c4130c6a6f6e21abc600cf76204da4fd0c25a05c"
-          }
-        ]
-      },
-      "observer": {
-        "source": {
-          "path": "OBS10/MIDIOBS.C",
-          "bytes": 23262,
-          "sha256": "419e99fcbb496edd03e178ddad1b2ccf7665560df4d0bae2e3bc2a8d4176b5cf"
-        },
-        "sources": {
-          "path": "OBS10/SOURCES.JSON",
-          "bytes": 2519,
-          "sha256": "da11524503084b89fc0abfc40b39b12abffd671b10df47aab87de0bee5356640"
-        },
-        "PIF": {
-          "path": "OBS10/DOSPING.PIF",
-          "bytes": 545,
-          "sha256": "cae0d512a5c5620b0ba220835a4fa479aa516930e6e02cd0c21e712b374358c8"
-        },
-        "PIF_metadata": {
-          "path": "OBS10/PIFMETA.JSN",
-          "bytes": 1602,
-          "sha256": "bfcdd85b18107640204ad43f50c9d67ddc780d2cbc99c6c64581fc72e6866dc4"
-        },
-        "DOS_executable": {
-          "path": "OBS10/DOSPING.EXE",
-          "bytes": 582,
-          "sha256": "f9856989f4ed6775e559e825711ec2766b395a38f4e3cc10de0970444d236c9b"
-        },
-        "runtime": {
-          "path": "OBS10/MIDIOBS.EXE",
-          "bytes": 18573,
-          "sha256": "04744bb9428762f647ec0b9c889efaf81ede0037f8e1236998cb9fc251cdebfb"
-        },
-        "header": {
-          "path": "OBS10/HEADER.JSON",
-          "bytes": 357,
-          "sha256": "cbea58d2b3e80b8be4e55c9514e0f29c8ce7a27347dc3cfaeccc2550426c8978"
-        },
-        "build_log": {
-          "path": "OBS10/OBSBUILD.LOG",
-          "bytes": 1010,
-          "sha256": "084c2848472dc7131cc18c7f127620a75608141d0b0f36a8899470ec553da5b6"
-        },
-        "process": {
-          "identity": {
-            "path": "OBS10/PROCESS.JSON",
-            "bytes": 411,
-            "sha256": "65d447b6062272cf884126add7d3b80333a051cf7d9fb3e14d464855ca34580d"
-          },
-          "pid": 33920,
-          "return": 0,
-          "owned_child_stopped": true,
-          "lease_released": true
+          "physical_test": false,
+          "whole_current_package_status": "PENDING",
+          "raw_records_modified": false,
+          "emulator_started_by_aggregator": false
         }
       },
-      "current_native_run": {
-        "status": "PASS_CURRENT_FULL_RUN",
-        "successful_assertions": 239,
-        "inputs": {
-          "path": "RUN10/INPUTS.JSON",
-          "bytes": 2836,
-          "sha256": "26328faadf15720567e61322488763228cd7b404d1ab73daf40360a8458d7493"
+      "native_install_launch": {
+        "status": "PASS",
+        "package": {
+          "bytes": 2120433,
+          "sha256": "1845c8e12d3664fb26d30e1b1223f81e1a19289ff71e7b012868e4f96f3a8eae"
         },
-        "raw_log": {
-          "path": "RUN10/CROOT/MIDIOBS.LOG",
-          "bytes": 11663,
-          "sha256": "3f7ad2130c212e1638b22c2923b351f193ef191dee10a2c215ce180c1c9e827e"
+        "installer": {
+          "bytes": 383302,
+          "sha256": "19f3a2af3c28b463efe00db0d85d173c7555bac95132a88c8b9cc8fec6c37413"
         },
         "process": {
-          "identity": {
-            "path": "RUN10/PROCESS.JSON",
-            "bytes": 409,
-            "sha256": "9713c0975e66171762fee94709b23e229ad575710e18d94a17c4973ea0b8b2ce"
-          },
-          "pid": 30216,
-          "return": 0,
-          "owned_child_stopped": true,
-          "lease_released": true
+          "bytes": 409,
+          "sha256": "e2d5e18862e896be0848008a29e3565e4c6224976d3ab9117107b1dac6fd8315"
         },
-        "preflight_and_normal_return_cleanup": {
-          "MPREF.LOG": {
-            "path": "RUN10/CROOT/MPREF.LOG",
+        "actual_consumer_path": "Extracted exact ZIP native SETUP /REPAIR /WIN:C:\\WINDOWS /APP:C:\\WINAMP /QUIET, unchanged installed GO, actual UI Play/Stop/Close, normal Windows exit, TPLAY postflight",
+        "source_SFX_scope": "Exact source SFX/internal runtime closure identity; consumer path tested was expanded ZIP, not SFX execution. Final RECUT must preserve its bytes.",
+        "inputs": {
+          "path": "PACK5/INPUTS.JSON",
+          "bytes": 9786,
+          "sha256": "52c8113c7c153e5abfdd545cc5c6247b3ef22cee5cb747c133e1b4245ecd64a4"
+        },
+        "readback": {
+          "path": "PACK5/READBACK.JSN",
+          "bytes": 5311,
+          "sha256": "85e1e06445baf3a830274865eb384cd23b63c3db13d77a3c6c039909546d80a2"
+        },
+        "native_repair_log": {
+          "path": "PACK5/CROOT/P5REPAIR.LOG",
+          "bytes": 307,
+          "sha256": "594f05f197bcdd1010ec7e122bd65b0d5a5f551d7fb25396a60da045c5ebdf82"
+        },
+        "native_repair_count": 1,
+        "installed23": {
+          "WINAMP/CHIME.SND": {
+            "bytes": 96,
+            "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149"
+          },
+          "WINXT/FIXXT.EXE": {
+            "bytes": 33001,
+            "sha256": "016d53ab4a77a120577fdd7ecf69399ab51559a53101bc00fdb2c4ebd24dc66a"
+          },
+          "WINAMP/INSTALL.TXT": {
+            "bytes": 2583,
+            "sha256": "a736917d6d1e05cab8cf029bd8a1e0094672205e5d9a29b948134ba6746a9638"
+          },
+          "WINAMP/LWFILE.DLL": {
+            "bytes": 14876,
+            "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
+          },
+          "WINAMP/MCITNDY.DLL": {
+            "bytes": 13036,
+            "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
+          },
+          "WINAMP/MIDICLK.DLL": {
+            "bytes": 16576,
+            "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
+          },
+          "WINAMP/MINIPLAY.EXE": {
+            "bytes": 52029,
+            "sha256": "7285ee2e3f7ff321643e4efe233941e8eeda8f89a993ff9ae91e1eb998a54fdb"
+          },
+          "WINAMP/PLUCK.TND": {
+            "bytes": 248,
+            "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c"
+          },
+          "WINAMP/RAWCLK.DLL": {
+            "bytes": 15464,
+            "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
+          },
+          "WINAMP/README.TXT": {
+            "bytes": 379,
+            "sha256": "37d65c0ef3df8a2d926c49de53d08b05baf32d85a879e5bcfbbfb24cda2d3d25"
+          },
+          "WINAMP/RESERVE.COM": {
+            "bytes": 1512,
+            "sha256": "644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8"
+          },
+          "WINAMP/SETUP.EXE": {
+            "bytes": 43327,
+            "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
+          },
+          "WINAMP/SHORT.VGM": {
+            "bytes": 387,
+            "sha256": "89f204cb51e9aabc86b7e42b31cc9402d3789f0e2ca9d9b410a572b27f4205bc"
+          },
+          "WINDOWS/SYSTEM/SOUND.DRV": {
+            "bytes": 9752,
+            "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
+          },
+          "WINAMP/STREAM.MID": {
+            "bytes": 3100,
+            "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
+          },
+          "WINAMP/TBRIDGE.EXE": {
+            "bytes": 2922,
+            "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
+          },
+          "WINXT/TCHIME.EXE": {
+            "bytes": 5071,
+            "sha256": "6de8cf5c0e00b78a1df0a52d912afdb376b2ef2a8516a2d3ca1303a751603e61"
+          },
+          "WINXT/TEXIT.EXE": {
+            "bytes": 9215,
+            "sha256": "5756639dbb979c758642663ba724f4951be5e2ff658611afd638c808edf39148"
+          },
+          "WINXT/TP.EXE": {
+            "bytes": 12847,
+            "sha256": "e0be284acf93ca6d1ccfe7150fe5ebdd5f16cf18c3c5a02a7aa779841be79a33"
+          },
+          "WINAMP/TPLAY.EXE": {
+            "bytes": 18141,
+            "sha256": "da47875485cd13574c963865c42f8389a48dfa4e8b71a45e9598fa2c81619ec2"
+          },
+          "WINDOWS/TSHELL.EXE": {
+            "bytes": 72323,
+            "sha256": "b024e8f715bd33cb94ab86718a3723e1cf70686187b96bbbf1ce383d606c93b9"
+          },
+          "WINDOWS/TSINPUT.DLL": {
+            "bytes": 6281,
+            "sha256": "d14dde571906bdd27a95030f11647333016eb34864afd22c08c5d2cf80660a80"
+          },
+          "WINXT/XPCHIME.EXE": {
+            "bytes": 5103,
+            "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
+          }
+        },
+        "SYSTEM_INI_preserved": {
+          "bytes": 1083,
+          "sha256": "9bb19831f37b36a537c1cea5e39d337fa54cc4e227373d6a6e0264000dd45c40"
+        },
+        "GO_preserved": {
+          "bytes": 49,
+          "sha256": "bc322a089509ec7e38ac8d75207218dadd4b9a577106c0c419b33a5fa12961ec"
+        },
+        "canonical_SOUND": {
+          "bytes": 9752,
+          "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
+        },
+        "normal_return_and_postflight": {
+          "NPREF.LOG": {
+            "path": "PACK5/CROOT/NPREF.LOG",
             "bytes": 222,
             "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
           },
-          "MWIN.LOG": {
-            "path": "RUN10/CROOT/MWIN.LOG",
+          "NWIN.LOG": {
+            "path": "PACK5/CROOT/NWIN.LOG",
             "bytes": 500,
             "sha256": "d9e2643cfba9fe2e3541acb92ed0350253604b6f74309969815eea3618758572"
           },
-          "MCLEAN.LOG": {
-            "path": "RUN10/CROOT/MCLEAN.LOG",
+          "NCLEAN.LOG": {
+            "path": "PACK5/CROOT/NCLEAN.LOG",
             "bytes": 222,
             "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
           },
           "RETURN.TXT": {
-            "path": "RUN10/CROOT/RETURN.TXT",
+            "path": "PACK5/CROOT/RETURN.TXT",
             "bytes": 6,
             "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
           }
         },
-        "DOS_marker": {
-          "path": "RUN10/CROOT/MIDIDOS.LOG",
-          "bytes": 18,
-          "sha256": "9bd29f78daea5b26e172c6d3435f755796492c82b801926b874a7d331e15f1de"
+        "capture_wrapper": {
+          "reported": "NONZERO",
+          "raw_marker": {
+            "path": "PACK5/CROOT/CAPTURE.TXT",
+            "bytes": 9,
+            "sha256": "f17a6912afb3ccb5c179d14349743bc9cdd01ff3d187eb7c420e1880ce370cfa"
+          },
+          "scope": "Capture-shell status preserved independently. Actual owned process0, Windows return0, bridge restoration, exact pre/postflight and RETURN PASS establish successful product completion."
         },
-        "DOS_EXE_WinExec_return": 774,
-        "explicit_PIF_fallback_invoked": false,
-        "seven_fixtures": [
+        "visual_states": [
           {
-            "path": "RUN10/CROOT/MMLAB/FIX/ALLOFF.MID",
-            "bytes": 76,
-            "sha256": "2f2298a683b65e787c90ddf087d9f7c651cccab6785590c11e4f9260c48fe3ee"
+            "seconds": 14.001,
+            "state": "STREAM.MID Playing",
+            "image": {
+              "path": "PACK5/FRAMES/F00839.PNG",
+              "bytes": 2939,
+              "sha256": "fdf33dd052318938e4f03be4922cc6012b4e903530e1f2b53a02205c4c9af7d5"
+            },
+            "review": "Parent and native QA independently viewed actual captured PNG"
           },
           {
-            "path": "RUN10/CROOT/MMLAB/FIX/BEND.MID",
-            "bytes": 185,
-            "sha256": "b9e3c85e164dc83339c28302f9ca18e58c4982ece711034bbbadeb16494a5b6d"
+            "seconds": 15.503,
+            "state": "Stopped, clock00:01",
+            "image": {
+              "path": "PACK5/FRAMES/F00929.PNG",
+              "bytes": 2953,
+              "sha256": "e36ab910af3c8368167717a227d24ccf612326f635daf96118710efbc5de602d"
+            },
+            "review": "Parent and native QA independently viewed actual captured PNG"
           },
           {
-            "path": "RUN10/CROOT/MMLAB/FIX/EXTRAS.MID",
-            "bytes": 129,
-            "sha256": "fd605f396a6b209c5307fc856aa2da3bb0c7789cc363cb924ac0404f1375056c"
+            "seconds": 18.006,
+            "state": "Player closed; XY Control desktop",
+            "image": {
+              "path": "PACK5/FRAMES/F01079.PNG",
+              "bytes": 2854,
+              "sha256": "19149321ae2383e09f75fe419258fbe4e51c490ffa442695556b81683d8fc123"
+            },
+            "review": "Parent and native QA independently viewed actual captured PNG"
           },
           {
-            "path": "RUN10/CROOT/MMLAB/FIX/STEAL.MID",
-            "bytes": 129,
-            "sha256": "2202addf5566a4a82279e78a7606f1f830b8a8cb7c3e5514f619362ace288ed7"
-          },
-          {
-            "path": "RUN10/CROOT/MMLAB/FIX/SUSTAIN.MID",
-            "bytes": 84,
-            "sha256": "b082f86ba0d0647664c9eff68533a207b01b516177ea36e8feea5bb1d9f96140"
-          },
-          {
-            "path": "RUN10/CROOT/MMLAB/FIX/VOLEXPR.MID",
-            "bytes": 90,
-            "sha256": "f68d1f66fa730cbeede53d09e71dd8755b9eb2b0691a32b1e801d063bd8ae218"
-          },
-          {
-            "path": "RUN10/CROOT/MMLAB/FIX/LONGMETA.MID",
-            "bytes": 70065,
-            "sha256": "9c8b64f6620974d2a0ea6d9f22282c026b321aa4cc5198642b943cab26670bad"
+            "seconds": 27.001,
+            "state": "Normal Windows exit dialog",
+            "image": {
+              "path": "PACK5/FRAMES/F01618.PNG",
+              "bytes": 3244,
+              "sha256": "5c5d9bb501a0184a14a58a4da751993c05aadd2a48a635e3b496e257af64f7fb"
+            },
+            "review": "Parent and native QA independently viewed actual captured PNG"
           }
         ],
-        "GUI": {
-          "Play_before_tick": 38612,
-          "Play_after_tick": 39326,
-          "blocking_Play_ms": 714,
-          "move_repaint_iterations": [
-            1,
-            2,
-            3
-          ],
-          "elapsed_ms": [
-            2911,
-            3625,
-            4339
-          ],
-          "actual_Stop_Close_Sound_PIT_cleanup": "All asserted and passed"
-        },
-        "captures": [
-          {
-            "path": "RUN10/captures/command_000.avi",
-            "bytes": 623708,
-            "sha256": "1fc45011d96741cf4c5c63fbbdfdc0ed1f651fb6d6c49fe7b0093712611b3c2e"
+        "current_packet_latency": {
+          "Opening_seconds": 12.716256,
+          "Playing_seconds": 13.367088,
+          "observed_interval_seconds": 0.650832,
+          "video": {
+            "path": "PACK5/captures/kernel_000.avi",
+            "bytes": 5687268,
+            "sha256": "b5b220c92912ad7231553a086c40393402ed6f744a38ebd7f2850aa3067fc874"
           },
-          {
-            "path": "RUN10/captures/kernel_000.avi",
-            "bytes": 2146546,
-            "sha256": "102db1adbc0e999ccbf3769919a319f8baf32e332912eff9d1cb43e7baccc2c1"
-          },
-          {
-            "path": "RUN10/captures/kernel_001.avi",
-            "bytes": 77036,
-            "sha256": "4dd690114c9352c416ba6aae589bc1db91c94494f39d80c946152ca70b745901"
-          },
-          {
-            "path": "RUN10/captures/kernel_002.avi",
-            "bytes": 6731064,
-            "sha256": "bd25f11927c069b08a23aabab1f4d74a15d814d60a3ae1c445ee72c9ccdd4062"
-          },
-          {
-            "path": "RUN10/captures/tplay_000.avi",
-            "bytes": 192592,
-            "sha256": "2f9e58e904eace955f630e9a391a13c5b75a6ce273973bd2bc4e2dd0b5b5ddeb"
-          },
-          {
-            "path": "RUN10/captures/tplay_000.wav",
-            "bytes": 9279020,
-            "sha256": "1bf76cd78b95ca19683580ad52580be37a977f3deb73a3bc1e9a51034bc56802"
+          "receipt": {
+            "path": "PACK5/LATENCY/LATENCY.JSN",
+            "bytes": 3220,
+            "sha256": "4cef9369ecab1d809507c107f428a9d48ec0607329da830da6de5e8826b9d450"
           }
-        ]
+        },
+        "Windows_QA_observer_loaded": false,
+        "OS_Setup_repeated": false
       },
-      "successful_scoped_assertions": 239,
-      "supplemental_prior_metadata_video_references_not_current_passes": {
+      "prior_video_scopes": {
         "NORMVG2": {
           "process": {
             "path": "NORMVG2/PROCESS.JSON",
@@ -562,468 +1337,104 @@
           }
         }
       },
+      "historical_failed_records": {
+        "policy": "Preserved unchanged; no earlier failed raw run contributes to the current239 PASS. Prior timing/burst captures retain their own raw watchdog results and metadata scopes.",
+        "current_engine_inherits_failed_runs": false
+      },
       "physical_test": false,
-      "whole_current_package_status": "PENDING",
-      "raw_records_modified": false,
-      "emulator_started_by_aggregator": false
-    }
-  },
-  "native_install_launch": {
-    "status": "PASS",
-    "package": {
-      "bytes": 2120433,
-      "sha256": "1845c8e12d3664fb26d30e1b1223f81e1a19289ff71e7b012868e4f96f3a8eae"
-    },
-    "installer": {
-      "bytes": 383302,
-      "sha256": "19f3a2af3c28b463efe00db0d85d173c7555bac95132a88c8b9cc8fec6c37413"
-    },
-    "process": {
-      "bytes": 409,
-      "sha256": "e2d5e18862e896be0848008a29e3565e4c6224976d3ab9117107b1dac6fd8315"
-    },
-    "actual_consumer_path": "Extracted exact ZIP native SETUP /REPAIR /WIN:C:\\WINDOWS /APP:C:\\WINAMP /QUIET, unchanged installed GO, actual UI Play/Stop/Close, normal Windows exit, TPLAY postflight",
-    "source_SFX_scope": "Exact source SFX/internal runtime closure identity; consumer path tested was expanded ZIP, not SFX execution. Final RECUT must preserve its bytes.",
-    "inputs": {
-      "path": "PACK5/INPUTS.JSON",
-      "bytes": 9786,
-      "sha256": "52c8113c7c153e5abfdd545cc5c6247b3ef22cee5cb747c133e1b4245ecd64a4"
-    },
-    "readback": {
-      "path": "PACK5/READBACK.JSN",
-      "bytes": 5311,
-      "sha256": "85e1e06445baf3a830274865eb384cd23b63c3db13d77a3c6c039909546d80a2"
-    },
-    "native_repair_log": {
-      "path": "PACK5/CROOT/P5REPAIR.LOG",
-      "bytes": 307,
-      "sha256": "594f05f197bcdd1010ec7e122bd65b0d5a5f551d7fb25396a60da045c5ebdf82"
-    },
-    "native_repair_count": 1,
-    "installed23": {
-      "WINAMP/CHIME.SND": {
-        "bytes": 96,
-        "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149"
-      },
-      "WINXT/FIXXT.EXE": {
-        "bytes": 33001,
-        "sha256": "016d53ab4a77a120577fdd7ecf69399ab51559a53101bc00fdb2c4ebd24dc66a"
-      },
-      "WINAMP/INSTALL.TXT": {
-        "bytes": 2583,
-        "sha256": "a736917d6d1e05cab8cf029bd8a1e0094672205e5d9a29b948134ba6746a9638"
-      },
-      "WINAMP/LWFILE.DLL": {
-        "bytes": 14876,
-        "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
-      },
-      "WINAMP/MCITNDY.DLL": {
-        "bytes": 13036,
-        "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
-      },
-      "WINAMP/MIDICLK.DLL": {
-        "bytes": 16576,
-        "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
-      },
-      "WINAMP/MINIPLAY.EXE": {
-        "bytes": 52029,
-        "sha256": "7285ee2e3f7ff321643e4efe233941e8eeda8f89a993ff9ae91e1eb998a54fdb"
-      },
-      "WINAMP/PLUCK.TND": {
-        "bytes": 248,
-        "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c"
-      },
-      "WINAMP/RAWCLK.DLL": {
-        "bytes": 15464,
-        "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
-      },
-      "WINAMP/README.TXT": {
-        "bytes": 379,
-        "sha256": "37d65c0ef3df8a2d926c49de53d08b05baf32d85a879e5bcfbbfb24cda2d3d25"
-      },
-      "WINAMP/RESERVE.COM": {
-        "bytes": 1512,
-        "sha256": "644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8"
-      },
-      "WINAMP/SETUP.EXE": {
-        "bytes": 43327,
-        "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
-      },
-      "WINAMP/SHORT.VGM": {
-        "bytes": 387,
-        "sha256": "89f204cb51e9aabc86b7e42b31cc9402d3789f0e2ca9d9b410a572b27f4205bc"
-      },
-      "WINDOWS/SYSTEM/SOUND.DRV": {
-        "bytes": 9752,
-        "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
-      },
-      "WINAMP/STREAM.MID": {
-        "bytes": 3100,
-        "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
-      },
-      "WINAMP/TBRIDGE.EXE": {
-        "bytes": 2922,
-        "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
-      },
-      "WINXT/TCHIME.EXE": {
-        "bytes": 5071,
-        "sha256": "6de8cf5c0e00b78a1df0a52d912afdb376b2ef2a8516a2d3ca1303a751603e61"
-      },
-      "WINXT/TEXIT.EXE": {
-        "bytes": 9215,
-        "sha256": "5756639dbb979c758642663ba724f4951be5e2ff658611afd638c808edf39148"
-      },
-      "WINXT/TP.EXE": {
-        "bytes": 12847,
-        "sha256": "e0be284acf93ca6d1ccfe7150fe5ebdd5f16cf18c3c5a02a7aa779841be79a33"
-      },
-      "WINAMP/TPLAY.EXE": {
-        "bytes": 18141,
-        "sha256": "da47875485cd13574c963865c42f8389a48dfa4e8b71a45e9598fa2c81619ec2"
-      },
-      "WINDOWS/TSHELL.EXE": {
-        "bytes": 72323,
-        "sha256": "b024e8f715bd33cb94ab86718a3723e1cf70686187b96bbbf1ce383d606c93b9"
-      },
-      "WINDOWS/TSINPUT.DLL": {
-        "bytes": 6281,
-        "sha256": "d14dde571906bdd27a95030f11647333016eb34864afd22c08c5d2cf80660a80"
-      },
-      "WINXT/XPCHIME.EXE": {
-        "bytes": 5103,
-        "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
-      }
-    },
-    "SYSTEM_INI_preserved": {
-      "bytes": 1083,
-      "sha256": "9bb19831f37b36a537c1cea5e39d337fa54cc4e227373d6a6e0264000dd45c40"
-    },
-    "GO_preserved": {
-      "bytes": 49,
-      "sha256": "bc322a089509ec7e38ac8d75207218dadd4b9a577106c0c419b33a5fa12961ec"
-    },
-    "canonical_SOUND": {
-      "bytes": 9752,
-      "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
-    },
-    "normal_return_and_postflight": {
-      "NPREF.LOG": {
-        "path": "PACK5/CROOT/NPREF.LOG",
-        "bytes": 222,
-        "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
-      },
-      "NWIN.LOG": {
-        "path": "PACK5/CROOT/NWIN.LOG",
-        "bytes": 500,
-        "sha256": "d9e2643cfba9fe2e3541acb92ed0350253604b6f74309969815eea3618758572"
-      },
-      "NCLEAN.LOG": {
-        "path": "PACK5/CROOT/NCLEAN.LOG",
-        "bytes": 222,
-        "sha256": "5d03f62d96e494c7c9ad9d5b662a8e4ac98a60cf1b8deb7492bd7073d21e3c6c"
-      },
-      "RETURN.TXT": {
-        "path": "PACK5/CROOT/RETURN.TXT",
-        "bytes": 6,
-        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
-      }
-    },
-    "capture_wrapper": {
-      "reported": "NONZERO",
-      "raw_marker": {
-        "path": "PACK5/CROOT/CAPTURE.TXT",
-        "bytes": 9,
-        "sha256": "f17a6912afb3ccb5c179d14349743bc9cdd01ff3d187eb7c420e1880ce370cfa"
-      },
-      "scope": "Capture-shell status preserved independently. Actual owned process0, Windows return0, bridge restoration, exact pre/postflight and RETURN PASS establish successful product completion."
-    },
-    "visual_states": [
-      {
-        "seconds": 14.001,
-        "state": "STREAM.MID Playing",
-        "image": {
-          "path": "PACK5/FRAMES/F00839.PNG",
-          "bytes": 2939,
-          "sha256": "fdf33dd052318938e4f03be4922cc6012b4e903530e1f2b53a02205c4c9af7d5"
+      "current_packet_ordinary_performance": {
+        "status": "OBSERVED_CURRENT_PACKET_ORDINARY_PERFORMANCE_ONLY",
+        "scope": "Unchanged current CANDIDATE5 installed23, all three BUILD8 DLLs including movable MID b4eef762. Deliberate50s performance bound; no full cleanup or whole-run PASS claimed.",
+        "candidate": {
+          "bytes": 22608,
+          "sha256": "64a9a37f24b629a422324e686adeef9575475a89f78dd2069f3aacc7ceed2fff"
         },
-        "review": "Parent and native QA independently viewed actual captured PNG"
-      },
-      {
-        "seconds": 15.503,
-        "state": "Stopped, clock00:01",
-        "image": {
-          "path": "PACK5/FRAMES/F00929.PNG",
-          "bytes": 2953,
-          "sha256": "e36ab910af3c8368167717a227d24ccf612326f635daf96118710efbc5de602d"
+        "packet": {
+          "bytes": 2120433,
+          "sha256": "1845c8e12d3664fb26d30e1b1223f81e1a19289ff71e7b012868e4f96f3a8eae"
         },
-        "review": "Parent and native QA independently viewed actual captured PNG"
-      },
-      {
-        "seconds": 18.006,
-        "state": "Player closed; XY Control desktop",
-        "image": {
-          "path": "PACK5/FRAMES/F01079.PNG",
-          "bytes": 2854,
-          "sha256": "19149321ae2383e09f75fe419258fbe4e51c490ffa442695556b81683d8fc123"
+        "installed_payloads_verified": 23,
+        "current_DLLs": {
+          "RAWCLK.DLL": {
+            "bytes": 15464,
+            "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
+          },
+          "MIDICLK.DLL": {
+            "bytes": 16576,
+            "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
+          },
+          "MCITNDY.DLL": {
+            "bytes": 13036,
+            "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
+          }
         },
-        "review": "Parent and native QA independently viewed actual captured PNG"
-      },
-      {
-        "seconds": 27.001,
-        "state": "Normal Windows exit dialog",
-        "image": {
-          "path": "PACK5/FRAMES/F01618.PNG",
-          "bytes": 3244,
-          "sha256": "5c5d9bb501a0184a14a58a4da751993c05aadd2a48a635e3b496e257af64f7fb"
+        "original_private_test_song_metadata_only": {
+          "name": "BLONDIE.MID",
+          "bytes": 57716,
+          "sha256": "bd67338aff0948cedfbf3f37fe46e0449c4a224218202346395212746952a620",
+          "song_bytes_not_distributed": true
         },
-        "review": "Parent and native QA independently viewed actual captured PNG"
-      }
-    ],
-    "current_packet_latency": {
-      "Opening_seconds": 12.716256,
-      "Playing_seconds": 13.367088,
-      "observed_interval_seconds": 0.650832,
-      "video": {
-        "path": "PACK5/captures/kernel_000.avi",
-        "bytes": 5687268,
-        "sha256": "b5b220c92912ad7231553a086c40393402ed6f744a38ebd7f2850aa3067fc874"
+        "raw_process": {
+          "identity": {
+            "bytes": 655,
+            "sha256": "4b9900eb731b0cfd379efea1e44ca2b5195700b4a6cdf19d901e1b02bf1baf21"
+          },
+          "pid": 23792,
+          "bound_seconds": 50,
+          "watchdog": true,
+          "owned_child_stopped": true,
+          "lease_released": true,
+          "whole_cleanup_pass": false,
+          "raw_result": "DELIBERATE_WATCHDOG_PRESERVED_NOT_PASS"
+        },
+        "inputs_identity": {
+          "bytes": 6023,
+          "sha256": "9498dfe4bbe5bb365683379b4380e0203b78ba02a509c2235cbf125b47d4bb08"
+        },
+        "Opening_seconds": 22.929312,
+        "Playing_seconds": 25.916464,
+        "Stopped_seconds": 27.067936,
+        "observed_Opening_to_Playing_seconds": 2.987152,
+        "video_identity_only": {
+          "bytes": 9344152,
+          "sha256": "a7d6f943371ece5329b26f328d4318eb997996a77386621fc7fcdf4ac5eabb0e"
+        },
+        "latency_receipt_identity": {
+          "bytes": 1726,
+          "sha256": "dca0dec79d0040d69d4004f460177b8f7f68b4a6ed4c9588d42fad0be8028781"
+        },
+        "reviewed_visual_metadata_only": [
+          {
+            "frame": 1559,
+            "seconds": 26.017,
+            "state": "Playing",
+            "image_identity_only": {
+              "bytes": 2856,
+              "sha256": "3f20fb7f746e47924364650cbe82eca026e4219225325662187cd19b68e09913"
+            },
+            "review": "Parent viewed actual captured frame; no image bytes included"
+          },
+          {
+            "frame": 1678,
+            "seconds": 28.002,
+            "state": "Stopped",
+            "image_identity_only": {
+              "bytes": 2866,
+              "sha256": "4710c8e7f3e2a72803f096d22b3318ba841bbdaa9579f1778ea182e2418f6a1a"
+            },
+            "review": "Parent viewed actual captured frame; no image bytes included"
+          }
+        ],
+        "no_private_song_or_capture_bytes_in_public_package": true
       },
-      "receipt": {
-        "path": "PACK5/LATENCY/LATENCY.JSN",
-        "bytes": 3220,
-        "sha256": "4cef9369ecab1d809507c107f428a9d48ec0607329da830da6de5e8826b9d450"
-      }
-    },
-    "Windows_QA_observer_loaded": false,
-    "OS_Setup_repeated": false
-  },
-  "prior_video_scopes": {
-    "NORMVG2": {
-      "process": {
-        "path": "NORMVG2/PROCESS.JSON",
-        "bytes": 657,
-        "sha256": "fd78b575733c6bc7f831324b063181d7cba53f16d8e11402d3f9dc79361296f4"
-      },
-      "inputs": {
-        "path": "NORMVG2/INPUTS.JSON",
-        "bytes": 3192,
-        "sha256": "52957c504a41722789931ad69cd150a9f606ae72453b5ef549a41b0ea288d12d"
-      },
-      "whole_raw_result": "TIMEOUT_PRESERVED",
-      "status_claim": "SCOPED_VIDEO_REFERENCE_ONLY_NOT_WHOLE_RUN_PASS",
-      "RAW_MCI_files_equal_current": true,
-      "MID_code_body_equal_current": true,
-      "MID_file_equal_current": false,
-      "prior_MID_CODE_flags": [
-        3392
-      ],
-      "current_MID_CODE_flags": [
-        7504
-      ],
-      "precise_scope": "Same RAW/MCI files and same MID instruction body; prior MID fixed CODE metadata, current movable/discardable CODE metadata. Not a current complete package/native-run PASS.",
-      "scope": "Original387-byte SHORT.VGM literal burst path visually Done without error; MID not loaded by this format path. Separate from full MIDI run and queued large-VGM work.",
-      "song": {
-        "path": "NORMVG2/CROOT/WINAMP/SHORT.VGM",
-        "bytes": 387,
-        "sha256": "89f204cb51e9aabc86b7e42b31cc9402d3789f0e2ca9d9b410a572b27f4205bc"
-      },
-      "visual_receipt": {
-        "path": "NORMVG2/FRAMES/FRAMES.JSON",
-        "bytes": 15386,
-        "sha256": "793d747d493294b8bc880aac7926d19c4a64732f58ebd7bb1a3686865a6928ac"
-      },
-      "reviewed_Done_image": {
-        "path": "NORMVG2/FRAMES/F02547.PNG",
-        "bytes": 2805,
-        "sha256": "1f00662f0db5c66639a9681945cf1a7a69797eaf1871cbf7f4170dff3e2ef18d"
-      },
-      "video": {
-        "path": "NORMVG2/captures/kernel_000.avi",
-        "bytes": 8371584,
-        "sha256": "c1a4fcc5d9913dbc62c4ba3d9d9f4dd82741207a58f8e886160a3252f5b8ddde"
-      }
-    },
-    "NORM7": {
-      "process": {
-        "path": "NORM7/PROCESS.JSON",
-        "bytes": 655,
-        "sha256": "8eb87cdfef72a9e34c98e05dd3fdb40fea5d2a0cdf7cb6c116f940f888032213"
-      },
-      "inputs": {
-        "path": "NORM7/INPUTS.JSON",
-        "bytes": 3464,
-        "sha256": "d484633e62d0f2f1207f8507f18ee008f6e8bebaafd3726f18d6ba4246c4f5de"
-      },
-      "whole_raw_result": "TIMEOUT_PRESERVED",
-      "status_claim": "SCOPED_VIDEO_REFERENCE_ONLY_NOT_WHOLE_RUN_PASS",
-      "RAW_MCI_files_equal_current": true,
-      "MID_code_body_equal_current": true,
-      "MID_file_equal_current": false,
-      "prior_MID_CODE_flags": [
-        3392
-      ],
-      "current_MID_CODE_flags": [
-        7504
-      ],
-      "precise_scope": "Same RAW/MCI files and same MID instruction body; prior MID fixed CODE metadata, current movable/discardable CODE metadata. Not a current complete package/native-run PASS.",
-      "scope": "Factual Opening-to-Playing video observation only, with prior fixed MID metadata",
-      "video": {
-        "path": "NORM7/captures/kernel_000.avi",
-        "bytes": 4507648,
-        "sha256": "8094085b0296aecec0489927441096697780a67326cd9d6024be45221da40197"
-      },
-      "latency_receipt": {
-        "path": "NORM7/LATENCY/LATENCY.JSN",
-        "bytes": 2544,
-        "sha256": "26348dffe1ff6f46be7a361420126f01e7e3ed9e088e7394e5e0fb127528ccbe"
-      },
-      "opening_seconds": 12.165552,
-      "playing_seconds": 12.799696,
-      "observed_interval_seconds": 0.634144,
-      "song": {
-        "path": "NORM7/CROOT/WINAMP/STREAM.MID",
-        "bytes": 3100,
-        "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
-      }
-    },
-    "NORMBL3": {
-      "process": {
-        "path": "NORMBL3/PROCESS.JSON",
-        "bytes": 657,
-        "sha256": "a99e8ba19b14657f5d0b5eb7f10342cd107c4e362bee890e41eb32c68c83a148"
-      },
-      "inputs": {
-        "path": "NORMBL3/INPUTS.JSON",
-        "bytes": 2254,
-        "sha256": "7d7d91bc5282920971af57f23f07b51b5cf18f7f2c6e96b08e8352d7036c0b6c"
-      },
-      "whole_raw_result": "TIMEOUT_PRESERVED",
-      "status_claim": "SCOPED_VIDEO_REFERENCE_ONLY_NOT_WHOLE_RUN_PASS",
-      "RAW_MCI_files_equal_current": true,
-      "MID_code_body_equal_current": true,
-      "MID_file_equal_current": false,
-      "prior_MID_CODE_flags": [
-        3392
-      ],
-      "current_MID_CODE_flags": [
-        7504
-      ],
-      "precise_scope": "Same RAW/MCI files and same MID instruction body; prior MID fixed CODE metadata, current movable/discardable CODE metadata. Not a current complete package/native-run PASS.",
-      "scope": "Factual Opening-to-Playing video observation only, with prior fixed MID metadata",
-      "video": {
-        "path": "NORMBL3/captures/kernel_000.avi",
-        "bytes": 8372768,
-        "sha256": "8ff02440fb06743a403d526d308ecbe768a91b99d1b3d2f5dc9d1fa8368749ce"
-      },
-      "latency_receipt": {
-        "path": "NORMBL3/LATENCY/LATENCY.JSN",
-        "bytes": 1588,
-        "sha256": "c2826c649ee378d1f43f137d7a8d7a3fb1b6e5f0606493fb7dc16b5cec9acc48"
-      },
-      "opening_seconds": 18.723936,
-      "playing_seconds": 22.044848,
-      "observed_interval_seconds": 3.320912,
-      "song": {
-        "path": "NORMBL3/CROOT/WINAMP/BLONDIE.MID",
-        "bytes": 57716,
-        "sha256": "bd67338aff0948cedfbf3f37fe46e0449c4a224218202346395212746952a620"
+      "current_UI_latency_summary": {
+        "STREAM_MID_Opening_to_Playing_seconds": 0.650832,
+        "original_private_BLONDIE_Opening_to_Playing_seconds": 2.987152,
+        "supersedes_historical_UI_timing_numbers": true,
+        "historical_scope": "Prior fixed-MID-metadata video references remain unchanged and historical; current0.650832/2.987152 measurements take precedence."
       }
     }
-  },
-  "historical_failed_records": {
-    "policy": "Preserved unchanged; no earlier failed raw run contributes to the current239 PASS. Prior timing/burst captures retain their own raw watchdog results and metadata scopes.",
-    "current_engine_inherits_failed_runs": false
   },
   "physical_test": false,
-  "current_packet_ordinary_performance": {
-    "status": "OBSERVED_CURRENT_PACKET_ORDINARY_PERFORMANCE_ONLY",
-    "scope": "Unchanged current CANDIDATE5 installed23, all three BUILD8 DLLs including movable MID b4eef762. Deliberate50s performance bound; no full cleanup or whole-run PASS claimed.",
-    "candidate": {
-      "bytes": 22608,
-      "sha256": "64a9a37f24b629a422324e686adeef9575475a89f78dd2069f3aacc7ceed2fff"
-    },
-    "packet": {
-      "bytes": 2120433,
-      "sha256": "1845c8e12d3664fb26d30e1b1223f81e1a19289ff71e7b012868e4f96f3a8eae"
-    },
-    "installed_payloads_verified": 23,
-    "current_DLLs": {
-      "RAWCLK.DLL": {
-        "bytes": 15464,
-        "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
-      },
-      "MIDICLK.DLL": {
-        "bytes": 16576,
-        "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
-      },
-      "MCITNDY.DLL": {
-        "bytes": 13036,
-        "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
-      }
-    },
-    "original_private_test_song_metadata_only": {
-      "name": "BLONDIE.MID",
-      "bytes": 57716,
-      "sha256": "bd67338aff0948cedfbf3f37fe46e0449c4a224218202346395212746952a620",
-      "song_bytes_not_distributed": true
-    },
-    "raw_process": {
-      "identity": {
-        "bytes": 655,
-        "sha256": "4b9900eb731b0cfd379efea1e44ca2b5195700b4a6cdf19d901e1b02bf1baf21"
-      },
-      "pid": 23792,
-      "bound_seconds": 50,
-      "watchdog": true,
-      "owned_child_stopped": true,
-      "lease_released": true,
-      "whole_cleanup_pass": false,
-      "raw_result": "DELIBERATE_WATCHDOG_PRESERVED_NOT_PASS"
-    },
-    "inputs_identity": {
-      "bytes": 6023,
-      "sha256": "9498dfe4bbe5bb365683379b4380e0203b78ba02a509c2235cbf125b47d4bb08"
-    },
-    "Opening_seconds": 22.929312,
-    "Playing_seconds": 25.916464,
-    "Stopped_seconds": 27.067936,
-    "observed_Opening_to_Playing_seconds": 2.987152,
-    "video_identity_only": {
-      "bytes": 9344152,
-      "sha256": "a7d6f943371ece5329b26f328d4318eb997996a77386621fc7fcdf4ac5eabb0e"
-    },
-    "latency_receipt_identity": {
-      "bytes": 1726,
-      "sha256": "dca0dec79d0040d69d4004f460177b8f7f68b4a6ed4c9588d42fad0be8028781"
-    },
-    "reviewed_visual_metadata_only": [
-      {
-        "frame": 1559,
-        "seconds": 26.017,
-        "state": "Playing",
-        "image_identity_only": {
-          "bytes": 2856,
-          "sha256": "3f20fb7f746e47924364650cbe82eca026e4219225325662187cd19b68e09913"
-        },
-        "review": "Parent viewed actual captured frame; no image bytes included"
-      },
-      {
-        "frame": 1678,
-        "seconds": 28.002,
-        "state": "Stopped",
-        "image_identity_only": {
-          "bytes": 2866,
-          "sha256": "4710c8e7f3e2a72803f096d22b3318ba841bbdaa9579f1778ea182e2418f6a1a"
-        },
-        "review": "Parent viewed actual captured frame; no image bytes included"
-      }
-    ],
-    "no_private_song_or_capture_bytes_in_public_package": true
-  },
-  "current_UI_latency_summary": {
-    "STREAM_MID_Opening_to_Playing_seconds": 0.650832,
-    "original_private_BLONDIE_Opening_to_Playing_seconds": 2.987152,
-    "supersedes_historical_UI_timing_numbers": true,
-    "historical_scope": "Prior fixed-MID-metadata video references remain unchanged and historical; current0.650832/2.987152 measurements take precedence."
-  }
+  "published": false
 }

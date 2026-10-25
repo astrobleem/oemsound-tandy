@@ -1,0 +1,90 @@
+{
+  "package": {
+    "bytes": 2157594,
+    "sha256": "40d00a49ecb4dc177274042c5084a5a3b5ee3d4e59eca81003af8c6c083f72db"
+  },
+  "runtime": {
+    "CHIME.SND": {
+      "bytes": 96,
+      "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149"
+    },
+    "FIXXT.EXE": {
+      "bytes": 33001,
+      "sha256": "016d53ab4a77a120577fdd7ecf69399ab51559a53101bc00fdb2c4ebd24dc66a"
+    },
+    "LWFILE.DLL": {
+      "bytes": 14876,
+      "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
+    },
+    "MCITNDY.DLL": {
+      "bytes": 13036,
+      "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
+    },
+    "MIDICLK.DLL": {
+      "bytes": 16576,
+      "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
+    },
+    "PLUCK.TND": {
+      "bytes": 248,
+      "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c"
+    },
+    "RAWCLK.DLL": {
+      "bytes": 15464,
+      "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
+    },
+    "RESERVE.COM": {
+      "bytes": 1512,
+      "sha256": "644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8"
+    },
+    "SETUP.EXE": {
+      "bytes": 43327,
+      "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
+    },
+    "SHORT.VGM": {
+      "bytes": 387,
+      "sha256": "89f204cb51e9aabc86b7e42b31cc9402d3789f0e2ca9d9b410a572b27f4205bc"
+    },
+    "SOUND.DRV": {
+      "bytes": 9752,
+      "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
+    },
+    "STREAM.MID": {
+      "bytes": 3100,
+      "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
+    },
+    "TBRIDGE.EXE": {
+      "bytes": 2922,
+      "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
+    },
+    "TCHIME.EXE": {
+      "bytes": 5071,
+      "sha256": "6de8cf5c0e00b78a1df0a52d912afdb376b2ef2a8516a2d3ca1303a751603e61"
+    },
+    "TEXIT.EXE": {
+      "bytes": 9215,
+      "sha256": "5756639dbb979c758642663ba724f4951be5e2ff658611afd638c808edf39148"
+    },
+    "TP.EXE": {
+      "bytes": 12847,
+      "sha256": "e0be284acf93ca6d1ccfe7150fe5ebdd5f16cf18c3c5a02a7aa779841be79a33"
+    },
+    "TPLAY.EXE": {
+      "bytes": 18141,
+      "sha256": "da47875485cd13574c963865c42f8389a48dfa4e8b71a45e9598fa2c81619ec2"
+    },
+    "TSHELL.EXE": {
+      "bytes": 72323,
+      "sha256": "b024e8f715bd33cb94ab86718a3723e1cf70686187b96bbbf1ce383d606c93b9"
+    },
+    "TSINPUT.DLL": {
+      "bytes": 6281,
+      "sha256": "d14dde571906bdd27a95030f11647333016eb34864afd22c08c5d2cf80660a80"
+    },
+    "XPCHIME.EXE": {
+      "bytes": 5103,
+      "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
+    }
+  },
+  "scope": "Published current MIDI runtime retained byte-for-byte while rebuilding only MINIPLAY; guides and receipt metadata excluded.",
+  "source_commit": "68fc60510bde5d7f6fa74e3fa806719bff7ead65"
+}

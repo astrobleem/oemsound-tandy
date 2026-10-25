@@ -43,6 +43,13 @@ FORMATS
 MIDI streams from disk and supports sustain, volume, expression, pitch bend
 and controller resets. Low bass uses the PC speaker with automatic PSG
 fallback. Tandy voices and percussion share the installed sound driver.
-Supported VGM/VGZ data preserves the PSG register stream. MOD is arranged for PSG square waves and does not
-reproduce sample timbres. Original synthetic examples and corresponding
+VGM reads directly from disk; VGZ expands automatically before playback.
+Opening and Checking file show progress. Choose Cancel to stop opening;
+Close also cancels safely. Temporary files are created and removed by the
+player; no TEMP setting or external decompressor is needed.
+Supported VGM/VGZ data preserves the PSG register stream and plays the
+initial traversal plus one loop repeat. Plain or expanded files may be up
+to 16 MiB, within the supported Tandy PSG command and timing profile.
+MOD is arranged for PSG square waves and does not reproduce sample
+timbres. Original synthetic examples and corresponding
 source are included. Development test records are in TESTS.JSN.

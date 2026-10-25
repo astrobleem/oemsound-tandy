@@ -55,6 +55,8 @@ class MidiPackage(unittest.TestCase):
         process = files['EVIDENCE/RAWPROC.JSN']
         self.stages = {}
         for label, record in self.builds.items():
+            if label=='player':
+                continue
             stage = self.root/label
             self.stages[label] = stage
             for name in record['sources']:
@@ -68,6 +70,16 @@ class MidiPackage(unittest.TestCase):
             put(stage/'BUILD.JSON', dump(record))
             put(stage/'PROCESS.JSON', process)
             put(stage/'BUILD.LOG', b'PASS MIDI THREE DLL BUILD\r\n')
+        playerstage=self.root/'player';self.stages['player']=playerstage
+        for name in self.builds['player']['sources']:
+            data=files['SOURCE/PLAYER/'+name]
+            put(playerstage/name,data);put(self.repo/'src/win30/PLAYER'/name,data)
+        for member,original in (('PLAYERSR.JSN','SOURCES.JSN'),('PLAYER.JSN','RESULT.JSN'),
+                                ('PLAYERPR.JSN','PROCESS.JSON'),('PLAYER.LOG','BUILD.LOG'),
+                                ('PLAYER.MAP','MINIPLAY.MAP')):
+            put(playerstage/original,files['EVIDENCE/'+member])
+        put(playerstage/'MINIPLAY.EXE',files['MINIPLAY.EXE'])
+        runtimes['player']='MINIPLAY.EXE'
         canonical = json.loads(files['BUILD.JSN'])['canonical_sound']
         put(self.repo/'src/win30/DRIVER/SOUNDID.JSON', dump(canonical))
         put(self.repo/'LICENSE', b'UNIT LICENSE')
