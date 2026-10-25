@@ -113,5 +113,201 @@
   },
   "publication_approved": false,
   "published": false,
-  "physical_hardware_test": false
+  "physical_hardware_test": false,
+  "exact_final_package_smoke": {
+    "receipt": {
+      "bytes": 6367,
+      "sha256": "b5c9ee356376067ade7f4c3320861938a6ff3ad9a7978e1e080aae2f6050dfa2"
+    },
+    "proof": {
+      "status": "PASS_EXACT_FINALBANK2_NATIVE_INSTALL_FILE_SMOKE",
+      "package": {
+        "bytes": 2420622,
+        "sha256": "fed4fdec0bb5652a6da4c987b6b8e7a4f860f92f4a8e34aad30ac26b49fb3486"
+      },
+      "package_unchanged": true,
+      "process": {
+        "bytes": 583,
+        "sha256": "92b1a43e969ebe3caeab88980f7985b3e05e4b1db0bd65c9967c8fb780dd166a"
+      },
+      "owned_pid": 11460,
+      "owned_stopped": true,
+      "lease_released": true,
+      "controller": {
+        "bytes": 6829,
+        "sha256": "96d3c2c2180842f205b1f5b64ef3219b72284f26fd9f539042f7b2cba0a003c6"
+      },
+      "controller_source": {
+        "bytes": 634,
+        "sha256": "8405ec695e0229fe0afea08e0aeab30c23bcda7fd5221e474fdf5a3a4cf05567"
+      },
+      "controller_build": {
+        "bytes": 583,
+        "sha256": "1ff03a9328e100823852a747005d92ed2ea9e2642951f0f361c027dbc583baee"
+      },
+      "log": {
+        "bytes": 586,
+        "sha256": "1ade274c1955aabb8c5dffc300df6f19a4e8ef98df51c52a342856abcbdf798c"
+      },
+      "assertions": 17,
+      "failures": 0,
+      "runtime": {
+        "MINIPLAY.EXE": {
+          "bytes": 55645,
+          "sha256": "24f0f0aad39f336fc9ddf2ea06aa05f595da844ac6177a8e9789bd44157d7e64"
+        },
+        "MIDICLK.DLL": {
+          "bytes": 17216,
+          "sha256": "34e0a11b20aee54759349f5408045118381f31754b6d69209f0943ac87f77bdd"
+        },
+        "MCITNDY.DLL": {
+          "bytes": 13548,
+          "sha256": "ae1c9f2293c28b6a152d9e4dc4393e34d635b2da823ec9bc1e2cbb2dcc493016"
+        },
+        "RAWCLK.DLL": {
+          "bytes": 15464,
+          "sha256": "1c71d9ac897de0139dd25dc2d76be99de21ac4184d162408e5e2427d79078c54"
+        },
+        "SOUND.DRV": {
+          "bytes": 9752,
+          "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
+        },
+        "SETUP.EXE": {
+          "bytes": 43327,
+          "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
+        },
+        "TPLAY.EXE": {
+          "bytes": 18141,
+          "sha256": "da47875485cd13574c963865c42f8389a48dfa4e8b71a45e9598fa2c81619ec2"
+        }
+      },
+      "installed23": {
+        "WINAMP/CHIME.SND": {
+          "bytes": 96,
+          "sha256": "b7f024173dc0e256d28fab28783da7e925991371952cb509e78576ae4dd22149"
+        },
+        "WINXT/FIXXT.EXE": {
+          "bytes": 33001,
+          "sha256": "016d53ab4a77a120577fdd7ecf69399ab51559a53101bc00fdb2c4ebd24dc66a"
+        },
+        "WINAMP/INSTALL.TXT": {
+          "bytes": 3404,
+          "sha256": "567be5d6c7dbf0df01ade7a2acc9dc745de7a21aa426d9d674f76769f2e215ea"
+        },
+        "WINAMP/LWFILE.DLL": {
+          "bytes": 14876,
+          "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
+        },
+        "WINAMP/MCITNDY.DLL": {
+          "bytes": 13548,
+          "sha256": "ae1c9f2293c28b6a152d9e4dc4393e34d635b2da823ec9bc1e2cbb2dcc493016"
+        },
+        "WINAMP/MIDICLK.DLL": {
+          "bytes": 17216,
+          "sha256": "34e0a11b20aee54759349f5408045118381f31754b6d69209f0943ac87f77bdd"
+        },
+        "WINAMP/MINIPLAY.EXE": {
+          "bytes": 55645,
+          "sha256": "24f0f0aad39f336fc9ddf2ea06aa05f595da844ac6177a8e9789bd44157d7e64"
+        },
+        "WINAMP/PLUCK.TND": {
+          "bytes": 248,
+          "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c"
+        },
+        "WINAMP/RAWCLK.DLL": {
+          "bytes": 15464,
+          "sha256": "1c71d9ac897de0139dd25dc2d76be99de21ac4184d162408e5e2427d79078c54"
+        },
+        "WINAMP/README.TXT": {
+          "bytes": 528,
+          "sha256": "1402f10e6b04a405ca04e8d297043cd279dc105c81a47bb2d8fb490fb00e4e5f"
+        },
+        "WINAMP/RESERVE.COM": {
+          "bytes": 1512,
+          "sha256": "644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8"
+        },
+        "WINAMP/SETUP.EXE": {
+          "bytes": 43327,
+          "sha256": "287c3ab37f2da9644ca2ce79ad430f40df8915db13c832d846205d7ee4310834"
+        },
+        "WINAMP/SHORT.VGM": {
+          "bytes": 387,
+          "sha256": "89f204cb51e9aabc86b7e42b31cc9402d3789f0e2ca9d9b410a572b27f4205bc"
+        },
+        "WINDOWS/SYSTEM/SOUND.DRV": {
+          "bytes": 9752,
+          "sha256": "ef501c64b80559ab8cc729c32bd36647a3c041bcf08ccf50cd958bb60065eccd"
+        },
+        "WINAMP/STREAM.MID": {
+          "bytes": 3100,
+          "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
+        },
+        "WINAMP/TBRIDGE.EXE": {
+          "bytes": 2922,
+          "sha256": "9f9176a37c537dced164d1a9f4134d003cf3f0cc2979989609d2d1b92f1afa2f"
+        },
+        "WINXT/TCHIME.EXE": {
+          "bytes": 5071,
+          "sha256": "6de8cf5c0e00b78a1df0a52d912afdb376b2ef2a8516a2d3ca1303a751603e61"
+        },
+        "WINXT/TEXIT.EXE": {
+          "bytes": 9215,
+          "sha256": "5756639dbb979c758642663ba724f4951be5e2ff658611afd638c808edf39148"
+        },
+        "WINXT/TP.EXE": {
+          "bytes": 12847,
+          "sha256": "e0be284acf93ca6d1ccfe7150fe5ebdd5f16cf18c3c5a02a7aa779841be79a33"
+        },
+        "WINAMP/TPLAY.EXE": {
+          "bytes": 18141,
+          "sha256": "da47875485cd13574c963865c42f8389a48dfa4e8b71a45e9598fa2c81619ec2"
+        },
+        "WINDOWS/TSHELL.EXE": {
+          "bytes": 72323,
+          "sha256": "b024e8f715bd33cb94ab86718a3723e1cf70686187b96bbbf1ce383d606c93b9"
+        },
+        "WINDOWS/TSINPUT.DLL": {
+          "bytes": 6281,
+          "sha256": "d14dde571906bdd27a95030f11647333016eb34864afd22c08c5d2cf80660a80"
+        },
+        "WINXT/XPCHIME.EXE": {
+          "bytes": 5103,
+          "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
+        }
+      },
+      "unchanged_source_members": 512,
+      "native_repair_log": {
+        "bytes": 307,
+        "sha256": "594f05f197bcdd1010ec7e122bd65b0d5a5f551d7fb25396a60da045c5ebdf82"
+      },
+      "play_start_ms": {
+        "CHAMBER_START_MS": 769,
+        "DEFAULT_START_MS": 714
+      },
+      "physical_PSG_writes": [
+        4624,
+        1676
+      ],
+      "acknowledged_frames": [
+        420,
+        152
+      ],
+      "SYSTEM_INI": {
+        "bytes": 1083,
+        "sha256": "9bb19831f37b36a537c1cea5e39d337fa54cc4e227373d6a6e0264000dd45c40"
+      },
+      "private_INIs_restored": true,
+      "IRQ0_preflight_equal": true,
+      "normal_GO_and_bridge_cleanup": true,
+      "receipt_scope": "Exact fed4fdec FINALBANK2 ZIP expanded unchanged, native Setup Repair, normal installed GO, STREAM.MID playback in Chamber and Default with physical PSG/frame counters, Stop/device close, window close/unload, normal DOS return and original IRQ/INT2F/bridge cleanup. No unrelated complete suites or live cases repeated.",
+      "prior_28_live_checks_untouched": true,
+      "prior_85_file_checks_untouched": true,
+      "product_bytes_changed": false,
+      "physical_hardware_test": false,
+      "published": false
+    },
+    "log": "NormalGOVisibleOwnedPlayer=1\nInstalledStreamSelected=1\nChamberSelected=1\nCHAMBER_START_MS=769\nChamberFilePlaying=1\nChamberStillPlaying=1\nCorrectedRawLoadedChamber=1\nPSG_WRITES=4624\nACKNOWLEDGED_FRAMES=420\nPhysicalPSGAndFrames=1\nNoTransportError=1\nChamberStopAndDeviceClose=1\nDefaultSelected=1\nDEFAULT_START_MS=714\nDefaultFilePlaying=1\nDefaultStillPlaying=1\nCorrectedRawLoadedDefault=1\nPSG_WRITES=1676\nACKNOWLEDGED_FRAMES=152\nPhysicalPSGAndFrames=1\nNoTransportError=1\nDefaultStopAndDeviceClose=1\nPlayerClosedAndUnloaded=1\nCHECKS=17\nFAILURES=0\nPASS FINAL2 SMOKE\n",
+    "after_packet_seal": true,
+    "packet_bytes_unchanged": true
+  }
 }
