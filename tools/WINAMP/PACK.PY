@@ -100,6 +100,7 @@ def build(a):
     require(tests.get('sound') == identity(files['SOUND.DRV']), 'Tests cover another driver')
     require(tests.get('rawclk') == identity(files['RAWCLK.DLL']), 'Tests cover another RAWCLK')
     require(tests.get('setup') == identity(files['SETUP.EXE']), 'Tests cover another Setup')
+    require(tests.get('launcher') == identity(files['TPLAY.EXE']), 'Tests cover another launcher')
     require(tests.get('clients') == {n:r['runtime'] for n,r in clients.items()},
             'Tests cover different shared client files')
     # Native Setup installs only these flat runtime files. The generated manifest
@@ -116,10 +117,26 @@ def build(a):
     # Preserve unchanged application source and notices from the accepted player.
     for name, data in previous.items():
         if name.startswith('SRC/'):
+            if name in ('SRC/INSTALL.TXT','SRC/README.md'):
+                continue
             files[name] = data
         elif name.startswith('DEPS/') and not name.startswith('DEPS/TSOUND/'):
+            if name.rsplit('/',1)[-1] in (
+                    'README.TXT','POLICY.MD','BUILD.BAT','BLDTPLAY.BAT'):
+                continue
             if name.rsplit('/',1)[-1] not in records['raw']['sources'] and name.rsplit('/',1)[-1] not in records['launch']['sources']:
                 files[name] = data
+    files['DEPS/README.TXT'] = (
+        'Corresponding source for unchanged MIDI/MCI and timer-bridge components.\r\n'
+        'Current driver, raw clock, launcher and installer sources and builders\r\n'
+        'are in SOURCE/DRIVER, SOURCE/RAW, SOURCE/LAUNCH and SOURCE/SETUP.\r\n'
+        'The player and file browser source is in SRC. Native build receipts\r\n'
+        'bind the current runtime bytes to those source snapshots.\r\n').encode('ascii')
+    files['SRC/README.TXT'] = (
+        'Corresponding source for the unchanged player and file browser.\r\n'
+        'Run the native installer described by the packet-root INSTALL.TXT.\r\n'
+        'Current shared driver, raw clock, launcher and Setup are in SOURCE.\r\n'
+        'Historical test records retain their original binary scope.\r\n').encode('ascii')
     files['SOURCE/DRIVER/LICENSE'] = (REPO/'LICENSE').read_bytes()
     files['BUILD.JSN'] = (json.dumps({'baseline_xt1': BASE_SHA,
         'source_commit': a.source_commit, 'canonical_sound': sound,
@@ -137,14 +154,17 @@ def build(a):
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(data)
     result = identity((a.out/'TWXT2.ZIP').read_bytes())
-    (a.out/'PACKET.JSN').write_text(json.dumps(result,indent=2)+'\n')
     # Same native Setup body, with its validated flat payload overlay appended.
     from importlib.machinery import SourceFileLoader
     from importlib.util import spec_from_loader, module_from_spec
     loader=SourceFileLoader('native_sfx',str(HERE/'SFX.PY'))
     spec=spec_from_loader(loader.name,loader);sfx=module_from_spec(spec);loader.exec_module(sfx)
     exe=sfx.make(a.out/'TWXT2/SETUP.EXE',a.out/'TWXT2')
+    require(tests.get('installer') == identity(exe),
+            'Tests cover another self-contained installer payload')
     (a.out/'TWSETUP.EXE').write_bytes(exe)
+    (a.out/'PACKET.JSN').write_text(json.dumps(
+        {**result, 'installer': identity(exe)},indent=2)+'\n')
     print(json.dumps(result))
 
 

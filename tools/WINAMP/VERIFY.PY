@@ -58,7 +58,8 @@ def verify(files, current=True):
                 'Consumers use another sound expectation')
     tests = json.loads(files['TESTS.JSN'])
     require(tests.get('status') == 'PASS', 'Incomplete native acceptance')
-    for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),('setup','SETUP.EXE')):
+    for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),
+                     ('setup','SETUP.EXE'),('launcher','TPLAY.EXE')):
         require(tests[key] == ident(files[name]), 'Native tests cover another '+name)
     rows = files['PAYLOAD.LST'].decode('ascii').splitlines()
     require(rows.pop(0) == 'TWSETUP1', 'Wrong native Setup manifest')
@@ -83,6 +84,11 @@ def verify(files, current=True):
         for path,pin in row['sources'].items():
             source='SOURCE/CLIENTS/'+Path(name).stem+'/'+Path(path).name
             require(ident(files[source])==pin, 'Unlinked client source')
+            parts=Path(path).parts
+            require('..' not in parts, 'Unsafe current client source path')
+            if current and parts[:2] == ('unified','oemsound-tandy'):
+                require(ident((REPO/Path(*parts[2:])).read_bytes())==pin,
+                        'Current client source differs: '+path)
     if current:
         for n in ('INSTALL.TXT','README.TXT'):
             require(files[n] == (HERE/n).read_bytes(), 'Current guide differs')
@@ -90,6 +96,9 @@ def verify(files, current=True):
 
 
 def verify_sfx(data, files):
+    tests=json.loads(files['TWXT2/TESTS.JSN'])
+    require(ident(data)==tests.get('installer'),
+            'Native tests cover another self-contained installer')
     require(len(data)>=32, 'Truncated native installer')
     magic,body,size,count,tablecrc,crc,reserved=struct.unpack_from('<8s6I',data,len(data)-32)
     require(magic==b'TWINSFX1' and reserved==0 and 1<=count<=64, 'Invalid native footer')
