@@ -82,13 +82,17 @@ apps here remain separate projects.
 
 ## More to play with
 
-- **[Mini Piano](src/win30/PIANO/README.MD)** — play notes with the keyboard or mouse.
-- **[JOYMIDI](src/win30/JOYMIDI/README.MD)** — turn a joystick into a pitch/velocity instrument.
-- **[Beats Lab](artifacts/win30/BEATS/README.MD)** — build patterns on a four-lane step sequencer.
+- **[Mini Piano](experimental/PITPUBLIC/INSTALL.TXT)** - play notes with the keyboard or mouse; use the current PITEXPR kit and its included Setup.
+- **[JoyMIDI](experimental/PITPUBLIC/INSTALL.TXT)** - turn a joystick into a pitch/velocity instrument; use the same PITEXPR kit and shared sound setup.
+- **[Beats Lab](src/win30/BEATLAB/README.MD)** - DWA: DAWs With Attitude. Edit five lanes, including PC speaker, with original editable demos and pattern Save/Load. [Authoring setup](experimental/PITPUBLIC/INSTALL.TXT).
 - **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** — an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256×160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
   · [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
 - **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** — an offline visualization
   of the Tandy PSG and PC-speaker arrangement.
+
+The instrument kits include their paired app-local MIDI support. All use
+the same installed SOUND driver; the included Setup handles it. Keep each
+complete kit together and follow its current setup guide.
 
 See [validation](experimental/WINAMP30/VALIDATION-UI.MD),
 [checksums](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/SHA256SUMS)
