@@ -1,4 +1,4 @@
-"""Test Beats state/files and each demo through the shipped mapper; no emulator."""
+"""Test Beats state/files, current mapper/PIT core and archived baseline; no emulator."""
 from pathlib import Path
 import argparse
 import array
@@ -18,6 +18,8 @@ TESTS = HERE / 'TESTS'
 REPO_ARCHIVE = ROOT / 'experimental/PITPUBLIC/MML3AUTH/SOURCE/src/win30'
 ARCHIVE = REPO_ARCHIVE if all((REPO_ARCHIVE / name).is_file() for name in
     ('BEATMML/MIDIMAP.C', 'MMLFIDL/MMLCORE.C')) else HERE.parent
+CURRENT_PARSER = HERE.parent / 'FIDDLE'
+PIT_CORE = HERE.parent / 'DRIVER/PITCORE.H'
 WINDOWS_GCC = Path('C:/Users/chad/Documents/Codex/toolchains/gcc-ucrt64.py')
 RATE = 22050
 GAIN = 0.18
@@ -65,7 +67,7 @@ def pcm_reference(out):
                     noise_phase -= 1
                 values[3] = (1.0 if noise_state & 1 else -1.0) * 10 ** (-row['v3'] / 10)
             if row['pit_hz']:
-                phases[3] = (phases[3] + row['pit_hz'] / RATE) % 1.0
+                phases[3] = (phases[3] + 1193182.0 / (row['pit_divisor'] * RATE)) % 1.0
                 values[4] = 1.0 if phases[3] < 0.5 else -1.0
             total = sum(values) * GAIN
             peak = max(peak, abs(total))
@@ -101,8 +103,18 @@ def pcm_reference(out):
                                   min(len(voices[lane]), ((attack['end_ms'] + 8) * RATE) // 1000)]
             if any(abs(value) > 1e-7 for value in after):
                 raise RuntimeError('Voice did not release at gate: ' + json.dumps(attack))
+            pitch = {}
+            if lane == 4:
+                actual_hz = 1193182.0 / attack['pit_divisor']
+                midi_hz = 440 * 2 ** ((attack['note'] - 69) / 12)
+                if not 0.995 < actual_hz / attack['expected_hz'] < 1.005 or not 0.99 < actual_hz / midi_hz < 1.01:
+                    raise RuntimeError('Speaker pitch was folded/doubled or badly rounded: ' + json.dumps(attack))
+                pitch = {'requested_hz': attack['expected_hz'], 'actual_hz': actual_hz,
+                         'midi_nominal_hz': midi_hz,
+                         'pitch_error_cents': 1200 * math.log2(actual_hz / midi_hz)}
             note_results.append(dict(attack, peak=note_peak, rms=note_rms,
                                      ac_rms=ac_rms, peak_to_peak=span,
+                                     **pitch,
                                      audible_samples=sum(abs(value) > 1e-7 for value in signal)))
         if clipped:
             raise RuntimeError(f'Demo {index} clipped {clipped} samples at fixed gain')
@@ -122,7 +134,7 @@ def pcm_reference(out):
                    wav=wav.name, wav_sha256=hashlib.sha256(wav.read_bytes()).hexdigest())
         report.append(row)
     result = {
-        'scope': 'Actual shipped mapper state with mocked SOUND/ports; fixed-gain software reference audio, not native timing or analog/hardware fidelity.',
+        'scope': 'Current app-local mapper and actual shared PIT core state with mocked SOUND/ports; fixed-gain software reference audio, not native timing or analog/hardware fidelity.',
         'sample_rate': RATE, 'mix_gain': GAIN, 'demos': report,
         'intended_attacks': sum(r['intended_attacks'] for r in report),
         'silent_attacks': 0, 'clipped_samples': 0,
@@ -140,6 +152,9 @@ def main():
     for required in ('BEATMML/MIDIMAP.C', 'BEATMML/INSTR.C', 'MMLFIDL/MMLCORE.C'):
         if not (ARCHIVE / required).is_file():
             parser.error('Required shipped regression source is missing: ' + str(ARCHIVE / required))
+    for required in (HERE / 'MIDIMAP.C', HERE / 'INSTR.C', CURRENT_PARSER / 'MMLCORE.C', PIT_CORE):
+        if not required.is_file():
+            parser.error('Required current production source is missing: ' + str(required))
     out = args.out.resolve()
     if out.exists():
         parser.error('--out must be new')
@@ -157,8 +172,8 @@ def main():
     if os.name == 'nt':
         runtime['PATH'] = 'C:/msys64/ucrt64/bin' + os.pathsep + runtime.get('PATH', '')
 
-    def run(argv, label):
-        result = subprocess.run(list(map(str, argv)), cwd=out, env=runtime,
+    def run(argv, label, cwd=out):
+        result = subprocess.run(list(map(str, argv)), cwd=cwd, env=runtime,
                                 capture_output=True, text=True, timeout=35)
         record = dict(label=label, command=list(map(str, argv)), exit=result.returncode,
                       stdout=result.stdout, stderr=result.stderr)
@@ -171,28 +186,45 @@ def main():
 
     common = ['-x', 'c', '-Wall', '-Wextra', '-Werror',
               '-Wno-misleading-indentation', '-Wno-unused-function',
-              '-I', HERE, '-I', ARCHIVE / 'MMLFIDL']
+              '-I', HERE]
+    pit_define = '-DBEATS_PIT_SOURCE="' + PIT_CORE.as_posix() + '"'
     suffix = '.exe' if os.name == 'nt' else ''
     cases = [
-        ('core', ['-std=c89', '-pedantic-errors'],
-         [TESTS / 'core.c', HERE / 'BEATPAT.C', HERE / 'BEATEXP.C', ARCHIVE / 'MMLFIDL/MMLCORE.C']),
+        ('core', ['-std=c89', '-pedantic-errors', '-I', CURRENT_PARSER],
+         [TESTS / 'core.c', HERE / 'BEATPAT.C', HERE / 'BEATEXP.C', CURRENT_PARSER / 'MMLCORE.C']),
         ('file_faults', ['-std=c89', '-pedantic-errors'],
          [TESTS / 'file_faults.c', HERE / 'BEATEXP.C']),
-        ('mapper', ['-std=c99', '-I', TESTS,
+        ('pit_service', ['-std=c89', '-pedantic-errors', pit_define],
+         [TESTS / 'pit_service.c']),
+        ('legacy_parser', ['-std=c89', '-pedantic-errors', '-I', ARCHIVE / 'MMLFIDL'],
+         [TESTS / 'legacy_parser.c', HERE / 'BEATPAT.C', HERE / 'BEATEXP.C', ARCHIVE / 'MMLFIDL/MMLCORE.C']),
+        ('legacy_mapper', ['-std=c99', '-I', TESTS, '-DBEATS_EXPECT_LEGACY=1', pit_define,
                     '-DBEATS_MAPPER_SOURCE="' + (ARCHIVE / 'BEATMML/MIDIMAP.C').as_posix() + '"',
+                    '-Wno-int-to-pointer-cast', '-Wno-pointer-to-int-cast', '-Wno-unused-parameter', '-Wno-sign-compare'],
+         [TESTS / 'mapper.c', HERE / 'BEATPAT.C', HERE / 'BEATEXP.C', ARCHIVE / 'BEATMML/INSTR.C']),
+        ('mapper', ['-std=c99', '-I', TESTS,
+                    pit_define, '-DBEATS_MAPPER_SOURCE="' + (HERE / 'MIDIMAP.C').as_posix() + '"',
                     '-Wno-int-to-pointer-cast',
                     '-Wno-pointer-to-int-cast', '-Wno-unused-parameter', '-Wno-sign-compare'],
-         [TESTS / 'mapper.c', HERE / 'BEATPAT.C', HERE / 'BEATEXP.C', ARCHIVE / 'BEATMML/INSTR.C']),
+         [TESTS / 'mapper.c', HERE / 'BEATPAT.C', HERE / 'BEATEXP.C', HERE / 'INSTR.C']),
     ]
     for name, flags, sources in cases:
         exe = out / (name + suffix)
         run(compiler + common + flags + sources + ['-o', exe], name + ' compile')
-        run([exe], name + ' run')
+        cwd = out
+        if name == 'legacy_mapper':
+            cwd = out / 'legacy'
+            cwd.mkdir()
+        run([exe], name + ' run', cwd)
+    if (out / 'old-range.csv').read_bytes() != (out / 'legacy/old-range.csv').read_bytes():
+        raise RuntimeError('Current mapper changed an archived old-range PSG/percussion/PIT trace')
+    print('PASS current/archived old-range PSG, percussion and PIT traces identical')
     audio = pcm_reference(out)
     (out / 'RESULT.JSON').write_text(json.dumps({
         'status': 'PASS', 'cases': [c[0] for c in cases],
         'audio': {'demos': len(audio['demos']), 'attacks': audio['intended_attacks'],
                   'silent_attacks': 0, 'clipped_samples': 0},
+        'old_range_trace_identical': True,
         'scope': 'Host-only source/files/mapper checks and software reference audio; no emulator/native claim.'
     }, indent=2) + '\n')
 

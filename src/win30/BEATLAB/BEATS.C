@@ -34,14 +34,14 @@ static FARPROC editThunk,oldEdit;
 static BPAT pat;
 static WORD sounding[5];
 static BYTE channel[5]={0,1,2,9,15};
-static BYTE defaultNote[5]={60,64,48,42,45};
+static BYTE defaultNote[5]={60,64,48,42,33};
 static char *noteNames[12]={"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
 static char appdir[144],mml[BP_MML_CAP],status[64]="Ready: Play or choose Demo";
 static char patternName[32]="Starter";
 static int opened,playing,timerReady,step,selLane,selStep,mmlView,dirty;
 static unsigned demoIndex;
 static DWORD due,gate;
-static int automatic,testStage,failures,testAttackFailure,testServiceFailure;
+static int automatic,testStage,failures,testAttackFailure,testServiceFailure,visualMode;
 static DWORD testAt;
 static HFILE logFile=HFILE_ERROR;
 static void redraw(void){if(mainWindow)InvalidateRect(mainWindow,NULL,FALSE);}
@@ -95,6 +95,10 @@ static int acquire(void)
         (DWORD)(LPVOID)&caps,sizeof(caps))||caps.wVoices!=3||caps.vDriverVersion<0x0102){
         say("Wrong mapper: use complete Beats kit");return 0;
     }
+    if(pat.pit&&caps.vDriverVersion<PIT_LOW_VERSION)
+        for(r=0;r<8;++r)if(pat.note[4][r]&&pat.note[4][r]<45){
+            say("Low bass needs current complete kit");return 0;
+        }
     if(pat.pit&&!GetProcAddress(GetModuleHandle("SOUND"),"TANDYPITVOICE")){
         say("PIT unavailable: run kit Setup in DOS");return 0;
     }
@@ -148,7 +152,7 @@ static void editPitch(int delta)
 {
     int n=pat.note[selLane][selStep];
     if(!n)n=defaultNote[selLane];else n+=delta;
-    if(n<(selLane==3?35:45))n=selLane==3?35:45;
+    if(n<(selLane==3?35:selLane==4?26:45))n=selLane==3?35:selLane==4?26:45;
     if(n>(selLane==3?81:96))n=selLane==3?81:96;
     pat.note[selLane][selStep]=(BYTE)n;changed();
 }
@@ -233,7 +237,7 @@ static void view(void)
 }
 static void about(void)
 {
-    MessageBox(mainWindow,"DWA: DAWs With Attitude\nStraight Outta LLMompton\nProduced by Dr. DRAM\n\nArrows: select. Space/Enter: note/rest.\nP/S or F5: Play/Stop. Ctrl+O/S: Load/Save.\nClick tone labels: presets. PIT enables row 5.",
+    MessageBox(mainWindow,"DWA: DAWs With\nAttitude\nStraight Outta\nLLMompton\nProduced by\nDr. DRAM\n\nF5: Play / Stop\nCtrl+O/S: files",
         "DWA Beats Lab",MB_OK);SetFocus(mainWindow);
 }
 static void paint(HWND w)
@@ -257,8 +261,8 @@ static void paint(HWND w)
             if(playing&&c==(unsigned)step){MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
         }
         SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
-        wsprintf(text,"%u BPM  +/- pitch  Space:rest",pat.tempo);
-    }else lstrcpy(text,"MML preview: Export saves; Copy copies");
+        wsprintf(text,"%u BPM +/-pitch Space:rest",pat.tempo);
+    }else lstrcpy(text,"MML: Export saves; Copy copies");
     box.left=mmlView?2:64;box.top=141;box.right=302;box.bottom=169;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
     TextOut(dc,mmlView?2:64,141,text,lstrlen(text));
     box.left=2;box.top=157;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));TextOut(dc,2,157,status,lstrlen(status));
@@ -278,18 +282,19 @@ static void nativeTest(DWORD now)
         for(i=0;i<BP_DEMOS;++i){BPDemo(&pat,i);check("editable demo valid",BPValid(&pat));}
         BPDemo(&pat,3);labels();saved=pat;
         SetWindowText(fileEdit,"NATIVE.BTS");check("save pattern",savePattern());
-        pat.note[4][0]=46;dirty=0;check("load pattern",loadPattern());
+        pat.note[4][0]=34;dirty=0;check("load pattern",loadPattern());
         check("load restores fifth lane",!memcmp(&saved,&pat,sizeof(pat)));
         check("MML export",exportMML());check("clipboard export",copyMML());
         view();check("MML visible",mmlView&&IsWindowVisible(mmlEdit));view();
-        selLane=4;selStep=0;editPitch(1);check("fifth edit",pat.note[4][0]==46);toggle();check("fifth rest",pat.note[4][0]==0);toggle();
+        selLane=4;selStep=0;editPitch(1);check("fifth edit",pat.note[4][0]==34);toggle();check("fifth rest",pat.note[4][0]==0);toggle();
         dirty=0;BPDemo(&pat,3);labels();
         selLane=0;selStep=0;SendMessage(mainWindow,WM_KEYDOWN,VK_LEFT,0L);check("keyboard wraps step",selStep==7);
         SendMessage(mainWindow,WM_KEYDOWN,VK_UP,0L);check("keyboard reaches PC speaker",selLane==4);
         SendMessage(mainWindow,WM_LBUTTONDOWN,0,MAKELONG(75,130));check("mouse edits PC speaker",pat.note[4][0]==0);
-        SendMessage(mainWindow,WM_LBUTTONDOWN,0,MAKELONG(75,130));check("mouse restores PC speaker",pat.note[4][0]==45);
+        SendMessage(mainWindow,WM_LBUTTONDOWN,0,MAKELONG(75,130));check("mouse restores PC speaker",pat.note[4][0]==33);
         BPDemo(&pat,3);dirty=0;play();check("Play starts",playing&&opened);
-        check("all five voices",debug&&debug(0)==31);testAt=now;testStage=1;
+        check("all five voices",debug&&debug(0)==31);
+        check("low speaker bass without folding",debug&&debug(20)==33&&debug(21)==55);testAt=now;testStage=1;
     }else if(testStage==1&&now-testAt>1800UL){
         stop();check("Stop mutes",debug&&debug(0)==0);check("Stop releases owner",!opened&&debug&&debug(1)==0);
         play();check("replay reacquires",playing&&opened);testAt=now;testStage=2;
@@ -326,7 +331,7 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
         else if(wp==VIEW)view();else if(wp==ABOUT)about();else if(wp==LOAD)loadPattern();else if(wp==SAVE)savePattern();
         else if(wp==SLOW&&pat.tempo>40){pat.tempo=pat.tempo<50?40:pat.tempo-10;changed();}
         else if(wp==FAST&&pat.tempo<240){pat.tempo+=10;if(pat.tempo>240)pat.tempo=240;changed();}
-        else if(wp==CLEAR&&discard()){stop();memset(pat.note,0,sizeof(pat.note));changed();say("Grid cleared: click cells to add notes");}
+        else if(wp==CLEAR&&discard()){stop();memset(pat.note,0,sizeof(pat.note));changed();say("Cleared: click cells to add notes");}
         else if(wp==EXPORT)exportMML();else if(wp==COPY)copyMML();
         else if(wp>=LANE0&&wp<LANE0+3){stop();r=wp-LANE0;pat.program[r]=(pat.program[r]+16)&127;changed();}
         else if(wp==LANE0+4)SendMessage(w,WM_COMMAND,PIT,0L);
@@ -340,6 +345,7 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
         if(wp==VK_F1){about();return 0;}
         if(GetKeyState(VK_CONTROL)<0){if(wp=='S')savePattern();if(wp=='O')loadPattern();return 0;}
         if(wp=='P'){play();return 0;}if(wp=='S'){stop();return 0;}
+        if(wp=='D'){demo();return 0;}if(wp=='V'){view();return 0;}
         if(mmlView)return 0;
         if(wp==VK_LEFT)selStep=(selStep+7)%8;else if(wp==VK_RIGHT)selStep=(selStep+1)%8;
         else if(wp==VK_UP)selLane=(selLane+4)%5;else if(wp==VK_DOWN)selLane=(selLane+1)%5;
@@ -369,7 +375,7 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     WNDCLASS wc;HWND w;MSG msg;int i;unsigned n;char path[144],line[64];
     if(previous){HWND old=FindWindow("DWABeats",NULL);if(old){ShowWindow(old,SW_RESTORE);SetActiveWindow(old);}return 0;}
     if(GetWinFlags()&WF_PMODE)return 2;instance=inst;
-    automatic=lstrcmp(cmd,"/test")==0;if(automatic)logFile=_lcreat("C:\\BEATS.LOG",0);
+    automatic=lstrcmp(cmd,"/test")==0;visualMode=lstrcmp(cmd,"/visual")==0;if(automatic)logFile=_lcreat("C:\\BEATS.LOG",0);
     n=GetModuleFileName(inst,path,sizeof(path));
     if(!n||n>=sizeof(path)){MessageBox(NULL,"App path too long: move the complete kit to a shorter folder.","DWA Beats",MB_OK);return 3;}
     path[n]=0;for(i=(int)n-1;i>=0;--i)if(path[i]=='\\')break;
@@ -383,15 +389,16 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     w=CreateWindow("DWABeats","DWA Beats Lab",WS_OVERLAPPED|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX|WS_CLIPCHILDREN,0,0,312,198,NULL,NULL,inst,NULL);
     if(!w){if(module>=32)FreeLibrary(module);return 5;}
     ShowWindow(w,show);UpdateWindow(w);SetFocus(w);
+    if(visualMode){HFILE ready=_lcreat("C:\\BEATSRDY.TXT",0);if(ready!=HFILE_ERROR)_lclose(ready);}
     while(GetMessage(&msg,NULL,0,0)){
         if(msg.message==WM_KEYDOWN){
             if(msg.wParam==VK_TAB){HWND next=GetNextDlgTabItem(w,GetFocus(),GetKeyState(VK_SHIFT)<0);if(next)SetFocus(next);continue;}
             if(msg.wParam==VK_ESCAPE||msg.wParam==VK_F5||msg.wParam==VK_F1||(GetKeyState(VK_CONTROL)<0&&(msg.wParam=='S'||msg.wParam=='O'))||
-               (msg.hwnd==w&&(msg.wParam=='P'||msg.wParam=='S'||msg.wParam==VK_SPACE||msg.wParam==VK_RETURN||msg.wParam==VK_LEFT||msg.wParam==VK_RIGHT||msg.wParam==VK_UP||msg.wParam==VK_DOWN||msg.wParam==VK_ADD||msg.wParam==VK_SUBTRACT||msg.wParam==0xbb||msg.wParam==0xbd||msg.wParam==VK_PRIOR||msg.wParam==VK_NEXT||msg.wParam==VK_DELETE))){SendMessage(w,WM_KEYDOWN,msg.wParam,msg.lParam);continue;}
+               (msg.hwnd==w&&(msg.wParam=='P'||msg.wParam=='S'||msg.wParam=='D'||msg.wParam=='V'||msg.wParam==VK_SPACE||msg.wParam==VK_RETURN||msg.wParam==VK_LEFT||msg.wParam==VK_RIGHT||msg.wParam==VK_UP||msg.wParam==VK_DOWN||msg.wParam==VK_ADD||msg.wParam==VK_SUBTRACT||msg.wParam==0xbb||msg.wParam==0xbd||msg.wParam==VK_PRIOR||msg.wParam==VK_NEXT||msg.wParam==VK_DELETE))){SendMessage(w,WM_KEYDOWN,msg.wParam,msg.lParam);continue;}
         }
         TranslateMessage(&msg);DispatchMessage(&msg);
     }
     stop();if(editThunk)FreeProcInstance(editThunk);
     if(automatic){check("close releases mapper",!opened&&debug&&debug(1)==0);check("close mutes voices",debug&&debug(0)==0);wsprintf(line,"TOTAL_FAILURES=%d\r\n",failures);if(logFile!=HFILE_ERROR){_lwrite(logFile,line,lstrlen(line));_lclose(logFile);}}
-    if(module>=32)FreeLibrary(module);if(automatic)ExitWindows(0L,0);return failures?6:0;
+    if(module>=32)FreeLibrary(module);if(automatic||visualMode)ExitWindows(0L,0);return failures?6:0;
 }

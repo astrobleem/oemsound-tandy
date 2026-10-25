@@ -1,4 +1,4 @@
-"""Prepare an unpublished Beats client update; preserve shared runtime bytes."""
+"""Prepare an unpublished coordinated authoring update; preserve shared runtime bytes."""
 from pathlib import Path, PurePosixPath
 import argparse
 import hashlib
@@ -13,11 +13,22 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
-PRODUCTION = ('BEATS.C', 'BEATPAT.C', 'BEATPAT.H', 'BEATEXP.C',
-              'BEATEXP.H', 'MIDIAPI.H', 'BEATS.DEF', 'BEATS.RSP', 'BUILD.BAT')
+BEATS_INPUTS = ('BEATS.C', 'BEATPAT.C', 'BEATPAT.H', 'BEATEXP.C', 'BEATEXP.H',
+                'MIDIAPI.H', 'BEATS.DEF', 'BEATS.RSP', 'BUILD.BAT', 'MIDIMAP.C',
+                'MIDIMAP.DEF', 'MIDIMAP.RSP', 'ENTRY.ASM', 'INSTR.C', 'INSTR.H', 'PERIODS.H')
+FIDDLE_INPUTS = ('MMLFIDL.C', 'MMLFIDL.DEF', 'MMLFIDL.RSP', 'MMLCORE.C', 'MMLCORE.H')
+SOURCE_PATHS = {n: 'src/win30/BEATLAB/' + n for n in BEATS_INPUTS}
+SOURCE_PATHS.update({n: 'src/win30/FIDDLE/' + n for n in FIDDLE_INPUTS})
+PRODUCTION = tuple(SOURCE_PATHS)
+RUNTIME_PATHS = {'BEATS.EXE': ('BEATS/BEATS.EXE',),
+                 'MIDIMAP.DRV': ('BEATS/MIDIMAP.DRV', 'FIDDLE/MIDIMAP.DRV'),
+                 'MMLFIDL.EXE': ('FIDDLE/MMLFIDL.EXE',)}
+REPLACED = {path for paths in RUNTIME_PATHS.values() for path in paths} | {
+    'README.TXT', 'INSTALL.TXT', 'BUILD.JSN', 'MANIFEST.JSN'}
 STEMS = ('STARTER', 'POCKET', 'LOWRIDER', 'FIVE', 'NIGHT')
 WINDOWS_GCC = Path('C:/Users/chad/Documents/Codex/toolchains/gcc-ucrt64.py')
 SOURCE_PREFIX = 'SOURCE/src/win30/BEATLAB/'
+REGRESSION_INPUTS = {'SOURCE/src/win30/DRIVER/PITCORE.H': 'src/win30/DRIVER/PITCORE.H'}
 GUIDE = b'''DWA: DAWs With Attitude - Fiddle and Beats authoring kit\r
 Straight Outta LLMompton. Produced by Dr. DRAM.\r
 \r
@@ -40,7 +51,8 @@ Stop other sound or speech producers before playing.\r
 \r
 TWSETUP.EXE already includes its installation payload. TWXT2.ZIP is the\r
 matching shared runtime/source companion, not a preparation step. Shared\r
-runtime and Fiddle bytes are preserved; the new Beats build and demo\r
+driver, installer and Winamp bytes are preserved. Beats, Fiddle and their\r
+paired app-local mapper are updated together; current build and demo\r
 identities are in BUILD.JSN. Older evidence retains its original scope.\r
 '''
 BEATS_GUIDE = b'''DWA Beats Lab - DAWs With Attitude\r
@@ -69,8 +81,9 @@ beside the app without replacing an existing .MML. Same-named demo .MML\r
 files are supplied for Fiddle. The grid loads .BTS, not arbitrary MML.\r
 \r
 Timing is straight eighths with 75 percent gate: no swing, glide, ties\r
-or per-cell velocity. The unchanged mapper accepts melodic A2-C7;\r
-PC-speaker bass uses its actual low limit A2 (110 Hz), not octave folding.\r
+or per-cell velocity. PSG tones remain A2-C7 (MIDI 45-96). The updated\r
+app-local mapper and Fiddle [P] part accept PC speaker D1-C7 (26-96);\r
+Speaker bass uses A1/C2/D2 (33/36/38), about 55/65/73 Hz, without folding.\r
 The speaker has fixed level and no PSG preset envelope.\r
 \r
 Run the complete kit's TWSETUP.EXE from DOS for shared sound setup. Keep\r
@@ -123,29 +136,40 @@ def read_kit(path):
 
 def native_inputs(build, here=HERE):
     build, here = Path(build), Path(here)
+    repo = here.parents[2]
     record_raw = (build / 'BUILD.JSON').read_bytes()
     record = json.loads(record_raw)
     require(record.get('target') == '8086 Windows 3.0 real mode; MSC6/LINK4', 'Unexpected native target')
     require(record.get('status') == 'native compile/link only; execution separate', 'Unexpected native build scope')
-    require(set(record.get('sources', {})) == set(PRODUCTION) and
-            set(record.get('source_originals', {})) == set(PRODUCTION), 'Incomplete compiled source inventory')
+    require(record.get('source_paths') == SOURCE_PATHS and
+            set(record.get('sources', {})) == set(PRODUCTION) and
+            set(record.get('source_originals', {})) == set(PRODUCTION), 'Incomplete or incorrect compiled source inventory')
     sources = {}
-    for name in PRODUCTION:
-        original, staged = (here / name).read_bytes(), (build / name).read_bytes()
+    for name, relative in SOURCE_PATHS.items():
+        original, staged = (repo / relative).read_bytes(), (build / name).read_bytes()
         require(pin(original) == record['source_originals'][name], 'Current source differs from native receipt: ' + name)
         require(pin(staged) == record['sources'][name] and staged == crlf(original), 'Compiled source differs: ' + name)
-        sources[SOURCE_PREFIX + name] = staged
-    exe = (build / 'BEATS.EXE').read_bytes()
-    require(pin(exe) == record.get('runtime'), 'Native BEATS.EXE differs from build receipt')
-    require(len(exe) >= 64 and exe[:2] == b'MZ', 'Not a native Beats executable')
-    ne = struct.unpack_from('<I', exe, 0x3c)[0]
-    require(ne + 64 <= len(exe) and exe[ne:ne+2] == b'NE' and
-            struct.unpack_from('<H', exe, ne+0x3e)[0] == 0x0300, 'Expected Windows 3.0 NE executable')
+        sources['SOURCE/' + relative] = staged
+    fiddle_header = (repo / 'src/win30/FIDDLE/MIDIAPI.H').read_bytes()
+    require(fiddle_header == (here / 'MIDIAPI.H').read_bytes() and
+            crlf(fiddle_header) == (build / 'MIDIAPI.H').read_bytes(), 'Fiddle and Beats MIDI headers differ')
+    sources['SOURCE/src/win30/FIDDLE/MIDIAPI.H'] = (build / 'MIDIAPI.H').read_bytes()
+    require(set(record.get('runtimes', {})) == set(RUNTIME_PATHS) and
+            record.get('runtime') == record['runtimes']['BEATS.EXE'], 'Incomplete or inconsistent native runtime inventory')
+    runtimes = {}
+    for name in RUNTIME_PATHS:
+        exe = (build / name).read_bytes()
+        require(pin(exe) == record['runtimes'][name], 'Native runtime differs from build receipt: ' + name)
+        require(len(exe) >= 64 and exe[:2] == b'MZ', 'Not a native executable: ' + name)
+        ne = struct.unpack_from('<I', exe, 0x3c)[0]
+        require(ne + 64 <= len(exe) and exe[ne:ne+2] == b'NE' and
+                struct.unpack_from('<H', exe, ne+0x3e)[0] == 0x0300, 'Expected Windows 3.0 NE executable: ' + name)
+        runtimes[name] = exe
     process = json.loads((build / 'PROCESS.JSON').read_bytes())
     require(all(process.get(k) is True for k in ('lease_acquired', 'lease_released', 'owned_child_stopped')) and
             process.get('return') == 0 and not process.get('error') and not process.get('watchdog'),
             'Native build did not complete under the shared lease')
-    return exe, sources, record_raw
+    return runtimes, sources, record_raw
 
 
 def make_demos(work, here=HERE):
@@ -193,35 +217,47 @@ int main(void){
             for stem in STEMS for ext in ('.BTS', '.MML')}
 
 
-def assemble(base_raw, base, exe, sources, build_raw, demos, here=HERE):
+def assemble(base_raw, base, runtimes, sources, build_raw, demos, here=HERE):
+    require(set(runtimes) == set(RUNTIME_PATHS), 'Runtime inventory differs')
     require(set(demos) == {'BEATS/' + stem + ext for stem in STEMS for ext in ('.BTS', '.MML')}, 'Demo inventory differs')
     require(all(data for data in demos.values()), 'Empty demo')
     require('EVIDENCE/BEFORE.JSN' not in base, 'Already updated kit is not a baseline')
     files = dict(base)
     files.update(sources)
-    for name in ('BUILD.PY', 'PACK.PY', 'PACKTEST.PY', 'HOSTTEST.PY', 'README.MD', 'VALIDATE.MD'):
-        files[SOURCE_PREFIX + name] = (Path(here) / name).read_bytes()
-    for path in sorted((Path(here) / 'TESTS').rglob('*')):
-        if path.is_file() and '__pycache__' not in path.parts and path.suffix.lower() in ('.c', '.h', '.py', '.md', '.txt', '.bts', '.mml'):
-            files[SOURCE_PREFIX + path.relative_to(here).as_posix()] = path.read_bytes()
+    for name in ('BUILD.PY', 'PACK.PY', 'PACKTEST.PY', 'HOSTTEST.PY', 'README.MD', 'LOWPIT.MD', 'VALIDATE.MD'):
+        path = Path(here) / name
+        if path.is_file():
+            files[SOURCE_PREFIX + name] = path.read_bytes()
+    for directory in (Path(here) / 'TESTS', Path(here).parent / 'FIDDLE'):
+        for path in sorted(directory.rglob('*')):
+            if path.is_file() and '__pycache__' not in path.parts and path.suffix.lower() in ('.c', '.h', '.py', '.md', '.txt', '.bts', '.mml', '.asm', '.def', '.rsp', '.bat'):
+                relative = 'SOURCE/' + path.relative_to(Path(here).parents[2]).as_posix()
+                if relative not in sources:
+                    files[relative] = path.read_bytes()
     files['SOURCE/src/win30/LAUNCH/RUNDOS.PY'] = (ROOT / 'src/win30/LAUNCH/RUNDOS.PY').read_bytes()
+    for member, relative in REGRESSION_INPUTS.items():
+        files[member] = (ROOT / relative).read_bytes()
     files.update(demos)
-    files.update({'BEATS/BEATS.EXE': exe, 'BEATS/README.TXT': BEATS_GUIDE,
-                  'README.TXT': GUIDE, 'INSTALL.TXT': GUIDE,
+    for name, paths in RUNTIME_PATHS.items():
+        for path in paths:
+            files[path] = runtimes[name]
+    files.update({'BEATS/README.TXT': BEATS_GUIDE, 'README.TXT': GUIDE, 'INSTALL.TXT': GUIDE,
                   'EVIDENCE/BEFORE.JSN': base['BUILD.JSN'], 'EVIDENCE/DWABUILD.JSN': build_raw})
-    replaced = {'BEATS/BEATS.EXE', 'README.TXT', 'INSTALL.TXT', 'BUILD.JSN', 'MANIFEST.JSN'}
-    preserved = {name: pin(data) for name, data in base.items() if name not in replaced}
+    preserved = {name: pin(data) for name, data in base.items() if name not in REPLACED}
     for name in preserved:
         require(files[name] == base[name], 'Unexpected baseline change: ' + name)
     files['BUILD.JSN'] = json_bytes({
-        'schema': 2, 'kit': 'MML3AUTH', 'operation': 'DWA Beats client update; shared runtime and Fiddle unchanged',
+        'schema': 2, 'kit': 'MML3AUTH', 'operation': 'DWA Beats, low-PIT mapper and matching Fiddle update; shared runtime unchanged',
         'baseline': pin(base_raw), 'baseline_record': 'EVIDENCE/BEFORE.JSN',
-        'native_build': pin(build_raw), 'preserved': preserved,
+        'native_build': pin(build_raw), 'runtimes': {name: pin(data) for name, data in runtimes.items()},
+        'regression_inputs': {name: pin(files[name]) for name in REGRESSION_INPUTS},
+        'preserved': preserved,
         'changes': {name: pin(data) for name, data in files.items()
                     if name not in ('BUILD.JSN', 'MANIFEST.JSN') and (name not in base or data != base[name])},
         'demos': {name: pin(data) for name, data in demos.items()},
         'qualification': {'native_build': 'Compile/link receipt only; execution acceptance is separate',
-                          'shared': 'Exact base installer and shared companion preserved',
+                          'shared': 'Exact base installer, shared driver and Winamp companion preserved',
+                          'paired_mapper': 'Both authoring apps receive the same receipt-pinned app-local mapper',
                           'historical_unchanged_client_gate': False,
                           'publication': 'Unpublished local candidate; explicit approval required'}})
     files['MANIFEST.JSN'] = json_bytes({name: pin(data) for name, data in sorted(files.items()) if name != 'MANIFEST.JSN'})
@@ -247,6 +283,17 @@ def verify_packet(path, expected, base):
     record = json.loads(files['BUILD.JSN'])
     for name, wanted in record['preserved'].items():
         require(files[name] == base[name] and pin(files[name]) == wanted, 'Preserved member differs: ' + name)
+    require(set(record['preserved']) == set(base) - REPLACED, 'Preservation inventory differs')
+    for name, paths in RUNTIME_PATHS.items():
+        for member in paths:
+            require(pin(files[member]) == record['runtimes'][name], 'Updated runtime pin differs: ' + member)
+    require(files['BEATS/MIDIMAP.DRV'] == files['FIDDLE/MIDIMAP.DRV'], 'Paired authoring mappers differ')
+    for member in ('TWSETUP.EXE', 'TWXT2.ZIP'):
+        require(files[member] == base[member], 'Shared runtime changed: ' + member)
+    require(set(record['regression_inputs']) == set(REGRESSION_INPUTS), 'Regression source inventory differs')
+    for member, relative in REGRESSION_INPUTS.items():
+        require(files[member] == (ROOT / relative).read_bytes() and
+                pin(files[member]) == record['regression_inputs'][member], 'Regression input differs: ' + member)
     require(files['EVIDENCE/BEFORE.JSN'] == base['BUILD.JSN'], 'Baseline receipt changed')
     require(pin(files['EVIDENCE/DWABUILD.JSN']) == record['native_build'], 'Native receipt changed')
     manifest = json.loads(files['MANIFEST.JSN'])
@@ -258,15 +305,20 @@ def build(base_kit, native_build, out):
     out = Path(out).resolve()
     require(not out.exists(), 'Output directory must be new')
     base_raw, base = read_kit(base_kit)
-    exe, sources, build_raw = native_inputs(native_build)
+    runtimes, sources, build_raw = native_inputs(native_build)
     out.mkdir(parents=True)
-    demos = make_demos(out / 'HOST')
-    files = assemble(base_raw, base, exe, sources, build_raw, demos)
+    demo_source = out / 'DEMSRC'
+    demo_source.mkdir()
+    for name in ('BEATPAT.C', 'BEATPAT.H', 'BEATEXP.C', 'BEATEXP.H'):
+        require(SOURCE_PREFIX + name in sources, 'Captured demo input missing: ' + name)
+        (demo_source / name).write_bytes(sources[SOURCE_PREFIX + name])
+    demos = make_demos(out / 'HOST', here=demo_source)
+    files = assemble(base_raw, base, runtimes, sources, build_raw, demos)
     path = out / 'MML3AUTH.ZIP'
     write_packet(path, files)
     identity = verify_packet(path, files, base)
     (out / 'PACKET.JSN').write_bytes(json_bytes({'candidate': identity, 'native_build': pin(build_raw),
-        'scope': 'Unpublished DWA client update; exact shared runtime/Fiddle preservation; native execution qualification separate'}))
+        'scope': 'Unpublished DWA client update; exact shared runtime preservation; coordinated authoring clients; native execution qualification separate'}))
     return identity
 
 

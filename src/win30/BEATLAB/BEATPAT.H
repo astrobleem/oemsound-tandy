@@ -2,6 +2,8 @@
 #define BEATPAT_H
 #define BP_LANES 5
 #define BP_STEPS 8
+#define BP_PIT_MIN 26U
+#define BP_PIT_MAX 96U
 #define BP_FILE_CAP 512
 #define BP_MML_CAP 2048
 #define BP_DEMOS 5

@@ -58,7 +58,7 @@ unsigned BeatExportPit(char *out,unsigned cap,unsigned char pat[5][8],
     out[0]=0;
     if(!pat || (enabled!=0 && enabled!=1))return 0;
     if(enabled)for(c=0;c<8;++c)
-        if(pat[4][c] && (pat[4][c]<45 || pat[4][c]>96))return 0;
+        if(pat[4][c] && (pat[4][c]<26 || pat[4][c]>96))return 0;
     n=BeatExport(out,cap,pat,tempo);
     if(!n || !enabled)return n;
     out[3]='3';

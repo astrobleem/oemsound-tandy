@@ -37,7 +37,8 @@ Four-voice patterns keep it off. The speaker has fixed hardware level;
 it does not use the PSG preset envelopes.
 
 Play starts at step 1. Stop or Escape mutes and releases sound; `P` and `S`
-work when the grid has focus, and F5 toggles playback. Losing activation or
+work when the grid has focus, and F5 toggles playback. `D` chooses the next
+demo and `V` switches Grid/MML when the grid has focus. Losing activation or
 closing the app also stops playback. Tab/Shift+Tab navigate native controls.
 Use the tempo `-`/`+` buttons or Page Down/Page Up (40-240 BPM).
 
@@ -59,10 +60,12 @@ The demos take inspiration from the relaxed, sparse G-funk feel of
 recordings, recognizable song melodies or lyrics.
 
 This compact sequencer has straight eighths and a fixed 75% gate, without
-swing, glide, ties or per-cell velocity. Its shipped mapper accepts melodic
-notes A2-C7; the lowest speaker note is A2 (110 Hz). The bass demo uses that
-actual lower limit and leaves space around it. It does not silently double
-or fold the bass into a higher voice.
+swing, glide, ties or per-cell velocity. PSG tones remain A2-C7. The
+explicitly enabled PC-speaker route accepts D1-C7, using rounded whole-Hz
+requests supported by the existing shared SOUND service (D1 is 37 Hz).
+The bass demo uses A1/C2/D2 at 55/65/73 Hz and leaves space around it.
+It does not double or fold the bass into a higher voice. The kit includes
+the matching Fiddle parser/player for these lower MML3 `[P]` notes.
 
 ## Save, load and share
 

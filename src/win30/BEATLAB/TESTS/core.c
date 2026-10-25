@@ -49,7 +49,7 @@ int main(void)
         if(d==1){CK(!p.pit);CK(!notes(&p,0)&&!notes(&p,1)&&!notes(&p,2)&&!notes(&p,4));CK(notes(&p,3)==8);}
         if(d==2){CK(notes(&p,0)&&notes(&p,2));CK(p.program[2]==32);CK(!notes(&p,4)&&!p.pit);}
         if(d==3){
-            CK(p.pit);for(c=0;c<8;++c){CK(p.note[4][c]>=45&&p.note[4][c]<=50);
+            CK(p.pit);for(c=0;c<8;++c){CK(p.note[4][c]>=33&&p.note[4][c]<=38);
                 if(c&1)for(r=0;r<4;++r)CK(!p.note[r][c]);}
             for(r=0;r<5;++r)CK(p.note[r][0]&&p.note[r][4]);
         }
@@ -71,6 +71,7 @@ int main(void)
         n=BPMML(&p,mml,sizeof(mml));CK(n&&n<BP_MML_CAP);
         CK(mml_validate(&score,mml,n,0,&error));
         CK(score.part_count==(p.pit?5U:4U));CK(score.present[4]==p.pit);
+        CK(score.low_pit==(d==3));
         for(r=0;r<score.part_count;++r){
             expected=notes(&p,r);CK(score.note_count[r]==8U+expected);
             mml_reset(&iterator,&score,r);seen=0;step=0;
@@ -96,15 +97,33 @@ int main(void)
         p.tempo=40+pick(201);p.pit=(unsigned char)pick(2);
         for(r=0;r<3;++r)p.program[r]=(unsigned char)pick(128);
         for(r=0;r<5;++r)for(c=0;c<8;++c)p.note[r][c]=
-            (unsigned char)(pick(4)?(r==3?35+pick(47):45+pick(52)):0);
+            (unsigned char)(pick(4)?(r==3?35+pick(47):r==4?26+pick(71):45+pick(52)):0);
         CK(BPValid(&p));n=BPEncode(&p,encoded,sizeof(encoded));CK(n);
         CK(BPDecode(&q,encoded,n)==BP_OK&&same(&p,&q));
     }
     BPDemo(&p,3);before=p;p.tempo=39;CK(!BPValid(&p));p=before;
     p.tempo=241;CK(!BPValid(&p));p=before;p.pit=2;CK(!BPValid(&p));p=before;
     p.program[1]=128;CK(!BPValid(&p));p=before;
-    for(r=0;r<5;++r){p.note[r][0]=(unsigned char)(r==3?34:44);CK(!BPValid(&p));p=before;
+    for(r=0;r<5;++r){p.note[r][0]=(unsigned char)(r==3?34:r==4?25:44);CK(!BPValid(&p));p=before;
         p.note[r][0]=(unsigned char)(r==3?82:97);CK(!BPValid(&p));p=before;}
+    BPDemo(&p,3);p.pit=0;p.note[4][0]=26;CK(BPValid(&p));
+    n=BPEncode(&p,encoded,sizeof(encoded));CK(n&&BPDecode(&q,encoded,n)==BP_OK&&same(&p,&q));
+    n=BPMML(&p,mml,sizeof(mml));CK(n&&!strstr(mml,"[P]"));
+    CK(mml_validate(&score,mml,n,0,&error)&&score.version==2&&!score.present[4]&&!score.low_pit);
+    p.pit=1;n=BPMML(&p,mml,sizeof(mml));CK(n);
+    CK(mml_validate(&score,mml,n,0,&error)&&score.present[4]&&score.low_pit);
+    strcpy(mml,"MML3\n[P]\nT120 O1 D4\n");
+    CK(mml_validate(&score,mml,(unsigned)strlen(mml),0,&error));
+    strcpy(mml,"MML3\n[P]\nT120 O1 C#4\n");
+    CK(!mml_validate(&score,mml,(unsigned)strlen(mml),0,&error)&&error.code==MML_E_PITCH);
+    strcpy(mml,"MML3\n[A]\nT120 O2 G#4\n[P]\nO1 D4\n");
+    CK(!mml_validate(&score,mml,(unsigned)strlen(mml),0,&error)&&error.code==MML_E_PITCH);
+    strcpy(mml,"MML3\n[A]\nT120 O1 D4\n[P]\nO1 D4\n");
+    CK(!mml_validate(&score,mml,(unsigned)strlen(mml),0,&error));
+    strcpy(mml,"MML3\n[P]\nT120 O7 C4\n");
+    CK(mml_validate(&score,mml,(unsigned)strlen(mml),0,&error));
+    strcpy(mml,"MML3\n[P]\nT120 O7 C#4\n");
+    CK(!mml_validate(&score,mml,(unsigned)strlen(mml),0,&error)&&error.code==MML_E_PITCH);
     memset(data,' ',sizeof(data));memcpy(data,"DWA1",4);
     CK(unchanged_reject(&p,data,sizeof(data)));
     CK(unchanged_reject(&p,"DWA1\n9999 0 0 0 0\n",(unsigned)strlen("DWA1\n9999 0 0 0 0\n")));

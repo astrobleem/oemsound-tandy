@@ -39,3 +39,8 @@ typedef struct { WORD hMidi; DWORD dwCallback,dwInstance; } TOPEN;
 
 #define TANDY_PIT_CONFIG 0x5441
 typedef int (FAR PASCAL *PITPROC)(unsigned,unsigned,unsigned);
+
+/* Additive v1.3 speaker range; PSG admission remains 45..96. */
+#define PIT_NOTE_MIN 26U
+#define PIT_NOTE_MAX 96U
+#define PIT_LOW_VERSION 0x0103U
