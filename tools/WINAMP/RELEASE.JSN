@@ -1,6 +1,6 @@
 {
   "tag": "tandy-winamp-xt2.20261025",
-  "source_commit": "991c3dda3d9614395e3d50e9ce77195fb095d339",
+  "source_commit": "e9a565592f3b400a726d53a540a315bf17ecf06c",
   "package": {
     "bytes": 1612564,
     "sha256": "77666b635df602dab2b4a0302f7922caef819247d11d1ed9b616220b10a51aaa"
