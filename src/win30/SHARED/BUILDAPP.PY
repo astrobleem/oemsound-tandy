@@ -58,6 +58,13 @@ def build(here, name, sources, header):
     for label, path in inputs.items():
         if not path.is_file():
             p.error('Missing consumer source: ' + label)
+    repo = Path(__file__).resolve().parents[3]
+    source_pins = {}
+    for label, path in inputs.items():
+        path = path.resolve()
+        if not path.is_relative_to(repo):
+            p.error('Consumer source escapes repository: ' + label)
+        source_pins['unified/oemsound-tandy/' + path.relative_to(repo).as_posix()] = identity(path)
     out.mkdir(parents=True, exist_ok=False)
     for label, path in inputs.items():
         shutil.copyfile(path, out/label)
@@ -112,12 +119,12 @@ exit
         raise RuntimeError('Early SOUND import: use dynamic installed-driver entry points')
     result = {'target': 'Windows 3.0 real mode; 8086; MSC6/LINK4',
               'compiler_flags': '/G0 /Gw /AS /W3 /Od', 'imports': imports,
-              'sources': {n: identity(path) for n, path in inputs.items()},
+              'source_pins': source_pins,
               'toolchain': {n: identity(tool/n) for n in TOOLS},
               'build_wrapper': identity(here/'BUILD.PY'),
               'shared_builder': identity(Path(__file__)),
               'guard': identity(guard),
-              'bytes': len(exe), 'sha256': hashlib.sha256(exe).hexdigest()}
+              'runtime': {name+'.EXE': identity(binary)}}
     for record in ('BUILD.JSON', 'RESULT.JSON'):
         (out/record).write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result, indent=2))

@@ -29,6 +29,8 @@ jobs:
           /tmp/tplay-policy
       - name: Verify complete native deliverables and reject corruption
         run: python3 tools/WINAMP/VERIFY.PY --self-test
+      - name: Check actual consumer build receipts and baseline guards
+        run: python3 tools/WINAMP/TESTBASE.PY
       - name: Check shared installer and preserved instrument packaging
         run: python3 tools/WINAMP/TESTPIT.PY
       - name: Check the emulator status-bit regression
