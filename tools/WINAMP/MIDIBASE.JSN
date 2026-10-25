@@ -20,10 +20,6 @@
       "bytes": 248,
       "sha256": "4b210548391c59973cf3c35de8bac6c5ab74fd1be101e3d19e237e3afa0a809c"
     },
-    "RAWCLK.DLL": {
-      "bytes": 15464,
-      "sha256": "a4d369e876be4f83ec8ce323b83a6456a9137675011da16d01423b6c7ead624c"
-    },
     "RESERVE.COM": {
       "bytes": 1512,
       "sha256": "644290e234cab9a6ac3799fa32959bb493d82d566501a8925720bb5a28c6afa8"
@@ -77,6 +73,12 @@
       "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
     }
   },
-  "scope": "Fixed current runtime outside the bank-aware MIDICLK, MCITNDY and MINIPLAY builds; each changed artifact is bound to its native source/build/test receipt.",
-  "source_commit": "68fc60510bde5d7f6fa74e3fa806719bff7ead65"
+  "scope": "Fixed current runtime outside the bank-aware player/MIDI/MCI and corrected paired-live RAWCLK builds. Every changed artifact is bound to its actual native source/build/test receipts.",
+  "source_commit": "4f0d22c07028fc8d7c14134ceb6c54d399fa3009",
+  "changed_runtime": [
+    "MINIPLAY.EXE",
+    "MIDICLK.DLL",
+    "MCITNDY.DLL",
+    "RAWCLK.DLL"
+  ]
 }
