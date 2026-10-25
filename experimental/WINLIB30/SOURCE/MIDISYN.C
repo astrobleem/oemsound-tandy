@@ -18,6 +18,7 @@ void MSReset(MSYN *s){unsigned i;LTP_U8 *p=(LTP_U8 *)s;for(i=0;i<sizeof(*s);i++)
  for(i=0;i<4;i++)s->baseVolume[i]=(LTP_U8)(s->volume[i]=15);
  for(i=0;i<16;i++){s->channelVolume[i]=s->expression[i]=127;s->pan[i]=64;s->pitchBend[i]=8192;s->bendFactor[i]=4096;}s->flags=3;s->renderDirty=1;s->renderValid=0;}
 void MSInvalidate(MSYN *s){s->renderDirty=1;}
+LTP_U16 MSBank(MSYN *s,LTP_U16 bank){if(bank>MS_BANK_CHAMBER)return 1;s->bank=(LTP_U8)bank;MSInvalidate(s);return 0;}
 void MSSpeakerMode(MSYN *s,LTP_U16 mode){MSInvalidate(s);s->speakerMode=mode;s->speakerNote=s->speakerDivisor=s->speakerBase=s->speakerFallback=0;s->speakerReleased=0;}
 /* Cache the extra 2dB attenuation only when a controller changes. PSG gain is
    quantized; PIT2 has fixed amplitude and supports only the zero/nonzero gate. */
@@ -128,7 +129,7 @@ static LTP_U16 applyMessage(MSYN *s,LTP_U32 ms,LTP_U32 value,unsigned renderNow)
  }
  if(s->counter==65535){for(i=0;i<3;i++){ranks[i]=1;for(j=0;j<3;j++)if(s->age[j]<s->age[i])ranks[i]++;}for(i=0;i<3;i++)s->age[i]=ranks[i];s->counter=3;}
  s->note[slot]=pitch;s->key[slot]=a+1;s->channel[slot]=ch;s->age[slot]=++s->counter;s->p[slot]=periods[pitch];s->volume[slot]=volume;s->baseVolume[slot]=(LTP_U8)volume;s->released[slot]=0;
- InstStart(&s->voice[slot],s->program[ch]>>4,volume,s->p[slot],step(ms));if(renderNow)MSRender(s,ms);return 0;
+ InstStart(&s->voice[slot],s->program[ch]>>4,volume,s->p[slot],step(ms));s->voice[slot].bank=s->bank;if(renderNow)MSRender(s,ms);return 0;
 }
 LTP_U16 MSMessage(MSYN *s,LTP_U32 ms,LTP_U32 value)
 {return applyMessage(s,ms,value,1);}

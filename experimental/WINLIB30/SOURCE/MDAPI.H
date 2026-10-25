@@ -40,6 +40,15 @@ WORD MDAPI MDTiming(WORD,WORD);
 DWORD MDAPI MDVersion(void);
 WORD MDAPI MDClock(WORD,DWORD FAR *);
 WORD MDAPI MDVoiceMode(WORD,WORD);
+/* Explicit instrument bank, independent of MIDI CC0/32 and voice flags.
+   Selection survives reset/live generations; MDOpen starts with Default.
+   Existing voices keep their latched bank. Invalid IDs do not alter state. */
+#define MD_BANK_DEFAULT 0
+#define MD_BANK_CHAMBER 1
+WORD MDAPI MDInstrumentBank(WORD,WORD);
+/* Seed an existing melodic voice with its own latched bank. The selected
+   bank for subsequent notes is unchanged, including on a refused seed. */
+WORD MDAPI MDSeedBank(WORD,DWORD,DWORD,DWORD,WORD);
 WORD MDAPI MDDebug(WORD,WORD);
 /* Stage a live generation; MDStart commits owner-only no-mute replacement. */
 WORD MDAPI MDBeginLive(WORD,DWORD);

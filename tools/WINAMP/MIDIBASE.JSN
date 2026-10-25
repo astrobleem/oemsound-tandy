@@ -1,7 +1,7 @@
 {
   "package": {
-    "bytes": 2157594,
-    "sha256": "40d00a49ecb4dc177274042c5084a5a3b5ee3d4e59eca81003af8c6c083f72db"
+    "bytes": 2373822,
+    "sha256": "a65e1ae06b3fc874809a907bb94b6420c7e8490e2b8ca3776cbfda28ef81fd79"
   },
   "runtime": {
     "CHIME.SND": {
@@ -15,14 +15,6 @@
     "LWFILE.DLL": {
       "bytes": 14876,
       "sha256": "c7041c86d9012795ddfba8de96ee225a7a709f86e5a1c39ecd516a5216cb5d5c"
-    },
-    "MCITNDY.DLL": {
-      "bytes": 13036,
-      "sha256": "133ac74490ee96b6cff49974e2c1d125706ebb043137a8806384196551942124"
-    },
-    "MIDICLK.DLL": {
-      "bytes": 16576,
-      "sha256": "b4eef762412088a8d075f0f6e181ac62e3fba34413bff9f896b6351363dc5ac6"
     },
     "PLUCK.TND": {
       "bytes": 248,
@@ -85,6 +77,6 @@
       "sha256": "83533e67e9f804668520a7ac5fcb1546bac9c3e58a6cd57c651ca16735374cc0"
     }
   },
-  "scope": "Published current MIDI runtime retained byte-for-byte while rebuilding only MINIPLAY; guides and receipt metadata excluded.",
+  "scope": "Fixed current runtime outside the bank-aware MIDICLK, MCITNDY and MINIPLAY builds; each changed artifact is bound to its native source/build/test receipt.",
   "source_commit": "68fc60510bde5d7f6fa74e3fa806719bff7ead65"
 }

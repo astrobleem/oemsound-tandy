@@ -22,6 +22,12 @@ Choose Add... to select MID, VGM, VGZ, MOD, TND or SND files. The playlist holds
 32 songs; scroll or use Home/End/Page Up/Page Down. Remove changes the list,
 not the song file. Stop and close the player, then exit Windows normally.
 
+Use MIDI: Default / MIDI: Chamber to choose a FauxBlaster instrument bank.
+In a compact window the button says Default / Chamber. The choice is saved
+automatically beside the player and reapplied when you reopen it or a song.
+New melodic notes use the chosen bank; held notes keep their original shape.
+VGM/VGZ register playback and percussion keep their original sound.
+
 GO starts the guarded real-mode launcher. For HPXY and XRSYNC it reserves or
 reuses the required video memory, loads the owned timer bridge, starts
 Windows and the player, and removes that bridge after normal Windows exit.

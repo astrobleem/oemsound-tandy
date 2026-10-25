@@ -1,4 +1,5 @@
 WORD SCStart(void);
+WORD SCBank(WORD);
 WORD SCPump(void);
 WORD SCStop(void);
 WORD SCPause(void);
