@@ -35,6 +35,7 @@ DGROUP GROUP _DATA
 _TEXT SEGMENT
 ASSUME CS:_TEXT,DS:DGROUP
 EXTRN TIMERENTRY:FAR
+EXTRN _TCBassSuspend:NEAR
 PUBLIC _HiPrepare,_HiProgram,_HiPeriod,_HiFind,_HiInstall,_HiStop,_HiRead,_HiStatus,_HiMetric,_HiLayer
 PUBLIC _HiRestart,_HiDetach,_HiAbandon,_HiAudio,_HookMetric
 brokerPtr DD 0
@@ -422,6 +423,8 @@ DISABLEHOOK PROC FAR
  mov ax,ss:[bp+18]
  mov lastDisFlags,ax
  inc disableCalls
+ ; Fixed capability call only; speaker is muted before the DOS transition.
+ call _TCBassSuspend
  in al,21h
  and ax,1
  push ax

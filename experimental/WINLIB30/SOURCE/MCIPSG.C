@@ -4,11 +4,13 @@
 #include "SMF.H"
 #include "MDAPI.H"
 #include "MCIPSG.H"
+#include "MIDISKIP.H"
 typedef WORD(FAR PASCAL *OPEN)(WORD FAR *);typedef WORD(FAR PASCAL *PUSH)(WORD,DWORD,DWORD,DWORD);typedef WORD(FAR PASCAL *COMMIT)(WORD,DWORD,DWORD,WORD);typedef WORD(FAR PASCAL *ONE)(WORD);typedef WORD(FAR PASCAL *STATUS)(WORD,MDINFO FAR *,WORD);typedef WORD(FAR PASCAL *MODE)(WORD,WORD);
 static HMODULE dll;static WORD handle,have,eof,ended,lastError,pumps;static DWORD committed,lastAccepted;static SMF_EVENT e;static MDINFO info;static char path[144];static OPEN op;static PUSH put;static COMMIT commit;static ONE start,pump,pauseClock,resumeClock,closeClock;static STATUS status;static MODE timing;
-static WORD feed(WORD budget){int r;WORD result;DWORD through;
+static WORD feed(WORD budget){int r;WORD result;DWORD through,msg;
  while(budget--&&!eof){if(!have){r=smf_step(&e);if(r<0)return 1;if(r==2)continue;if(!r){eof=1;break;}have=1;}
-  result=put(handle,info.generation,e.ms,(DWORD)e.status|((DWORD)e.data1<<8)|((DWORD)e.data2<<16));if(result==MD_FULL)break;if(result){lastError=result;return 1;}lastAccepted=e.ms;have=0;}
+  msg=(DWORD)e.status|((DWORD)e.data1<<8)|((DWORD)e.data2<<16);if(MSSkipMessage(msg)){have=0;continue;}
+  result=put(handle,info.generation,e.ms,msg);if(result==MD_FULL)break;if(result){lastError=result;return 1;}lastAccepted=e.ms;have=0;}
  if(ended)return 0;
  if(eof){result=commit(handle,info.generation,smf_duration_ms(),MD_EOF);if(result)return 1;ended=1;return 0;}
  /* A peeked event seals every earlier timestamp, but not a partially

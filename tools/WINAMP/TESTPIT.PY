@@ -55,10 +55,10 @@ def shared_fixture(root):
             ('TEXIT.EXE','X'),('TP.EXE','X'),('FIXXT.EXE','X'),('TSINPUT.DLL','W')):
         files[name] = b'UNIT CLIENT '+name.encode()
         clients[name] = {'kind': kind, 'runtime': pack.identity(files[name]),
-                         'sources': {}}
+                         'crc32': '%08x'%zlib.crc32(files[name]), 'sources': {}}
     header = (HERE.parents[1]/'src/win30/DRIVER/SOUNDID.H').read_bytes()
     builds = {}
-    for label, name in (('driver','SOUND.DRV'),('raw','RAWCLK.DLL'),
+    for label, name in (('driver','SOUND.DRV'),
                         ('launch','TPLAY.EXE'),('setup','SETUP.EXE')):
         source = label.encode()
         builds[label] = {'runtime': pack.identity(files[name]),
@@ -67,6 +67,19 @@ def shared_fixture(root):
         if label in ('launch','setup'):
             files['SOURCE/'+label.upper()+'/SOUNDID.H'] = header
             builds[label]['sources']['SOUNDID.H'] = pack.identity(header)
+    builder = pack.load_module('pit_unit_shared_builder', HERE/'PACK.PY')
+    process = dump({'return': 0, 'owned_child_stopped': True, 'lease_released': True})
+    for label, names in builder.CLOCK_SOURCES.items():
+        sources = {name: b'UNIT SOURCE '+name.encode() for name in names}
+        builds[label] = {'runtime': pack.identity(files[builder.CLOCK_FILES[label]]),
+                         'sources': {n: pack.identity(d) for n,d in sources.items()},
+                         'common_process_identity': pack.identity(process)}
+        for name, data in sources.items():
+            files['SOURCE/'+label.upper()+'/'+name] = data
+            files['DEPS/'+name] = data
+        files['EVIDENCE/'+label.upper()+'.JSN'] = dump(builds[label])
+        files['EVIDENCE/'+label.upper()+'.LOG'] = b'PASS MIDI THREE DLL BUILD\r\n'
+        files['EVIDENCE/'+label.upper()+'PROC.JSN'] = process
     sound = dict(pack.identity(files['SOUND.DRV']),
                  crc32='%08x'%zlib.crc32(files['SOUND.DRV']))
     files['EVIDENCE/CLIENTS.JSN'] = dump(clients)
@@ -87,6 +100,7 @@ def shared_fixture(root):
              'installer': pack.identity(exe), 'clients':
              {name: row['runtime'] for name,row in clients.items()}}
     for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),
+                     ('midiclk','MIDICLK.DLL'),('mcitndy','MCITNDY.DLL'),
                      ('setup','SETUP.EXE'),('launcher','TPLAY.EXE')):
         tests[key] = pack.identity(files[name])
     files['TESTS.JSN'] = dump(tests)

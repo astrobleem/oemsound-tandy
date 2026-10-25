@@ -6,9 +6,15 @@ import json
 import struct
 import zipfile
 import zlib
+from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_loader
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
+_loader = SourceFileLoader('winamp_native_builder', str(HERE/'PACK.PY'))
+_spec = spec_from_loader(_loader.name, _loader)
+builder = module_from_spec(_spec)
+_loader.exec_module(builder)
 
 
 def ident(data):
@@ -34,6 +40,8 @@ def verify(files, current=True):
     for label,source,filename in (
             ('driver','src/win30/DRIVER','SOUND.DRV'),
             ('raw','experimental/WINLIB30/SOURCE','RAWCLK.DLL'),
+            ('midi','experimental/WINLIB30/SOURCE','MIDICLK.DLL'),
+            ('mci','experimental/WINLIB30/SOURCE','MCITNDY.DLL'),
             ('launch','src/win30/LAUNCH','TPLAY.EXE'),
             ('setup','src/win30/SETUP','SETUP.EXE')):
         record = builds[label]
@@ -48,6 +56,16 @@ def verify(files, current=True):
                 elif label == 'setup' and name == 'TPLAYPOL.H':
                     path = REPO/'src/win30/LAUNCH/TPLAYPOL.H'
                 require(ident(path.read_bytes()) == pin, 'Current source differs: '+str(path))
+    builder.clock_receipts(files, builds)
+    for label in builder.CLOCK_SOURCES:
+        require(json.loads(files['EVIDENCE/'+label.upper()+'.JSN']) == builds[label],
+                'Native source receipt differs: '+label)
+        for name in builds[label]['sources']:
+            expected = files['SOURCE/'+label.upper()+'/'+name]
+            require(files.get('DEPS/'+name) == expected, 'Stale/missing DEPS source: '+name)
+            require(all(data == expected for path,data in files.items()
+                        if path.startswith('DEPS/') and path.rsplit('/',1)[-1] == name),
+                    'Stale duplicate DEPS source: '+name)
     sound = json.loads(files['BUILD.JSN'])['canonical_sound']
     require(ident(files['SOUND.DRV']) == {k:sound[k] for k in ('bytes','sha256')},
             'Canonical sound identity differs')
@@ -61,6 +79,7 @@ def verify(files, current=True):
     require(tests.get('release_readiness', {}).get('status') == 'READY',
             'Current published baseline reconciliation is incomplete')
     for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),
+                     ('midiclk','MIDICLK.DLL'),('mcitndy','MCITNDY.DLL'),
                      ('setup','SETUP.EXE'),('launcher','TPLAY.EXE')):
         require(tests[key] == ident(files[name]), 'Native tests cover another '+name)
     rows = files['PAYLOAD.LST'].decode('ascii').splitlines()

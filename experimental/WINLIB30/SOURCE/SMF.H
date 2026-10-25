@@ -14,11 +14,14 @@ typedef unsigned int SMF_ULONG;
 typedef unsigned long SMF_ULONG;
 #endif
 
-#define SMF_MAX_FILE    32768U
+/* Sanity bound only: the file is streamed, never held in memory. The event
+ * budget below is the real work bound. */
+#define SMF_MAX_FILE    ((SMF_ULONG)1048576UL)
 #define SMF_MAX_TRACKS  16U
 #ifndef SMF_MAX_EVENTS
-#define SMF_MAX_EVENTS  16384U
+#define SMF_MAX_EVENTS  65000U
 #endif
+#define SMF_WINDOW      64U
 #define SMF_MAX_US ((SMF_ULONG)3600000000UL)
 
 typedef struct SMF_EVENT {
@@ -31,12 +34,31 @@ typedef struct SMF_EVENT {
     unsigned char track;      /* Zero-based track index. */
 } SMF_EVENT;
 
+/* Streaming source: copy n bytes at absolute file offset into dst (a near
+ * buffer owned by the parser). Return the byte count read; anything short
+ * of n is a read error. Each track keeps one SMF_WINDOW-byte window.
+ */
+typedef unsigned (*SMF_READ)(SMF_ULONG offset, unsigned char *dst,
+                             unsigned n);
+int smf_open_stream(SMF_READ read, SMF_ULONG size);
+/* Optional foreground admission during the complete validation/duration pass.
+ * event points to parser-owned static storage (DS in the Win16 DLL), valid
+ * only for the call. Return nonzero to admit or zero to reject. A rejection
+ * still validates the rest of the file, so syntax/read errors take precedence.
+ * Returns 1 on success, 0 for a parser error, SMF_OPEN_REJECTED for admission;
+ * either failure leaves playback disabled. No callback runs during playback.
+ */
+typedef int (*SMF_ADMIT)(const SMF_EVENT *event);
+#define SMF_OPEN_REJECTED (-1)
+int smf_open_stream_checked(SMF_READ read, SMF_ULONG size, SMF_ADMIT admit);
+
 /* The buffer is BORROWED and must remain immutable and alive. On Win16 it
- * must fit in one far segment (GlobalLock of a <=32 KiB allocation is usual).
+ * must fit in one far segment (<= 65535 bytes). MCITNDY streams instead.
  * Fully validates the complete file and merged timeline before succeeding.
  * Returns 1 on success, 0 on failure; failure leaves playback disabled.
  */
 int smf_open(const unsigned char SMF_FAR *file, unsigned size);
+/* Memory-backed convenience over smf_open_stream (<= 65535 bytes). */
 
 /* Return 1 for a channel message, 0 for clean EOF, -1 for error.
  * Meta events and bounded F0/F7 SysEx payloads are never emitted.
