@@ -3,24 +3,33 @@
 For Tandy 1000 EX/HX, DOS, 640 KB and Windows 3.0 real mode.
 
 Choose [Fiddle/Beats, the instruments or the DOS test from current downloads](../../docs/DOWNLOADS.MD).
-Each Windows packet includes TSOUND.DRV and its paired app-local MIDIMAP files.
+Fiddle/Beats authoring is in MML3AUTH.ZIP; Mini Piano, JoyMIDI, MiniMIDI and
+expressive Beats are in PITEXPR.ZIP.
 
 ## Install
 
-Extract the selected kit. From plain DOS, copy its top-level TSOUND.DRV to
-your Windows SYSTEM folder and set the existing `[boot]` sound.drv line to
-`sound.drv=TSOUND.DRV`. Keep MIDIMAP.DRV beside its paired clients.
-The [install guide](INSTALL.TXT) gives the exact paths and controls.
+Extract the complete Windows kit with its application folders intact.
+Exit Windows to DOS and run the included TWSETUP.EXE once. It installs the
+single shared SOUND driver and its required files automatically. Keep the
+supplied app-local MIDIMAP.DRV files beside their clients; no system MIDI
+registration, driver copying or INI editing is needed.
+The [install guide](INSTALL.TXT) gives the launch paths and controls.
 
-## Known limits and technical details
+Both Windows kits include the same current Tandy Beats Lab: three PSG tones,
+noise and a separately editable PC-speaker row, with native pattern Save/Load,
+MML preview/export and original editable demos. MML3AUTH adds Fiddle;
+PITEXPR adds Mini Piano, JoyMIDI and MiniMIDI. Use a desktop at least 320 pixels
+wide for Beats. The same installed SOUND driver serves the kits and Winamp;
+app-local MIDI support is not another system sound-driver installation.
 
-PIT2 adds one on/off square-wave voice; it is off until selected. It cannot
-run alongside sampled speaker speech. TSOUND has restricted SOUND semantics,
-including unsupported system beeps; direct beep writers can disturb playback.
-These kits have scoped emulator tests, not full physical EX integration.
-Windows 3.1 is not supported.
+## Known limits
 
-[Versioned timing and playback details](../../docs/SNDTIME.MD) ·
-[Release notes and optional checksums](https://github.com/astrobleem/oemsound-tandy/releases/tag/sound-exp-v0.1.0-pit.20261007).
-Source and original component notices are included in each kit. Historical
-source and test records retain their original scope.
+PIT adds one fixed-level square-wave voice, selected explicitly. Stop one
+producer before starting another; speaker music cannot run alongside
+sampled speaker speech. These kits have scoped emulator evidence, not full
+physical EX acceptance. Windows 3.1 is outside the qualified scope.
+
+[Timing and playback details](../../docs/SNDTIME.MD) |
+[Current releases](https://github.com/astrobleem/oemdisplay-tandy/releases/tag/windows-xt).
+Source and component notices are included in each kit. Historical source
+and test records retain their original scope.

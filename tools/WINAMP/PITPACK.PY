@@ -166,7 +166,7 @@ def write_zip(path, kit, files):
             archive.writestr(info, data)
 
 
-def verify(path, kit):
+def verify(path, kit, current=False):
     raw = path.read_bytes()
     with zipfile.ZipFile(path) as archive:
         names = archive.namelist()
@@ -179,6 +179,10 @@ def verify(path, kit):
         safe(name)
         require(identity(files[name]) == pin, 'Output member differs: '+name)
     record = json.loads(files['BUILD.JSN'])
+    if record.get('schema') == 2:
+        current_packets = load_module('current_beats_packets',
+            HERE.parents[1]/'src/win30/BEATLAB/PACK.PY')
+        return current_packets.verify_release_packet(path, kit, current=current)
     for name,pin in record['original']['preserved'].items():
         require(identity(files[name]) == pin, 'Preserved client/data/source changed: '+name)
     for name,wanted in record['original']['runtime_sha256'].items():

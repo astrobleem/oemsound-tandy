@@ -29,6 +29,10 @@ jobs:
           /tmp/tplay-policy
       - name: Verify complete native deliverables and reject corruption
         run: python3 tools/WINAMP/VERIFY.PY --self-test
+      - name: Check Beats patterns, expressive routing and both kit layouts
+        run: |
+          python3 src/win30/BEATLAB/HOSTTEST.PY --out /tmp/beats-patterns
+          python3 src/win30/BEATLAB/PACKTEST.PY
       - name: Check actual consumer build receipts and baseline guards
         run: python3 tools/WINAMP/TESTBASE.PY
       - name: Check shared installer and preserved instrument packaging

@@ -19,12 +19,12 @@
       "sha256": "534790b2de96bee1d9b138d573acaad1898a231d8b7b96ef5c03a1cde48fa66f"
     },
     "MML3AUTH.ZIP": {
-      "bytes": 3170486,
-      "sha256": "1f2ec0aad62478715d7c3eb0b185df9a5801594ea875acfb28fb76853c644210"
+      "bytes": 3467832,
+      "sha256": "c0bf425a8b4fb8da4be238413fe4a4eca75e106ce1ff9535c351baefcca536b5"
     },
     "PITEXPR.ZIP": {
-      "bytes": 3211523,
-      "sha256": "fa4a93abf03682d750318a1d79ebf26a2a845e402a5d8a52660cd188235b816d"
+      "bytes": 3560729,
+      "sha256": "295c064bb140e20058469d8348b5e02443922d4a6e5d839eb62be76cae5e7be7"
     }
   },
   "native_tests": {
@@ -42,5 +42,45 @@
   "exact_final_smoke": {
     "bytes": 6367,
     "sha256": "b5c9ee356376067ade7f4c3320861938a6ff3ad9a7978e1e080aae2f6050dfa2"
+  },
+  "beatlab_baselines": {
+    "MML3AUTH.ZIP": {
+      "bytes": 3170486,
+      "sha256": "1f2ec0aad62478715d7c3eb0b185df9a5801594ea875acfb28fb76853c644210"
+    },
+    "PITEXPR.ZIP": {
+      "bytes": 3211523,
+      "sha256": "fa4a93abf03682d750318a1d79ebf26a2a845e402a5d8a52660cd188235b816d"
+    }
+  },
+  "beatlab_baseline_commit": "c8dce49a24e83db28affccbc5f4c3b5937cb8109",
+  "beatlab_native": {
+    "native_source_commit": "a31e79a401eb8416494a7feb1b7014caa6b127f2",
+    "runtimes": {
+      "BEATS.EXE": {
+        "bytes": 30229,
+        "sha256": "b6d8278ecacfa4441f8a656205ead3a9ab30d74fe39ecc79b4ee0f6888fbad31"
+      },
+      "MIDIMAP.DRV": {
+        "bytes": 6622,
+        "sha256": "2a98f7e9f91514418c9ac4d00d85462a0d95b7cbbf861e597546c4891b87623c"
+      },
+      "MMLFIDL.EXE": {
+        "bytes": 28643,
+        "sha256": "c51f42992261c49169548f735c732cae068b423e0f40b31b4cc82766463f7b93"
+      }
+    },
+    "functional_native_checks": {
+      "beats": 42,
+      "fiddle": 17
+    },
+    "affected_ui_native_checks": 10,
+    "host_audio": {
+      "attacks": 144,
+      "silent": 0,
+      "clipped": 0,
+      "fixed_gain": 0.18
+    },
+    "scope": "Pre-brand core acceptance plus affected final UI; exact unchanged mapper/Fiddle and current bank common payload"
   }
 }
