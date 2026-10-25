@@ -24,6 +24,10 @@ EXPORTS
  TCRearm @17
  TCMask @18
  TCLiveApply @19
+ TCBGetCaps @20
+ TCBOpen @21
+ TCBPush @22
+ TCBEnd @23
 IMPORTS
  CreateSystemTimer=SYSTEM.2
  KillSystemTimer=SYSTEM.3

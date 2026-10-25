@@ -7,6 +7,7 @@ DGROUP GROUP _DATA
 _TEXT SEGMENT
 ASSUME CS:_TEXT, DS:DGROUP
 EXTRN _Tick:NEAR
+PUBLIC _PitRead, _PitGate, _PitProgram
 PUBLIC LibEntry, TIMERENTRY, _SaveIRQ, _RestoreIRQ, _PsgByte
 LibEntry PROC FAR
     mov ax,1
@@ -63,5 +64,34 @@ io_delay:
     pop bp
     ret
 _PsgByte ENDP
+_PitRead PROC NEAR
+    xor ax,ax
+    in al,61h
+    ret
+_PitRead ENDP
+_PitGate PROC NEAR
+    push bp
+    mov bp,sp
+    mov ax,[bp+4]
+    out 61h,al
+    pop bp
+    ret
+_PitGate ENDP
+_PitProgram PROC NEAR
+    push bp
+    mov bp,sp
+    mov al,0b6h
+    out 43h,al
+    jmp short pit_delay
+pit_delay:
+    mov ax,[bp+4]
+    out 42h,al
+    jmp short pit_delay2
+pit_delay2:
+    mov al,ah
+    out 42h,al
+    pop bp
+    ret
+_PitProgram ENDP
 _TEXT ENDS
 END LibEntry

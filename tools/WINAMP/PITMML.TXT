@@ -1,0 +1,21 @@
+FIDDLE AND BEATS - SHARED TANDY SOUND SETUP
+
+Extract the complete kit to C:\MML3AUTH, keeping BEATS and FIDDLE intact.
+Exit Windows to DOS and run C:\MML3AUTH\TWSETUP.EXE once. Setup finds your
+Windows installation and installs the shared SOUND driver, Winamp and its
+required files automatically. Keep this kit in its extracted directory.
+
+Start Windows through your normal display launcher. In Program Manager,
+choose File / Run and enter the program you want:
+  C:\MML3AUTH\BEATS\BEATS.EXE
+  C:\MML3AUTH\FIDDLE\MMLFIDL.EXE
+
+The paired MIDIMAP.DRV files stay beside their applications. The same shared
+sound driver serves these tools and Winamp; no driver copying or INI editing
+is needed. The installed Winamp Setup menu provides Repair and Uninstall.
+
+This packet preserves the accepted applications, musical data and client
+source. TWXT2.ZIP contains the matching complete shared package, source and
+test receipts. TWSETUP.EXE already contains its installation payload; that
+companion ZIP is not a preparation step. Original test records retain their
+recorded scope.

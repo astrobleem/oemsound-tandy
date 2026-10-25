@@ -2,6 +2,8 @@
    Windows 3.0 real mode / 8086. No IRQ/PIT changes or resident helper. */
 #define WINVER 0x0300
 #include <windows.h>
+#include "PSGOWN.H"
+static PSG_OWNER soundOwner;
 #include "TNOTICE.H"
 /* Compact status notices for 160-pixel displays. */
 #define TIMER 1
@@ -30,13 +32,11 @@ static int argIs(LPSTR p, char *s)
 }
 static int busy(void)
 {
-    HMODULE h;
     if (FindWindow("TandyPSGTest", NULL) ||
         FindWindow("TandyStartupChime", NULL) ||
         FindWindow("TandyXPStartupChime", NULL) ||
         FindWindow("TandyAutomaticMouth", NULL)) return 1;
-    h = GetModuleHandle("SOUND");
-    return h && GetProcAddress(h, "DEBUGTIMER") != NULL;
+    return !PsgOwnerAcquire(&soundOwner);
 }
 /* Compact native prompt: standard two-button MessageBox clips at 160px. */
 static HINSTANCE promptInst;
@@ -112,6 +112,7 @@ static int confirmExit(HINSTANCE inst)
 }
 static void psgByte(unsigned char value)
 {
+    if (!PsgOwnerHeld(&soundOwner)) return;
     _asm { mov dx, 0c0h
            mov al, value
            out dx, al
@@ -144,7 +145,8 @@ static void tone(unsigned voice, unsigned period)
 }
 static void cleanup(HWND w)
 {
-    KillTimer(w, TIMER); active = 0; muteAll();
+    KillTimer(w, TIMER); active = 0;
+    PsgOwnerRelease(&soundOwner);
 }
 static void finish(HWND w)
 {
@@ -163,6 +165,7 @@ LONG FAR PASCAL ChimeProc(HWND w, UINT m, WPARAM wp, LPARAM lp)
         return 0;
     case WM_TIMER:
         if (wp != TIMER || !active) return 0;
+        if (!PsgOwnerHeld(&soundOwner)) { finish(w); return 0; }
         if (phase == 4) {
             began = GetTickCount(); phase = 0;
             tone(0, 240); /* Bb4: original descending companion phrase. */
@@ -223,16 +226,18 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE previous, LPSTR cmd, int show)
     c.cbClsExtra = 0; c.cbWndExtra = 0; c.hInstance = inst;
     c.hIcon = NULL; c.hCursor = NULL; c.hbrBackground = NULL;
     c.lpszMenuName = NULL; c.lpszClassName = "TandyPreExitChime";
-    if (!RegisterClass(&c)) return 3;
+    if (!RegisterClass(&c)) {
+        PsgOwnerRelease(&soundOwner); return 3;
+    }
     w = CreateWindow("TandyPreExitChime", "Tandy pre-exit chime", WS_POPUP,
         0, 0, 0, 0, NULL, NULL, inst, NULL);
-    if (!w) { muteAll(); return 4; }
+    if (!w) { PsgOwnerRelease(&soundOwner); return 4; }
     /* Deliberately no ShowWindow: the hidden owner only receives messages.
        GetMessage yields while Program Manager and other startup apps run. */
     while (GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg); DispatchMessage(&msg);
     }
-    muteAll(); logResult("MUTED WINDOW GONE\r\n");
+    PsgOwnerRelease(&soundOwner); logResult("MUTED WINDOW GONE\r\n");
     if (!requestExit) { logResult("NO EXIT REQUEST\r\n"); return 0; }
     /* Call only after cleanup and leaving the message loop. Windows itself
        sends save/exit queries. A veto must leave the desktop running. */

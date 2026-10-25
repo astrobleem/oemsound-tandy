@@ -7,9 +7,9 @@ Music players and instruments for the **Tandy 1000 EX/HX** and Windows 3.0.
 Browse your music, build a playlist, and play **MIDI, VGM/VGZ and tracker MOD
 arrangements** through the Tandy PSG.
 
-**[Download Tandy Winamp](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP)**
+**[Download Tandy Winamp](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP)**
  · [Install guide](experimental/WINAMP30/INSTALL.TXT)
- · [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024)
+ · [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt2.20261025)
 
 ![Tandy Winamp in color](docs/SHOTS/WAMPCOL.PNG)
 
@@ -25,38 +25,20 @@ arrangements** through the Tandy PSG.
 *The same released app with its Add song browser open. The folder contains
 original synthetic examples.*
 
-On a real **Tandy 1000 EX at 7.16 MHz**, the player was accepted with reported
-uninterrupted music while using Program Manager.
-[Hardware report and test record](experimental/WINAMP30/EVIDENCE/PHYSICAL.JSON).
-
 ### Try it
 
-1. [Download TWXT1.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP) and extract its `TWXT1` folder to
-   `C:\TWXT1`. The sound driver and video helper are included.
-2. Exit Windows. Copy the included driver:
+1. [Download TWXT2.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP).
+2. Extract its `TWXT2` folder on the DOS computer, exit Windows, and run
+   `SETUP` in that folder. It finds Windows and installs Winamp, the shared
+   sound driver, DLLs and video-memory helper automatically.
+3. Start the player from DOS with `C:\WINAMP\GO`.
 
-   ```dos
-   COPY C:\TWXT1\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
-   ```
+Setup handles the existing Windows sound entry and current Windows XT sound
+clients. The same SOUND driver serves Winamp, alerts and PIT instruments.
+Run `C:\WINAMP\SETUP` for Launch, Repair or Uninstall Winamp.
 
-   Under `[boot]` in `C:\WINDOWS\SYSTEM.INI`, change the existing sound line
-   to `sound.drv=TSOUND.DRV`. Keep `system.drv=SYSTEM.DRV` and your display/fonts.
-3. From plain DOS, check:
-
-   ```dos
-   C:\TWXT1\TPLAY C:\WINDOWS /CHECK
-   ```
-
-   After **preflight PASS**, start:
-
-   ```dos
-   C:\TWXT1\GO
-   ```
-
-Use your actual Windows directory if different; `GO C:\W30SND`, for example,
-starts that installation. HPXY and XRSYNC use the included video reservation
-automatically. Stock CGA uses the same command without reservation.
-The [install guide](experimental/WINAMP30/INSTALL.TXT) covers other paths and undo.
+The [install guide](experimental/WINAMP30/INSTALL.TXT) covers normal use.
+[TWXT2.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP) includes the same ready-built runtime and corresponding source.
 
 Choose Add... to load songs. Stop and close the player, then exit Windows
 normally. TPLAY removes its owned timer bridge after Windows returns.
@@ -72,7 +54,7 @@ using square-wave tones; it does not reproduce sample timbres.
 the PSG's **three tones and noise**. Write a fifth `[P]` part in MML3, or edit
 and export the fifth lane in Beats.
 
-**[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP)**
+**[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/MML3AUTH.ZIP)**
  · [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
 
 For the other instruments and DOS sound test, use [current sound downloads](docs/DOWNLOADS.MD).
@@ -84,7 +66,7 @@ Windows MIDI services, prepared-frame/ordered-burst playback backend and USER
 UI helpers. Its VGM, gzip and MOD readers and foreground integration are
 available as source with working examples.
 
-Start with **[FORMATS30](https://github.com/astrobleem/libwintandy/tree/24ff4f932c0d4d4e2a18a3c49b0ea0a8ff90e71f/examples/FORMATS30)**,
+Start with **[FORMATS30](https://github.com/astrobleem/libwintandy/tree/main/examples/FORMATS30)**,
 then follow the [build guide](experimental/WINAMP30/BUILDING-UI.MD) and
 [API/format boundaries](docs/FORMATS.MD#reuse-and-evidence). The playlist and
 Browse/Add/Remove UI belong to Winamp; `TPLAY` is its guarded DOS launcher.
@@ -105,7 +87,7 @@ apps here remain separate projects.
   of the Tandy PSG and PC-speaker arrangement.
 
 See [validation](experimental/WINAMP30/VALIDATION-UI.MD),
-[checksums](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/SHA256SUMS)
+[checksums](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/SHA256SUMS)
 and component notices for exact versions and scope. Winamp and the
 [Windows XT display project](https://github.com/astrobleem/oemdisplay-tandy)
 have separate release gates.
@@ -113,7 +95,7 @@ have separate release gates.
 ## Licensing
 
 Keep the [root license](LICENSE) and component-specific notices. Winamp/shared
-source and the first-party browser retain their MIT notices; TSOUND has its own
+source and the first-party browser retain their MIT notices; the sound driver has its own
 license. The Winamp package includes no private/commercial music, sample media,
 Windows, ROMs or proprietary tools. BUDCAP's existing media has separate rights
 and is not included in the Winamp download.

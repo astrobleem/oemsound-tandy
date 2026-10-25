@@ -1,2 +1,14 @@
 experimental/WINAMP30/LAUNCH/** -text
 artifacts/win30/TWXT1.ZIP -text
+
+# Current native sound and installer inputs retain their qualified bytes.
+src/win30/DRIVER/** -text
+src/win30/LAUNCH/** -text
+src/win30/SETUP/** -text
+src/win30/SHARED/** -text
+src/win30/CHIME/** -text
+src/win30/XPCHIME/** -text
+src/win30/TEXIT/** -text
+experimental/WINLIB30/SOURCE/** -text
+tools/WINAMP/** -text
+artifacts/win30/TWXT2.ZIP -text
