@@ -219,6 +219,44 @@ def build(kit, archive, archive_sha, package, package_sha, installer, tests, out
     return pin
 
 
+def refresh(kit, archive, archive_sha, package, package_sha, installer, tests, out):
+    """Replace only the common payload in an exact current consumer packet.
+
+    Never rebuild application members from a historical original snapshot.
+    The caller pins the current packet; its existing manifest/receipts remain
+    authoritative for application bytes. Shared acceptance is checked anew.
+    """
+    require(kit in KITS, 'Unknown PIT kit')
+    require(not out.exists(), 'Output directory must be new')
+    raw, wrapped = read_zip(archive, archive_sha)
+    verify(archive, kit)
+    prefix = kit+'/'
+    require(all(name.startswith(prefix) for name in wrapped), 'Wrong current kit root')
+    before = {name[len(prefix):]: data for name,data in wrapped.items()}
+    record = json.loads(before['BUILD.JSN'])
+    require(record['kit'] == kit, 'Current kit receipt differs')
+    package_raw, exe, shared_record = shared(package, package_sha, installer, tests)
+    record.update(operation='current application members plus refreshed shared native Setup',
+                  shared=shared_record,
+                  common_refresh={'previous_packet':identity(raw),
+                      'preserved_application_members':True})
+    files = dict(before)
+    files.update({'TWSETUP.EXE':exe, 'TWXT2.ZIP':package_raw,
+                  'BUILD.JSN':(json.dumps(record, indent=2, sort_keys=True)+'\n').encode()})
+    files['MANIFEST.JSN'] = (json.dumps({name:identity(data) for name,data in
+        sorted(files.items()) if name != 'MANIFEST.JSN'}, indent=2, sort_keys=True)+'\n').encode()
+    changed = {'TWSETUP.EXE','TWXT2.ZIP','BUILD.JSN','MANIFEST.JSN'}
+    require(set(files) == set(before) and
+            all(files[name] == data for name,data in before.items() if name not in changed),
+            'Shared refresh changed an application, song, source or guide')
+    out.mkdir(parents=True)
+    target = out/(kit+'.ZIP')
+    write_zip(target, kit, files)
+    pin = verify(target, kit)
+    (out/'PACKET.JSN').write_text(json.dumps(pin, indent=2)+'\n')
+    return pin
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--kit', choices=KITS, required=True)
@@ -226,6 +264,9 @@ if __name__ == '__main__':
         parser.add_argument('--'+name, type=Path, required=True)
     parser.add_argument('--input-sha256', required=True)
     parser.add_argument('--shared-sha256', required=True)
+    parser.add_argument('--refresh-current', action='store_true',
+                        help='Preserve all members of the pinned current app packet')
     args = parser.parse_args()
-    print(json.dumps(build(args.kit, args.input, args.input_sha256,
+    compose = refresh if args.refresh_current else build
+    print(json.dumps(compose(args.kit, args.input, args.input_sha256,
         args.shared, args.shared_sha256, args.installer, args.tests, args.out)))

@@ -20,6 +20,9 @@ Add opens the file browser. The playlist holds 32 songs; Remove changes
 the list without deleting a song. The filename edit also accepts a path.
 Stop and close the player, then exit Windows normally to return to DOS.
 
+The MIDI bank button selects Default or Chamber and remembers the choice
+for later playback. Held live voices retain the bank they started with.
+
 Large VGM reads directly from disk. VGZ expands automatically, with
 foreground progress and Cancel, then uses the same playback path. Temporary
 files need no user configuration. MIDI retains sustain, volume, expression,
