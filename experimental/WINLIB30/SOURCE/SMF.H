@@ -41,6 +41,16 @@ typedef struct SMF_EVENT {
 typedef unsigned (*SMF_READ)(SMF_ULONG offset, unsigned char *dst,
                              unsigned n);
 int smf_open_stream(SMF_READ read, SMF_ULONG size);
+/* Optional foreground admission during the complete validation/duration pass.
+ * event points to parser-owned static storage (DS in the Win16 DLL), valid
+ * only for the call. Return nonzero to admit or zero to reject. A rejection
+ * still validates the rest of the file, so syntax/read errors take precedence.
+ * Returns 1 on success, 0 for a parser error, SMF_OPEN_REJECTED for admission;
+ * either failure leaves playback disabled. No callback runs during playback.
+ */
+typedef int (*SMF_ADMIT)(const SMF_EVENT *event);
+#define SMF_OPEN_REJECTED (-1)
+int smf_open_stream_checked(SMF_READ read, SMF_ULONG size, SMF_ADMIT admit);
 
 /* The buffer is BORROWED and must remain immutable and alive. On Win16 it
  * must fit in one far segment (<= 65535 bytes). MCITNDY streams instead.

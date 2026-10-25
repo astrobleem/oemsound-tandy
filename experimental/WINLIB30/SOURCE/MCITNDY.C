@@ -20,25 +20,32 @@ static void freeFile(void){smf_close();if(hfile>=0)_lclose(hfile);hfile=-1;count
 static unsigned readAt(DWORD off,unsigned char *dst,unsigned n){
     if(hfile<0||_llseek(hfile,(LONG)off,0)<0)return 0;
     return _lread(hfile,dst,n)==n?n:0;}
+static WORD admissionGroup;
+static DWORD admissionAt,admissionResult;
+/* Foreground only; SMF supplies its static DS event, never a caller stack. */
+static int admitEvent(const SMF_EVENT *e)
+{
+    DWORD msg;
+    if(e->ms!=admissionAt){admissionAt=e->ms;admissionGroup=0;}
+    msg=(DWORD)e->status|((DWORD)e->data1<<8)|((DWORD)e->data2<<16);
+    if(MSSkipMessage(msg))return 1;
+    if(++admissionGroup>1024){admissionResult=MC_BADFILE;return 0;}
+    if(!MSValidMessage(msg,1)){admissionResult=MC_UNSUPPORTED;return 0;}
+    return 1;
+}
 static DWORD readFile(LPCSTR name)
 {
-    LONG size;int r;static SMF_EVENT e;WORD group=0;DWORD msg;DWORD groupAt=0xffffffffUL;
+    LONG size;int r;
     hfile=_lopen(name,OF_READ|OF_SHARE_DENY_WRITE);if(hfile<0)return MC_BADFILE;
     size=_llseek(hfile,0L,2);
     if(size<=0L)return MC_BADFILE;
-    if(!smf_open_stream(readAt,(DWORD)size))return MC_BADFILE;
+    admissionGroup=0;admissionAt=0xffffffffUL;admissionResult=0;
+    r=smf_open_stream_checked(readAt,(DWORD)size,admitEvent);
+    if(r!=1)return r==SMF_OPEN_REJECTED?admissionResult:MC_BADFILE;
     length=smf_duration_ms();
     if(!smf_event_count())return MC_BADFILE;
     count=smf_event_count();fileBytes=size>65535L?65535U:(WORD)size;
-    while((r=smf_next(&e))==1){
-        if(e.ms!=groupAt){groupAt=e.ms;group=0;}
-        msg=(DWORD)e.status|((DWORD)e.data1<<8)|((DWORD)e.data2<<16);
-        if(MSSkipMessage(msg))continue;
-        if(++group>1024)return MC_BADFILE;
-        if(!MSValidMessage(msg,1))
-            return MC_UNSUPPORTED;
-    }
-    return r<0?MC_BADFILE:0L;
+    return 0L;
 }
 
 DWORD MCEXPORT MciCommand(WORD id,WORD message,DWORD flags,DWORD params){MCOPEN FAR *op;MCSTATUS FAR *st;MCSET FAR *set;MCGEN FAR *gp;DWORD result;WORD r;HMODULE h;static WNDCLASS cls;static char name[144];

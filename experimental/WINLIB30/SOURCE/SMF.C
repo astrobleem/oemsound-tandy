@@ -381,7 +381,7 @@ void smf_close(void)
     g_error = "No file open";
 }
 
-static int open_inner(SMF_READ read, SMF_ULONG size)
+static int open_inner(SMF_READ read, SMF_ULONG size, SMF_ADMIT admit)
 {
     unsigned format;
     unsigned declared;
@@ -389,6 +389,7 @@ static int open_inner(SMF_READ read, SMF_ULONG size)
     SMF_ULONG length;
     static SMF_EVENT event; /* Address passed through a near pointer. */
     int status;
+    int admitted = 1;
 
     if (read == 0)
         return fail("Null MIDI read callback");
@@ -443,10 +444,17 @@ static int open_inner(SMF_READ read, SMF_ULONG size)
     }
     do {
         status = smf_next(&event);
+        if (status > 0 && admit != 0 && admitted && !admit(&event))
+            admitted = 0;
     } while (status > 0);
     if (status < 0) {
         g_open = 0;
         return 0;
+    }
+    if (!admitted) {
+        g_open = 0;
+        fail("Channel event rejected by admission callback");
+        return SMF_OPEN_REJECTED;
     }
     g_duration = g_us / (SMF_ULONG)1000U;
     g_file_channels = g_channels;
@@ -466,7 +474,13 @@ unsigned smf_division(void) { return g_division; }
 int smf_open_stream(SMF_READ read, SMF_ULONG size)
 {
     smf_close();
-    return open_inner(read, size);
+    return open_inner(read, size, 0);
+}
+
+int smf_open_stream_checked(SMF_READ read, SMF_ULONG size, SMF_ADMIT admit)
+{
+    smf_close();
+    return open_inner(read, size, admit);
 }
 
 int smf_open(const unsigned char SMF_FAR *file, unsigned size)
@@ -475,5 +489,5 @@ int smf_open(const unsigned char SMF_FAR *file, unsigned size)
     if (file == 0)
         return fail("Null MIDI file pointer");
     g_mem = file;
-    return open_inner(mem_read, size);
+    return open_inner(mem_read, size, 0);
 }
