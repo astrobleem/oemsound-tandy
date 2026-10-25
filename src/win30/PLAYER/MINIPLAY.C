@@ -223,7 +223,7 @@ static WORD openBrowser(void)
  if(!browseOpen||!browseError){uiBrowseError=0xffffUL;FreeLibrary(browseModule);browseModule=0;playlistFeedback("Browser unavailable");return 0;}
  uiBrowseStep=3;
  browsePath[0]=0;browseFileTitle[0]=0;browseDirectory[0]=0;
- GetWindowText(fileBox,browseFileTitle,sizeof(browseFileTitle));n=lstrlen(browseFileTitle);last=0;
+ n=GetDlgItemText(mainWindow,FILEBOX,browseFileTitle,sizeof(browseFileTitle));last=0;
  for(i=0;i<n;++i)if(browseFileTitle[i]=='\\'||browseFileTitle[i]=='/')last=(WORD)(i+1);
  if(last){for(i=0;i<last;++i)browseDirectory[i]=browseFileTitle[i];browseDirectory[last]=0;}
  else lstrcpy(browseDirectory,directory);
@@ -272,7 +272,11 @@ static WORD closeFile(void)
 }
 static void play(void)
 {
- DWORD r;WORD i,found;if(closeFile())return;GetWindowText(fileBox,filename,sizeof(filename));
+ DWORD r;WORD i,found;if(closeFile())return;
+ /* Read the edit value rather than its cached window caption on Windows3.0. */
+ filename[0]=0;i=GetDlgItemText(mainWindow,FILEBOX,filename,sizeof(filename));
+ if(!i){caption("Enter a file name");return;}
+ if(i>=sizeof(filename)-1){caption("File name is too long");return;}
  found=findPath(filename);
  if(found<playlist.count){PLLSelect(&playlist,found,listRows());SendMessage(listBox,LB_SETCURSEL,found,0L);}
  else {playlist.selected=PLL_NONE;SendMessage(listBox,LB_SETCURSEL,0xffff,0L);}
