@@ -25,6 +25,9 @@
 #define BEEP_PERIOD1 125
 #define BEEP_PERIOD2 149
 #define BEEP_VOLUME 4
+#define BEEP_WAIT_TICKS 20UL
+#define BEEP_BIOS_DAY 0x001800b0UL
+#define BEEP_STALL_POLLS 65535U
 extern unsigned FAR PASCAL CreateSystemTimer(unsigned, FARPROC);
 extern void FAR PASCAL KillSystemTimer(unsigned);
 extern void FAR PASCAL TimerEntry(void);
@@ -41,12 +44,15 @@ typedef struct {
 } VOICE;
 static VOICE voices[3];
 static HTASK owner;
+static unsigned rawPsg, queueManaged;
+#include "PITCORE.H"
 static unsigned timer;
 static volatile unsigned running;
 static unsigned timerEpoch;
 static unsigned timerStarting, timerStopping;
 static unsigned present;
 static unsigned events;
+
 static volatile unsigned beepActive, beepArmed, beepPhase;
 static volatile unsigned beepDone, beepResult, beepVoice;
 static volatile unsigned beepCallActive;
@@ -115,8 +121,25 @@ static void musictoneout(unsigned v,unsigned tone) {
 static int owns(void) { return owner && owner==GetCurrentTask(); }
 static int validvoice(int v) { return v>=1 && v<=3; }
 static int psgready(void) {
+#ifdef SOUND_HOST
+    return !(GetWinFlags() & WF_PMODE);
+#else
     if (GetWinFlags() & WF_PMODE) return 0;
     return *(unsigned char FAR *)0xfc000000UL == 0x21;
+#endif
+}
+/* Independent BIOS clock, including early USER initialization. No USER
+   entry point is called by the alert path. Save flags around the two words. */
+static DWORD beepclock(void) {
+#ifdef SOUND_HOST
+    extern DWORD _cdecl ReadBeepClock(void);
+    return ReadBeepClock();
+#else
+    unsigned flags;
+    DWORD value;
+    flags=SaveIRQ(); value=*(DWORD FAR *)0x0040006cUL;
+    RestoreIRQ(flags); return value;
+#endif
 }
 static unsigned choosebeepvoice(void) {
     unsigned i; VOICE *v;
@@ -153,6 +176,7 @@ static int enqueue(int voice,unsigned p,unsigned total,unsigned sounded) {
     VOICE *v; unsigned flags;
     if (!owns() || !validvoice(voice)) return DVNA;
     if (!total) return BADDUR;
+    if (rawPsg) return ACTIVE;
     v=&voices[voice-1];
     flags=SaveIRQ();
     if (v->count>=v->capacity) { RestoreIRQ(flags); return QFULL; }
@@ -160,7 +184,7 @@ static int enqueue(int voice,unsigned p,unsigned total,unsigned sounded) {
     v->notes[v->tail].total=total;
     v->notes[v->tail].sounded=sounded;
     v->tail=(v->tail+1)%MAXQ;
-    ++v->count;
+    ++v->count; queueManaged=1;
     RestoreIRQ(flags);
     return 0;
 }
@@ -224,6 +248,7 @@ void _cdecl Tick(void) {
     }
     if (!any) { running=0; muteall(); }
 }
+#include "PITLEASE.H"
 static void stopinternal(void) {
     unsigned i,flags,t,release;
     flags=SaveIRQ(); running=0; t=timer; timer=0;
@@ -235,7 +260,8 @@ static void stopinternal(void) {
         voices[i].active=voices[i].silenced=voices[i].clocked=0;
         voices[i].elapsed=0;
     }
-    events=0; muteall(); RestoreIRQ(flags);
+    events=0; rawPsg=queueManaged=0;
+    leaseRevoke(); pitStop(); muteall(); RestoreIRQ(flags);
     if (t && release) {
         KillSystemTimer(t);
         flags=SaveIRQ(); timerStopping=0; RestoreIRQ(flags);
@@ -353,6 +379,7 @@ int SAPI StartSound(void) {
     unsigned flags,i,any=0,t;
     if (!owns()) return DVNA;
     flags=SaveIRQ();
+    if (rawPsg) { RestoreIRQ(flags); return ACTIVE; }
     if (running) { RestoreIRQ(flags); return 0; }
     for (i=0;i<3;++i) if (voices[i].count) any=1;
     RestoreIRQ(flags);
@@ -411,20 +438,29 @@ int SAPI SetVoiceEnvelope(int v,int shape,int repeat) { return BADSHAPE; }
 int SAPI SetSoundNoise(int source,int duration) { return BADSOURCE; }
 /* DDK ordinal 17 has one cleanup word, ignores it, and returns AX 0/1. */
 int SAPI DoBeep(unsigned ignored) {
-    unsigned flags,voice,t,done,result;
+    unsigned flags,voice,t,done,result,armed,stalled=0,timedout;
+    DWORD started,now,last,elapsed;
     (void)ignored;
+    /* Yield needs a real task; early taskless initialization has none. */
+    if (!GetCurrentTask()) return 0;
     if (!present) {
         if (!psgready()) return 0;
         present=1;
     }
     flags=SaveIRQ();
+    /* A SYSTEM callback cannot run while the caller masks interrupts.
+       Never enable them on the caller's behalf or wait for that callback. */
+    if (!(flags & 0x0200U)) { RestoreIRQ(flags); return 0; }
     if (beepCallActive) {
 #ifdef SOUND_TEST
         ++beepRejects;
 #endif
         RestoreIRQ(flags); return 0;
     }
-    if (timerStarting || timerStopping) {
+    /* OpenSound also protects clients writing the PSG directly. Only
+       explicitly published legacy queues permit voice borrowing. */
+    if (rawPsg || (owner && !queueManaged) ||
+        timerStarting || timerStopping) {
         RestoreIRQ(flags); return 0;
     }
     voice=choosebeepvoice();
@@ -434,6 +470,7 @@ int SAPI DoBeep(unsigned ignored) {
     testBeepReturnWaiting=0;
 #endif
     RestoreIRQ(flags);
+    started=last=beepclock();
     t=ensuretimer();
     if (!t) {
         flags=SaveIRQ();
@@ -449,12 +486,27 @@ int SAPI DoBeep(unsigned ignored) {
     }
     RestoreIRQ(flags);
     for (;;) {
+        now=beepclock();
+        if (now!=last) { last=now; stalled=0; }
+        else if (stalled<BEEP_STALL_POLLS) ++stalled;
+        elapsed=now>=started ? now-started : BEEP_BIOS_DAY-started+now;
+        timedout=elapsed>=BEEP_WAIT_TICKS ||
+                 stalled==BEEP_STALL_POLLS;
         flags=SaveIRQ(); done=beepDone; result=beepResult;
+        if (!done && timedout) {
+            /* Only this alert is cancelled. Queued music, the task owner,
+               and separate PIT leases keep their existing state. */
+            voice=beepVoice; armed=beepActive && beepArmed;
+            cancelbeep();
+            if (armed && queueManaged) restorebeepvoice(voice);
+            done=beepDone; result=beepResult;
+        }
 #ifdef SOUND_TEST
-        if (done && testHoldBeepReturn) {
+        if (done && testHoldBeepReturn && !timedout) {
             testBeepReturnWaiting=1;
             RestoreIRQ(flags); Yield(); continue;
         }
+        if (timedout) testHoldBeepReturn=0;
         testBeepReturnWaiting=0;
 #endif
         if (done) {
@@ -464,8 +516,40 @@ int SAPI DoBeep(unsigned ignored) {
         if (done) break;
         Yield();
     }
-    if (result) retiretimer(t);
+    retiretimer(t);
     return (int)result;
+}
+/* Private raw PSG lease. OpenSound is still the cross-task authority.
+   Repeated CLAIM is a side-effect-free ownership check for timed clients. */
+int SAPI TandyPsgLease(unsigned version,unsigned operation) {
+    unsigned flags,i;
+    int result=0;
+    if (version!=1 || operation>2) return BADSTATE;
+    if (operation && !owns()) return DVNA;
+    flags=SaveIRQ();
+    if (!operation) result=(owner || beepCallActive) ? ACTIVE : 0;
+    else if (operation==1) {
+        if (!rawPsg) {
+            if (running || beepCallActive || timerStarting || timerStopping)
+                result=ACTIVE;
+            for (i=0;i<3;++i) if (voices[i].count) result=ACTIVE;
+            if (!result) { rawPsg=1; queueManaged=0; }
+        }
+    } else if (!rawPsg) result=DVNA;
+    else { rawPsg=0; queueManaged=0; muteall(); }
+    RestoreIRQ(flags);
+    return result;
+}
+/* Optional PIT2 voice shares the same task owner; it never steals a fast
+   prepared lease. PSG legacy queues and this separate voice may coexist. */
+int SAPI TandyPitVoice(unsigned version,unsigned hz,unsigned level) {
+    unsigned flags;
+    int result;
+    if (!owns()) return DVNA;
+    flags=SaveIRQ();
+    result=leaseToken ? ACTIVE : pitSet(version,hz,level);
+    RestoreIRQ(flags);
+    return result;
 }
 int SAPI MyOpenSound(void) { return OpenSound(); }
 int SAPI WEP(int reason) { stopinternal(); owner=0; return 1; }

@@ -2,6 +2,8 @@
    Windows 3.0 real mode / 8086. No IRQ/PIT changes or resident helper. */
 #define WINVER 0x0300
 #include <windows.h>
+#include "PSGOWN.H"
+static PSG_OWNER soundOwner;
 #define TIMER 1
 static DWORD began;
 static unsigned phase;
@@ -13,6 +15,7 @@ static unsigned notes[6] = { 90, 180, 120, 135, 90, 60 };
 static unsigned onsets[6] = { 0, 300, 450, 900, 1500, 1800 };
 static void psgByte(unsigned char value)
 {
+    if (!PsgOwnerHeld(&soundOwner)) return;
     _asm { mov dx, 0c0h
            mov al, value
            out dx, al
@@ -45,7 +48,8 @@ static void tone(unsigned voice, unsigned period, unsigned attenuation)
 }
 static void cleanup(HWND w)
 {
-    KillTimer(w, TIMER); active = 0; muteAll();
+    KillTimer(w, TIMER); active = 0;
+    PsgOwnerRelease(&soundOwner);
 }
 static void finish(HWND w)
 {
@@ -64,6 +68,7 @@ LONG FAR PASCAL ChimeProc(HWND w, UINT m, WPARAM wp, LPARAM lp)
         return 0;
     case WM_TIMER:
         if (wp != TIMER || !active) return 0;
+        if (!PsgOwnerHeld(&soundOwner)) { finish(w); return 0; }
         if (phase == 7) {
             began = GetTickCount(); phase = 0;
             tone(0, notes[0], 6); /* Melody, quieter than the tone demo. */
@@ -109,18 +114,21 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE previous, LPSTR cmd, int show)
        compatibility guard; it does not identify an exact EX/HX model. */
     if (previous || (GetWinFlags() & WF_PMODE)) return 1;
     if (*(unsigned char FAR *)0xfc000000UL != 0x21) return 2;
+    if (!PsgOwnerAcquire(&soundOwner)) return 7;
     c.style = 0; c.lpfnWndProc = ChimeProc;
     c.cbClsExtra = 0; c.cbWndExtra = 0; c.hInstance = inst;
     c.hIcon = NULL; c.hCursor = NULL; c.hbrBackground = NULL;
     c.lpszMenuName = NULL; c.lpszClassName = "TandyXPStartupChime";
-    if (!RegisterClass(&c)) return 3;
+    if (!RegisterClass(&c)) {
+        PsgOwnerRelease(&soundOwner); return 3;
+    }
     w = CreateWindow("TandyXPStartupChime", "Tandy XP-note startup chime", WS_POPUP,
         0, 0, 0, 0, NULL, NULL, inst, NULL);
-    if (!w) { muteAll(); return 4; }
+    if (!w) { PsgOwnerRelease(&soundOwner); return 4; }
     /* Deliberately no ShowWindow: the hidden owner only receives messages.
        GetMessage yields while Program Manager and other startup apps run. */
     while (GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg); DispatchMessage(&msg);
     }
-    muteAll(); return msg.wParam;
+    PsgOwnerRelease(&soundOwner); return msg.wParam;
 }

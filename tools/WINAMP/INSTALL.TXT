@@ -1,0 +1,46 @@
+TANDY WINAMP - INSTALL AND PLAY
+
+For Tandy 1000 EX/HX, DOS 3.0+, normal 640 KB and Windows 3.0 real mode.
+
+INSTALL
+Exit Windows to plain DOS and run TWSETUP. Setup finds Windows, offers a
+choice if several installations exist, and installs the player in C:\WINAMP.
+It installs the shared SOUND.DRV, selects it in Windows, and supplies the
+player DLLs, timer bridge and video-memory helper automatically. Existing
+Windows XT sound clients use the same driver.
+
+After Setup completes, start from plain DOS:
+  C:\WINAMP\GO
+
+No Windows driver copying, INI editing or separate helper download is needed.
+TWSETUP.EXE is self-contained. TWXT2.ZIP contains the same runtime and source;
+if using the ZIP, extract its TWXT2 directory and run its SETUP.EXE in DOS.
+
+PLAY
+Choose Add... to select MID, VGM, VGZ, MOD, TND or SND files. The playlist holds
+32 songs; scroll or use Home/End/Page Up/Page Down. Remove changes the list,
+not the song file. Stop and close the player, then exit Windows normally.
+
+GO starts the guarded real-mode launcher. For HPXY and XRSYNC it reserves or
+reuses the required video memory, loads the owned timer bridge, starts
+Windows and the player, and removes that bridge after normal Windows exit.
+Stock CGA uses the same command. The video reservation is reused until reboot.
+Sound ownership prevents competing apps from changing one another's output;
+stop the current producer before starting another.
+
+REPAIR OR REMOVE
+Run C:\WINAMP\SETUP in plain DOS for Launch, Repair or Uninstall Winamp.
+Repair checks the current installation and restores its owned files. For a
+missing or damaged cached file, run the self-contained TWSETUP again and
+choose Repair. Uninstall removes Winamp while keeping shared Windows sound
+and Windows XT clients. Unrelated files and settings are preserved.
+
+Setup and GO report a specific error when hardware, Windows, files or timer
+ownership cannot safely support the launch. Resolve that reported condition
+before trying again. Setup cleans up failed writes internally.
+
+FORMATS
+MIDI uses Tandy voices and basic percussion. Supported VGM/VGZ data preserves
+the PSG register stream. MOD is arranged for PSG square waves and does not
+reproduce sample timbres. Original synthetic examples and corresponding
+source are included. Development test records are in TESTS.JSN.

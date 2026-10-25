@@ -1,15 +1,15 @@
-name: TPLAY exact-head package and policy
+name: Unified Windows sound and native Setup
 on:
   pull_request:
   push:
-    branches: [main, fix/tplay-current-display]
+    branches: [main, feature/unified-sound-setup]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  tplay:
+  current:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 8
     env:
       SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
@@ -17,17 +17,17 @@ jobs:
         with:
           ref: ${{ env.SOURCE_SHA }}
           persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /.gitattributes
-            /experimental/WINAMP30/LAUNCH/
-            /experimental/PITPUBLIC/PITWIN/SOURCE/
-            /artifacts/win30/TWXT1.ZIP
       - name: Confirm exact reviewed head
         run: test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
-      - name: Compile and run C89 policy checks
+      - name: Exercise production driver state and ownership
+        run: python3 src/win30/DRIVER/HOSTTEST.PY --out /tmp/sound-driver
+      - name: Exercise native installer parser and launcher policy
         run: |
-          gcc -x c -std=c89 -Wall -Wextra -Werror -I experimental/WINAMP30/LAUNCH experimental/WINAMP30/LAUNCH/TESTPOL.C -o /tmp/tplay-policy
+          cc -x c -std=c89 -Wall -Wextra -Werror src/win30/SETUP/TESTSFX.C -o /tmp/setup-parser
+          /tmp/setup-parser
+          cc -x c -std=c89 -Wall -Wextra -Werror -I src/win30/LAUNCH src/win30/LAUNCH/TESTPOL.C -o /tmp/tplay-policy
           /tmp/tplay-policy
-      - name: Verify download and reject corrupted packages
-        run: python3 experimental/WINAMP30/LAUNCH/VERIFY.PY --self-test
+      - name: Verify complete native deliverables and reject corruption
+        run: python3 tools/WINAMP/VERIFY.PY --self-test
+      - name: Check the emulator status-bit regression
+        run: python3 tools/WINAMP/QA/TESTP61.PY

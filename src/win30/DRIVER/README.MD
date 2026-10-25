@@ -1,147 +1,84 @@
-# Experimental bounded Win3.0 PSG driver
+# Canonical Windows 3.0 Tandy sound driver
 
-This is a restricted three-voice SOUND ABI implementation for known Tandy
-hardware in Windows 3.0 real mode. It is not a MIDI/wave driver and is not
-ready to install over a working system without the isolated acceptance tests.
+This source builds SOUND.DRV, whose internal Win16 module name is SOUND.
+The same driver provides the legacy three PSG queues, Windows alerts, the
+optional PIT2 voice and the prepared PIT2 lease. Consumers resolve private
+extensions from the already installed SOUND module; they do not load a second
+driver or swap it for an application. TSOUND.C is the retained source filename.
 
-## Supported contract
+## Ownership and PSG arbitration
 
-- Exclusive task ownership; OpenSound returns three voices.
-- Three fixed ring queues, 32 records by default and 64 maximum each.
-- Six-byte records; QueueSize accepts 0..384 bytes per empty voice queue,
-  rounded down to a record. Zero disables enqueueing. Queue-full failure
-  does not overwrite or partially append a note.
-- SetVoiceNote: 0 rest, 1..84 notes; length divisor 1..64, dots 0..15.
-- SetVoiceSound: integer-Hz subset of the 16.16 API; nonzero fractional
-  words explicitly return -13. Duration 1..32767 in 2.5-ms units.
-- PSG-unrepresentable low pitches return -13, rather than silently clamp.
-- Accent: tempo 32..255, articulation 0 normal / 1 legato / 2 staccato, pitch 0..83.
-  Volume unsigned 0..65534 maps monotonically to 16 attenuation steps;
-  65535 selects the default attenuation 4. Parameters apply to subsequently
-  enqueued notes; queued records retain their volume and timing.
-- Start is idempotent; Stop flushes and silences; Close releases ownership.
-- Count includes the active record through its final note-off.
-- Threshold event bits latch crossings from count N to N-1. GetStatus
-  atomically reads and clears; event-pointer storage remains fixed.
-- WaitSoundState yields; waits for current below-threshold conditions.
-  State 1 returns a qualifying one-based voice; state 2 waits for all three.
-  An impossible wait while not running returns -16 instead of hanging.
-- DoBeep and Windows MessageBeep play a short PSG alert without an OpenSound
-  owner. The DDK's one-word input is ignored, so every MessageBeep type uses
-  the same two-tone pattern. DoBeep returns 1 after completion and 0 on timer
-  failure, cancellation, or reentry. A call owns its completion until its
-  original waiter consumes it; a second request during that interval is
-  rejected.
+OpenSound returns three voices and grants one task exclusive ownership. A
+second open, including a repeated open by that task, returns -1. CloseSound
+from another task has no effect. StopSound flushes notes, cancels alerts,
+revokes raw/PIT leases, mutes owned output and removes the exact SYSTEM timer.
+CloseSound additionally relinquishes the task owner. WEP performs teardown.
 
-## Explicitly unsupported
+OpenSound initially protects direct PSG clients as well as legacy callers:
+a Windows alert cannot assume that empty legacy queues mean idle hardware.
+Publishing a legacy queue establishes managed playback. Alerts may then borrow
+an idle/resting voice or overlay voice 1 while all queues continue advancing
+at the original elapsed time. Each alert phase occupies a full callback
+interval. Cancelled, reentrant or busy alerts return 0 without stealing raw
+playback. A completed alert returns 1. Calls without a current task or with interrupts masked return 0 before
+creating a timer. A missing callback cancels only the alert after 20 independent
+BIOS ticks (about 1.1 seconds), or a finite poll budget if that clock is frozen.
+The borrowed managed note is restored; the task and PIT ownership remain held.
+Only an unchanged idle alert timer is retired. No USER API is needed by this
+alert deadline, including during early desktop initialization.
 
-Envelope returns -11; noise returns -15; SyncAllVoices returns -16.
-These are deliberate restrictions, not placeholder successful stubs.
-Nonowner/invalid-voice mutating operations return -1; query counts return0.
-Invalid or failed calls do not grant another task ownership.
-Abrupt owner termination without CloseSound has not been qualified. Applications
-must pair OpenSound/CloseSound; normal library teardown mutes in WEP.
+Direct writers explicitly acquire TANDYPSGLEASE(version=1, operation=1) after
+OpenSound and their final StopSound. CLAIM is idempotent for that task and
+performs no I/O when already held, so it also validates continued ownership.
+QUERY=0 returns 0 only while unowned; RELEASE=2 mutes raw PSG and relinquishes
+only the raw claim. Invalid version/operation returns -16, wrong task -1,
+and busy queues/alerts -3. Legacy enqueue and StartSound return -3 during a
+raw claim. StopSound revokes it. PSGLINK.H defines the callable contract.
 
-## Scheduling and safety
+## PIT2 extensions
 
-SYSTEM.2 and SYSTEM.3 are the stock CreateSystemTimer/KillSystemTimer entry
-points verified in the target Win3.0 binary. A 55-ms request runs at the stock
-~54.925-ms callback cadence. This is separate from application USER timers and
-producer/refill loops; it is not a per-note spacing or latency promise. For
-example, legacy Mini MIDI sets its own 55-ms USER timer and calls the paired
-mapper directly. Neither cadence is the newer R4 prepared-state interface.
-Our callback preserves all registers, segment registers and flags, uses fixed
-code/data, and never calls DOS, USER, GDI or allocation.
-There are no driver-owned interrupt-vector, PIT or PIC writes. PSG writes
-use only port C0h after real-mode and ROM-signature checks.
+TANDYPITVOICE uses the published version-1 (version,hz,level) signature in
+PITAPI.H. It requires the OpenSound task, supports 37..7902 whole Hz at level 1,
+and accepts hz=0 or level=0 to stop. It preserves EX routing bits and refuses
+an already active speaker. Legacy PSG queues may run alongside this voice.
 
-Note timing is intentionally coarse. Fractional tick remainder carries
-between notes; catch-up is limited to four transitions per voice per callback
-so very short dense sequences may lag. This is not a precise MIDI clock.
-The allocated SYSTEM timer is retained after a queue naturally finishes and
-removed by Stop/Close/WEP, before any callback code could be unloaded.
+TANDYPITLEASE preserves the prepared API in PITLINK.H: version 0x0100,
+QUERY/CLAIM/RELEASE and TPINFO's fixed resident fast entry point. CLAIM and
+RELEASE require the actual OpenSound task. QUERY grants no token. The fast
+capability checks its nonzero generation token before I/O; it never calls
+Windows or DOS. SUSPEND stops owned PIT2 output; REENTER refuses another
+speaker owner. Release, StopSound and CloseSound invalidate old tokens.
+A raw PSG claim and PIT lease coexist. Neither PIT release nor suspension
+releases PSG ownership. The simple PIT voice refuses a prepared PIT lease.
 
-An alert creates and retires its own SYSTEM timer when music is idle, or shares
-the music timer while playback runs. It emits PSG periods 125 and 149 at
-attenuation 4. The callback begins each tone at a timer boundary and changes
-phase only on a later callback, giving each tone at least one full ~54.925-ms
-interval even when a request arrives just before a callback. Startup adds at
-most one callback interval. It borrows an idle, resting, or already-silent
-voice; when all three are audible it temporarily overlays voice 1. The music
-scheduler still advances every queue and envelope on every timer tick, but
-suppresses hardware writes for only the borrowed voice while the alert sounds.
-At the end, it restores the note currently due at that voice's musical elapsed
-time. Other voices continue normally, and repeated alerts do not accumulate
-queue or elapsed-time drift. Alerts remain serialized until their original
-waiter consumes completion, so reentry during the completion handoff is
-rejected. StopSound, CloseSound, and WEP cancel an active alert, mute the
-borrowed voice, and wake the waiting caller with 0. The callback does only
-bounded state updates and PSG writes.
+## Legacy sound contract
 
-## Build and validation
+Ordinals 1..18 and the FAR PASCAL signatures are unchanged. Three fixed queues
+hold 32 six-byte records by default, 64 maximum. SetVoiceNote supports rests,
+notes 1..84, divisors 1..64 and 0..15 dots. SetVoiceSound accepts whole-Hz 16.16
+frequencies and positive 2.5-ms duration units. Unrepresentable pitches return
+-13. Accent retains tempo, articulation, pitch and attenuation. Count includes
+the active note through note-off. Threshold bits latch crossings and clear
+atomically when read. WaitSoundState yields and rejects impossible waits.
+Envelope, legacy noise and SyncAllVoices retain their established negative
+results (-11, -15 and -16); the integration does not replace those calls with
+success stubs. ABI.MD records the underlying legacy calling conventions.
 
-Use BUILD.PY with --repo pointing at the existing licensed toolchain checkout,
---dosbox pointing at DOSBox-X, and a new --out directory. The runner first
-builds a normal production variant with the base TSOUND.DEF and no SOUND_TEST
-macro, then builds the instrumented test candidate with /DSOUND_TEST and
-SNDTEST.DEF. PSG trace logging, completion-race controls, and timer failure
-injection exist only in that explicitly guarded test build. The normal
-TSOUND.DEF does not export these test hooks. Both variants use /G0 /Gw /Gs /AS
-/W3 /Od; MASM is assembled in .8086 mode. BUILD also builds DRVTEST.EXE and
-INTRUD.EXE, then validates only the instrumented candidate in an isolated
-guest.
+## Build and tests
 
-For testing only, clone an existing guest and replace its stock SOUND.DRV
-with the candidate, retaining all original installations unchanged. Do not
-publish the cloned guest, Windows binaries or stock DDK/toolchain files.
-The code is not accepted merely because compilation passes: retain driver
-log and captured audio evidence for the exact binary tested.
+Run BUILD.PY with explicit --toolchain, --dosbox, --lease and new --out paths.
+It preflights the supplied MSC6/MASM/LINK4 files, acquires the shared emulator
+lease, checks the process inventory and runs only its own hidden bounded
+child. The build uses /G0 /Gw /Gs /AS /W3 /Od and .8086 assembly. Production
+SOUND.DRV omits SOUND_TEST hooks; the separate TSOUND.DRV test build contains
+PSG traces, deterministic callback stepping and failure/race injection.
+BUILD.JSON pins source, external tools and both artifacts. DRVTEST/INTRUD
+exercise alerts, callback timing, cross-task refusal and lifecycle behavior.
 
-See ABI.MD for source/binary findings and limitations of the bundled sample.
-
-## Current isolated result
-
-The prior candidate in TESTS.JSON passed 105 automatic native checks with
-640KB, disabled XMS/EMS/UMB and the emulator's 8086-prefetch CPU core. Captured
-PCM contains the three simultaneous tone fundamentals near 262/330/392 Hz,
-repeated 440 Hz test tones and a quiet final tail. This establishes the tested
-subset in that emulator, not physical-hardware or complete SOUND compliance.
-A separate task could not open, start, stop, resize, retune or close the
-owner's playback. Active Stop and Close removed their timer; callback counts
-stayed unchanged after Stop while Windows continued running. Abrupt owner
-exit and SYSTEM timer exhaustion remain explicitly unqualified. The test guest and stock binaries are excluded.
-The alert driver build produced separate production and SOUND_TEST variants;
-test-only trace/failure controls are absent from the production map. The latest
-Windows 3.0 guest run passed 223 alert and lifecycle checks with zero failures,
-including before/after-callback boundary tests that verify each frequency
-receives a full callback interval. See BEEP-TESTS.JSON for exact hashes, logs,
-corrected audio capture, race/drift regressions, and the current Open Watcom
-compile-only result.
-
-## Isolated install and rollback procedure
-
-1. Shut down the emulator. Copy a known-working Windows 3.0 guest directory
-   to a new test directory. Never run these steps on the only working guest
-   or a physical machine before separate hardware qualification.
-2. Keep the original guest untouched. In the clone, confirm SYSTEM.INI's
-   existing sound.drv entry resolves to WINDOWS\SYSTEM\SOUND.DRV. If its
-   layout differs, resolve the actual file rather than guessing a new path.
-3. Preserve a copy of that cloned stock driver outside the clone. Copy the
-   built TSOUND.DRV into the clone as WINDOWS\SYSTEM\SOUND.DRV. Internal
-   module identity must remain SOUND; merely loading a differently named
-   file alongside the stock module can select the wrong module.
-4. Copy the matching DRVTEST.EXE and INTRUD.EXE into the clone's C: root.
-   Retain the clone's accepted display configuration and RESERVE launcher.
-5. Use an absolute DOSBox-X config path (its wrapper changes directories).
-   Configure machine=tandy, 8086_prefetch, 640 KB, no XMS/EMS/UMB and a
-   separate capture directory. Run the native test through win /r.
-6. Check both DRVTEST.LOG and INTRUD.LOG for TOTAL_FAILURES=0, and inspect
-   the finalized PCM capture. A missing/partial log is not a passing run.
-7. For rollback, stop the emulator and restore the saved stock SOUND.DRV
-   to the clone, or abandon the clone and resume the untouched original.
-   No live file replacement or main installation changes are necessary.
-
-Do not install this candidate as a general-purpose replacement while its
-unsupported features matter: noise and envelopes are unavailable, and
-SyncAllVoices rejects the request.
-The native demo remains available independently of this experimental driver.
+HOSTTEST.PY compiles the real driver state machine with mocked Win16 and port
+calls and checks raw/queued/PIT arbitration, stale tokens, handoff and cleanup.
+On Windows it uses the required preflighted gcc-ucrt64.py launcher; missing
+toolchain dependencies refuse before compiler startup. Native acceptance is
+separate from these mocked checks. TESTS.JSON and BEEP-TESTS.JSON retain their
+historical binary scope; current native receipts identify the tested driver
+hash separately. Emulator results do not claim physical hardware validation.
