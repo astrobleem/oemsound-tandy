@@ -24,11 +24,19 @@ static WORD pinCode(void){WORD n;HMODULE h;if(timerPin)return 0;
  h=LoadLibrary(timerPath);if(h<32)return 1;timerPin=h;return 0;
 }
 static void unpinCode(void){HMODULE h=timerPin;timerPin=0;if(h)FreeLibrary(h);}
-static TCFRAME queue[TC_CAP],lastFrame,restoredFrame;static WORD lastValid,restorePending;
+/* A session selects frames or literal bursts before publishing any data.
+   Its mode is retained through flush/rearm and never changes while owned. */
+typedef union {
+ TCFRAME frames[TC_CAP];
+ TCBURST blocks[TCB_CAPACITY];
+} TCSTORAGE;
+static TCSTORAGE storage;
+#define queue storage.frames
+#define bursts storage.blocks
+static TCFRAME lastFrame,restoredFrame;static WORD lastValid,restorePending;
 HTASK owner=0;static HTASK probeOwner;
 WORD timer=0,probeTimer=0,head=0,tail=0,count=0,end=0,active=0,finished=0,error=0;
 static DWORD epoch,published,lastDue,lastStamp,clockCycles;
-static TCBURST bursts[TCB_CAPACITY];
 static WORD burstMode,burstLatch,burstRegs[8],burstPublished;
 static DWORD burstLastWrite;
 static WORD noiseWrites,burstHash,burstWriteCount;
