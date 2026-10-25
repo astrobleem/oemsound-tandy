@@ -48,13 +48,18 @@ New maintained application source is isolated under src/win30/BEATLAB.
 
 ## Native and publication gates still pending
 
-Automatic approval review denied the DOSBox-based BUILD.PY invocation
-before execution because the earlier explicit no-emulator instruction had
-not been lifted. No emulator started. No native binary or updated candidate ZIP was
-produced. An explicit permission question is pending.
-Do not retry that action until new applicable approval is received.
+The original audit-only no-emulator restriction caused the first automatic
+approval rejection, before execution. The parent then explicitly withdrew
+that restriction for app completion. The one clarified retry was allowed.
+The shared guard failed before emulator launch because the lease was held
+by another native owner (86Box PID34720, task-4/native-cga-system-unit-01).
+The failed guard receipt is preserved in beats-build-01/PROCESS.JSON.
+No native executable or updated candidate ZIP has been produced yet.
+Native work is waiting for the shared slot; no other owner's process or
+lock was altered. See LOWPIT.MD for the separately coordinated low-bass
+admission correction proposal.
 
-After an explicit exception, use the existing shared emulator lease and
+Use the existing shared emulator lease and
 an isolated toolchain/output. BUILD.PY accepts --dosbox, --toolchain,
 --lease and --out; it stages only this app's compilation and pins the
 actual compiled bytes. Native execution must use a disposable 640 KB
