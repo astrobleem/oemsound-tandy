@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import shutil
+import struct
 from RUNDOS import run
 
 HERE = Path(__file__).resolve().parent
@@ -79,6 +80,19 @@ exit
     for name in ('TANDYPSGLEASE', 'TANDYPITLEASE', 'TANDYPITVOICE'):
         if name not in production or name not in test:
             raise RuntimeError('Missing production extension: ' + name)
+    data = (out / 'SOUND.DRV').read_bytes()
+    ne = struct.unpack_from('<I', data, 0x3c)[0]
+    if data[ne:ne+2] != b'NE':
+        raise RuntimeError('Production driver is not a Win16 NE module')
+    count = struct.unpack_from('<H', data, ne + 0x1e)[0]
+    refs = ne + struct.unpack_from('<H', data, ne + 0x28)[0]
+    names = ne + struct.unpack_from('<H', data, ne + 0x2a)[0]
+    imports = []
+    for index in range(count):
+        start = names + struct.unpack_from('<H', data, refs + index*2)[0]
+        imports.append(data[start+1:start+1+data[start]].decode('ascii'))
+    if set(imports) != {'KERNEL', 'SYSTEM'}:
+        raise RuntimeError('Unexpected early sound-driver dependency: ' + repr(imports))
     record = {'target': 'Windows 3.0 real mode; 8086; MSC6/MASM5.10/LINK4',
               'compiler_flags': '/G0 /Gw /Gs /AS /W3 /Od',
               'sources': {n: identity(out / n) for n in SOURCES},
@@ -86,6 +100,7 @@ exit
               'runtime': identity(out / 'SOUND.DRV'),
               'test_runtime': identity(out / 'TSOUND.DRV'),
               'production_test_hooks': 'absent',
+              'production_import_modules': imports,
               'test_build_test_hooks': 'present'}
     (out / 'BUILD.JSON').write_text(json.dumps(record, indent=2) + '\n')
     print(json.dumps(record, indent=2))
