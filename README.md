@@ -7,7 +7,7 @@ Music players and instruments for the **Tandy 1000 EX/HX** and Windows 3.0.
 Browse your music, build a playlist, and play **MIDI, VGM/VGZ and tracker MOD
 arrangements** through the Tandy PSG.
 
-**[Download Tandy Winamp](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWSETUP.EXE)**
+**[Download Tandy Winamp](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP)**
  · [Install guide](experimental/WINAMP30/INSTALL.TXT)
  · [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt2.20261025)
 
@@ -27,9 +27,10 @@ original synthetic examples.*
 
 ### Try it
 
-1. [Download TWSETUP.EXE](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWSETUP.EXE).
-2. Exit Windows to DOS and run `TWSETUP`. It finds Windows and installs
-   Winamp, the shared sound driver, DLLs and video-memory helper automatically.
+1. [Download TWXT2.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP).
+2. Extract its `TWXT2` folder on the DOS computer, exit Windows, and run
+   `SETUP` in that folder. It finds Windows and installs Winamp, the shared
+   sound driver, DLLs and video-memory helper automatically.
 3. Start the player from DOS with `C:\WINAMP\GO`.
 
 Setup handles the existing Windows sound entry and current Windows XT sound

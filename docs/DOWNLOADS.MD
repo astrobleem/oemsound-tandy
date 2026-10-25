@@ -1,15 +1,15 @@
 # Current sound downloads
 
-- **Tandy Winamp and shared Windows sound:** [TWSETUP.EXE](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWSETUP.EXE)
-  installs directly from DOS. [Install](../experimental/WINAMP30/INSTALL.TXT).
-  [TWXT2.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP) contains the same runtime and source.
+- **Tandy Winamp and shared Windows sound:** [TWXT2.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP).
+  Extract its TWXT2 folder and run SETUP from DOS. The runtime and source are
+  included. [Install](../experimental/WINAMP30/INSTALL.TXT).
 - **Fiddle and Beats music authoring:** [MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/MML3AUTH.ZIP).
 - **Mini Piano, JoyMIDI, MiniMIDI and expressive Beats:**
   [PITEXPR.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/PITEXPR.ZIP).
 - **DOS PSG sound test:** [PITDOS.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITDOS.ZIP).
 
 The Windows packets use the same included native Setup and SOUND driver.
-Run TWSETUP in DOS once; no driver copying, INI editing or helper hunting is
+Run the included SETUP in DOS once; no driver copying, INI editing or helper hunting is
 needed. The instrument packets retain their application folders and include
 the same shared installer. [Instrument guide](../experimental/PITPUBLIC/INSTALL.TXT).
 
