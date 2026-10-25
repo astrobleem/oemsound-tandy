@@ -8,8 +8,8 @@ Browse your music, build a playlist, and play **MIDI, VGM/VGZ and tracker MOD
 arrangements** through the Tandy PSG.
 
 **[Download Tandy Winamp](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP)**
- Â· [Install guide](experimental/WINAMP30/INSTALL.TXT)
- Â· [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024)
+ · [Install guide](experimental/WINAMP30/INSTALL.TXT)
+ · [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024)
 
 ![Tandy Winamp in color](docs/SHOTS/WAMPCOL.PNG)
 
@@ -64,7 +64,7 @@ normally. TPLAY removes its owned timer bridge after Windows returns.
 MIDI uses the Tandy voices and basic percussion. VGM/VGZ preserves the supported
 PSG register stream. MOD follows supported tracker pitch, volume and effects
 using square-wave tones; it does not reproduce sample timbres.
-[Supported formats](docs/FORMATS.MD) Â· [Playback timing](docs/SNDTIME.MD)
+[Supported formats](docs/FORMATS.MD) · [Playback timing](docs/SNDTIME.MD)
 
 ## Make five-voice music
 
@@ -73,7 +73,7 @@ the PSG's **three tones and noise**. Write a fifth `[P]` part in MML3, or edit
 and export the fifth lane in Beats.
 
 **[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP)**
- Â· [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
+ · [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
 
 For the other instruments and DOS sound test, use [current sound downloads](docs/DOWNLOADS.MD).
 
@@ -96,12 +96,12 @@ apps here remain separate projects.
 
 ## More to play with
 
-- **[Mini Piano](src/win30/PIANO/README.MD)** â€” play notes with the keyboard or mouse.
-- **[JOYMIDI](src/win30/JOYMIDI/README.MD)** â€” turn a joystick into a pitch/velocity instrument.
-- **[Beats Lab](artifacts/win30/BEATS/README.MD)** â€” build patterns on a four-lane step sequencer.
-- **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** â€” an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256Ã—160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
-  Â· [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
-- **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** â€” an offline visualization
+- **[Mini Piano](src/win30/PIANO/README.MD)** — play notes with the keyboard or mouse.
+- **[JOYMIDI](src/win30/JOYMIDI/README.MD)** — turn a joystick into a pitch/velocity instrument.
+- **[Beats Lab](artifacts/win30/BEATS/README.MD)** — build patterns on a four-lane step sequencer.
+- **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** — an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256×160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
+  · [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
+- **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** — an offline visualization
   of the Tandy PSG and PC-speaker arrangement.
 
 See [validation](experimental/WINAMP30/VALIDATION-UI.MD),
