@@ -318,13 +318,13 @@
     },
     {
       "path": "TESTS/AUDITION/AUDHOOK.H",
-      "bytes": 2987,
-      "sha256": "ef170e20e6897ef3416f261ef97cc80ef4b0fd50c3c96f8eeddee6ffb12d4da5"
+      "bytes": 3065,
+      "sha256": "85c460049c500edec2fc1219169aea998c95ec22921d6204356263a073d043a1"
     },
     {
       "path": "TESTS/AUDITION/AUDMAIN.H",
-      "bytes": 2755,
-      "sha256": "2af39230444c6b6f5d63bc9fa09e5ead232d940ae9deacaef90477ab24d2abb2"
+      "bytes": 2805,
+      "sha256": "385a46e9b1aa66aa52f324dabf9bedc03a1859e1217769a3e66cdc9c30e3646e"
     },
     {
       "path": "TESTS/AUDITION/PSGAUDIT.C",
@@ -483,8 +483,8 @@
     },
     {
       "path": "TESTS/RUNBANK.PY",
-      "bytes": 1874,
-      "sha256": "42d20ab9e8b9ac95497aa2241b1eaeefc464fe6050e06a40c4f4b6885d09ca4b"
+      "bytes": 2134,
+      "sha256": "e06e4556769dac1437f590983e12c7a42611def33f2773b3a309af03306d097c"
     },
     {
       "path": "TESTS/beat_host.c",
@@ -500,6 +500,11 @@
       "path": "TESTS/live_host.c",
       "bytes": 1820,
       "sha256": "0c6ad53e879b691eb9ac53c014f00dc5bc13ffcccc3659384b0bf88de99d80f4"
+    },
+    {
+      "path": "TESTS/mci_admission_host.c",
+      "bytes": 5948,
+      "sha256": "b18988c906d187692991ed737c11075583ba7c2f264ea52338261394be49b1fd"
     },
     {
       "path": "TESTS/mdhost/driver.c",
