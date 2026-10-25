@@ -1,48 +1,46 @@
 TANDY WINAMP - INSTALL AND PLAY
 
-DOWNLOAD
-https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP
-
-Use Windows 3.0 real mode, DOS 3.0+ and normal 640 KB on a Tandy 1000 EX/HX.
-The sound driver and matching video-memory helper are included. HPXY and
-XRSYNC use that helper automatically; stock CGA needs no video reservation.
+For Tandy 1000 EX/HX, DOS 3.0+, normal 640 KB and Windows 3.0 real mode.
 
 INSTALL
-1. Extract the ZIP's TWXT1 folder to C:\TWXT1. Keep its runtime files together.
-2. Exit Windows completely to plain DOS. Copy the sound driver:
-     COPY C:\TWXT1\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
-3. In C:\WINDOWS\SYSTEM.INI, change the existing sound.drv line under [boot]:
-     sound.drv=TSOUND.DRV
-   Keep system.drv=SYSTEM.DRV and your installed display/fonts. Change the
-   existing line instead of adding a duplicate. If this installation already
-   uses the included TSOUND driver, steps 2-3 are already satisfied.
-4. From plain DOS, check:
-     C:\TWXT1\TPLAY C:\WINDOWS /CHECK
-   After preflight PASS, start:
-     C:\TWXT1\GO
+Exit Windows to plain DOS and run TWSETUP. Setup finds Windows, offers a
+choice if several installations exist, and installs the player in C:\WINAMP.
+It installs the shared SOUND.DRV, selects it in Windows, and supplies the
+player DLLs, timer bridge and video-memory helper automatically. Existing
+Windows XT sound clients use the same driver.
 
-Use your actual Windows path if different, in the copy/edit/check steps and
-when launching, for example C:\TWXT1\GO C:\W30SND. No separate sound kit or
-helper download is needed. No automatic sound installer is supplied.
+After Setup completes, start from plain DOS:
+  C:\WINAMP\GO
+
+No Windows driver copying, INI editing or separate helper download is needed.
+TWSETUP.EXE is self-contained. TWXT2.ZIP contains the same runtime and source;
+if using the ZIP, extract its TWXT2 directory and run its SETUP.EXE in DOS.
 
 PLAY
-TPLAY reserves or reuses the Tandy video overlap, loads its timer bridge,
-starts Windows /R and Winamp, then removes its bridge on normal Windows exit.
-Run GO/TPLAY directly from plain DOS; no extra WINXT launcher is needed.
-The video reservation remains until reboot and is reused without duplication.
-Choose Add... for MID, VGM, VGZ, MOD, TND or SND files. The playlist holds
+Choose Add... to select MID, VGM, VGZ, MOD, TND or SND files. The playlist holds
 32 songs; scroll or use Home/End/Page Up/Page Down. Remove changes the list,
 not the song file. Stop and close the player, then exit Windows normally.
-Use one sound producer at a time; do not run a competing sound/timer TSR.
 
-TROUBLESHOOTING AND UNDO
-Keep the runtime DLLs, TBRIDGE.EXE, RESERVE.COM and TPLAY together. If CHECK
-refuses, resolve its reported driver, display or ownership problem before
-starting. The paired system/sound checks and reservation refusal remain active.
-To remove TSOUND, exit Windows and restore the previous sound.drv value in
-SYSTEM.INI, normally SOUND.DRV for the stock driver. TSOUND is inactive after
-another sound driver is selected. TPLAY itself changes no installation files.
+GO starts the guarded real-mode launcher. For HPXY and XRSYNC it reserves or
+reuses the required video memory, loads the owned timer bridge, starts
+Windows and the player, and removes that bridge after normal Windows exit.
+Stock CGA uses the same command. The video reservation is reused until reboot.
+Sound ownership prevents competing apps from changing one another's output;
+stop the current producer before starting another.
 
-DETAILS
-FORMATS.MD describes the supported formats. MOD is a PSG arrangement rather
-than sample playback. TESTS.JSON records HPXY/XRSYNC playback, redraw, reservation and cleanup tests. Source, notices and original synthetic examples are included.
+REPAIR OR REMOVE
+Run C:\WINAMP\SETUP in plain DOS for Launch, Repair or Uninstall Winamp.
+Repair checks the current installation and restores its owned files. For a
+missing or damaged cached file, run the self-contained TWSETUP again and
+choose Repair. Uninstall removes Winamp while keeping shared Windows sound
+and Windows XT clients. Unrelated files and settings are preserved.
+
+Setup and GO report a specific error when hardware, Windows, files or timer
+ownership cannot safely support the launch. Resolve that reported condition
+before trying again. Setup cleans up failed writes internally.
+
+FORMATS
+MIDI uses Tandy voices and basic percussion. Supported VGM/VGZ data preserves
+the PSG register stream. MOD is arranged for PSG square waves and does not
+reproduce sample timbres. Original synthetic examples and corresponding
+source are included. Development test records are in TESTS.JSN.

@@ -81,6 +81,8 @@ def shared(package, package_sha, installer, tests_path):
     require(tests == files['TWXT2/TESTS.JSN'], 'External/shared native tests differ')
     receipt = json.loads(tests)
     require(receipt.get('status') == 'PASS', 'Shared native tests have not passed')
+    require(receipt.get('release_readiness', {}).get('status') == 'READY',
+            'Shared current-baseline reconciliation is incomplete')
     exe = installer.read_bytes()
     verifier.verify_sfx(exe, files)
     require(identity(exe) == receipt.get('installer'), 'Untested shared installer')

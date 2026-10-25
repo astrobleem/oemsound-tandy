@@ -82,7 +82,8 @@ def shared_fixture(root):
             (folder/name).write_bytes(data)
     sfx = pack.load_module('pit_unit_sfx', HERE/'SFX.PY')
     exe = sfx.make(folder/'SETUP.EXE', folder)
-    tests = {'status': 'PASS', 'scope': 'Synthetic unit fixture only',
+    tests = {'status': 'PASS', 'release_readiness': {'status': 'READY'},
+             'scope': 'Synthetic unit fixture only',
              'installer': pack.identity(exe), 'clients':
              {name: row['runtime'] for name,row in clients.items()}}
     for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),
@@ -148,6 +149,19 @@ def main():
                        for kit,row in original.items()}
         (pack.PITROOT/'SOURCE-PINS.json').write_bytes(dump(source_pins))
         shared, shared_sha, exe, tests, shared_files = shared_fixture(root)
+        pending = dict(shared_files)
+        pending_tests = json.loads(pending['TESTS.JSN'])
+        pending_tests['release_readiness'] = {'status': 'PENDING_SEPARATE_RECONCILIATION'}
+        pending['TESTS.JSN'] = dump(pending_tests)
+        pending['MANIFEST.JSN'] = dump({name: pack.identity(data) for name,data in pending.items()
+                                        if name != 'MANIFEST.JSN'})
+        pending_zip = root/'PENDING.ZIP'
+        pending_sha = zip_files(pending_zip, 'TWXT2', pending)
+        pending_receipt = root/'PENDING.JSN'
+        pending_receipt.write_bytes(pending['TESTS.JSN'])
+        rejected(lambda: pack.shared(pending_zip, pending_sha, exe, pending_receipt),
+                 'pending current baseline must not publish')
+
         for kit,(archive,sha,files) in original.items():
             def build(out, archive=archive, sha=sha):
                 return pack.build(kit, archive, sha, shared, shared_sha, exe, tests, out)

@@ -97,6 +97,8 @@ def build(a):
     files['TESTS.JSN'] = a.tests.read_bytes()
     tests = json.loads(files['TESTS.JSN'])
     require(tests.get('status') == 'PASS', 'Native acceptance has not passed')
+    require(tests.get('release_readiness', {}).get('status') == 'READY',
+            'Current published baseline reconciliation is incomplete')
     require(tests.get('sound') == identity(files['SOUND.DRV']), 'Tests cover another driver')
     require(tests.get('rawclk') == identity(files['RAWCLK.DLL']), 'Tests cover another RAWCLK')
     require(tests.get('setup') == identity(files['SETUP.EXE']), 'Tests cover another Setup')

@@ -1,69 +1,32 @@
-TANDY SOUND KITS - WINDOWS 3.0 REAL MODE
+TANDY MUSIC TOOLS - ONE SHARED SOUND INSTALLATION
 
-DOWNLOAD
-Fiddle and Beats MML3 authoring:
-https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP
-Expressive Piano/Beats/JoyMIDI/MiniMIDI:
-https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITEXPR.ZIP
-DOS PSGTEST:
-https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITDOS.ZIP
+For Tandy 1000 EX/HX, normal 640 KB, DOS and Windows 3.0 real mode.
 
-WINDOWS INSTALL
-You need an existing Windows 3.0 real-mode installation, DOS, 640 KB and
-a Tandy 1000 EX/HX. No automatic sound installer is supplied.
+Download MML3AUTH.ZIP for Fiddle/Beats authoring, or PITEXPR.ZIP for
+Mini Piano, JoyMIDI, MiniMIDI and expressive Beats:
+https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/MML3AUTH.ZIP
+https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/PITEXPR.ZIP
 
-1. Extract your selected kit to C:\MML3AUTH or C:\PITEXPR. Exit Windows
-   completely to plain DOS.
-2. Copy the sound driver (use your actual Windows path if different):
-     COPY C:\MML3AUTH\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
-   For the instrument kit, use C:\PITEXPR\TSOUND.DRV instead.
-3. In C:\WINDOWS\SYSTEM.INI, set the existing sound.drv line under [boot]:
-     sound.drv=TSOUND.DRV
-   Keep the TSOUND.DRV filename.
-4. Keep each app's paired MIDIMAP.DRV beside its clients. For MML3AUTH,
-   extract the complete kit and keep its BEATS/FIDDLE subfolders intact.
-   Do not register this app-local mapper as a system MIDI device.
-5. Start Windows through your usual required display launcher. Tandy
-   graphics still require their video-memory reservation; stock CGA does not.
-   In Program Manager, choose File / Run and the desired program, for example
-   C:\PITEXPR\MINIPIAN.EXE or C:\MML3AUTH\FIDDLE\MMLFIDL.EXE. Run only one sound producer at a time.
+Extract the complete kit, keeping its application folders intact. Exit
+Windows to DOS and run the included TWSETUP.EXE. Setup finds Windows and
+installs the shared SOUND driver and Winamp automatically. All these
+Windows tools use that same installed driver.
 
-For Winamp, use its own TPLAY launch instructions instead:
-https://github.com/astrobleem/oemsound-tandy/blob/main/experimental/WINAMP30/INSTALL.TXT
+Start Windows through your required display launcher, then run the program
+from its supplied folder using File/Run in Program Manager or Tandy Start.
+Keep the supplied app-local MIDIMAP.DRV files beside their clients; they
+are already placed correctly. No system MIDI registration, driver copying
+or INI editing is needed.
 
-OPTIONAL PC-SPEAKER VOICE
-PIT2 adds an on/off square-wave voice alongside the PSG. It starts off.
-Beats: PIT button enables lane five. Mini Piano: F3 adds a held pitch.
-JoyMIDI: F3 octave layer needs explicit rearm. MiniMIDI: PIT button maps
-MIDI channel 16. PSGPLAY: F3 or /pit. TCHIME: /pit.
-Use TEXIT /pitpreview for listening; /pitgo is the explicit exit test.
-Stop/Escape and normal close mute and release the sound. If a killed app
-leaves ownership busy, restart Windows before using another sound app.
+PIT adds an optional PC-speaker square-wave voice beside the PSG's three
+tones and noise. Enable the PIT control in Beats/MiniMIDI, use F3 in Mini
+Piano/JoyMIDI, or select MML3/[P] in Fiddle. Stop/Escape and normal close
+release sound. Stop one producer before starting another.
 
-MML3 AUTHORING
-Beats exports an explicit MML3 [P] part when PIT is enabled; otherwise it
-keeps MML2 output. In Fiddle, author MML3/[P] with V0 or V1. PIT playback
-needs opt-in and the paired driver capability. No raw-port fallback exists.
-Limits: MIDI 45..96, 8192 source bytes, 32768 tokens, 4096 notes/rests per
-part, 600 seconds. No PIT envelopes, presets, bends or ties. The kit includes
-original DEFAULT2/PIT.MML examples and SOURCE/docs/PITAUTH.MD details.
+C:\WINAMP\GO starts Winamp through its required timer/video launcher.
+C:\WINAMP\SETUP offers Launch, Repair and Uninstall Winamp. Shared sound
+and Windows XT clients stay installed when Winamp is removed.
 
-DOS
-Extract PITDOS, boot plain DOS and change to that folder. Run PSGTEST or
-PSGTEST /pit outside Windows and sound/timer TSRs. Escape or Ctrl-C stops
-and releases sound. No installation or startup changes are needed.
-
-UNDO AND LIMITS
-Exit Windows and restore the previous sound.drv value in SYSTEM.INI,
-normally SOUND.DRV for the stock driver. TSOUND is inactive afterward.
-TSOUND is a restricted SOUND driver: system beep, envelopes/noise API and
-SyncAllVoices are unsupported. PIT2 has no independent volume control and
-cannot play alongside sampled speaker speech. Direct Windows beeps/writers
-can disturb it. Cooperative timers can stall. Physical EX audio summing,
-real joystick/key input and full custom-display integration remain unqualified;
-these kit results are emulator tests. Windows 3.1 is not supported.
-
-SOURCE AND TEST DETAILS
-Each download includes corresponding component source, notices and scoped
-test records. SOURCE-PINS.json and INPUTS.json retain packaging identities.
-The downloaded drivers and clients are ready built.
+DOS PSGTEST is a separate DOS program: extract PITDOS.ZIP, boot plain DOS,
+change to that folder, and run PSGTEST or PSGTEST /pit. No Windows sound
+installation is needed for the DOS test.

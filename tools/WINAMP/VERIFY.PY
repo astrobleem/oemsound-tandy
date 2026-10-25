@@ -58,6 +58,8 @@ def verify(files, current=True):
                 'Consumers use another sound expectation')
     tests = json.loads(files['TESTS.JSN'])
     require(tests.get('status') == 'PASS', 'Incomplete native acceptance')
+    require(tests.get('release_readiness', {}).get('status') == 'READY',
+            'Current published baseline reconciliation is incomplete')
     for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),
                      ('setup','SETUP.EXE'),('launcher','TPLAY.EXE')):
         require(tests[key] == ident(files[name]), 'Native tests cover another '+name)
