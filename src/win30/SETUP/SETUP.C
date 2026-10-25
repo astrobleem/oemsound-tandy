@@ -53,7 +53,7 @@ static char home[PLEN], win[PLEN], app[PLEN];
 static char stage[PLEN], path[PLEN], temp[PLEN];
 static char ini[MAXINI+1], edited[MAXINI+256];
 static char selectedsound[128];
-static unsigned long instbytes,instcrc;
+static unsigned long instbytes,instcrc,gobytes,gocrc;
 static char candidates[16][PLEN];
 static char newdirs[2][PLEN];
 static unsigned nnewdirs;
@@ -590,6 +590,10 @@ static int manifest(void) {
     return 1;
 }
 static int statepath(char *out) { return join(out,app,"TWSTATE.DAT"); }
+static void launchscript(char *out,const char *directory,const char *windows) {
+    sprintf(out,"@ECHO OFF\r\n%c:\r\nCD %s\r\nTPLAY.EXE %s\r\n",
+            directory[0],directory+2,windows);
+}
 static int readpair(FILE *f,unsigned long *bytes,unsigned long *crc) {
     char line[64],tail;
     return fgets(line,sizeof(line),f)&&
@@ -638,6 +642,11 @@ static int readstate(void) {
         clientowned[i].which=which; clientowned[i].mirror=mirror;
     }
     if(*win&&!equal(win,w)) { fclose(f); return -1; }
+    /* Retain the exact recorded path spelling used to generate GO.BAT. */
+    launchscript(edited,a,w); gobytes=(unsigned long)strlen(edited);
+    gocrc=0xffffffffUL;
+    for(i=0;edited[i];i++) gocrc=crcstep(gocrc,(unsigned char)edited[i]);
+    gocrc^=0xffffffffUL;
     strcpy(win,w); fclose(f); return 1;
 }
 static int writestate(const char *dst) {
@@ -879,8 +888,7 @@ static int install(int installed) {
     if(!join(src,home,"PAYLOAD.LST")||!join(dst,app,"PAYLOAD.LST")||
        !add(dst,src,0)) goto stagingfail;
     if(!join(made,stage,"GENERATE.TMP")) goto stagingfail;
-    sprintf(edited,"@ECHO OFF\r\n%c:\r\nCD %s\r\nTPLAY.EXE %s\r\n",
-            app[0],app+2,win);
+    launchscript(edited,app,win);
     if(!putfile(made,edited)||!join(dst,app,"GO.BAT")||!add(dst,made,0))
         goto stagingfail;
     if(!join(src,win,"SYSTEM.INI")||!readtext(src,ini,sizeof(ini))||
@@ -911,8 +919,11 @@ static int uninstall(void) {
         }
         if(!add(dst,0,1)) goto bad;
     }
-    if(!join(dst,app,"GO.BAT")||!add(dst,0,1)||
-       !join(dst,app,"PAYLOAD.LST")||!add(dst,0,1)||
+    if(!join(dst,app,"GO.BAT")) goto bad;
+    if(exists(dst)&&!matches(dst,gobytes,gocrc))
+        printf("Kept changed file: %s\n",dst);
+    else if(!add(dst,0,1)) goto bad;
+    if(!join(dst,app,"PAYLOAD.LST")||!add(dst,0,1)||
        !statepath(dst)||!add(dst,0,1)) goto bad;
     if(!commit()) return 0;
     rmdir(app);

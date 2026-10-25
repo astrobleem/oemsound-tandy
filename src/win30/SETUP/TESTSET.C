@@ -22,6 +22,37 @@ static void put32(unsigned char *p,unsigned long value) {
 }
 #include "SFXTEST.H"
 #include "ROLLTEST.H"
+static void launchscriptTests(const char *root) {
+    char go[PLEN],state[PLEN],list[PLEN],text[128];
+    unsigned scenario;
+    for(scenario=0;scenario<3;scenario++) {
+        strcpy(app,root);strcat(app,"\\GOAPP");
+        strcpy(win,root);strcat(win,"\\WINDOWS");
+        nfiles=nitems=nclients=0;validateinstall=0;failafter=-1;
+        check(mkdir(app)==0,"prepare current GO uninstall fixture");
+        if(scenario==1) app[0]=(char)tolower((unsigned char)app[0]);
+        launchscript(edited,app,win);
+        join(go,app,"GO.BAT");statepath(state);join(list,app,"PAYLOAD.LST");
+        check(putfile(go,edited)&&writestate(state)&&putfile(list,"current\r\n"),
+              "write generated GO and current ownership state");
+        if(scenario==1) app[0]=(char)toupper((unsigned char)app[0]);
+        if(scenario==2)
+            check(putfile(go,"@ECHO OFF\r\nECHO CUSTOM\r\n"),
+                  "customize current GO without changing installer state");
+        check(uninstall(),"current Uninstall completes with generated or changed GO");
+        check(!exists(state)&&!exists(list)&&!exists(stage),
+              "Uninstall removes ownership/private files");
+        if(scenario==2) {
+            check(readtext(go,text,sizeof(text))&&
+                  !strcmp(text,"@ECHO OFF\r\nECHO CUSTOM\r\n"),
+                  "Uninstall preserves customized GO byte for byte");
+            remove(go);rmdir(app);
+        } else {
+            check(!exists(go)&&!exists(app),
+                  "Uninstall removes unchanged GO using recorded path spelling");
+        }
+    }
+}
 int main(int argc,char **argv) {
     char prev[128],a[PLEN],b[PLEN],out[PLEN];
     const char *input="; keep\r\n[boot]\r\nsystem.drv=SYSTEM.DRV\r\n"
@@ -158,5 +189,6 @@ int main(int argc,char **argv) {
     remove(a); remove(out); rmdir(app);
     join(a,win,"SYSTEM"); rmdir(a); rmdir(win);
     rollbackchecks(argv[1]);
+    launchscriptTests(argv[1]);
     printf("PASS: %u installer core checks\n",tests); return 0;
 }
