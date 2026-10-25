@@ -14,8 +14,8 @@ def run(exe, config, lease_path, timeout=60):
     result_path = out / 'PROCESS.JSON'
     if result_path.exists():
         raise ValueError('A fresh run directory is required')
-    if not 1 <= timeout <= 180:
-        raise ValueError('Timeout must be 1..180 seconds')
+    if not 1 <= timeout <= 300:
+        raise ValueError('Timeout must be 1..300 seconds')
     result = {'started': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'emulator': str(exe), 'config': str(config),
               'emulator_sha256': hashlib.sha256(exe.read_bytes()).hexdigest(),
