@@ -3,8 +3,9 @@ TANDY WINAMP - INSTALL AND PLAY
 For Tandy 1000 EX/HX, DOS 3.0+, normal 640 KB and Windows 3.0 real mode.
 
 INSTALL
-Exit Windows to plain DOS and run TWSETUP. Setup finds Windows, offers a
-choice if several installations exist, and installs the player in C:\WINAMP.
+Extract the TWXT2 folder from the ZIP on the DOS computer. Exit Windows and
+run SETUP.EXE in that folder. Setup finds Windows, offers a choice if several
+installations exist, and installs the player in C:\WINAMP.
 It installs the shared SOUND.DRV, selects it in Windows, and supplies the
 player DLLs, timer bridge and video-memory helper automatically. Existing
 Windows XT sound clients use the same driver.
@@ -13,8 +14,8 @@ After Setup completes, start from plain DOS:
   C:\WINAMP\GO
 
 No Windows driver copying, INI editing or separate helper download is needed.
-TWSETUP.EXE is self-contained. TWXT2.ZIP contains the same runtime and source;
-if using the ZIP, extract its TWXT2 directory and run its SETUP.EXE in DOS.
+The ZIP contains SETUP.EXE, the actual runtime files and corresponding
+source. No separate executable or helper download is required.
 
 PLAY
 Choose Add... to select MID, VGM, VGZ, MOD, TND or SND files. The playlist holds
@@ -31,8 +32,7 @@ stop the current producer before starting another.
 REPAIR OR REMOVE
 Run C:\WINAMP\SETUP in plain DOS for Launch, Repair or Uninstall Winamp.
 Repair checks the current installation and restores its owned files. For a
-missing or damaged cached file, run the self-contained TWSETUP again and
-choose Repair. Uninstall removes Winamp while keeping shared Windows sound
+missing or damaged cached file, run SETUP from the extracted download and choose Repair. Uninstall removes Winamp while keeping shared Windows sound
 and Windows XT clients. Unrelated files and settings are preserved.
 
 Setup and GO report a specific error when hardware, Windows, files or timer
