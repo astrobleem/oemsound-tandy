@@ -56,24 +56,37 @@ source pins and all three runtime identities. The final native compile/link
 passed via the guarded DOSBox runner with normal return 0 and lease release.
 No other owner's emulator/process/lock was altered.
 
-Final build04 completed the full native application scenario on a disposable
-640 KB HX / Windows 3.0 fixture with the published WINXT720 fixed 320x200
-profile and exact shared SOUND bytes. BEATS /test passed 42 assertions:
-window/control bounds, five demos, .BTS save/load, restored PIT state,
-MML/clipboard, keyboard/mouse editing, all five voices, A1/55 Hz,
-Stop/replay/deactivation/close and injected failure cleanup. MMLFIDL
-/lowtest passed 17 assertions using the actual Beats-exported low-P MML.
-The native .BTS and .MML outputs exactly matched the supplied FIVE files.
-Both apps returned to DOS; the owned child stopped and lease released.
-Local beats-native-03/RESULT.JSON records the full 377.9-second run.
+Native build06 and the final Beats run passed on a disposable 640 KB HX /
+Windows 3.0 fixture using the published WINXT720 fixed 320x200 profile,
+its memory reservation helper and the exact shared SOUND bytes.
 
-The initial 300-second test bound expired only during its later visual
-pass; it is not used as whole-run acceptance. The slower visual-only run confirmed Grid, the automatically enabled low
-speaker demo and readable MML. It found the standard MessageBox wrapped
-About beyond 200 pixels; the compact branding/key-hint correction now
-awaits its final native rebuild and visual check. Build05 was refused by
-the normal busy lease before launch; the legitimate other owner is being
-waited out. No earlier binary is claimed as the final corrected app.
+- BEATS /test passed 42 assertions, including window/control bounds, five
+  demos, .BTS save/load, restored PIT state, MML/clipboard, keyboard/mouse
+  editing, five simultaneous voices, A1/55 Hz, Stop/replay/deactivation/
+  close and injected attack/update failure cleanup. Saved .BTS and exported
+  .MML exactly matched the supplied FIVE demo files.
+- Fiddle /lowtest passed 17 assertions on the actual Beats-exported low-P
+  MML. Fiddle and mapper hashes are identical between the full combined
+  run and final build06; the final subsequent Beats change was About text.
+- Actual Grid, Speaker bass/PIT-on and MML screens were inspected. A slow
+  visual capture caught About wrapping past 200 pixels. It was reduced to
+  nine short lines; the final native capture shows all branding, key hints
+  and OK inside the screen. This was a real app correction, not a warning.
+- Both native scenarios returned to DOS. Only owned children were stopped,
+  and shared leases were released. No other owner's process/lock changed.
+
+Local evidence: beats-build-06/BUILD.JSON and PROCESS.JSON;
+beats-native-03/RESULT.JSON (42 Beats + 17 Fiddle);
+beats-visual-01/{GRID,SPEAKER,MML}.PNG; and
+beats-native-04/RESULT.JSON / ABOUT.PNG (final 42 Beats + compact About,
+304.7 seconds). Failed legacy-display, timed-bound and busy-lease receipts
+are retained separately and are not treated as passing qualification.
+
+Final runtime SHA256:
+
+- BEATS.EXE: 44884b6aac3ffd7b9e19ac5e745c856d19bffa695d1ec43c1bf39267387c46df
+- MIDIMAP.DRV: 2a98f7e9f91514418c9ac4d00d85462a0d95b7cbbf861e597546c4891b87623c
+- MMLFIDL.EXE: c51f42992261c49169548f735c732cae068b423e0f40b31b4cc82766463f7b93
 
 The final MSC6 build's executable sizes and NE allocation requests are:
 
@@ -87,11 +100,6 @@ Each near data/code segment remains below 64 KB. These module requests do
 not measure total Windows memory use; native 640 KB execution is separate.
 MSC6 conversion/signed-comparison warnings remain from current/retained
 code; compile/link completed successfully. No raw host GCC/cc1 was launched.
-
-The original audit-only no-emulator rejection was unexecuted. Later app
-scope explicitly authorized guarded native work; a busy legitimate owner
-was waited out. An initial legacy display fixture failed before app startup;
-it is not accepted. Only successful complete receipts qualify execution.
 
 ## Candidate packet
 
