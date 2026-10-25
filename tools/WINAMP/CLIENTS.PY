@@ -21,6 +21,7 @@ def main():
     for name in ('native','fixxt','display','workspace','out','header'):
         p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--client-suffix',required=True)
+    p.add_argument('--tshell-build',type=Path)
     a=p.parse_args()
     if a.out.exists():p.error('Output must be new')
     entries={}; sources={}; table=[]
@@ -46,6 +47,8 @@ def main():
                 (name,kind,len(data),zlib.crc32(data),len(data),zlib.crc32(data)))
             continue
         build=a.native/(folder+a.client_suffix) if folder else a.fixxt
+        if name=='TSHELL.EXE' and a.tshell_build:
+            build=a.tshell_build
         record=json.loads((build/'BUILD.JSON').read_bytes())
         data=(build/name).read_bytes()
         wanted=record['runtime'][name] if folder else record['runtime']
