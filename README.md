@@ -7,14 +7,13 @@ Music players and instruments for the **Tandy 1000 EX/HX** and Windows 3.0.
 Browse your music, build a playlist, and play **MIDI, VGM/VGZ and tracker MOD
 arrangements** through the Tandy PSG.
 
-**[Download Tandy Winamp XT1](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP)**
+**[Download Tandy Winamp](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP)**
  Â· [Install guide](experimental/WINAMP30/INSTALL.TXT)
  Â· [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt1.20261024)
 
-![Tandy Winamp UX3 in color](docs/SHOTS/WAMPCOL.PNG)
+![Tandy Winamp in color](docs/SHOTS/WAMPCOL.PNG)
 
-*Earlier UX3 capture of the unchanged player, in Windows 3.0 real mode with the
-320x200 color driver. [Genuine capture details](docs/SHOTS/WINAMPCL.MD).*
+*Windows 3.0 player capture. [Capture details](docs/SHOTS/WINAMPCL.MD).*
 
 - **Browse/Add:** choose songs from the Windows file browser.
 - **32-song playlist:** scroll past the visible rows or use Home, End and Page Up/Down.
@@ -26,7 +25,7 @@ arrangements** through the Tandy PSG.
 *The same released app with its Add song browser open. The folder contains
 original synthetic examples.*
 
-On a real **Tandy 1000 EX at 7.16 MHz**, the owner accepted UX3 and reported
+On a real **Tandy 1000 EX at 7.16 MHz**, the player was accepted with reported
 uninterrupted music while using Program Manager.
 [Hardware report and test record](experimental/WINAMP30/EVIDENCE/PHYSICAL.JSON).
 
@@ -76,9 +75,7 @@ and export the fifth lane in Beats.
 **[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP)**
  Â· [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
 
-This is square-wave music, separate from sampled speaker speech. A separate
-Winamp speaker-assist candidate has native validation; it is not in the XT1
-download. The [engineering note](docs/SPEAKER.MD) explains its scope and progress.
+For the other instruments and DOS sound test, use [current sound downloads](docs/DOWNLOADS.MD).
 
 ## Build your own Windows music app
 

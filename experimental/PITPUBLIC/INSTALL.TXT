@@ -1,8 +1,6 @@
 TANDY SOUND KITS - WINDOWS 3.0 REAL MODE
 
 DOWNLOAD
-Sound driver and seven Windows music clients:
-https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITWIN.ZIP
 Fiddle and Beats MML3 authoring:
 https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP
 Expressive Piano/Beats/JoyMIDI/MiniMIDI:
@@ -14,20 +12,21 @@ WINDOWS INSTALL
 You need an existing Windows 3.0 real-mode installation, DOS, 640 KB and
 a Tandy 1000 EX/HX. No automatic sound installer is supplied.
 
-1. Extract PITWIN to C:\PITWIN. Exit Windows completely to plain DOS.
+1. Extract your selected kit to C:\MML3AUTH or C:\PITEXPR. Exit Windows
+   completely to plain DOS.
 2. Copy the sound driver (use your actual Windows path if different):
-     COPY C:\PITWIN\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
+     COPY C:\MML3AUTH\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
+   For the instrument kit, use C:\PITEXPR\TSOUND.DRV instead.
 3. In C:\WINDOWS\SYSTEM.INI, set the existing sound.drv line under [boot]:
      sound.drv=TSOUND.DRV
-   Keep the TSOUND.DRV filename. This also matches Winamp's TPLAY checks;
-   renaming it to SOUND.DRV, as older kit text suggests, is unnecessary.
+   Keep the TSOUND.DRV filename.
 4. Keep each app's paired MIDIMAP.DRV beside its clients. For MML3AUTH,
    extract the complete kit and keep its BEATS/FIDDLE subfolders intact.
    Do not register this app-local mapper as a system MIDI device.
 5. Start Windows through your usual required display launcher. Tandy
    graphics still require their video-memory reservation; stock CGA does not.
    In Program Manager, choose File / Run and the desired program, for example
-   C:\PITWIN\MINIPIAN.EXE. Run only one sound producer at a time.
+   C:\PITEXPR\MINIPIAN.EXE or C:\MML3AUTH\FIDDLE\MMLFIDL.EXE. Run only one sound producer at a time.
 
 For Winamp, use its own TPLAY launch instructions instead:
 https://github.com/astrobleem/oemsound-tandy/blob/main/experimental/WINAMP30/INSTALL.TXT

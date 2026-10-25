@@ -2,31 +2,15 @@
 
 For Tandy 1000 EX/HX, DOS, 640 KB and Windows 3.0 real mode.
 
-- **Sound driver and Windows instruments:** [download PITWIN.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITWIN.ZIP).
-  Includes TSOUND.DRV, Mini Piano, Beats, JoyMIDI, MiniMIDI, PSGPLAY and chimes.
-- **Write five-voice music:** [download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/MML3AUTH.ZIP)
-  for Fiddle and Beats MML3 authoring.
-- **Expressive instruments:** [download PITEXPR.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITEXPR.ZIP).
-- **DOS sound test:** [download PITDOS.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/sound-exp-v0.1.0-pit.20261007/PITDOS.ZIP).
+Choose [Fiddle/Beats, the instruments or the DOS test from current downloads](../../docs/DOWNLOADS.MD).
+Each Windows packet includes TSOUND.DRV and its paired app-local MIDIMAP files.
 
-## Install the Windows sound driver
+## Install
 
-Extract PITWIN to `C:\PITWIN` and exit Windows to plain DOS:
-
-```bat
-COPY C:\PITWIN\TSOUND.DRV C:\WINDOWS\SYSTEM\TSOUND.DRV
-```
-
-Use your actual Windows directory. Under `[boot]` in `SYSTEM.INI`, change the
-existing sound line to `sound.drv=TSOUND.DRV`. Keep each app's paired
-MIDIMAP.DRV beside it; this mapper is app-local, not a system MIDI device.
-Start Windows using your usual required display launcher, then use Program
-Manager's **File / Run**, for example `C:\PITWIN\MINIPIAN.EXE`.
-There is no automatic sound installer. Keep MML3AUTH's BEATS/FIDDLE folders intact.
-
-The [short install guide](INSTALL.TXT) covers the optional speaker voice,
-MML3 controls, DOS use and undo. [Winamp](../WINAMP30/INSTALL.TXT) uses this
-same TSOUND filename and its own checked TPLAY launcher.
+Extract the selected kit. From plain DOS, copy its top-level TSOUND.DRV to
+your Windows SYSTEM folder and set the existing `[boot]` sound.drv line to
+`sound.drv=TSOUND.DRV`. Keep MIDIMAP.DRV beside its paired clients.
+The [install guide](INSTALL.TXT) gives the exact paths and controls.
 
 ## Known limits and technical details
 

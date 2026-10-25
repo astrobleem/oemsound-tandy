@@ -1,4 +1,4 @@
-TANDY WINAMP XT1 - INSTALL AND PLAY
+TANDY WINAMP - INSTALL AND PLAY
 
 DOWNLOAD
 https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt1.20261024/TWXT1.ZIP
@@ -45,6 +45,4 @@ another sound driver is selected. TPLAY itself changes no installation files.
 
 DETAILS
 FORMATS.MD describes the supported formats. MOD is a PSG arrangement rather
-than sample playback. TESTS.JSON records XT1's HPXY/XRSYNC playback, redraw,
-reservation and cleanup tests. UX3's earlier physical EX report retains its
-original scope. Source, notices and original synthetic examples are included.
+than sample playback. TESTS.JSON records HPXY/XRSYNC playback, redraw, reservation and cleanup tests. Source, notices and original synthetic examples are included.
