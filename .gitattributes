@@ -23,3 +23,5 @@ experimental/WINLIB30/TESTS/RUNBANK.PY -text
 experimental/WINLIB30/TESTS/live_host.c -text
 experimental/WINLIB30/TESTS/mdhost/driver.c -text
 experimental/WINLIB30/TESTS/mci_admission_host.c -text
+
+experimental/WINLIB30/NATIVE/BANKS.JSN -text

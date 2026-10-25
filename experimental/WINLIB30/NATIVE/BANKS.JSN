@@ -1,0 +1,117 @@
+{
+  "status": "PASS_SCOPED_LOCAL_BANK_INTEGRATION",
+  "canonical_bank_commit": "c5fbc4511852658587fc24507068d1261cc3c452",
+  "compiled_DLL_source": "4089122bf38d5d3ff5a5d3f3df296c4993209118",
+  "compiled_player_source": "367bdff7a9a4ddcc9d541b4b397267427ccdb98d",
+  "file_assertions": 85,
+  "file_scope": "Original completed file phase with byte-identical current player/MIDI/MCI; its RAWCLK preceded the isolated paired-live guard correction. Not relabelled as new-RAW file replay.",
+  "live_assertions": 28,
+  "live_scope": "Exact corrected RAWCLK native replay; held Chamber60 plus new Default64, clock329ms, reset/reopen and normal cleanup.",
+  "file_log": "NormalInstalledVisiblePlayer=1\nInitialDefault=1\nBankVisibleNormal=1\nVisibleChamberAndSavedPreference=1\nOwnerFilenameSelectionQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameComplete=1\nCHAMBER_PLAY_START_MS=714\nChamberMIDIStarted=1\nChamberGraphicsPlayback=1\nChamberStop=1\nPlayerClose=1\nNormalReopen=1\nReopenRetainsChamber=1\nCompactChamberVisible=1\nCompactDefaultSaved=1\nOwnerFilenameSelectionQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameComplete=1\nDEFAULT_PLAY_START_MS=714\nDefaultMIDIStarted=1\nDefaultGraphicsPlayback=1\nDefaultStop=1\nOwnerFilenameSelectionQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameCharacterQueued=1\nOwnerFilenameComplete=1\nExistingVGMStarts=1\nMIDIChoiceStoredDuringVGM=1\nVGMNoTimingFailure=1\nNoPlayerBeforeLiveOwner=1\nNativeLiveObserverLaunch=1\nCHECKS=85\nFAILURES=0\nPASS FILE BANK\n",
+  "live_log": "PrivatePlayerClosedBeforeLive=1\nNativeMIDICLKLoad=1\nDedicatedBankExports=1\nActualLiveBind=1\nActualLiveOpen=1\nNativeDefaultOwner=1\nNativeInvalidBank=1\nNativeChamberSelect=1\nNativeLiveFirstNote=1\nNativeFirstSeedRebuild=1\nNativeLivePump=1\nFIRST_LIVE_CLOCK_MS=329\nNativeClockAdvances=1\nHeldVoiceBankLatched=1\nFutureDefaultSelect=1\nNativeSecondNote=1\nMixedLiveBanks=1\nMIXED_REBUILD_RESULT=0\nAC_LAST_ERROR=0\nAC_LAST_RAW=0\nNativeMixedSeedRebuild=1\nSelectedBankRestoredAfterSeeds=1\nMixedNativePlaybackPump=1\nLiveResetDefault=1\nLiveResetChamber=1\nResetClearsAllNotes=1\nLiveClose=1\nLiveReopenRetainsChoice=1\nReopenedLiveNote=1\nReopenedNativePump=1\nFinalLiveCleanup=1\nNATIVE_SIZEOF_TVOICE=10\nNATIVE_SIZEOF_MSYN=332\nPreferenceUnaffectedByLiveOwner=1\nCHECKS=28\nFAILURES=0\nPASS NATIVE BANK\n",
+  "live_process": {
+    "started": "2026-10-25T21:48:45.925632+00:00",
+    "config": "C:\\Users\\chad\\Documents\\Codex\\2026-10-24\\task-4\\unified-bank-qa\\LIVERUN4\\RUN.CNF",
+    "emulator": "C:\\Program Files\\DOSBox-X\\dosbox-x.exe",
+    "emulator_sha256": "769fb38a5a94475488be2107856d9a9fcca65487df35676188f5c2ccd5a2e964",
+    "queue_bound_seconds": 900,
+    "timeout": 120,
+    "contention_attempts": 0,
+    "lease_acquired": true,
+    "inventory": "",
+    "pid": 24604,
+    "launched": "2026-10-25T21:48:46.157178+00:00",
+    "return": 0,
+    "owned_child_stopped": true,
+    "lease_released": true
+  },
+  "runtime": {
+    "MIDICLK.DLL": {
+      "bytes": 17216,
+      "sha256": "34e0a11b20aee54759349f5408045118381f31754b6d69209f0943ac87f77bdd"
+    },
+    "RAWCLK.DLL": {
+      "bytes": 15464,
+      "sha256": "1c71d9ac897de0139dd25dc2d76be99de21ac4184d162408e5e2427d79078c54"
+    },
+    "MCITNDY.DLL": {
+      "bytes": 13548,
+      "sha256": "ae1c9f2293c28b6a152d9e4dc4393e34d635b2da823ec9bc1e2cbb2dcc493016"
+    },
+    "MINIPLAY.EXE": {
+      "bytes": 55645,
+      "sha256": "24f0f0aad39f336fc9ddf2ea06aa05f595da844ac6177a8e9789bd44157d7e64"
+    }
+  },
+  "raw_regression": {
+    "old_mock_always_returned_idle": true,
+    "real_bridge_states": {
+      "idle": 0,
+      "armed": 1,
+      "running": 2,
+      "stop_pending": 3
+    },
+    "old_guard_fails_realistic_active_test": true,
+    "old_negative_receipt": {
+      "bytes": 5213,
+      "sha256": "52827aec08f0785d6948fdc77757c4b0361ef467800e2db77eeda2f940a76a8f"
+    },
+    "corrected_paired_checks": 3435,
+    "failures": 0,
+    "unsafe_IRQ_calls": 0,
+    "corrected_receipt": {
+      "bytes": 4953,
+      "sha256": "b940f7b264c1a42d5f6dab75cbf46ea7aec5798f7db46f62e1ca4b9191860174"
+    }
+  },
+  "Default_trace": {
+    "hash": "70D11B5D",
+    "events": 6634,
+    "renders": 9798
+  },
+  "core_bank_checks": 111,
+  "per_note": {
+    "positive": 154,
+    "missing": 0,
+    "clipped": 0,
+    "rejected": 0,
+    "steals": 0,
+    "muted_negative_missing": 1,
+    "all8_existing_takes_unchanged": true,
+    "receipt": {
+      "bytes": 628,
+      "sha256": "1d2d2d30c5bd00ea60617b70ef48002bab7747d669a7e43e69a1bbb0407e576c"
+    }
+  },
+  "primary_packet": {
+    "status": "QUALIFIED_LOCAL_PRIMARY_PACKET",
+    "package": {
+      "bytes": 2420622,
+      "sha256": "fed4fdec0bb5652a6da4c987b6b8e7a4f860f92f4a8e34aad30ac26b49fb3486"
+    },
+    "installer_internal": {
+      "bytes": 389040,
+      "sha256": "534790b2de96bee1d9b138d573acaad1898a231d8b7b96ef5c03a1cde48fa66f"
+    },
+    "source_commit": "9f14ffa177f986b725e124a86344a401d8febead",
+    "compiled_DLL_source": "4089122bf38d5d3ff5a5d3f3df296c4993209118",
+    "compiled_player_source": "367bdff7a9a4ddcc9d541b4b397267427ccdb98d",
+    "tests": {
+      "bytes": 81331,
+      "sha256": "f8e8ebbaa2d74a2f68142f49d023dba08e47ef99279583a948de067c97192c2a"
+    },
+    "native_file_assertions": 85,
+    "native_live_assertions": 28,
+    "packet_identities": 512,
+    "corrupt_packet_refusals": 5,
+    "corrupt_overlay_refusals": 3,
+    "all_installed23_current_bytes_verified": true,
+    "Native_Repair_repeated": false,
+    "PIT_app_kits_rewritten": false,
+    "publication_approved": false,
+    "published": false
+  },
+  "publication_approved": false,
+  "published": false,
+  "physical_hardware_test": false
+}

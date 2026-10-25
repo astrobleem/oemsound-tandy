@@ -77,6 +77,11 @@
       "sha256": "ef1e80ec6ef92aea234d7e0f9b89bf04aa2abb57da9e484bc55dec4a67834eaf"
     },
     {
+      "path": "NATIVE/BANKS.JSN",
+      "bytes": 7549,
+      "sha256": "d049fd488e1561b1a357e06820cf035375295a0b81dd62d18b61203502a96c7e"
+    },
+    {
       "path": "NOTICES.TXT",
       "bytes": 400,
       "sha256": "073c9b89b15806bff3a40fdca62bbc2e51a1a4719f2fa96443e0ebb9d4a74377"
