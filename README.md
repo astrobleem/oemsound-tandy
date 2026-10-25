@@ -7,9 +7,9 @@ Music players and instruments for the **Tandy 1000 EX/HX** and Windows 3.0.
 Browse your music, build a playlist, and play **MIDI, VGM/VGZ and tracker MOD
 arrangements** through the Tandy PSG.
 
-**[Download Tandy Winamp](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP)**
+**[Download Tandy Winamp](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP)**
  · [Install guide](experimental/WINAMP30/INSTALL.TXT)
- · [Release notes](https://github.com/astrobleem/oemsound-tandy/releases/tag/tandy-winamp-xt2.20261025)
+ · [Release notes](https://github.com/astrobleem/oemdisplay-tandy/releases/tag/windows-xt)
 
 ![Tandy Winamp in color](docs/SHOTS/WAMPCOL.PNG)
 
@@ -27,7 +27,7 @@ original synthetic examples.*
 
 ### Try it
 
-1. [Download TWXT2.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP).
+1. [Download TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP).
 2. Extract its `TWXT2` folder on the DOS computer, exit Windows, and run
    `SETUP` in that folder. It finds Windows and installs Winamp, the shared
    sound driver, DLLs and video-memory helper automatically.
@@ -38,7 +38,7 @@ clients. The same SOUND driver serves Winamp, alerts and PIT instruments.
 Run `C:\WINAMP\SETUP` for Launch, Repair or Uninstall Winamp.
 
 The [install guide](experimental/WINAMP30/INSTALL.TXT) covers normal use.
-[TWXT2.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/TWXT2.ZIP) includes the same ready-built runtime and corresponding source.
+[TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP) includes the same ready-built runtime and corresponding source.
 
 Choose Add... to load songs. Stop and close the player, then exit Windows
 normally. TPLAY removes its owned timer bridge after Windows returns.
@@ -54,7 +54,7 @@ using square-wave tones; it does not reproduce sample timbres.
 the PSG's **three tones and noise**. Write a fifth `[P]` part in MML3, or edit
 and export the fifth lane in Beats.
 
-**[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/MML3AUTH.ZIP)**
+**[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP)**
  · [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
 
 For the other instruments and DOS sound test, use [current sound downloads](docs/DOWNLOADS.MD).
