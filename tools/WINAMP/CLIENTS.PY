@@ -16,20 +16,39 @@ def pin(data):
     return {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
 
 
+def current_baseline(root, manifest):
+    """Read the one current published component snapshot, never producer files."""
+    record=json.loads(manifest.read_bytes())
+    names={name for name,_,_ in SPECS}
+    if record.get('schema')!=1 or set(record['files'])!=names:
+        raise ValueError('Current native baseline must contain exactly seven clients')
+    result={}
+    for name in names:
+        data=(root/name).read_bytes();wanted=record['files'][name]
+        if pin(data)!={k:wanted[k] for k in ('bytes','sha256')} or '%08x'%zlib.crc32(data)!=wanted['crc32']:
+            raise ValueError('Current published baseline differs: '+name)
+        result[name]=data
+    return result
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    for name in ('native','fixxt','display','workspace','out','header'):
+    for name in ('native','fixxt','display','workspace','out','header',
+                 'baseline-root','baseline-manifest'):
         p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--client-suffix',required=True)
     p.add_argument('--tshell-build',type=Path)
     a=p.parse_args()
     if a.out.exists():p.error('Output must be new')
+    baseline=current_baseline(a.baseline_root,a.baseline_manifest)
     entries={}; sources={}; table=[]
     a.out.mkdir(parents=True)
     for name,kind,folder in SPECS:
         if folder=='unchanged':
             path=a.display/'tools/XR1PACK/PAYLOAD'/name
             data=path.read_bytes()
+            if data!=baseline[name]:
+                raise ValueError('Unchanged dependency differs from current packet: '+name)
             rel=path.relative_to(a.workspace).as_posix()
             entries[name]={'kind':kind,'runtime':pin(data),'crc32':'%08x'%zlib.crc32(data),
                 'current_baseline':pin(data),'baseline_crc32':'%08x'%zlib.crc32(data),
@@ -60,7 +79,7 @@ def main():
             paths={n:a.workspace/n for n in record['source_pins']}
             pins=record['source_pins']
         else:
-            paths={n:a.display/'tools/SOUNDOWN'/n for n in record['sources']}
+            paths={n:a.display/('tools/DOSINST' if n in ('FIXXT.C','SOUNDID.H') else 'tools/SOUNDOWN')/n for n in record['sources']}
             pins=record['sources']
         snapshot={}
         for n,path in paths.items():
@@ -72,7 +91,7 @@ def main():
             target=a.out/'SOURCE'/Path(name).stem/path.name
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(staged,target)
-        old=(a.display/'tools/XR1PACK/PAYLOAD'/name).read_bytes()
+        old=baseline[name]
         entries[name]={'kind':kind,'runtime':pin(data),'crc32':'%08x'%zlib.crc32(data),
                        'current_baseline':pin(old),'baseline_crc32':'%08x'%zlib.crc32(old),
                        'sources':snapshot}
