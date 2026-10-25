@@ -48,12 +48,19 @@ def shared_fixture(root):
     files = {name: b'UNIT FIXTURE '+name.encode() for name in (
         'SOUND.DRV','RAWCLK.DLL','TPLAY.EXE','MINIPLAY.EXE','MIDICLK.DLL',
         'MCITNDY.DLL','LWFILE.DLL','TBRIDGE.EXE','RESERVE.COM')}
-    files['SETUP.EXE'] = b'MZUNIT TEST ONLY'
+    builder = pack.load_module('pit_unit_shared_builder', HERE/'PACK.PY')
+    with zipfile.ZipFile(HERE.parents[1]/'artifacts/win30/TWXT2.ZIP') as original:
+        baseline = {name:original.read('TWXT2/'+name) for name in builder.MIDI_BASE['runtime']}
+        # Opaque published core bytes model the preserved-runtime contract;
+        # these synthetic receipts never qualify or execute those binaries.
+        player = original.read('TWXT2/MINIPLAY.EXE')+b'UNIT PLAYER ONLY'
+    files.update(baseline)
+    files['MINIPLAY.EXE'] = player
     clients = {}
     for name, kind in (
             ('TSHELL.EXE','W'),('TCHIME.EXE','X'),('XPCHIME.EXE','X'),
             ('TEXIT.EXE','X'),('TP.EXE','X'),('FIXXT.EXE','X'),('TSINPUT.DLL','W')):
-        files[name] = b'UNIT CLIENT '+name.encode()
+        files[name] = baseline[name]
         clients[name] = {'kind': kind, 'runtime': pack.identity(files[name]),
                          'crc32': '%08x'%zlib.crc32(files[name]), 'sources': {}}
     header = (HERE.parents[1]/'src/win30/DRIVER/SOUNDID.H').read_bytes()
@@ -67,7 +74,6 @@ def shared_fixture(root):
         if label in ('launch','setup'):
             files['SOURCE/'+label.upper()+'/SOUNDID.H'] = header
             builds[label]['sources']['SOUNDID.H'] = pack.identity(header)
-    builder = pack.load_module('pit_unit_shared_builder', HERE/'PACK.PY')
     process = dump({'return': 0, 'owned_child_stopped': True, 'lease_released': True})
     for label, names in builder.CLOCK_SOURCES.items():
         sources = {name: b'UNIT SOURCE '+name.encode() for name in names}
@@ -80,10 +86,35 @@ def shared_fixture(root):
         files['EVIDENCE/'+label.upper()+'.JSN'] = dump(builds[label])
         files['EVIDENCE/'+label.upper()+'.LOG'] = b'PASS MIDI THREE DLL BUILD\r\n'
         files['EVIDENCE/'+label.upper()+'PROC.JSN'] = process
+    sources = {name:b'UNIT PLAYER SOURCE '+name.encode() for name in builder.PLAYER_SOURCES}
+    source = {'commit':'0'*40, 'files':{n:pack.identity(d) for n,d in sources.items()},
+              'flags':'/G0 /Gw /Gs /AS /W3 /Od'}
+    result = {'status':'COMPILED_RUNTIME_ACCEPTANCE_PENDING','source':source,
+              'process':json.loads(process),'runtime':pack.identity(player),
+              'map':pack.identity(b'UNIT PLAYER MAP'),
+              'NE':{'identity':pack.identity(player),'expected_windows_version':768,
+                    'CODE_minimum_bytes':16,'DGROUP_minimum_bytes':16,'heap_bytes':16,'stack_bytes':16}}
+    files['EVIDENCE/PLAYERSR.JSN'] = dump(source)
+    files['EVIDENCE/PLAYER.JSN'] = dump(result)
+    files['EVIDENCE/PLAYERPR.JSN'] = process
+    files['EVIDENCE/PLAYER.LOG'] = b'PASS NATIVE PLAYER BUILD'
+    files['EVIDENCE/PLAYER.MAP'] = b'UNIT PLAYER MAP'
+    for name,data in sources.items():
+        for prefix in ('SOURCE/PLAYER/','SRC/SOURCE/','DEPS/'):
+            files[prefix+name] = data
+    # Shared compiled headers retain one identical modeled source identity.
+    for label,names in builder.CLOCK_SOURCES.items():
+        for name in names & set(sources):
+            data=sources[name]
+            files['SOURCE/'+label.upper()+'/'+name]=data
+            builds[label]['sources'][name]=pack.identity(data)
+        files['EVIDENCE/'+label.upper()+'.JSN']=dump(builds[label])
+    builds['player'] = builder.player_receipt(files)
+    files['EVIDENCE/MIDIBASE.JSN'] = (HERE/'MIDIBASE.JSN').read_bytes()
     sound = dict(pack.identity(files['SOUND.DRV']),
                  crc32='%08x'%zlib.crc32(files['SOUND.DRV']))
     files['EVIDENCE/CLIENTS.JSN'] = dump(clients)
-    files['BUILD.JSN'] = dump({'native_builds': builds, 'canonical_sound': sound})
+    files['BUILD.JSN'] = dump({'native_builds': builds, 'canonical_sound': sound, 'runtime_base':builder.MIDI_BASE})
     lines = ['TWSETUP1']
     for name in sorted(n for n in files if '/' not in n and n != 'BUILD.JSN'):
         kind = clients[name]['kind'] if name in clients else ('S' if name == 'SOUND.DRV' else 'A')
@@ -101,7 +132,7 @@ def shared_fixture(root):
              {name: row['runtime'] for name,row in clients.items()}}
     for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),
                      ('midiclk','MIDICLK.DLL'),('mcitndy','MCITNDY.DLL'),
-                     ('setup','SETUP.EXE'),('launcher','TPLAY.EXE')):
+                     ('setup','SETUP.EXE'),('launcher','TPLAY.EXE'),('player','MINIPLAY.EXE')):
         tests[key] = pack.identity(files[name])
     files['TESTS.JSN'] = dump(tests)
     files['MANIFEST.JSN'] = dump({name: pack.identity(data) for name,data in files.items()})

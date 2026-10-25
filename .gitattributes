@@ -12,3 +12,5 @@ src/win30/TEXIT/** -text
 experimental/WINLIB30/SOURCE/** -text
 tools/WINAMP/** -text
 artifacts/win30/TWXT2.ZIP -text
+
+src/win30/PLAYER/** -text

@@ -57,6 +57,21 @@ def verify(files, current=True):
                     path = REPO/'src/win30/LAUNCH/TPLAYPOL.H'
                 require(ident(path.read_bytes()) == pin, 'Current source differs: '+str(path))
     builder.clock_receipts(files, builds)
+    require(builder.player_receipt(files) == builds['player'], 'Unlinked native player receipt')
+    require(json.loads(files['BUILD.JSN'])['runtime_base'] == builder.MIDI_BASE and
+            json.loads(files['EVIDENCE/MIDIBASE.JSN']) == builder.MIDI_BASE,
+            'Published MIDI runtime baseline differs')
+    builder.frozen_runtime(files)
+    for name,wanted in builds['player']['sources'].items():
+        data = files['SOURCE/PLAYER/'+name]
+        require(files.get('SRC/SOURCE/'+name) == data and files.get('DEPS/'+name) == data,
+                'Missing/stale current player source copy: '+name)
+        for path,value in files.items():
+            if path.rsplit('/',1)[-1] == name and builder.current_player_copy(path):
+                require(value == data, 'Stale duplicate current player source: '+path)
+        if current:
+            require(ident((REPO/'src/win30/PLAYER'/name).read_bytes()) == wanted,
+                    'Current player source differs: '+name)
     for label in builder.CLOCK_SOURCES:
         require(json.loads(files['EVIDENCE/'+label.upper()+'.JSN']) == builds[label],
                 'Native source receipt differs: '+label)
@@ -80,7 +95,7 @@ def verify(files, current=True):
             'Current published baseline reconciliation is incomplete')
     for key,name in (('sound','SOUND.DRV'),('rawclk','RAWCLK.DLL'),
                      ('midiclk','MIDICLK.DLL'),('mcitndy','MCITNDY.DLL'),
-                     ('setup','SETUP.EXE'),('launcher','TPLAY.EXE')):
+                     ('setup','SETUP.EXE'),('launcher','TPLAY.EXE'),('player','MINIPLAY.EXE')):
         require(tests[key] == ident(files[name]), 'Native tests cover another '+name)
     rows = files['PAYLOAD.LST'].decode('ascii').splitlines()
     require(rows.pop(0) == 'TWSETUP1', 'Wrong native Setup manifest')

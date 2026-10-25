@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import re
+import struct
 import zipfile
 import zlib
 
@@ -11,7 +12,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 BASE_SHA = '055f872e4af09d5f2a8f8bc961dfadbcf274d56380e827006d5e3d91a3d3b061'
 RUNTIME = ('CHIME.SND', 'LWFILE.DLL',
-           'MINIPLAY.EXE', 'PLUCK.TND', 'RESERVE.COM', 'SHORT.VGM',
+           'PLUCK.TND', 'RESERVE.COM', 'SHORT.VGM',
            'STREAM.MID', 'TBRIDGE.EXE')
 # These are the current three-DLL native link inputs, not SDK/toolchain files.
 CLOCK_SOURCES = {
@@ -27,6 +28,122 @@ CLOCK_SOURCES = {
                 'MIDISKIP.H SMF.C SMF.H').split()),
 }
 CLOCK_FILES = {'raw': 'RAWCLK.DLL', 'midi': 'MIDICLK.DLL', 'mci': 'MCITNDY.DLL'}
+
+
+MIDI_BASE = json.loads((HERE/'MIDIBASE.JSN').read_bytes())
+PLAYER_SOURCES = set(('BLDPLAY.BAT CDLG.H FMTAPP.C FMTAPP.H FMTCORE.C FMTCORE.H '
+    'GUNZIP.C GUNZIP.H LTWUI.C LTWUI.H LWAUDIO.H MCIAPI.H MINIPLAY.C '
+    'MINIPLAY.DEF MINIPLAY.RSP MODPLAY.C MODPLAY.H PLLIST.C PLLIST.H '
+    'RAWAPP.C RAWAPP.H RAWFILE.C RAWFILE.H TCBURST.H TIMECLK.H '
+    'VGM.C VGM.H VGMGRP.C VGMGRP.H').split())
+
+
+def player_sources(record, sources):
+    names = set(record['files'])
+    require(record.get('flags') == '/G0 /Gw /Gs /AS /W3 /Od',
+            'Player compile flags differ from the native 8086/small-model build')
+    require(PLAYER_SOURCES <= names, 'Missing compiled player source/header')
+    require(re.fullmatch('[0-9a-f]{40}', record.get('commit','')),
+            'Missing committed player source identity')
+    for name, wanted in record['files'].items():
+        require(re.fullmatch(r'[A-Z0-9_]{1,8}\.[A-Z0-9_]{1,3}', name),
+                'Unsafe player source name: '+name)
+        data = sources[name]
+        require(identity(data) == wanted, 'Player source identity differs: '+name)
+        for header in re.findall(rb'^\s*#\s*include\s*"([^"\r\n]+)"',data,re.M):
+            require(header.decode('ascii').upper() in names,
+                    'Unpinned player include: '+header.decode('ascii'))
+    for obj in re.findall(rb'\b([A-Z0-9_]+)\.OBJ\b',sources['MINIPLAY.RSP'].upper()):
+        require(obj.decode()+'.C' in names or obj.decode()+'.ASM' in names,
+                'Unpinned player link unit: '+obj.decode())
+
+
+def player_receipt(files):
+    source = json.loads(files['EVIDENCE/PLAYERSR.JSN'])
+    result = json.loads(files['EVIDENCE/PLAYER.JSN'])
+    process_bytes = files['EVIDENCE/PLAYERPR.JSN']
+    process = json.loads(process_bytes)
+    require(result.get('status') == 'COMPILED_RUNTIME_ACCEPTANCE_PENDING',
+            'Player native build is unfinished')
+    require(result.get('source') == source and result.get('process') == process,
+            'Player build/source/process receipts differ')
+    require(process.get('return') == 0 and process.get('owned_child_stopped') is True and
+            process.get('lease_released') is True and not process.get('watchdog') and
+            'error' not in process, 'Player native process did not finish normally')
+    log = files['EVIDENCE/PLAYER.LOG']
+    require(b'PASS NATIVE PLAYER BUILD' in log and
+            not re.search(rb'^\s*FAIL\b',log,re.M), 'Player native build has not passed')
+    binary = files['MINIPLAY.EXE']
+    require(len(binary)>=64 and binary[:2]==b'MZ', 'Player is not a native executable')
+    at = struct.unpack_from('<I',binary,60)[0]
+    require(at+64<=len(binary) and binary[at:at+2]==b'NE' and
+            struct.unpack_from('<H',binary,at+62)[0]==0x300,
+            'Player native NE/version differs')
+    runtime = identity(binary)
+    require(result['runtime'] == runtime and result['NE']['identity'] == runtime,
+            'Player native binary differs')
+    ne = result['NE']
+    require(ne['expected_windows_version'] == 0x300 and ne['CODE_minimum_bytes'] <= 65536 and
+            ne['DGROUP_minimum_bytes']+ne['heap_bytes']+ne['stack_bytes'] <= 65536,
+            'Player is outside native Windows3.0/small-model limits')
+    require(identity(files['EVIDENCE/PLAYER.MAP']) == result['map'], 'Player native MAP differs')
+    sources = {n:files['SOURCE/PLAYER/'+n] for n in source['files']}
+    player_sources(source,sources)
+    return {'sources':source['files'], 'source_commit':source['commit'],
+            'flags':source['flags'], 'runtime':runtime,
+            'source_receipt':identity(files['EVIDENCE/PLAYERSR.JSN']),
+            'result_receipt':identity(files['EVIDENCE/PLAYER.JSN']),
+            'process_receipt':identity(process_bytes), 'map':result['map']}
+
+
+def native_player(directory, source):
+    source_record = json.loads((directory/'SOURCES.JSN').read_bytes())
+    for name, wanted in source_record['files'].items():
+        require(identity((source/name).read_bytes()) == wanted,
+                'Current player source differs: '+name)
+        require(identity((directory/name).read_bytes()) == wanted,
+                'Staged player source differs: '+name)
+    files = {'MINIPLAY.EXE':(directory/'MINIPLAY.EXE').read_bytes()}
+    for output,original in (('PLAYERSR.JSN','SOURCES.JSN'),('PLAYER.JSN','RESULT.JSN'),
+                            ('PLAYERPR.JSN','PROCESS.JSON'),('PLAYER.LOG','BUILD.LOG'),
+                            ('PLAYER.MAP','MINIPLAY.MAP')):
+        files['EVIDENCE/'+output] = (directory/original).read_bytes()
+    for name in source_record['files']:
+        files['SOURCE/PLAYER/'+name] = (directory/name).read_bytes()
+    return files,player_receipt(files)
+
+
+def frozen_runtime(files):
+    for name,wanted in MIDI_BASE['runtime'].items():
+        require(identity(files[name]) == wanted, 'Published MIDI runtime changed: '+name)
+
+
+def current_player_copy(path):
+    parts = path.upper().split('/')
+    if any(p in ('EVIDENCE','FROZEN','HISTORICAL','HISTORY','TESTS') for p in parts):
+        return False
+    return (path.startswith(('DEPS/','SRC/SOURCE/','SOURCE/PLAYER/')) or
+            (len(parts)==2 and parts[0]=='SRC') or
+            path.startswith(('SOURCE/RAW/','SOURCE/MIDI/','SOURCE/MCI/')))
+
+
+def install_player_sources(files, record, records):
+    sources = {n:files['SOURCE/PLAYER/'+n] for n in record['sources']}
+    for path in list(files):
+        name = path.rsplit('/',1)[-1]
+        if name not in sources or not current_player_copy(path):
+            continue
+        parts = path.split('/')
+        if len(parts)==3 and parts[0]=='SOURCE' and parts[1].lower() in CLOCK_SOURCES:
+            core = records[parts[1].lower()]['sources']
+            if name in core:
+                require(files[path] == sources[name], 'Player changed shared compiled header: '+name)
+                continue
+        del files[path]
+    for name,data in sources.items():
+        for prefix in ('SOURCE/PLAYER/','SRC/SOURCE/','DEPS/'):
+            files[prefix+name] = data
+
 
 
 def clock_sources(label, record, sources):
@@ -131,6 +248,8 @@ def build(a):
         if label in CLOCK_SOURCES:
             files['EVIDENCE/'+label.upper()+'PROC.JSN'] = (directory/'PROCESS.JSON').read_bytes()
     clock_receipts(files, records)
+    player_files,records['player'] = native_player(a.player, REPO/'src/win30/PLAYER')
+    files.update(player_files)
     clients = json.loads((a.clients/'PINS.JSN').read_bytes())
     require(len(clients) == 7, 'Expected the current Windows XT clients and paired input dependency')
     for name,record in clients.items():
@@ -167,6 +286,8 @@ def build(a):
         require(tests.get(key) == identity(files[name]), 'Tests cover another '+name)
     require(tests.get('setup') == identity(files['SETUP.EXE']), 'Tests cover another Setup')
     require(tests.get('launcher') == identity(files['TPLAY.EXE']), 'Tests cover another launcher')
+    require(tests.get('player') == identity(files['MINIPLAY.EXE']), 'Tests cover another player')
+    frozen_runtime(files)
     require(tests.get('clients') == {n:r['runtime'] for n,r in clients.items()},
             'Tests cover different shared client files')
     # Native Setup installs only these flat runtime files. The generated manifest
@@ -180,7 +301,7 @@ def build(a):
                     (kind, name, name,
                      len(data), zlib.crc32(data)))
     files['PAYLOAD.LST'] = ('\r\n'.join(rows)+'\r\n').encode('ascii')
-    # Preserve unchanged player/bridge source; replace every rebuilt DLL input.
+    # Preserve notices/frozen evidence; replace current rebuilt player/clock inputs.
     rebuilt = set(records['launch']['sources'])
     clock_inputs = {}
     for label in CLOCK_SOURCES:
@@ -203,21 +324,24 @@ def build(a):
                 files[name] = data
     for name, data in clock_inputs.items():
         files['DEPS/'+name] = data
+    install_player_sources(files, records['player'], records)
+    files['EVIDENCE/MIDIBASE.JSN'] = (HERE/'MIDIBASE.JSN').read_bytes()
     files['DEPS/README.TXT'] = (
         'Current MIDI/MCI and raw-clock link inputs are included here.\r\n'
         'The unchanged timer-bridge source is retained. Native source snapshots\r\n'
-        'are in SOURCE/DRIVER, RAW, MIDI, MCI, LAUNCH and SETUP.\r\n'
-        'The player and file browser source is in SRC. Native build receipts\r\n'
+        'are in SOURCE/DRIVER, RAW, MIDI, MCI, PLAYER, LAUNCH and SETUP.\r\n'
+        'Current player source is in SOURCE/PLAYER and SRC/SOURCE. Native receipts\r\n'
         'bind the current runtime bytes to those source snapshots.\r\n').encode('ascii')
     files['SRC/README.TXT'] = (
-        'Corresponding source for the unchanged player and file browser.\r\n'
+        'Current player source/builder is in SOURCE/PLAYER and SRC/SOURCE.\r\n'
+        'Unchanged file browser source and notices remain here.\r\n'
         'Run the native installer described by the packet-root INSTALL.TXT.\r\n'
         'Current shared driver, clocks, MIDI/MCI, launcher and Setup are in SOURCE.\r\n'
         'Historical test records retain their original binary scope.\r\n').encode('ascii')
     files['SOURCE/DRIVER/LICENSE'] = (REPO/'LICENSE').read_bytes()
     files['BUILD.JSN'] = (json.dumps({'baseline_xt1': BASE_SHA,
         'source_commit': a.source_commit, 'canonical_sound': sound,
-        'native_builds': records, 'clients': clients}, indent=2)+'\n').encode()
+        'native_builds': records, 'clients': clients, 'runtime_base': MIDI_BASE}, indent=2)+'\n').encode()
     files['MANIFEST.JSN'] = (json.dumps({n: identity(data) for n,data in
         sorted(files.items())}, indent=2)+'\n').encode()
     a.out.mkdir(parents=True)
@@ -247,7 +371,7 @@ def build(a):
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
-    for n in ('baseline','driver','raw','midi','mci','launch','setup','clients','workspace','tests','out'):
+    for n in ('baseline','driver','raw','midi','mci','launch','setup','player','clients','workspace','tests','out'):
         p.add_argument('--'+n,type=Path,required=True)
     p.add_argument('--source-commit',required=True)
     build(p.parse_args())
