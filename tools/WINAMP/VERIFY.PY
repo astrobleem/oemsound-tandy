@@ -180,7 +180,7 @@ def main():
         path=a.package.parent/(kit+'.ZIP')
         require(ident(path.read_bytes())==release['assets'][path.name],
                 'Instrument packet archive pin differs: '+kit)
-        pit.verify(path,kit)
+        pit.verify(path,kit,current=True)
         with zipfile.ZipFile(path) as archive:
             require(archive.read(kit+'/TWSETUP.EXE')==exe,
                     'Instrument packet uses another installer')

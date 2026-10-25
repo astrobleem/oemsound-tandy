@@ -1,9 +1,11 @@
 # Tandy Beats Lab validation and release gate
 
-Unpublished client update based on OEMSound main
-`18c5b271d9d24ed93d0929b23d06ea29a08e96bd`. Existing MML3AUTH/PITEXPR
-release bytes are unchanged. Publish capability descriptions with the
-coordinated native packet, after explicit publication approval.
+Qualified Tandy Beats Lab update. Application work began on OEMSound main
+18c5b271d9d24ed93d0929b23d06ea29a08e96bd; both current kits are composed
+against the published bank baseline c8dce49a24e83db28affccbc5f4c3b5937cb8109.
+Only the scoped Beats/Fiddle/app-local mapper bytes are replaced. Shared
+installer/Winamp bank bytes, companion instruments and frozen snapshots stay
+exact. The user explicitly approved the presentation and publication.
 
 ## Ownership and current source
 
@@ -37,7 +39,7 @@ LOWPIT.MD describes the approved speaker-only lower-note extension.
   PIT divisors drive pitch. AUDIO.JSON includes per-note/lane measurements.
   These are software references, not analog or physical-hardware capture.
 
-Repository and relocated source layouts pass. PACKTEST.PY passes 20 tests,
+Repository and relocated source layouts pass. PACKTEST.PY passes 32 tests,
 including stale/failed native receipt refusal, compiled-source closure,
 paired-client identities, exact shared dependency preservation and demo
 creation from captured validated source rather than mutable live files.
@@ -56,7 +58,7 @@ source pins and all three runtime identities. The final native compile/link
 passed via the guarded DOSBox runner with normal return 0 and lease release.
 No other owner's emulator/process/lock was altered.
 
-Native build06 and the final Beats run passed on a disposable 640 KB HX /
+Functional native build06 and its Beats run passed on a disposable 640 KB HX /
 Windows 3.0 fixture using the published WINXT720 fixed 320x200 profile,
 its memory reservation helper and the exact shared SOUND bytes.
 
@@ -72,7 +74,7 @@ its memory reservation helper and the exact shared SOUND bytes.
   visual capture caught About wrapping past 200 pixels. It was reduced to
   nine short lines; the final native capture shows all branding, key hints
   and OK inside the screen. This was a real app correction, not a warning.
-- Both native scenarios returned to DOS. Only owned children were stopped,
+- Both functional native scenarios returned to DOS. Only owned children were stopped,
   and shared leases were released. No other owner's process/lock changed.
 
 Local evidence: beats-build-06/BUILD.JSON and PROCESS.JSON;
@@ -117,24 +119,35 @@ Open loads the exported MML; Beats Load opens editable .BTS patterns.
 Publication was explicitly authorized after branding discussion; complete
 the current-bank composition gate below before publishing.
 
-### Reconcile the bank publication before shipping
+### Common bank payload and reproducible baselines
 
-The qualified local packet uses the earlier shared installer/Winamp payload.
-Hold that packet for publication: the separately approved bank release is
-updating those dependencies. After its exact public identities are relayed,
-reconcile current main and compose against its newly pinned MML3AUTH base.
-PACK.PY reads that base's identity from tools/WINAMP/RELEASE.JSN and preserves
-its TWSETUP.EXE, TWXT2.ZIP and other shared members exactly. Keep the qualified
-Beats/Fiddle/mapper runtime hashes above; do not rebuild the music clients.
+Both kits are composed from the qualified bank publication at OEMSound
+merge c8dce49a24e83db28affccbc5f4c3b5937cb8109. TWXT2.ZIP remains 2420622
+bytes, SHA256 fed4fdec0bb5652a6da4c987b6b8e7a4f860f92f4a8e34aad30ac26b49fb3486;
+its embedded TWSETUP.EXE remains 389040 bytes, SHA256
+534790b2de96bee1d9b138d573acaad1898a231d8b7b96ef5c03a1cde48fa66f.
+The common package, installer and bank DLLs are never replaced with the
+older pre-bank candidate payload. VERIFY.PY checks their complete receipts
+and the installer's embedded members; app/UI benchmarks are not repeated.
 
-Verify the published base manifest, shared-package native receipts and the
-installer's embedded payload with tools/WINAMP/VERIFY.PY. Then verify the
-new authoring packet preserves those exact shared identities and the tested
-app/demo bytes. Replacing TWXT2.ZIP alone is insufficient: TWSETUP.EXE embeds
-its own installation payload. This is package composition plus scoped
-installer verification, without repeating app music/UI benchmarks. If the
-new publication lacks a compatible pinned authoring base or changes the
-shared SOUND/PIT contract, report that concrete exception before proceeding.
+RELEASE.JSN records beatlab_baseline_commit and beatlab_baselines. Restore
+the two original bank-baseline ZIPs from artifacts/win30 at that immutable
+commit into a new private directory, preserving bytes. Current artifacts
+contain finished clients and are deliberately refused as producer baselines.
+For example, developer Python subprocess.check_output(['git','show',
+'c8dce49a24e83db28affccbc5f4c3b5937cb8109:artifacts/win30/MML3AUTH.ZIP'])
+returns the exact baseline bytes; Path.write_bytes saves them without shell
+text-redirection encoding. Verify their declared pins before composing.
+
+Use PACK.PY --kit MML3AUTH --base-kit BANK-BASE/MML3AUTH.ZIP --build BUILD
+--out NEW-AUTH, and --kit PITEXPR --base-kit BANK-BASE/PITEXPR.ZIP --build
+BUILD --out NEW-INSTRUMENTS. PITEXPR reads the sibling MML3AUTH baseline for
+its frozen regression aliases, or accepts --regression-kit explicitly.
+Both recipes preserve the current TWSETUP/TWXT2 and companion apps, and
+reuse the qualified app/mapper/demo bytes. Published schema2 verification
+also compares current normalized native sources, headers and actual PITCORE
+with staged receipt bytes, so a later source edit cannot pass as a fresh
+native build. Frozen regression aliases remain historical.
 
 ### One current Beats app in both kits
 
@@ -161,7 +174,6 @@ BEATS.EXE/MIDIMAP.DRV paths and its unchanged companion executables;
 MML3AUTH retains BEATS/ and FIDDLE/. Kit guides and manifests reflect those
 layouts. Frozen source and historical receipts retain their original scope.
 
-Bank publication is the remaining package input gate; current main still
-has the previous shared payload. Publication is authorized, but do not
-release the older packet04 after the bank update. Recompose only from the
-exact relayed/public bank baseline and verify the embedded native installer.
+Bank composition now uses the exact published payload above. Publication is
+explicitly authorized; finish exact-head review/CI, publish only the scoped
+app packets/catalog, and verify anonymous downloads before reporting success.

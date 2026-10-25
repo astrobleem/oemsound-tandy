@@ -2,8 +2,8 @@ TANDY MUSIC TOOLS - ONE SHARED SOUND INSTALLATION
 
 For Tandy 1000 EX/HX, normal 640 KB, DOS and Windows 3.0 real mode.
 
-Download MML3AUTH.ZIP for Fiddle/Beats authoring, or PITEXPR.ZIP for
-Mini Piano, JoyMIDI, MiniMIDI and expressive Beats:
+Download MML3AUTH.ZIP for Tandy Beats Lab with Fiddle, or PITEXPR.ZIP for
+the same Tandy Beats Lab with Mini Piano, JoyMIDI and MiniMIDI:
 https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP
 https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITEXPR.ZIP
 

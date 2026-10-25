@@ -68,41 +68,43 @@ driver, installer and Winamp bytes are preserved. Beats, Fiddle and their\r
 paired app-local mapper are updated together; current build and demo\r
 identities are in BUILD.JSN. Older evidence retains its original scope.\r
 '''
-BEATS_GUIDE = b'''Tandy Beats Lab - DAWs With Attitude\r
-Straight Outta LLMompton. Produced by Dr. DRAM.\r
-\r
-Click Demo to cycle Starter, Pocket drums, Lowrider lead, Speaker bass\r
-and Late-night keys. These original G-funk-style educational patterns\r
-contain no copied recordings, lyrics or recognizable song melodies.\r
-\r
-Click a grid cell to toggle note/rest. Arrows select; Space/Enter toggles;\r
-Pitch-/Pitch+ or +/- changes pitch; Delete rests. Click tone labels for shipped presets.\r
-PCspkr is row 5. Its visible PIT switch controls playback and export;\r
-the Speaker bass demo enables it automatically. No extra activation step.\r
-Tempo +/- or Page Down/Up changes BPM. Play starts at step 1. Stop/Escape\r
-releases sound; P/S works with grid focus, and F5 toggles playback.\r
-Tab/Shift+Tab navigates controls. About/F1 shows key controls.\r
-\r
-Enter NAME.BTS beside Load/Save. Save preserves all 40 cells, tempo,\r
-presets and PIT state; Load reopens them. Ctrl+S saves, Ctrl+O loads.\r
-Replacement asks first and keeps the previous file as .BAK. Bad input\r
-leaves the current edit intact. Ready editable examples are:\r
-  STARTER.BTS  POCKET.BTS  LOWRIDER.BTS  FIVE.BTS  NIGHT.BTS\r
-\r
-MML shows the generated score. Copy copies it; Export writes NAME.MML\r
-beside the app without replacing an existing .MML. Same-named demo .MML\r
-files are supplied for Fiddle. The grid loads .BTS, not arbitrary MML.\r
-\r
-Timing is straight eighths with 75 percent gate: no swing, glide, ties\r
-or per-cell velocity. PSG tones remain A2-C7 (MIDI 45-96). The updated\r
-app-local mapper and Fiddle [P] part accept PC speaker D1-C7 (26-96);\r
-Speaker bass uses A1/C2/D2 (33/36/38), about 55/65/73 Hz, without folding.\r
-The speaker has fixed level and no PSG preset envelope.\r
-\r
-Run the complete kit's TWSETUP.EXE from DOS for shared sound setup. Keep\r
-paired MIDIMAP.DRV beside Beats; do not install or swap it system-wide.\r
-Stop one sound producer before starting another.\r
-'''
+BEATS_GUIDE = b'''Tandy Beats Lab - DAWs With Attitude
+Straight Outta LLMompton. Produced by Dr. DRAM.
+
+Click Demo to cycle Starter, Pocket drums, Lowrider lead, Speaker bass
+and Late-night keys. These original G-funk-style educational patterns
+contain no copied recordings, lyrics or recognizable song melodies.
+
+Click a grid cell to toggle note/rest. Arrows select; Space/Enter toggles;
+Pitch-/Pitch+ or +/- changes pitch; Delete rests.
+
+Click tone labels for shipped presets.
+PCspkr is row 5. Its visible PIT switch controls playback and export;
+the Speaker bass demo enables it automatically. No extra activation step.
+Tempo +/- or Page Down/Up changes BPM. Play starts at step 1. Stop/Escape
+releases sound; P/S works with grid focus, and F5 toggles playback.
+Tab/Shift+Tab navigates controls. About/F1 shows key controls.
+
+Enter NAME.BTS beside Load/Save. Save preserves all 40 cells, tempo,
+presets and PIT state; Load reopens them. Ctrl+S saves, Ctrl+O loads.
+Replacement asks first and keeps the previous file as .BAK. Bad input
+leaves the current edit intact. Ready editable examples are:
+  STARTER.BTS  POCKET.BTS  LOWRIDER.BTS  FIVE.BTS  NIGHT.BTS
+
+MML shows the generated score. Copy copies it; Export writes NAME.MML
+beside the app without replacing an existing .MML. Same-named demo .MML
+files are supplied for Fiddle. The grid loads .BTS, not arbitrary MML.
+
+Timing is straight eighths with 75 percent gate: no swing, glide, ties
+or per-cell velocity. PSG tones remain A2-C7 (MIDI 45-96). The updated
+app-local mapper and Fiddle [P] part accept PC speaker D1-C7 (26-96);
+Speaker bass uses A1/C2/D2 (33/36/38), about 55/65/73 Hz, without folding.
+The speaker has fixed level and no PSG preset envelope.
+
+Run the complete kit's TWSETUP.EXE from DOS for shared sound setup. Keep
+paired MIDIMAP.DRV beside Beats; do not install or swap it system-wide.
+Stop one sound producer before starting another.
+'''.replace(b'\n', b'\r\n')
 
 
 def require(ok, message):
@@ -402,7 +404,7 @@ def verify_packet(path, expected, base, kit='MML3AUTH'):
     return pin(Path(path).read_bytes())
 
 
-def verify_release_packet(path, kit='MML3AUTH', release=None, expected=None):
+def verify_release_packet(path, kit='MML3AUTH', release=None, expected=None, current=False):
     """Read-only schema2 verification; no baseline ZIP, compiler or emulator."""
     layout = kit_layout(kit)
     raw = Path(path).read_bytes()
@@ -455,10 +457,16 @@ def verify_release_packet(path, kit='MML3AUTH', release=None, expected=None):
     for name,relative in SOURCE_PATHS.items():
         data = files['SOURCE/' + relative]
         require(data and data == crlf(data) and pin(data) == native['sources'][name], 'Published compiled source pin differs: ' + name)
+        if current:
+            require(crlf((ROOT/relative).read_bytes()) == data, 'Current compiled source differs: ' + name)
         original = native['source_originals'][name]
         require(isinstance(original.get('bytes'),int) and len(data.replace(b'\r\n',b'\n')) <= original['bytes'] <= len(data) and
                 re.fullmatch('[0-9a-f]{64}',original.get('sha256','')), 'Published original source metadata differs: ' + name)
     require(files['SOURCE/src/win30/FIDDLE/MIDIAPI.H'] == files[SOURCE_PREFIX+'MIDIAPI.H'], 'Published MIDI source headers differ')
+    if current:
+        require(crlf((ROOT/'src/win30/FIDDLE/MIDIAPI.H').read_bytes()) == files['SOURCE/src/win30/FIDDLE/MIDIAPI.H'], 'Current Fiddle MIDI header differs')
+        for member,relative in REGRESSION_INPUTS.items():
+            require((ROOT/relative).read_bytes() == files[member], 'Current regression input differs: ' + relative)
     require(set(native.get('runtimes',{})) == set(RUNTIME_PATHS) and native.get('runtime') == native['runtimes']['BEATS.EXE'] and
             record['runtimes'] == native['runtimes'], 'Published native runtime inventory differs')
     for name,paths in layout['runtimes'].items():

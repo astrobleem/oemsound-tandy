@@ -404,6 +404,27 @@ class LayoutAndPublishedTests(unittest.TestCase):
         self.assertIn(pack.SOURCE_PREFIX+'HOSTTEST.PY',flat)
         self.assertIn(pack.SOURCE_PREFIX+'TESTS/legacy_parser.c',flat)
 
+    def test_current_checkout_drift_refuses_stale_packaged_runtime(self):
+        files = self.files['PITEXPR']
+        path = self.write('PITEXPR',files)
+        checkout = self.out/'checkout'
+        for name,data in files.items():
+            if name.startswith('SOURCE/'):
+                target = checkout/name[len('SOURCE/'):]
+                target.parent.mkdir(parents=True,exist_ok=True)
+                target.write_bytes(data)
+        with patch.object(pack,'ROOT',checkout):
+            pack.verify_release_packet(path,'PITEXPR',release=self.release,current=True)
+            for relative in ('src/win30/BEATLAB/BEATS.C',
+                             'src/win30/FIDDLE/MIDIAPI.H','src/win30/DRIVER/PITCORE.H'):
+                target = checkout/relative
+                original = target.read_bytes()
+                target.write_bytes(original+b'\r\n/* changed after packaging */\r\n')
+                with self.subTest(source=relative):
+                    with self.assertRaisesRegex(ValueError,'Current'):
+                        pack.verify_release_packet(path,'PITEXPR',release=self.release,current=True)
+                target.write_bytes(original)
+
     def test_explicit_bank_baseline_remains_accepted_after_asset_promotion(self):
         release = copy.deepcopy(self.release)
         for kit in pack.KITS:
