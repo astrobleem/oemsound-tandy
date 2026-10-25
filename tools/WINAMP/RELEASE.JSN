@@ -1,35 +1,46 @@
 {
   "tag": "windows-xt",
-  "source_commit": "4f0d22c07028fc8d7c14134ceb6c54d399fa3009",
+  "source_commit": "9f14ffa177f986b725e124a86344a401d8febead",
   "package": {
-    "bytes": 2373822,
-    "sha256": "a65e1ae06b3fc874809a907bb94b6420c7e8490e2b8ca3776cbfda28ef81fd79"
+    "bytes": 2420622,
+    "sha256": "fed4fdec0bb5652a6da4c987b6b8e7a4f860f92f4a8e34aad30ac26b49fb3486"
   },
   "installer": {
-    "bytes": 386593,
-    "sha256": "e2cc290d46101a0268530308a0d16cf7d4bc997b9a03fcb0f68fd7882a7ae236"
+    "bytes": 389040,
+    "sha256": "534790b2de96bee1d9b138d573acaad1898a231d8b7b96ef5c03a1cde48fa66f"
   },
   "assets": {
     "TWXT2.ZIP": {
-      "bytes": 2373822,
-      "sha256": "a65e1ae06b3fc874809a907bb94b6420c7e8490e2b8ca3776cbfda28ef81fd79"
+      "bytes": 2420622,
+      "sha256": "fed4fdec0bb5652a6da4c987b6b8e7a4f860f92f4a8e34aad30ac26b49fb3486"
     },
     "TWSETUP.EXE": {
-      "bytes": 386593,
-      "sha256": "e2cc290d46101a0268530308a0d16cf7d4bc997b9a03fcb0f68fd7882a7ae236"
+      "bytes": 389040,
+      "sha256": "534790b2de96bee1d9b138d573acaad1898a231d8b7b96ef5c03a1cde48fa66f"
     },
     "MML3AUTH.ZIP": {
-      "bytes": 3121015,
-      "sha256": "c78c4487b59cf8e85fa0e5f946db10168ea21a752964bc2dcd0d3b87c25f1c44"
+      "bytes": 3170486,
+      "sha256": "1f2ec0aad62478715d7c3eb0b185df9a5801594ea875acfb28fb76853c644210"
     },
     "PITEXPR.ZIP": {
-      "bytes": 3162052,
-      "sha256": "625dc5d0eb6bfd68facf07cf45a4722daf7aff9ef71e4925ec3846f264d3ab17"
+      "bytes": 3211523,
+      "sha256": "fa4a93abf03682d750318a1d79ebf26a2a845e402a5d8a52660cd188235b816d"
     }
   },
   "native_tests": {
-    "bytes": 58758,
-    "sha256": "1af61757b56e64387266850ffee945bab805269814cbca53ae14744c7be281d3"
+    "bytes": 81331,
+    "sha256": "f8e8ebbaa2d74a2f68142f49d023dba08e47ef99279583a948de067c97192c2a"
   },
-  "current_baseline": "734040674b7b4ea35b946c5703234e43722492f7"
+  "current_baseline": "734040674b7b4ea35b946c5703234e43722492f7",
+  "bank_native_evidence": {
+    "path": "experimental/WINLIB30/NATIVE/BANKS.JSN",
+    "identity": {
+      "bytes": 15516,
+      "sha256": "c712b359c4339b96e00a41a97e6b4d64c709a4e556f932f159c1c35f66c8099a"
+    }
+  },
+  "exact_final_smoke": {
+    "bytes": 6367,
+    "sha256": "b5c9ee356376067ade7f4c3320861938a6ff3ad9a7978e1e080aae2f6050dfa2"
+  }
 }

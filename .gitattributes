@@ -14,3 +14,14 @@ tools/WINAMP/** -text
 artifacts/win30/TWXT2.ZIP -text
 
 src/win30/PLAYER/** -text
+
+# Current bank regression inputs retain their recorded bytes.
+experimental/WINLIB30/TESTS/AUDITION/** -text
+experimental/WINLIB30/TESTS/BANK* -text
+experimental/WINLIB30/TESTS/BTRACE.C -text
+experimental/WINLIB30/TESTS/RUNBANK.PY -text
+experimental/WINLIB30/TESTS/live_host.c -text
+experimental/WINLIB30/TESTS/mdhost/driver.c -text
+experimental/WINLIB30/TESTS/mci_admission_host.c -text
+
+experimental/WINLIB30/NATIVE/BANKS.JSN -text

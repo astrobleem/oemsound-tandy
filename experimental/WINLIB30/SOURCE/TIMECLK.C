@@ -405,14 +405,19 @@ WORD TCAPI TCXPairPush(TCXPAIR FAR *source){WORD flags,t,i;
  pairMode=1;published=source->frame.at;
  tail=(tail+1)&(TC_CAP-1);count++;RestoreIRQ(flags);return 0;
 }
-WORD TCAPI TCXPairLive(TCXPAIR FAR *source){WORD flags;
+WORD TCAPI TCXPairLive(TCXPAIR FAR *source){WORD flags,status;
  if(!owns()||!source||bassMode!=2||burstMode)return 1;
  if(!pairMode&&(count||sent||active))return 1;
  pairFirst=*source;
  if(pairFirst.frame.at||!validPair(&pairFirst))return 3;
- if(timer&&(userPaused||HiStatus()||
-    (active?!HiMetric(9):HiMetric(9))))return 1;
- flags=SaveIRQ();head=tail=count=end=finished=error=0;restorePending=0;
+ /* Broker1=armed/2=running is the valid owned clock, not an error.
+    A stopped generation requires idle0 and no callback; stop-pending3
+    or a missing active callback must still refuse without mutation. */
+ flags=SaveIRQ();
+ if(timer){status=HiStatus();if(userPaused||(active?
+    ((status!=1&&status!=2)||!HiMetric(9)):(status||HiMetric(9)))){
+     RestoreIRQ(flags);return 1;}}
+ head=tail=count=end=finished=error=0;restorePending=0;
  if(timer)epoch=lastStamp=HiRead();else epoch=0xffffffffUL;
  clockCycles=published=lastDue=0;sent=1;pairMode=1;
  pairLast=pairFirst;pairOutput(1);RestoreIRQ(flags);return 0;

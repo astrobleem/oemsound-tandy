@@ -16,6 +16,7 @@ arrangements** through the Tandy PSG.
 *Windows 3.0 player capture. [Capture details](docs/SHOTS/WINAMPCL.MD).*
 
 - **Browse/Add:** choose songs from the Windows file browser.
+- **MIDI instruments:** choose Default or Chamber; Winamp remembers your choice.
 - **32-song playlist:** scroll past the visible rows or use Home, End and Page Up/Down.
 - **Remove while playing:** change the list without deleting the song or stopping it.
 - **A proper player window:** the title stays **Tandy Winamp**, with track and status inside.

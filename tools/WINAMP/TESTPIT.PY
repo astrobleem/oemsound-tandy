@@ -227,6 +227,18 @@ def main():
             check('TSOUND.DRV' not in output)
             check(output['INSTALL.TXT'] != files['INSTALL.TXT'])
             check(json.loads(output['BUILD.JSN'])['qualification']['fresh_pitexpr_native_claim'] is False)
+            refreshed = root/(kit+'-refreshed')
+            current_zip = first/(kit+'.ZIP')
+            current_sha = pack.identity(current_zip.read_bytes())['sha256']
+            pack.refresh(kit,current_zip,current_sha,shared,shared_sha,exe,tests,refreshed)
+            with zipfile.ZipFile(refreshed/(kit+'.ZIP')) as z:
+                refreshed_files = {n[len(kit)+1:]:z.read(n) for n in z.namelist()}
+            for name,data in output.items():
+                if name not in ('BUILD.JSN','MANIFEST.JSN'):
+                    check(refreshed_files[name] == data)
+            check(json.loads(refreshed_files['BUILD.JSN'])['common_refresh']['preserved_application_members'])
+            rejected(lambda: pack.refresh(kit,current_zip,'0'*64,shared,shared_sha,exe,tests,root/'badrefresh'),
+                     'wrong pinned current app packet')
             rejected(lambda: pack.original(kit, archive, '0'*64), 'wrong original input pin')
             corrupt = dict(files)
             runtime = next(name for name in files if name.endswith('.EXE'))
