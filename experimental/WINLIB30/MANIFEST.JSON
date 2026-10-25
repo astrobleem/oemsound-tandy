@@ -337,6 +337,11 @@
       "sha256": "24124b7ca9b842c8b2e59c9adb9282999e72a402c2c3ed941cde9bfd772ae59f"
     },
     {
+      "path": "TESTS/BANKFILE.C",
+      "bytes": 2319,
+      "sha256": "486b9faa1dfa8c6cb1d3022978a2e6bef31f4e8070dda0bd06c1d49bafa5a878"
+    },
+    {
       "path": "TESTS/BANKLIVE.C",
       "bytes": 1678,
       "sha256": "b72eab832c1eb010aa1b72294d8e5e2b6f3c15da16c5b7c053c1b42406b7f3c0"
@@ -380,6 +385,11 @@
       "path": "TESTS/FACADE/windows.h",
       "bytes": 353,
       "sha256": "826e1f425dd0212cb6ba86971ea8ad4c58ab8db973b9dfe7180c2f6bcd63b431"
+    },
+    {
+      "path": "TESTS/FIXTURES/STREAM.MID",
+      "bytes": 3100,
+      "sha256": "5ffbdbbb556f2c9964cdedfea6d58ec9f74746f65ef7c6c5083523be5016ac76"
     },
     {
       "path": "TESTS/NATIVE/FIXTURE-INPUTS.JSON",
@@ -483,8 +493,8 @@
     },
     {
       "path": "TESTS/RUNBANK.PY",
-      "bytes": 2134,
-      "sha256": "e06e4556769dac1437f590983e12c7a42611def33f2773b3a309af03306d097c"
+      "bytes": 2332,
+      "sha256": "2175145505dd8ca6a04f5608a00cc1c88db5ba3c2eaf93bb3e8ca9817ca9c54a"
     },
     {
       "path": "TESTS/beat_host.c",
