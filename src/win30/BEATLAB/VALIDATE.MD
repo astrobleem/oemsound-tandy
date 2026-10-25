@@ -106,7 +106,7 @@ code; compile/link completed successfully. No raw host GCC/cc1 was launched.
 ## Candidate packet
 
 ```
-python src/win30/BEATLAB/PACK.PY --base-kit artifacts/win30/MML3AUTH.ZIP --build <native-build> --out <new-output>
+python src/win30/BEATLAB/PACK.PY --base-kit BANK-BASE/MML3AUTH.ZIP --build <native-build> --out <new-output>
 ```
 
 PACK.PY replaces only BEATS.EXE, paired MIDIMAP.DRV and MMLFIDL.EXE runtime
@@ -124,7 +124,7 @@ the current-bank composition gate below before publishing.
 Both kits are composed from the qualified bank publication at OEMSound
 merge c8dce49a24e83db28affccbc5f4c3b5937cb8109. TWXT2.ZIP remains 2420622
 bytes, SHA256 fed4fdec0bb5652a6da4c987b6b8e7a4f860f92f4a8e34aad30ac26b49fb3486;
-its embedded TWSETUP.EXE remains 389040 bytes, SHA256
+the matching self-contained TWSETUP.EXE remains 389040 bytes, SHA256
 534790b2de96bee1d9b138d573acaad1898a231d8b7b96ef5c03a1cde48fa66f.
 The common package, installer and bank DLLs are never replaced with the
 older pre-bank candidate payload. VERIFY.PY checks their complete receipts
