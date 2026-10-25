@@ -6,9 +6,9 @@ import json
 import shutil
 import zlib
 
-SPECS = (('TSHELL.EXE','W','tshell3'), ('TCHIME.EXE','X','chime3'),
-         ('XPCHIME.EXE','X','xpchime3'), ('TEXIT.EXE','X','texit3'),
-         ('TP.EXE','X','tp3'), ('FIXXT.EXE','X',None),
+SPECS = (('TSHELL.EXE','W','tshell'), ('TCHIME.EXE','X','chime'),
+         ('XPCHIME.EXE','X','xpchime'), ('TEXIT.EXE','X','texit'),
+         ('TP.EXE','X','tp'), ('FIXXT.EXE','X',None),
          ('TSINPUT.DLL','W','unchanged'))
 
 
@@ -20,6 +20,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('native','fixxt','display','workspace','out','header'):
         p.add_argument('--'+name,type=Path,required=True)
+    p.add_argument('--client-suffix',required=True)
     a=p.parse_args()
     if a.out.exists():p.error('Output must be new')
     entries={}; sources={}; table=[]
@@ -44,7 +45,7 @@ def main():
             table.append('    {"%s",\'%s\',%dUL,0x%08xUL,%dUL,0x%08xUL}'%
                 (name,kind,len(data),zlib.crc32(data),len(data),zlib.crc32(data)))
             continue
-        build=a.native/folder if folder else a.fixxt
+        build=a.native/(folder+a.client_suffix) if folder else a.fixxt
         record=json.loads((build/'BUILD.JSON').read_bytes())
         data=(build/name).read_bytes()
         wanted=record['runtime'][name] if folder else record['runtime']

@@ -15,6 +15,26 @@ def identity(path):
     data = path.read_bytes()
     return {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
 
+def module_imports(exe):
+    if exe[:2] != b'MZ' or len(exe) < 64:
+        raise ValueError('Missing DOS application header')
+    ne = struct.unpack_from('<I', exe, 0x3c)[0]
+    if ne+64 > len(exe) or exe[ne:ne+2] != b'NE':
+        raise ValueError('Missing Win16 NE header')
+    count = struct.unpack_from('<H', exe, ne+0x1e)[0]
+    module_table = ne+struct.unpack_from('<H', exe, ne+0x28)[0]
+    import_table = ne+struct.unpack_from('<H', exe, ne+0x2a)[0]
+    if count > 64 or module_table+2*count > len(exe):
+        raise ValueError('Invalid module reference table')
+    names = []
+    for i in range(count):
+        at = import_table+struct.unpack_from('<H', exe, module_table+2*i)[0]
+        if at >= len(exe) or not 1 <= exe[at] <= 64 or at+1+exe[at] > len(exe):
+            raise ValueError('Invalid imported module name')
+        names.append(exe[at+1:at+1+exe[at]].decode('ascii').upper())
+    return names
+
+
 def build(here, name, sources, header):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--dosbox', type=Path, required=True)
@@ -87,8 +107,11 @@ exit
         raise RuntimeError('Unexpected Win16 EXE target')
     struct.pack_into('<H', exe, ne+0x3e, 0x0300)
     binary.write_bytes(exe)
+    imports = module_imports(exe)
+    if 'SOUND' in imports:
+        raise RuntimeError('Early SOUND import: use dynamic installed-driver entry points')
     result = {'target': 'Windows 3.0 real mode; 8086; MSC6/LINK4',
-              'compiler_flags': '/G0 /Gw /AS /W3 /Od',
+              'compiler_flags': '/G0 /Gw /AS /W3 /Od', 'imports': imports,
               'sources': {n: identity(path) for n, path in inputs.items()},
               'toolchain': {n: identity(tool/n) for n in TOOLS},
               'build_wrapper': identity(here/'BUILD.PY'),
