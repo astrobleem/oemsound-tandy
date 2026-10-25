@@ -78,6 +78,15 @@ def main():
             'Observer graphics/playback completion missing')
     require('PITEmulatedControlBits' in logs['UNIFYQA.LOG']['checks'],
             'Current emulated port61 assertion missing')
+    required_primary = ('ObserverDeferredChecks', 'PrimaryTSHELLConfigured',
+                        'PrimaryTSHELLInstalledPath', 'PrimaryTSHELLTaskInstance',
+                        'PrimaryTSHELLIdentityStable', 'PrimaryTSHELLStartupSettled',
+                        'PrimaryTSHELLSoundIdle', 'PrimaryTSHELLShutdownIdentity',
+                        'ObserverSurvivedPrimaryTeardown', 'PrimaryTSHELLUnloaded',
+                        'PrimaryTSHELLWindowGone', 'PrimaryTSHELLCleanupSoundIdle')
+    require(all(name in logs['UNIFYQA.LOG']['checks']
+                for name in required_primary),
+            'Actual initial primary-shell identity/teardown qualification missing')
     clients = {name: identity(a.guest / a.app / name) for name in
                ('TCHIME.EXE', 'XPCHIME.EXE', 'TEXIT.EXE', 'TP.EXE')}
     clients['WINDOWS/TSHELL.EXE'] = identity(a.guest / a.windows / 'TSHELL.EXE')

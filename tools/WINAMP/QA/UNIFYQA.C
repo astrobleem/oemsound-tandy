@@ -11,7 +11,7 @@ static TANDYPITPROC pit;
 static TPGET lease;
 static QBEEP beep;
 static HWND player,window;
-static WORD phase,frames,rounds;
+static WORD phase,frames,rounds,checksPending,checksRunning;
 static DWORD started,wholeRun;
 static char soundFile[128],displayFile[128],child[160];
 static char expectedSound[128],expectedDisplay[32],application[128];
@@ -293,6 +293,83 @@ static void actualclients(void)
     CloseSound();
     check("ClientsFinalAvailable",psg(1,TSG_QUERY),0);
 }
+/* The initial application can now run under the real primary shell.
+   Validate its installed identity before any shutdown notification. */
+static int primaryshell(void)
+{
+    char dir[128],expected[144],ini[144],selected[80],loaded[128];
+    HWND bar;
+    HMODULE module;
+    WORD instance;
+    HTASK task;
+    DWORD began,quietAt=0;
+    int configured,quiet=0,settled=0,identity,unloaded;
+    GetWindowsDirectory(dir,sizeof(dir));
+    lstrcpy(expected,dir);lstrcat(expected,"\\TSHELL.EXE");
+    lstrcpy(ini,dir);lstrcat(ini,"\\SYSTEM.INI");
+    GetPrivateProfileString("boot","shell","",selected,sizeof(selected),ini);
+    text("initial_shell_selection",selected);
+    module=GetModuleHandle("TSHELL");bar=FindWindow("TandyStart",0);
+    if(!lstrcmpi(selected,"PROGMAN.EXE")) {
+        check("LegacyPrimaryNoUnexpectedTSHELL",!module&&!bar,1);
+        return !module&&!bar;
+    }
+    configured=!lstrcmpi(selected,"TSHELL.EXE")||
+               !lstrcmpi(selected,expected);
+    check("PrimaryTSHELLConfigured",configured,1);
+    if(!configured) return 0;
+    check("PrimaryTSHELLModule",module!=0,1);
+    check("PrimaryTSHELLWindow",bar!=0&&IsWindow(bar),1);
+    if(!module||!bar||!IsWindow(bar)) return 0;
+    loaded[0]=0;GetModuleFileName(module,loaded,sizeof(loaded));
+    text("initial_primary_shell",loaded);
+    identity=!lstrcmpi(loaded,expected);
+    check("PrimaryTSHELLInstalledPath",identity,1);
+    instance=GetWindowWord(bar,GWW_HINSTANCE);task=GetWindowTask(bar);
+    loaded[0]=0;
+    GetModuleFileName((HMODULE)instance,loaded,sizeof(loaded));
+    identity=identity&&instance&&!lstrcmpi(loaded,expected)&&
+             task&&task!=GetCurrentTask();
+    check("PrimaryTSHELLTaskInstance",identity,1);
+    if(!identity) return 0;
+    began=GetTickCount();
+    while(GetTickCount()-began<4000UL) {
+        identity=GetModuleHandle("TSHELL")==module&&IsWindow(bar)&&
+                 GetWindowWord(bar,GWW_HINSTANCE)==instance&&
+                 GetWindowTask(bar)==task;
+        if(!identity) break;
+        if(!GetModuleHandle("TCHIME")&&!GetModuleHandle("XPCHIME")&&
+           psg(1,TSG_QUERY)==0) {
+            if(!quiet) { quiet=1;quietAt=GetTickCount(); }
+            if(GetTickCount()-quietAt>=500UL) { settled=1;break; }
+        } else quiet=0;
+        Yield();
+    }
+    check("PrimaryTSHELLIdentityStable",identity,1);
+    check("PrimaryTSHELLStartupSettled",settled,1);
+    check("PrimaryTSHELLSoundIdle",psg(1,TSG_QUERY),0);
+    if(!identity||!settled) return 0;
+    /* Revalidate the exact task/instance/path after every yielding wait. */
+    loaded[0]=0;
+    GetModuleFileName((HMODULE)GetWindowWord(bar,GWW_HINSTANCE),
+                      loaded,sizeof(loaded));
+    identity=GetModuleHandle("TSHELL")==module&&IsWindow(bar)&&
+             GetWindowWord(bar,GWW_HINSTANCE)==instance&&
+             GetWindowTask(bar)==task&&!lstrcmpi(loaded,expected);
+    check("PrimaryTSHELLShutdownIdentity",identity,1);
+    if(!identity) return 0;
+    text("primary_teardown","WM_ENDSESSION(TRUE)");
+    SendMessage(bar,WM_ENDSESSION,TRUE,0L);
+    check("ObserverSurvivedPrimaryTeardown",1,1);
+    began=GetTickCount();
+    while(GetModuleHandle("TSHELL")&&GetTickCount()-began<3000UL) Yield();
+    unloaded=GetModuleHandle("TSHELL")==0;
+    check("PrimaryTSHELLUnloaded",unloaded,1);
+    check("PrimaryTSHELLWindowGone",!IsWindow(bar),1);
+    check("PrimaryTSHELLCleanupSoundIdle",psg(1,TSG_QUERY),0);
+    sameSound("PrimarySameInstalledSound");
+    return unloaded&&!IsWindow(bar);
+}
 static void shellcase(int busy)
 {
     char dir[128],command[160],configuration[144],selected[32];
@@ -391,6 +468,21 @@ static void stoprun(void)
 LONG FAR PASCAL WndProc(HWND w,WORD m,WORD a,LONG b)
 {
     if(m==WM_TIMER) {
+        if(checksRunning) return 0L;
+        if(checksPending) {
+            checksPending=0;checksRunning=1;
+            check("ObserverDeferredChecks",1,1);
+            if(!primaryshell()) {
+                check("PrimaryShellPrecondition",0,1);
+                checksRunning=0;stoprun();return 0L;
+            }
+            legacy();leases();actualclients();shellstartup();
+            started=GetTickCount();
+            wsprintf(child,"%s\\MINIPLAY.EXE",(LPSTR)application);
+            check("PlayerLaunch",WinExec(child,SW_SHOWNORMAL)>31,1);
+            checksRunning=0;
+            return 0L;
+        }
         if(GetTickCount()-wholeRun>75000UL) {
             check("WholeRunTimeout",0,1);
             stoprun();
@@ -462,7 +554,7 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE prev,LPSTR cmd,int show)
 {
     WNDCLASS wc;
     MSG msg;
-    WORD i;
+    WORD i,registered,timerReady;
     char *p=(char *)&wc;
     qlog=_lcreat("C:\\UNIFYQA.LOG",0);
     if(qlog==HFILE_ERROR) {
@@ -474,19 +566,22 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE prev,LPSTR cmd,int show)
                      sizeof(application));
     wholeRun=GetTickCount();
     if(!exports()) { finishlog();ExitWindows(0L,0);return 1; }
-    legacy();leases();actualclients();shellstartup();
+    checksPending=1;
     for(i=0;i<sizeof(wc);++i) p[i]=0;
     wc.lpfnWndProc=WndProc;wc.hInstance=inst;wc.lpszClassName="UNIFYQA";
     wc.hbrBackground=GetStockObject(WHITE_BRUSH);
-    check("RegisterObserver",RegisterClass(&wc)!=0,1);
+    registered=RegisterClass(&wc)!=0;
+    check("RegisterObserver",registered,1);
+    if(!registered) { finishlog();ExitWindows(0L,0);return 21; }
     window=CreateWindow("UNIFYQA","Unified sound graphics check",
            WS_OVERLAPPEDWINDOW,350,20,120,90,0,0,inst,0L);
     check("CreateObserver",window!=0,1);
+    if(!window) { finishlog();ExitWindows(0L,0);return 22; }
     ShowWindow(window,SW_SHOW);
-    check("ObserverTimer",SetTimer(window,1,200,0)!=0,1);
+    timerReady=SetTimer(window,1,200,0)!=0;
+    check("ObserverTimer",timerReady,1);
+    if(!timerReady) { finishlog();ExitWindows(0L,0);return 23; }
     started=GetTickCount();
-    wsprintf(child,"%s\\MINIPLAY.EXE",(LPSTR)application);
-    check("PlayerLaunch",WinExec(child,SW_SHOWNORMAL)>31,1);
     while(GetMessage(&msg,0,0,0)) {
         TranslateMessage(&msg);DispatchMessage(&msg);
     }

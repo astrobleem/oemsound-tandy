@@ -59,3 +59,19 @@ Remaining separate acceptance: Tetris client execution if source is located,
 installer upgrade/repair/rollback/refusal tests, bridge
 cleanup logs and waveform inspection. This source does not claim any
 execution, physical-hardware qualification, or those independent cases.
+
+Initial actual-primary acceptance now precedes the legacy and manual-shell
+cases. Functional checks run from the first observer timer dispatch after
+its message loop starts, allowing the primary shell's startup launch call
+to return. The observer verifies selected/loaded Windows-root TSHELL, the
+bar's instance path and stable distinct task, then500ms of idle/no-chime
+state. Only after revalidating that exact identity does it send the normal
+WM_ENDSESSION(TRUE) notification. It requires observer survival, shell/window
+unload and unchanged idle SOUND before the existing manual idle/busy startup
+chime cases. No prior startup chime is claimed as observed.
+
+Whether ending the primary shell automatically ends Windows is a mandatory
+native gate. An incomplete log, missing survival assertion or premature
+Windows return is failure, never a qualification pass. The PROGMAN control
+skips only initial-primary teardown and retains the existing manual-primary
+expectations, so its intentional profile failures remain explicit.
