@@ -3,8 +3,8 @@
 - **Tandy Winamp and shared Windows sound:** [TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP).
   Extract its TWXT2 folder and run SETUP from DOS. The runtime and source are
   included. [Install](../experimental/WINAMP30/INSTALL.TXT).
-- **Fiddle and Beats music authoring:** [MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP).
-- **Mini Piano, JoyMIDI, MiniMIDI and expressive Beats:**
+- **Tandy Beats Lab with Fiddle:** [MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP).
+- **Tandy Beats Lab with Mini Piano, JoyMIDI and MiniMIDI:**
   [PITEXPR.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITEXPR.ZIP).
 - **DOS PSG sound test:** [PITDOS.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITDOS.ZIP).
 
@@ -15,3 +15,8 @@ the same shared installer. [Instrument guide](../experimental/PITPUBLIC/INSTALL.
 
 Windows tools require Tandy 1000 EX/HX, normal 640 KB and Windows 3.0 real
 mode. The DOS PSG test runs directly from its folder outside Windows.
+
+Both music kits contain the same five-lane Tandy Beats Lab, editable demos,
+pattern Save/Load and MML export. Choose by companion instruments. Beats
+requires a desktop at least 320 pixels wide. DWA (DAWs With Attitude) is its
+playful secondary label; the application remains Tandy Beats Lab.

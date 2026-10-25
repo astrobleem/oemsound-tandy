@@ -15,12 +15,12 @@ supplied app-local MIDIMAP.DRV files beside their clients; no system MIDI
 registration, driver copying or INI editing is needed.
 The [install guide](INSTALL.TXT) gives the launch paths and controls.
 
-Beats authoring has five editable rows: three PSG tones, noise and PC
-speaker. Its PIT setting controls whether the fifth row plays and exports.
-The expressive Beats kit also has five rows, but does not have the authoring
-app's MML preview/export controls. The same installed SOUND driver serves
-both kits and Winamp; their app-local MIDI support is not a second system
-sound-driver installation.
+Both Windows kits include the same current Tandy Beats Lab: three PSG tones,
+noise and a separately editable PC-speaker row, with native pattern Save/Load,
+MML preview/export and original editable demos. MML3AUTH adds Fiddle;
+PITEXPR adds Mini Piano, JoyMIDI and MiniMIDI. Use a desktop at least 320 pixels
+wide for Beats. The same installed SOUND driver serves the kits and Winamp;
+app-local MIDI support is not another system sound-driver installation.
 
 ## Known limits
 

@@ -1,12 +1,16 @@
-# DWA Beats Lab
+# Tandy Beats Lab
 
 **DWA: DAWs With Attitude.** Straight Outta LLMompton.
 Produced by Dr. DRAM. Mixed on five channels. Mastered on absolutely none.
 
 A small, native Windows 3.0 music tool for the Tandy 1000 EX/HX: edit an
 eight-step pattern with three PSG tones, noise percussion and an optional
-PC-speaker lane. The editor fits a 320x200 desktop. No samples or extra
+PC-speaker lane. The editor requires a desktop at least 320 pixels wide and fits 320x200. No samples or extra
 sound card are needed.
+
+![Tandy Beats Lab editor](../../../docs/SHOTS/BEATS/EDITOR.PNG)
+
+Windows 3.0 real-mode emulator capture at 320x200; no physical-hardware claim.
 
 ## Start making noise
 
@@ -27,7 +31,8 @@ Stop other music/speech producers before playing.
 
 Each column is one straight eighth note. Click a cell to toggle its note
 and rest; arrow keys select a cell, Space or Enter toggles it, and `+`/`-`
-changes its pitch. Delete makes a rest. Click the three tone labels to
+changes its pitch. The Pitch-/Pitch+ buttons also edit the selected note.
+Delete makes a rest. Click the three tone labels to
 cycle through the existing presets. The fourth row is noise percussion;
 `PCspkr` is the fifth, separately editable row.
 

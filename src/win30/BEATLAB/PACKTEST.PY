@@ -3,6 +3,10 @@ from pathlib import Path
 from importlib.machinery import SourceFileLoader
 from importlib.util import module_from_spec, spec_from_loader
 import json
+import copy
+import os
+import subprocess
+import sys
 import struct
 import tempfile
 import unittest
@@ -14,6 +18,23 @@ loader = SourceFileLoader('beats_pack_tested', str(HERE / 'PACK.PY'))
 spec = spec_from_loader(loader.name, loader)
 pack = module_from_spec(spec)
 loader.exec_module(pack)
+
+
+def unit_kit(kit):
+    """Use authenticated current bytes as a temporary preservation fixture.
+
+    Once public assets are schema2, strip only their declared additions in
+    memory; these synthetic baseline fixtures never leave TemporaryDirectory.
+    Production read_kit still accepts only pinned assets/explicit bank baselines.
+    """
+    raw, files = pack.read_kit(pack.ROOT/'artifacts/win30'/(kit+'.ZIP'), kit)
+    if 'EVIDENCE/BEFORE.JSN' in files:
+        record = json.loads(files['BUILD.JSN'])
+        for name in record['changes']:
+            if name not in pack.replacement_paths(kit):
+                files.pop(name, None)
+        files['MANIFEST.JSN'] = pack.json_bytes({n:pack.pin(b) for n,b in files.items() if n != 'MANIFEST.JSN'})
+    return raw, files
 
 
 class NativeReceiptTests(unittest.TestCase):
@@ -143,7 +164,7 @@ class NativeReceiptTests(unittest.TestCase):
 class PacketTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw, cls.base = pack.read_kit(pack.ROOT/'artifacts/win30/MML3AUTH.ZIP')
+        cls.raw, cls.base = unit_kit('MML3AUTH')
 
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix='beats-packet-test-')
@@ -238,8 +259,9 @@ class PacketTests(unittest.TestCase):
 
     def test_missing_native_build_creates_no_candidate(self):
         out = self.root/'must-not-exist'
-        with self.assertRaises(FileNotFoundError):
-            pack.build(pack.ROOT/'artifacts/win30/MML3AUTH.ZIP', self.root/'absent-native-build', out)
+        with patch.object(pack,'read_kit',return_value=(self.raw,self.base)):
+            with self.assertRaises(FileNotFoundError):
+                pack.build(pack.ROOT/'artifacts/win30/MML3AUTH.ZIP', self.root/'absent-native-build', out)
         self.assertFalse(out.exists())
 
     def test_build_demos_use_validated_captured_source_not_live_source(self):
@@ -252,7 +274,8 @@ class PacketTests(unittest.TestCase):
         # different demo metadata from live HERE. Only captured bytes may win.
         captured[member] = captured[member].replace(old, new, 1)
         out = self.root/'captured-demo-candidate'
-        with patch.object(pack, 'native_inputs', return_value=(self.runtimes, captured, b'{"test_fixture":true}')):
+        with patch.object(pack, 'native_inputs', return_value=(self.runtimes, captured, b'{"test_fixture":true}')), \
+             patch.object(pack, 'read_kit', return_value=(self.raw,self.base)):
             pack.build(pack.ROOT/'artifacts/win30/MML3AUTH.ZIP', self.root/'native-capture', out)
         with zipfile.ZipFile(out/'MML3AUTH.ZIP') as archive:
             starter = archive.read('MML3AUTH/BEATS/STARTER.BTS')
@@ -261,6 +284,16 @@ class PacketTests(unittest.TestCase):
         self.assertEqual(packaged_source, captured[member])
         self.assertEqual((out/'DEMSRC/BEATPAT.C').read_bytes(), captured[member])
         self.assertNotIn(new, (HERE/'BEATPAT.C').read_bytes())
+
+    def test_finished_input_is_refused_before_native_or_compiler_work(self):
+        out = self.root/'no-reapply-output'
+        finished = dict(self.files)
+        with patch.object(pack,'read_kit',return_value=(self.raw,finished)), \
+             patch.object(pack,'native_inputs',side_effect=AssertionError('No native receipt work for finished input')), \
+             patch.object(pack,'make_demos',side_effect=AssertionError('No compiler for finished input')):
+            with self.assertRaisesRegex(ValueError,'preceding bank baseline'):
+                pack.build('finished-kit.zip','native-build',out)
+        self.assertFalse(out.exists())
 
     def test_real_host_generated_demos_are_ready_formats(self):
         files = pack.make_demos(self.root/'host-demos')
@@ -276,6 +309,183 @@ class PacketTests(unittest.TestCase):
                 self.assertEqual(values[-8:], [33,33,36,33,33,36,38,33])
             self.assertTrue(mml.startswith(b'MML3' if stem=='FIVE' else b'MML2'))
             self.assertEqual(b'[P]' in mml, stem=='FIVE')
+
+
+class LayoutAndPublishedTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.scratch = tempfile.TemporaryDirectory(prefix='beats-two-kit-test-')
+        cls.root = Path(cls.scratch.name)
+        cls.bases = {kit:unit_kit(kit) for kit in pack.KITS}
+        cls.demos = pack.make_demos(cls.root/'real-demo-helper')
+        cls.sources = {'SOURCE/'+relative:pack.crlf((pack.ROOT/relative).read_bytes())
+                       for relative in pack.SOURCE_PATHS.values()}
+        cls.sources['SOURCE/src/win30/FIDDLE/MIDIAPI.H'] = cls.sources[pack.SOURCE_PREFIX+'MIDIAPI.H']
+        ne = bytearray(128)
+        ne[:2] = b'MZ'
+        struct.pack_into('<I',ne,0x3c,64)
+        ne[64:66] = b'NE'
+        struct.pack_into('<H',ne,64+0x3e,0x0300)
+        # Temporary structural fixtures only; never executed or distributed.
+        cls.runtimes = {n:bytes(ne)+n.encode('ascii') for n in pack.RUNTIME_PATHS}
+        cls.native = {'target':'8086 Windows 3.0 real mode; MSC6/LINK4',
+                      'status':'native compile/link only; execution separate',
+                      'source_paths':dict(pack.SOURCE_PATHS),
+                      'sources':{n:pack.pin(cls.sources['SOURCE/'+rel]) for n,rel in pack.SOURCE_PATHS.items()},
+                      'source_originals':{n:pack.pin((pack.ROOT/rel).read_bytes()) for n,rel in pack.SOURCE_PATHS.items()},
+                      'runtimes':{n:pack.pin(data) for n,data in cls.runtimes.items()},
+                      'runtime':pack.pin(cls.runtimes['BEATS.EXE'])}
+        cls.release = copy.deepcopy(pack.release_record())
+        cls.release['beatlab_baselines'] = {kit+'.ZIP':pack.pin(raw) for kit,(raw,base) in cls.bases.items()}
+        cls.files = {}
+        for kit,(raw,base) in cls.bases.items():
+            cls.files[kit] = pack.assemble(raw,base,cls.runtimes,cls.sources,
+                pack.json_bytes(cls.native),cls.demos,kit=kit,regression=cls.bases['MML3AUTH'])
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.scratch.cleanup()
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix='beats-published-test-')
+        self.out = Path(self.temp.name)
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def write(self, kit, files):
+        path = self.out/(kit+'.ZIP')
+        pack.write_packet(path,files,kit)
+        return path
+
+    def reindex(self, files, record=None):
+        if record is not None:
+            files['BUILD.JSN'] = pack.json_bytes(record)
+        files['MANIFEST.JSN'] = pack.json_bytes({n:pack.pin(data) for n,data in files.items() if n != 'MANIFEST.JSN'})
+
+    def test_two_layouts_have_identical_app_mapper_and_demos(self):
+        author,flat = self.files['MML3AUTH'],self.files['PITEXPR']
+        self.assertEqual(author['BEATS/BEATS.EXE'],flat['BEATS.EXE'])
+        self.assertEqual(author['BEATS/MIDIMAP.DRV'],flat['MIDIMAP.DRV'])
+        self.assertEqual(author['FIDDLE/MIDIMAP.DRV'],flat['MIDIMAP.DRV'])
+        self.assertNotIn('BEATS/BEATS.EXE',flat)
+        for stem in pack.STEMS:
+            for ext in ('.BTS','.MML'):
+                self.assertEqual(author['BEATS/'+stem+ext],flat[stem+ext])
+        for kit,files in self.files.items():
+            base = self.bases[kit][1]
+            record = json.loads(files['BUILD.JSN'])
+            self.assertEqual(set(record['preserved']),set(base)-pack.replacement_paths(kit))
+            for name in record['preserved']:
+                self.assertEqual(files[name],base[name],kit+':'+name)
+            for name in ('TWSETUP.EXE','TWXT2.ZIP')+pack.KITS[kit]['siblings']:
+                self.assertEqual(files[name],base[name])
+            self.assertTrue(files[pack.KITS[kit]['guide']].startswith(b'Tandy Beats Lab'))
+
+    def test_finished_verifier_needs_no_base_archive_or_compiler(self):
+        for kit,files in self.files.items():
+            with self.subTest(kit=kit):
+                path = self.write(kit,files)
+                with patch.object(pack,'read_kit',side_effect=AssertionError('No baseline ZIP reads allowed')), \
+                     patch.object(pack,'make_demos',side_effect=AssertionError('No compiler allowed')):
+                    self.assertEqual(pack.verify_release_packet(path,kit,release=self.release,expected=pack.pin(path.read_bytes())),
+                                     pack.pin(path.read_bytes()))
+
+    def test_flat_guides_and_current_source_closure(self):
+        flat = self.files['PITEXPR']
+        self.assertIn(b'C:\\PITEXPR\\BEATS.EXE',flat['INSTALL.TXT'])
+        self.assertIn(b'BEATS.TXT',flat['INSTALL.TXT'])
+        self.assertNotIn(b'C:\\MML3AUTH\\BEATS',flat['INSTALL.TXT'])
+        for name in pack.FROZEN_ALIASES:
+            self.assertEqual(flat[name],self.bases['MML3AUTH'][1][name])
+        for name in self.sources:
+            self.assertEqual(flat[name],self.sources[name])
+        self.assertIn('SOURCE/src/win30/DRIVER/PITCORE.H',flat)
+        self.assertIn(pack.SOURCE_PREFIX+'HOSTTEST.PY',flat)
+        self.assertIn(pack.SOURCE_PREFIX+'TESTS/legacy_parser.c',flat)
+
+    def test_explicit_bank_baseline_remains_accepted_after_asset_promotion(self):
+        release = copy.deepcopy(self.release)
+        for kit in pack.KITS:
+            release['assets'][kit+'.ZIP'] = pack.pin(b'synthetic finished release fixture '+kit.encode('ascii'))
+        with patch.object(pack,'release_record',return_value=release):
+            for kit in pack.KITS:
+                raw,files = pack.read_kit(pack.ROOT/'artifacts/win30'/(kit+'.ZIP'),kit)
+                self.assertEqual(pack.pin(raw),release['beatlab_baselines'][kit+'.ZIP'])
+                self.assertIn('TWSETUP.EXE',files)
+
+    def test_read_kit_refuses_stale_shared_payload_even_with_approved_outer_pin(self):
+        for kit in pack.KITS:
+            with self.subTest(kit=kit):
+                files = dict(self.bases[kit][1])
+                files['TWXT2.ZIP'] = b'synthetic downlevel shared payload'
+                self.reindex(files)
+                path = self.write(kit,files)
+                release = copy.deepcopy(self.release)
+                release['beatlab_baselines'][kit+'.ZIP'] = pack.pin(path.read_bytes())
+                with patch.object(pack,'release_record',return_value=release):
+                    with self.assertRaisesRegex(ValueError,'shared payload mixing'):
+                        pack.read_kit(path,kit)
+
+    def test_published_shared_mixing_refused_with_self_consistent_internal_pins(self):
+        files = dict(self.files['PITEXPR'])
+        record = json.loads(files['BUILD.JSN'])
+        files['TWXT2.ZIP'] = b'synthetic downlevel shared runtime'
+        record['preserved']['TWXT2.ZIP'] = pack.pin(files['TWXT2.ZIP'])
+        self.reindex(files,record)
+        with self.assertRaisesRegex(ValueError,'shared payload mixing'):
+            pack.verify_release_packet(self.write('PITEXPR',files),'PITEXPR',release=self.release)
+
+    def test_published_compiled_header_pin_and_alias_are_enforced(self):
+        for member,error in ((pack.SOURCE_PREFIX+'MIDIAPI.H','compiled source pin'),
+                             ('SOURCE/src/win30/FIDDLE/MIDIAPI.H','MIDI source headers')):
+            with self.subTest(member=member):
+                files = dict(self.files['PITEXPR'])
+                record = json.loads(files['BUILD.JSN'])
+                files[member] = files[member][:-1]
+                record['changes'][member] = pack.pin(files[member])
+                self.reindex(files,record)
+                with self.assertRaisesRegex(ValueError,error):
+                    pack.verify_release_packet(self.write('PITEXPR',files),'PITEXPR',release=self.release)
+
+    def test_published_frozen_header_sizes_are_enforced(self):
+        files = dict(self.files['PITEXPR'])
+        member = 'SOURCE/src/win30/BEATMML/INSTR.H'
+        files[member] = files[member][:-1]
+        record = json.loads(files['BUILD.JSN'])
+        record['changes'][member] = pack.pin(files[member])
+        self.reindex(files,record)
+        with self.assertRaisesRegex(ValueError,'regression source pin'):
+            pack.verify_release_packet(self.write('PITEXPR',files),'PITEXPR',release=self.release)
+
+    def test_published_bad_demo_range_and_mml_mode_are_refused(self):
+        for name,data,error in (('FIVE.BTS',b'DWA1\r\n88 1 0 0 0\r\n'+b'0 '*32+b'25 33 36 33 33 36 38 33\r\n','note range'),
+                                ('FIVE.MML',self.files['PITEXPR']['FIVE.MML'].replace(b'MML3',b'MML2',1),'MML/pattern')):
+            with self.subTest(name=name):
+                files = dict(self.files['PITEXPR'])
+                record = json.loads(files['BUILD.JSN'])
+                files[name] = data
+                record['changes'][name] = record['demos'][name] = pack.pin(data)
+                self.reindex(files,record)
+                with self.assertRaisesRegex(ValueError,error):
+                    pack.verify_release_packet(self.write('PITEXPR',files),'PITEXPR',release=self.release)
+
+    def test_extracted_flat_source_runs_its_host_regressions(self):
+        source = self.out/'extracted'
+        for name,data in self.files['PITEXPR'].items():
+            if name.startswith('SOURCE/'):
+                path = source/name
+                path.parent.mkdir(parents=True,exist_ok=True)
+                path.write_bytes(data)
+        runner = source/pack.SOURCE_PREFIX/'HOSTTEST.PY'
+        result = subprocess.run([sys.executable,str(runner),'--out',str(self.out/'host-checks')],
+                                capture_output=True,text=True,timeout=60)
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        report = json.loads((self.out/'host-checks/RESULT.JSON').read_bytes())
+        self.assertEqual(report['status'],'PASS')
+        self.assertTrue(report['old_range_trace_identical'])
+        self.assertEqual(report['audio']['silent_attacks'],0)
+        self.assertEqual(report['audio']['clipped_samples'],0)
 
 
 if __name__ == '__main__':

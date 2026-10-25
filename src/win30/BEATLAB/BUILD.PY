@@ -1,4 +1,4 @@
-"""Build DWA Beats, its mapper and matching Fiddle with the shared native lease."""
+"""Build Tandy Beats Lab, its mapper and matching Fiddle with the shared native lease."""
 from pathlib import Path
 import argparse,hashlib,importlib.util,json,shutil,struct
 from importlib.machinery import SourceFileLoader

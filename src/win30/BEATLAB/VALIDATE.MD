@@ -1,4 +1,4 @@
-# DWA Beats local validation and release gate
+# Tandy Beats Lab validation and release gate
 
 Unpublished client update based on OEMSound main
 `18c5b271d9d24ed93d0929b23d06ea29a08e96bd`. Existing MML3AUTH/PITEXPR
@@ -84,15 +84,15 @@ are retained separately and are not treated as passing qualification.
 
 Final runtime SHA256:
 
-- BEATS.EXE: 44884b6aac3ffd7b9e19ac5e745c856d19bffa695d1ec43c1bf39267387c46df
+- BEATS.EXE: b6d8278ecacfa4441f8a656205ead3a9ab30d74fe39ecc79b4ee0f6888fbad31
 - MIDIMAP.DRV: 2a98f7e9f91514418c9ac4d00d85462a0d95b7cbbf861e597546c4891b87623c
 - MMLFIDL.EXE: c51f42992261c49169548f735c732cae068b423e0f40b31b4cc82766463f7b93
 
-The final MSC6 build's executable sizes and NE allocation requests are:
+The current MSC6 build07 executable sizes and NE allocation requests are:
 
 | Module | File bytes | CODE | DGROUP minimum | Heap | Stack |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| BEATS.EXE | 28997 | 23284 | 9296 | 2048 | 4096 |
+| BEATS.EXE | 30229 | 24068 | 9504 | 2048 | 4096 |
 | MIDIMAP.DRV | 6622 | 5367 | 674 | 0 | 0 |
 | MMLFIDL.EXE | 28643 | 22150 | 22464 | 4096 | 4096 |
 
@@ -114,4 +114,54 @@ frozen regression source, manifests and separate client-update evidence.
 No consumer Python/compiler/file gathering is required. Existing Fiddle
 Open loads the exported MML; Beats Load opens editable .BTS patterns.
 
-Publication, pushes, PRs, merges and release replacement remain unapproved.
+Publication was explicitly authorized after branding discussion; complete
+the current-bank composition gate below before publishing.
+
+### Reconcile the bank publication before shipping
+
+The qualified local packet uses the earlier shared installer/Winamp payload.
+Hold that packet for publication: the separately approved bank release is
+updating those dependencies. After its exact public identities are relayed,
+reconcile current main and compose against its newly pinned MML3AUTH base.
+PACK.PY reads that base's identity from tools/WINAMP/RELEASE.JSN and preserves
+its TWSETUP.EXE, TWXT2.ZIP and other shared members exactly. Keep the qualified
+Beats/Fiddle/mapper runtime hashes above; do not rebuild the music clients.
+
+Verify the published base manifest, shared-package native receipts and the
+installer's embedded payload with tools/WINAMP/VERIFY.PY. Then verify the
+new authoring packet preserves those exact shared identities and the tested
+app/demo bytes. Replacing TWXT2.ZIP alone is insufficient: TWSETUP.EXE embeds
+its own installation payload. This is package composition plus scoped
+installer verification, without repeating app music/UI benchmarks. If the
+new publication lacks a compatible pinned authoring base or changes the
+shared SOUND/PIT contract, report that concrete exception before proceeding.
+
+### One current Beats app in both kits
+
+The user approved publication with Tandy Beats Lab as the primary product
+name. DAWs With Attitude remains a small secondary label; LLMompton and
+Dr. DRAM remain in About/README. Build07 passed native affected-UI checks:
+10 name/control/close assertions and actual 320x200 Grid/About captures in
+beats-native-05. Its primary title, small ready label and restored mouse
+Pitch-/Pitch+ controls fit; MML hides/restores those controls correctly.
+
+PITEXPR's shipped Beats used the same mapper 1.2, instrument curves, periods,
+assembly and MIDI header as the authoring snapshot. The current app retains
+mode 3, eligible vibrato, velocities 96/76, percussion, straight eighths,
+75% gates and dropped-stall behavior. Restoring the mouse pitch controls
+closed the real interaction gap. Companion Piano/JoyMIDI/MiniMIDI sources
+accept mapper versions >=1.2, so 1.3 passes their existing checks. Host tests
+already prove old-range output identity. The old 156-pixel window fitted a
+160-pixel profile; the new 312-pixel editor intentionally targets 320x200.
+No 160-mode compatibility is claimed. The old single demo's high C5/E5
+speaker answers are superseded by the approved editable low-bass demos.
+
+Both kits must receive identical app/mapper/demo bytes. PITEXPR retains flat
+BEATS.EXE/MIDIMAP.DRV paths and its unchanged companion executables;
+MML3AUTH retains BEATS/ and FIDDLE/. Kit guides and manifests reflect those
+layouts. Frozen source and historical receipts retain their original scope.
+
+Bank publication is the remaining package input gate; current main still
+has the previous shared payload. Publication is authorized, but do not
+release the older packet04 after the bank update. Recompose only from the
+exact relayed/public bank baseline and verify the embedded native installer.

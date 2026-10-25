@@ -1,4 +1,4 @@
-/* DWA Beats Lab. Win3.0 / 8088 foreground editor; existing mapper only. */
+/* Tandy Beats Lab. Win3.0 / 8088 foreground editor; existing mapper only. */
 #define WINVER 0x0300
 #include <windows.h>
 #include <stdio.h>
@@ -24,6 +24,8 @@
 #define SLOW 113
 #define FAST 114
 #define CLEAR 115
+#define LOWER 116
+#define HIGHER 117
 #define LANE0 120
 #define PULSE 1
 static HINSTANCE instance,module;
@@ -36,7 +38,7 @@ static WORD sounding[5];
 static BYTE channel[5]={0,1,2,9,15};
 static BYTE defaultNote[5]={60,64,48,42,33};
 static char *noteNames[12]={"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
-static char appdir[144],mml[BP_MML_CAP],status[64]="Ready: Play or choose Demo";
+static char appdir[144],mml[BP_MML_CAP],status[64]="DAWs With Attitude: Play / Demo";
 static char patternName[32]="Starter";
 static int opened,playing,timerReady,step,selLane,selStep,mmlView,dirty;
 static unsigned demoIndex;
@@ -81,7 +83,7 @@ static void labels(void)
     SetDlgItemText(mainWindow,PIT,pat.pit?"PIT: on":"PIT: off");
     SetDlgItemText(mainWindow,VIEW,mmlView?"Grid":"MML");
     if(mmlView&&mmlEdit){BPMML(&pat,mml,sizeof(mml));SetWindowText(mmlEdit,mml);}
-    wsprintf(text,"DWA Beats - %s%s",(LPSTR)patternName,(LPSTR)(dirty?" *":""));SetWindowText(mainWindow,text);
+    wsprintf(text,"Tandy Beats Lab - %s%s",(LPSTR)patternName,(LPSTR)(dirty?" *":""));SetWindowText(mainWindow,text);
 }
 static void changed(void)
 {
@@ -139,7 +141,7 @@ static void play(void)
 static int discard(void)
 {
     return !dirty||automatic||MessageBox(mainWindow,"Discard unsaved pattern changes?",
-        "DWA Beats",MB_YESNO|MB_ICONQUESTION)==IDYES;
+        "Tandy Beats Lab",MB_YESNO|MB_ICONQUESTION)==IDYES;
 }
 static void demo(void)
 {
@@ -233,12 +235,13 @@ static void view(void)
     for(r=0;r<5;++r)ShowWindow(GetDlgItem(mainWindow,LANE0+r),mmlView?SW_HIDE:SW_SHOW);
     ShowWindow(GetDlgItem(mainWindow,CLEAR),mmlView?SW_HIDE:SW_SHOW);
     ShowWindow(GetDlgItem(mainWindow,SLOW),mmlView?SW_HIDE:SW_SHOW);ShowWindow(GetDlgItem(mainWindow,FAST),mmlView?SW_HIDE:SW_SHOW);
+    ShowWindow(GetDlgItem(mainWindow,LOWER),mmlView?SW_HIDE:SW_SHOW);ShowWindow(GetDlgItem(mainWindow,HIGHER),mmlView?SW_HIDE:SW_SHOW);
     labels();SetFocus(mainWindow);redraw();
 }
 static void about(void)
 {
     MessageBox(mainWindow,"DWA: DAWs With\nAttitude\nStraight Outta\nLLMompton\nProduced by\nDr. DRAM\n\nF5: Play / Stop\nCtrl+O/S: files",
-        "DWA Beats Lab",MB_OK);SetFocus(mainWindow);
+        "Tandy Beats Lab",MB_OK);SetFocus(mainWindow);
 }
 static void paint(HWND w)
 {
@@ -261,10 +264,10 @@ static void paint(HWND w)
             if(playing&&c==(unsigned)step){MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
         }
         SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
-        wsprintf(text,"%u BPM +/-pitch Space:rest",pat.tempo);
+        wsprintf(text,"%u BPM",pat.tempo);
     }else lstrcpy(text,"MML: Export saves; Copy copies");
     box.left=mmlView?2:64;box.top=141;box.right=302;box.bottom=169;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
-    TextOut(dc,mmlView?2:64,141,text,lstrlen(text));
+    TextOut(dc,mmlView?2:184,141,text,lstrlen(text));
     box.left=2;box.top=157;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));TextOut(dc,2,157,status,lstrlen(status));
     EndPaint(w,&ps);
 }
@@ -275,6 +278,19 @@ static void button(HWND w,const char *s,int x,int y,int width,int id)
 static void nativeTest(DWORD now)
 {
     static BPAT saved;unsigned i;RECT client,control;POINT pt;
+    if(automatic==2){
+        char title[80];
+        GetClientRect(mainWindow,&client);GetWindowText(mainWindow,title,sizeof(title));
+        check("primary product name",!strncmp(title,"Tandy Beats Lab",15));
+        check("secondary label",!strncmp(status,"DAWs With Attitude",18));
+        for(i=LOWER;i<=HIGHER;++i){GetWindowRect(GetDlgItem(mainWindow,i),&control);pt.x=control.right;pt.y=control.bottom;ScreenToClient(mainWindow,&pt);check("mouse pitch control fits",pt.x<=client.right&&pt.y<=client.bottom&&IsWindowVisible(GetDlgItem(mainWindow,i)));}
+        selLane=0;selStep=0;SendMessage(mainWindow,WM_COMMAND,HIGHER,0L);check("mouse pitch plus",pat.note[0][0]==61);
+        SendMessage(mainWindow,WM_COMMAND,LOWER,0L);check("mouse pitch minus",pat.note[0][0]==60);
+        view();check("MML hides pitch controls",!IsWindowVisible(GetDlgItem(mainWindow,LOWER))&&!IsWindowVisible(GetDlgItem(mainWindow,HIGHER)));
+        view();check("grid restores pitch controls",IsWindowVisible(GetDlgItem(mainWindow,LOWER))&&IsWindowVisible(GetDlgItem(mainWindow,HIGHER)));
+        dirty=0;PostMessage(mainWindow,WM_CLOSE,0,0L);testStage=3;automatic=3;return;
+    }
+    if(automatic==3)return;
     if(!testStage){
         GetClientRect(mainWindow,&client);check("client fits 320x200",client.right>=302&&client.bottom>=168&&GetSystemMetrics(SM_CXSCREEN)>=312);
         for(i=PLAY;i<=COPY;++i){GetWindowRect(GetDlgItem(mainWindow,i),&control);pt.x=control.right;pt.y=control.bottom;ScreenToClient(mainWindow,&pt);check("toolbar fits",pt.x<=client.right&&pt.y<=client.bottom);}
@@ -318,6 +334,7 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
         SendMessage(fileEdit,EM_LIMITTEXT,12,0L);
         button(w,"Load",116,23,42,LOAD);button(w,"Save",162,23,42,SAVE);button(w,"Export",208,23,46,EXPORT);button(w,"Copy",258,23,44,COPY);
         button(w,"-",2,42,28,SLOW);button(w,"+",32,42,28,FAST);button(w,"Clear",2,139,59,CLEAR);
+        button(w,"Pitch-",64,139,56,LOWER);button(w,"Pitch+",124,139,56,HIGHER);
         for(r=0;r<5;++r)CreateWindow("BUTTON",lanes[r],WS_CHILD|WS_VISIBLE|WS_TABSTOP,2,59+r*16,59,14,w,(HMENU)(LANE0+r),instance,NULL);
         mmlEdit=CreateWindow("EDIT","",WS_CHILD|WS_BORDER|WS_TABSTOP|WS_VSCROLL|ES_MULTILINE|ES_AUTOVSCROLL,2,45,300,94,w,(HMENU)MMLTEXT,instance,NULL);
         if(!fileEdit||!mmlEdit)return -1;
@@ -329,13 +346,14 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
         if(wp==PLAY)play();else if(wp==STOP)stop();else if(wp==DEMO)demo();
         else if(wp==PIT){stop();pat.pit=!pat.pit;changed();say(pat.pit?"PC speaker enabled for lane 5":"Lane 5 muted: PIT is off");}
         else if(wp==VIEW)view();else if(wp==ABOUT)about();else if(wp==LOAD)loadPattern();else if(wp==SAVE)savePattern();
+        else if(wp==LOWER)editPitch(-1);else if(wp==HIGHER)editPitch(1);
         else if(wp==SLOW&&pat.tempo>40){pat.tempo=pat.tempo<50?40:pat.tempo-10;changed();}
         else if(wp==FAST&&pat.tempo<240){pat.tempo+=10;if(pat.tempo>240)pat.tempo=240;changed();}
         else if(wp==CLEAR&&discard()){stop();memset(pat.note,0,sizeof(pat.note));changed();say("Cleared: click cells to add notes");}
         else if(wp==EXPORT)exportMML();else if(wp==COPY)copyMML();
         else if(wp>=LANE0&&wp<LANE0+3){stop();r=wp-LANE0;pat.program[r]=(pat.program[r]+16)&127;changed();}
         else if(wp==LANE0+4)SendMessage(w,WM_COMMAND,PIT,0L);
-        if((wp>=PLAY&&wp<=CLEAR&&wp!=FILEEDIT&&wp!=MMLTEXT&&wp!=VIEW&&wp!=ABOUT)||
+        if((wp>=PLAY&&wp<=HIGHER&&wp!=FILEEDIT&&wp!=MMLTEXT&&wp!=VIEW&&wp!=ABOUT)||
            (wp>=LANE0&&wp<LANE0+5))SetFocus(w);return 0;
     case WM_LBUTTONDOWN:
         x=LOWORD(lp);y=HIWORD(lp);if(!mmlView&&x>=64&&x<296&&y>=59&&y<139){selStep=(x-64)/29;selLane=(y-59)/16;toggle();SetFocus(w);}return 0;
@@ -375,18 +393,18 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     WNDCLASS wc;HWND w;MSG msg;int i;unsigned n;char path[144],line[64];
     if(previous){HWND old=FindWindow("DWABeats",NULL);if(old){ShowWindow(old,SW_RESTORE);SetActiveWindow(old);}return 0;}
     if(GetWinFlags()&WF_PMODE)return 2;instance=inst;
-    automatic=lstrcmp(cmd,"/test")==0;visualMode=lstrcmp(cmd,"/visual")==0;if(automatic)logFile=_lcreat("C:\\BEATS.LOG",0);
+    automatic=!lstrcmp(cmd,"/test")?1:!lstrcmp(cmd,"/uitest")?2:0;visualMode=lstrcmp(cmd,"/visual")==0;if(automatic)logFile=_lcreat("C:\\BEATS.LOG",0);
     n=GetModuleFileName(inst,path,sizeof(path));
-    if(!n||n>=sizeof(path)){MessageBox(NULL,"App path too long: move the complete kit to a shorter folder.","DWA Beats",MB_OK);return 3;}
+    if(!n||n>=sizeof(path)){MessageBox(NULL,"App path too long: move the complete kit to a shorter folder.","Tandy Beats Lab",MB_OK);return 3;}
     path[n]=0;for(i=(int)n-1;i>=0;--i)if(path[i]=='\\')break;
-    if(i<0||(unsigned)i+12>=sizeof(path)){MessageBox(NULL,"App folder too long: move the complete kit.","DWA Beats",MB_OK);return 3;}
+    if(i<0||(unsigned)i+12>=sizeof(path)){MessageBox(NULL,"App folder too long: move the complete kit.","Tandy Beats Lab",MB_OK);return 3;}
     lstrcpy(appdir,path);appdir[i+1]=0;lstrcpy(path+i+1,"MIDIMAP.DRV");module=LoadLibrary(path);
     if(module>=32){midi=(MIDIPROC)GetProcAddress(module,"MIDIMESSAGE");debug=(DEBUGPROC)GetProcAddress(module,"DEBUGSTATE");}
     if(!midi)lstrcpy(status,"Mapper missing: extract complete kit");BPDefault(&pat);
     wc.style=CS_HREDRAW|CS_VREDRAW;wc.lpfnWndProc=WndProc;wc.cbClsExtra=wc.cbWndExtra=0;wc.hInstance=inst;
     wc.hIcon=NULL;wc.hCursor=LoadCursor(NULL,IDC_ARROW);wc.hbrBackground=GetStockObject(WHITE_BRUSH);wc.lpszMenuName=NULL;wc.lpszClassName="DWABeats";
     if(!RegisterClass(&wc))return 4;
-    w=CreateWindow("DWABeats","DWA Beats Lab",WS_OVERLAPPED|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX|WS_CLIPCHILDREN,0,0,312,198,NULL,NULL,inst,NULL);
+    w=CreateWindow("DWABeats","Tandy Beats Lab",WS_OVERLAPPED|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX|WS_CLIPCHILDREN,0,0,312,198,NULL,NULL,inst,NULL);
     if(!w){if(module>=32)FreeLibrary(module);return 5;}
     ShowWindow(w,show);UpdateWindow(w);SetFocus(w);
     if(visualMode){HFILE ready=_lcreat("C:\\BEATSRDY.TXT",0);if(ready!=HFILE_ERROR)_lclose(ready);}
