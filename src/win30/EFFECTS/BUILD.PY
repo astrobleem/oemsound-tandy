@@ -1,6 +1,6 @@
 """Build only Effects Lab through the current guarded MSC6 wrapper."""
 from pathlib import Path
-import argparse,hashlib,importlib.util,json,shutil,struct
+import argparse,hashlib,importlib.util,json,runpy,shutil,struct
 from importlib.machinery import SourceFileLoader
 HERE=Path(__file__).resolve().parent
 p=argparse.ArgumentParser(description=__doc__)
@@ -9,9 +9,10 @@ a=p.parse_args();out=a.out.resolve();tool=a.toolchain.resolve()
 for n in ('BIN/CL.EXE','BIN/MASM.EXE','BIN/LINK4.EXE','LIB/SLIBCE.LIB','LIB/SLIBCEW.LIB','LIB/LIBW.LIB','DDK/286/INC/WINDOWS.H'):
  if not (tool/n).is_file():p.error('Missing external toolchain input: '+n)
 if any(c in str(out)+str(tool) for c in ('"','\n','\r')):p.error('Invalid mount path')
+runpy.run_path(str(HERE/'LAUNCPIN.PY'))['validate'](HERE)
 out.mkdir(parents=True,exist_ok=False)
-files={n:HERE/n for n in ('EFFECTS.C','FXCORE.C','FXCORE.H','EFFECTS.DEF','EFFECTS.RSP','BUILD.BAT','FXSTART.C','FXSTART.RSP')}
-for n in ('TPLAY.C','TPLAYPOL.H','SOUNDID.H','DOSSTAT.ASM'):files[n]=HERE.parent/'LAUNCH'/n
+files={n:HERE/n for n in ('EFFECTS.C','FXCORE.C','FXCORE.H','EFFECTS.DEF','EFFECTS.RSP','BUILD.BAT','FXSTART.C','FXSTART.RSP','TPLAY.C')}
+for n in ('TPLAYPOL.H','SOUNDID.H','DOSSTAT.ASM'):files[n]=HERE.parent/'LAUNCH'/n
 for n in ('TIMECLK.H','TCBURST.H','TCXBASS.H','PITLINK.H'):files[n]=HERE.parents[2]/'experimental/WINLIB30/SOURCE'/n
 originals={n:path.read_bytes() for n,path in files.items()}
 for n,data in originals.items():(out/n).write_bytes(data.replace(b'\r\n',b'\n').replace(b'\n',b'\r\n'))

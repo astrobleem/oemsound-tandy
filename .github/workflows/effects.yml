@@ -16,8 +16,9 @@ jobs:
       - name: Verify the exact native package and compiled source closure
         run: |
           python3 - <<'PY'
-          import hashlib, json, pathlib, zipfile
+          import hashlib, json, pathlib, runpy, zipfile
           root = pathlib.Path('.')
+          runpy.run_path('src/win30/EFFECTS/LAUNCPIN.PY')['validate'](root / 'src/win30/EFFECTS')
           def pin(data):
               return {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
           with zipfile.ZipFile('artifacts/win30/EFFECTS.ZIP') as z:

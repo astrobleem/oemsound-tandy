@@ -1,8 +1,9 @@
 # Effects Lab first native milestone
 
 Base: OEMSound main `1c1d066`, isolated branch `feat/effects-lab`. The maintained
-implementation is `src/win30/EFFECTS`. The shared launcher's only additive
-change is a defaulted TP_PLAYER macro; ordinary TPLAY still opens MINIPLAY.
+implementation is `src/win30/EFFECTS`. The shared launcher source stays exact.
+The app-local launcher snapshot adds only a defaulted TP_PLAYER macro;
+LAUNCPIN.PY verifies it against canonical TPLAY with that exact transformation.
 FXSTART selects EFFECTS and retains every existing driver/ROM/IRQ/bridge check.
 No shared SOUND, RAWCLK, MIDI bank or accepted example sound bytes changed.
 
@@ -21,7 +22,7 @@ That check found a mixed signed/unsigned multiplication which changed negative
 slides only on the 32-bit host. Explicit signed-long tick multiplication fixes
 it; the resulting MSC6 executable is byte-identical to the tested native build.
 
-`effects-build-07` compiled/linked with MSC6, MASM and LINK4, `/G0 /Gw /AS /W3
+`effects-build-08` compiled/linked with MSC6, MASM and LINK4, `/G0 /Gw /AS /W3
 /Od`, using the guarded shared emulator lease. The process returned 0 and
 released its lease. Final EFFECTS.EXE is 24,773 bytes, SHA256
 `2ca7d0ea699ecf87e6bdc41847be2572c335eb113c16f6ef96669fe2ac1b62a7`.
@@ -38,7 +39,7 @@ five presets, save/reopen equality, export, keyboard edit, preview, silent
 pause/stable cursor, resume, Stop, speaker routing and leased divisor,
 speaker pause/Stop, deactivation and close release. The guarded launcher
 reported normal TBRIDGE uninstall with BIOS/INT2F vectors restored and Windows
-return 0. The final byte-identical source receipt is build07; runtime receipt
+return 0. The final byte-identical source receipt is build08; runtime receipt
 is win02, which executed build06.
 
 Actual emulator video frames were inspected: EDITOR.PNG and SPEAKER.PNG show

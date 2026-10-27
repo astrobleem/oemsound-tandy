@@ -1,9 +1,10 @@
 """Compose a self-contained private Effects Lab kit against qualified receipts."""
 from pathlib import Path
-import argparse,hashlib,json,re,shutil,zipfile
+import argparse,hashlib,json,re,runpy,shutil,zipfile
 p=argparse.ArgumentParser()
 for n in ('build','host','native','libtandy','out'):p.add_argument('--'+n,type=Path,required=True)
 a=p.parse_args();here=Path(__file__).resolve().parent;root=here.parents[2];out=a.out.resolve();out.mkdir();kit=out/'EFFECTS';kit.mkdir()
+runpy.run_path(str(here/'LAUNCPIN.PY'))['validate'](here)
 def pin(b):return dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
 build=json.loads((a.build/'BUILD.JSON').read_text());host=json.loads((a.host/'RESULT.JSON').read_text());native=json.loads((a.native/'RESULT.JSON').read_text())
 assert host['status']=='PASS' and native['status']=='PASS'
@@ -11,6 +12,7 @@ assert pin((a.build/'EFFECTS.EXE').read_bytes())==build['runtime']
 assert native['exe_sha256']==build['runtime']['sha256']
 assert pin((a.build/'FXSTART.EXE').read_bytes())==build['launcher']
 source={}
+source['src/win30/LAUNCH/TPLAY.C']=(here.parent/'LAUNCH/TPLAY.C').read_bytes()
 for n in build['original_sources']:
  path=here/n if (here/n).is_file() else here.parent/'LAUNCH'/n if (here.parent/'LAUNCH'/n).is_file() else root/'experimental/WINLIB30/SOURCE'/n
  assert pin(path.read_bytes())==build['original_sources'][n],n
