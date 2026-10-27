@@ -25,3 +25,7 @@ experimental/WINLIB30/TESTS/mdhost/driver.c -text
 experimental/WINLIB30/TESTS/mci_admission_host.c -text
 
 experimental/WINLIB30/NATIVE/BANKS.JSN -text
+
+# Effects Lab source pins and native package retain their recorded bytes.
+src/win30/EFFECTS/** -text
+artifacts/win30/EFFECTS.ZIP -text
