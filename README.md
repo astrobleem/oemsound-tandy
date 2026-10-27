@@ -86,7 +86,7 @@ apps here remain separate projects.
 - **[Mini Piano](experimental/PITPUBLIC/INSTALL.TXT)** - play notes with the keyboard or mouse; use the current PITEXPR kit and its included Setup.
 - **[JoyMIDI](experimental/PITPUBLIC/INSTALL.TXT)** - turn a joystick into a pitch/velocity instrument; use the same PITEXPR kit and shared sound setup.
 - **[Tandy Beats Lab](src/win30/BEATLAB/README.MD)** - DWA: DAWs With Attitude. Edit five lanes, including PC speaker, with original editable demos and pattern Save/Load. [Authoring setup](experimental/PITPUBLIC/INSTALL.TXT).
-- **[Effects Lab](src/win30/EFFECTS/README.MD)** - create short PSG or PC-speaker effects with editable presets, pitch sweeps, vibrato and gating; save patches and export libtandy C data. First native milestone, pending publication.
+- **[Effects Lab](src/win30/EFFECTS/README.MD)** - create short PSG or PC-speaker effects with editable presets, pitch sweeps, vibrato and gating; save patches and export libtandy C data. [Download the complete native kit](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/EFFECTS.ZIP).
 - **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** — an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256×160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
   · [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
 - **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** — an offline visualization

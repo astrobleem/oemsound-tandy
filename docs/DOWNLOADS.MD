@@ -6,6 +6,10 @@
 - **Tandy Beats Lab with Fiddle:** [MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP).
 - **Tandy Beats Lab with Mini Piano, JoyMIDI and MiniMIDI:**
   [PITEXPR.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITEXPR.ZIP).
+- **Tandy Effects Lab, PSG and PC-speaker editor:**
+  [EFFECTS.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/EFFECTS.ZIP).
+  Extract its EFFECTS folder, run its TWSETUP.EXE from DOS once, then
+  `GO C:\WINDOWS` from that folder. [Controls and export](../src/win30/EFFECTS/README.MD).
 - **DOS PSG sound test:** [PITDOS.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITDOS.ZIP).
 
 The Windows packets use the same included native Setup and SOUND driver.

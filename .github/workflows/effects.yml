@@ -1,0 +1,53 @@
+name: Effects Lab compiler and native package
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  effects:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Verify the exact native package and compiled source closure
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, zipfile
+          root = pathlib.Path('.')
+          def pin(data):
+              return {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+          with zipfile.ZipFile('artifacts/win30/EFFECTS.ZIP') as z:
+              assert z.testzip() is None
+              manifest = json.loads(z.read('EFFECTS/MANIFEST.JSN'))
+              for name, expected in manifest['files'].items():
+                  assert pin(z.read('EFFECTS/' + name)) == expected, name
+              build = json.loads(z.read('EFFECTS/EVIDENCE/BUILD.JSN'))
+              native = json.loads(z.read('EFFECTS/EVIDENCE/NATIVE.JSN'))
+              assert native['status'] == 'PASS' and native['assertions'] == 22
+              assert native['exe_sha256'] == build['runtime']['sha256']
+              assert pin(z.read('EFFECTS/EFFECTS.EXE')) == build['runtime']
+              assert pin(z.read('EFFECTS/FXSTART.EXE')) == build['launcher']
+              for name, expected in build['original_sources'].items():
+                  paths = [root / 'src/win30/EFFECTS' / name,
+                           root / 'src/win30/LAUNCH' / name,
+                           root / 'experimental/WINLIB30/SOURCE' / name]
+                  path = next(p for p in paths if p.is_file())
+                  assert pin(path.read_bytes()) == expected, str(path)
+              assert z.read('EFFECTS/TWSETUP.EXE') == (root / 'artifacts/win30/TWSETUP.EXE').read_bytes()
+              assert z.read('EFFECTS/TWXT2.ZIP') == (root / 'artifacts/win30/TWXT2.ZIP').read_bytes()
+              z.extractall('/tmp/effects-kit')
+          print('PASS native receipt, runtime, source closure, shared dependencies and package CRC')
+          PY
+      - name: Exercise actual compiler and libtandy export state equality
+        run: |
+          lib=/tmp/effects-kit/EFFECTS/SOURCE/LIBTANDY
+          cc -x c -std=c89 -pedantic -Wall -Wextra -Werror -Wno-misleading-indentation \
+            -I src/win30/EFFECTS -I "$lib/include" \
+            src/win30/EFFECTS/HOST.C src/win30/EFFECTS/FXCORE.C \
+            "$lib/src/lt_audio.c" "$lib/src/lt_chip.c" -o /tmp/effects-test
+          mkdir /tmp/effects-host
+          /tmp/effects-test /tmp/effects-host
