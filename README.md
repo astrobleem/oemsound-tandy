@@ -1,111 +1,85 @@
 # OEMSound-Tandy
 
-Music players and instruments for the **Tandy 1000 EX/HX** and Windows 3.0.
+## Tandy MIDI and sound for Windows 3.0
 
-## Tandy Winamp
+Put the Tandy 1000's built-in sound to work in Windows. OEMSound provides
+one shared Windows sound driver, MIDI playback software, and a collection
+of native music tools for the hardware you already own.
 
-Browse your music, build a playlist, and play **MIDI, VGM/VGZ and tracker MOD
-arrangements** through the Tandy PSG.
+**[Download DOS Setup](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE)** ·
+[All downloads](docs/DOWNLOADS.MD) · [Installation guide](docs/INSTALL.MD)
 
-**[Download Tandy Winamp](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP)**
- · [Install guide](experimental/WINAMP30/INSTALL.TXT)
- · [Release notes](https://github.com/astrobleem/oemdisplay-tandy/releases/tag/windows-xt)
+### What it brings to Windows
 
-![Tandy Winamp in color](docs/SHOTS/WAMPCOL.PNG)
+- **Tandy PSG music:** three tone voices and noise percussion. Windows sound
+  calls and alerts use the same installed driver.
+- **MIDI instruments:** the included MIDI engine turns notes, pitch bend,
+  sustain and expression into Tandy sound. Winamp offers Default and Chamber
+  instrument banks.
+- **An extra speaker voice:** supported apps can use the PC speaker for
+  square-wave bass or effects alongside the PSG.
+- **One sound installation:** the player, instruments and Windows XT sound
+  clients share the same `SOUND.DRV`.
 
-*Windows 3.0 player capture. [Capture details](docs/SHOTS/WINAMPCL.MD).*
+### Requirements
 
-- **Browse/Add:** choose songs from the Windows file browser.
-- **MIDI instruments:** choose Default or Chamber; Winamp remembers your choice.
-- **32-song playlist:** scroll past the visible rows or use Home, End and Page Up/Down.
-- **Remove while playing:** change the list without deleting the song or stopping it.
-- **A proper player window:** the title stays **Tandy Winamp**, with track and status inside.
+Tandy 1000 **EX or HX**, DOS **3.0 or later**, normal **640 KB** memory,
+and **Windows 3.0 in real mode**, with a working display setup. Beats and
+Effects Lab need a desktop at least 320 pixels wide. Windows 3.1, protected
+mode and other Tandy/PCjr sound configurations are outside the supported scope.
 
-![The Add song browser in color](docs/SHOTS/WAMPCBR.PNG)
+### Install and hear it
 
-*The same released app with its Add song browser open. The folder contains
-original synthetic examples.*
+1. Copy **TWSETUP.EXE** to the Tandy and exit Windows to DOS.
+2. Run `TWSETUP`. It finds Windows and installs the shared sound driver,
+   Winamp and its launch helpers.
+3. Run `C:\WINAMP\GO` from DOS. In Winamp, choose **Add...**, select a song,
+   then **Play**. Original example songs are included.
 
-### Try it
+Setup handles the driver selection and required files. [The install guide](docs/INSTALL.MD)
+also covers the ZIP option, the extra apps, Repair and Uninstall.
 
-1. [Download TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP).
-2. Extract its `TWXT2` folder on the DOS computer, exit Windows, and run
-   `SETUP` in that folder. It finds Windows and installs Winamp, the shared
-   sound driver, DLLs and video-memory helper automatically.
-3. Start the player from DOS with `C:\WINAMP\GO`.
+## Apps that use the driver
 
-Setup handles the existing Windows sound entry and current Windows XT sound
-clients. The same SOUND driver serves Winamp, alerts and PIT instruments.
-Run `C:\WINAMP\SETUP` for Launch, Repair or Uninstall Winamp.
+### Tandy Winamp — listen
 
-The [install guide](experimental/WINAMP30/INSTALL.TXT) covers normal use.
-[TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP) includes the same ready-built runtime and corresponding source.
+![Current Tandy Winamp playing a MIDI song](docs/SHOTS/CURRENT/WINAMP.PNG)
 
-Choose Add... to load songs. Stop and close the player, then exit Windows
-normally. TPLAY removes its owned timer bridge after Windows returns.
+Play MIDI, Tandy VGM/VGZ, MOD arrangements, TND and AGI SND files. Build a
+playlist and choose a MIDI instrument bank. MOD plays PSG square-wave
+arrangements rather than sampled instrument timbres.
+[Player guide](experimental/WINAMP30/README.md) · [Supported formats](docs/FORMATS.MD)
 
-MIDI uses the Tandy voices and basic percussion. VGM/VGZ preserves the supported
-PSG register stream. MOD follows supported tracker pitch, volume and effects
-using square-wave tones; it does not reproduce sample timbres.
-[Supported formats](docs/FORMATS.MD) · [Playback timing](docs/SNDTIME.MD)
+### Beats Lab and Fiddle — make music
 
-## Your Tandy has an extra voice!
+![Current five-lane Beats Lab editor](docs/SHOTS/BEATS/EDITOR.PNG)
 
-### Tandy FauxBlaster, from Doebelinschmirtz Incorporated!
+Edit three PSG tone lanes, noise percussion and an optional PC-speaker lane.
+Save patterns, try the original demos, and export MML scores for Fiddle.
+[Beats guide](src/win30/BEATLAB/README.MD) · [Fiddle guide](src/win30/FIDDLE/README.MD)
 
-Behold the Fifth-Voice-inator! **Fiddle and Beats** add an optional
-**PC-speaker square-wave voice** alongside the Tandy PSG's **three tone voices
-and noise channel**. A little extra mischief from the speaker you already own.
+### Effects Lab — make sounds
 
-Write a fifth `[P]` part in MML3, or edit and export the fifth lane in Beats.
+![Current Effects Lab editor](docs/SHOTS/EFFECTS/EDITOR.PNG)
 
-**[Download MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP)**
- · [Authoring and setup](experimental/PITPUBLIC/INSTALL.TXT)
+Create coin, laser, explosion, jump and blip effects. Adjust pitch sweeps,
+vibrato, envelopes and gating, preview on PSG or PC speaker, then save the
+patch or export libtandy C data.
+[Effects guide](src/win30/EFFECTS/README.MD)
 
-For the other instruments and DOS sound test, use [current sound downloads](docs/DOWNLOADS.MD).
+The [instrument kit](docs/DOWNLOADS.MD) also includes **Mini Piano**, **JoyMIDI**
+and **MiniMIDI**. All are clients of the same shared sound installation.
+[Choose an app](docs/APPS.MD).
 
-## Build your own Windows music app
+These are native Windows apps with included MIDI support; the kit does not
+register a general WinMM `midiOut` device for arbitrary Windows MIDI software.
+PSG instruments are synthesized chip sounds, not a General MIDI sample bank.
 
-**[libwintandy](https://github.com/astrobleem/libwintandy)** shares the 8086
-Windows MIDI services, prepared-frame/ordered-burst playback backend and USER
-UI helpers. Its VGM, gzip and MOD readers and foreground integration are
-available as source with working examples.
+## Source and further reading
 
-Start with **[FORMATS30](https://github.com/astrobleem/libwintandy/tree/main/examples/FORMATS30)**,
-then follow the [build guide](experimental/WINAMP30/BUILDING-UI.MD) and
-[API/format boundaries](docs/FORMATS.MD#reuse-and-evidence). The playlist and
-Browse/Add/Remove UI belong to Winamp; `TPLAY` is its guarded DOS launcher.
+[Developer guide](docs/DEVELOP.MD) · [Validation and screenshot provenance](docs/SHOTS/CURRENT/README.MD) ·
+[Earlier demos](docs/DEMOS.MD) · [Windows XT display project](https://github.com/astrobleem/oemdisplay-tandy)
 
-For separate source-only DOS and portable C89 Tandy components, see
-[libtandy](https://github.com/astrobleem/libtandy). It covers SN76489-family PSG
-state, graphics, surfaces, input and cooperative timing; the Windows driver and
-apps here remain separate projects.
-
-## More to play with
-
-- **[Mini Piano](experimental/PITPUBLIC/INSTALL.TXT)** - play notes with the keyboard or mouse; use the current PITEXPR kit and its included Setup.
-- **[JoyMIDI](experimental/PITPUBLIC/INSTALL.TXT)** - turn a joystick into a pitch/velocity instrument; use the same PITEXPR kit and shared sound setup.
-- **[Tandy Beats Lab](src/win30/BEATLAB/README.MD)** - DWA: DAWs With Attitude. Edit five lanes, including PC speaker, with original editable demos and pattern Save/Load. [Authoring setup](experimental/PITPUBLIC/INSTALL.TXT).
-- **[Effects Lab](src/win30/EFFECTS/README.MD)** - create short PSG or PC-speaker effects with editable presets, pitch sweeps, vibrato and gating; save patches and export libtandy C data. [Download the complete native kit](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/EFFECTS.ZIP).
-- **[Buddy Holly: BUDCAP video with PSG music and timed captions](https://youtu.be/wzUQWxt3Eno)** — an offline export. [BUDCAP 0.4 docs](examples/BUDDY/BUDCAP/README.md) describe the 256×160 DOS video at 4 fps. [Watch the genuine emulator demo GIF](docs/SHOTS/BUDCAP04.GIF)
-  · [Capture details](docs/SHOTS/README.MD#budcap-04-animated-preview).
-- **[Blondie's "Call Me" five-channel oscilloscope](https://youtu.be/gpdcfCYBdpk)** — an offline visualization
-  of the Tandy PSG and PC-speaker arrangement.
-
-The instrument kits include their paired app-local MIDI support. All use
-the same installed SOUND driver; the included Setup handles it. Keep each
-complete kit together and follow its current setup guide.
-
-See [validation](experimental/WINAMP30/VALIDATION-UI.MD),
-[checksums](https://github.com/astrobleem/oemsound-tandy/releases/download/tandy-winamp-xt2.20261025/SHA256SUMS)
-and component notices for exact versions and scope. Winamp and the
-[Windows XT display project](https://github.com/astrobleem/oemdisplay-tandy)
-have separate release gates.
-
-## Licensing
-
-Keep the [root license](LICENSE) and component-specific notices. Winamp/shared
-source and the first-party browser retain their MIT notices; the sound driver has its own
-license. The Winamp package includes no private/commercial music, sample media,
-Windows, ROMs or proprietary tools. BUDCAP's existing media has separate rights
-and is not included in the Winamp download.
+The screenshots are authentic Windows 3.0 emulator captures of the current
+apps. Runtime/source and component notices accompany the downloads. See
+[LICENSE](LICENSE) and the [licensing notes](docs/DEVELOP.MD#licensing).

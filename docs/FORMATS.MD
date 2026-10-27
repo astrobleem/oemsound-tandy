@@ -1,7 +1,7 @@
 # Tandy Winamp formats
 
 [Download Tandy Winamp](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP)
-and follow the [native Setup guide](../tools/WINAMP/INSTALL.TXT). Setup installs
+and follow the [native Setup guide](INSTALL.MD). Setup installs
 the player, shared SOUND driver, DLLs and launcher. Start with `C:\WINAMP\GO`.
 
 | Input | Playback |
