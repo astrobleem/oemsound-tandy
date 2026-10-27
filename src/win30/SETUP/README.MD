@@ -1,5 +1,7 @@
 # Native Winamp Setup
 
+Developer reference. For normal installation, use [the DOS setup guide](../../../docs/INSTALL.MD).
+
 The direct consumer download is the self-contained native `TWSETUP.EXE`.
 Run it in DOS; it needs no archive extractor or preparation program. The ZIP
 also contains a plain `SETUP.EXE` and the same runtime files. Setup finds

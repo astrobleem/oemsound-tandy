@@ -1,0 +1,19 @@
+{
+  "image": {
+    "bytes": 3193,
+    "sha256": "5991574a572aadc1ac8d677925237f04b848369abb02212e1f710dd62de48296"
+  },
+  "runtime": {
+    "bytes": 55645,
+    "sha256": "24f0f0aad39f336fc9ddf2ea06aa05f595da844ac6177a8e9789bd44157d7e64"
+  },
+  "source_avi": {
+    "bytes": 2282052,
+    "sha256": "38fce520944d0a3155610038c019a47a992853d408481a98d8b907e0c5cad6be"
+  },
+  "source_run": "FINALSMOKE1, 2026-10-25",
+  "sample": "FINAL05.PNG from ffmpeg fps=1 sampling",
+  "processing": "Lossless PNG encoding of one actual 320x200 native frame; no crop, scaling, retouching or generated content",
+  "new_native_run": false,
+  "physical_hardware_claim": false
+}

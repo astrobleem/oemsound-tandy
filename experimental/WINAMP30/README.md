@@ -1,37 +1,36 @@
 # Tandy Winamp
 
-[Download TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP).
-This is the native Windows 3.0 real-mode Tandy player. The expanded ZIP
-includes DOS Setup, the player, its DLLs, shared SOUND driver and helpers.
+Play MIDI and Tandy chip-music files through the shared Windows sound driver.
 
-## Install and start
+![Current Tandy Winamp playing MIDI](../../docs/SHOTS/CURRENT/WINAMP.PNG)
 
-1. Extract the TWXT2 folder on the DOS computer and exit Windows.
-2. Run `SETUP.EXE` in that folder and select the Windows installation.
-3. Start the installed player with `C:\WINAMP\GO`.
+[Download and install](../../docs/INSTALL.MD) · [All downloads](../../docs/DOWNLOADS.MD)
 
-Setup selects the shared sound driver and installs the required files.
-No manual driver copying, INI editing or separate helper download is needed.
-The [install guide](INSTALL.TXT) also covers Launch, Repair and Uninstall.
+## Play a song
 
-## Play
+Start from DOS with `C:\WINAMP\GO`. Choose **Add...**, select a song, then
+**Play**. The original STREAM.MID, SHORT.VGM, PLUCK.TND and CHIME.SND examples
+are included. Type a path in the filename box or browse folders and drives.
 
-Add opens the file browser. The playlist holds 32 songs; Remove changes
-the list without deleting a song. The filename edit also accepts a path.
-Stop and close the player, then exit Windows normally to return to DOS.
+The playlist holds 32 songs. Use its scrollbar or Home/End/Page Up/Page Down.
+**Remove** changes the list without deleting the file; a removed playing
+song continues until Stop or its end.
 
-The MIDI bank button selects Default or Chamber and remembers the choice
-for later playback. Held live voices retain the bank they started with.
+For MIDI, choose **Default** or **Chamber**. Winamp remembers the instrument
+bank. MIDI supports sustain, volume, expression, pitch bend and controller
+resets, with speaker bass and automatic PSG fallback.
 
-Large VGM reads directly from disk. VGZ expands automatically, with
-foreground progress and Cancel, then uses the same playback path. Temporary
-files need no user configuration. MIDI retains sustain, volume, expression,
-pitch bend, controller resets and PC speaker bass with PSG fallback.
+VGM streams from disk. VGZ expands automatically, with progress and Cancel,
+then uses the same playback path. MOD plays PSG square-wave arrangements,
+not the sampled instrument timbres. [Full format details](../../docs/FORMATS.MD).
 
-The [current package tests](../../tools/WINAMP/TESTS.JSN) identify the exact
-native builds, playback and cleanup evidence. Older records under LAUNCH
-and EVIDENCE retain their original scope.
+VGM/VGZ/MOD offer Pause/Resume. Play restarts a song. Stop and close the
+player, then exit Windows normally to return to DOS.
 
-[Current downloads](../../docs/DOWNLOADS.MD) · [Install guide](INSTALL.TXT) ·
-[Supported formats](../../docs/FORMATS.MD). Source and component notices
-are included.
+## Setup and troubleshooting
+
+[Installation, Repair and Uninstall](../../docs/INSTALL.MD) covers the current
+native Setup. It installs the shared driver and every required helper.
+For an opening error, use the status message and the supported-format guide.
+
+[Developer build guide](BUILDING-UI.MD) · [Current validation record](../../tools/WINAMP/TESTS.JSN)

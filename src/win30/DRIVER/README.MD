@@ -1,5 +1,7 @@
 # Canonical Windows 3.0 Tandy sound driver
 
+Developer reference. For normal installation, use [the DOS setup guide](../../../docs/INSTALL.MD).
+
 This source builds SOUND.DRV, whose internal Win16 module name is SOUND.
 The same driver provides the legacy three PSG queues, Windows alerts, the
 optional PIT2 voice and the prepared PIT2 lease. Consumers resolve private

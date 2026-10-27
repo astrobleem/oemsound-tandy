@@ -1,91 +1,41 @@
 # Tandy Beats Lab
 
-**DWA: DAWs With Attitude.** Straight Outta LLMompton.
-Produced by Dr. DRAM. Mixed on five channels. Mastered on absolutely none.
+Build an eight-step pattern with three PSG tone lanes, noise percussion and
+an optional PC-speaker lane. Save it, vary it and export a score for Fiddle.
 
-A small, native Windows 3.0 music tool for the Tandy 1000 EX/HX: edit an
-eight-step pattern with three PSG tones, noise percussion and an optional
-PC-speaker lane. The editor requires a desktop at least 320 pixels wide and fits 320x200. No samples or extra
-sound card are needed.
+![Five-lane Beats Lab editor](../../../docs/SHOTS/BEATS/EDITOR.PNG)
 
-![Tandy Beats Lab editor](../../../docs/SHOTS/BEATS/EDITOR.PNG)
+[Download a music kit](../../../docs/DOWNLOADS.MD) ·
+[Shared setup and launch](../../../docs/INSTALL.MD#add-music-tools)
 
-Windows 3.0 real-mode emulator capture at 320x200; no physical-hardware claim.
+## Start with a demo
 
-## Start making noise
+Click **Demo**, then **Play**. The original patterns cover Pocket drums,
+Lowrider lead, Speaker bass, Late-night keys and Starter. Each is editable.
+The Speaker bass demo turns the PIT speaker lane on automatically.
 
-Use the complete Fiddle/Beats authoring kit from the
-[current downloads](../../../docs/DOWNLOADS.MD). Extract the kit, exit
-Windows to DOS and run its included `TWSETUP.EXE` once. Start Windows
-through your normal display launcher and run `BEATS\BEATS.EXE` from the
-extracted kit. [Shared setup instructions](../../../experimental/PITPUBLIC/INSTALL.TXT).
+Click a grid cell to toggle a note/rest. Arrow keys select a cell;
+Space/Enter toggles it. **Pitch−/Pitch+** or `+`/`−` changes its pitch, and
+Delete makes a rest. Click a tone lane's label to cycle its instrument preset.
 
-Keep the supplied application folders intact. `MIDIMAP.DRV` is app-local
-MIDI synthesis support, not an alternative system sound-driver installation.
-It cooperates with the single installed SOUND driver for sound ownership
-and uses that driver's optional PC-speaker service. Setup supplies the
-shared driver; no file gathering, driver swapping or INI editing is needed.
-Stop other music/speech producers before playing.
+Use **PIT** to enable the separately editable PC-speaker row and the tempo
+buttons to change speed. **Play** starts at step 1; **Stop/Esc** releases
+sound. F5 toggles playback. Tab/Shift+Tab navigates the buttons.
 
-## The grid
+## Save a pattern or share a score
 
-Each column is one straight eighth note. Click a cell to toggle its note
-and rest; arrow keys select a cell, Space or Enter toggles it, and `+`/`-`
-changes its pitch. The Pitch-/Pitch+ buttons also edit the selected note.
-Delete makes a rest. Click the three tone labels to
-cycle through the existing presets. The fourth row is noise percussion;
-`PCspkr` is the fifth, separately editable row.
+Enter a name such as `MYGROOVE.BTS`. **Save/Ctrl+S** stores all 40 cells,
+tempo, tone presets and speaker setting beside the app. **Load/Ctrl+O** brings
+it back. Replacing a pattern asks first and keeps the previous file as `.BAK`.
 
-The visible PIT control enables or disables the PC-speaker row. A pattern
-and its demos load that setting automatically; Save/Load preserves it.
-Four-voice patterns keep it off. The speaker has fixed hardware level;
-it does not use the PSG preset envelopes.
+**MML** shows the generated score; **Grid** returns to the cells. **Copy** puts
+the score on the clipboard. **Export** writes a same-name `.MML` file for
+[Fiddle](../FIDDLE/README.MD), using MML3 when the speaker part is enabled.
+Choose another name if an export already exists.
 
-Play starts at step 1. Stop or Escape mutes and releases sound; `P` and `S`
-work when the grid has focus, and F5 toggles playback. `D` chooses the next
-demo and `V` switches Grid/MML when the grid has focus. Losing activation or
-closing the app also stops playback. Tab/Shift+Tab navigate native controls.
-Use the tempo `-`/`+` buttons or Page Down/Page Up (40-240 BPM).
+Both MML3AUTH and PITEXPR contain this same editor and its original examples.
+MML3AUTH adds Fiddle; PITEXPR adds the instruments. **About/F1** shows the key
+controls and the app's DWA: DAWs With Attitude label.
 
-## Demos with a pocket
-
-Click Demo to cycle through these original, editable examples. Their names
-appear in the title; their filenames appear beside Load and Save.
-
-| Demo | File | What to listen for |
-| --- | --- | --- |
-| Pocket drums | `POCKET.BTS` | A relaxed 90 BPM kick, hat and snare groove using the noise row. |
-| Lowrider lead | `LOWRIDER.BTS` | Sparse high lead, organ replies and low PSG bass at 92 BPM. |
-| Speaker bass | `FIVE.BTS` | Five voices together, with low speaker-only answers. PC speaker loads **on**. |
-| Late-night keys | `NIGHT.BTS` | Short lead phrases, bell accents, bass and crisp percussion. |
-| Starter | `STARTER.BTS` | The original four-voice starter pattern. |
-
-The demos take inspiration from the relaxed, sparse G-funk feel of
-*The Chronic*. These are original educational patterns, not album
-recordings, recognizable song melodies or lyrics.
-
-This compact sequencer has straight eighths and a fixed 75% gate, without
-swing, glide, ties or per-cell velocity. PSG tones remain A2-C7. The
-explicitly enabled PC-speaker route accepts D1-C7, using rounded whole-Hz
-requests supported by the existing shared SOUND service (D1 is 37 Hz).
-The bass demo uses A1/C2/D2 at 55/65/73 Hz and leaves space around it.
-It does not double or fold the bass into a higher voice. The kit includes
-the matching Fiddle parser/player for these lower MML3 `[P]` notes.
-
-## Save, load and share
-
-Enter an 8.3 filename such as `MYGROOVE.BTS` in the filename box. Save stores
-all 40 cells, tempo, tone presets and the speaker setting beside the app.
-Load opens that pattern for further editing. Ctrl+S saves; Ctrl+O loads.
-Replacing a pattern asks first and keeps the previous file as `.BAK`.
-A rejected or damaged file leaves the current pattern intact.
-
-MML switches to the generated, read-only score preview; Grid returns to the
-cells. Copy puts that score on the clipboard. Export writes a same-stem
-`.MML` file for Fiddle: MML2 with speaker off, MML3 plus `[P]` with it on.
-Existing MML files are protected from overwriting; choose another filename.
-The grid loads `.BTS` patterns, not arbitrary MML scores.
-
-The status line explains missing files, busy sound and disk errors. If
-Setup is needed, use the one supplied with the kit. About/F1 shows the key
-controls without a splash screen or startup delay.
+[Detailed demo and pitch reference](REFERENCE.MD) ·
+[Source/tests](TESTS/README.md) · [Native validation](VALIDATE.MD)
