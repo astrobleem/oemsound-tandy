@@ -11,6 +11,9 @@
 #include "TPLAYPOL.H"
 #include "SOUNDID.H"
 #define PLEN 128
+#ifndef TP_PLAYER
+#define TP_PLAYER "MINIPLAY.EXE"
+#endif
 #define FP(s,o) ((void far *)(((unsigned long)(s)<<16)|(unsigned)(o)))
 extern unsigned _cdecl DOSStat(unsigned);
 static char home[PLEN],win[PLEN],path[PLEN],bridge[PLEN],reserve[PLEN];
@@ -117,7 +120,7 @@ int main(int argc,char **argv){
  if(!join(path,win,"SYSTEM\\SOUND.DRV")||!identity(path,SOUND_BYTES,SOUND_CRC))return refuse("Paired SOUND.DRV identity mismatch or missing file.");
  if(!join(wincom,win,"WIN.COM")||!bootstrap(wincom))return refuse("WIN.COM missing or outside the DOS COM bootstrap size.");
  if(!join(bridge,home,"TBRIDGE.EXE")||!identity(bridge,2922U,0x79c22c55UL))return refuse("Keep the matching TBRIDGE.EXE with TPLAY.");
- if(!join(player,home,test?"RAWGUI.EXE":"MINIPLAY.EXE")||!exists(player))return refuse("Player or test client is missing.");
+ if(!join(player,home,test?"RAWGUI.EXE":TP_PLAYER)||!exists(player))return refuse("Player or test client is missing.");
  if(!join(path,home,"RAWCLK.DLL")||!exists(path))return refuse("Keep RAWCLK.DLL with TPLAY.");
  if(video&&(!join(reserve,home,"RESERVE.COM")||!identity(reserve,1512U,0xc794fceaUL)))return refuse("Keep the qualified RESERVE.COM with TPLAY for Tandy graphics.");
  printf("TPLAY preflight PASS: bounded driver checks complete; no resident or sound acquisition yet.\n");fflush(stdout);
