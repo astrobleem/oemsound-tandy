@@ -18,7 +18,8 @@ and release-failure owner retention. Code grows 26 bytes, data is unchanged,
 and all four helper binaries are identical. Prior native metrics below
 remain version-pinned evidence; no native menu test or full replay is claimed.
 MENU09-BUILD.json is the final build; FINAL-BUILD.json preserves native08.
-Fresh re-review of this focused fix is pending; no publication authorized.
+The focused fix addresses the review finding; publication was approved
+by Chad on 2026-10-28. No new native menu behavior test is claimed.
 The runtime and installer CRC manifest are regenerated for build09; the
 native fresh-install receipt below qualifies the prior build08 payload and
 same CRC kernel, not a new native installation of build09.
@@ -97,7 +98,8 @@ the optional queue ABI is a source contract, not an implemented PSG bridge.
 AdLib and General MIDI are not implemented. No canonical SOUND/MIDI engine
 or driver replacement is included. Original video frames are preserved;
 WZP merely rearranges the approved WZV encoding into lossless native planes.
-Fresh independent Windows review and publication approval are still pending.
+Source review identified mouse-menu pause; the focused fix/regression is
+recorded above. Chad approved paired publication on 2026-10-28.
 Earlier failed/superseded runs and raw media remain preserved in the private
 workspace. EVIDENCE contains selected unmodified receipts, corrections,
 logs and genuine screenshots, with original-path/SHA256 provenance.

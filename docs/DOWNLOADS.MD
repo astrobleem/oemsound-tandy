@@ -1,6 +1,6 @@
 # Downloads
 
-Start with **[TWSETUP.EXE — native DOS Setup](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE)**.
+Start with **[TWSETUP.EXE â€” native DOS Setup](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE)**.
 It installs the shared Windows sound driver, Winamp and the required helpers.
 [Installation instructions](INSTALL.MD).
 
@@ -15,7 +15,30 @@ It installs the shared Windows sound driver, Winamp and the required helpers.
 
 The Windows apps share one installed `SOUND.DRV`. Choose the music kit by
 which companion apps you want; there is no different driver to select.
-[Requirements](../README.md#requirements) · [App controls and launch paths](APPS.MD)
+[Requirements](../README.md#requirements) Â· [App controls and launch paths](APPS.MD)
+
+## Buddy Holly tiny video players
+
+These separate players run actual frame video with synthesized music.
+Windows 3.0 real mode fits the 160x100 16-color CGA desktop; DOS supports
+CGA, Tandy graphics and text fallbacks. Sound and display choices are independent.
+
+| Download | What you get |
+| --- | --- |
+| [WINPLAY.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/examples/BUDDY/WINPLAY.ZIP) | Windows player, one-voice speaker arrangement, Tandy-compatible PSG mapper, optional faster speaker clock, wallpaper and fresh-directory DOS installer. |
+| [DOSPLAY.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/examples/BUDDY/DOSPLAY.ZIP) | Standalone DOS player with speaker, PSG or silent output, and high/low-resolution video. Use LOWRES on an original-speed CGA 8088. |
+| [WINSRC.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/examples/BUDDY/WINSRC.ZIP) | Corresponding Windows source with the current broker inputs and license notices. DOS source is in the repository. |
+
+[Install and controls](../examples/BUDDY/README.TXT) -
+[Windows guide](../examples/BUDDY/WIN30/README.TXT) -
+[DOS guide](../examples/BUDDY/DOS/README.TXT) -
+[Paired release and checksums](https://github.com/astrobleem/oemsound-tandy/releases/tag/buddy-2026.10.28)
+
+The Buddy installer uses a new app folder and leaves system/INI/boot files
+alone. Auto uses recognized Tandy ROM hardware or falls back to PC speaker;
+select PSG explicitly for a configured compatible C0 sound card. AdLib and
+General MIDI are not implemented. Read the guides for fast-clock prerequisites,
+attribution and emulator qualification limits.
 
 Source and component notices are included. [Developer documentation](DEVELOP.MD)
 keeps build instructions and versioned evidence separate from installation.

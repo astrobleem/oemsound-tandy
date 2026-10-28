@@ -1,4 +1,4 @@
-BUDDY HOLLY FOR WINDOWS 3.0 REAL MODE - INTEGRATION CANDIDATE
+BUDDY HOLLY FOR WINDOWS 3.0 REAL MODE
 
 Requires an 8088-compatible PC, 640 KB, Windows 3.0 real mode, and a
 16-color display driver. The 64x48 video targets 4 frames/second.
@@ -6,7 +6,7 @@ The compact window fits the 160x100 CGA desktop with its compact fonts.
 Windows and display drivers are not included.
 
 INSTALL
-Extract the candidate package to a DOS-accessible directory. In DOS,
+Extract WINPLAY.ZIP to a DOS-accessible directory. In DOS,
 change to that directory and run BUDSET C:\BUDDY (or another NEW absolute
 8.3 directory whose parent exists). BUDSET verifies the complete payload,
 refuses existing targets, copies and verifies the result. A failed copy
@@ -77,8 +77,7 @@ To remove: exit the player and Windows, remove only this package's files
 from its dedicated installation directory, then remove the empty directory.
 Preserve your own files, modified media, logs, and any preexisting broker.
 
-This is a local integration candidate. See QA qualification receipts for
-exact measured builds/profiles and gaps. Emulation is not physical-hardware
-qualification. Published historical WINPLAY.ZIP is retained until release
-approval; build/package this source with source/BUILD.PY and PACK.PY.
+See QA qualification receipts for exact measured builds/profiles and gaps.
+Emulation is not physical-hardware qualification. Build/package this source
+with source/BUILD.PY and PACK.PY. WINSRC.ZIP supplies corresponding source.
 See ATTRIB.TXT for video/music attribution. No sampled soundtrack is used.

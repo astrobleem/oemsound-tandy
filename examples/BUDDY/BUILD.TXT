@@ -1,4 +1,4 @@
-BUDDY - REPRODUCTION OF THE CURRENT LOCAL CANDIDATE
+BUDDY - REPRODUCTION OF THE PAIRED DOS / WINDOWS UPDATE
 
 Use external Open Watcom 1.9 and Python 3 on a modern developer host.
 No tools, OS images or ROMs are bundled. All output directories must be NEW.
@@ -17,7 +17,7 @@ No emulator is launched by these builders. Win16 C uses -zW -0 -ms -os -s
 The current WINHOOK/TBRIDGE mirror is copied at build time, not replaced.
 The canonical published SOUND/MIDI driver and its MSC6/MASM/LINK4 toolchain
 are unchanged. Historical Windows BUILD.BAT batches are incomplete legacy
-paths; use the complete BUILD.PY path above for this app-local candidate.
+paths; use the complete BUILD.PY path above for this app-local package.
 See WIN30/source/BUILD.TXT for contributor controls and scoped host checks.
 
 DOS (updated portable player, 8086 small model)
@@ -47,5 +47,6 @@ receipts with separate explicit corrections; no extra playback is queued.
 DOS/RESULTS.TXT and QA/DOSPORT retain the independently reviewed DOS scope.
 The archival QA/WINDOWS.TXT and QA/DOS.TXT describe the original delivery,
 not this update. Imported OS code, physical hardware and removable-media
-throughput are not certified. Windows fresh independent review is pending.
-Publishing source or packages requires Chad's approval.
+throughput are not certified. Review identified the mouse-menu pause case;
+the focused fix has a failing-before/passing-after host regression.
+Chad approved publication of this paired update on 2026-10-28.

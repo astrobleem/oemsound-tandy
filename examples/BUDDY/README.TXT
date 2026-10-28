@@ -73,4 +73,4 @@ Use dedicated new folders. Logs are written alongside the runtime.
 BUILD.TXT describes reproduction. FORMAT.TXT documents the streams.
 ATTRIB.TXT separates original code from third-party music/video.
 SHA256.TXT covers this tree; runtime ZIPs have their own manifests.
-This is a local review candidate. No publication has been approved.
+See WIN30/QA/RESULTS.TXT and DOS/RESULTS.TXT for versioned evidence.
