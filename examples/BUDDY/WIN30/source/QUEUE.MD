@@ -1,4 +1,7 @@
-# Win16 Buddy lookahead client preparation
+# Optional PSG lookahead client contract
+
+This document covers the optional PSG client only. PC-speaker prepared-state
+services are separate app-local components; see ../README.TXT.
 
 This is a client adaptation of the WZM1/WZV2 player in this directory. It does
 not change the Windows x64 PCM player, DOS players, mapper or SOUND/PIT owners.
@@ -8,7 +11,7 @@ backend tests remain required before enabling timestamped playback.
 ## Current behavior and prepared changes
 
 The available MIDIMAP.DRV exports MIDIMESSAGE but no documented timestamped
-queue interface. A normal build therefore retains immediate MIDI output and
+queue interface. On PSG, a normal build therefore retains immediate MIDI output and
 the existing 55 ms USER timer. It now preserves every due WZM snapshot, with
 bounded foreground work, instead of collapsing overdue snapshots to the last
 one. It drains overdue audio before drawing pictures. This fixes event loss;
@@ -18,7 +21,7 @@ Both paths validate the complete bounded score before opening sound. Cue start,
 resume and Left/Right seek reconstruct the current snapshot with binary search,
 without replaying historical attacks. Space pauses/resumes; Enter replays the
 full movie; Escape stops. Pause/focus/minimize stops and closes the same owner,
-so resume reconstructs and starts a fresh timeline. No new device acquisition,
+so resume reconstructs and starts a fresh timeline. For this optional PSG client, no new device acquisition,
 direct PSG write, PIT programming, IRQ callback or timer is introduced.
 
 With a real bridge, `BQSCHED.C` uses the backend clock for movie position and

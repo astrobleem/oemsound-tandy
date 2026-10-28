@@ -4,6 +4,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
@@ -16,7 +17,7 @@ env = os.environ.copy()
 env['PATH'] = str(args.cc.resolve().parent) + os.pathsep + env['PATH']
 native = (source / 'TINYVID.C').read_text()
 bodies = []
-for name in ('fetchEvent', 'applyState', 'musicAt', 'movieNow', 'updateMusic'):
+for name in ('fetchEvent', 'applyState', 'musicAt', 'movieNow', 'updateMusic', 'prepareSpeaker'):
     match = re.search(r'^static (?:int|DWORD) ' + name +
                       r'\([^\n]*\)\n\{\n.*?^\}\n', native, re.M | re.S)
     if not match:
@@ -26,14 +27,15 @@ for name in ('fetchEvent', 'applyState', 'musicAt', 'movieNow', 'updateMusic'):
 results = []
 for name in ('BQTEST', 'BQINTEG'):
     exe = args.out.resolve() / (name + '.EXE')
-    build = subprocess.run([str(args.cc.resolve()), '-x', 'c', '-std=c89',
+    compiler = ([sys.executable, str(args.cc.resolve()), '--'] if args.cc.suffix.lower()=='.py' else [str(args.cc.resolve())])
+    build = subprocess.run(compiler + ['-x', 'c', '-std=c89',
                             '-Wall', '-Wextra', '-Werror', '-pedantic',
                             '-I', str(args.out.resolve()),
                             str(source / (name + '.C')), '-o', str(exe)],
                            capture_output=True, text=True, env=env)
     (args.out / (name + '-BUILD.LOG')).write_text(build.stdout + build.stderr)
     build.check_returncode()
-    test = subprocess.run([str(exe)], capture_output=True, text=True, env=env)
+    test = subprocess.run([str(exe)] + ([str(source.parent/'media/SPEAKER.WZM')] if name=='BQINTEG' else []), capture_output=True, text=True, env=env)
     (args.out / (name + '-TEST.LOG')).write_text(test.stdout + test.stderr)
     print(test.stdout, end='')
     test.check_returncode()

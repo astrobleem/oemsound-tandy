@@ -1,0 +1,11 @@
+system windows dll
+name SPKFAST.DLL
+option map=SPKFAST.MAP
+option start=LibEntry
+segment type code fixed preload
+segment type data fixed preload
+file FASTENT.obj,FASTCLK.obj,WINHOOK.obj
+library C:\WATCOM\LIB286\WIN\clibs.lib
+import CREATESYSTEMTIMER SYSTEM.2
+import KILLSYSTEMTIMER SYSTEM.3
+export WEP.1 resident

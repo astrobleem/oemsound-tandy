@@ -4,7 +4,19 @@
 #include <windows.h>
 #include "MIDIAPI.H"
 #include "PERIODS.H"
-#define MAPI FAR PASCAL _loadds
+#ifdef PSG_HOST
+#define MAPI
+extern int hostTandy;
+#define TANDY_ROM hostTandy
+#else
+#define MAPI FAR PASCAL __loadds
+#define TANDY_ROM (*(BYTE FAR *)0xfc000000UL==0x21)
+#endif
+#define PSG_EXPLICIT_C0 0x30475350UL
+/* The lease ABI is the current libwintandy PSGOWN.H contract. */
+typedef int (FAR PASCAL *PSGLEASE)(WORD,WORD);
+static PSGLEASE lease;
+static WORD claimed,explicitCard,releaseError;
 extern void _cdecl PsgByte(unsigned);
 static HTASK owner;
 static WORD notesOn[3],channelsOn[3],periodOn[3],volumeOn[3],age[3];
@@ -26,12 +38,16 @@ static int owns(DWORD cookie)
 {
     return owner && owner==GetCurrentTask() && cookie==MIDI_COOKIE;
 }
-static void release(void)
+static DWORD release(void)
 {
-    if(!owner)return;
+    if(!owner)return 0L;
     reset();
+    if(claimed) {
+        if(lease(1,2)){releaseError=1;return MMSYSERR_ERROR;}
+        claimed=0;lease=NULL;releaseError=0;
+    }
     if(hasSound) {StopSound();CloseSound();hasSound=0;}
-    owner=0;
+    owner=0;return 0L;
 }
 static unsigned attenuation(unsigned velocity)
 {
@@ -101,15 +117,15 @@ static DWORD shortData(DWORD value)
 DWORD MAPI midiMessage(WORD id,WORD msg,DWORD user,DWORD p1,DWORD p2)
 {
     static TCAPS caps;TOPEN FAR *desc;BYTE FAR *dest;BYTE *source;unsigned i,n;
-    int count;
+    int count;HMODULE sound;PSGLEASE entry;
     if(id)return MMSYSERR_BADDEVICEID;
     switch(msg) {
     case MODM_GETNUMDEVS:return 1L;
     case MODM_GETDEVCAPS:
         if(!p1 || p2>65535UL)return MMSYSERR_INVALPARAM;
-        caps.wMid=0;caps.wPid=0;caps.vDriverVersion=0x0101;
+        caps.wMid=0;caps.wPid=0;caps.vDriverVersion=0x0102;
         for(i=0;i<32;++i)caps.szPname[i]=0;
-        lstrcpy(caps.szPname,"Tandy PSG experimental MIDI");
+        lstrcpy(caps.szPname,"Tandy PSG / explicit C0 card");
         caps.wTechnology=2;caps.wVoices=3;caps.wNotes=3;
         caps.wChannelMask=0xffff;caps.dwSupport=0L;
         n=(unsigned)p2;if(n>sizeof(caps))n=sizeof(caps);
@@ -120,16 +136,25 @@ DWORD MAPI midiMessage(WORD id,WORD msg,DWORD user,DWORD p1,DWORD p2)
         if(!user || !p1 || p2)return MMSYSERR_INVALPARAM;
         desc=(TOPEN FAR *)p1;
         if(desc->dwCallback)return MMSYSERR_NOTSUPPORTED;
-        if((GetWinFlags()&WF_PMODE) ||
-            *(BYTE FAR *)0xfc000000UL!=0x21)return MMSYSERR_ERROR;
+        if(GetWinFlags()&WF_PMODE)return MMSYSERR_ERROR;
+        if(desc->dwInstance&&desc->dwInstance!=PSG_EXPLICIT_C0)
+            return MMSYSERR_INVALPARAM;
+        explicitCard=desc->dwInstance==PSG_EXPLICIT_C0;
+        sound=GetModuleHandle("SOUND");
+        entry=sound?(PSGLEASE)GetProcAddress(sound,"TANDYPSGLEASE"):NULL;
+        /* A lease query only reports busy/idle. It cannot detect a PSG. */
+        if(!explicitCard&&!TANDY_ROM)return MMSYSERR_ERROR;
         /* Cooperate with existing SOUND users before touching global PSG. */
         count=OpenSound();if(count<0)return MMSYSERR_ALLOCATED;
         hasSound=1;owner=GetCurrentTask();
         if(!owner) {CloseSound();hasSound=0;return MMSYSERR_ERROR;}
-        StopSound();reset();*(DWORD FAR *)user=MIDI_COOKIE;return 0L;
+        StopSound();
+        if(entry){if(entry(1,1)){CloseSound();hasSound=0;owner=0;
+                return MMSYSERR_ALLOCATED;}lease=entry;claimed=1;}
+        releaseError=0;reset();*(DWORD FAR *)user=MIDI_COOKIE;return 0L;
     case MODM_CLOSE:
         if(!owns(user))return MMSYSERR_ALLOCATED;
-        release();return 0L;
+        return release();
     case MODM_RESET:
         if(!owns(user))return MMSYSERR_ALLOCATED;
         reset();return 0L;
@@ -148,7 +173,7 @@ LONG MAPI DriverProc(DWORD id,WORD handle,WORD msg,LONG p1,LONG p2)
 {
     /* Lifecycle probe only. No install/configure or multimedia dispatcher. */
     if(msg==1 || msg==2 || msg==3 || msg==4)return 1L;
-    if(msg==5 || msg==6) {if(!owner || owner==GetCurrentTask())release();return 1L;}
+    if(msg==5 || msg==6) {if(!owner || owner==GetCurrentTask())return release()?0L:1L;return 0L;}
     return 0L;
 }
 /* WEP may not call other DLLs. Normal clients close before unloading. */
@@ -162,6 +187,9 @@ WORD MAPI DebugState(WORD query)
     WORD mask=0;unsigned i;
     for(i=0;i<3;++i)if(notesOn[i])mask|=1<<i;
     if(noiseNote)mask|=8;
+    if(query==15)return claimed;
+    if(query==16)return explicitCard;
+    if(query==17)return releaseError;
     if(query==0)return mask;
     if(query==1)return owner?1:0;
     if(query==2)return writes;

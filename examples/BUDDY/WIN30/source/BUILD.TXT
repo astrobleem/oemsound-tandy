@@ -1,0 +1,63 @@
+WINDOWS BUDDY - DEVELOPER BUILD AND TEST
+
+Authoritative complete app-local build (modern Windows developer host):
+  python examples/BUDDY/WIN30/source/BUILD.PY --watcom C:\WATCOM --out NEWDIR
+Open Watcom 1.9 is external, not vendored. BUILD.PY checks its inputs,
+compiles 8086 small-model C89, and places every output below NEWDIR.
+It launches no emulator. SOURCE/BUILD.BAT and DRIVER/BUILD.BAT are retained
+historical MSC6 app/mapper batches, not the complete tested package builder.
+This does not change the canonical published SOUND/MIDI engine toolchain.
+
+The fast service copies WINHOOK.ASM and TBRIDGE.ASM from the current
+experimental/WINLIB30/SOURCE engine mirror at build time. Do not replace
+those files with a standalone older core. The copies are build outputs.
+SPKFAST uses this broker with HiAudio(0) and the existing single SOUND owner.
+Its recognized SYSTEM byte pattern is deliberately strict. Unknown Windows
+versions/protected mode do not qualify for the faster backend.
+
+Build the native installer and local runtime package:
+  python examples/BUDDY/WIN30/PACK.PY --build NEWDIR --watcom C:\WATCOM --out NEWPACK
+NEWPACK/BUDWIN is the extracted DOS package; NEWPACK/WINPLAY.ZIP is its ZIP.
+PACK.PY embeds exact payload sizes/CRCs in the DOS BUDSET installer and
+writes SHA256.TXT plus PACKAGE.JSON. It never uploads or replaces releases.
+The runtime uses DOS 8.3 names. No Python is required on the target machine.
+
+Host C tests on Chad's host must use the controlled GCC wrapper:
+  python .../source/TESTBQ.PY --cc C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py --out NEWBQ
+  python .../host/TESTWIN.PY --cc C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py --out NEWFAULT
+  python .../QA/SERVICES.PY --cc C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py --out NEWSERVICE
+Use complete paths in place of ... . Output directories must be new.
+TESTBQ extracts actual production functions and checks all speaker event
+boundaries, state reconstruction, queue backpressure and ordered PSG output.
+TESTWIN executes production cleanup, stream/GDI failures, automatic-start,
+paused-seek and conservative hardware-selection branches with stubs. SERVICES models exact current timer
+and mapper C sources with ownership, failures and full-song service tests.
+Host tests do not establish Win16 calling conventions or measured timing.
+
+Contributor command letters: H = automatic-song alias, N = remain open after
+completion, D = force portable DIB conversion, U = legacy foreground speaker
+for timing comparisons only. M/V/C automate audio/video/combined song mode;
+F automates the complete movie. B/P explicitly select speaker/C0 PSG.
+The shipping default is the resident prepared speaker service, not U.
+Before any audio epoch, the player prepares and paints its first picture
+and compact window. It seeds immediate PSG or starts the prepared clock
+only after that repaint and a foreground/focus check. STARTORDER executes
+this exact play function with assertions on first-frame/audio call order.
+
+Rebuild the accepted sparse speaker arrangement from the written score:
+  python examples/BUDDY/WIN30/host/SPEAKER.PY --out NEWMUSIC
+The result matches media/SPEAKER.WZM byte-for-byte. The 667 states preserve
+musical rests; the service adds one explicit end mute. Regenerate lossless
+native-plane video from the approved packed source:
+  python examples/BUDDY/WIN30/host/PLANAR.PY media/WEEZER.WZV NEW.WZP
+All 966 original tiny frames are retained in WZP, without another quantizer.
+
+Native tests require the normal shared emulator byte lock, process/port
+inventory, existing private image, explicit watchdog and owned-job cleanup.
+QA/BUDQA.C is a contributor-only Win16 controller; QACMD.TXT supplies FN,
+HN or PFN. It is not shipped in the runtime. It waits for actual player
+closure before exiting Windows and testing module/SOUND release.
+Do not launch an old unguarded DOSBox build harness as a shortcut.
+
+No BIOS/Windows images, toolchains or emulator executable are distributed.
+Publication of source, packages and code changes requires Chad's approval.

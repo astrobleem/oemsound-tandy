@@ -1,0 +1,3337 @@
+[
+  {
+    "time_ms": 0,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 35652,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 35796,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 35900,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 36044,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 36148,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 36291,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 36395,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 36826,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 37138,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 37426,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 37634,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 37777,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 37882,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 38025,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 38129,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 38273,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 38377,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 38808,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 39615,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 39759,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 39863,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 40007,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 40111,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 40255,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 40359,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 40790,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 41102,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 41389,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 41597,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 41813,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 42092,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 42380,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 43579,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 43722,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 43826,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 43970,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 44074,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 44218,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 44322,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 44753,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 45065,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 45352,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 45560,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 45704,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 45808,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 45952,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 46056,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 46199,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 46303,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 46734,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 47542,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 47686,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 47790,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 47933,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 48037,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 48181,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 48285,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 48572,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 48781,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 49068,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 49276,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 49420,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 49771,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 50202,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 51505,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 51793,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 52001,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 52288,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 52744,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 52887,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 52992,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 53135,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 53239,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 53670,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 53982,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 54126,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 54478,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 54765,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 55469,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 55756,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 55964,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 56251,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 56707,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 56851,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 56955,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 57098,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 57202,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 57633,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 57946,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 58089,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 58441,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 58728,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 59432,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 59719,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 59927,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 60215,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 60918,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 61062,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 61166,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 61453,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 61661,
+    "note": 52,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 61949,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 62157,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 62444,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 62652,
+    "note": 58,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 62939,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 63147,
+    "note": 60,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 63291,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 63395,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 63682,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 63891,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 64178,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 64386,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 64673,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 64881,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 65025,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 65129,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 65273,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 65377,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 65520,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 65624,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 65768,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 65872,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 66016,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 66120,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 66264,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 66368,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 66655,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 66863,
+    "note": 39,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 67150,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 67854,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 68141,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 68349,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 68637,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 68845,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 68988,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 69092,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 69236,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 69340,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 69484,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 69588,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 69731,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 69835,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 69979,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 70083,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 70227,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 70331,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 70618,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 71322,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 71609,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 71817,
+    "note": 43,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 72104,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 72312,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 72600,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 72808,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 72952,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 73056,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 73199,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 73303,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 73447,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 73799,
+    "note": 39,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 73942,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 74542,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 74685,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 75285,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 75572,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 75780,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 76068,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 76276,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 76419,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 76523,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 76811,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 77019,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 77163,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 77267,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 77410,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 78010,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 78153,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 78257,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 78401,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 79248,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 79392,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 79496,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 79640,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 79744,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 79887,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 79991,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 80422,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 80734,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 81022,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 81230,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 81374,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 81478,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 81621,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 81725,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 81869,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 81973,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 82404,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 83211,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 83355,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 83459,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 83603,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 83707,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 83851,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 83955,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 84386,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 84698,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 84985,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 85193,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 85409,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 85689,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 86184,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 87175,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 87318,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 87422,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 87566,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 87670,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 87814,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 87918,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 88349,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 88661,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 88948,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 89156,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 89300,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 89404,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 89548,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 89652,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 89795,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 89900,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 90331,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 91138,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 91282,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 91386,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 91529,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 91633,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 91777,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 91881,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 92312,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 92624,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 92912,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 93120,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 93335,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 93615,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 93902,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 95101,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 95245,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 95349,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 95493,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 95597,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 95740,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 95844,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 96275,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 96588,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 96875,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 97083,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 97227,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 97331,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 97474,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 97578,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 97722,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 97826,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 98257,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 99065,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 99208,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 99312,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 99456,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 99560,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 99704,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 99808,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 100095,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 100303,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 100590,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 100799,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 100942,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 101294,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 101725,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 103028,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 103315,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 103523,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 103811,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 104266,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 104410,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 104514,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 104658,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 104762,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 105193,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 105505,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 105649,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 106000,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 106288,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 106991,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 107279,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 107487,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 107774,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 108230,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 108373,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 108477,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 108621,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 108725,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 109156,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 109468,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 109612,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 109964,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 110251,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 110954,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 111242,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 111450,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 111737,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 112441,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 112584,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 112688,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 112976,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 113184,
+    "note": 52,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 113471,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 113679,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 113967,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 114175,
+    "note": 58,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 114462,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 114670,
+    "note": 60,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 114814,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 114918,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 115205,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 115413,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 115700,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 115909,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 116196,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 116404,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 116548,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 116652,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 116795,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 116899,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 117043,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 117147,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 117291,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 117395,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 117538,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 117642,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 117786,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 117890,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 118178,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 118386,
+    "note": 39,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 118673,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 119376,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 119664,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 119872,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 120159,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 120367,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 120511,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 120615,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 120759,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 120863,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 121006,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 121110,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 121254,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 121358,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 121502,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 121606,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 121749,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 121853,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 122141,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 122844,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 123132,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 123340,
+    "note": 43,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 123627,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 123835,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 124122,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 124331,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 124474,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 124578,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 124722,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 124826,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 124970,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 125321,
+    "note": 39,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 125465,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 126064,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 126208,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 126808,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 127095,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 127303,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 127590,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 127798,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 127942,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 128046,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 128333,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 128541,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 128685,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 128789,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 128933,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 129532,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 129676,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 129780,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 129924,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 130771,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 131058,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 131266,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 131554,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 131762,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 131905,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 132009,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 132297,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 132505,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 132648,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 140954,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 141241,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 141697,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 141840,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 141944,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 142088,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 142192,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 142335,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 142439,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 142726,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 143182,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 143326,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 143429,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 143573,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 143677,
+    "note": 46,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 143821,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 144068,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 144316,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 144420,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 144563,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 144667,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 144811,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 144915,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 145202,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 145657,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 145801,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 145905,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 146049,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 146152,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 146296,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 146400,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 146687,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 146895,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 147039,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 147390,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 147534,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 147638,
+    "note": 46,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 147781,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 147885,
+    "note": 48,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 148029,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 148133,
+    "note": 46,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 148276,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 148380,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 148524,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 148628,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 148772,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 148876,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 149019,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 149618,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 149762,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 149866,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 150009,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 150113,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 150257,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 150361,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 150648,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 151351,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 151495,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 151599,
+    "note": 46,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 151742,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 151846,
+    "note": 48,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 151990,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 152094,
+    "note": 46,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 152237,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 152341,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 152485,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 152589,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 152732,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 152836,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 152980,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 153579,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 153722,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 153826,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 153970,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 154074,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 154218,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 154322,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 154609,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 155312,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 155455,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 155559,
+    "note": 46,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 155703,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 155807,
+    "note": 48,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 155950,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 156054,
+    "note": 46,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 156198,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 156302,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 156445,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 156549,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 156693,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 156797,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 157228,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 157540,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 157827,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 158035,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 158322,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 158530,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 158673,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 158777,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 159065,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 159272,
+    "note": 49,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 159416,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 159520,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 159951,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 160758,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 160901,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 161253,
+    "note": 55,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 161396,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 161748,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 161892,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 162243,
+    "note": 58,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 162387,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 162738,
+    "note": 58,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 162882,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 163233,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 163377,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 164719,
+    "note": 60,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 165006,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 165214,
+    "note": 58,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 165357,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 165461,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 165892,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 166204,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 166347,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 166451,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 166739,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 166946,
+    "note": 52,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 167234,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 167442,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 167729,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 167937,
+    "note": 58,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 168224,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 168432,
+    "note": 60,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 168719,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 168927,
+    "note": 52,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 169214,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 169422,
+    "note": 56,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 169709,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 169917,
+    "note": 58,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 170204,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 170412,
+    "note": 60,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 170556,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 170660,
+    "note": 56,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 170803,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 170907,
+    "note": 52,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 171051,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 171155,
+    "note": 56,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 171298,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 171402,
+    "note": 58,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 171546,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 171650,
+    "note": 60,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 171793,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 171897,
+    "note": 58,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 172041,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 172145,
+    "note": 56,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 172289,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 172392,
+    "note": 52,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 172536,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 172640,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 172927,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 173135,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 173422,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 173630,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 173917,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 174125,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 174269,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 174373,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 174516,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 174620,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 174764,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 174868,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 175012,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 175116,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 175259,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 175363,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 175507,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 175611,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 175898,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 176106,
+    "note": 39,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 176393,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 177096,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 177383,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 177591,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 177878,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 178086,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 178230,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 178334,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 178477,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 178581,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 178725,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 178829,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 178972,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 179076,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 179220,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 179324,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 179467,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 179571,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 179859,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 180562,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 180849,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 181057,
+    "note": 43,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 181344,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 181552,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 181839,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 182047,
+    "note": 46,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 182190,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 182294,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 182438,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 182542,
+    "note": 41,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 182685,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 183037,
+    "note": 39,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 183181,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 183780,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 183923,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 184522,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 184809,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 185017,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 185305,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 185512,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 185656,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 185760,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 186047,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 186255,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 186399,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 188483,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 188770,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 188978,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 189265,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 189473,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 189617,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 189721,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 190008,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 190216,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 190359,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 192444,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 192731,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 192939,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 193226,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 193434,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 193578,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 193682,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 193969,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 194177,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 194320,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 196405,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 196692,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 196900,
+    "note": 53,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 197187,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 197395,
+    "note": 51,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 197538,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 197642,
+    "note": 48,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 197929,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 198137,
+    "note": 44,
+    "role": "short low melody"
+  },
+  {
+    "time_ms": 198281,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 198385,
+    "note": 44,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 198529,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 199128,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 199271,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 199375,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 199519,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 199623,
+    "note": 39,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 199766,
+    "note": 0,
+    "role": "rest"
+  },
+  {
+    "time_ms": 199870,
+    "note": 41,
+    "role": "spaced written riff"
+  },
+  {
+    "time_ms": 200157,
+    "note": 0,
+    "role": "rest"
+  }
+]
