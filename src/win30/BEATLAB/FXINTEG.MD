@@ -40,15 +40,16 @@ loop checks messages between16-state preparation batches. It uses PM_NOYIELD
 and restores lookahead before yielding, also yielding while the finite final
 queue drains. The moving play marks update five one-pixel strips rather than
 repainting40 text cells. Status updates invalidate only the status line.
-Full grid exposes batch text into five row calls and replenish prepared audio
-between rows. It services audio while WM_TIMER is delayed.
+Full grid exposes replenish prepared audio after each cell. Standard per-cell
+text drawing avoids the slow custom-spacing fallback in the Tandy driver. It services audio while WM_TIMER is delayed.
 GUI timer timing never controls note deadlines. RAWCLK emits only
 prepared bytes/PIT values, with its existing bounded IRQ path. No additional
 driver, MIDI owner, timer, callbacks into the app, PCM or consumer preparation
 is introduced. An exhausted queue or timing error fails silent and releases
 on the next foreground service. The speaker is exclusive: unavailable/busy
 PIT refuses Play; losing that lease later stops the song. The existing
-bridge may temporarily suspend for DOS; reentry precedes the busy check. The old app-local
+bridge may temporarily suspend for DOS; reentry waits for idle quiescence and
+precedes the busy check. The old app-local
 mapper, Fiddle, MIDI banks and SOUND driver sources are unchanged.
 
 Pause uses TCPause/TCUnpause, preserving cursor and merged PSG/PIT state.
@@ -70,12 +71,14 @@ merger, transposition, delta decoder, embedded songs, legacy load and tempo
 boundaries. `FXCLOCK.PY --libwintandy <root> --out <new-output>` reproduces the observed
 native empty-queue error4, then verifies30 seconds of actual producer/RAWCLK
 streaming with no GUI timer, a350ms foreground gap and pause/resume.
-It also models the observed9.5-second full-paint delay across five rows,
-including5.5ms of producer CPU per frame and bounded refills between rows.
+It also conservatively models20 seconds of grid paint across40 cells,
+including5.5ms of producer CPU per frame and bounded refills between cells.
 `HOSTTEST.PY` retains all five original demo/MML, transactional
 save, current/archived mapper and actual PIT core regressions. `FXNATIVE.PY`
 accepts private licensed fixture paths and reuses the shared emulator lease,
-process inventory, private disk, bounded audio and owned cleanup.
+process inventory, private disk, bounded audio and owned cleanup. Its developer
+`--play-only` iteration mode returns DIAGNOSTIC_PASS, which cannot qualify
+consumer packaging. The full UI/playback/recording run remains required.
 `FXAUDIO.PY --native <run>` verifies sustained PSG and speaker activity in three
 parts of a12-second playback interval, resumed activity, and pause/stop silence.
 `FXPACK.PY` requires that audio receipt and verifies its recording hashes.

@@ -61,13 +61,13 @@ int main(void)
         }
     }
     C(TCClose()==0);C(!owner&&!sound&&!leaseHeld&&!pitToken&&!unsafe);
-    /* Native06 measured a9.5s full grid paint. Refill between its five rows,
+    /* Native06 measured a9.5s full grid paint. Model a20s paint across40cells,
        including producer CPU time, using actual RAWCLK deadlines/ownership. */
     C(BBPrepare(&player,&song));C(TCXOpen(1)==0);publish(BB_PREFILL);
     now=0;paintNow=0;paintTick=1;C(TCStart()==0);tick(0);
-    for(i=0;i<5;++i){
+    for(i=0;i<40;++i){
         unsigned batch;
-        paintElapsed(2267045UL); /*1.9s row, five rows=9.5s*/
+        paintElapsed(596591UL); /*0.5s per cell, twice measured total cost*/
         for(batch=0;batch<8&&TCDebug(0)<TCB_CAPACITY-BB_BATCH;++batch){
             n=TCB_CAPACITY-TCDebug(0);if(n>BB_BATCH)n=BB_BATCH;
             paintPublish(n);

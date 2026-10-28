@@ -49,7 +49,7 @@ static ZERO openFn,startFn,closeFn,pauseFn,resumeFn,continueFn,endFn,statusFn;
 static ONE debug,xopenFn;static CLOCKFN clockFn;static PUT putFn;static XPUT xputFn;
 static BBPLAYER producer;static BBBURST prepared;static TCXBURST block;
 static int paused,pending,ending,servicing,painting;static unsigned usePit;static DWORD lastDraw;
-static DWORD lastService,maxServiceGap,maxPaintCycles;static unsigned pumpCalls;
+static DWORD lastService,maxServiceGap,maxPaintCycles;static unsigned pumpCalls,lastPushResult;
 static FARPROC editThunk,oldEdit;
 static BPAT pat;
 static BYTE defaultNote[5]={60,64,48,42,33};
@@ -59,7 +59,7 @@ static char patternName[32]="Starter";
 static int opened,playing,timerReady,step,selLane,selStep,mmlView,dirty;
 static unsigned demoIndex;
 
-static int automatic,testStage,failures,testServiceFailure,visualMode,automaticTestBusy;
+static int automatic,testStage,failures,testServiceFailure,visualMode,automaticTestBusy,playbackOnly;
 static WORD pausedSent;static DWORD prepareMs;
 static char testLog[4096];static unsigned testLogBytes;
 static DWORD testAt;
@@ -110,7 +110,14 @@ static int stop(void)
     if(mainWindow)SetDlgItemText(mainWindow,PAUSE,"Pause");
     say("Stopped: sound released");return 1;
 }
-static void fail(const char *s){if(stop())say(s);}
+static void fail(const char *s)
+{
+    char detail[110];
+    if(automatic&&!testServiceFailure){
+        check(s,0);wsprintf(detail,"fault err%u push%u active%u run%u irq%u pit%u queue%u due%lu now%lu",debug(6),lastPushResult,debug(1),debug(20),debug(21),statusFn(),debug(0),prepared.at,clockFn());check(detail,1);
+    }
+    if(stop())say(s);
+}
 static void pauseSound(void)
 {
     if(!playing)return;
@@ -149,7 +156,7 @@ static int pump(void)
             block.at=prepared.at;block.count=prepared.count;block.pitDivisor=prepared.pit;
             for(r=0;r<block.count;++r)block.data[r]=prepared.data[r];pending=1;
         }
-        r=usePit?xputFn(&block):putFn((TCBURST FAR *)&block);
+        r=usePit?xputFn(&block):putFn((TCBURST FAR *)&block);lastPushResult=r;
         if(r==2)return 1;if(r)return 0;pending=0;
     }
     return 1;
@@ -167,7 +174,7 @@ static void play(void)
     for(i=0;i<BB_PREFILL/BB_BATCH;++i)if(!pump()){fail("Prepare failed: sound released");return;}
     if(startFn()){fail("Clock failed: use GO from DOS");return;}
     prepareMs=GetTickCount()-began;lastDraw=lastService=maxServiceGap=maxPaintCycles=0;
-    pumpCalls=0;playing=1;step=0;markColumn(0,1);say("Playing prepared song; F6 pauses");
+    pumpCalls=lastPushResult=0;playing=1;step=0;markColumn(0,1);say("Playing prepared song; F6 pauses");
 }
 /* Move only the five one-pixel play marks. Repainting all 40 text cells at
    every step can consume seconds on an 8088 and starve the prepared queue. */
@@ -191,15 +198,24 @@ static void playMark(unsigned next)
    supplied from the foreground message loop even when WM_TIMER is absent. */
 static void servicePlayback(void)
 {
-    DWORD cycles,gap;
+    DWORD cycles,gap;WORD r;
     if(servicing||!opened||!playing||paused)return;servicing=1;
     cycles=clockFn();gap=cycles-lastService;lastService=cycles;
     if(gap>maxServiceGap)maxServiceGap=gap;
     if(debug(6)){fail("Transport late/underrun: sound released");goto done;}
     if(debug(7)){stop();say("25 minute session finished; Play restarts");goto done;}
     if(automatic&&testServiceFailure){fail("Injected prepare failure");goto done;}
-    if(debug(1)&&!debug(20)&&continueFn()){fail("Resume error: sound released");goto done;}
-    if(usePit&&statusFn()!=TCX_AVAILABLE&&statusFn()!=TCX_SUSPENDED){
+    if(debug(1)&&!debug(20)){
+        /* DOS/GDI reentry can still be quiescing. TCResume requires idle0. */
+        if(debug(21)){Yield();goto done;}
+        r=continueFn();
+        if(r&&!debug(20)){
+            if(debug(21)){Yield();goto done;}
+            fail("Resume error: sound released");goto done;
+        }
+    }
+    r=usePit?statusFn():TCX_AVAILABLE;
+    if(r!=TCX_AVAILABLE&&r!=TCX_SUSPENDED){
         fail("Speaker lease lost: sound released");goto done;
     }
     ++pumpCalls;if(!pump()){fail("Prepare error: sound released");goto done;}
@@ -349,40 +365,39 @@ static void about(void)
 static void paintFeed(void)
 {
     unsigned i;
-    for(i=0;i<8&&playing&&!paused&&debug(0)<TCB_CAPACITY-BB_BATCH;++i)servicePlayback();
+    for(i=0;i<8&&playing&&!paused;++i){
+        servicePlayback();
+        if(debug(0)>=TCB_CAPACITY-BB_BATCH)break;
+    }
 }
 static void paint(HWND w)
 {
-    HDC dc;PAINTSTRUCT ps;RECT box;TEXTMETRIC tm;
-    unsigned r,c,n,k,len,used;char text[80],rowText[40];int dx[40],width,x,y;DWORD began,spent;
+    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c,n;char text[80];int x,y;DWORD began,spent;
     began=playing&&!paused?clockFn():0;painting=1;
     dc=BeginPaint(w,&ps);SelectObject(dc,GetStockObject(SYSTEM_FIXED_FONT));
-    SelectObject(dc,GetStockObject(NULL_BRUSH));SetBkMode(dc,TRANSPARENT);
+    SelectObject(dc,GetStockObject(NULL_BRUSH));SetBkMode(dc,OPAQUE);
     SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
     box.left=62;box.top=44;box.right=302;box.bottom=141;
     if(!mmlView&&RectVisible(dc,&box)){
         FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
         wsprintf(text,"%u / 8",selStep+1);TextOut(dc,234,46,text,lstrlen(text));
-        width=GetTextMetrics(dc,&tm)?tm.tmAveCharWidth:6;
-        for(r=0;r<5;++r){
-            used=0;y=59+r*16;
-            for(c=0;c<8;++c){
-                x=64+c*29;Rectangle(dc,x,y,x+27,y+14);
-                n=pat.note[r][c];if(!n)lstrcpy(text," -");
-                else if(pat.trigger[r][c])wsprintf(text,"F%u",n);
-                else if(r==3)wsprintf(text,"%u",n);
-                else wsprintf(text,"%s%u",(LPSTR)noteNames[n%12],n/12-1);
-                len=lstrlen(text);for(k=0;k<len;++k){rowText[used]=text[k];dx[used++]=width;}
-                dx[used-1]=29-(len-1)*width;
-            }
-            /* One GDI text call per row, with exact29-pixel cell advances. */
-            ExtTextOut(dc,66,y+3,0,NULL,rowText,used,dx);
-            if(r==(unsigned)selLane){box.left=65+selStep*29;box.top=y+1;
-                box.right=box.left+25;box.bottom=y+13;InvertRect(dc,&box);}
-            if(playing){x=64+step*29;MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
+        for(r=0;r<5;++r)for(c=0;c<8;++c){
+            x=64+c*29;y=59+r*16;box.left=x;box.top=y;box.right=x+27;box.bottom=y+14;
+            FillRect(dc,&box,GetStockObject(r==selLane&&c==selStep?BLACK_BRUSH:WHITE_BRUSH));
+            Rectangle(dc,x,y,x+27,y+14);
+            SetBkColor(dc,r==selLane&&c==selStep?RGB(0,0,0):RGB(255,255,255));
+            SetTextColor(dc,r==selLane&&c==selStep?RGB(255,255,255):RGB(0,0,0));
+            n=pat.note[r][c];if(!n)lstrcpy(text," -");
+            else if(pat.trigger[r][c])wsprintf(text,"F%u",n);
+            else if(r==3)wsprintf(text,"%u",n);
+            else wsprintf(text,"%s%u",(LPSTR)noteNames[n%12],n/12-1);
+            TextOut(dc,x+2,y+3,text,lstrlen(text));
+            if(playing&&c==(unsigned)step){MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
+            /* Bound the no-refill interval to one cell, not an entire row. */
             paintFeed();
         }
     }
+    SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
     box.left=mmlView?2:64;box.top=141;box.right=302;box.bottom=157;
     if(RectVisible(dc,&box)){
         FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
@@ -416,6 +431,7 @@ static void nativeTest(DWORD now)
     }
     if(automatic==3)return;
     if(!testStage){
+        if(playbackOnly)goto playback;
         GetClientRect(mainWindow,&client);check("client fits 320x200",client.right>=302&&client.bottom>=168&&GetSystemMetrics(SM_CXSCREEN)>=312);
         for(i=PLAY;i<=COPY;++i){GetWindowRect(GetDlgItem(mainWindow,i),&control);pt.x=control.right;pt.y=control.bottom;ScreenToClient(mainWindow,&pt);check("toolbar fits",pt.x<=client.right&&pt.y<=client.bottom);}
         check("five-lane default",BPValid(&pat)&&pat.note[3][7]==42);
@@ -442,7 +458,8 @@ static void nativeTest(DWORD now)
         SetWindowText(fileEdit,"FXSAVE.BTS");check("save embedded patch",savePattern());saved=pat;
         remove(path);pat.patch[1].v[FX_PITCH]=100;dirty=0;check("load without FXP",loadPattern());
         check("embedded patch restored",!memcmp(&saved,&pat,sizeof(pat)));
-        BPDemo(&pat,5);dirty=0;labels();play();check("FX demo starts",playing&&opened);
+playback:
+        BPDemo(&pat,5);dirty=0;labels();redraw();play();check("FX demo starts",playing&&opened);
         check("prepared queue",debug&&debug(0)>=100);
         check("speaker lease",debug&&debug(31));testAt=GetTickCount();testStage=1;
     }else if(testStage==1&&now-testAt>1800UL){
@@ -549,6 +566,7 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     if(i<0||(unsigned)i+12>=sizeof(path)){MessageBox(NULL,"App folder too long: move the complete kit.","Tandy Beats Lab",MB_OK);return 3;}
     if(!lstrcmpi(path+i+1,"RAWGUI.EXE")){automatic=1;if(logFile==HFILE_ERROR)logFile=_lcreat("C:\\BEATS.LOG",0);}
     lstrcpy(appdir,path);appdir[i+1]=0;
+    if(automatic){HFILE fast=_lopen("C:\\MMLAB\\BEATFAST.FLG",OF_READ);if(fast!=HFILE_ERROR){playbackOnly=1;_lclose(fast);}}
     if(!bindClock())lstrcpy(status,"Transport missing: extract complete kit");BPDefault(&pat);
     wc.style=CS_HREDRAW|CS_VREDRAW;wc.lpfnWndProc=WndProc;wc.cbClsExtra=wc.cbWndExtra=0;wc.hInstance=inst;
     wc.hIcon=NULL;wc.hCursor=LoadCursor(NULL,IDC_ARROW);wc.hbrBackground=GetStockObject(WHITE_BRUSH);wc.lpszMenuName=NULL;wc.lpszClassName="DWABeats";

@@ -7,6 +7,7 @@ p=argparse.ArgumentParser(description=__doc__)
 for n in ('out','build','seed','windows_seed','emulator','roms','lease','deps','control','owned_helpers'):
  p.add_argument('--'+n.replace('_','-'),type=Path,required=True)
 p.add_argument('--bound',type=int,default=480)
+p.add_argument('--play-only',action='store_true',help='Diagnostic playback only; cannot qualify a consumer package')
 a=p.parse_args();assert 60<=a.bound<=600
 sys.path[:0]=[str(a.deps),str(a.control),str(a.owned_helpers)]
 from pyfatfs.PyFatFS import PyFatFS
@@ -16,7 +17,7 @@ from owned_job import OwnedJob,stop_owned
 here=Path(__file__).resolve().parent;repo=here.parents[2]
 out=a.out.resolve();out.mkdir();build=a.build.resolve();offset=17408
 def pin(b):return dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
-r=dict(status='NOT_RUN',fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),harness=pin(Path(__file__).read_bytes()),capture_rates=dict(psg=48000,speaker=49716),actions=[],bound_seconds=a.bound)
+r=dict(status='NOT_RUN',playback_only=a.play_only,fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),harness=pin(Path(__file__).read_bytes()),capture_rates=dict(psg=48000,speaker=49716),actions=[],bound_seconds=a.bound)
 assert shutil.disk_usage(out).free>1024**3
 assert (a.seed/'DISK.IMG').stat().st_size<100*1024**2
 shutil.copyfile(a.seed/'DISK.IMG',out/'DISK.IMG')
@@ -73,6 +74,10 @@ with PyFatFS(str(out/'DISK.IMG'),offset=offset) as fs,PyFatFS(str(a.windows_seed
  put('WINDOWS/WIN.INI',ini.replace('\n','\r\n').encode('latin1'))
  put('CONFIG.SYS',b'FILES=40\r\nBUFFERS=8\r\n')
  put('AUTOEXEC.BAT',b'@ECHO OFF\r\nPATH C:\\;C:\\WINDOWS;C:\\DOS\r\nSET TEMP=C:\\WINDOWS\\TEMP\r\nCD \\MMLAB\r\nECHO TEST>C:\\PHASE.TXT\r\nBTSTART C:\\WINDOWS /TEST > C:\\START.LOG\r\nIF ERRORLEVEL 1 GOTO FAILED\r\nECHO VISUAL>C:\\PHASE.TXT\r\nBTSTART C:\\WINDOWS > C:\\VISUAL.LOG\r\nIF ERRORLEVEL 1 GOTO FAILED\r\nECHO RETURNED>C:\\DONE.TXT\r\nGOTO END\r\n:FAILED\r\nECHO FAILED>C:\\DONE.TXT\r\n:END\r\n')
+ if a.play_only:
+  auto=fs.readbytes('AUTOEXEC.BAT');first=auto.index(b'ECHO VISUAL');last=auto.index(b'ECHO RETURNED')
+  put('AUTOEXEC.BAT',auto[:first]+auto[last:]);put('MMLAB/BEATFAST.FLG',b'Diagnostic only\r\n')
+ elif fs.exists('MMLAB/BEATFAST.FLG'):fs.remove('MMLAB/BEATFAST.FLG')
  for n in ('BEATS.LOG','DONE.TXT','PHASE.TXT','MMLAB/IMPORT.FXP','MMLAB/FXSAVE.BTS','MMLAB/FXSAVE.BAK','MMLAB/NATIVE.BTS','MMLAB/NATIVE.BAK','MMLAB/NATIVE.MML'):
   if fs.exists(n):fs.remove(n)
 proc=g=ctl=job=watch=host=None;held=False;start=time.monotonic();visual=False
@@ -120,7 +125,7 @@ try:
   (out/'LIVE.json').write_text(json.dumps(dict(seconds=round(time.monotonic()-start,1),mode=mode,phase=phase)))
   if 'FAIL ' in text or re.search(r'TOTAL_FAILURES=[1-9]',text):raise RuntimeError('Native assertions failed')
   if phase=='VISUAL' and mode==9 and not visual:
-   rest(15);shot('EDITOR')
+   rest(55);shot('EDITOR')
    paint=re.search(r'paint (\d+) cycles',text)
    paint_wait=max(2,min(20,int(paint[1])/1193182*1.5+1)) if paint else 15
    for unused in range(5):key(0x20);rest(paint_wait) # D cycles to Effects groove.
@@ -140,10 +145,10 @@ try:
    visual=True
   if done:
    assert done=='RETURNED',launch
-   assert mode==3 and 'TOTAL_FAILURES=0' in text and visual
+   assert mode==3 and 'TOTAL_FAILURES=0' in text and (visual or a.play_only)
    with PyFatFS(str(out/'DISK.IMG'),offset=offset,read_only=True) as fs:
-    (out/'FXSAVE.BTS').write_bytes(fs.readbytes('MMLAB/FXSAVE.BTS'))
-   r.update(status='PASS',assertions=text.count('PASS '),normal_dos_return=True);shot('DOS');break
+    if not a.play_only:(out/'FXSAVE.BTS').write_bytes(fs.readbytes('MMLAB/FXSAVE.BTS'))
+   r.update(status='DIAGNOSTIC_PASS' if a.play_only else 'PASS',assertions=text.count('PASS '),normal_dos_return=True);shot('DOS');break
   assert shutil.disk_usage(out).free>512*1024**2
   assert sum(x.stat().st_size for x in out.iterdir() if x.is_file())<400*1024**2
  else:raise TimeoutError('8088 acceptance bound expired')
@@ -164,4 +169,4 @@ finally:
  if held:lease.seek(0);msvcrt.locking(lease.fileno(),msvcrt.LK_UNLCK,1)
  lease.close();r['lease_released']=held;r['inventory_after']=inventory();r['seconds']=round(time.monotonic()-start,1)
  (out/'RESULT.JSON').write_text(json.dumps(r,indent=2));print(json.dumps(r),flush=True)
-raise SystemExit(0 if r['status']=='PASS' else 1)
+raise SystemExit(0 if r['status'] in ('PASS','DIAGNOSTIC_PASS') else 1)
