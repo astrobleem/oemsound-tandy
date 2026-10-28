@@ -17,7 +17,7 @@ instrumented=tick.replace('if(recordsRead==eventCount)producerDone=1;',
 instrumented=instrumented.replace('qtail=(tail+1)&(QUEUE_SIZE-1);',
     'qtail=(tail+1)&(QUEUE_SIZE-1); if(producerDone&&inject_at==2){++injections;audioTick(0);}')
 instrumented=instrumented.replace('if(!fetchEvent())return 0;',
-    'if(!fetchEvent())return 0; if(producerDone&&inject_at==3){++injections;audioTick(0);}')
+    'if(!fetchEvent()){return 0;}\n        if(producerDone&&inject_at==3){++injections;audioTick(0);}')
 
 prefix=r'''
 #include <assert.h>
@@ -193,6 +193,7 @@ def build_run(name,text):
     c=OUT/(name+'.c');exe=OUT/(name+'.exe');c.write_text(text)
     build=subprocess.run(COMPILER+['-x','c','-std=c89','-Wall','-Wextra','-Werror',str(c),'-o',str(exe)],capture_output=True,text=True)
     (OUT/(name+'-build.log')).write_text(build.stdout+build.stderr)
+    if build.returncode:print(build.stdout+build.stderr,file=sys.stderr)
     build.check_returncode()
     run=subprocess.run([str(exe)],capture_output=True,text=True)
     (OUT/(name+'.log')).write_text(run.stdout+run.stderr)
