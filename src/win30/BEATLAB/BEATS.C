@@ -1,4 +1,4 @@
-/* Tandy Beats Lab. Win3.0 / 8088 foreground editor; existing mapper only. */
+/* Tandy Beats Lab. Win3.0 / 8088 editor and shared prepared transport. */
 #define WINVER 0x0300
 #include <windows.h>
 #include <stdio.h>
@@ -9,6 +9,10 @@
 #include <sys/stat.h>
 #include "MIDIAPI.H"
 #include "BEATPAT.H"
+#include "BEATPLAY.H"
+#include "TIMECLK.H"
+#include "TCBURST.H"
+#include "TCXBASS.H"
 #define PLAY 101
 #define STOP 102
 #define DEMO 103
@@ -27,116 +31,145 @@
 #define LOWER 116
 #define HIGHER 117
 #define LANE0 120
+#define PAUSE 118
+#define IMPORTFX 119
+#define FXSTEP 126
 #define PULSE 1
 static HINSTANCE instance,module;
 static HWND mainWindow,fileEdit,mmlEdit;
-static MIDIPROC midi;
-static DEBUGPROC debug;
+typedef WORD(FAR PASCAL *ZERO)(void);
+typedef WORD(FAR PASCAL *ONE)(WORD);
+typedef DWORD(FAR PASCAL *CLOCKFN)(void);
+typedef WORD(FAR PASCAL *PUT)(TCBURST FAR *);
+typedef WORD(FAR PASCAL *XPUT)(TCXBURST FAR *);
+static ZERO openFn,startFn,closeFn,pauseFn,resumeFn,continueFn,endFn,statusFn;
+static ONE debug,xopenFn;static CLOCKFN clockFn;static PUT putFn;static XPUT xputFn;
+static BBPLAYER producer;static BBBURST prepared;static TCXBURST block;
+static int paused,pending,ending,servicing;static unsigned usePit;static DWORD lastDraw;
 static FARPROC editThunk,oldEdit;
 static BPAT pat;
-static WORD sounding[5];
-static BYTE channel[5]={0,1,2,9,15};
 static BYTE defaultNote[5]={60,64,48,42,33};
 static char *noteNames[12]={"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
 static char appdir[144],mml[BP_MML_CAP],status[64]="DAWs With Attitude: Play / Demo";
 static char patternName[32]="Starter";
 static int opened,playing,timerReady,step,selLane,selStep,mmlView,dirty;
 static unsigned demoIndex;
-static DWORD due,gate;
-static int automatic,testStage,failures,testAttackFailure,testServiceFailure,visualMode;
+
+static int automatic,testStage,failures,testServiceFailure,visualMode;
+static WORD pausedSent;static DWORD prepareMs;
+static char testLog[4096];static unsigned testLogBytes;
 static DWORD testAt;
 static HFILE logFile=HFILE_ERROR;
 static void redraw(void){if(mainWindow)InvalidateRect(mainWindow,NULL,FALSE);}
 static void say(const char *s){strncpy(status,s,sizeof(status)-1);status[sizeof(status)-1]=0;redraw();}
 static void check(const char *s,int okay)
 {
-    char line[120];if(!okay)++failures;
-    if(logFile!=HFILE_ERROR){wsprintf(line,"%s %s\r\n",(LPSTR)(okay?"PASS":"FAIL"),(LPSTR)s);_lwrite(logFile,line,lstrlen(line));}
-}
-static DWORD message(WORD m,DWORD value)
-{
-    if(automatic&&testServiceFailure&&m==MODM_SYNTHUPDATE)return MMSYSERR_ERROR;
-    return midi?midi(0,m,MIDI_COOKIE,value,0L):MMSYSERR_ERROR;
-}
-static int send(unsigned s,unsigned a,unsigned b)
-{
-    if(automatic&&testAttackFailure&&(s&0xf0)==0x90)return 0;
-    return message(MODM_DATA,(DWORD)s|((DWORD)a<<8)|((DWORD)b<<16))==0;
-}
-static void releaseNotes(void)
-{
-    int i;for(i=0;i<5;++i)if(sounding[i]){
-        send(0x80|channel[i],sounding[i],0);sounding[i]=0;
+    char line[120];unsigned n;if(!okay)++failures;
+    if(logFile!=HFILE_ERROR){
+        wsprintf(line,"%s %s\r\n",(LPSTR)(okay?"PASS":"FAIL"),(LPSTR)s);n=lstrlen(line);
+        if(testLogBytes+n<sizeof(testLog)){memcpy(testLog+testLogBytes,line,n);testLogBytes+=n;}
+        else ++failures;
     }
 }
-static void stop(void)
+static int bindClock(void)
 {
-    playing=0;
-    if(opened){releaseNotes();message(MODM_RESET,0L);message(MODM_CLOSE,0L);opened=0;}
-    say("Stopped: sound released");
+    char path[144];lstrcpy(path,appdir);lstrcat(path,"RAWCLK.DLL");
+    module=LoadLibrary(path);if(module<32){module=0;return 0;}
+    openFn=(ZERO)GetProcAddress(module,(LPSTR)21L);putFn=(PUT)GetProcAddress(module,(LPSTR)22L);
+    endFn=(ZERO)GetProcAddress(module,(LPSTR)23L);startFn=(ZERO)GetProcAddress(module,(LPSTR)3L);
+    closeFn=(ZERO)GetProcAddress(module,(LPSTR)5L);debug=(ONE)GetProcAddress(module,(LPSTR)6L);
+    pauseFn=(ZERO)GetProcAddress(module,(LPSTR)14L);resumeFn=(ZERO)GetProcAddress(module,(LPSTR)15L);
+    continueFn=(ZERO)GetProcAddress(module,(LPSTR)11L);clockFn=(CLOCKFN)GetProcAddress(module,(LPSTR)12L);
+    xopenFn=(ONE)GetProcAddress(module,(LPSTR)25L);xputFn=(XPUT)GetProcAddress(module,(LPSTR)26L);
+    statusFn=(ZERO)GetProcAddress(module,(LPSTR)28L);
+    if(openFn&&putFn&&endFn&&startFn&&closeFn&&debug&&pauseFn&&resumeFn&&continueFn&&clockFn&&xopenFn&&xputFn&&statusFn)return 1;
+    FreeLibrary(module);module=0;return 0;
 }
-static void fail(const char *s){stop();say(s);}
+static int stop(void)
+{
+    if(opened&&closeFn()){say("Close pending: retry Stop");return 0;}
+    opened=playing=paused=pending=ending=0;
+    if(mainWindow)SetDlgItemText(mainWindow,PAUSE,"Pause");
+    say("Stopped: sound released");return 1;
+}
+static void fail(const char *s){if(stop())say(s);}
+static void pauseSound(void)
+{
+    if(!playing)return;
+    if((paused?resumeFn():pauseFn())!=0){fail("Pause failed: sound released");return;}
+    paused=!paused;SetDlgItemText(mainWindow,PAUSE,paused?"Resume":"Pause");
+    say(paused?"Paused: silent, position held":"Resumed");
+}
 static void labels(void)
 {
     char text[64];unsigned r;
-    for(r=0;r<3;++r){wsprintf(text,"%u %s",r+1,(LPSTR)BPPreset(pat.program[r]));SetDlgItemText(mainWindow,LANE0+r,text);}
+    for(r=0;r<3;++r){wsprintf(text,"%u %s",r+1,(LPSTR)(pat.loaded[r]?"FX":BPPreset(pat.program[r])));SetDlgItemText(mainWindow,LANE0+r,text);}
+    SetDlgItemText(mainWindow,LANE0+3,pat.loaded[3]?"4 FX":"4 Noise");
+    SetDlgItemText(mainWindow,LANE0+4,pat.loaded[4]?"5 FX":"PCspkr");
+    SetDlgItemText(mainWindow,FXSTEP,pat.trigger[selLane][selStep]?"Note":"FX step");
     SetDlgItemText(mainWindow,PIT,pat.pit?"PIT: on":"PIT: off");
     SetDlgItemText(mainWindow,VIEW,mmlView?"Grid":"MML");
-    if(mmlView&&mmlEdit){BPMML(&pat,mml,sizeof(mml));SetWindowText(mmlEdit,mml);}
+    if(mmlView&&mmlEdit){if(!BPMML(&pat,mml,sizeof(mml)))lstrcpy(mml,"FX steps use .BTS playback. MML cannot encode imported patches.");SetWindowText(mmlEdit,mml);}
     wsprintf(text,"Tandy Beats Lab - %s%s",(LPSTR)patternName,(LPSTR)(dirty?" *":""));SetWindowText(mainWindow,text);
 }
 static void changed(void)
 {
     dirty=1;labels();redraw();
 }
-static int acquire(void)
+/* Producer runs ahead of the audio clock. The GUI neither schedules notes
+   nor services envelopes. Queue exhaustion fails silent in RAWCLK. */
+static int pump(void)
 {
-    static TOPEN desc;static DWORD cookie;static TCAPS caps;DWORD result;unsigned r;
-    if(!midi){say("Mapper missing: extract complete kit");return 0;}
-    if(message(MODM_GETNUMDEVS,0L)!=1L||midi(0,MODM_GETDEVCAPS,0L,
-        (DWORD)(LPVOID)&caps,sizeof(caps))||caps.wVoices!=3||caps.vDriverVersion<0x0102){
-        say("Wrong mapper: use complete Beats kit");return 0;
-    }
-    if(pat.pit&&caps.vDriverVersion<PIT_LOW_VERSION)
-        for(r=0;r<8;++r)if(pat.note[4][r]&&pat.note[4][r]<45){
-            say("Low bass needs current complete kit");return 0;
+    unsigned i,r,n;
+    n=debug(0);if(n>=TCB_CAPACITY)return 1;
+    n=TCB_CAPACITY-n;if(n>BB_BATCH)n=BB_BATCH;
+    for(i=0;i<n;++i){
+        if(!pending){
+            if(!BBNext(&producer,&prepared)){
+                if(!ending){if(endFn())return 0;ending=1;}return 1;
+            }
+            block.at=prepared.at;block.count=prepared.count;block.pitDivisor=prepared.pit;
+            for(r=0;r<block.count;++r)block.data[r]=prepared.data[r];pending=1;
         }
-    if(pat.pit&&!GetProcAddress(GetModuleHandle("SOUND"),"TANDYPITVOICE")){
-        say("PIT unavailable: run kit Setup in DOS");return 0;
-    }
-    desc.hMidi=0;desc.dwCallback=desc.dwInstance=0;cookie=0;
-    result=midi(0,MODM_OPEN,(DWORD)(LPVOID)&cookie,(DWORD)(LPVOID)&desc,0L);
-    if(result){say(result==MMSYSERR_ALLOCATED?"Sound busy: stop the other player":"Open failed: run kit Setup in DOS");return 0;}
-    opened=1;
-    if(cookie!=MIDI_COOKIE||message(MODM_SYNTHCONFIG,3L)){
-        fail("Mapper mismatch: use complete kit");return 0;
-    }
-    if(pat.pit&&midi(0,TANDY_PIT_CONFIG,MIDI_COOKIE,1L,1L)){
-        fail("PIT busy or unavailable");return 0;
-    }
-    for(r=0;r<3;++r)if(!send(0xc0|channel[r],pat.program[r],0)){
-        fail("Preset failed: playback stopped");return 0;
+        r=usePit?xputFn(&block):putFn((TCBURST FAR *)&block);
+        if(r==2)return 1;if(r)return 0;pending=0;
     }
     return 1;
 }
-static int nextStep(DWORD now)
-{
-    unsigned r,duration;releaseNotes();
-    for(r=0;r<5;++r)if(pat.note[r][step]&&(r!=4||pat.pit)){
-        if(!send(0x90|channel[r],pat.note[r][step],r==3?76:96)){
-            fail("Note failed: playback stopped");return 0;
-        }
-        sounding[r]=pat.note[r][step];
-    }
-    duration=(unsigned)(30000UL/pat.tempo);
-    gate=now+((DWORD)duration*3U)/4U;due+=duration;redraw();return 1;
-}
 static void play(void)
 {
-    stop();if(!timerReady){say("Timer failed: close and reopen");return;}
-    if(!acquire())return;
-    step=0;playing=1;due=GetTickCount();
-    if(nextStep(due))say(pat.pit?"Playing + PC speaker; F5 stops":"Playing PSG voices; F5 stops");
+    unsigned i,r;DWORD began=GetTickCount();
+    if(!stop())return;
+    if(!timerReady||!module){say("Transport missing: use complete Beats kit");return;}
+    if(!BBPrepare(&producer,&pat)){say("Invalid pattern: playback refused");return;}
+    usePit=pat.pit;r=usePit?xopenFn(1):openFn();
+    if(r){say("Sound busy/unavailable: stop other apps");return;}opened=1;
+    if(usePit&&statusFn()){fail("Speaker unavailable: use kit Setup");return;}
+    pending=ending=0;
+    for(i=0;i<BB_PREFILL/BB_BATCH;++i)if(!pump()){fail("Prepare failed: sound released");return;}
+    if(startFn()){fail("Clock failed: use GO from DOS");return;}
+    prepareMs=GetTickCount()-began;lastDraw=0;playing=1;step=0;say("Playing prepared song; F6 pauses");
+}
+/* Windows' UI timer can be delayed by the real-mode bridge. Keep audio
+   supplied from the foreground message loop even when WM_TIMER is absent. */
+static void servicePlayback(void)
+{
+    DWORD cycles;
+    if(servicing||!opened||!playing||paused)return;servicing=1;
+    if(debug(6)){fail("Transport late/underrun: sound released");goto done;}
+    if(debug(7)){stop();say("25 minute session finished; Play restarts");goto done;}
+    if(automatic&&testServiceFailure){fail("Injected prepare failure");goto done;}
+    if(debug(1)&&!debug(20)&&continueFn()){fail("Resume error: sound released");goto done;}
+    if(usePit&&statusFn()!=TCX_AVAILABLE&&statusFn()!=TCX_SUSPENDED){
+        fail("Speaker lease lost: sound released");goto done;
+    }
+    if(!pump()){fail("Prepare error: sound released");goto done;}
+    cycles=clockFn();
+    if(cycles-lastDraw>=298295UL){
+        lastDraw=cycles;step=BBStep((cycles/3579545UL)*180UL+
+            (cycles%3579545UL)*180UL/3579545UL,producer.song.tempo);redraw();
+    }
+done:servicing=0;
 }
 static int discard(void)
 {
@@ -147,7 +180,7 @@ static void demo(void)
 {
     if(!discard())return;stop();demoIndex=(demoIndex+1)%BP_DEMOS;
     lstrcpy(patternName,BPDemo(&pat,demoIndex));
-    SetWindowText(fileEdit,demoIndex==1?"POCKET.BTS":demoIndex==2?"LOWRIDER.BTS":demoIndex==3?"FIVE.BTS":demoIndex==4?"NIGHT.BTS":"STARTER.BTS");dirty=0;labels();
+    SetWindowText(fileEdit,demoIndex==5?"FXGROOVE.BTS":demoIndex==1?"POCKET.BTS":demoIndex==2?"LOWRIDER.BTS":demoIndex==3?"FIVE.BTS":demoIndex==4?"NIGHT.BTS":"STARTER.BTS");dirty=0;labels();
     say(pat.pit?"Demo loaded: PC speaker ON":"Demo loaded: PSG voices only");
 }
 static void editPitch(int delta)
@@ -160,12 +193,14 @@ static void editPitch(int delta)
 }
 static void toggle(void)
 {
-    pat.note[selLane][selStep]=pat.note[selLane][selStep]?0:defaultNote[selLane];changed();
+    pat.note[selLane][selStep]=pat.note[selLane][selStep]?0:defaultNote[selLane];
+    if(!pat.note[selLane][selStep])pat.trigger[selLane][selStep]=0;changed();
 }
 static int filename(char *name,char *path,const char *ext)
 {
+    if(GetWindowTextLength(fileEdit)>12){say("Use an 8.3 pattern name ending .BTS");return 0;}
     GetWindowText(fileEdit,name,13);
-    if(!BPName(name,ext)){say("Use a name like GROOVE.BTS");return 0;}
+    if(!BPName(name,ext)){say(!lstrcmp(ext,"FXP")?"Enter NAME.FXP, then Import FX":"Use a name like GROOVE.BTS");return 0;}
     if(lstrlen(appdir)+lstrlen(name)>=144){say("Folder path too long: move kit");return 0;}
     lstrcpy(path,appdir);lstrcat(path,name);return 1;
 }
@@ -176,6 +211,32 @@ static void fileError(int r)
     else if(r==BP_EXISTS)say("Temp file exists: use a new name");
     else if(r==BP_RECOVER)say("Save failed: old pattern is in .BAK");
     else say("Disk error: check space/write access");
+}
+static void fxStep(void)
+{
+    if(!pat.loaded[selLane]){say("Enter .FXP name/path, then Import");return;}
+    pat.trigger[selLane][selStep]=!pat.trigger[selLane][selStep];
+    if(pat.trigger[selLane][selStep])pat.note[selLane][selStep]=60;
+    changed();say("F60 = original FX; +/- transposes");
+}
+static int importFX(void)
+{
+    char input[144],path[144],*name;FXPATCH loaded;
+    GetWindowText(fileEdit,input,sizeof(input));name=strrchr(input,'\\');name=name?name+1:input;
+    if(!BPName(name,"FXP")){say("Enter NAME.FXP or C:\\EFFECTS\\NAME.FXP");return 0;}
+    if(input[1]==':'){
+        if(input[2]!='\\'){say("Use an absolute DOS patch path");return 0;}lstrcpy(path,input);
+    }else {
+        if(lstrlen(appdir)+lstrlen(input)>=144){say("Patch path too long");return 0;}
+        lstrcpy(path,appdir);lstrcat(path,input);
+    }
+    if(FXLoad(&loaded,path)){say("Invalid/missing patch: current edit kept");return 0;}
+    if(!BPFits(&loaded,selLane)){say("Import: tones 1-3, noise 4, PIT 5");return 0;}
+    if(!stop())return 0;
+    pat.patch[selLane]=loaded;pat.loaded[selLane]=1;memset(pat.fxName[selLane],0,13);lstrcpy(pat.fxName[selLane],name);
+    pat.trigger[selLane][selStep]=1;pat.note[selLane][selStep]=60;
+    if(selLane==4)pat.pit=1;changed();
+    say("Imported: Save as NAME.BTS");return 1;
 }
 static int savePattern(void)
 {
@@ -202,7 +263,7 @@ static int exportMML(void)
     char name[13],path[144];unsigned n;int f,bad;
     if(!filename(name,path,"BTS"))return 0;
     lstrcpy(path+lstrlen(path)-3,"MML");n=BPMML(&pat,mml,sizeof(mml));
-    if(!n){say("Export failed: pattern unchanged");return 0;}
+    if(!n){say("FX needs .BTS; MML cannot export");return 0;}
     f=open(path,O_WRONLY|O_CREAT|O_EXCL|O_BINARY,S_IREAD|S_IWRITE);
     if(f<0){say("MML exists/disk error: change name");return 0;}
     bad=write(f,mml,n)!=(int)n;if(close(f))bad=1;
@@ -211,7 +272,7 @@ static int exportMML(void)
 static int copyMML(void)
 {
     HANDLE h;LPSTR dst;unsigned i,n=BPMML(&pat,mml,sizeof(mml));
-    if(!n){say("Cannot export this pattern");return 0;}
+    if(!n){say("FX needs .BTS; MML cannot export");return 0;}
     h=GlobalAlloc(GMEM_MOVEABLE|GMEM_DDESHARE,n+1);
     if(!h){say("Clipboard: not enough memory");return 0;}
     dst=GlobalLock(h);if(!dst){GlobalFree(h);say("Clipboard memory unavailable");return 0;}
@@ -230,9 +291,11 @@ LONG FAR PASCAL ReadOnlyProc(HWND w,UINT m,WPARAM a,LPARAM b)
 static void view(void)
 {
     unsigned r;mmlView=!mmlView;
-    if(mmlView){BPMML(&pat,mml,sizeof(mml));SetWindowText(mmlEdit,mml);}
+    if(mmlView){if(!BPMML(&pat,mml,sizeof(mml)))lstrcpy(mml,"FX steps use .BTS playback. MML cannot encode imported patches.");SetWindowText(mmlEdit,mml);}
     ShowWindow(mmlEdit,mmlView?SW_SHOW:SW_HIDE);
     for(r=0;r<5;++r)ShowWindow(GetDlgItem(mainWindow,LANE0+r),mmlView?SW_HIDE:SW_SHOW);
+    ShowWindow(GetDlgItem(mainWindow,IMPORTFX),mmlView?SW_HIDE:SW_SHOW);
+    ShowWindow(GetDlgItem(mainWindow,FXSTEP),mmlView?SW_HIDE:SW_SHOW);
     ShowWindow(GetDlgItem(mainWindow,CLEAR),mmlView?SW_HIDE:SW_SHOW);
     ShowWindow(GetDlgItem(mainWindow,SLOW),mmlView?SW_HIDE:SW_SHOW);ShowWindow(GetDlgItem(mainWindow,FAST),mmlView?SW_HIDE:SW_SHOW);
     ShowWindow(GetDlgItem(mainWindow,LOWER),mmlView?SW_HIDE:SW_SHOW);ShowWindow(GetDlgItem(mainWindow,HIGHER),mmlView?SW_HIDE:SW_SHOW);
@@ -240,7 +303,7 @@ static void view(void)
 }
 static void about(void)
 {
-    MessageBox(mainWindow,"DWA: DAWs With\nAttitude\nStraight Outta\nLLMompton\nProduced by\nDr. DRAM\n\nF5: Play / Stop\nCtrl+O/S: files",
+    MessageBox(mainWindow,"DWA: DAWs With Attitude\nStraight Outta LLMompton\nProduced by Dr. DRAM\n\nF5 Play/Stop; F6 Pause\nEsc Stop; Ctrl+O/S files\nImport: selected lane/step\nFX step / Note switches\nF60 = original patch pitch\nNoise FX borrows tone 2\nEdits heard on next Play",
         "Tandy Beats Lab",MB_OK);SetFocus(mainWindow);
 }
 static void paint(HWND w)
@@ -250,7 +313,7 @@ static void paint(HWND w)
     SelectObject(dc,GetStockObject(NULL_BRUSH));SetBkMode(dc,OPAQUE);SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
     if(!mmlView){
         box.left=62;box.top=44;box.right=302;box.bottom=141;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
-        for(c=0;c<8;++c){wsprintf(text,"%u",c+1);TextOut(dc,74+c*29,46,text,1);}
+        wsprintf(text,"%u / 8",selStep+1);TextOut(dc,234,46,text,lstrlen(text));
         for(r=0;r<5;++r)for(c=0;c<8;++c){
             x=64+c*29;y=59+r*16;box.left=x;box.top=y;box.right=x+27;box.bottom=y+14;
             FillRect(dc,&box,GetStockObject(r==selLane&&c==selStep?BLACK_BRUSH:WHITE_BRUSH));
@@ -258,6 +321,7 @@ static void paint(HWND w)
             SetBkColor(dc,r==selLane&&c==selStep?RGB(0,0,0):RGB(255,255,255));
             SetTextColor(dc,r==selLane&&c==selStep?RGB(255,255,255):RGB(0,0,0));
             n=pat.note[r][c];if(!n)lstrcpy(text," -");
+            else if(pat.trigger[r][c])wsprintf(text,"F%u",n);
             else if(r==3)wsprintf(text,"%u",n);
             else wsprintf(text,"%s%u",(LPSTR)noteNames[n%12],n/12-1);
             TextOut(dc,x+2,y+3,text,lstrlen(text));
@@ -278,6 +342,7 @@ static void button(HWND w,const char *s,int x,int y,int width,int id)
 static void nativeTest(DWORD now)
 {
     static BPAT saved;unsigned i;RECT client,control;POINT pt;
+    FXPATCH imported;char path[144],detail[100];
     if(automatic==2){
         char title[80];
         GetClientRect(mainWindow,&client);GetWindowText(mainWindow,title,sizeof(title));
@@ -308,18 +373,37 @@ static void nativeTest(DWORD now)
         SendMessage(mainWindow,WM_KEYDOWN,VK_UP,0L);check("keyboard reaches PC speaker",selLane==4);
         SendMessage(mainWindow,WM_LBUTTONDOWN,0,MAKELONG(75,130));check("mouse edits PC speaker",pat.note[4][0]==0);
         SendMessage(mainWindow,WM_LBUTTONDOWN,0,MAKELONG(75,130));check("mouse restores PC speaker",pat.note[4][0]==33);
-        BPDemo(&pat,3);dirty=0;play();check("Play starts",playing&&opened);
-        check("all five voices",debug&&debug(0)==31);
-        check("low speaker bass without folding",debug&&debug(20)==33&&debug(21)==55);testAt=now;testStage=1;
+        lstrcpy(path,appdir);lstrcat(path,"IMPORT.FXP");FXPreset(&imported,0);
+        check("native FX fixture",!FXSave(&imported,path,0));selLane=1;selStep=3;
+        SetWindowText(fileEdit,"IMPORT.FXP");check("in-app patch import",importFX());
+        SetWindowText(fileEdit,path);check("absolute patch path import",importFX());
+        SetWindowText(fileEdit,"IMPORT.FXP");
+        check("import assigns selected lane/step",pat.loaded[1]&&pat.trigger[1][3]&&pat.note[1][3]==60);
+        selLane=3;check("wrong target rejected",!importFX());selLane=1;
+        SetWindowText(fileEdit,"FXSAVE.BTS");check("save embedded patch",savePattern());saved=pat;
+        remove(path);pat.patch[1].v[FX_PITCH]=100;dirty=0;check("load without FXP",loadPattern());
+        check("embedded patch restored",!memcmp(&saved,&pat,sizeof(pat)));
+        BPDemo(&pat,5);dirty=0;labels();play();check("FX demo starts",playing&&opened);
+        check("prepared queue",debug&&debug(0)>=100);
+        check("speaker lease",debug&&debug(31));testAt=GetTickCount();testStage=1;
     }else if(testStage==1&&now-testAt>1800UL){
-        stop();check("Stop mutes",debug&&debug(0)==0);check("Stop releases owner",!opened&&debug&&debug(1)==0);
-        play();check("replay reacquires",playing&&opened);testAt=now;testStage=2;
-    }else if(testStage==2&&now-testAt>500UL){
-        SendMessage(mainWindow,WM_ACTIVATE,0,0);check("deactivate stops",!playing&&!opened&&debug&&debug(0)==0);
-        testAttackFailure=1;play();check("attack failure stops/releases",!playing&&!opened&&debug&&debug(1)==0);testAttackFailure=0;
+        WORD before=debug(2),spins=0;DWORD until=clockFn()+417613UL;
+        while((LONG)(clockFn()-until)<0&&!debug(6)&&++spins<60000U);
+        wsprintf(detail,"sent %u->%u error %u run %u prepare %lu ms",before,debug(2),debug(6),debug(20),prepareMs);
+        check(detail,1);
+        check("audio advances without GUI service",debug(2)>before&&!debug(6));
+        pauseSound();pausedSent=debug(2);check("pause silences clock",paused&&!debug(20));
+        testAt=GetTickCount();testStage=2;
+    }else if(testStage==2&&now-testAt>350UL){
+        check("pause holds playback position",paused&&debug(2)==pausedSent);
+        pauseSound();check("resume",!paused&&playing);testAt=now;testStage=3;
+    }else if(testStage==3&&now-testAt>500UL){
+        stop();check("Stop releases transport",!opened&&debug&&!debug(10)&&!debug(9)&&!debug(31));
+        play();check("replay reacquires",playing&&opened);
+        SendMessage(mainWindow,WM_ACTIVATE,0,0);check("deactivate releases",!playing&&!opened&&!debug(10));
         play();testServiceFailure=1;SendMessage(mainWindow,WM_TIMER,PULSE,0L);
-        check("service failure stops/releases",!playing&&!opened&&debug&&debug(1)==0);testServiceFailure=0;
-        play();check("close during play",playing);dirty=0;PostMessage(mainWindow,WM_CLOSE,0,0L);testStage=3;
+        check("prepare failure releases",!playing&&!opened&&!debug(10));testServiceFailure=0;
+        play();check("close during play",playing);dirty=0;PostMessage(mainWindow,WM_CLOSE,0,0L);testStage=4;
     }
 }
 LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
@@ -328,38 +412,44 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
     switch(m){
     case WM_CREATE:
         mainWindow=w;
-        button(w,"Play",2,2,40,PLAY);button(w,"Stop",44,2,40,STOP);button(w,"Demo",86,2,44,DEMO);
-        button(w,"PIT: off",132,2,76,PIT);button(w,"MML",210,2,44,VIEW);button(w,"About",256,2,46,ABOUT);
+        button(w,"Play",2,2,40,PLAY);button(w,"Stop",44,2,40,STOP);button(w,"Pause",86,2,44,PAUSE);button(w,"Demo",132,2,44,DEMO);
+        button(w,"PIT: off",178,2,76,PIT);button(w,"MML",184,42,44,VIEW);button(w,"About",256,2,46,ABOUT);
         fileEdit=CreateWindow("EDIT","PATTERN.BTS",WS_CHILD|WS_VISIBLE|WS_BORDER|WS_TABSTOP|ES_AUTOHSCROLL,2,23,110,18,w,(HMENU)FILEEDIT,instance,NULL);
-        SendMessage(fileEdit,EM_LIMITTEXT,12,0L);
+        SendMessage(fileEdit,EM_LIMITTEXT,127,0L);
         button(w,"Load",116,23,42,LOAD);button(w,"Save",162,23,42,SAVE);button(w,"Export",208,23,46,EXPORT);button(w,"Copy",258,23,44,COPY);
+        button(w,"Import",64,42,58,IMPORTFX);button(w,"FX step",124,42,58,FXSTEP);
+        SetWindowPos(GetDlgItem(w,VIEW),NULL,184,42,44,15,SWP_NOZORDER);
+        SetWindowPos(GetDlgItem(w,IMPORTFX),NULL,64,42,58,15,SWP_NOZORDER);
+        SetWindowPos(GetDlgItem(w,FXSTEP),NULL,124,42,58,15,SWP_NOZORDER);
         button(w,"-",2,42,28,SLOW);button(w,"+",32,42,28,FAST);button(w,"Clear",2,139,59,CLEAR);
         button(w,"Pitch-",64,139,56,LOWER);button(w,"Pitch+",124,139,56,HIGHER);
         for(r=0;r<5;++r)CreateWindow("BUTTON",lanes[r],WS_CHILD|WS_VISIBLE|WS_TABSTOP,2,59+r*16,59,14,w,(HMENU)(LANE0+r),instance,NULL);
-        mmlEdit=CreateWindow("EDIT","",WS_CHILD|WS_BORDER|WS_TABSTOP|WS_VSCROLL|ES_MULTILINE|ES_AUTOVSCROLL,2,45,300,94,w,(HMENU)MMLTEXT,instance,NULL);
+        mmlEdit=CreateWindow("EDIT","",WS_CHILD|WS_BORDER|WS_TABSTOP|WS_VSCROLL|ES_MULTILINE|ES_AUTOVSCROLL,2,59,300,80,w,(HMENU)MMLTEXT,instance,NULL);
         if(!fileEdit||!mmlEdit)return -1;
         editThunk=MakeProcInstance((FARPROC)ReadOnlyProc,instance);if(!editThunk)return -1;
         oldEdit=(FARPROC)SetWindowLong(mmlEdit,GWL_WNDPROC,(LONG)editThunk);
         timerReady=SetTimer(w,PULSE,30,NULL)!=0;if(!timerReady)return -1;
         labels();return 0;
     case WM_COMMAND:
-        if(wp==PLAY)play();else if(wp==STOP)stop();else if(wp==DEMO)demo();
+        if(wp==PLAY)play();else if(wp==STOP)stop();else if(wp==PAUSE)pauseSound();
+        else if(wp==IMPORTFX)importFX();else if(wp==FXSTEP)fxStep();else if(wp==DEMO)demo();
         else if(wp==PIT){stop();pat.pit=!pat.pit;changed();say(pat.pit?"PC speaker enabled for lane 5":"Lane 5 muted: PIT is off");}
         else if(wp==VIEW)view();else if(wp==ABOUT)about();else if(wp==LOAD)loadPattern();else if(wp==SAVE)savePattern();
         else if(wp==LOWER)editPitch(-1);else if(wp==HIGHER)editPitch(1);
         else if(wp==SLOW&&pat.tempo>40){pat.tempo=pat.tempo<50?40:pat.tempo-10;changed();}
         else if(wp==FAST&&pat.tempo<240){pat.tempo+=10;if(pat.tempo>240)pat.tempo=240;changed();}
-        else if(wp==CLEAR&&discard()){stop();memset(pat.note,0,sizeof(pat.note));changed();say("Cleared: click cells to add notes");}
+        else if(wp==CLEAR&&discard()){stop();memset(pat.note,0,sizeof(pat.note));memset(pat.trigger,0,sizeof(pat.trigger));changed();say("Cleared: click cells to add notes");}
         else if(wp==EXPORT)exportMML();else if(wp==COPY)copyMML();
         else if(wp>=LANE0&&wp<LANE0+3){stop();r=wp-LANE0;pat.program[r]=(pat.program[r]+16)&127;changed();}
         else if(wp==LANE0+4)SendMessage(w,WM_COMMAND,PIT,0L);
-        if((wp>=PLAY&&wp<=HIGHER&&wp!=FILEEDIT&&wp!=MMLTEXT&&wp!=VIEW&&wp!=ABOUT)||
+        if(wp==PAUSE||wp==IMPORTFX||wp==FXSTEP||(wp>=PLAY&&wp<=HIGHER&&wp!=FILEEDIT&&wp!=MMLTEXT&&wp!=VIEW&&wp!=ABOUT)||
            (wp>=LANE0&&wp<LANE0+5))SetFocus(w);return 0;
     case WM_LBUTTONDOWN:
-        x=LOWORD(lp);y=HIWORD(lp);if(!mmlView&&x>=64&&x<296&&y>=59&&y<139){selStep=(x-64)/29;selLane=(y-59)/16;toggle();SetFocus(w);}return 0;
+        x=LOWORD(lp);y=HIWORD(lp);if(!mmlView&&x>=64&&x<296&&y>=59&&y<139){selStep=(x-64)/29;selLane=(y-59)/16;toggle();labels();SetFocus(w);}return 0;
     case WM_KEYDOWN:
         if(wp==VK_ESCAPE){stop();return 0;}
         if(wp==VK_F5){if(playing)stop();else play();return 0;}
+        if(wp==VK_F6){pauseSound();return 0;}
         if(wp==VK_F1){about();return 0;}
         if(GetKeyState(VK_CONTROL)<0){if(wp=='S')savePattern();if(wp=='O')loadPattern();return 0;}
         if(wp=='P'){play();return 0;}if(wp=='S'){stop();return 0;}
@@ -370,20 +460,19 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
         else if(wp==VK_RETURN||wp==VK_SPACE)toggle();else if(wp==VK_ADD||wp==0xbb)editPitch(1);else if(wp==VK_SUBTRACT||wp==0xbd)editPitch(-1);
         else if(wp==VK_PRIOR&&pat.tempo<240){pat.tempo+=10;if(pat.tempo>240)pat.tempo=240;changed();}
         else if(wp==VK_NEXT&&pat.tempo>40){pat.tempo=pat.tempo<50?40:pat.tempo-10;changed();}
-        else if(wp==VK_DELETE){pat.note[selLane][selStep]=0;changed();}
-        redraw();return 0;
+        else if(wp==VK_DELETE){pat.note[selLane][selStep]=0;pat.trigger[selLane][selStep]=0;changed();}
+        labels();redraw();return 0;
     case WM_TIMER:
         if(wp!=PULSE)return 0;
-        if(opened&&message(MODM_SYNTHUPDATE,0L)){fail("Synth failed: playback stopped");return 0;}
         now=GetTickCount();
-        if(playing){if((LONG)(now-gate)>=0)releaseNotes();if((LONG)(now-due)>=0){if(now-due>1000UL)due=now;step=(step+1)%8;nextStep(now);}}
+        servicePlayback();
         if(automatic)nativeTest(now);return 0;
-    case WM_ACTIVATE:if(!LOWORD(wp)&&playing)stop();return 0;
+    case WM_ACTIVATE:if(!LOWORD(wp)&&opened)stop();return 0;
     case WM_CANCELMODE:stop();return 0;
     case WM_PAINT:paint(w);return 0;
     case WM_QUERYENDSESSION:stop();return discard()?TRUE:FALSE;
     case WM_ENDSESSION:if(wp)stop();return 0;
-    case WM_CLOSE:if(!discard())return 0;stop();DestroyWindow(w);return 0;
+    case WM_CLOSE:if(!discard()||!stop())return 0;DestroyWindow(w);return 0;
     case WM_DESTROY:KillTimer(w,PULSE);timerReady=0;stop();PostQuitMessage(0);return 0;
     }
     return DefWindowProc(w,m,wp,lp);
@@ -398,9 +487,9 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     if(!n||n>=sizeof(path)){MessageBox(NULL,"App path too long: move the complete kit to a shorter folder.","Tandy Beats Lab",MB_OK);return 3;}
     path[n]=0;for(i=(int)n-1;i>=0;--i)if(path[i]=='\\')break;
     if(i<0||(unsigned)i+12>=sizeof(path)){MessageBox(NULL,"App folder too long: move the complete kit.","Tandy Beats Lab",MB_OK);return 3;}
-    lstrcpy(appdir,path);appdir[i+1]=0;lstrcpy(path+i+1,"MIDIMAP.DRV");module=LoadLibrary(path);
-    if(module>=32){midi=(MIDIPROC)GetProcAddress(module,"MIDIMESSAGE");debug=(DEBUGPROC)GetProcAddress(module,"DEBUGSTATE");}
-    if(!midi)lstrcpy(status,"Mapper missing: extract complete kit");BPDefault(&pat);
+    if(!lstrcmpi(path+i+1,"RAWGUI.EXE")){automatic=1;if(logFile==HFILE_ERROR)logFile=_lcreat("C:\\BEATS.LOG",0);}
+    lstrcpy(appdir,path);appdir[i+1]=0;
+    if(!bindClock())lstrcpy(status,"Transport missing: extract complete kit");BPDefault(&pat);
     wc.style=CS_HREDRAW|CS_VREDRAW;wc.lpfnWndProc=WndProc;wc.cbClsExtra=wc.cbWndExtra=0;wc.hInstance=inst;
     wc.hIcon=NULL;wc.hCursor=LoadCursor(NULL,IDC_ARROW);wc.hbrBackground=GetStockObject(WHITE_BRUSH);wc.lpszMenuName=NULL;wc.lpszClassName="DWABeats";
     if(!RegisterClass(&wc))return 4;
@@ -408,15 +497,20 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     if(!w){if(module>=32)FreeLibrary(module);return 5;}
     ShowWindow(w,show);UpdateWindow(w);SetFocus(w);
     if(visualMode){HFILE ready=_lcreat("C:\\BEATSRDY.TXT",0);if(ready!=HFILE_ERROR)_lclose(ready);}
-    while(GetMessage(&msg,NULL,0,0)){
+    for(;;){
+        if(playing&&!paused){
+            servicePlayback();
+            if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE)){Yield();continue;}
+            if(msg.message==WM_QUIT)break;
+        }else if(!GetMessage(&msg,NULL,0,0))break;
         if(msg.message==WM_KEYDOWN){
             if(msg.wParam==VK_TAB){HWND next=GetNextDlgTabItem(w,GetFocus(),GetKeyState(VK_SHIFT)<0);if(next)SetFocus(next);continue;}
-            if(msg.wParam==VK_ESCAPE||msg.wParam==VK_F5||msg.wParam==VK_F1||(GetKeyState(VK_CONTROL)<0&&(msg.wParam=='S'||msg.wParam=='O'))||
+            if(msg.wParam==VK_ESCAPE||msg.wParam==VK_F5||msg.wParam==VK_F6||msg.wParam==VK_F1||(GetKeyState(VK_CONTROL)<0&&(msg.wParam=='S'||msg.wParam=='O'))||
                (msg.hwnd==w&&(msg.wParam=='P'||msg.wParam=='S'||msg.wParam=='D'||msg.wParam=='V'||msg.wParam==VK_SPACE||msg.wParam==VK_RETURN||msg.wParam==VK_LEFT||msg.wParam==VK_RIGHT||msg.wParam==VK_UP||msg.wParam==VK_DOWN||msg.wParam==VK_ADD||msg.wParam==VK_SUBTRACT||msg.wParam==0xbb||msg.wParam==0xbd||msg.wParam==VK_PRIOR||msg.wParam==VK_NEXT||msg.wParam==VK_DELETE))){SendMessage(w,WM_KEYDOWN,msg.wParam,msg.lParam);continue;}
         }
         TranslateMessage(&msg);DispatchMessage(&msg);
     }
     stop();if(editThunk)FreeProcInstance(editThunk);
-    if(automatic){check("close releases mapper",!opened&&debug&&debug(1)==0);check("close mutes voices",debug&&debug(0)==0);wsprintf(line,"TOTAL_FAILURES=%d\r\n",failures);if(logFile!=HFILE_ERROR){_lwrite(logFile,line,lstrlen(line));_lclose(logFile);}}
+    if(automatic){check("close releases transport",!opened&&debug&&debug(10)==0);check("close mutes voices",debug&&debug(10)==0);wsprintf(line,"TOTAL_FAILURES=%d\r\n",failures);if(logFile!=HFILE_ERROR){_lwrite(logFile,testLog,testLogBytes);_lwrite(logFile,line,lstrlen(line));_lclose(logFile);}}
     if(module>=32)FreeLibrary(module);if(automatic||visualMode)ExitWindows(0L,0);return failures?6:0;
 }

@@ -225,6 +225,7 @@ def native_inputs(build, here=HERE):
     repo = here.parents[2]
     record_raw = (build / 'BUILD.JSON').read_bytes()
     record = json.loads(record_raw)
+    require('BTSTART.EXE' not in record.get('runtimes',{}), 'Effects integration builds require FXPACK.PY')
     require(record.get('target') == '8086 Windows 3.0 real mode; MSC6/LINK4', 'Unexpected native target')
     require(record.get('status') == 'native compile/link only; execution separate', 'Unexpected native build scope')
     require(record.get('source_paths') == SOURCE_PATHS and
@@ -265,13 +266,13 @@ def make_demos(work, here=HERE):
     helper.write_text('''#include <stdio.h>
 #include <string.h>
 #include "BEATPAT.H"
-#if BP_DEMOS != 5
+#if BP_DEMOS < 5
 #error Update_the_packet_demo_inventory
 #endif
 int main(void){
  static const char *names[5]={"STARTER","POCKET","LOWRIDER","FIVE","NIGHT"};
  static BPAT p,loaded;static char text[BP_MML_CAP];char path[20];FILE *f;unsigned i,n;
- for(i=0;i<BP_DEMOS;++i){
+ for(i=0;i<5;++i){
   BPDemo(&p,i);if(!BPValid(&p))return 1;
   sprintf(path,"%s.BTS",names[i]);n=BPEncode(&p,text,sizeof(text));
   if(!n||BPDecode(&loaded,text,n)||loaded.tempo!=p.tempo||loaded.pit!=p.pit||
@@ -292,8 +293,8 @@ int main(void){
         compiler = [shutil.which('cc') or 'gcc']
     exe = work / ('DEMOS.exe' if os.name == 'nt' else 'DEMOS')
     command = compiler + ['-x', 'c', '-std=c89', '-pedantic-errors', '-Wall', '-Wextra', '-Werror',
-                          '-Wno-misleading-indentation', '-I', str(here), str(helper),
-                          str(here / 'BEATPAT.C'), str(here / 'BEATEXP.C'), '-o', str(exe)]
+                          '-Wno-misleading-indentation', '-I', str(here), '-I', str(ROOT/'src/win30/EFFECTS'), str(helper),
+                          str(here / 'BEATPAT.C'), str(here / 'BEATEXP.C'), str(ROOT/'src/win30/EFFECTS/FXCORE.C'), '-o', str(exe)]
     env = dict(os.environ)
     if os.name == 'nt':
         env['PATH'] = 'C:/msys64/ucrt64/bin' + os.pathsep + env.get('PATH', '')
@@ -313,6 +314,8 @@ def assemble(base_raw, base, runtimes, sources, build_raw, demos, here=HERE, kit
     frozen, frozen_pin = frozen_regression_sources(kit, base_raw, base, regression)
     files.update(frozen)
     files.update(sources)
+    for name in ('FXCORE.C','FXCORE.H'):
+        files['SOURCE/src/win30/EFFECTS/'+name] = (ROOT/'src/win30/EFFECTS'/name).read_bytes()
     for name in ('BUILD.PY', 'PACK.PY', 'PACKTEST.PY', 'HOSTTEST.PY', 'README.MD', 'LOWPIT.MD', 'VALIDATE.MD'):
         path = Path(here) / name
         if path.is_file():

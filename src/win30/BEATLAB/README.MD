@@ -1,41 +1,51 @@
 # Tandy Beats Lab
 
-Build an eight-step pattern with three PSG tone lanes, noise percussion and
-an optional PC-speaker lane. Save it, vary it and export a score for Fiddle.
+Make an eight-step song with three PSG tone lanes, noise percussion and a PC
+speaker lane. Import Effects Lab patches as instruments and effects, then save
+one editable song.
 
-![Five-lane Beats Lab editor](../../../docs/SHOTS/BEATS/EDITOR.PNG)
+Extract the complete BEATSFX folder. Exit Windows to DOS and run its included
+TWSETUP.EXE for shared sound setup. Run `GO` (or `GO C:\WINDOWS`) from DOS to
+start Beats. `GOFX` starts the included Effects Lab in the same folder. Both
+apps share the installed SOUND driver. Stop one before playing the other.
 
-[Download a music kit](../../../docs/DOWNLOADS.MD) ·
-[Shared setup and launch](../../../docs/INSTALL.MD#add-music-tools)
+Click Demo to cycle the five original patterns and **Effects groove**. The
+last demo combines a laser, pitched-noise explosion and speaker jump with
+normal notes. Click Play. Pause/F6 holds the position silently; Resume/F6
+continues. Stop/Esc releases sound. Play restarts at step1; F5 toggles Play/Stop.
 
-## Start with a demo
+Click a grid cell to toggle a note/rest. Arrows select; Space/Enter toggles;
+Pitch-/Pitch+ or +/- changes pitch; Delete makes a rest. Click tone labels to
+cycle the original eight presets for normal notes. PIT switches row5 on/off.
+Tempo +/- or Page Down/Up changes BPM. Edits are heard on the next Play.
 
-Click **Demo**, then **Play**. The original patterns cover Pocket drums,
-Lowrider lead, Speaker bass, Late-night keys and Starter. Each is editable.
-The Speaker bass demo turns the PIT speaker lane on automatically.
+To use a patch:
 
-Click a grid cell to toggle a note/rest. Arrow keys select a cell;
-Space/Enter toggles it. **Pitch−/Pitch+** or `+`/`−` changes its pitch, and
-Delete makes a rest. Click a tone lane's label to cycle its instrument preset.
+1. Select the destination cell. Tone patches go in rows1-3, noise in row4,
+   speaker in row5.
+2. Enter `COIN.FXP` in the filename box, or a path such as
+   `C:\EFFECTS\COIN.FXP`, then click **Import**. That cell becomes an FX
+   trigger and the patch is assigned to its lane. Speaker imports enable PIT.
+3. Select more cells and click **FX step** to trigger the same patch. **Note**
+   turns the selected FX cell back into a normal note. `F60` means the original
+   patch pitch (C4). Pitch buttons transpose it; fixed noise ignores pitch.
+4. Enter a song name such as `MYSONG.BTS`, then Save/Ctrl+S. The song contains
+   the patch parameters and triggers, so the source FXP is no longer needed.
 
-Use **PIT** to enable the separately editable PC-speaker row and the tempo
-buttons to change speed. **Play** starts at step 1; **Stop/Esc** releases
-sound. F5 toggles playback. Tab/Shift+Tab navigates the buttons.
+A new trigger replaces the previous effect in that lane. A rest lets an effect
+finish. Pitched noise temporarily borrows tone2 and mutes its audible output;
+its current note/effect returns afterward. Speaker effects temporarily replace
+speaker notes. Stop/Pause apply to the whole song. A busy speaker refuses Play;
+loss of its lease stops playback. Songs loop for up to25 minutes per Play.
 
-## Save a pattern or share a score
+Load/Ctrl+O restores the complete song. Old .BTS patterns still load. Save asks
+before replacement and keeps the previous file as .BAK. Invalid input leaves
+the current edit intact. The supplied FXGROOVE.BTS is ready to play.
 
-Enter a name such as `MYGROOVE.BTS`. **Save/Ctrl+S** stores all 40 cells,
-tempo, tone presets and speaker setting beside the app. **Load/Ctrl+O** brings
-it back. Replacing a pattern asks first and keeps the previous file as `.BAK`.
+MML/Grid shows the score for normal patterns; Copy and Export work as before.
+Imported patches require .BTS playback: MML cannot represent their trajectories,
+so export clearly refuses songs with active FX steps. Fiddle and MIDIMAP.DRV
+are included for normal MML scores. About/F1 shows key controls; Tab/Shift+Tab
+moves between buttons.
 
-**MML** shows the generated score; **Grid** returns to the cells. **Copy** puts
-the score on the clipboard. **Export** writes a same-name `.MML` file for
-[Fiddle](../FIDDLE/README.MD), using MML3 when the speaker part is enabled.
-Choose another name if an export already exists.
-
-Both MML3AUTH and PITEXPR contain this same editor and its original examples.
-MML3AUTH adds Fiddle; PITEXPR adds the instruments. **About/F1** shows the key
-controls and the app's DWA: DAWs With Attitude label.
-
-[Detailed demo and pitch reference](REFERENCE.MD) ·
-[Source/tests](TESTS/README.md) · [Native validation](VALIDATE.MD)
+[Integration and source details](FXINTEG.MD) - [Original demo reference](REFERENCE.MD)

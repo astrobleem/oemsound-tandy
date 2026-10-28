@@ -43,7 +43,7 @@ int main(void)
     CK(BPName("BEAT.BTS","BTS"));CK(BPName("beat_123.bts","BTS"));
     CK(BPName("A.MML","MML"));CK(!BPName("A.BTS","MML"));
     for(i=0;i<sizeof(badnames)/sizeof(badnames[0]);++i)CK(!BPName(badnames[i],"BTS"));
-    for(d=0;d<BP_DEMOS;++d){
+    for(d=0;d<5;++d){
         name=BPDemo(&p,d);CK(name&&*name);CK(BPValid(&p));
         if(d==0){CK(!p.pit);CK(notes(&p,0)==4&&notes(&p,1)==4&&notes(&p,2)==4&&notes(&p,3)==8);}
         if(d==1){CK(!p.pit);CK(!notes(&p,0)&&!notes(&p,1)&&!notes(&p,2)&&!notes(&p,4));CK(notes(&p,3)==8);}
@@ -147,6 +147,6 @@ int main(void)
     for(i=0;i<BP_FILE_CAP+1;++i)fputc(' ',f);fclose(f);
     before=q;CK(BPLoad(&q,"LARGE.BTS")==BP_FORMAT&&same(&q,&before));
     CK(BPSave(&p,"missing/PATTERN.BTS",0)==BP_OPEN);
-    printf("PASS pattern/codec/files/MML checks=%u demos=%u\n",checks,(unsigned)BP_DEMOS);
+    printf("PASS pattern/codec/files/MML checks=%u original_demos=%u\n",checks,(unsigned)BP_DEMOS);
     return 0;
 }

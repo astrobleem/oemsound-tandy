@@ -180,7 +180,7 @@ static int demos_run(void)
     fprintf(attacks,"demo,lane,step,note,start_ms,end_ms,slot,expected_hz,program,pit_divisor\n");
     metadata=fopen("demos.csv","w");CK(metadata!=0);
     fprintf(metadata,"demo,name,tempo,pit,duration_ms\n");
-    for(d=0;d<BP_DEMOS;++d){
+    for(d=0;d<5;++d){
         name=BPDemo(&p,d);CK(BPValid(&p));
         duration=30000U/p.tempo;gate=(duration*3U)/4U;total=duration*16U+200U;
         fprintf(metadata,"%u,%s,%u,%u,%u\n",d,name,p.tempo,(unsigned)p.pit,total);

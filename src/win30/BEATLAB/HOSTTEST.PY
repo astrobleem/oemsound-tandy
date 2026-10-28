@@ -186,7 +186,7 @@ def main():
 
     common = ['-x', 'c', '-Wall', '-Wextra', '-Werror',
               '-Wno-misleading-indentation', '-Wno-unused-function',
-              '-I', HERE]
+              '-I', HERE, '-I', HERE.parent / 'EFFECTS']
     pit_define = '-DBEATS_PIT_SOURCE="' + PIT_CORE.as_posix() + '"'
     suffix = '.exe' if os.name == 'nt' else ''
     cases = [
@@ -210,7 +210,7 @@ def main():
     ]
     for name, flags, sources in cases:
         exe = out / (name + suffix)
-        run(compiler + common + flags + sources + ['-o', exe], name + ' compile')
+        run(compiler + common + flags + sources + [HERE.parent / 'EFFECTS/FXCORE.C'] + ['-o', exe], name + ' compile')
         cwd = out
         if name == 'legacy_mapper':
             cwd = out / 'legacy'
