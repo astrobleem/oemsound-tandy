@@ -85,7 +85,8 @@ go=b'@ECHO OFF\r\nIF "%1"=="" GOTO DEFAULT\r\nBTSTART %1\r\nGOTO END\r\n:DEFAULT
 e=kit/'EVIDENCE';e.mkdir()
 for path,name in ((a.build/'BUILD.JSON','BUILD.JSN'),(a.build/'PROCESS.JSON','BLDPROC.JSN'),(a.host/'RESULT.JSON','HOST.JSN'),(a.host/'TEST.LOG','HOST.LOG'),(a.clock/'RESULT.JSON','CLOCK.JSN'),(a.clock/'TEST.LOG','CLOCK.LOG'),(a.native/'RESULT.JSON','NATIVE.JSN'),(a.native/'AUDIO.JSON','AUDIO.JSN'),(a.native/'BEATS.LOG','NATIVE.LOG')):shutil.copyfile(path,e/name)
 for name in ('EDITOR','PLAYING','PAUSED','STOPPED'):
- if (a.native/(name+'.PNG')).is_file():shutil.copyfile(a.native/(name+'.PNG'),e/(name+'.PNG'))
+ if (a.native/(name+'.PNG')).is_file():shutil.copyfile(a.native/(name+'.PNG'),e/('STOPREQ.PNG' if name=='STOPPED' else name+'.PNG'))
+(e/'READ_ME.TXT').write_bytes(b'PNG frames are point-in-time observations. STOPREQ.PNG was captured shortly after Escape while the status repaint was pending; it is not a settled Stop-status screenshot. NATIVE.JSN and AUDIO.JSN contain the actual action-frame, silence and response-bound evidence. Capture analysis trims at most0.25s for buffering. Emulated hardware only; no physical-hardware or subjective listening claim.\r\n')
 manifest={str(path.relative_to(kit)).replace('\\','/'):pin(path.read_bytes()) for path in kit.rglob('*') if path.is_file()}
 (kit/'MANIFEST.JSN').write_text(json.dumps(dict(format='Private Beats/Effects integration v1',publication=False,files=manifest),indent=2))
 archive=out/'BEATSFX.ZIP'
