@@ -49,7 +49,7 @@ static ZERO openFn,startFn,closeFn,pauseFn,resumeFn,continueFn,endFn,statusFn;
 static ONE debug,xopenFn;static CLOCKFN clockFn;static PUT putFn;static XPUT xputFn;
 static BBPLAYER producer;static BBBURST prepared;static TCXBURST block;
 static int paused,pending,ending,servicing,painting;static unsigned usePit;static DWORD lastDraw;
-static DWORD lastService,maxServiceGap,maxPaintCycles;static unsigned pumpCalls,lastPushResult;
+static DWORD lastService,maxServiceGap,maxPaintCycles,maxHeaderCycles,maxYieldCycles;static unsigned pumpCalls,lastPushResult;
 static FARPROC editThunk,oldEdit;
 static BPAT pat;static BYTE gridPending[5];
 static BYTE defaultNote[5]={60,64,48,42,33};
@@ -86,6 +86,12 @@ static void textChanged(HWND w,const char *s)
     if(lstrcmp(old,s))SetWindowText(w,s);
 }
 static void label(int id,const char *s){if(mainWindow)textChanged(GetDlgItem(mainWindow,id),s);}
+static void giveTime(void)
+{
+    DWORD began=0,span;int running=opened&&playing&&!paused;
+    if(running)began=clockFn();Yield();
+    if(running&&opened&&playing&&!paused){span=clockFn()-began;if(span>maxYieldCycles)maxYieldCycles=span;}
+}
 static void check(const char *s,int okay)
 {
     char line[120];unsigned n;if(!okay)++failures;
@@ -172,14 +178,19 @@ static void play(void)
     unsigned i,r;DWORD began=GetTickCount();
     if(!stop())return;
     if(!timerReady||!module){say("Transport missing: use complete Beats kit");return;}
+    say("Preparing song...");UpdateWindow(mainWindow);
     if(!BBPrepare(&producer,&pat)){say("Invalid pattern: playback refused");return;}
     usePit=pat.pit;r=usePit?xopenFn(1):openFn();
     if(r){say("Sound busy/unavailable: stop other apps");return;}opened=1;
     if(usePit&&statusFn()){fail("Speaker unavailable: use kit Setup");return;}
     pending=ending=0;
     for(i=0;i<BB_PREFILL/BB_BATCH;++i)if(!pump()){fail("Prepare failed: sound released");return;}
+    /* Let pending Windows work finish while prepared times are still relative. */
+    giveTime();
+    if(!opened||!mainWindow||playing)return;
+    if(usePit&&statusFn()!=TCX_AVAILABLE){fail("Speaker unavailable after prepare");return;}
     if(startFn()){fail("Clock failed: use GO from DOS");return;}
-    prepareMs=GetTickCount()-began;lastDraw=lastService=maxServiceGap=maxPaintCycles=0;
+    prepareMs=GetTickCount()-began;lastDraw=lastService=maxServiceGap=maxPaintCycles=maxHeaderCycles=maxYieldCycles=0;
     pumpCalls=lastPushResult=0;playing=1;step=0;markColumn(0,1);say("Playing prepared song; F6 pauses");
 }
 /* Move only the five one-pixel play marks. Repainting all 40 text cells at
@@ -213,10 +224,10 @@ static void servicePlayback(void)
     if(automatic&&testServiceFailure){fail("Injected prepare failure");goto done;}
     if(debug(1)&&!debug(20)){
         /* DOS/GDI reentry can still be quiescing. TCResume requires idle0. */
-        if(debug(21)){Yield();goto done;}
+        if(debug(21)){giveTime();goto done;}
         r=continueFn();
         if(r&&!debug(20)){
-            if(debug(21)){Yield();goto done;}
+            if(debug(21)){giveTime();goto done;}
             fail("Resume error: sound released");goto done;
         }
     }
@@ -412,7 +423,8 @@ static void paintOne(void)
 }
 static void paint(HWND w)
 {
-    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c;char text[80];int x,y;
+    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c;char text[80];int x,y;DWORD began,span;
+    began=playing&&!paused?clockFn():0;
     dc=BeginPaint(w,&ps);SelectObject(dc,GetStockObject(SYSTEM_FIXED_FONT));
     SetBkMode(dc,OPAQUE);SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
     if(!mmlView){
@@ -434,6 +446,7 @@ static void paint(HWND w)
     box.left=2;box.top=157;box.right=302;box.bottom=169;
     if(RectVisible(dc,&box)){FillRect(dc,&box,GetStockObject(WHITE_BRUSH));TextOut(dc,2,157,status,lstrlen(status));}
     EndPaint(w,&ps);
+    if(playing&&!paused){span=clockFn()-began;if(span>maxHeaderCycles)maxHeaderCycles=span;}
 }
 static void button(HWND w,const char *s,int x,int y,int width,int id)
 {
@@ -493,7 +506,7 @@ playback:
         while((LONG)(clockFn()-until)<0&&!debug(6)&&++spins<60000U);
         wsprintf(detail,"sent %u->%u error %u run %u prepare %lu ms",before,debug(2),debug(6),debug(20),prepareMs);
         check(detail,1);
-        wsprintf(detail,"pumps %u gap %lu paint %lu cycles",pumpCalls,maxServiceGap,maxPaintCycles);check(detail,1);
+        wsprintf(detail,"pumps %u gap %lu paint %lu head %lu yield %lu cycles",pumpCalls,maxServiceGap,maxPaintCycles,maxHeaderCycles,maxYieldCycles);check(detail,1);
         check("audio advances without GUI service",debug(2)>before&&!debug(6));
         pauseSound();pausedSent=debug(2);check("pause silences clock",paused&&!debug(20));
         testAt=GetTickCount();testStage=2;
@@ -605,7 +618,7 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
         if((playing&&!paused)||gridDirty()){
             if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE|PM_NOYIELD)){
                 servicePlayback();paintOne();
-                if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())Yield();
+                if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())giveTime();
                 continue;
             }
             if(msg.message==WM_QUIT)break;
@@ -617,7 +630,7 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
         }
         TranslateMessage(&msg);DispatchMessage(&msg);
         servicePlayback();paintOne();
-        if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())Yield();
+        if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())giveTime();
     }
     stop();if(editThunk)FreeProcInstance(editThunk);
     if(automatic){check("close releases transport",!opened&&debug&&debug(10)==0);check("close mutes voices",debug&&debug(10)==0);wsprintf(line,"TOTAL_FAILURES=%d\r\n",failures);if(logFile!=HFILE_ERROR){_lwrite(logFile,testLog,testLogBytes);_lwrite(logFile,line,lstrlen(line));_lclose(logFile);}}
