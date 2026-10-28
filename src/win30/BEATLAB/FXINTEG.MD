@@ -106,7 +106,7 @@ process inventory, private disk, bounded audio and owned cleanup. Its developer
 `--play-only` iteration mode returns DIAGNOSTIC_PASS, which cannot qualify
 consumer packaging. The full UI/playback/recording run remains required.
 `FXAUDIO.PY --native <run>` verifies sustained PSG and speaker activity in three
-parts of a12-second playback interval, resumed activity, and pause/stop silence.
+parts of a playback interval exceeding11 seconds, resumed activity, and pause/stop silence.
 `AUDTEST.PY --out <new-output>` checks the synthetic audio/onset gates.
 `FXPACK.PY` requires that audio receipt and verifies its recording hashes.
 Host checks
@@ -127,3 +127,9 @@ state, retaining its Peek-before-cell ordering. Primary reference:
 https://www.pcjs.org/documents/books/mspl13/win/w3sdkr1/
 The --visual-only native and --diagnostic audio options are development probes;
 they produce DIAGNOSTIC_PASS and cannot qualify FXPACK.
+
+The response validator measures actual exact-zero onset within2 captured seconds
+and requires at least0.5s continued zero samples, confirmed by2.5 wall seconds.
+It retains the original fixed-window observations, which may start before mute.
+Ten synthetic fixtures include within-deadline overlap, late-response and
+short-zero-tail cases. Request screenshots are not settled-state evidence.

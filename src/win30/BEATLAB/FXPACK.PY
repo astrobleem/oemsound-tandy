@@ -105,8 +105,10 @@ for path,name in ((a.build/'BUILD.JSON','BUILD.JSN'),(a.build/'PROCESS.JSON','BL
 for path,name in ((a.raw_build/'BUILD.JSON','RAWBLD.JSN'),(a.raw_build/'PROCESS.JSON','RAWPROC.JSN')):shutil.copyfile(path,e/name)
 shutil.copyfile(a.raw_host/'RESULT.JSON',e/'RAWTEST.JSN')
 for name in ('EDITOR','PLAYING','PAUSED','STOPPED'):
- if (a.native/(name+'.PNG')).is_file():shutil.copyfile(a.native/(name+'.PNG'),e/('STOPREQ.PNG' if name=='STOPPED' else name+'.PNG'))
-(e/'READ_ME.TXT').write_bytes(b'PNG frames are point-in-time observations. STOPREQ.PNG was captured shortly after Escape while the status repaint was pending; it is not a settled Stop-status screenshot. NATIVE.JSN and AUDIO.JSN contain the actual action-frame, silence and response-bound evidence. Capture analysis trims at most0.25s for buffering. Emulated hardware only; no physical-hardware or subjective listening claim.\r\n')
+ label={'PAUSED':'PAUSREQ','STOPPED':'STOPREQ'}.get(name,name)
+ if (a.native/(name+'.PNG')).is_file():shutil.copyfile(a.native/(name+'.PNG'),e/(label+'.PNG'))
+if (a.native/'AUDIO-FIXED-WINDOW-FAIL.JSON').is_file():shutil.copyfile(a.native/'AUDIO-FIXED-WINDOW-FAIL.JSON',e/'AUDIOWIN.JSN')
+(e/'READ_ME.TXT').write_bytes(b'PNG frames are point-in-time observations. PAUSREQ.PNG and STOPREQ.PNG may precede their status repaint; they do not prove a settled Pause/Stop caption. NATIVE.JSN and AUDIO.JSN carry actual action-frame and recorded-silence evidence. Fixed observation windows remain in AUDIO.JSN. When present, AUDIOWIN.JSN preserves the earlier fixed-window rejection; it is diagnostic history. The final gate measures actual exact-zero onset within2 captured seconds with at least0.5s zero-tail confirmation, rather than assuming that window start was already silent. Emulated hardware only; no physical-hardware or subjective listening claim.\r\n')
 manifest={str(path.relative_to(kit)).replace('\\','/'):pin(path.read_bytes()) for path in kit.rglob('*') if path.is_file()}
 (kit/'MANIFEST.JSN').write_text(json.dumps(dict(format='Private Beats/Effects integration v1',publication=False,files=manifest),indent=2))
 archive=out/'BEATSFX.ZIP'

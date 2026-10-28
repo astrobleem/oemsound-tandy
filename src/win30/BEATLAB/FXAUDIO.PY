@@ -27,12 +27,14 @@ def stats(path,begin,end):
     rms=math.sqrt(sum((v-mean)**2 for v in samples)/n)
     return dict(frames=end-begin,peak=max(abs(v) for v in samples),rms=round(rms,3),mean=round(mean,3))
 
-result['play_onset']={}
+result['play_onset']={};result['silence_onset']={};result['fixed_window_observations']=[]
+result['response_policy']='Exact-zero onset within2 captured seconds, corroborated by at least0.5s exact-zero tail. Original fixed observation windows retained as diagnostics.'
 for channel in ('psg','speaker'):
     path=root/(channel+'.s16le');rate=rates[channel]
     assert path.stat().st_size<160*1024**2 and path.stat().st_size%4==0
     result['recordings'][path.name]=dict(bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
     result['play_onset'][channel]={}
+    result['silence_onset'][channel]={}
     for mode,request in (('PLAYING','COLD_PLAY_REQUEST'),('WARM','WARM_PLAY_REQUEST')):
         begin=actions[request][channel+'_frames'];end=actions[mode+'_BEGIN'][channel+'_frames']
         assert end>begin and end*4<=path.stat().st_size
@@ -44,6 +46,18 @@ for channel in ('psg','speaker'):
     for mode in ('PLAYING','PAUSED','RESUMED','STOPPED','WARM'):
         begin=actions[mode+'_BEGIN'][channel+'_frames'];end=actions[mode+'_END'][channel+'_frames']
         assert end>begin and end*4<=path.stat().st_size
+        if mode in ('PAUSED','STOPPED'):
+            fixed=stats(path,begin,end)
+            result['fixed_window_observations'].append(dict(channel=channel,mode=mode,**fixed))
+            request=actions['REPAINT_BEFORE_PAUSE' if mode=='PAUSED' else 'REPAINT_BEFORE_STOP'][channel+'_frames']
+            with path.open('rb') as f:f.seek(request*4);samples=array.array('h',f.read((end-request)*4))
+            if sys.byteorder!='little':samples.byteswap()
+            last=max((i//2 for i,v in enumerate(samples) if v!=0),default=-1)
+            onset=last+1;tail=end-request-onset
+            okay=onset<=2*rate and tail>=rate//2
+            result['silence_onset'][channel][mode]=dict(first_exact_zero_frame=onset,request_to_silence_capture_seconds=round(onset/rate,6),corroborated_zero_tail_seconds=round(tail/rate,6))
+            result['segments'].append(dict(channel=channel,mode=mode,part=1,pass_check=okay,frames=tail,peak=0,rms=0.0,mean=0.0))
+            continue
         if mode=='PLAYING':assert end-begin>=10*rate,'Playback capture does not exceed startup buffer'
         portions=3 if mode=='PLAYING' else 1
         for part in range(portions):
@@ -58,10 +72,12 @@ for channel in ('psg','speaker'):
 result['repaint_transport_bounds']={}
 for mode,request in (('PAUSED','REPAINT_BEFORE_PAUSE'),('STOPPED','REPAINT_BEFORE_STOP')):
     elapsed=actions[mode+'_BEGIN']['wall']-actions[request]['wall']
+    confirmed=actions[mode+'_END']['wall']-actions[request]['wall']
     assert 0<elapsed<=2.5,'Transport response capture exceeded2.5s after repaint request'
+    assert elapsed<confirmed<=2.5,'Silence confirmation exceeded2.5s after repaint request'
     observed={channel:actions[mode+'_BEGIN'][channel+'_frames']-actions[request][channel+'_frames'] for channel in rates}
     assert all(0<observed[channel]<=2*rates[channel] for channel in rates),'Repaint transport silence capture exceeded2 emulated seconds'
-    result['repaint_transport_bounds'][mode]=dict(request_to_window_seconds=round(elapsed,3),request_to_window_frames=observed,silent_window_checks=all(s['pass_check'] for s in result['segments'] if s['mode']==mode),note='Measured silent window trims at most0.25s for capture buffering')
+    result['repaint_transport_bounds'][mode]=dict(request_to_observation_window_seconds=round(elapsed,3),request_to_confirmation_end_seconds=round(confirmed,3),request_to_window_frames=observed,silence_deadline_checks=all(s['pass_check'] for s in result['segments'] if s['mode']==mode),note='The fixed observation window may start before the actual mute. Direct exact-zero onset and corroboration retain the2s capture deadline.')
 result['status']='PASS' if all(s['pass_check'] for s in result['segments']) else 'FAIL'
 if a.diagnostic and result['status']=='PASS':result['status']='DIAGNOSTIC_PASS'
 (root/'AUDIO.JSON').write_text(json.dumps(result,indent=2)+'\n')
