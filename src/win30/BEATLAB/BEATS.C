@@ -660,7 +660,7 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
         if(preparing||(playing&&!paused)||gridDirty()){
             if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE|PM_NOYIELD)){
                 servicePreparation();servicePlayback();paintOne();
-                if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())giveTime();
+                if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH))giveTime();
                 continue;
             }
             if(msg.message==WM_QUIT)break;
@@ -672,7 +672,7 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
         }
         TranslateMessage(&msg);DispatchMessage(&msg);
         servicePreparation();servicePlayback();paintOne();
-        if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())giveTime();
+        if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH))giveTime();
     }
     stop();if(editThunk)FreeProcInstance(editThunk);
     if(automatic){check("close releases transport",!opened&&debug&&debug(10)==0);check("close mutes voices",debug&&debug(10)==0);wsprintf(line,"TOTAL_FAILURES=%d\r\n",failures);if(logFile!=HFILE_ERROR){_lwrite(logFile,testLog,testLogBytes);_lwrite(logFile,line,lstrlen(line));_lclose(logFile);}}

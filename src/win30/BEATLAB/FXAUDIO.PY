@@ -6,9 +6,10 @@ import argparse,array,hashlib,json,math,sys
 
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--native',type=Path,required=True)
+p.add_argument('--diagnostic',action='store_true',help='Analyze diagnostic capture without qualifying packaging')
 a=p.parse_args();root=a.native.resolve()
 native=json.loads((root/'RESULT.JSON').read_bytes())
-assert native['status']=='PASS' and native['normal_dos_return']
+assert native['status']==('DIAGNOSTIC_PASS' if a.diagnostic else 'PASS') and native['normal_dos_return']
 rates=dict(psg=48000,speaker=49716)
 assert native['capture_rates']==rates
 def pin(b):return dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
@@ -62,6 +63,7 @@ for mode,request in (('PAUSED','REPAINT_BEFORE_PAUSE'),('STOPPED','REPAINT_BEFOR
     assert all(0<observed[channel]<=2*rates[channel] for channel in rates),'Repaint transport silence capture exceeded2 emulated seconds'
     result['repaint_transport_bounds'][mode]=dict(request_to_window_seconds=round(elapsed,3),request_to_window_frames=observed,silent_window_checks=all(s['pass_check'] for s in result['segments'] if s['mode']==mode),note='Measured silent window trims at most0.25s for capture buffering')
 result['status']='PASS' if all(s['pass_check'] for s in result['segments']) else 'FAIL'
+if a.diagnostic and result['status']=='PASS':result['status']='DIAGNOSTIC_PASS'
 (root/'AUDIO.JSON').write_text(json.dumps(result,indent=2)+'\n')
 print(json.dumps(result,indent=2))
-raise SystemExit(0 if result['status']=='PASS' else 1)
+raise SystemExit(0 if result['status'] in ('PASS','DIAGNOSTIC_PASS') else 1)

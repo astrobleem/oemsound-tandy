@@ -119,3 +119,11 @@ hours with44 rebases and physical DWORD wrap, checks partial/full queue and
 pending FULL retry, pause and invalid-owner/frame calls, with no added sound
 writes at a rebase. Native test mode uses a phase-aligned shorter interval to
 exercise the same API promptly; ordinary playback uses the four-minute shift.
+
+Windows3.0 GetInputState includes timer events in the system queue. With the
+30ms UI timer it cannot gate cooperative Yield while PM_NOYIELD is active.
+The loop now yields at its audio high-water boundary regardless of timer/input
+state, retaining its Peek-before-cell ordering. Primary reference:
+https://www.pcjs.org/documents/books/mspl13/win/w3sdkr1/
+The --visual-only native and --diagnostic audio options are development probes;
+they produce DIAGNOSTIC_PASS and cannot qualify FXPACK.
