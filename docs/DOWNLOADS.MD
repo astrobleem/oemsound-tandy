@@ -1,6 +1,6 @@
 # Downloads
 
-Start with **[TWSETUP.EXE â€” native DOS Setup](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE)**.
+Start with **[TWSETUP.EXE — native DOS Setup](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE)**.
 It installs the shared Windows sound driver, Winamp and the required helpers.
 [Installation instructions](INSTALL.MD).
 
@@ -15,7 +15,7 @@ It installs the shared Windows sound driver, Winamp and the required helpers.
 
 The Windows apps share one installed `SOUND.DRV`. Choose the music kit by
 which companion apps you want; there is no different driver to select.
-[Requirements](../README.md#requirements) Â· [App controls and launch paths](APPS.MD)
+[Requirements](../README.md#requirements) · [App controls and launch paths](APPS.MD)
 
 ## Buddy Holly tiny video players
 
