@@ -1,11 +1,14 @@
 # Tandy Beats Lab native UI
 
-Windows 3.0 real mode on an emulated 640 KB Tandy 1000 HX, with the published
-fixed 320x200 display profile. The primary name, secondary label and mouse
-pitch controls were checked in the affected-UI native run; 10 assertions
-passed and Windows returned cleanly to DOS. These are emulator captures,
-not physical-hardware photos or audio-fidelity evidence.
+EDITOR.PNG is the full native19 capture of the current Effects-capable editor
+on an emulated Tandy1000HX8088 at7.16MHz,640KB, Windows3.0 real mode and
+320x200. Build19 BEATS.EXE is51,845 bytes, SHA256
+91d46ebd0da787fc8c4ecc3fc7ddd0da785efb61ba91d7b0545490ec2849aec7.
+The complete run passed65 scripted checks, physical controls, recorded audio
+and normal DOS return. See [current validation](../../../src/win30/BEATLAB/FXVALID.MD).
 
-EDITOR.PNG shows the five-lane editor. ABOUT.PNG shows the compact branding
-and its visible OK button. Runtime identity and source entry points are in
-../../../src/win30/BEATLAB/VALIDATE.MD.
+ABOUT.PNG retains the earlier branding-dialog capture and its original
+10-assertion UI scope in [earlier validation](../../../src/win30/BEATLAB/VALIDATE.MD).
+These are emulator captures, not physical-hardware photos or sound-quality
+measurements. Pause/Stop request images in the package are explicitly labeled
+as request observations; actual silence is established from recorded samples.

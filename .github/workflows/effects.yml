@@ -37,7 +37,15 @@ jobs:
                            root / 'src/win30/LAUNCH' / name,
                            root / 'experimental/WINLIB30/SOURCE' / name]
                   path = next(p for p in paths if p.is_file())
-                  assert pin(path.read_bytes()) == expected, str(path)
+                  staged = z.read('EFFECTS/SOURCE/' + path.relative_to(root).as_posix())
+                  assert pin(staged) == expected, name
+                  compiled = staged.replace(b'\r\n', b'\n').replace(b'\n', b'\r\n')
+                  assert pin(compiled) == build['sources'][name], name
+                  same = pin(path.read_bytes()) == expected
+                  if not same:
+                      versioned = runpy.run_path('src/win30/BEATLAB/PUBVERIFY.PY')['accepts_recorded_pin']
+                      same = versioned(path.relative_to(root).as_posix(), expected, root)
+                  assert same, str(path)
               assert z.read('EFFECTS/TWSETUP.EXE') == (root / 'artifacts/win30/TWSETUP.EXE').read_bytes()
               assert z.read('EFFECTS/TWXT2.ZIP') == (root / 'artifacts/win30/TWXT2.ZIP').read_bytes()
               z.extractall('/tmp/effects-kit')

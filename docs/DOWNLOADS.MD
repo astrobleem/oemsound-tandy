@@ -8,6 +8,7 @@ It installs the shared Windows sound driver, Winamp and the required helpers.
 | --- | --- |
 | [TWSETUP.EXE](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE) | The self-contained DOS installer. Run `TWSETUP`, then `C:\WINAMP\GO`. |
 | [TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP) | The same driver/player as an expanded kit, with original example songs and source. Extract `TWXT2` and run its `SETUP.EXE`. |
+| [BEATSFX.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/BEATSFX.ZIP) | Beats Lab with Effects Lab patch import, per-step FX and embedded songs, plus Effects Lab, Fiddle, shared Setup and source. Extract `BEATSFX`, run its `TWSETUP`, then `GO` from DOS. |
 | [MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP) | Beats Lab and Fiddle: editable patterns, five-voice music and MML scores. Includes shared Setup. |
 | [PITEXPR.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITEXPR.ZIP) | The same Beats Lab, plus Mini Piano, JoyMIDI and MiniMIDI. Includes shared Setup. |
 | [EFFECTS.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/EFFECTS.ZIP) | Effects Lab with PSG/speaker patches, C export and shared Setup. Extract `EFFECTS`, then follow its `GO C:\WINDOWS` instructions. |

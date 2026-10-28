@@ -14,5 +14,7 @@ WORD TCAPI TCBGetCaps(WORD,TCBINFO FAR *,WORD);
 WORD TCAPI TCBOpen(void);
 WORD TCAPI TCBPush(TCBURST FAR *);
 WORD TCAPI TCBEnd(void);
+/* Optional ordinal37: shift active burst clock/deadlines without sound writes. */
+WORD TCAPI TCBRebase(DWORD);
 /* 0 success,1 ownership/lifecycle,2 FULL,3 invalid,4 spacing/horizon. */
 #endif

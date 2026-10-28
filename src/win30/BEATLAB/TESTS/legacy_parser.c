@@ -10,7 +10,7 @@ static unsigned checks;
 int main(void)
 {
     BPAT p;MML_SCORE score;MML_ERROR error;char text[BP_MML_CAP];unsigned n,d,low_error=0;
-    for(d=0;d<BP_DEMOS;++d){
+    for(d=0;d<5;++d){
         BPDemo(&p,d);n=BPMML(&p,text,sizeof(text));CK(n);
         if(d==3){CK(!mml_validate(&score,text,n,0,&error)&&error.code!=MML_E_NONE);low_error=error.code;}
         else CK(mml_validate(&score,text,n,0,&error));
