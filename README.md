@@ -55,7 +55,10 @@ arrangements rather than sampled instrument timbres.
 ![Current five-lane Beats Lab editor](docs/SHOTS/BEATS/EDITOR.PNG)
 
 Edit three PSG tone lanes, noise percussion and an optional PC-speaker lane.
-Save patterns, try the original demos, and export MML scores for Fiddle.
+Import Effects Lab patches into selected lanes and steps, transpose them, and
+save the patches inside the song. Try the mixed Effects groove demo, pause or
+stop playback, and export normal-note MML scores for Fiddle.
+[Download the complete Beats + Effects kit](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/BEATSFX.ZIP).
 [Beats guide](src/win30/BEATLAB/README.MD) · [Fiddle guide](src/win30/FIDDLE/README.MD)
 
 ### Effects Lab — make sounds

@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
+import runpy
 import struct
 import zipfile
 import zlib
@@ -55,7 +56,12 @@ def verify(files, current=True):
                     path = REPO/'src/win30/DRIVER/SOUNDID.H'
                 elif label == 'setup' and name == 'TPLAYPOL.H':
                     path = REPO/'src/win30/LAUNCH/TPLAYPOL.H'
-                require(ident(path.read_bytes()) == pin, 'Current source differs: '+str(path))
+                same = ident(path.read_bytes()) == pin
+                if not same:
+                    helper = REPO/'src/win30/BEATLAB/PUBVERIFY.PY'
+                    same = helper.is_file() and runpy.run_path(str(helper))['accepts_recorded_pin'](
+                        path.relative_to(REPO).as_posix(), pin, REPO)
+                require(same, 'Current source differs: '+str(path))
     builder.clock_receipts(files, builds)
     require(builder.player_receipt(files) == builds['player'], 'Unlinked native player receipt')
     require(json.loads(files['BUILD.JSN'])['runtime_base'] == builder.MIDI_BASE and

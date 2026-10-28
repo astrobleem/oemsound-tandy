@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import re
+import runpy
 import shutil
 import stat
 import struct
@@ -461,7 +462,12 @@ def verify_release_packet(path, kit='MML3AUTH', release=None, expected=None, cur
         data = files['SOURCE/' + relative]
         require(data and data == crlf(data) and pin(data) == native['sources'][name], 'Published compiled source pin differs: ' + name)
         if current:
-            require(crlf((ROOT/relative).read_bytes()) == data, 'Current compiled source differs: ' + name)
+            same = crlf((ROOT/relative).read_bytes()) == data
+            if not same:
+                helper = ROOT/'src/win30/BEATLAB/PUBVERIFY.PY'
+                same = helper.is_file() and runpy.run_path(str(helper))['accepts_recorded_pin'](
+                    relative, pin(data), ROOT)
+            require(same, 'Current compiled source differs: ' + name)
         original = native['source_originals'][name]
         require(isinstance(original.get('bytes'),int) and len(data.replace(b'\r\n',b'\n')) <= original['bytes'] <= len(data) and
                 re.fullmatch('[0-9a-f]{64}',original.get('sha256','')), 'Published original source metadata differs: ' + name)

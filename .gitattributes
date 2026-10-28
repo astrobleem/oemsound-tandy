@@ -39,3 +39,6 @@ examples/BUDDY/*.TXT whitespace=cr-at-eol
 examples/BUDDY/WIN30/** -text whitespace=cr-at-eol
 examples/BUDDY/WINPLAY.ZIP -text
 examples/BUDDY/WINSRC.ZIP -text
+
+# Approved Beats Effects native package retains its exact published bytes.
+artifacts/win30/BEATSFX.ZIP -text

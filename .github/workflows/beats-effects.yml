@@ -1,0 +1,39 @@
+name: Beats Effects package and merger
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  beats-effects:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: astrobleem/libwintandy
+          ref: d41ab4c1340d64f404a3794d06f37bfe10788ae0
+          path: .ci-libwintandy
+          persist-credentials: false
+      - name: Verify approved native artifact and reject stale source transitions
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          python3 src/win30/BEATLAB/PUBVERIFY.PY --extract "$RUNNER_TEMP/beats-kit"
+          python3 src/win30/BEATLAB/PUBTEST.PY
+      - name: Exercise actual compiler, merger, persistence and transport producer
+        run: |
+          for name in TIMECLK.C TCBURST.H TIMECLK.DEF FXMERGE.C FXMERGE.H; do
+            cmp "experimental/WINLIB30/SOURCE/$name" ".ci-libwintandy/libtandywin/AUDIO/SOURCE/$name"
+          done
+          python3 src/win30/BEATLAB/FXTEST.PY --out "$RUNNER_TEMP/beats-fx"
+          python3 src/win30/BEATLAB/FXCLOCK.PY --libwintandy .ci-libwintandy --out "$RUNNER_TEMP/beats-clock"
+          python3 src/win30/BEATLAB/AUDTEST.PY --out "$RUNNER_TEMP/beats-audio-gates"
+      - name: Replay the exact source shipped to consumers
+        run: python3 "$RUNNER_TEMP/beats-kit/BEATSFX/SOURCE/src/win30/BEATLAB/FXTEST.PY" --out "$RUNNER_TEMP/beats-consumer"
