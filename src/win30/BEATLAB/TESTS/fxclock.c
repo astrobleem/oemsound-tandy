@@ -19,6 +19,20 @@ static void publish(unsigned n)
         C(TCXPush(&queued)==0);
     }
 }
+static DWORD paintNow;static unsigned paintTick;
+static void paintElapsed(DWORD delta)
+{
+    paintNow+=delta;
+    while((DWORD)BBStamp(paintTick)<=paintNow){tick((DWORD)BBStamp(paintTick));++paintTick;}
+}
+static void paintPublish(unsigned n)
+{
+    unsigned i;
+    for(i=0;i<n;++i){
+        /* Conservative measured producer CPU cost:5.5ms per prepared frame. */
+        paintElapsed(6562UL);publish(1);
+    }
+}
 int main(void)
 {
     unsigned i,n;DWORD stamp;WORD sentBefore;
@@ -47,6 +61,21 @@ int main(void)
         }
     }
     C(TCClose()==0);C(!owner&&!sound&&!leaseHeld&&!pitToken&&!unsafe);
+    /* Native06 measured a9.5s full grid paint. Refill between its five rows,
+       including producer CPU time, using actual RAWCLK deadlines/ownership. */
+    C(BBPrepare(&player,&song));C(TCXOpen(1)==0);publish(BB_PREFILL);
+    now=0;paintNow=0;paintTick=1;C(TCStart()==0);tick(0);
+    for(i=0;i<5;++i){
+        unsigned batch;
+        paintElapsed(2267045UL); /*1.9s row, five rows=9.5s*/
+        for(batch=0;batch<8&&TCDebug(0)<TCB_CAPACITY-BB_BATCH;++batch){
+            n=TCB_CAPACITY-TCDebug(0);if(n>BB_BATCH)n=BB_BATCH;
+            paintPublish(n);
+        }
+        C(TCDebug(6)==0);
+    }
+    C(paintTick>BB_PREFILL&&TCDebug(2)==paintTick);C(TCClose()==0);
+    C(!owner&&!sound&&!leaseHeld&&!pitToken&&!unsafe);
     printf("PASS merged FX foreground refill and GUI-stall checks=%d failures=%d\n",checks,failures);
     return failures!=0;
 }

@@ -10,10 +10,11 @@ Passing host checks include:
 
 - FXTEST: 18,054 compiler/merger/producer/codec checks; 35 noise-latch writes
   across 1,200 rendered states, rather than a reset on every level update.
-- FXCLOCK: 12,573 checks using the actual producer and actual RAWCLK with the
+- FXCLOCK: 14,888 checks using the actual producer and actual RAWCLK with the
   library's existing Win16/port mocks. The test reproduces native underrun 4
   when a 512-frame queue is never replenished. Foreground refill then runs
-  1,800 frames without WM_TIMER, including a 350ms foreground gap and pause.
+  1,800 frames without WM_TIMER, including a350ms foreground gap and pause,
+  and models measured9.5s full-paint cost with bounded between-row refills.
 - Original five-demo pattern/MML and transactional-file tests, actual PIT
   bounds/service checks, current/archived mapper regression and 144 intended
   original demo attacks with no silent attacks or clipped reference samples.
@@ -33,14 +34,17 @@ candidates. Native checks passed in-app relative and absolute FXP import,
 target rejection, embedded song save/load after deleting the source FXP,
 the mixed demo's initial queue/speaker claim, replay, deactivate, failure
 release and close. Native playback/pause assertions failed after the queue
-drained: earlier `sent512->512 error4 run0`, latest `sent160->160 error4 run0`.
+drained: earlier `sent512->512 error4 run0`, then `sent160->160 error4 run0`. Native06 measured a9.5s full paint
+and failed at517frames despite512-frame prefill; its2pump trace attributes the
+starvation to that single paint.
 Those recordings are diagnostic evidence, not continuous playback passes.
 
 The final source restores512 prepared startup frames, uses PM_NOYIELD for
 input checks, restores queue lookahead before cooperative Yield, and updates
 only five one-pixel play marks instead of repainting40 text cells every step.
 Native diagnostics now measure maximum service gap and full-paint cycles.
-The GUI-stall assertion measures RAWCLK cycles and buffers its output in RAM.
+Status paint now avoids the grid; full grids use five batched text calls and
+refill between rows. The GUI-stall assertion measures RAWCLK cycles and buffers its output in RAM.
 The producer/actual-RAWCLK host model passes with the current512-frame policy.
 Independent review resolved launcher specialization, native-test reentry,
 shutdown close refusal and extracted-source launcher validation findings.

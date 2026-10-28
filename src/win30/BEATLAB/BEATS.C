@@ -48,7 +48,7 @@ typedef WORD(FAR PASCAL *XPUT)(TCXBURST FAR *);
 static ZERO openFn,startFn,closeFn,pauseFn,resumeFn,continueFn,endFn,statusFn;
 static ONE debug,xopenFn;static CLOCKFN clockFn;static PUT putFn;static XPUT xputFn;
 static BBPLAYER producer;static BBBURST prepared;static TCXBURST block;
-static int paused,pending,ending,servicing;static unsigned usePit;static DWORD lastDraw;
+static int paused,pending,ending,servicing,painting;static unsigned usePit;static DWORD lastDraw;
 static DWORD lastService,maxServiceGap,maxPaintCycles;static unsigned pumpCalls;
 static FARPROC editThunk,oldEdit;
 static BPAT pat;
@@ -65,7 +65,21 @@ static char testLog[4096];static unsigned testLogBytes;
 static DWORD testAt;
 static HFILE logFile=HFILE_ERROR;
 static void redraw(void){if(mainWindow)InvalidateRect(mainWindow,NULL,FALSE);}
-static void say(const char *s){strncpy(status,s,sizeof(status)-1);status[sizeof(status)-1]=0;redraw();}
+static void say(const char *s)
+{
+    RECT box;strncpy(status,s,sizeof(status)-1);status[sizeof(status)-1]=0;
+    box.left=2;box.top=157;box.right=302;box.bottom=169;
+    if(mainWindow)InvalidateRect(mainWindow,&box,FALSE);
+}
+static void markColumn(unsigned column,int on)
+{
+    HDC dc;RECT box;unsigned r;
+    if(mmlView||!mainWindow||(dc=GetDC(mainWindow))==NULL)return;
+    box.left=64+column*29;box.right=box.left+27;
+    for(r=0;r<5;++r){box.top=73+r*16;box.bottom=box.top+1;
+        FillRect(dc,&box,GetStockObject(on?BLACK_BRUSH:WHITE_BRUSH));}
+    ReleaseDC(mainWindow,dc);
+}
 static void check(const char *s,int okay)
 {
     char line[120];unsigned n;if(!okay)++failures;
@@ -92,7 +106,7 @@ static int bindClock(void)
 static int stop(void)
 {
     if(opened&&closeFn()){say("Close pending: retry Stop");return 0;}
-    opened=playing=paused=pending=ending=0;
+    if(playing)markColumn(step,0);opened=playing=paused=pending=ending=0;
     if(mainWindow)SetDlgItemText(mainWindow,PAUSE,"Pause");
     say("Stopped: sound released");return 1;
 }
@@ -153,7 +167,7 @@ static void play(void)
     for(i=0;i<BB_PREFILL/BB_BATCH;++i)if(!pump()){fail("Prepare failed: sound released");return;}
     if(startFn()){fail("Clock failed: use GO from DOS");return;}
     prepareMs=GetTickCount()-began;lastDraw=lastService=maxServiceGap=maxPaintCycles=0;
-    pumpCalls=0;playing=1;step=0;say("Playing prepared song; F6 pauses");
+    pumpCalls=0;playing=1;step=0;markColumn(0,1);say("Playing prepared song; F6 pauses");
 }
 /* Move only the five one-pixel play marks. Repainting all 40 text cells at
    every step can consume seconds on an 8088 and starve the prepared queue. */
@@ -190,7 +204,7 @@ static void servicePlayback(void)
     }
     ++pumpCalls;if(!pump()){fail("Prepare error: sound released");goto done;}
     cycles=clockFn();
-    if(cycles-lastDraw>=298295UL){
+    if(!painting&&cycles-lastDraw>=298295UL){
         lastDraw=cycles;playMark(BBStep((cycles/3579545UL)*180UL+
             (cycles%3579545UL)*180UL/3579545UL,producer.song.tempo));
     }
@@ -203,9 +217,9 @@ static int discard(void)
 }
 static void demo(void)
 {
-    if(!discard())return;stop();demoIndex=(demoIndex+1)%BP_DEMOS;
+    if(!discard()||!stop())return;demoIndex=(demoIndex+1)%BP_DEMOS;
     lstrcpy(patternName,BPDemo(&pat,demoIndex));
-    SetWindowText(fileEdit,demoIndex==5?"FXGROOVE.BTS":demoIndex==1?"POCKET.BTS":demoIndex==2?"LOWRIDER.BTS":demoIndex==3?"FIVE.BTS":demoIndex==4?"NIGHT.BTS":"STARTER.BTS");dirty=0;labels();
+    SetWindowText(fileEdit,demoIndex==5?"FXGROOVE.BTS":demoIndex==1?"POCKET.BTS":demoIndex==2?"LOWRIDER.BTS":demoIndex==3?"FIVE.BTS":demoIndex==4?"NIGHT.BTS":"STARTER.BTS");dirty=0;labels();redraw();
     say(pat.pit?"Demo loaded: PC speaker ON":"Demo loaded: PSG voices only");
 }
 static void editPitch(int delta)
@@ -281,7 +295,7 @@ static int loadPattern(void)
     char name[13],path[144];BPAT loaded;int r;
     if(!filename(name,path,"BTS")||!discard())return 0;
     r=BPLoad(&loaded,path);if(r){fileError(r);return 0;}
-    stop();pat=loaded;dirty=0;lstrcpy(patternName,name);labels();say(pat.pit?"Loaded: PC speaker ON":"Loaded: PSG voices only");return 1;
+    if(!stop())return 0;pat=loaded;dirty=0;lstrcpy(patternName,name);labels();redraw();say(pat.pit?"Loaded: PC speaker ON":"Loaded: PSG voices only");return 1;
 }
 static int exportMML(void)
 {
@@ -331,35 +345,53 @@ static void about(void)
     MessageBox(mainWindow,"DWA: DAWs With Attitude\nStraight Outta LLMompton\nProduced by Dr. DRAM\n\nF5 Play/Stop; F6 Pause\nEsc Stop; Ctrl+O/S files\nImport: selected lane/step\nFX step / Note switches\nF60 = original patch pitch\nNoise FX borrows tone 2\nEdits heard on next Play",
         "Tandy Beats Lab",MB_OK);SetFocus(mainWindow);
 }
+/* A full expose must not block foreground audio for an entire grid paint. */
+static void paintFeed(void)
+{
+    unsigned i;
+    for(i=0;i<8&&playing&&!paused&&debug(0)<TCB_CAPACITY-BB_BATCH;++i)servicePlayback();
+}
 static void paint(HWND w)
 {
-    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c,n;char text[80];int x,y;DWORD began,spent;
-    began=playing&&!paused?clockFn():0;
+    HDC dc;PAINTSTRUCT ps;RECT box;TEXTMETRIC tm;
+    unsigned r,c,n,k,len,used;char text[80],rowText[40];int dx[40],width,x,y;DWORD began,spent;
+    began=playing&&!paused?clockFn():0;painting=1;
     dc=BeginPaint(w,&ps);SelectObject(dc,GetStockObject(SYSTEM_FIXED_FONT));
-    SelectObject(dc,GetStockObject(NULL_BRUSH));SetBkMode(dc,OPAQUE);SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
-    if(!mmlView){
-        box.left=62;box.top=44;box.right=302;box.bottom=141;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
+    SelectObject(dc,GetStockObject(NULL_BRUSH));SetBkMode(dc,TRANSPARENT);
+    SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
+    box.left=62;box.top=44;box.right=302;box.bottom=141;
+    if(!mmlView&&RectVisible(dc,&box)){
+        FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
         wsprintf(text,"%u / 8",selStep+1);TextOut(dc,234,46,text,lstrlen(text));
-        for(r=0;r<5;++r)for(c=0;c<8;++c){
-            x=64+c*29;y=59+r*16;box.left=x;box.top=y;box.right=x+27;box.bottom=y+14;
-            FillRect(dc,&box,GetStockObject(r==selLane&&c==selStep?BLACK_BRUSH:WHITE_BRUSH));
-            Rectangle(dc,x,y,x+27,y+14);
-            SetBkColor(dc,r==selLane&&c==selStep?RGB(0,0,0):RGB(255,255,255));
-            SetTextColor(dc,r==selLane&&c==selStep?RGB(255,255,255):RGB(0,0,0));
-            n=pat.note[r][c];if(!n)lstrcpy(text," -");
-            else if(pat.trigger[r][c])wsprintf(text,"F%u",n);
-            else if(r==3)wsprintf(text,"%u",n);
-            else wsprintf(text,"%s%u",(LPSTR)noteNames[n%12],n/12-1);
-            TextOut(dc,x+2,y+3,text,lstrlen(text));
-            if(playing&&c==(unsigned)step){MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
+        width=GetTextMetrics(dc,&tm)?tm.tmAveCharWidth:6;
+        for(r=0;r<5;++r){
+            used=0;y=59+r*16;
+            for(c=0;c<8;++c){
+                x=64+c*29;Rectangle(dc,x,y,x+27,y+14);
+                n=pat.note[r][c];if(!n)lstrcpy(text," -");
+                else if(pat.trigger[r][c])wsprintf(text,"F%u",n);
+                else if(r==3)wsprintf(text,"%u",n);
+                else wsprintf(text,"%s%u",(LPSTR)noteNames[n%12],n/12-1);
+                len=lstrlen(text);for(k=0;k<len;++k){rowText[used]=text[k];dx[used++]=width;}
+                dx[used-1]=29-(len-1)*width;
+            }
+            /* One GDI text call per row, with exact29-pixel cell advances. */
+            ExtTextOut(dc,66,y+3,0,NULL,rowText,used,dx);
+            if(r==(unsigned)selLane){box.left=65+selStep*29;box.top=y+1;
+                box.right=box.left+25;box.bottom=y+13;InvertRect(dc,&box);}
+            if(playing){x=64+step*29;MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
+            paintFeed();
         }
-        SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
-        wsprintf(text,"%u BPM",pat.tempo);
-    }else lstrcpy(text,"MML: Export saves; Copy copies");
-    box.left=mmlView?2:64;box.top=141;box.right=302;box.bottom=169;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
-    TextOut(dc,mmlView?2:184,141,text,lstrlen(text));
-    box.left=2;box.top=157;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));TextOut(dc,2,157,status,lstrlen(status));
-    EndPaint(w,&ps);
+    }
+    box.left=mmlView?2:64;box.top=141;box.right=302;box.bottom=157;
+    if(RectVisible(dc,&box)){
+        FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
+        if(mmlView)lstrcpy(text,"MML: Export saves; Copy copies");else wsprintf(text,"%u BPM",pat.tempo);
+        TextOut(dc,mmlView?2:184,141,text,lstrlen(text));
+    }
+    box.left=2;box.top=157;box.right=302;box.bottom=169;
+    if(RectVisible(dc,&box)){FillRect(dc,&box,GetStockObject(WHITE_BRUSH));TextOut(dc,2,157,status,lstrlen(status));}
+    EndPaint(w,&ps);painting=0;
     if(playing&&!paused){spent=clockFn()-began;if(spent>maxPaintCycles)maxPaintCycles=spent;}
 }
 static void button(HWND w,const char *s,int x,int y,int width,int id)
@@ -461,14 +493,14 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
     case WM_COMMAND:
         if(wp==PLAY)play();else if(wp==STOP)stop();else if(wp==PAUSE)pauseSound();
         else if(wp==IMPORTFX)importFX();else if(wp==FXSTEP)fxStep();else if(wp==DEMO)demo();
-        else if(wp==PIT){stop();pat.pit=!pat.pit;changed();say(pat.pit?"PC speaker enabled for lane 5":"Lane 5 muted: PIT is off");}
+        else if(wp==PIT){if(!stop())return 0;pat.pit=!pat.pit;changed();say(pat.pit?"PC speaker enabled for lane 5":"Lane 5 muted: PIT is off");}
         else if(wp==VIEW)view();else if(wp==ABOUT)about();else if(wp==LOAD)loadPattern();else if(wp==SAVE)savePattern();
         else if(wp==LOWER)editPitch(-1);else if(wp==HIGHER)editPitch(1);
         else if(wp==SLOW&&pat.tempo>40){pat.tempo=pat.tempo<50?40:pat.tempo-10;changed();}
         else if(wp==FAST&&pat.tempo<240){pat.tempo+=10;if(pat.tempo>240)pat.tempo=240;changed();}
-        else if(wp==CLEAR&&discard()){stop();memset(pat.note,0,sizeof(pat.note));memset(pat.trigger,0,sizeof(pat.trigger));changed();say("Cleared: click cells to add notes");}
+        else if(wp==CLEAR&&discard()){if(!stop())return 0;memset(pat.note,0,sizeof(pat.note));memset(pat.trigger,0,sizeof(pat.trigger));changed();say("Cleared: click cells to add notes");}
         else if(wp==EXPORT)exportMML();else if(wp==COPY)copyMML();
-        else if(wp>=LANE0&&wp<LANE0+3){stop();r=wp-LANE0;pat.program[r]=(pat.program[r]+16)&127;changed();}
+        else if(wp>=LANE0&&wp<LANE0+3){if(!stop())return 0;r=wp-LANE0;pat.program[r]=(pat.program[r]+16)&127;changed();}
         else if(wp==LANE0+4)SendMessage(w,WM_COMMAND,PIT,0L);
         if(wp==PAUSE||wp==IMPORTFX||wp==FXSTEP||(wp>=PLAY&&wp<=HIGHER&&wp!=FILEEDIT&&wp!=MMLTEXT&&wp!=VIEW&&wp!=ABOUT)||
            (wp>=LANE0&&wp<LANE0+5))SetFocus(w);return 0;

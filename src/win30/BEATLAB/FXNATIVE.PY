@@ -121,7 +121,9 @@ try:
   if 'FAIL ' in text or re.search(r'TOTAL_FAILURES=[1-9]',text):raise RuntimeError('Native assertions failed')
   if phase=='VISUAL' and mode==9 and not visual:
    rest(15);shot('EDITOR')
-   for unused in range(5):key(0x20) # D cycles to Effects groove.
+   paint=re.search(r'paint (\d+) cycles',text)
+   paint_wait=max(2,min(20,int(paint[1])/1193182*1.5+1)) if paint else 15
+   for unused in range(5):key(0x20);rest(paint_wait) # D cycles to Effects groove.
    prep=re.search(r'prepare (\d+) ms',text);ready_wait=max(2,(int(prep[1])/1000+2) if prep else 15)
    key(0x3f);rest(min(ready_wait,55));shot('PLAYING');begin=mark('PLAYING_BEGIN')
    # Measured emulated time, not a host sleep, must exceed startup lookahead.

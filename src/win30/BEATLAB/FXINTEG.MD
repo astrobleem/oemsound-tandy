@@ -39,7 +39,9 @@ Beats owns one RAWCLK session. It opens TC[B/X], prepares512 bursts
 loop checks messages between16-state preparation batches. It uses PM_NOYIELD
 and restores lookahead before yielding, also yielding while the finite final
 queue drains. The moving play marks update five one-pixel strips rather than
-repainting40 text cells. It services audio while WM_TIMER is delayed.
+repainting40 text cells. Status updates invalidate only the status line.
+Full grid exposes batch text into five row calls and replenish prepared audio
+between rows. It services audio while WM_TIMER is delayed.
 GUI timer timing never controls note deadlines. RAWCLK emits only
 prepared bytes/PIT values, with its existing bounded IRQ path. No additional
 driver, MIDI owner, timer, callbacks into the app, PCM or consumer preparation
@@ -68,6 +70,8 @@ merger, transposition, delta decoder, embedded songs, legacy load and tempo
 boundaries. `FXCLOCK.PY --libwintandy <root> --out <new-output>` reproduces the observed
 native empty-queue error4, then verifies30 seconds of actual producer/RAWCLK
 streaming with no GUI timer, a350ms foreground gap and pause/resume.
+It also models the observed9.5-second full-paint delay across five rows,
+including5.5ms of producer CPU per frame and bounded refills between rows.
 `HOSTTEST.PY` retains all five original demo/MML, transactional
 save, current/archived mapper and actual PIT core regressions. `FXNATIVE.PY`
 accepts private licensed fixture paths and reuses the shared emulator lease,
