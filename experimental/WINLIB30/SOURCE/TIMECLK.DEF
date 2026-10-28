@@ -38,6 +38,7 @@ EXPORTS
  TCXPairCaps @34
  TCXPairPush @35
  TCXPairLive @36
+ TCBRebase @37
 IMPORTS
  CreateSystemTimer=SYSTEM.2
  KillSystemTimer=SYSTEM.3

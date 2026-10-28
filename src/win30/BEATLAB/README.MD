@@ -12,7 +12,9 @@ apps share the installed SOUND driver. Stop one before playing the other.
 Click Demo to cycle the five original patterns and **Effects groove**. The
 last demo combines a laser, pitched-noise explosion and speaker jump with
 normal notes. Click Play. Pause/F6 holds the position silently; Resume/F6
-continues. Stop/Esc releases sound. Play restarts at step1; F5 toggles Play/Stop.
+continues. Stop/Esc releases sound and cancels Preparing. Play restarts at
+step1; F5 toggles Play/Stop. Preparing fills the playback queue on the8088;
+you can cancel it. Replaying unchanged patches reuses their compiled shapes.
 
 Click a grid cell to toggle a note/rest. Arrows select; Space/Enter toggles;
 Pitch-/Pitch+ or +/- changes pitch; Delete makes a rest. Click tone labels to
@@ -36,7 +38,9 @@ A new trigger replaces the previous effect in that lane. A rest lets an effect
 finish. Pitched noise temporarily borrows tone2 and mutes its audible output;
 its current note/effect returns afterward. Speaker effects temporarily replace
 speaker notes. Stop/Pause apply to the whole song. A busy speaker refuses Play;
-loss of its lease stops playback. Songs loop for up to25 minutes per Play.
+loss of its lease stops playback. Songs keep looping until you stop them.
+Use the complete kit and start with GO from DOS. If an older RAWCLK is already
+loaded in Windows, close older players and restart Windows before using Beats.
 
 Load/Ctrl+O restores the complete song. Old .BTS patterns still load. Save asks
 before replacement and keeps the previous file as .BAK. Invalid input leaves

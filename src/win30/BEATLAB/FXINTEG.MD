@@ -21,8 +21,15 @@ Normal notes use the existing `INSTR.C` curves, programs and vibrato, with
 75 percent gate, sampled on that same grid. A step boundary is the first 60Hz
 sample at or after its exact eighth-note deadline. `BBStamp` uses rational PIT
 cycles without accumulated rounding drift or 32-bit intermediate overflow.
-Edits affect the next Play. This is an eight-step looping song; RAWCLK's bounded
-literal-burst horizon ends a session with explicit silence at 25 minutes.
+Edits affect the next Play. The eight-step song loops until stopped. The old
+25-minute fail-silent timestamp guard was artificial. Beats now periodically
+subtracts a phase-aligned four-minute origin from its producer and RAWCLK's
+logical timestamps before that guard. TCBRebase is additive ordinal37: under
+one IRQ lock it advances a shared DWORD burst origin and adjusts logical clock
+fields, leaving queued physical stamps, timer epoch and lastStamp untouched.
+There is no queue walk, restart or sound write. Normal frame-mode consumers
+retain their original behavior and ordinals1-36. Modulo32 physical stamps can
+wrap while the song remains within the small logical horizon.
 
 Portable `FXMERGE.C/H` is canonical in libtandy `sound/`, with identical copies
 in libwintandy's Windows AUDIO/SOURCE and OEMSound's engine mirror. It combines
@@ -35,10 +42,20 @@ Noise control is emitted only for a real attack, mode change or restore;
 level-only rows do not reset the LFSR. `FXBytes` is never called by Beats.
 
 Beats owns one RAWCLK session. It opens TC[B/X], prepares512 bursts
-(8.5 seconds), then starts the existing timer/bridge. The main PeekMessage
-loop checks messages between16-state preparation batches. It uses PM_NOYIELD
-and restores lookahead before yielding, also yielding while the finite final
-queue drains. The moving play marks update five one-pixel strips rather than
+(8.5 seconds) in16-state foreground batches, then starts the existing
+timer/bridge. Input is checked between batches, so Stop/Esc, deactivate and
+close can cancel preparation before the epoch. Cancellation clears the job
+even if transport close refuses and needs a retry. At full lookahead, one
+settling Yield and a return precede the next turn's ownership/PIT recheck and
+clock start; the servicing guard remains set across that Yield. A known-initialized producer
+reuses compiled clips only when all loaded patch parameters and seeds match;
+notes and tempo can change independently. Cold compilation still runs in the
+foreground. Expensive dirty-cell text drawing waits until the audio buffer is
+ready, so selecting or editing a pattern immediately before Play does not
+make grid rendering compete with preparation. Status painting and input remain
+active; dirty cells are retained and resume drawing after start or cancellation. The main PeekMessage loop uses PM_NOYIELD while active and restores
+lookahead before cooperative yields. This retains the full buffer; it does
+not pretend that batching removes the8088 CPU cost. The moving play marks update five one-pixel strips rather than
 repainting40 text cells. Status updates invalidate only the status line.
 Full grid exposes mark a five-byte pending-cell mask. The message loop draws
 one current cell per turn and checks pending input before rendering the next.
@@ -64,7 +81,14 @@ Build with the existing guarded `BUILD.PY`. Its additional output is
 Use `GO.BAT` from the complete kit. Direct Windows launch works only when the
 normal timer bridge is already active. The older `PACK.PY` is retained for
 historical authoring-release verification; new integration builds use
-`FXPACK.PY --build ... --host ... --clock ... --native ... --out ...`. It includes both
+`FXPACK.PY --build ... --raw-build ... --raw-host ... --libwintandy ...
+--host ... --clock ... --native ... --out ...`.
+The matching backend is built with guarded
+`experimental/WINLIB30/SOURCE/BLDRAW.PY`, using the same toolchain/lease
+arguments. The kit contains this source-pinned RAWCLK and its build receipt;
+the original SOUND driver, bridge and Setup remain unchanged. An already
+loaded older RAWCLK cannot supply ordinal37; Beats gives a restart-Windows
+message. Starting with GO from DOS naturally loads the matching module. It includes both
 editors, launchers, example patches, the mixed demo, shared Setup, source and
 source-pinned acceptance. It never publishes.
 
@@ -77,12 +101,21 @@ It also conservatively models20 seconds of grid paint across40 cells,
 including5.5ms of producer CPU per frame and bounded refills between cells.
 `HOSTTEST.PY` retains all five original demo/MML, transactional
 save, current/archived mapper and actual PIT core regressions. `FXNATIVE.PY`
-accepts private licensed fixture paths and reuses the shared emulator lease,
+requires `--raw-build` plus private licensed fixture paths and reuses the shared emulator lease,
 process inventory, private disk, bounded audio and owned cleanup. Its developer
 `--play-only` iteration mode returns DIAGNOSTIC_PASS, which cannot qualify
 consumer packaging. The full UI/playback/recording run remains required.
 `FXAUDIO.PY --native <run>` verifies sustained PSG and speaker activity in three
 parts of a12-second playback interval, resumed activity, and pause/stop silence.
+`AUDTEST.PY --out <new-output>` checks the synthetic audio/onset gates.
 `FXPACK.PY` requires that audio receipt and verifies its recording hashes.
 Host checks
 alone do not establish Win16 ABI, memory use, native timing or audible quality.
+
+The focused rolling/cache regressions compare exact merged bytes, PIT values
+and deadlines across rebases at tempos99/100/240, including pitched-noise
+borrowing and restoration. The actual RAWCLK host model runs three virtual
+hours with44 rebases and physical DWORD wrap, checks partial/full queue and
+pending FULL retry, pause and invalid-owner/frame calls, with no added sound
+writes at a rebase. Native test mode uses a phase-aligned shorter interval to
+exercise the same API promptly; ordinary playback uses the four-minute shift.

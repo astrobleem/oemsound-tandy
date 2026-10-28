@@ -41,6 +41,25 @@ int BBPrepare(BBPLAYER *p,const BPAT *song)
     }
     return 1;
 }
+/* Reuse only a previously compiled, identical set of patch parameters. */
+int BBRestart(BBPLAYER *p,const BPAT *song)
+{
+    unsigned r;
+    if(!p||!BPValid(song))return 0;
+    for(r=0;r<5;++r)if(song->loaded[r]!=p->song.loaded[r]||
+        (song->loaded[r]&&memcmp(&song->patch[r],&p->song.patch[r],sizeof(FXPATCH))))return 0;
+    p->song=*song;p->tick=0;p->lastStep=8;p->noiseFX=0;
+    memset(&p->old,0,sizeof(p->old));memset(p->pitch,0,sizeof(p->pitch));
+    for(r=0;r<5;++r)p->cursor[r]=p->clip[r].count;
+    return 1;
+}
+/* Preserve both the eight-step phase and the exact rational PIT timestamp. */
+int BBRebase(BBPLAYER *p,unsigned long ticks)
+{
+    if(!p||!ticks||ticks>=p->tick||ticks%36UL||
+       ((ticks%14400UL)*p->song.tempo)%14400UL)return 0;
+    p->tick-=ticks;return 1;
+}
 int BBNext(BBPLAYER *p,BBBURST *b)
 {
     FXMSTATE base,out;FXMLAYER fx[5];TVOICE voice;

@@ -4,7 +4,7 @@ Developer fixture only: licensed DOS/Windows/ROMs and emulator are external.
 from pathlib import Path
 import argparse,base64,hashlib,json,msvcrt,os,re,shutil,socket,subprocess,sys,threading,time,traceback,zipfile
 p=argparse.ArgumentParser(description=__doc__)
-for n in ('out','build','seed','windows_seed','emulator','roms','lease','deps','control','owned_helpers'):
+for n in ('out','build','raw_build','seed','windows_seed','emulator','roms','lease','deps','control','owned_helpers'):
  p.add_argument('--'+n.replace('_','-'),type=Path,required=True)
 p.add_argument('--bound',type=int,default=480)
 p.add_argument('--play-only',action='store_true',help='Diagnostic playback only; cannot qualify a consumer package')
@@ -17,7 +17,11 @@ from owned_job import OwnedJob,stop_owned
 here=Path(__file__).resolve().parent;repo=here.parents[2]
 out=a.out.resolve();out.mkdir();build=a.build.resolve();offset=17408
 def pin(b):return dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
-r=dict(status='NOT_RUN',playback_only=a.play_only,fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),harness=pin(Path(__file__).read_bytes()),capture_rates=dict(psg=48000,speaker=49716),actions=[],bound_seconds=a.bound)
+raw_build=json.loads((a.raw_build/'BUILD.JSON').read_bytes())
+raw_runtime=(a.raw_build/'RAWCLK.DLL').read_bytes();assert pin(raw_runtime)==raw_build['runtime']
+for name,wanted in raw_build['sources'].items():
+ assert pin((repo/'experimental/WINLIB30/SOURCE'/name).read_bytes())==wanted,name
+r=dict(status='NOT_RUN',playback_only=a.play_only,fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),raw_runtime=pin(raw_runtime),harness=pin(Path(__file__).read_bytes()),capture_rates=dict(psg=48000,speaker=49716),actions=[],bound_seconds=a.bound)
 assert shutil.disk_usage(out).free>1024**3
 assert (a.seed/'DISK.IMG').stat().st_size<100*1024**2
 shutil.copyfile(a.seed/'DISK.IMG',out/'DISK.IMG')
@@ -51,6 +55,7 @@ bios = xt
 (out/'86box.cfg').write_text(cfg)
 with zipfile.ZipFile(repo/'artifacts/win30/TWXT2.ZIP') as z:
  runtime={n:z.read('TWXT2/'+n) for n in ('RAWCLK.DLL','SOUND.DRV','TBRIDGE.EXE','RESERVE.COM')}
+runtime['RAWCLK.DLL']=raw_runtime
 with PyFatFS(str(out/'DISK.IMG'),offset=offset) as fs,PyFatFS(str(a.windows_seed/'DISK.IMG'),offset=8704,read_only=True) as win:
  def put(n,b):
   if fs.exists(n):fs.remove(n)
@@ -127,9 +132,12 @@ try:
   if phase=='VISUAL' and mode==9 and not visual:
    rest(55);shot('EDITOR')
    paint_wait=20 # Finish each stopped demo grid; test active repaint below.
-   for unused in range(5):key(0x20);rest(paint_wait) # D cycles to Effects groove.
+   for demo in range(5):
+    key(0x20)
+    if demo<4:rest(paint_wait)
+   # Play immediately after the last Demo; pending grid work must not delay onset.
    prep=re.search(r'prepare (\d+) ms',text);ready_wait=max(2,(int(prep[1])/1000+2) if prep else 15)
-   key(0x3f);rest(min(ready_wait,55));shot('PLAYING');begin=mark('PLAYING_BEGIN')
+   mark('COLD_PLAY_REQUEST');key(0x3f);rest(min(ready_wait+3,55));shot('PLAYING');begin=mark('PLAYING_BEGIN')
    # Measured emulated time, not a host sleep, must exceed startup lookahead.
    limit=time.monotonic()+40
    while any((out/(n+'.s16le')).stat().st_size//4-begin[n+'_frames']<11*rate for n,rate in r['capture_rates'].items()):
@@ -138,6 +146,8 @@ try:
    key(0x4d);mark('REPAINT_BEFORE_PAUSE');key(0x40);rest(.5);shot('PAUSED');mark('PAUSED_BEGIN');rest(1);assert mark('PAUSED_END')['gate']==0
    key(0x40);rest(1);mark('RESUMED_BEGIN');rest(2);mark('RESUMED_END')
    key(0x4d);mark('REPAINT_BEFORE_STOP');key(0x01);rest(.5);shot('STOPPED');mark('STOPPED_BEGIN');rest(1);assert mark('STOPPED_END')['gate']==0
+   mark('WARM_PLAY_REQUEST');key(0x3f);rest(min(ready_wait+3,55));mark('WARM_BEGIN');rest(2);mark('WARM_END')
+   key(0x01);rest(1);assert mark('WARM_STOPPED')['gate']==0
    g.run_while(lambda:hold_modifier_and_tap(ctl,SC_ALT,0x3e),settle_seconds=2,start_delay=.01)
    # Program Manager's normal exit confirmation.
    g.run_while(lambda:hold_modifier_and_tap(ctl,SC_ALT,0x3e),settle_seconds=1,start_delay=.01);key(0x1c)

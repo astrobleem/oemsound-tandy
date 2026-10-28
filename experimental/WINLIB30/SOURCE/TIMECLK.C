@@ -38,7 +38,7 @@ HTASK owner=0;static HTASK probeOwner;
 WORD timer=0,probeTimer=0,head=0,tail=0,count=0,end=0,active=0,finished=0,error=0;
 static DWORD epoch,published,lastDue,lastStamp,clockCycles;
 static WORD burstMode,burstLatch,burstRegs[8],burstPublished;
-static DWORD burstLastWrite;
+static DWORD burstLastWrite,burstBase;
 static WORD noiseWrites,burstHash,burstWriteCount;
 static WORD bassQueue[TC_CAP],bassMode,bassEnabled,bassLast,bassSuspended;
 static WORD bassStatus=TCX_UNAVAILABLE;
@@ -95,7 +95,7 @@ static void bassRelease(void){
  bassLease.token=0;bassGet=0;bassMode=bassEnabled=bassLast=bassSuspended=0;bassStatus=TCX_UNAVAILABLE;
  pairMode=pairUsingFold=0;
 }
-static DWORD queuedAt(WORD i){return burstMode?bursts[i].at:queue[i].at;}
+static DWORD queuedAt(WORD i){return burstMode?bursts[i].at-burstBase:queue[i].at;}
 static WORD queueMask(void){return burstMode?TCB_CAPACITY-1:TC_CAP-1;}
 static WORD wideClock,userPaused;
 static WORD due(DWORD at,DWORD now){return wideClock?(LONG)(now-at)>=0:now>=at;}
@@ -197,7 +197,7 @@ WORD TCAPI TCOpen(void){WORD flags;
  if(OpenSound()<0)return 1;
  owner=GetCurrentTask();if(!owner){CloseSound();return 1;}StopSound();
  if(rawClaim()){CloseSound();owner=0;return 1;}
- flags=SaveIRQ();head=tail=count=end=active=finished=error=0;calls=sent=maxBatch=maxLate=maxGap=overflows=writes=underruns=0;published=lastDue=0;lastValid=restorePending=wideClock=userPaused=burstMode=burstPublished=noiseWrites=0;
+ flags=SaveIRQ();head=tail=count=end=active=finished=error=0;calls=sent=maxBatch=maxLate=maxGap=overflows=writes=underruns=0;published=lastDue=burstBase=0;lastValid=restorePending=wideClock=userPaused=burstMode=burstPublished=noiseWrites=0;
  bassMode=bassEnabled=bassLast=bassSuspended=pairMode=pairUsingFold=0;
  bassStatus=TCX_UNAVAILABLE;mute();RestoreIRQ(flags);return 0;
 }
@@ -270,7 +270,7 @@ WORD TCAPI TCUnpause(void){WORD r;if(!owns()||!userPaused)return 1;userPaused=0;
 WORD TCAPI TCFlush(void){WORD flags,n;if(!owns())return 1;
  if(timer&&HiMetric(9)&&HiStop())return 1;
  for(n=0;timer&&HiStatus()&&n<4000;n++)Yield();if(timer&&HiStatus())return 1;
- flags=SaveIRQ();active=0;userPaused=0;restorePending=lastValid=0;head=tail=count=end=finished=error=0;published=lastDue=clockCycles=lastStamp=burstLastWrite=0;burstPublished=0;epoch=0xffffffffUL;sent=0;bassLast=pairUsingFold=0;mute();RestoreIRQ(flags);return 0;}
+ flags=SaveIRQ();active=0;userPaused=0;restorePending=lastValid=0;head=tail=count=end=finished=error=0;published=lastDue=clockCycles=lastStamp=burstLastWrite=burstBase=0;burstPublished=0;epoch=0xffffffffUL;sent=0;bassLast=pairUsingFold=0;mute();RestoreIRQ(flags);return 0;}
 WORD TCAPI TCRearm(void){WORD r;if(!owns()||!timer||active||!count)return 1;
  active=1;HiPrepare(nextInterval(0));epoch=0xffffffffUL;lastStamp=clockCycles=0;r=HiRestart();if(r)active=0;return r;}
 
@@ -313,7 +313,7 @@ static WORD burstPush(TCBURST FAR *source,WORD divisor,WORD extended){WORD f,t,i
  if(at>2147483647UL||((count||active||sent)&&at<published))return 4;
  if(burstPublished&&at-burstLastWrite<TCB_MIN_CYCLES)return 4;
  f=SaveIRQ();if(count==TCB_CAPACITY){overflows++;RestoreIRQ(f);return 2;}t=tail;RestoreIRQ(f);
- bursts[t].at=at;bursts[t].count=source->count;bassQueue[t]=divisor;
+ bursts[t].at=at+burstBase;bursts[t].count=source->count;bassQueue[t]=divisor;
  for(i=0;i<source->count;i++)bursts[t].data[i]=source->data[i];
  f=SaveIRQ();if(error||end||(active&&at<clockCycles)){RestoreIRQ(f);return 4;}
  burstLastWrite=at;burstPublished=1;
@@ -324,6 +324,19 @@ WORD TCAPI TCBEnd(void){WORD f;if(!owns()||!burstMode)return 1;
  end=1;if(!count){finished=1;active=0;mute();}RestoreIRQ(f);return 0;
 }
 
+/* Owner-task rolling origin. O(1) under the IRQ lock: queued stamps retain
+   their modulo32 physical value; queuedAt subtracts the shared origin. No
+   PSG/PIT write, pause, parsing or queue walk occurs here. */
+WORD TCAPI TCBRebase(DWORD amount){WORD f;
+ if(!owns()||!burstMode||!timer||!active||end||error)return 1;
+ if(!amount)return 3;f=SaveIRQ();
+ if(!active||end||error){RestoreIRQ(f);return 1;}
+ if(amount>clockCycles||amount>published||amount>lastDue||
+    (burstPublished&&amount>burstLastWrite)){RestoreIRQ(f);return 3;}
+ burstBase+=amount;clockCycles-=amount;published-=amount;lastDue-=amount;
+ if(burstPublished)burstLastWrite-=amount;
+ RestoreIRQ(f);return 0;
+}
 WORD TCAPI TCBPush(TCBURST FAR *s){return burstPush(s,0,0);}
 
 WORD TCAPI TCXGetCaps(WORD version,TCXINFO FAR *out,WORD bytes){WORD status;

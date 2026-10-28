@@ -3,8 +3,9 @@
 #define BEATPLAY_H
 #include "BEATPAT.H"
 #include "FXMERGE.H"
-/* RAWCLK's literal-burst horizon is <2^31 PIT cycles. 25 minutes/session. */
+/* Safety horizon only. The caller rolls the origin before reaching this. */
 #define BB_LIMIT 90000UL
+#define BB_REBASE_TICKS 14400UL
 #define BB_BATCH 16U
 #define BB_PREFILL 512U
 typedef struct {
@@ -21,6 +22,8 @@ typedef struct {
 } BBPLAYER;
 int BBPrepare(BBPLAYER *,const BPAT *);
 int BBNext(BBPLAYER *,BBBURST *);
+int BBRestart(BBPLAYER *,const BPAT *);
+int BBRebase(BBPLAYER *,unsigned long);
 unsigned BBStep(unsigned long,unsigned);
 unsigned long BBStamp(unsigned long);
 unsigned BBTranspose(unsigned,unsigned,unsigned,unsigned);

@@ -10,7 +10,7 @@ import struct
 
 HERE = Path(__file__).resolve().parent
 SOURCES = ('TIMECLK.C', 'PSGOWN.H', 'TIMECLK.H', 'TCBURST.H',
-           'TIMECLK.DEF', 'TIMECLK.RSP', 'CLOCK.ASM', 'WINHOOK.ASM',
+           'TCXBASS.H', 'PITLINK.H', 'TIMECLK.DEF', 'TIMECLK.RSP', 'CLOCK.ASM', 'WINHOOK.ASM',
            'BLDRAW.BAT')
 
 

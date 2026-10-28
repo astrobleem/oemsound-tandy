@@ -26,18 +26,28 @@ def stats(path,begin,end):
     rms=math.sqrt(sum((v-mean)**2 for v in samples)/n)
     return dict(frames=end-begin,peak=max(abs(v) for v in samples),rms=round(rms,3),mean=round(mean,3))
 
+result['play_onset']={}
 for channel in ('psg','speaker'):
     path=root/(channel+'.s16le');rate=rates[channel]
     assert path.stat().st_size<160*1024**2 and path.stat().st_size%4==0
     result['recordings'][path.name]=dict(bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
-    for mode in ('PLAYING','PAUSED','RESUMED','STOPPED'):
+    result['play_onset'][channel]={}
+    for mode,request in (('PLAYING','COLD_PLAY_REQUEST'),('WARM','WARM_PLAY_REQUEST')):
+        begin=actions[request][channel+'_frames'];end=actions[mode+'_BEGIN'][channel+'_frames']
+        assert end>begin and end*4<=path.stat().st_size
+        with path.open('rb') as f:f.seek(begin*4);samples=array.array('h',f.read((end-begin)*4))
+        if sys.byteorder!='little':samples.byteswap()
+        first=next((i//2 for i,v in enumerate(samples) if abs(v)>64),None)
+        assert first is not None,'No audible onset after '+request
+        result['play_onset'][channel]['cold' if mode=='PLAYING' else 'warm']=dict(first_active_frame=first,request_to_onset_capture_seconds=round(first/rate,3),note='Effects groove begins with PSG and ordinary speaker notes. Capture timing, not exact host key-handler latency.')
+    for mode in ('PLAYING','PAUSED','RESUMED','STOPPED','WARM'):
         begin=actions[mode+'_BEGIN'][channel+'_frames'];end=actions[mode+'_END'][channel+'_frames']
         assert end>begin and end*4<=path.stat().st_size
         if mode=='PLAYING':assert end-begin>=10*rate,'Playback capture does not exceed startup buffer'
         portions=3 if mode=='PLAYING' else 1
         for part in range(portions):
             s=stats(path,begin+(end-begin)*part//portions,begin+(end-begin)*(part+1)//portions)
-            active=mode in ('PLAYING','RESUMED')
+            active=mode in ('PLAYING','RESUMED','WARM')
             okay=s['rms']>50 if active else s['rms']<=4 and s['peak']<=64
             result['segments'].append(dict(channel=channel,mode=mode,part=part+1,pass_check=okay,**s))
         if mode=='PLAYING':

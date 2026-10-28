@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "BEATPLAY.H"
-static BBPLAYER player;
+static BBPLAYER player,other;
 static BPAT p,q,keep;
 static unsigned checks;
 #define CK(x) do {++checks;if(!(x)){fprintf(stderr,"FAIL fx:%u %s\n",(unsigned)__LINE__,#x);return 1;}}while(0)
@@ -22,7 +22,7 @@ int main(void)
 {
     static char text[BP_FILE_CAP];FXMSTATE base,out,old;
     FXMLAYER fx[5];BBBURST burst;unsigned r,c,n,k,t,noiseWrites;
-    unsigned long prior=0;FILE *f;
+    unsigned long prior=0,roll;BBBURST compare;FILE *f;
     memset(&base,0,sizeof(base));memset(fx,0,sizeof(fx));
     for(r=0;r<3;++r){base.period[r]=200+r*100;base.level[r]=r+3;}
     base.noise=4;base.level[3]=8;base.pit=21000;
@@ -93,7 +93,32 @@ int main(void)
     for(t=0;t<1000;++t){CK(BBNext(&player,&burst));CK(player.lastStep==(t/45)%8);}
     p.tempo=240;CK(BBPrepare(&player,&p));
     for(t=0;t<1000;++t){CK(BBNext(&player,&burst));CK(player.lastStep==((t*2U)/15)%8);}
-    /* The final bounded session state is an explicit PSG+speaker mute. */
+    /* Warm restart preserves compiled trajectories, including noise and PIT. */
+    BPDemo(&p,5);CK(BBPrepare(&player,&p));
+    for(t=0;t<330;++t)CK(BBNext(&player,&burst));
+    p.note[0][1]=65;p.tempo=99;CK(BBRestart(&player,&p));
+    CK(BBPrepare(&other,&p));
+    for(t=0;t<600;++t){CK(BBNext(&player,&burst)&&BBNext(&other,&compare));
+        CK(burst.at==compare.at&&burst.pit==compare.pit&&burst.count==compare.count);
+        CK(!memcmp(burst.data,compare.data,burst.count));}
+    q=p;q.patch[0].seed^=1;CK(!BBRestart(&player,&q));
+    q=p;q.patch[0].v[FX_PITCH]+=1;CK(!BBRestart(&player,&q));
+    q=p;q.loaded[2]=!q.loaded[2];CK(!BBRestart(&player,&q));
+    /* Exact output and eight-step phase survive rolling at odd/even tempos. */
+    for(k=0;k<3;++k){BPDemo(&p,5);p.tempo=k==0?99:k==1?100:240;
+        p.loaded[2]=1;FXPreset(&p.patch[2],0);strcpy(p.fxName[2],"TEST.FXP");
+        p.loaded[3]=1;FXPreset(&p.patch[3],2);p.patch[3].v[FX_NOISE]=4;
+        for(c=0;c<8;++c){p.trigger[2][c]=1;p.trigger[3][c]=c==0||c==4;
+            p.note[2][c]=p.note[3][c]=60;}
+        CK(BBPrepare(&player,&p));
+        for(t=0;t<14473U;++t)CK(BBNext(&player,&burst));other=player;
+        CK(!BBRebase(&player,player.tick));CK(!BBRebase(&player,1));
+        roll=BBStamp(BB_REBASE_TICKS);CK(BBRebase(&player,BB_REBASE_TICKS));
+        for(t=0;t<420;++t){CK(BBNext(&player,&burst)&&BBNext(&other,&compare));
+            CK(burst.at==compare.at-roll&&burst.pit==compare.pit&&burst.count==compare.count);
+            CK(!memcmp(burst.data,compare.data,burst.count));}
+    }
+    /* Internal fail-silent guard; the app rolls its origin well before it. */
     player.tick=BB_LIMIT;CK(BBNext(&player,&burst));CK(!burst.pit);
     for(r=0;r<4;++r)CK(player.old.level[r]==15);
     CK(!BBNext(&player,&burst));CK(BBStamp(BB_LIMIT)<2147483647UL);
