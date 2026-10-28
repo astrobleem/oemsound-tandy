@@ -1,10 +1,13 @@
-/* Private WZV2/WZM1 Tandy DOS player. MSC 6, /G0, small model. */
+/* WZV2/WZM1 DOS player. Open Watcom, 8086 small model. */
 #include <dos.h>
 #include <io.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
-#include "PERIODS.H"
+#include <conio.h>
+#include <stdlib.h>
+#include "AUDIO.H"
+#include "lt_tick_dos.h"
 #define U32 unsigned long
 #define U8 unsigned char
 #define VIDEO_HEADER 24
@@ -13,14 +16,30 @@
 #define MUSIC_CHUNK 64
 #define MAX_FRAME 6144
 #define DAY_TICKS 0x1800b0UL
-extern U32 _cdecl ClockTick(void);
-extern unsigned _cdecl VideoMode(void);
-extern void _cdecl SetMode(unsigned);
-extern void _cdecl VideoRow(U8 *,unsigned,unsigned);
-extern void _cdecl PsgByte(unsigned);
-extern unsigned _cdecl KeyRead(void);
-extern unsigned _cdecl IsWindows(void);
+extern U32 __cdecl ClockTick(void);
+extern unsigned __cdecl VideoMode(void);
+extern void __cdecl SetMode(unsigned);
+extern void __cdecl VideoRow(U8 *,unsigned,unsigned);
+extern void __cdecl PsgByte(unsigned);
+extern unsigned __cdecl KeyRead(void);
+extern unsigned __cdecl IsWindows(void);
 static int vf=-1,mf=-1,haveHardware,displayChanged,handlers,mode=3,error;
+static int graphics=-1, audioChoice=-1, tandy, timerOpen, timerStatus, chorus;
+static unsigned timerWasOpen;
+static const AUDIO *audio=&buddy_silent;
+static unsigned long oldVector, newVector, timerLate;
+static unsigned backlog, gateAfter;
+static U8 cgaMap[256], row[160];
+#define QUEUE_SIZE 128
+static volatile unsigned qhead, qtail;
+static STATE queue[QUEUE_SIZE];
+static volatile U32 audioNow, audioFraction, underruns;
+static volatile int audioDone, producerDone;
+static int dry;
+static U32 queueBytes;
+typedef struct { U32 scheduled, actual; unsigned note, mask; } TRACE;
+static TRACE trace[1024];
+static unsigned traceCount;
 static unsigned oldMode,width,height,fps,frameBytes,rowBytes,xByte,yTop;
 static U8 pixels[MAX_FRAME],musicBuffer[MUSIC_CHUNK*RECORD_SIZE];
 static unsigned bufferCount,bufferIndex;
@@ -29,38 +48,48 @@ static U32 startTick,lastService,lastFrame=0xffffffffUL;
 static U32 playStart,playEnd,prerolled;
 static int fullRange;
 static U32 rendered,dropped,applied,skipped,maxLate,totalLate,maxGap;
-static U32 maxVideoRead,maxMusicRead,maxDraw,psgWrites,elapsedEnd;
-static U8 volume[4]={15,15,15,15};
+static U32 maxVideoRead,maxMusicRead,maxDraw,elapsedEnd;
+
 static volatile int interrupted;
-static void (_interrupt _far *oldBreak)();
-static void (_interrupt _far *oldCritical)();
-typedef struct { U32 when; U8 note[4],velocity[4],retrigger; } STATE;
-static STATE current,nextState,seed;
+static void (__interrupt __far *oldBreak)();
+static void (__interrupt __far *oldCritical)();
+
+static STATE nextState,seed;
 static int seedValid;
 static int nextValid;
 static unsigned wordAt(U8 *p) {return (unsigned)p[0]|((unsigned)p[1]<<8);}
 static U32 longAt(U8 *p) {return (U32)wordAt(p)|((U32)wordAt(p+2)<<16);}
 static U32 since(U32 first,U32 last) {return last>=first?last-first:DAY_TICKS-first+last;}
-static U32 elapsed(void) {return playStart+since(startTick,ClockTick())*54925UL/1000UL;}
-static void output(unsigned b) {PsgByte(b);psgWrites++;}
+static U32 elapsed(void)
+{
+    U32 cycles;
+    if(!timerOpen)return playStart;
+    cycles=lttk_now();
+    return playStart+(cycles/1193182UL)*1000UL+
+           (cycles%1193182UL)*1000UL/1193182UL;
+}
 static void mute(void)
 {
-    unsigned i;if(!haveHardware)return;
-    for(i=0;i<4;i++){output(0x9f|(i<<5));volume[i]=15;}
+    if(haveHardware)audio->mute();
 }
 static int fail(int n) {error=n;return 0;}
 static int readExact(int f,void *p,unsigned n)
 {
-    unsigned got;return !_dos_read(f,(void _far *)p,n,&got)&&got==n;
+    unsigned got;return !_dos_read(f,(void __far *)p,n,&got)&&got==n;
 }
-void _interrupt _far onBreak(void) {interrupted=1;}
-void _far onCritical(unsigned deverr,unsigned errcode,unsigned _far *devhdr)
+void __interrupt __far onBreak(void) {interrupted=1;}
+int __far onCritical(unsigned deverr,unsigned errcode,unsigned __far *devhdr)
 {
-    (void)deverr;(void)errcode;(void)devhdr;_hardresume(_HARDERR_FAIL);
+    (void)deverr;(void)errcode;(void)devhdr;_hardresume(_HARDERR_FAIL);return 3;
 }
 static void cleanup(void)
 {
-    mute();
+    if(timerOpen){
+        lttk_run(0);backlog=lttk_backlog_max();timerLate=lttk_late();
+        timerStatus=lttk_close();timerOpen=0;
+    }
+    mute();gateAfter=inp(0x61)&3;
+    newVector=(U32)_dos_getvect(8);
     if(displayChanged){SetMode(oldMode);displayChanged=0;}
     if(vf>=0){_dos_close(vf);vf=-1;}
     if(mf>=0){_dos_close(mf);mf=-1;}
@@ -85,7 +114,7 @@ static int openVideo(void)
        duration>frames*step||duration<=(frames-1)*step)return fail(13);
     expected=VIDEO_HEADER+frames*(U32)frameBytes;length=(U32)lseek(vf,0L,2);
     if(length!=expected)return fail(14);
-    xByte=(320-width)/4;yTop=(200-height)/2;return 1;
+    xByte=(320-width)/(graphics==4?8:4);yTop=(200-height)/2;return 1;
 }
 static int fetchEvent(void)
 {
@@ -104,7 +133,7 @@ static int fetchEvent(void)
     for(i=0;i<4;i++){
         nextState.note[i]=p[4+i];nextState.velocity[i]=p[8+i];
         if(p[8+i]>127||(!p[4+i]&&p[8+i])||(p[4+i]&&!p[8+i])||
-           (p[4+i]&&((unsigned)p[4+i]<(i==3?35U:45U)||(unsigned)p[4+i]>(i==3?81U:96U))))return fail(25);
+           (p[4+i]&&((unsigned)p[4+i]<(audioChoice==1?24U:(i==3?35U:45U))||(unsigned)p[4+i]>(audioChoice==1?96U:(i==3?81U:96U)))))return fail(25);
     }
     nextState.retrigger=p[12];previousEvent=nextState.when;
     recordsRead++;bufferIndex++;nextValid=1;return 1;
@@ -112,7 +141,7 @@ static int fetchEvent(void)
 static int openMusic(void)
 {
     U8 h[MUSIC_HEADER];U32 musicDuration,length;
-    if(_dos_open("WEEZER.WZM",O_RDONLY,&mf))return fail(20);
+    if(_dos_open(audioChoice==1?"SPEAKER.WZM":"WEEZER.WZM",O_RDONLY,&mf))return fail(20);
     if(!readExact(mf,h,MUSIC_HEADER))return fail(21);
     if(memcmp(h,"WZM1",4)||wordAt(h+4)!=MUSIC_HEADER||
        wordAt(h+6)!=RECORD_SIZE||longAt(h+16))return fail(22);
@@ -136,6 +165,10 @@ static int openCue(void)
     if(memcmp(h,"WZC1",4)||longAt(h+4)!=duration||
        playStart>=playEnd||playEnd>duration)return fail(52);
     if(fullRange){playStart=0;playEnd=duration;}
+    if(chorus){
+        if(duration<87174UL)return fail(52);
+        playStart=63395UL;playEnd=87174UL;
+    }
     return 1;
 }
 static int primeMusic(void)
@@ -146,33 +179,81 @@ static int primeMusic(void)
     }
     return 1;
 }
-static void soundState(STATE *s)
+/* Single producer/consumer ring: foreground publishes complete slots;
+ * interrupt alone consumes them. No file, DOS, BIOS, or heap in callback. */
+static void audioTick(void *context)
 {
-    unsigned i,n,period,atten,change;
-    for(i=0;i<4;i++){
-        change=current.note[i]!=s->note[i]||current.velocity[i]!=s->velocity[i]||
-               (s->retrigger&(1<<i));
-        if(!change)continue;
-        output(0x9f|(i<<5));volume[i]=15;n=s->note[i];if(!n)continue;
-        atten=14-(((unsigned)s->velocity[i]-1)*14)/126;
-        if(i<3){period=periods[n-45];output(0x80|(i<<5)|(period&15));output(period>>4);}
-        else {period=0xe6;if(n==35||n==36)period=0xe2;
-              else if(n==38||n==40)period=0xe5;
-              else if(n==42||n==44||n==46)period=0xe4;output(period);}
-        output(0x90|(i<<5)|atten);volume[i]=(U8)atten;
+    unsigned count=0, head;
+    U32 late;
+    (void)context;
+    audioNow+=8;
+    audioFraction+=397544UL;
+    if(audioFraction>=1193182UL){audioFraction-=1193182UL;++audioNow;}
+    if(audioDone)return;
+    if(audioNow>=playEnd){audio->mute();audioDone=1;return;}
+    if(!(mode&1))return;
+    while((head=qhead)!=qtail && queue[head].when<=audioNow && count<8){
+        late=audioNow-queue[head].when;
+        if(late>maxLate)maxLate=late;
+        totalLate+=late;applied++;
+        audio->state(&queue[head]);
+        if(traceCount<1024){
+            trace[traceCount].scheduled=queue[head].when;
+            trace[traceCount].actual=audioNow;
+            trace[traceCount].note=queue[head].note[1];
+            trace[traceCount].mask=audio_mask;++traceCount;
+        }
+        qhead=(head+1)&(QUEUE_SIZE-1);++count;dry=0;
     }
-    current=*s;
+    if(qhead==qtail&&!producerDone&&!dry){
+        audio->mute();++underruns;dry=1;
+    }
 }
 static int musicService(U32 now)
 {
-    STATE pending;U32 count=0,late,gap;
-    if(now>=playEnd)return 1;
-    gap=now-lastService;if(gap>maxGap)maxGap=gap;lastService=now;
+    unsigned tail;
+    U32 gap=now-lastService;
+    if(gap>maxGap)maxGap=gap;
+    lastService=now;
     if(!(mode&1))return 1;
-    while(nextValid&&nextState.when<=now){pending=nextState;count++;if(!fetchEvent())return 0;}
-    if(!count)return 1;
-    applied++;skipped+=count-1;late=now-pending.when;totalLate+=late;if(late>maxLate)maxLate=late;
-    soundState(&pending);return 1;
+    while(nextValid){
+        tail=qtail;
+        if(((tail+1)&(QUEUE_SIZE-1))==qhead)break;
+        queue[tail]=nextState;
+        /* The final state is validated already. Publish EOF before its tail
+         * so an IRQ draining that slot cannot mistake EOF for starvation. */
+        if(recordsRead==eventCount)producerDone=1;
+        qtail=(tail+1)&(QUEUE_SIZE-1);
+        if(!fetchEvent())return 0;
+    }
+    if(!nextValid)producerDone=1;
+    return 1;
+}
+static void initCga(void)
+{
+    /* CGA palette 1 high intensity: black, cyan, magenta, white. */
+    static U8 map[16]={0,1,1,1,2,2,2,3,0,1,1,1,2,2,3,3};
+    unsigned i;
+    union REGS r;
+    for(i=0;i<256;i++)cgaMap[i]=(map[i>>4]<<2)|map[i&15];
+    r.h.ah=0x0b;r.h.bh=0;r.h.bl=16;int86(0x10,&r,&r);
+    r.h.ah=0x0b;r.h.bh=1;r.h.bl=1;int86(0x10,&r,&r);
+}
+static void textFrame(void)
+{
+    static char shades[]=" .,:;ox%#@";
+    static U8 light[16]={0,1,3,4,2,3,4,6,3,4,6,7,5,6,8,9};
+    unsigned x,y,sx,sy,w=width/2,h=height/4,n,base;
+    U8 pixel;
+    U8 __far *screen=(U8 __far *)MK_FP(graphics==7?0xb000:0xb800,0);
+    for(y=0;y<h;y++){
+        sy=y*4;base=((25-h)/2+y)*160+(80-w);
+        for(x=0;x<w;x++){
+            sx=x*2;pixel=pixels[sy*rowBytes+sx/2];n=pixel>>4;
+            screen[base+x*2]=shades[light[n]];
+            screen[base+x*2+1]=(graphics==7)?7:(n?n:8);
+        }
+    }
 }
 static int videoService(U32 now)
 {
@@ -187,9 +268,20 @@ static int videoService(U32 now)
     now=elapsed();if(now>=playEnd)return 1;
     if(!musicService(now))return 0;
     t=ClockTick();
-    for(y=0;y<height;y++){
-        screenY=y+yTop;bankOffset=(screenY&3)*8192+(screenY>>2)*160+xByte;
-        VideoRow(pixels+y*rowBytes,bankOffset,rowBytes);
+    if(graphics==3||graphics==7)textFrame();
+    else for(y=0;y<height;y++){
+        unsigned x;
+        screenY=y+yTop;
+        if(graphics==4){
+            for(x=0;x<rowBytes;x+=2)
+                row[x/2]=(cgaMap[pixels[y*rowBytes+x]]<<4)|
+                          cgaMap[pixels[y*rowBytes+x+1]];
+            bankOffset=(screenY&1)*8192+(screenY>>1)*80+xByte;
+            VideoRow(row,bankOffset,rowBytes/2);
+        }else{
+            bankOffset=(screenY&3)*8192+(screenY>>2)*160+xByte;
+            VideoRow(pixels+y*rowBytes,bankOffset,rowBytes);
+        }
     }
     spent=since(t,ClockTick());if(spent>maxDraw)maxDraw=spent;
     lastFrame=frame;rendered++;return 1;
@@ -198,19 +290,24 @@ static void report(char *reason)
 {
     FILE *f=fopen("DOSPLAY.LOG","w");unsigned i,mask=0;
     if(!f)return;
-    for(i=0;i<4;i++)if(volume[i]!=15)mask|=1<<i;
-    fprintf(f,"%s\nversion=1\nmode=%d\nerror=%d\n",reason,mode,error);
+    mask=audio_mask;
+    fprintf(f,"%s\nversion=2\nmode=%d\nerror=%d\n",reason,mode,error);
+    fprintf(f,"timer_opened=%u\n",timerWasOpen);
+    fprintf(f,"backend=%s\ngraphics=%d\ntimer_hz=120\nqueue_bytes=%lu\n",audio->name,graphics,queueBytes);
+    fprintf(f,"timer_close=%d\nvector_restored=%d\nbacklog_max=%u\ntimer_late=%lu\nunderruns=%lu\nspeaker_gate_after_stop=%u\n",timerStatus,oldVector==newVector,backlog,timerLate,underruns,gateAfter);
     fprintf(f,"width=%u\nheight=%u\nfps=%u\nduration_ms=%lu\nelapsed_ms=%lu\n",width,height,fps,duration,elapsedEnd);
     fprintf(f,"frames=%lu\ndropped_frames=%lu\nmusic_events_applied=%lu\nmusic_events_skipped=%lu\nmusic_events_read=%lu\n",rendered,dropped,applied,skipped,recordsRead);
     fprintf(f,"music_max_late_ms=%lu\nmusic_total_late_ms=%lu\nservice_max_gap_ms=%lu\n",maxLate,totalLate,maxGap);
     fprintf(f,"video_read_max_ticks=%lu\nmusic_read_max_ticks=%lu\ndraw_max_ticks=%lu\n",maxVideoRead,maxMusicRead,maxDraw);
     fprintf(f,"play_start_ms=%lu\nplay_end_ms=%lu\nrun_elapsed_ms=%lu\nprerolled_records=%lu\nfull_range=%d\n",playStart,playEnd,elapsedEnd>=playStart?elapsedEnd-playStart:0UL,prerolled,fullRange);
-    fprintf(f,"sound_mask_after_stop=%u\npsg_writes=%lu\nold_mode=%u\nrestored_mode=%u\n",mask,psgWrites,oldMode,VideoMode());
+    fprintf(f,"sound_mask_after_stop=%u\npsg_writes=%lu\nold_mode=%u\nrestored_mode=%u\n",mask,audio_writes,oldMode,VideoMode());
+    for(i=0;i<traceCount;i++)fprintf(f,"event=%lu,%lu,%u,%u\n",trace[i].scheduled,trace[i].actual,trace[i].note,trace[i].mask);
+    fprintf(f,"report_end=1\n");
     fclose(f);
 }
 int main(int argc,char **argv)
 {
-    unsigned key;U32 now;char *reason="Complete";int marker,i;union REGS r;
+    unsigned key;U32 now;char *reason="Complete";int marker,i;FILE *markFile;union REGS r;
     for(i=1;i<argc;i++){
         if(strlen(argv[i])!=2||argv[i][0]!='/')goto usage;
         switch(argv[i][1]){
@@ -218,20 +315,48 @@ int main(int argc,char **argv)
         case 'V':case 'v':mode=2;break;
         case 'B':case 'b':mode=3;break;
         case 'F':case 'f':fullRange=1;break;
+        case 'S':case 's':audioChoice=1;break;
+        case 'T':case 't':audioChoice=0;break;
+        case 'N':case 'n':audioChoice=2;break;
+        case 'C':case 'c':graphics=4;break;
+        case 'X':case 'x':graphics=3;break;
+        case 'M':case 'm':graphics=7;break;
+        case 'G':case 'g':graphics=9;break;
+        case 'H':case 'h':chorus=1;break;
         default:goto usage;
         }
     }
-    if(IsWindows()){puts("Exit Windows first. DOSPLAY needs exclusive Tandy hardware.");return 1;}
+    if(IsWindows()){puts("Exit Windows first. DOSPLAY needs exclusive DOS hardware.");return 1;}
     r.h.ah=0x30;intdos(&r,&r);if(r.h.al<3){puts("DOS 3.0 or later required.");return 1;}
-    if(*(U8 _far *)0xfc000000UL!=0x21){puts("Tandy 1000 hardware required.");return 1;}
-    oldMode=VideoMode();haveHardware=1;mute();
+    tandy=*(U8 __far *)MK_FP(0xfc00,0)==0x21;
+    oldMode=VideoMode();
+    if(audioChoice<0)audioChoice=tandy?0:1;
+    if(graphics<0)graphics=tandy?9:(oldMode==7?7:4);
+    if(!(mode&1))audioChoice=2;
+    audio=audioChoice==0?&buddy_psg:(audioChoice==1?&buddy_speaker:&buddy_silent);
+    haveHardware=1;audio->open();
+    oldVector=(U32)_dos_getvect(8);queueBytes=sizeof(queue);
     oldBreak=_dos_getvect(0x23);oldCritical=_dos_getvect(0x24);
     _dos_setvect(0x23,onBreak);_harderr(onCritical);handlers=1;
     if(((mode&2)&&!openVideo())||((mode&1)&&!openMusic())||!openCue()||!primeMusic()){reason="Error";goto done;}
-    if(mode&2){displayChanged=1;SetMode(9);if(VideoMode()!=9){fail(40);reason="Error";goto done;}}
+    if(mode&2){displayChanged=1;SetMode(graphics);if(VideoMode()!=(unsigned)graphics){fail(40);reason="Error";goto done;}}
+    if((mode&2)&&graphics==4)initCga();
+    lastService=playStart;
+    if(!musicService(playStart)){reason="Error";goto done;}
     if(!_dos_creat("DOSSTART.LOG",0,&marker))_dos_close(marker);
-    startTick=ClockTick();lastService=playStart;
-    if(seedValid){soundState(&seed);applied++;}
+    markFile=fopen("MARK.LOG","w");
+    if(markFile){
+        fprintf(markFile,"segment=%u\noffset=%u\n",
+            FP_SEG((void __far *)&audioNow),
+            FP_OFF((void __far *)&audioNow));
+        fclose(markFile);
+    }
+    startTick=ClockTick();lastService=playStart;audioNow=playStart;
+    if(seedValid){audio->state(&seed);applied++;}
+    if(lttk_open(9943U,audioTick,0)!=LTTK_OK){
+        fail(60);reason="Error";goto done;
+    }
+    timerOpen=1;timerWasOpen=1;lttk_run(1);
     for(;;){
         key=KeyRead();if(interrupted||key==3||key==27||key==32){reason="Stopped";break;}
         now=elapsed();
@@ -244,5 +369,5 @@ done:
     cleanup();report(reason);restoreHandlers();printf("DOSPLAY: %s. Error %d. See DOSPLAY.LOG.\n",reason,error);
     return error?1:0;
 usage:
-    puts("DOSPLAY [/F full video] [/A audio | /V video | /B both]\nDefault: song-only. Escape/Space: stop; relaunch to restart.");return 1;
+    puts("DOSPLAY [/F full video] [/A audio | /V video | /B both]\n[/S speaker | /T PSG | /N silent] [/C CGA | /X text | /M mono | /G Tandy]\nDefault: auto device, song cue. /H chorus. Escape/Space/Ctrl+C: stop.");return 1;
 }

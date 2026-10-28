@@ -7,11 +7,13 @@ the host build wrappers. Pass absolute paths. Use a new output directory.
 
 Windows:
 python3 WIN30/source/BUILD.PY --repo /path/to/toolchain --dosbox /path/to/dosbox-x --out /path/to/new-win-build
-DOS:
-python3 DOS/HOST/BUILD.PY /path/to/new-dos-build --repo /path/to/toolchain --dosbox /path/to/dosbox-x
+DOS (updated; external Open Watcom 1.9, no emulator for the build):
+python DOS/HOST/BUILD.PY --watcom C:\WATCOM --out C:\new-private-dos-build
+See DOS/README.TXT for the C89 host checks and native evidence reproduction.
 
-/G0 selects 8086/8088 instructions. Windows uses /Gw /AS /W3 /Od; DOS uses
-/AS /W3 /Os and .8086 assembler. Driver sources are in WIN30/DRIVER; mount the
+/G0 selects 8086/8088 instructions in Windows, which uses /Gw /AS /W3 /Od.
+The updated DOS target uses Open Watcom C16 -0 -ms -os -s -w3 -ecc and WASM
+-0. This does not replace the published Windows DLL toolchain. Driver sources are in WIN30/DRIVER; mount the
 toolchain as C: and that directory as D:, then run its BUILD.BAT. The runtime
 driver is the existing released binary; the newly simplified driver batch
 is supplied for convenience and has not been independently rebuilt here.
@@ -39,11 +41,11 @@ python3 DOS/HOST/AUDIT.PY /path/to/DOSPLAY.EXE
 These scoped reachable-code audits do not certify imported OS routines,
 unresolved indirect continuations, or physical hardware compatibility.
 
-Final binaries: Windows BUILD08 and DOS BUILD06, both byte-identically
-rebuilt before original delivery. Publication changes host path options and
-documentation only; runtime source and binary behavior are unchanged.
-
-Publication validation: the relocated configurable DOS build wrapper was
-run with explicit toolchain/DOSBox paths and reproduced the exact BUILD06
-binary hash. All 14 arranger tests and four Windows fault suites also pass
-from this overlay.
+The original Windows BUILD08 history above is retained. The DOS source and
+runtime now change behavior; its exact current EXE hash, measured resources
+and native scope are in DOS/QUALIFICATION.json and DOS/RESULTS.TXT.
+DOS/HOST/PACK.PY packages an existing extracted runtime with --exe, --assets
+and a new --out ZIP; it generates SHA256.TXT. Media regeneration remains a
+developer operation using the user's source video. The DOS sparse speaker
+asset is byte-identical to the coordinated Windows arrangement; no accepted
+four-voice arrangement, cue, source video or beat map is changed here.

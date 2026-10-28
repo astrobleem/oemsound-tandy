@@ -1,0 +1,34 @@
+{
+  "8086": {
+    "accepted": true,
+    "expected": true
+  },
+  "imul386": {
+    "accepted": false,
+    "expected": false
+  },
+  "nearje386": {
+    "accepted": false,
+    "expected": false
+  },
+  "push186": {
+    "accepted": false,
+    "expected": false
+  },
+  "operand386": {
+    "accepted": false,
+    "expected": false
+  },
+  "valid": {
+    "accepted": true,
+    "expected": true
+  },
+  "empty": {
+    "accepted": false,
+    "expected": false
+  },
+  "oversized": {
+    "accepted": false,
+    "expected": false
+  }
+}

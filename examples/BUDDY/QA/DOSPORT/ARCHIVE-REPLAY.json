@@ -1,0 +1,35 @@
+{
+  "archives": {
+    "Buddy-DOS-source-and-host-evidence.zip": {
+      "crc_pass": true,
+      "members": 52,
+      "sha256": "5dd401ed47c6e5e73efa8b90d17e758709402bf570b33cca052b30010545ae4b"
+    },
+    "Buddy-DOS.zip": {
+      "crc_pass": true,
+      "members": 21,
+      "sha256": "6edc702d85713f96f1799b176542f0170f9660109c548a86455897d202f789cc"
+    },
+    "Buddy-DOS-native-evidence.zip": {
+      "crc_pass": true,
+      "members": 977,
+      "sha256": "bf20a5147ad427d2b5e1276b83ae0739f860598bd7f0d18e5c161d47a1c49dfd"
+    }
+  },
+  "no_emulator_launched": true,
+  "no_OS_ROM_used": true,
+  "build.py": {
+    "exit_code": 0
+  },
+  "host_check.py": {
+    "exit_code": 0
+  },
+  "analyze_batch.py": {
+    "exit_code": 0
+  },
+  "executable_sha256": "5fffde5dfa7b0354e78f24ac34568177dd4b1235d732f8a2932e507d64c92ff5",
+  "rebuild_identical": true,
+  "native_analysis_identical": true,
+  "status": "UNPACKED_REBUILD_AND_ANALYSIS_PASS",
+  "replay_file_bytes": 425701698
+}

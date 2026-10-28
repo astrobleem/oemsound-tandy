@@ -13,12 +13,16 @@ Space plays/stops the song; Enter plays the entire video; Escape stops.
 Focus loss, menu activation, or closing stops and releases sound.
 MIDIMAP.DRV stays beside the app; no SYSTEM.INI edit is required.
 
-DOS requires DOS 3.0+ and Tandy 1000-compatible PSG and BIOS graphics mode 9.
-Unzip DOSPLAY.ZIP; exit Windows completely, enter its folder, run DOSPLAY.
-DOSPLAY /F plays the entire video. DOSPLAY /A is audio-only; /V video-only.
-Escape, Space or Ctrl+C stops, mutes, and restores the original display mode.
-For the smaller fallback: CD LOWRES, then DOSPLAY (or DOSPLAY /F).
-Keep DOSPLAY.EXE, WEEZER.WZV, WEEZER.WZM and WEEZER.CUE together.
+DOS requires DOS 3.0+ and an 8086/8088-compatible PC. Exit Windows before
+running DOSPLAY. Automatic Tandy ROM detection chooses PSG + BIOS mode 9;
+other PCs choose PC speaker + CGA, or mono text when already in mode 7.
+/S speaker, /T PSG at 0C0h, /N silent; independently /C CGA, /X text,
+/M mono text, /G Tandy graphics. /A audio, /V video, /F full, /H chorus.
+Escape, Space or Ctrl+C stops, mutes, and restores the original display.
+For original-speed CGA, CD LOWRES then DOSPLAY. Keep DOSPLAY.EXE, WEEZER.WZV,
+WEEZER.WZM, SPEAKER.WZM and WEEZER.CUE together. See DOS/README.TXT for
+exact capabilities, source build and qualification. AdLib and General MIDI
+are future backend possibilities and are not implemented.
 
 Both stream bounded chunks; neither preloads the movie or decodes AVI.
 High-resolution video is 11,870,232 bytes and needs 49,152 video bytes/s;
@@ -30,9 +34,10 @@ STATUS
 The Windows 3.0 player is the legacy app-local mapper path with cooperative
 roughly 55-ms USER service; it does not use R4's newer 8-ms prepared-state
 backend. The user reports a strong positive DOS result and Windows timing
-struggles. DOS is the recommended playback version. These reports are
+struggles. These describe the original delivery; the portable DOS update has separate
+qualification in DOS/RESULTS.TXT. These reports are
 qualitative. See the [versioned sound timing notes](../../docs/SNDTIME.MD).
-The exact final binaries completed the full video in a 640KB DOSBox-X Tandy
+The original 2026-10-04 binaries completed the full video in a 640KB DOSBox-X Tandy
 profile at 3000 cycles with no video drops. Windows coalesced 10 late music
 states; DOS coalesced none. Emulator cycles are not physical CPU MHz.
 See QA for exact build/preset scope and limitations. No measured physical

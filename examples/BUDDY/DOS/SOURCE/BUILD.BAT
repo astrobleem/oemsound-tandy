@@ -1,16 +1,19 @@
 @echo off
-PATH=C:\BIN
-SET INCLUDE=C:\INCLUDE
-SET LIB=C:\LIB
-CL /nologo /c /G0 /AS /W3 /Os DOSPLAY.C > BUILD.LOG
-IF ERRORLEVEL 1 GOTO FAIL
-MASM /W2 HARDWARE.ASM; >> BUILD.LOG
-IF ERRORLEVEL 1 GOTO FAIL
-LINK4 /NOE /NOD /MAP /STACK:4096 DOSPLAY+HARDWARE,DOSPLAY,DOSPLAY,SLIBCE; >> BUILD.LOG
-IF ERRORLEVEL 1 GOTO FAIL
-ECHO PASS >> BUILD.LOG
-GOTO END
-:FAIL
-ECHO FAIL >> BUILD.LOG
-:END
-EXIT
+rem Open Watcom must be on PATH. Run from SOURCE.
+wcc -0 -ms -os -s -w3 -ecc -i=..\libtandy\include DOSPLAY.C
+if errorlevel 1 goto fail
+wcc -0 -ms -os -s -w3 -ecc -i=..\libtandy\include AUDIO.C
+if errorlevel 1 goto fail
+wcc -0 -ms -os -s -w3 -ecc -i=..\libtandy\include ..\libtandy\src\lt_tick_dos.c
+if errorlevel 1 goto fail
+wcc -0 -ms -os -s -w3 -ecc -i=..\libtandy\include ..\libtandy\src\lt_chip.c
+if errorlevel 1 goto fail
+wasm -0 -ms HARDWARE.ASM
+if errorlevel 1 goto fail
+wlink system dos name DOSPLAY.EXE option stack=4096 option map file DOSPLAY.obj,AUDIO.obj,lt_tick_dos.obj,lt_chip.obj,HARDWARE.obj
+if errorlevel 1 goto fail
+echo PASS
+goto end
+:fail
+echo FAIL
+:end

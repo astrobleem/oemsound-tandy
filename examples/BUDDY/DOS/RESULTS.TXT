@@ -1,0 +1,87 @@
+DOS BUDDY PORTABLE PLAYER - QUALIFIED PUBLICATION CANDIDATE
+
+EXE SHA256: 5fffde5dfa7b0354e78f24ac34568177dd4b1235d732f8a2932e507d64c92ff5
+EXE bytes: 22900; Open Watcom C16/WASM 1.9, 8086 small model.
+All 24 required native cases passed their stated acceptance checks.
+No code publication, upload or one-floppy work performed.
+
+The selected current libtandy chip writer and DOS 120 Hz clock are unchanged.
+Normal prepared music remains in foreground-refilled fixed storage; each app
+callback consumes at most eight states. Video skips obsolete frames while
+audio keeps source deadlines. Speaker, PSG and silent backends are selectable;
+AdLib and General MIDI remain unimplemented. Sound and display overrides
+are independent. Speaker/CUE/PSG assets and all 128 PIT periods match the
+current Windows Buddy integration (checks/PAIRING.json).
+
+Native scope: emulated IBM XT/CGA, Tandy 1000 HX, IBM XT/MDA; each 8088 is
+configured at 4.77 MHz with 640 KB and RAM-speed XTIDE. No physical-machine
+or slow/removable-media certification. Full high-CGA, low-CGA, Tandy mode 9
+and MDA text performances are included. Text is a character-image fallback;
+EGA/VGA native modes, Hercules graphics and PCjr detection are unimplemented.
+
+CASE       RESULT       SOURCE MS  FRAMES DROPS  STATES UNDERRUNS MAXLATE MS
+CGANAT     Complete       23822      47   140     104         0          8
+TEXTSP     Stopped         5166      12    27      25         0          8
+CGAESC     Stopped         5611      10    32      28         0          8
+CGALOW     Complete       23782      96     0     104         0          8
+NSIL       Complete       24002      47   142     196         0          8
+VONLY      Complete       23781      96     0       0         0          0
+DENSE      Complete        1002       0     0     400        45        237
+NOOPEN     Error 20           0       0     0       0         0          0
+BADHDR     Error 22           0       0     0       0         0          0
+SHORT      Error 21           0       0     0       0         0          0
+HSHORT     Error 52           0       0     0       0         0          0
+HINNER     Error 52           0       0     0       0         0          0
+VEDBAD     Error 12           0       0     0       0         0          0
+BADLIVE    Error 25         503       0     0       3         0          4
+BADTIME    Error 24        2452       0     0     123         0          8
+CGAFULL    Complete      241749     493  1438     667         0          8
+PSGNAT     Complete       23798     186     4     196         0          8
+SPKESC     Stopped         5202      10    29      25         0          8
+PSGFULL    Complete      241447    1931     0    1341         0          8
+MONONAT    Complete       23853      65   125     104         0          8
+MONOESC    Stopped         5282      13    27      26         0          8
+MONOFULL   Complete      241570     683  1247     667         0          8
+ACTRLC     Stopped         5246       0     0      25         0          8
+FULLLO     Complete      241402     966     0     667         0          8
+
+Ordinary song cases have zero underruns. DENSE is an intentional overload
+at 1000 states/second: all 400 ordered states delivered, with measured
+starvation/refill gaps and late events. It qualifies recovery and clean
+shutdown, not a music deadline guarantee at that load. Detailed counts
+and timings are in QUALIFICATION.json. Host injected interleavings verify
+final queue publication, starvation/refill, trace limits and cue boundaries.
+
+All counted cases independently restore IRQ0, INT23, INT24 and the original
+display mode; speaker gate and sound mask are zero. Complete batches verify
+post-exit BIOS clock progression and silent PCM tails; stopped FAT copies
+agree. Each malformed input is required to return its exact error. Actual
+INT24 media-hardware errors and failed BIOS mode-setting are not injected.
+
+PSGFULL reads 1342 prepared records and dispatches the 1341 before the
+241400-ms deadline. Deadline shutdown supplies the final mute instead of
+dispatching the record at that exact endpoint. Its pre-deadline native PSG
+I/O matches all 10261 original-algorithm bytes exactly.
+
+Observer limitations and corrections are preserved: initial Ctrl+C saw a
+stale launch marker and stopped before playback; it is excluded and a
+corrected active-playback Ctrl+C run is counted. If a batch hits its host
+bound, its completed independent cases remain evidence; incomplete cases
+are excluded and the focused follow-up provides the full qualified run.
+The package includes every such result, without relabeling a timed-out
+batch as complete. Trace actual times use the callback logical clock;
+PCM/PSG I/O comparisons separately measure emulated output timing.
+
+Human musical recognition/comfort and physical hardware remain unqualified.
+The sparse speaker arrangement retains lowered melody and written bass
+riffs, with dialogue rests and articulation gaps; it uses fixed amplitude.
+The four-voice original score, cue and movie bytes remain unchanged.
+
+REPRODUCTION
+Use DOS/HOST/BUILD.PY with external Open Watcom and a new private output.
+Host C89 suites: HOSTTEST.PY, TESTQUE.PY, TESTTOOLS.PY. Source build matches
+the qualified EXE byte for byte; scoped ISA inspection found no reachable
+post-8088 instruction. Host checks alone do not prove native timing or ABI.
+Native archive REPRODUCE.TXT describes analysis from lossless PCM, raw VRAM,
+binary snapshots and OS-free frozen FAT copies. No OS/ROM images are shipped.
+Independent final review is supplied separately with its pinned hashes.

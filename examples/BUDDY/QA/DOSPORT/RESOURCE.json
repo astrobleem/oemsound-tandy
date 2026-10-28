@@ -1,0 +1,128 @@
+{
+  "exe_bytes": 22900,
+  "exe_sha256": "5fffde5dfa7b0354e78f24ac34568177dd4b1235d732f8a2932e507d64c92ff5",
+  "dgroup_bytes": 31552,
+  "linker_memory_bytes": 52112,
+  "timer_private_stack": 3072,
+  "ring_bytes": 1792,
+  "event_trace_bytes": 12288,
+  "application_stack": 4096,
+  "native_qualification": "NATIVE_PASS",
+  "object_segments": {
+    "AUDIO": [
+      {
+        "segment": "_TEXT",
+        "class": "CODE",
+        "bytes": 605
+      },
+      {
+        "segment": "CONST",
+        "class": "DATA",
+        "bytes": 28
+      },
+      {
+        "segment": "CONST2",
+        "class": "DATA",
+        "bytes": 280
+      },
+      {
+        "segment": "_DATA",
+        "class": "DATA",
+        "bytes": 104
+      },
+      {
+        "segment": "_BSS",
+        "class": "BSS",
+        "bytes": 44
+      }
+    ],
+    "DOSPLAY": [
+      {
+        "segment": "_TEXT",
+        "class": "CODE",
+        "bytes": 5126
+      },
+      {
+        "segment": "CONST",
+        "class": "DATA",
+        "bytes": 1170
+      },
+      {
+        "segment": "CONST2",
+        "class": "DATA",
+        "bytes": 0
+      },
+      {
+        "segment": "_DATA",
+        "class": "DATA",
+        "bytes": 59
+      },
+      {
+        "segment": "_BSS",
+        "class": "BSS",
+        "bytes": 21746
+      }
+    ],
+    "HARDWARE": [
+      {
+        "segment": "_TEXT",
+        "class": "CODE",
+        "bytes": 153
+      },
+      {
+        "segment": "_DATA",
+        "class": "DATA",
+        "bytes": 0
+      }
+    ],
+    "lt_chip": [
+      {
+        "segment": "_TEXT",
+        "class": "CODE",
+        "bytes": 877
+      },
+      {
+        "segment": "CONST",
+        "class": "DATA",
+        "bytes": 0
+      },
+      {
+        "segment": "CONST2",
+        "class": "DATA",
+        "bytes": 0
+      },
+      {
+        "segment": "_DATA",
+        "class": "DATA",
+        "bytes": 0
+      }
+    ],
+    "lt_tick_dos": [
+      {
+        "segment": "_TEXT",
+        "class": "CODE",
+        "bytes": 839
+      },
+      {
+        "segment": "CONST",
+        "class": "DATA",
+        "bytes": 0
+      },
+      {
+        "segment": "CONST2",
+        "class": "DATA",
+        "bytes": 0
+      },
+      {
+        "segment": "_DATA",
+        "class": "DATA",
+        "bytes": 0
+      },
+      {
+        "segment": "_BSS",
+        "class": "BSS",
+        "bytes": 3112
+      }
+    ]
+  }
+}

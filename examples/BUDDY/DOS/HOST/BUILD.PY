@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
+"""Build the DOS-only 8086 executable; does not launch an emulator."""
 from pathlib import Path
-import subprocess,os,time,shutil,argparse,hashlib,json
-p=argparse.ArgumentParser();p.add_argument('out',type=Path);p.add_argument('--repo',type=Path,required=True);p.add_argument('--dosbox',type=Path,required=True);a=p.parse_args();out=a.out.resolve();out.mkdir(parents=True)
-source=Path(__file__).resolve().parents[1]/'SOURCE'
-for q in source.iterdir():shutil.copyfile(q,out/q.name)
-conf=f'''[sdl]\nfullscreen=false\noutput=surface\n[dosbox]\nmachine=tandy\nmemsize=16\n[cpu]\ncore=normal\ncputype=8086_prefetch\ncycles=fixed 200000\n[mixer]\nnosound=true\n[autoexec]\n@echo off\nmount C "{a.repo.resolve()}"\nmount D "{out}"\nD:\nBUILD.BAT\n'''
-(out/'BUILD.CNF').write_text(conf)
-env={**os.environ,'SDL_VIDEODRIVER':'dummy','SDL_AUDIODRIVER':'dummy'}
-s='';t=time.monotonic();proc=subprocess.Popen([str(a.dosbox.resolve()),'-nopromptfolder','-conf',str(out/'BUILD.CNF')],stdout=(out/'HOST.LOG').open('wb'),stderr=subprocess.STDOUT,env=env)
-try:
- while time.monotonic()-t<120:
-  s=(out/'BUILD.LOG').read_text(errors='replace') if (out/'BUILD.LOG').exists() else ''
-  if 'PASS' in s or 'FAIL' in s or proc.poll() is not None:break
-  time.sleep(.2)
-finally:
- if proc.poll() is None:proc.kill()
- proc.wait()
-print(s)
-if 'PASS' not in s:raise SystemExit(1)
-b=(out/'DOSPLAY.EXE').read_bytes();r={'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'compiler':'Microsoft C 6 /G0 /AS /Os','assembler':'.8086 MASM 5.1','stack_bytes':4096}
-(out/'RESULT.JSON').write_text(json.dumps(r,indent=2)+'\n');print(r)
+import argparse,os,subprocess,hashlib,json
+p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--watcom',type=Path,default=Path(os.environ.get('WATCOM',r'C:\WATCOM')));a=p.parse_args()
+root=Path(__file__).resolve().parents[1];out=a.out.resolve();out.mkdir(parents=True,exist_ok=False)
+wat=a.watcom.resolve();env=dict(os.environ,WATCOM=str(wat),INCLUDE=str(wat/'H'))
+sources=[root/'SOURCE/DOSPLAY.C',root/'SOURCE/AUDIO.C',root/'libtandy/src/lt_tick_dos.c',root/'libtandy/src/lt_chip.c']
+with (out/'BUILD.LOG').open('wb') as log:
+ for src in sources:
+  subprocess.run([str(wat/'BINNT/WCC.EXE'),'-0','-ms','-os','-s','-w3','-ecc','-i='+str(wat/'H'),'-i='+str(root/'SOURCE'),'-i='+str(root/'libtandy/include'),str(src)],cwd=out,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
+ subprocess.run([str(wat/'BINNT/WASM.EXE'),'-0','-ms',str(root/'SOURCE/HARDWARE.ASM')],cwd=out,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
+ (out/'DOSPLAY.LNK').write_text('system dos\nname DOSPLAY.EXE\noption map=DOSPLAY.MAP\noption stack=4096\nfile DOSPLAY.obj,AUDIO.obj,lt_tick_dos.obj,lt_chip.obj,HARDWARE.obj\n')
+ subprocess.run([str(wat/'BINNT/WLINK.EXE'),'@DOSPLAY.LNK'],cwd=out,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
+exe=out/'DOSPLAY.EXE';r=dict(bytes=exe.stat().st_size,sha256=hashlib.sha256(exe.read_bytes()).hexdigest(),compiler='Open Watcom C16 1.9 -0 -ms -os -s -w3 -ecc',application_stack=4096,emulator_started=False)
+(out/'BUILD-RESULT.json').write_text(json.dumps(r,indent=2));print(json.dumps(r,indent=2))

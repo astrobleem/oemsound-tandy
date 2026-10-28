@@ -29,3 +29,8 @@ experimental/WINLIB30/NATIVE/BANKS.JSN -text
 # Effects Lab source pins and native package retain their recorded bytes.
 src/win30/EFFECTS/** -text
 artifacts/win30/EFFECTS.ZIP -text
+
+# Qualified DOS source and runtime are byte-pinned.
+examples/BUDDY/DOS/** -text whitespace=cr-at-eol
+examples/BUDDY/DOSPLAY.ZIP -text
+examples/BUDDY/*.TXT whitespace=cr-at-eol

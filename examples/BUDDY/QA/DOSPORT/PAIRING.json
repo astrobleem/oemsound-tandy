@@ -1,0 +1,28 @@
+{
+  "SPEAKER.WZM": {
+    "equal": true,
+    "sha256": "f618bf1dcb3ae234583bbcb6dae21008e94a4afbdda83d089638354310c5f1fe",
+    "peer": "C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task-6\\integration\\examples\\BUDDY\\WIN30\\media\\SPEAKER.WZM",
+    "rechecked_after_peer_fastfull05_started": true
+  },
+  "WEEZER.WZM": {
+    "equal": true,
+    "sha256": "0842ae69d5eef97469dfee7d0ea87ea0be136a25d89bd360ffa24394f7467d57",
+    "peer": "C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task-6\\integration\\examples\\BUDDY\\WIN30\\media\\WEEZER.WZM",
+    "rechecked_after_peer_fastfull05_started": true
+  },
+  "WEEZER.CUE": {
+    "equal": true,
+    "sha256": "d3446413fdffcf9a2a65d8a6a1f77e3e6aeade4ad8f521b74b1f8880f7689905",
+    "peer": "C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task-6\\integration\\examples\\BUDDY\\WIN30\\media\\WEEZER.CUE",
+    "rechecked_after_peer_fastfull05_started": true
+  },
+  "PIT_period_table": {
+    "equal": true,
+    "entries": 128
+  },
+  "coordination": {
+    "method": "Read-only comparison; no peer files modified",
+    "message_permission": "Pending new human approval; previous permission covered only two stale messages to HPDIB and compact"
+  }
+}
