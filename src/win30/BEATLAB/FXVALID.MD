@@ -1,5 +1,8 @@
 # Integration validation
 
+Current incremental-grid UI source awaits its new native timing/latency run.
+The evidence below records the preceding sound-qualified build11.
+
 The final Effects integration passed MSC6 /G0 and LINK4 build11 and the full
 native09 acceptance on an emulated Tandy HX8088 /7.16MHz /640KB /Windows3.0
 real mode at320x200. It passed55 scripted assertions, then normal launcher,

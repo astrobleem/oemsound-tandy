@@ -51,7 +51,7 @@ static BBPLAYER producer;static BBBURST prepared;static TCXBURST block;
 static int paused,pending,ending,servicing,painting;static unsigned usePit;static DWORD lastDraw;
 static DWORD lastService,maxServiceGap,maxPaintCycles;static unsigned pumpCalls,lastPushResult;
 static FARPROC editThunk,oldEdit;
-static BPAT pat;
+static BPAT pat;static BYTE gridPending[5];
 static BYTE defaultNote[5]={60,64,48,42,33};
 static char *noteNames[12]={"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
 static char appdir[144],mml[BP_MML_CAP],status[64]="DAWs With Attitude: Play / Demo";
@@ -80,6 +80,12 @@ static void markColumn(unsigned column,int on)
         FillRect(dc,&box,GetStockObject(on?BLACK_BRUSH:WHITE_BRUSH));}
     ReleaseDC(mainWindow,dc);
 }
+static void textChanged(HWND w,const char *s)
+{
+    char old[80];if(!w)return;old[0]=0;GetWindowText(w,old,sizeof(old));
+    if(lstrcmp(old,s))SetWindowText(w,s);
+}
+static void label(int id,const char *s){if(mainWindow)textChanged(GetDlgItem(mainWindow,id),s);}
 static void check(const char *s,int okay)
 {
     char line[120];unsigned n;if(!okay)++failures;
@@ -107,7 +113,7 @@ static int stop(void)
 {
     if(opened&&closeFn()){say("Close pending: retry Stop");return 0;}
     if(playing)markColumn(step,0);opened=playing=paused=pending=ending=0;
-    if(mainWindow)SetDlgItemText(mainWindow,PAUSE,"Pause");
+    if(mainWindow)label(PAUSE,"Pause");
     say("Stopped: sound released");return 1;
 }
 static void fail(const char *s)
@@ -122,20 +128,20 @@ static void pauseSound(void)
 {
     if(!playing)return;
     if((paused?resumeFn():pauseFn())!=0){fail("Pause failed: sound released");return;}
-    paused=!paused;SetDlgItemText(mainWindow,PAUSE,paused?"Resume":"Pause");
+    paused=!paused;label(PAUSE,paused?"Resume":"Pause");
     say(paused?"Paused: silent, position held":"Resumed");
 }
 static void labels(void)
 {
     char text[64];unsigned r;
-    for(r=0;r<3;++r){wsprintf(text,"%u %s",r+1,(LPSTR)(pat.loaded[r]?"FX":BPPreset(pat.program[r])));SetDlgItemText(mainWindow,LANE0+r,text);}
-    SetDlgItemText(mainWindow,LANE0+3,pat.loaded[3]?"4 FX":"4 Noise");
-    SetDlgItemText(mainWindow,LANE0+4,pat.loaded[4]?"5 FX":"PCspkr");
-    SetDlgItemText(mainWindow,FXSTEP,pat.trigger[selLane][selStep]?"Note":"FX step");
-    SetDlgItemText(mainWindow,PIT,pat.pit?"PIT: on":"PIT: off");
-    SetDlgItemText(mainWindow,VIEW,mmlView?"Grid":"MML");
+    for(r=0;r<3;++r){wsprintf(text,"%u %s",r+1,(LPSTR)(pat.loaded[r]?"FX":BPPreset(pat.program[r])));label(LANE0+r,text);}
+    label(LANE0+3,pat.loaded[3]?"4 FX":"4 Noise");
+    label(LANE0+4,pat.loaded[4]?"5 FX":"PCspkr");
+    label(FXSTEP,pat.trigger[selLane][selStep]?"Note":"FX step");
+    label(PIT,pat.pit?"PIT: on":"PIT: off");
+    label(VIEW,mmlView?"Grid":"MML");
     if(mmlView&&mmlEdit){if(!BPMML(&pat,mml,sizeof(mml)))lstrcpy(mml,"FX steps use .BTS playback. MML cannot encode imported patches.");SetWindowText(mmlEdit,mml);}
-    wsprintf(text,"Tandy Beats Lab - %s%s",(LPSTR)patternName,(LPSTR)(dirty?" *":""));SetWindowText(mainWindow,text);
+    wsprintf(text,"Tandy Beats Lab - %s%s",(LPSTR)patternName,(LPSTR)(dirty?" *":""));textChanged(mainWindow,text);
 }
 static void changed(void)
 {
@@ -370,34 +376,55 @@ static void paintFeed(void)
         if(debug(0)>=TCB_CAPACITY-BB_BATCH)break;
     }
 }
+static int gridDirty(void)
+{
+    unsigned r;if(mmlView)return 0;
+    for(r=0;r<5;++r)if(gridPending[r])return 1;return 0;
+}
+/* Draw at most one cell per message-loop turn. The next input/paint message
+   is checked before the next cell; a full expose cannot trap transport keys. */
+static void paintOne(void)
+{
+    HDC dc;RECT box;unsigned r,c,n;BYTE bit;int x,y;char text[16];DWORD began,spent;
+    if(!gridDirty())return;
+    for(r=0;r<5;++r)if(gridPending[r])break;
+    for(c=0;c<8;++c)if(gridPending[r]&(1U<<c))break;
+    bit=(BYTE)(1U<<c);gridPending[r]&=(BYTE)~bit;
+    dc=GetDC(mainWindow);if(!dc){gridPending[r]|=bit;return;}
+    began=playing&&!paused?clockFn():0;painting=1;
+    SelectObject(dc,GetStockObject(SYSTEM_FIXED_FONT));SelectObject(dc,GetStockObject(NULL_BRUSH));
+    SetBkMode(dc,OPAQUE);x=64+c*29;y=59+r*16;
+    box.left=x;box.top=y;box.right=x+27;box.bottom=y+14;
+    FillRect(dc,&box,GetStockObject(r==(unsigned)selLane&&c==(unsigned)selStep?BLACK_BRUSH:WHITE_BRUSH));
+    Rectangle(dc,x,y,x+27,y+14);
+    SetBkColor(dc,r==(unsigned)selLane&&c==(unsigned)selStep?RGB(0,0,0):RGB(255,255,255));
+    SetTextColor(dc,r==(unsigned)selLane&&c==(unsigned)selStep?RGB(255,255,255):RGB(0,0,0));
+    n=pat.note[r][c];if(!n)lstrcpy(text," -");
+    else if(pat.trigger[r][c])wsprintf(text,"F%u",n);
+    else if(r==3)wsprintf(text,"%u",n);
+    else wsprintf(text,"%s%u",(LPSTR)noteNames[n%12],n/12-1);
+    TextOut(dc,x+2,y+3,text,lstrlen(text));
+    box.top=y+14;box.bottom=y+15;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
+    if(playing&&c==(unsigned)step){MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
+    ReleaseDC(mainWindow,dc);painting=0;
+    if(playing&&!paused){spent=clockFn()-began;if(spent>maxPaintCycles)maxPaintCycles=spent;}
+    paintFeed();
+}
 static void paint(HWND w)
 {
-    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c,n;char text[80];int x,y;DWORD began,spent;
-    began=playing&&!paused?clockFn():0;painting=1;
+    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c;char text[80];int x,y;
     dc=BeginPaint(w,&ps);SelectObject(dc,GetStockObject(SYSTEM_FIXED_FONT));
-    SelectObject(dc,GetStockObject(NULL_BRUSH));SetBkMode(dc,OPAQUE);
-    SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
-    box.left=62;box.top=44;box.right=302;box.bottom=141;
-    if(!mmlView&&RectVisible(dc,&box)){
-        FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
-        wsprintf(text,"%u / 8",selStep+1);TextOut(dc,234,46,text,lstrlen(text));
+    SetBkMode(dc,OPAQUE);SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
+    if(!mmlView){
         for(r=0;r<5;++r)for(c=0;c<8;++c){
-            x=64+c*29;y=59+r*16;box.left=x;box.top=y;box.right=x+27;box.bottom=y+14;
-            FillRect(dc,&box,GetStockObject(r==selLane&&c==selStep?BLACK_BRUSH:WHITE_BRUSH));
-            Rectangle(dc,x,y,x+27,y+14);
-            SetBkColor(dc,r==selLane&&c==selStep?RGB(0,0,0):RGB(255,255,255));
-            SetTextColor(dc,r==selLane&&c==selStep?RGB(255,255,255):RGB(0,0,0));
-            n=pat.note[r][c];if(!n)lstrcpy(text," -");
-            else if(pat.trigger[r][c])wsprintf(text,"F%u",n);
-            else if(r==3)wsprintf(text,"%u",n);
-            else wsprintf(text,"%s%u",(LPSTR)noteNames[n%12],n/12-1);
-            TextOut(dc,x+2,y+3,text,lstrlen(text));
-            if(playing&&c==(unsigned)step){MoveTo(dc,x,y+14);LineTo(dc,x+26,y+14);}
-            /* Bound the no-refill interval to one cell, not an entire row. */
-            paintFeed();
+            x=64+c*29;y=59+r*16;
+            if(x<ps.rcPaint.right&&x+27>ps.rcPaint.left&&y<ps.rcPaint.bottom&&y+15>ps.rcPaint.top)
+                gridPending[r]|=(BYTE)(1U<<c);
         }
+        box.left=230;box.top=44;box.right=302;box.bottom=58;
+        if(RectVisible(dc,&box)){FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
+            wsprintf(text,"%u / 8",selStep+1);TextOut(dc,234,46,text,lstrlen(text));}
     }
-    SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
     box.left=mmlView?2:64;box.top=141;box.right=302;box.bottom=157;
     if(RectVisible(dc,&box)){
         FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
@@ -406,8 +433,7 @@ static void paint(HWND w)
     }
     box.left=2;box.top=157;box.right=302;box.bottom=169;
     if(RectVisible(dc,&box)){FillRect(dc,&box,GetStockObject(WHITE_BRUSH));TextOut(dc,2,157,status,lstrlen(status));}
-    EndPaint(w,&ps);painting=0;
-    if(playing&&!paused){spent=clockFn()-began;if(spent>maxPaintCycles)maxPaintCycles=spent;}
+    EndPaint(w,&ps);
 }
 static void button(HWND w,const char *s,int x,int y,int width,int id)
 {
@@ -550,7 +576,7 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
     case WM_QUERYENDSESSION:if(!stop())return FALSE;return discard()?TRUE:FALSE;
     case WM_ENDSESSION:if(wp)stop();return 0;
     case WM_CLOSE:if(!discard()||!stop())return 0;DestroyWindow(w);return 0;
-    case WM_DESTROY:KillTimer(w,PULSE);timerReady=0;stop();PostQuitMessage(0);return 0;
+    case WM_DESTROY:KillTimer(w,PULSE);timerReady=0;stop();memset(gridPending,0,sizeof(gridPending));mainWindow=NULL;PostQuitMessage(0);return 0;
     }
     return DefWindowProc(w,m,wp,lp);
 }
@@ -576,20 +602,22 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     ShowWindow(w,show);UpdateWindow(w);SetFocus(w);
     if(visualMode){HFILE ready=_lcreat("C:\\BEATSRDY.TXT",0);if(ready!=HFILE_ERROR)_lclose(ready);}
     for(;;){
-        if(playing&&!paused){
-            servicePlayback();
-            /* Check input each batch, but restore lookahead before yielding.
-               The finite ending queue must be allowed to drain as well. */
-            if(playing&&!paused&&(ending||debug(0)>=TCB_CAPACITY-BB_BATCH))Yield();
-            if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE|PM_NOYIELD))continue;
+        if((playing&&!paused)||gridDirty()){
+            if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE|PM_NOYIELD)){
+                servicePlayback();paintOne();
+                if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())Yield();
+                continue;
+            }
             if(msg.message==WM_QUIT)break;
         }else if(!GetMessage(&msg,NULL,0,0))break;
         if(msg.message==WM_KEYDOWN){
-            if(msg.wParam==VK_TAB){HWND next=GetNextDlgTabItem(w,GetFocus(),GetKeyState(VK_SHIFT)<0);if(next)SetFocus(next);continue;}
+            if(msg.wParam==VK_TAB){HWND next=GetNextDlgTabItem(w,GetFocus(),GetKeyState(VK_SHIFT)<0);if(next)SetFocus(next);servicePlayback();continue;}
             if(msg.wParam==VK_ESCAPE||msg.wParam==VK_F5||msg.wParam==VK_F6||msg.wParam==VK_F1||(GetKeyState(VK_CONTROL)<0&&(msg.wParam=='S'||msg.wParam=='O'))||
-               (msg.hwnd==w&&(msg.wParam=='P'||msg.wParam=='S'||msg.wParam=='D'||msg.wParam=='V'||msg.wParam==VK_SPACE||msg.wParam==VK_RETURN||msg.wParam==VK_LEFT||msg.wParam==VK_RIGHT||msg.wParam==VK_UP||msg.wParam==VK_DOWN||msg.wParam==VK_ADD||msg.wParam==VK_SUBTRACT||msg.wParam==0xbb||msg.wParam==0xbd||msg.wParam==VK_PRIOR||msg.wParam==VK_NEXT||msg.wParam==VK_DELETE))){SendMessage(w,WM_KEYDOWN,msg.wParam,msg.lParam);continue;}
+               (msg.hwnd==w&&(msg.wParam=='P'||msg.wParam=='S'||msg.wParam=='D'||msg.wParam=='V'||msg.wParam==VK_SPACE||msg.wParam==VK_RETURN||msg.wParam==VK_LEFT||msg.wParam==VK_RIGHT||msg.wParam==VK_UP||msg.wParam==VK_DOWN||msg.wParam==VK_ADD||msg.wParam==VK_SUBTRACT||msg.wParam==0xbb||msg.wParam==0xbd||msg.wParam==VK_PRIOR||msg.wParam==VK_NEXT||msg.wParam==VK_DELETE))){SendMessage(w,WM_KEYDOWN,msg.wParam,msg.lParam);servicePlayback();continue;}
         }
         TranslateMessage(&msg);DispatchMessage(&msg);
+        servicePlayback();paintOne();
+        if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH)&&!GetInputState())Yield();
     }
     stop();if(editThunk)FreeProcInstance(editThunk);
     if(automatic){check("close releases transport",!opened&&debug&&debug(10)==0);check("close mutes voices",debug&&debug(10)==0);wsprintf(line,"TOTAL_FAILURES=%d\r\n",failures);if(logFile!=HFILE_ERROR){_lwrite(logFile,testLog,testLogBytes);_lwrite(logFile,line,lstrlen(line));_lclose(logFile);}}

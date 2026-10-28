@@ -40,8 +40,10 @@ loop checks messages between16-state preparation batches. It uses PM_NOYIELD
 and restores lookahead before yielding, also yielding while the finite final
 queue drains. The moving play marks update five one-pixel strips rather than
 repainting40 text cells. Status updates invalidate only the status line.
-Full grid exposes replenish prepared audio after each cell. Standard per-cell
-text drawing avoids the slow custom-spacing fallback in the Tandy driver. It services audio while WM_TIMER is delayed.
+Full grid exposes mark a five-byte pending-cell mask. The message loop draws
+one current cell per turn and checks pending input before rendering the next.
+It also skips unchanged button/caption text. Status-only paint does not restart
+the grid; no self-posted feeder or new timer is used. It services audio while WM_TIMER is delayed.
 GUI timer timing never controls note deadlines. RAWCLK emits only
 prepared bytes/PIT values, with its existing bounded IRQ path. No additional
 driver, MIDI owner, timer, callbacks into the app, PCM or consumer preparation

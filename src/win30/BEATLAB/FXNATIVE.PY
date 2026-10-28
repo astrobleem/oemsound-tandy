@@ -126,8 +126,7 @@ try:
   if 'FAIL ' in text or re.search(r'TOTAL_FAILURES=[1-9]',text):raise RuntimeError('Native assertions failed')
   if phase=='VISUAL' and mode==9 and not visual:
    rest(55);shot('EDITOR')
-   paint=re.search(r'paint (\d+) cycles',text)
-   paint_wait=max(2,min(20,int(paint[1])/1193182*1.5+1)) if paint else 15
+   paint_wait=20 # Finish each stopped demo grid; test active repaint below.
    for unused in range(5):key(0x20);rest(paint_wait) # D cycles to Effects groove.
    prep=re.search(r'prepare (\d+) ms',text);ready_wait=max(2,(int(prep[1])/1000+2) if prep else 15)
    key(0x3f);rest(min(ready_wait,55));shot('PLAYING');begin=mark('PLAYING_BEGIN')
@@ -136,9 +135,9 @@ try:
    while any((out/(n+'.s16le')).stat().st_size//4-begin[n+'_frames']<11*rate for n,rate in r['capture_rates'].items()):
     assert time.monotonic()<limit,'Capture did not advance11 emulated seconds';rest(1)
    mark('PLAYING_END')
-   key(0x40);rest(.5);shot('PAUSED');mark('PAUSED_BEGIN');rest(1);assert mark('PAUSED_END')['gate']==0
+   key(0x4d);mark('REPAINT_BEFORE_PAUSE');key(0x40);rest(.5);shot('PAUSED');mark('PAUSED_BEGIN');rest(1);assert mark('PAUSED_END')['gate']==0
    key(0x40);rest(1);mark('RESUMED_BEGIN');rest(2);mark('RESUMED_END')
-   key(0x01);rest(.5);shot('STOPPED');mark('STOPPED_BEGIN');rest(1);assert mark('STOPPED_END')['gate']==0
+   key(0x4d);mark('REPAINT_BEFORE_STOP');key(0x01);rest(.5);shot('STOPPED');mark('STOPPED_BEGIN');rest(1);assert mark('STOPPED_END')['gate']==0
    g.run_while(lambda:hold_modifier_and_tap(ctl,SC_ALT,0x3e),settle_seconds=2,start_delay=.01)
    # Program Manager's normal exit confirmation.
    g.run_while(lambda:hold_modifier_and_tap(ctl,SC_ALT,0x3e),settle_seconds=1,start_delay=.01);key(0x1c)

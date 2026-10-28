@@ -44,6 +44,13 @@ for channel in ('psg','speaker'):
             # Starts >=9s after BEGIN, beyond512/60=8.533s of startup data.
             s=stats(path,end-rate,end)
             result['segments'].append(dict(channel=channel,mode='PLAYING_TAIL',part=1,pass_check=s['rms']>50,**s))
+result['repaint_transport_bounds']={}
+for mode,request in (('PAUSED','REPAINT_BEFORE_PAUSE'),('STOPPED','REPAINT_BEFORE_STOP')):
+    elapsed=actions[mode+'_BEGIN']['wall']-actions[request]['wall']
+    assert 0<elapsed<=2.5,'Transport response capture exceeded2.5s after repaint request'
+    observed={channel:actions[mode+'_BEGIN'][channel+'_frames']-actions[request][channel+'_frames'] for channel in rates}
+    assert all(0<observed[channel]<=2*rates[channel] for channel in rates),'Repaint transport silence capture exceeded2 emulated seconds'
+    result['repaint_transport_bounds'][mode]=dict(request_to_window_seconds=round(elapsed,3),request_to_window_frames=observed,silent_window_checks=all(s['pass_check'] for s in result['segments'] if s['mode']==mode),note='Measured silent window trims at most0.25s for capture buffering')
 result['status']='PASS' if all(s['pass_check'] for s in result['segments']) else 'FAIL'
 (root/'AUDIO.JSON').write_text(json.dumps(result,indent=2)+'\n')
 print(json.dumps(result,indent=2))
