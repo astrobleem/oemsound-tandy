@@ -1,0 +1,109 @@
+{
+  "exact_source_panes": 11,
+  "checked": 17,
+  "samples": [
+    {
+      "image": "BACK_PAUSED.png",
+      "matching_source_frames": [
+        163
+      ]
+    },
+    {
+      "image": "CLOSE.png",
+      "matching_source_frames": [
+        0,
+        1,
+        2,
+        551,
+        561,
+        955,
+        956,
+        957,
+        958,
+        959,
+        960,
+        961,
+        962
+      ]
+    },
+    {
+      "image": "DONE.png",
+      "matching_source_frames": []
+    },
+    {
+      "image": "ESCAPE.png",
+      "matching_source_frames": []
+    },
+    {
+      "image": "FOCUS_LOST.png",
+      "matching_source_frames": [
+        144
+      ]
+    },
+    {
+      "image": "FORWARD.png",
+      "matching_source_frames": [
+        143
+      ]
+    },
+    {
+      "image": "MINIMIZED.png",
+      "matching_source_frames": []
+    },
+    {
+      "image": "NATURAL.png",
+      "matching_source_frames": [
+        965
+      ]
+    },
+    {
+      "image": "PAUSE1.png",
+      "matching_source_frames": []
+    },
+    {
+      "image": "PAUSE2.png",
+      "matching_source_frames": []
+    },
+    {
+      "image": "PLAYING.png",
+      "matching_source_frames": [
+        144
+      ]
+    },
+    {
+      "image": "RESUME1.png",
+      "matching_source_frames": [
+        142
+      ]
+    },
+    {
+      "image": "RESUME2.png",
+      "matching_source_frames": [
+        144
+      ]
+    },
+    {
+      "image": "START_ESCAPE.png",
+      "matching_source_frames": [
+        144
+      ]
+    },
+    {
+      "image": "START_FOCUS.png",
+      "matching_source_frames": []
+    },
+    {
+      "image": "START_FULL.png",
+      "matching_source_frames": [
+        145
+      ]
+    },
+    {
+      "image": "START_PAUSE.png",
+      "matching_source_frames": [
+        965
+      ]
+    }
+  ],
+  "scope": "Every retained native phase screenshot, with genuine partial blits retained as unmatched. No synthesized frame or exclusion of failed samples."
+}

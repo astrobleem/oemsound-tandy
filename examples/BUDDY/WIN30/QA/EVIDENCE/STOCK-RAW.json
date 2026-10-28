@@ -1,0 +1,79 @@
+{
+  "complete": false,
+  "case": "stock",
+  "bound_seconds": 800,
+  "reused_image": "C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task-6\\native-service\\DISK.IMG",
+  "new_os_image": false,
+  "lease_acquired": true,
+  "native_fresh_receipt": "native-integrated-installed-02/FRESH-QUALIFICATION.json",
+  "staged_sha256": {
+    "ATTRIB.TXT": "a5826f70139787b4f8b72a71757f60a1b9baea91231df977560752b920ce4da1",
+    "CGA16.BMP": "677acaf018784c94efc9b10c0f6788e8ea642928de30ea54ab0e7fa495fa0174",
+    "LIBWT.TXT": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4",
+    "LICENSE.TXT": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "MIDIMAP.DRV": "6282d292ea232282b69f5a0d35ae2da1e29b1ff234758d93fe2e0513c5c3c385",
+    "NOTICES.TXT": "0a615aad62b41c640c83d90b7416960e1e923ab43cbaea09e67bb5d0f65433da",
+    "README.TXT": "1f228978d0b26ae764dac0e1088f9648ea9381631ffecdc2525dddb8611c6048",
+    "SPEAKER.WZM": "f618bf1dcb3ae234583bbcb6dae21008e94a4afbdda83d089638354310c5f1fe",
+    "SPKCLK.DLL": "28e55f33c14b6080082505c2a50e72be94a4711e14649a0e023e8f87855e847d",
+    "SPKFAST.DLL": "d95a5f34c5348fc8ce4a018a00cf894c8679cad052a9e41e305c8f3c54ebbbb7",
+    "TBRIDGE.EXE": "b188e1118b2480e3216ce495b6ee5e8d6352e05337da64dbe3f8c03391795bb3",
+    "TINYVID.EXE": "845d9476179dba5e8be865f9434701d519f6db2c17471e6d0be1361281f7947c",
+    "WEEZER.CUE": "d3446413fdffcf9a2a65d8a6a1f77e3e6aeade4ad8f521b74b1f8880f7689905",
+    "WEEZER.WZM": "0842ae69d5eef97469dfee7d0ea87ea0be136a25d89bd360ffa24394f7467d57",
+    "WEEZER.WZP": "65d0bfef515d85835d051ecd40a318dffc333414459861c8fd5200c2466d55c1",
+    "WEEZER.WZV": "05914fe661ae993c73930c175a5f1da6de2a38938f58af6081788be4ae622312"
+  },
+  "owned_pid": 10248,
+  "F1": true,
+  "initial_screen": true,
+  "phases": {
+    "NATURAL": {
+      "state": [
+        1413699123,
+        2,
+        35701,
+        241400,
+        965,
+        965,
+        1,
+        0,
+        275,
+        220,
+        668,
+        0,
+        0,
+        666,
+        0,
+        241400
+      ],
+      "gate": 0
+    },
+    "START_PAUSE": {
+      "state": [
+        1413699123,
+        2,
+        35701,
+        241400,
+        965,
+        965,
+        1,
+        0,
+        275,
+        220,
+        668,
+        0,
+        0,
+        666,
+        0,
+        241400
+      ],
+      "gate": 0
+    }
+  },
+  "error": "ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task-6\\run_installed_windows.py\", line 76, in <module>\n    raw=g.read_memory(0xb8000,16384);native=all(raw[x]==0xde for x in range(0,16000,2))\n  File \"E:\\DOSMCP\\mcp-server\\src\\gdbclient.py\", line 149, in read_memory\n    resp = self._rsp(f\"m{addr:x},{n:x}\")\n  File \"E:\\DOSMCP\\mcp-server\\src\\gdbclient.py\", line 103, in _rsp\n    return self._recv_packet().decode(\"ascii\", errors=\"replace\")\n  File \"E:\\DOSMCP\\mcp-server\\src\\gdbclient.py\", line 83, in _recv_packet\n    chunk = self.sock.recv(4096)\nConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host\n",
+  "owned_stopped": true,
+  "lease_released": true,
+  "inventory_after": "0"
+}

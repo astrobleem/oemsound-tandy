@@ -1,0 +1,8 @@
+{
+  "sample_rate": 48000,
+  "frames": 18466560,
+  "nonzero_samples": 22821672,
+  "peak": 2895,
+  "rms": 741.2708187522426,
+  "scope": "Actual configured C0 PSG mixer PCM; not a pitch-sequence or listening verdict"
+}

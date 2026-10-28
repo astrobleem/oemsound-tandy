@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "native_source_and_target_crc_verified": true,
+  "native_process_returned_zero": true,
+  "return_evidence": "AUTOEXEC created USER.DAT only after IF ERRORLEVEL 1 checked the first installer returned success",
+  "installed_files": 16,
+  "sha256_readback": {
+    "ATTRIB.TXT": true,
+    "CGA16.BMP": true,
+    "LIBWT.TXT": true,
+    "LICENSE.TXT": true,
+    "MIDIMAP.DRV": true,
+    "NOTICES.TXT": true,
+    "README.TXT": true,
+    "SPEAKER.WZM": true,
+    "SPKCLK.DLL": true,
+    "SPKFAST.DLL": true,
+    "TBRIDGE.EXE": true,
+    "TINYVID.EXE": true,
+    "WEEZER.CUE": true,
+    "WEEZER.WZM": true,
+    "WEEZER.WZP": true,
+    "WEEZER.WZV": true
+  },
+  "installer_log": "Buddy Windows installer - fresh directory only\r\nVerified 16 files in C:\\BWSRC2\r\nInstalling 3082846 bytes to C:\\BWNEW2\r\nVerified 16 files in C:\\BWNEW2\r\nInstalled. In Windows, use File/Run and select TINYVID.EXE there.\r\nB = PC speaker; P = configured Tandy-compatible C0 card; A = Auto.\r\nNo system files, INI files, PATH or boot files were changed.\r\n",
+  "scope": "Native fresh installation only. Redundant repeated native negative/CRC commands are intentionally not qualified; all 12 host installer cases passed.",
+  "next": "Reuse installed BWNEW2 for final Windows playback without another installation"
+}

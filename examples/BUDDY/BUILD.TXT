@@ -1,51 +1,51 @@
-REPRODUCTION
+BUDDY - REPRODUCTION OF THE CURRENT LOCAL CANDIDATE
 
-Use your existing licensed Microsoft C 6 / MASM 5.1 / LINK4 toolchain with
-Windows 3.0 headers and libraries. No tools or OS are bundled. The toolchain
-root must contain BIN, INCLUDE, LIB and DDK/286/INC. DOSBox-X is required for
-the host build wrappers. Pass absolute paths. Use a new output directory.
+Use external Open Watcom 1.9 and Python 3 on a modern developer host.
+No tools, OS images or ROMs are bundled. All output directories must be NEW.
+Run commands from the repository root; supply absolute tool/output paths.
 
-Windows:
-python3 WIN30/source/BUILD.PY --repo /path/to/toolchain --dosbox /path/to/dosbox-x --out /path/to/new-win-build
-DOS (updated; external Open Watcom 1.9, no emulator for the build):
-python DOS/HOST/BUILD.PY --watcom C:\WATCOM --out C:\new-private-dos-build
-See DOS/README.TXT for the C89 host checks and native evidence reproduction.
+WINDOWS (app-local player, clocks, private mapper, DOS broker)
+python examples/BUDDY/WIN30/source/BUILD.PY --watcom C:\WATCOM --out C:\NEWBUILD
+python examples/BUDDY/WIN30/PACK.PY --build C:\NEWBUILD --watcom C:\WATCOM --out C:\NEWPACK
+WINPLAY.ZIP contains the verified runtime and fresh-only BUDSET installer.
+WINSRC.ZIP is the corresponding standalone Windows source tree, including
+the two current engine mirror assembly inputs and their license notices.
+Unzip WINSRC.ZIP into a new directory; run the same source/BUILD.PY command
+there. PACK.PY also emits SOURCE.ZIP and exact package SHA256/CRC metadata.
+No emulator is launched by these builders. Win16 C uses -zW -0 -ms -os -s
+-w3 (-zu for DLLs); WASM uses -0. DOS installer uses -bt=dos -0 -ms -os.
+The current WINHOOK/TBRIDGE mirror is copied at build time, not replaced.
+The canonical published SOUND/MIDI driver and its MSC6/MASM/LINK4 toolchain
+are unchanged. Historical Windows BUILD.BAT batches are incomplete legacy
+paths; use the complete BUILD.PY path above for this app-local candidate.
+See WIN30/source/BUILD.TXT for contributor controls and scoped host checks.
 
-/G0 selects 8086/8088 instructions in Windows, which uses /Gw /AS /W3 /Od.
-The updated DOS target uses Open Watcom C16 -0 -ms -os -s -w3 -ecc and WASM
--0. This does not replace the published Windows DLL toolchain. Driver sources are in WIN30/DRIVER; mount the
-toolchain as C: and that directory as D:, then run its BUILD.BAT. The runtime
-driver is the existing released binary; the newly simplified driver batch
-is supplied for convenience and has not been independently rebuilt here.
+DOS (updated portable player, 8086 small model)
+python examples/BUDDY/DOS/HOST/BUILD.PY --watcom C:\WATCOM --out C:\NEWDOS
+The DOS target uses Open Watcom C16 -0 -ms -os -s -w3 -ecc and WASM -0.
+See DOS/README.TXT for host C89 checks, deterministic runtime packaging
+with DOS/HOST/PACK.PY, resources and the 24-case native qualification.
+No accepted four-voice score, cue, source video or beat map changes here.
+The sparse speaker asset and all 128 speaker PIT periods match Windows.
 
-HOST TESTS (Python 3, host C compiler for TESTWIN)
-python3 WIN30/host/TESTARR.PY
-python3 WIN30/host/TESTWIN.PY
-The 14 arranger checks compare against the included small WZM golden file.
-Four fault-stub suites exercise exact Windows source helpers; they are not
-real Windows API fault injection. See QA for native emulator test coverage.
-The descriptive JSON filenames and host scripts stay on the modern host;
-DOS-target source/runtime names use 8.3. Target C/ASM/BAT inputs use CRLF.
+MEDIA REGENERATION (developer host only)
+python examples/BUDDY/WIN30/host/ARRANGE.PY
+python examples/BUDDY/WIN30/host/SPEAKER.PY --out C:\NEWMUSIC
+python examples/BUDDY/WIN30/host/CONVERT.PY YOUR.WEEZER.AVI NEW.WZV
+python examples/BUDDY/WIN30/host/PLANAR.PY NEW.WZV NEW.WZP
+CONVERT requires Pillow and FFmpeg/ffprobe. For larger DOS video add
+--width 128 --height 96 --fps 8. Supply your own source video; consult
+ATTRIB.TXT before redistribution. No media tools fetch from the network.
+WZP rearranges all 966 tiny WZV frames losslessly, without a new quantizer.
+WIN30/media/README.TXT records the approved WZV palette encoding provenance.
 
-MEDIA REGENERATION (Python 3.11+, Pillow, FFmpeg/ffprobe on PATH)
-python3 WIN30/host/ARRANGE.PY
-python3 WIN30/host/CONVERT.PY /path/to/WEEZER.AVI /path/to/WEEZER.WZV
-For larger DOS video add: --width 128 --height 96 --fps 8
-ARRANGE writes WEEZER.WZM and WEEZER.CUE under WIN30/media by default, and
-also emits arrangement reports. No network fetching occurs in these tools.
-Supply your own source video; consult ATTRIB.TXT before redistributing it.
-
-ISA CHECKS (GNU objdump required; matching LINK map beside each executable)
-python3 WIN30/source/AUDIT.PY /path/to/TINYVID.EXE
-python3 DOS/HOST/AUDIT.PY /path/to/DOSPLAY.EXE
-These scoped reachable-code audits do not certify imported OS routines,
-unresolved indirect continuations, or physical hardware compatibility.
-
-The original Windows BUILD08 history above is retained. The DOS source and
-runtime now change behavior; its exact current EXE hash, measured resources
-and native scope are in DOS/QUALIFICATION.json and DOS/RESULTS.TXT.
-DOS/HOST/PACK.PY packages an existing extracted runtime with --exe, --assets
-and a new --out ZIP; it generates SHA256.TXT. Media regeneration remains a
-developer operation using the user's source video. The DOS sparse speaker
-asset is byte-identical to the coordinated Windows arrangement; no accepted
-four-voice arrangement, cue, source video or beat map is changed here.
+EVIDENCE / SCOPE
+WIN30/QA/RESULTS.TXT pins the final Windows binaries and maps native full
+playback, cross-device controls, cleanup, installer and host checks to
+their exact build versions. Evidence preserves raw failed/canceled observer
+receipts with separate explicit corrections; no extra playback is queued.
+DOS/RESULTS.TXT and QA/DOSPORT retain the independently reviewed DOS scope.
+The archival QA/WINDOWS.TXT and QA/DOS.TXT describe the original delivery,
+not this update. Imported OS code, physical hardware and removable-media
+throughput are not certified. Windows fresh independent review is pending.
+Publishing source or packages requires Chad's approval.

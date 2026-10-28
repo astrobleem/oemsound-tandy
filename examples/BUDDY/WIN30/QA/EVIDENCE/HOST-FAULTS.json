@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "scope": "Six previously completed exact-source host suites, not Win16 fault injection",
+  "cases": {
+    "CLEANUP": {
+      "passed": true
+    },
+    "VIDEOIO": {
+      "passed": true
+    },
+    "AUTO": {
+      "passed": true
+    },
+    "PAUSESEEK": {
+      "passed": true
+    },
+    "SELECTOR": {
+      "passed": true
+    },
+    "STARTORDER": {
+      "passed": true
+    }
+  },
+  "original": "test-faults-09"
+}

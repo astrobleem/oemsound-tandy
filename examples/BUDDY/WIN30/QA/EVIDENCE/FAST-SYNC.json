@@ -1,0 +1,14 @@
+{
+  "samples": 738,
+  "audio_elapsed_minus_last_gui_trace_ms": {
+    "0": -14.808190522166115,
+    "1": 2.607365033392416,
+    "5": 25.380698366723664,
+    "50": 142.747365033385,
+    "95": 258.29736503338967,
+    "99": 287.3695872556138,
+    "100": 297.1918094778375
+  },
+  "meaning": "Waveform epoch from first written attack compared with all native service-clock traces and contemporaneous mixer counters. GUI traces can be stale during a blit; buffered PCM file size can lag the mixer.",
+  "passed": true
+}
