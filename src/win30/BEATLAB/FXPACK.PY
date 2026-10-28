@@ -23,6 +23,7 @@ clock=json.loads((a.clock/'RESULT.JSON').read_bytes())
 audio=json.loads((a.native/'AUDIO.JSON').read_bytes())
 assert host['status']==clock['status']==native['status']==audio['status']=='PASS'
 assert native['playback_only'] is False
+assert native['visual_only'] is False and native['trace_input'] is False
 assert audio['runtime']==native['runtime']
 assert audio['validator']==pin((here/'FXAUDIO.PY').read_bytes())
 assert audio['native_result']==pin((a.native/'RESULT.JSON').read_bytes())

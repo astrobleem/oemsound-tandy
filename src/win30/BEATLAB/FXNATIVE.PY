@@ -9,7 +9,9 @@ for n in ('out','build','raw_build','seed','windows_seed','emulator','roms','lea
 p.add_argument('--bound',type=int,default=480)
 p.add_argument('--play-only',action='store_true',help='Diagnostic playback only; cannot qualify a consumer package')
 p.add_argument('--visual-only',action='store_true',help='Diagnostic physical UI/audio only; cannot qualify a consumer package')
+p.add_argument('--trace-input',action='store_true',help='Developer RAM key trace; visual-only diagnostic only')
 a=p.parse_args();assert 60<=a.bound<=600 and not(a.play_only and a.visual_only)
+assert not a.trace_input or a.visual_only
 sys.path[:0]=[str(a.deps),str(a.control),str(a.owned_helpers)]
 from pyfatfs.PyFatFS import PyFatFS
 from src.gdbclient import GdbClient
@@ -22,7 +24,7 @@ raw_build=json.loads((a.raw_build/'BUILD.JSON').read_bytes())
 raw_runtime=(a.raw_build/'RAWCLK.DLL').read_bytes();assert pin(raw_runtime)==raw_build['runtime']
 for name,wanted in raw_build['sources'].items():
  assert pin((repo/'experimental/WINLIB30/SOURCE'/name).read_bytes())==wanted,name
-r=dict(status='NOT_RUN',playback_only=a.play_only,visual_only=a.visual_only,fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),raw_runtime=pin(raw_runtime),harness=pin(Path(__file__).read_bytes()),capture_rates=dict(psg=48000,speaker=49716),actions=[],bound_seconds=a.bound)
+r=dict(status='NOT_RUN',playback_only=a.play_only,visual_only=a.visual_only,trace_input=a.trace_input,fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),raw_runtime=pin(raw_runtime),harness=pin(Path(__file__).read_bytes()),capture_rates=dict(psg=48000,speaker=49716),actions=[],bound_seconds=a.bound)
 assert shutil.disk_usage(out).free>1024**3
 assert (a.seed/'DISK.IMG').stat().st_size<100*1024**2
 shutil.copyfile(a.seed/'DISK.IMG',out/'DISK.IMG')
@@ -87,7 +89,9 @@ with PyFatFS(str(out/'DISK.IMG'),offset=offset) as fs,PyFatFS(str(a.windows_seed
   auto=fs.readbytes('AUTOEXEC.BAT');first=auto.index(b'ECHO VISUAL');last=auto.index(b'ECHO RETURNED')
   put('AUTOEXEC.BAT',auto[:first]+auto[last:]);put('MMLAB/BEATFAST.FLG',b'Diagnostic only\r\n')
  elif fs.exists('MMLAB/BEATFAST.FLG'):fs.remove('MMLAB/BEATFAST.FLG')
- for n in ('BEATS.LOG','DONE.TXT','PHASE.TXT','MMLAB/IMPORT.FXP','MMLAB/FXSAVE.BTS','MMLAB/FXSAVE.BAK','MMLAB/NATIVE.BTS','MMLAB/NATIVE.BAK','MMLAB/NATIVE.MML'):
+ if a.trace_input:put('MMLAB/BEATKEY.FLG',b'Developer key trace\r\n')
+ elif fs.exists('MMLAB/BEATKEY.FLG'):fs.remove('MMLAB/BEATKEY.FLG')
+ for n in ('BEATKEY.LOG','BEATS.LOG','DONE.TXT','PHASE.TXT','MMLAB/IMPORT.FXP','MMLAB/FXSAVE.BTS','MMLAB/FXSAVE.BAK','MMLAB/NATIVE.BTS','MMLAB/NATIVE.BAK','MMLAB/NATIVE.MML'):
   if fs.exists(n):fs.remove(n)
 proc=g=ctl=job=watch=host=None;held=False;start=time.monotonic();visual=False
 lease=a.lease.open('rb')
@@ -119,6 +123,11 @@ try:
   for n in ('psg','speaker'):
    path=out/(n+'.s16le');row[n+'_frames']=path.stat().st_size//4 if path.exists() else 0
   r['actions'].append(row);(out/'ACTIONS.json').write_text(json.dumps(r['actions'],indent=2));return row
+ def silent_gate(name):
+  row=mark(name)
+  if row['gate']:
+   if not a.trace_input:raise AssertionError('Speaker gate remains active: '+name)
+   r.setdefault('trace_gate_failures',[]).append(name)
  last=None
  while time.monotonic()-start<a.bound-10:
   assert proc.poll() is None;rest(.6)
@@ -147,11 +156,11 @@ try:
    while any((out/(n+'.s16le')).stat().st_size//4-begin[n+'_frames']<11*rate for n,rate in r['capture_rates'].items()):
     assert time.monotonic()<limit,'Capture did not advance11 emulated seconds';rest(1)
    mark('PLAYING_END')
-   key(0x4d);mark('REPAINT_BEFORE_PAUSE');key(0x40);rest(.5);shot('PAUSED');mark('PAUSED_BEGIN');rest(1);assert mark('PAUSED_END')['gate']==0
+   key(0x4d);mark('REPAINT_BEFORE_PAUSE');key(0x40);rest(.5);shot('PAUSED');mark('PAUSED_BEGIN');rest(1);silent_gate('PAUSED_END')
    key(0x40);rest(1);mark('RESUMED_BEGIN');rest(2);mark('RESUMED_END')
-   key(0x4d);mark('REPAINT_BEFORE_STOP');key(0x01);rest(.5);shot('STOPPED');mark('STOPPED_BEGIN');rest(1);assert mark('STOPPED_END')['gate']==0
+   key(0x4d);mark('REPAINT_BEFORE_STOP');key(0x01);rest(.5);shot('STOPPED');mark('STOPPED_BEGIN');rest(1);silent_gate('STOPPED_END')
    mark('WARM_PLAY_REQUEST');key(0x3f);rest(min(ready_wait+3,55));mark('WARM_BEGIN');rest(2);mark('WARM_END')
-   key(0x01);rest(1);assert mark('WARM_STOPPED')['gate']==0
+   key(0x01);rest(1);silent_gate('WARM_STOPPED')
    g.run_while(lambda:hold_modifier_and_tap(ctl,SC_ALT,0x3e),settle_seconds=2,start_delay=.01)
    # Program Manager's normal exit confirmation.
    g.run_while(lambda:hold_modifier_and_tap(ctl,SC_ALT,0x3e),settle_seconds=1,start_delay=.01);key(0x1c)
@@ -160,8 +169,10 @@ try:
    assert done=='RETURNED',launch
    assert mode==3 and ('TOTAL_FAILURES=0' in text or a.visual_only) and (visual or a.play_only)
    with PyFatFS(str(out/'DISK.IMG'),offset=offset,read_only=True) as fs:
-    if not a.play_only:(out/'FXSAVE.BTS').write_bytes(fs.readbytes('MMLAB/FXSAVE.BTS'))
-   r.update(status='DIAGNOSTIC_PASS' if a.play_only or a.visual_only else 'PASS',assertions=text.count('PASS '),normal_dos_return=True);shot('DOS');break
+    if not a.play_only and not a.visual_only:(out/'FXSAVE.BTS').write_bytes(fs.readbytes('MMLAB/FXSAVE.BTS'))
+    if a.trace_input:
+     data=fs.readbytes('BEATKEY.LOG');(out/'BEATKEY.LOG').write_bytes(data);r['input_trace']=pin(data)
+   r.update(status='FAIL' if r.get('trace_gate_failures') else 'DIAGNOSTIC_PASS' if a.play_only or a.visual_only else 'PASS',assertions=text.count('PASS '),normal_dos_return=True);shot('DOS');break
   assert shutil.disk_usage(out).free>512*1024**2
   assert sum(x.stat().st_size for x in out.iterdir() if x.is_file())<400*1024**2
  else:raise TimeoutError('8088 acceptance bound expired')

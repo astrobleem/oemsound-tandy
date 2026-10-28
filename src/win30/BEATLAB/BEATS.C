@@ -65,6 +65,28 @@ static WORD pausedSent,rebaseCount;static DWORD prepareMs,prepareBegan;
 static char testLog[4096];static unsigned testLogBytes;
 static DWORD testAt;
 static HFILE logFile=HFILE_ERROR;
+/* Developer flag only: bounded RAM events, flushed after sound is released. */
+typedef struct {DWORD ms,cycle;WORD phase,key,state,queued,error;} KEYTRACE;
+static KEYTRACE keyTrace[32];static unsigned keyCount;static int traceKeys;
+static void traceInput(unsigned phase,unsigned key)
+{
+    KEYTRACE *t;
+    if(!traceKeys||keyCount>=32||(key!=VK_F5&&key!=VK_F6&&key!=VK_ESCAPE&&key!=VK_RIGHT))return;
+    t=&keyTrace[keyCount++];t->ms=GetTickCount();t->phase=phase;t->key=key;
+    t->state=opened|(playing<<1)|(paused<<2)|(preparing<<3);
+    t->cycle=opened?clockFn():0;t->queued=opened?debug(0):0;t->error=opened?debug(6):0;
+}
+static void flushInput(void)
+{
+    HFILE f;unsigned i;char line[112];KEYTRACE *t;
+    if(!traceKeys||opened)return;f=_lcreat("C:\\BEATKEY.LOG",0);if(f==HFILE_ERROR)return;
+    for(i=0;i<keyCount;++i){t=&keyTrace[i];
+        wsprintf(line,"%u %u %lu %lu %u %u %u\r\n",t->phase,t->key,t->ms,t->cycle,t->state,t->queued,t->error);
+        _lwrite(f,line,lstrlen(line));
+    }
+    wsprintf(line,"prepare %lu gap %lu cell %lu header %lu yield %lu\r\n",prepareMs,maxServiceGap,maxPaintCycles,maxHeaderCycles,maxYieldCycles);
+    _lwrite(f,line,lstrlen(line));_lclose(f);
+}
 static void redraw(void){if(mainWindow)InvalidateRect(mainWindow,NULL,FALSE);}
 static void say(const char *s)
 {
@@ -421,10 +443,12 @@ static int gridDirty(void)
    is checked before the next cell; a full expose cannot trap transport keys. */
 static void paintOne(void)
 {
-    HDC dc;RECT box;unsigned r,c,n;BYTE bit;int x,y;char text[16];DWORD began,spent;
+    HDC dc;RECT box;MSG input;unsigned r,c,n;BYTE bit;int x,y;char text[16];DWORD began,spent;
     /* Fill lookahead before expensive cell text; retain every dirty bit.
        Status still paints and the loop checks input between each batch. */
     if(preparing||!gridDirty())return;
+    if(PeekMessage(&input,NULL,WM_KEYFIRST,WM_KEYLAST,PM_NOREMOVE|PM_NOYIELD))return;
+    if(!mainWindow||preparing||!gridDirty())return;
     for(r=0;r<5;++r)if(gridPending[r])break;
     for(c=0;c<8;++c)if(gridPending[r]&(1U<<c))break;
     bit=(BYTE)(1U<<c);gridPending[r]&=(BYTE)~bit;
@@ -605,9 +629,10 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
     case WM_LBUTTONDOWN:
         x=LOWORD(lp);y=HIWORD(lp);if(!mmlView&&x>=64&&x<296&&y>=59&&y<139){selStep=(x-64)/29;selLane=(y-59)/16;toggle();labels();SetFocus(w);}return 0;
     case WM_KEYDOWN:
-        if(wp==VK_ESCAPE){stop();return 0;}
-        if(wp==VK_F5){if(playing||preparing)stop();else play();return 0;}
-        if(wp==VK_F6){pauseSound();return 0;}
+        traceInput(1,wp);
+        if(wp==VK_ESCAPE){stop();traceInput(2,wp);return 0;}
+        if(wp==VK_F5){if(playing||preparing)stop();else play();traceInput(2,wp);return 0;}
+        if(wp==VK_F6){pauseSound();traceInput(2,wp);return 0;}
         if(wp==VK_F1){about();return 0;}
         if(GetKeyState(VK_CONTROL)<0){if(wp=='S')savePattern();if(wp=='O')loadPattern();return 0;}
         if(wp=='P'){play();return 0;}if(wp=='S'){stop();return 0;}
@@ -619,7 +644,7 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
         else if(wp==VK_PRIOR&&pat.tempo<240){pat.tempo+=10;if(pat.tempo>240)pat.tempo=240;changed();}
         else if(wp==VK_NEXT&&pat.tempo>40){pat.tempo=pat.tempo<50?40:pat.tempo-10;changed();}
         else if(wp==VK_DELETE){pat.note[selLane][selStep]=0;pat.trigger[selLane][selStep]=0;changed();}
-        labels();redraw();return 0;
+        labels();redraw();traceInput(2,wp);return 0;
     case WM_TIMER:
         if(wp!=PULSE)return 0;
         now=GetTickCount();
@@ -637,7 +662,7 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
 }
 int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
 {
-    WNDCLASS wc;HWND w;MSG msg;int i;unsigned n;char path[144],line[64];
+    WNDCLASS wc;HWND w;MSG msg,input;int i;unsigned n;char path[144],line[64];
     if(previous){HWND old=FindWindow("DWABeats",NULL);if(old){ShowWindow(old,SW_RESTORE);SetActiveWindow(old);}return 0;}
     if(GetWinFlags()&WF_PMODE)return 2;instance=inst;
     automatic=!lstrcmp(cmd,"/test")?1:!lstrcmp(cmd,"/uitest")?2:0;visualMode=lstrcmp(cmd,"/visual")==0;if(automatic)logFile=_lcreat("C:\\BEATS.LOG",0);
@@ -647,6 +672,8 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     if(i<0||(unsigned)i+12>=sizeof(path)){MessageBox(NULL,"App folder too long: move the complete kit.","Tandy Beats Lab",MB_OK);return 3;}
     if(!lstrcmpi(path+i+1,"RAWGUI.EXE")){automatic=1;if(logFile==HFILE_ERROR)logFile=_lcreat("C:\\BEATS.LOG",0);}
     lstrcpy(appdir,path);appdir[i+1]=0;
+    if(!automatic){lstrcpy(path,appdir);lstrcat(path,"BEATKEY.FLG");
+        {HFILE f=_lopen(path,OF_READ);if(f!=HFILE_ERROR){traceKeys=1;_lclose(f);}}}
     if(automatic){HFILE fast=_lopen("C:\\MMLAB\\BEATFAST.FLG",OF_READ);if(fast!=HFILE_ERROR){playbackOnly=1;_lclose(fast);}}
     if(!bindClock())lstrcpy(status,oldClock?"Close older players; restart Windows":"Transport missing: extract complete kit");BPDefault(&pat);
     wc.style=CS_HREDRAW|CS_VREDRAW;wc.lpfnWndProc=WndProc;wc.cbClsExtra=wc.cbWndExtra=0;wc.hInstance=inst;
@@ -658,13 +685,19 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     if(visualMode){HFILE ready=_lcreat("C:\\BEATSRDY.TXT",0);if(ready!=HFILE_ERROR)_lclose(ready);}
     for(;;){
         if(preparing||(playing&&!paused)||gridDirty()){
-            if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE|PM_NOYIELD)){
+            if(!PeekMessage(&msg,NULL,WM_KEYFIRST,WM_KEYLAST,PM_REMOVE|PM_NOYIELD)&&
+               !PeekMessage(&msg,NULL,0,0,PM_REMOVE|PM_NOYIELD)){
                 servicePreparation();servicePlayback();paintOne();
+                if(PeekMessage(&input,NULL,WM_KEYFIRST,WM_KEYLAST,PM_NOREMOVE|PM_NOYIELD))continue;
                 if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH))giveTime();
                 continue;
             }
             if(msg.message==WM_QUIT)break;
         }else if(!GetMessage(&msg,NULL,0,0))break;
+        if(msg.message==WM_KEYDOWN)traceInput(0,msg.wParam);
+        else if(msg.message==WM_KEYUP)traceInput(3,msg.wParam);
+        else if(msg.message==WM_SYSKEYDOWN)traceInput(4,msg.wParam);
+        else if(msg.message==WM_SYSKEYUP)traceInput(5,msg.wParam);
         if(msg.message==WM_KEYDOWN){
             if(msg.wParam==VK_TAB){HWND next=GetNextDlgTabItem(w,GetFocus(),GetKeyState(VK_SHIFT)<0);if(next)SetFocus(next);servicePreparation();servicePlayback();continue;}
             if(msg.wParam==VK_ESCAPE||msg.wParam==VK_F5||msg.wParam==VK_F6||msg.wParam==VK_F1||(GetKeyState(VK_CONTROL)<0&&(msg.wParam=='S'||msg.wParam=='O'))||
@@ -672,9 +705,10 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
         }
         TranslateMessage(&msg);DispatchMessage(&msg);
         servicePreparation();servicePlayback();paintOne();
+        if(PeekMessage(&input,NULL,WM_KEYFIRST,WM_KEYLAST,PM_NOREMOVE|PM_NOYIELD))continue;
         if((!playing||paused||ending||debug(0)>=TCB_CAPACITY-BB_BATCH))giveTime();
     }
-    stop();if(editThunk)FreeProcInstance(editThunk);
+    stop();flushInput();if(editThunk)FreeProcInstance(editThunk);
     if(automatic){check("close releases transport",!opened&&debug&&debug(10)==0);check("close mutes voices",debug&&debug(10)==0);wsprintf(line,"TOTAL_FAILURES=%d\r\n",failures);if(logFile!=HFILE_ERROR){_lwrite(logFile,testLog,testLogBytes);_lwrite(logFile,line,lstrlen(line));_lclose(logFile);}}
     if(module>=32)FreeLibrary(module);if(automatic||visualMode)ExitWindows(0L,0);return failures?6:0;
 }
