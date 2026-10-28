@@ -651,6 +651,8 @@ long FAR PASCAL BUD_EXPORT WndProc(HWND window,unsigned message,WPARAM wp,LONG l
         return 0;
     case WM_SIZE:if(wp==SIZE_MINIMIZED&&playing)pausePlayback();return 0;
     case WM_KILLFOCUS:if(playing)pausePlayback();return 0;
+    /* USER sends this for mouse and keyboard system-menu entry. */
+    case WM_INITMENU:if(playing)pausePlayback();return 0;
     case WM_SYSKEYDOWN:if(playing)pausePlayback();break;
     case WM_ACTIVATE:if(!wp&&playing)pausePlayback();return 0;
     case WM_PAINT:

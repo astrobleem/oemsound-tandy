@@ -26,7 +26,10 @@ Host C tests on Chad's host must use the controlled GCC wrapper:
   python .../source/TESTBQ.PY --cc C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py --out NEWBQ
   python .../host/TESTWIN.PY --cc C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py --out NEWFAULT
   python .../QA/SERVICES.PY --cc C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py --out NEWSERVICE
+  python .../host/TESTMENU.PY --cc C:\Users\chad\Documents\Codex\toolchains\gcc-ucrt64.py --out NEWMENU
 Use complete paths in place of ... . Output directories must be new.
+TESTMENU executes actual WndProc menu-entry cases and pause/stop/release
+functions with modeled OS calls; it is not native menu ABI qualification.
 TESTBQ extracts actual production functions and checks all speaker event
 boundaries, state reconstruction, queue backpressure and ordered PSG output.
 TESTWIN executes production cleanup, stream/GDI failures, automatic-start,

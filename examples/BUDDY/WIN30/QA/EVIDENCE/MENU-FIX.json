@@ -1,0 +1,21 @@
+{
+  "finding": "Pause on mouse-opened system menu",
+  "reviewed_commit": "2d5ed5ff26b46d7ca80e928965a368f59dc88b65",
+  "fix": "WM_INITMENU calls existing pausePlayback before USER menu tracking",
+  "regression_before_passed": false,
+  "regression_after_passed": true,
+  "exact_source_host_cases": 10,
+  "helpers_identical": {
+    "SPKCLK.DLL": true,
+    "SPKFAST.DLL": true,
+    "MIDIMAP.DRV": true,
+    "TBRIDGE.EXE": true
+  },
+  "code_growth_bytes": 26,
+  "data_growth_bytes": 0,
+  "native_replay_performed": false,
+  "emulator_started": false,
+  "playback_started": false,
+  "qualification": "Historical native results remain pinned to their tested builds; menu entry is host-tested only",
+  "independent_rereview": "Pending"
+}

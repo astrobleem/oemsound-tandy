@@ -123,5 +123,35 @@
     "original": "native-integrated-installed-03\\NATURAL.LOG",
     "bytes": 1080,
     "sha256": "2a31c7745714c6b9550e549ce3138ebf26390cf4df0f88dd0c652a0bbe25b1cf"
+  },
+  "MENU09-BUILD.json": {
+    "original": "build-integrated-09/RESULT.JSON",
+    "bytes": 4498,
+    "sha256": "43f5e5fc1cbc833db9618966b54564fd28efb892f566ac4fd5a46041600ff740"
+  },
+  "MENU-BEFORE.json": {
+    "original": "test-menu-before-01/RESULT.JSON",
+    "bytes": 328,
+    "sha256": "f057be76f574b775c4ea87a6f872abe61d68a1cb7e5de92d59eaaa25dd82bc09"
+  },
+  "MENU-AFTER.json": {
+    "original": "test-menu-after-01/RESULT.JSON",
+    "bytes": 327,
+    "sha256": "2ccf447b279b83c6d4875ba6fd00a9629fd6a7481b046feadc94563561720fc3"
+  },
+  "MENU-BEFORE.LOG": {
+    "original": "test-menu-before-01/TEST.LOG",
+    "bytes": 137,
+    "sha256": "afbf1c3a2c335f6350e35ae9d8f13a3a04f425fb03b7aacab7c041e47e3ede35"
+  },
+  "MENU-AFTER.LOG": {
+    "original": "test-menu-after-01/TEST.LOG",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "REVIEW-2d5ed.json": {
+    "original": "C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task-2\\BUDDY-REVIEW-2d5ed5ff.json",
+    "bytes": 2969,
+    "sha256": "d95073d87e934862e590d7d0ee585d229c8bfb0c2372d2747ee9eb296a0ee7c3"
   }
 }

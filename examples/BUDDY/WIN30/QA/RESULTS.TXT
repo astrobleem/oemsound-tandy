@@ -1,14 +1,27 @@
 WINDOWS BUDDY - LOCAL INTEGRATION QUALIFICATION
 
-Final TINYVID.EXE: 845d9476179dba5e8be865f9434701d519f6db2c17471e6d0be1361281f7947c
-18,404 bytes; Open Watcom 1.9, 8086 small model, build-integrated-08.
-The final NE code segment is 14,542 bytes; minimum data is 12,896 bytes,
+Final TINYVID.EXE: 75f5ad886312110526e401c09e2613effdb519077858e06cfb0b7a27cbaf73f0
+18,430 bytes; Open Watcom 1.9, 8086 small model, build-integrated-09.
+The final NE code segment is 14,568 bytes; minimum data is 12,896 bytes,
 with separate 2,048-byte heap and 4,096-byte stack. This is not total RAM use.
 All tests below are existing completed evidence; no repeat playback queued.
 Profiles: emulated IBM XT/8088 4.77 MHz, 640 KB, RAM-speed XTIDE, Windows
 3.0 real mode, CGA 160x100/16 colors with compact fonts. Explicit PSG uses
 an emulated ISA Tandy-compatible sound card at C0 independently of CGA.
 No physical-machine, protected-mode or slow/removable-media qualification.
+
+REVIEW FOLLOW-UP: build09 only adds WM_INITMENU pause/release to WndProc.
+It fixes mouse system-menu entry while focus remains on the player.
+The exact-source host regression fails before and passes after the change,
+covering mouse and keyboard entry, idempotence, dismissal without restart,
+and release-failure owner retention. Code grows 26 bytes, data is unchanged,
+and all four helper binaries are identical. Prior native metrics below
+remain version-pinned evidence; no native menu test or full replay is claimed.
+MENU09-BUILD.json is the final build; FINAL-BUILD.json preserves native08.
+Fresh re-review of this focused fix is pending; no publication authorized.
+The runtime and installer CRC manifest are regenerated for build09; the
+native fresh-install receipt below qualifies the prior build08 payload and
+same CRC kernel, not a new native installation of build09.
 
 FULL FAST SPEAKER: native-integrated-fastfull-06, build07
 241400 ms, 940 rendered / 26 dropped frames, last source frame 965.

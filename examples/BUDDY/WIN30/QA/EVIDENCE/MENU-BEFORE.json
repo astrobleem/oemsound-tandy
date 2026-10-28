@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "source_sha256": "e40cf3bd2da130b86a535f6487040f8e8c5744abe1ade611d333d0802d74d81f",
+  "cases": 10,
+  "scope": "Host exact WndProc event cases plus actual pause/stop/release functions; modeled OS/timer/mapper calls, not native menu ABI",
+  "emulator_started": false,
+  "playback_started": false
+}
