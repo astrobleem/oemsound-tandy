@@ -13,6 +13,9 @@
 #include "TIMECLK.H"
 #include "TCBURST.H"
 #include "TCXBASS.H"
+#if BB_PREFILL != TCB_CAPACITY || (BB_PREFILL % BB_BATCH) != 0
+#error Beats startup must fill the prepared transport queue in whole batches
+#endif
 #define PLAY 101
 #define STOP 102
 #define DEMO 103
@@ -46,6 +49,7 @@ static ZERO openFn,startFn,closeFn,pauseFn,resumeFn,continueFn,endFn,statusFn;
 static ONE debug,xopenFn;static CLOCKFN clockFn;static PUT putFn;static XPUT xputFn;
 static BBPLAYER producer;static BBBURST prepared;static TCXBURST block;
 static int paused,pending,ending,servicing;static unsigned usePit;static DWORD lastDraw;
+static DWORD lastService,maxServiceGap,maxPaintCycles;static unsigned pumpCalls;
 static FARPROC editThunk,oldEdit;
 static BPAT pat;
 static BYTE defaultNote[5]={60,64,48,42,33};
@@ -55,7 +59,7 @@ static char patternName[32]="Starter";
 static int opened,playing,timerReady,step,selLane,selStep,mmlView,dirty;
 static unsigned demoIndex;
 
-static int automatic,testStage,failures,testServiceFailure,visualMode;
+static int automatic,testStage,failures,testServiceFailure,visualMode,automaticTestBusy;
 static WORD pausedSent;static DWORD prepareMs;
 static char testLog[4096];static unsigned testLogBytes;
 static DWORD testAt;
@@ -148,14 +152,35 @@ static void play(void)
     pending=ending=0;
     for(i=0;i<BB_PREFILL/BB_BATCH;++i)if(!pump()){fail("Prepare failed: sound released");return;}
     if(startFn()){fail("Clock failed: use GO from DOS");return;}
-    prepareMs=GetTickCount()-began;lastDraw=0;playing=1;step=0;say("Playing prepared song; F6 pauses");
+    prepareMs=GetTickCount()-began;lastDraw=lastService=maxServiceGap=maxPaintCycles=0;
+    pumpCalls=0;playing=1;step=0;say("Playing prepared song; F6 pauses");
+}
+/* Move only the five one-pixel play marks. Repainting all 40 text cells at
+   every step can consume seconds on an 8088 and starve the prepared queue. */
+static void playMark(unsigned next)
+{
+    HDC dc;RECT box;unsigned r;int x;
+    if(next==(unsigned)step)return;
+    if(!mmlView&&(dc=GetDC(mainWindow))!=NULL){
+        for(r=0;r<5;++r){
+            box.top=73+r*16;box.bottom=box.top+1;
+            x=64+step*29;box.left=x;box.right=x+27;
+            FillRect(dc,&box,GetStockObject(WHITE_BRUSH));
+            x=64+next*29;box.left=x;box.right=x+27;
+            FillRect(dc,&box,GetStockObject(BLACK_BRUSH));
+        }
+        ReleaseDC(mainWindow,dc);
+    }
+    step=next;
 }
 /* Windows' UI timer can be delayed by the real-mode bridge. Keep audio
    supplied from the foreground message loop even when WM_TIMER is absent. */
 static void servicePlayback(void)
 {
-    DWORD cycles;
+    DWORD cycles,gap;
     if(servicing||!opened||!playing||paused)return;servicing=1;
+    cycles=clockFn();gap=cycles-lastService;lastService=cycles;
+    if(gap>maxServiceGap)maxServiceGap=gap;
     if(debug(6)){fail("Transport late/underrun: sound released");goto done;}
     if(debug(7)){stop();say("25 minute session finished; Play restarts");goto done;}
     if(automatic&&testServiceFailure){fail("Injected prepare failure");goto done;}
@@ -163,11 +188,11 @@ static void servicePlayback(void)
     if(usePit&&statusFn()!=TCX_AVAILABLE&&statusFn()!=TCX_SUSPENDED){
         fail("Speaker lease lost: sound released");goto done;
     }
-    if(!pump()){fail("Prepare error: sound released");goto done;}
+    ++pumpCalls;if(!pump()){fail("Prepare error: sound released");goto done;}
     cycles=clockFn();
     if(cycles-lastDraw>=298295UL){
-        lastDraw=cycles;step=BBStep((cycles/3579545UL)*180UL+
-            (cycles%3579545UL)*180UL/3579545UL,producer.song.tempo);redraw();
+        lastDraw=cycles;playMark(BBStep((cycles/3579545UL)*180UL+
+            (cycles%3579545UL)*180UL/3579545UL,producer.song.tempo));
     }
 done:servicing=0;
 }
@@ -308,7 +333,8 @@ static void about(void)
 }
 static void paint(HWND w)
 {
-    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c,n;char text[80];int x,y;
+    HDC dc;PAINTSTRUCT ps;RECT box;unsigned r,c,n;char text[80];int x,y;DWORD began,spent;
+    began=playing&&!paused?clockFn():0;
     dc=BeginPaint(w,&ps);SelectObject(dc,GetStockObject(SYSTEM_FIXED_FONT));
     SelectObject(dc,GetStockObject(NULL_BRUSH));SetBkMode(dc,OPAQUE);SetBkColor(dc,RGB(255,255,255));SetTextColor(dc,RGB(0,0,0));
     if(!mmlView){
@@ -334,6 +360,7 @@ static void paint(HWND w)
     TextOut(dc,mmlView?2:184,141,text,lstrlen(text));
     box.left=2;box.top=157;FillRect(dc,&box,GetStockObject(WHITE_BRUSH));TextOut(dc,2,157,status,lstrlen(status));
     EndPaint(w,&ps);
+    if(playing&&!paused){spent=clockFn()-began;if(spent>maxPaintCycles)maxPaintCycles=spent;}
 }
 static void button(HWND w,const char *s,int x,int y,int width,int id)
 {
@@ -391,6 +418,7 @@ static void nativeTest(DWORD now)
         while((LONG)(clockFn()-until)<0&&!debug(6)&&++spins<60000U);
         wsprintf(detail,"sent %u->%u error %u run %u prepare %lu ms",before,debug(2),debug(6),debug(20),prepareMs);
         check(detail,1);
+        wsprintf(detail,"pumps %u gap %lu paint %lu cycles",pumpCalls,maxServiceGap,maxPaintCycles);check(detail,1);
         check("audio advances without GUI service",debug(2)>before&&!debug(6));
         pauseSound();pausedSent=debug(2);check("pause silences clock",paused&&!debug(20));
         testAt=GetTickCount();testStage=2;
@@ -466,11 +494,11 @@ LONG FAR PASCAL WndProc(HWND w,UINT m,WPARAM wp,LPARAM lp)
         if(wp!=PULSE)return 0;
         now=GetTickCount();
         servicePlayback();
-        if(automatic)nativeTest(now);return 0;
+        if(automatic&&!automaticTestBusy){automaticTestBusy=1;nativeTest(now);automaticTestBusy=0;}return 0;
     case WM_ACTIVATE:if(!LOWORD(wp)&&opened)stop();return 0;
     case WM_CANCELMODE:stop();return 0;
     case WM_PAINT:paint(w);return 0;
-    case WM_QUERYENDSESSION:stop();return discard()?TRUE:FALSE;
+    case WM_QUERYENDSESSION:if(!stop())return FALSE;return discard()?TRUE:FALSE;
     case WM_ENDSESSION:if(wp)stop();return 0;
     case WM_CLOSE:if(!discard()||!stop())return 0;DestroyWindow(w);return 0;
     case WM_DESTROY:KillTimer(w,PULSE);timerReady=0;stop();PostQuitMessage(0);return 0;
@@ -500,7 +528,10 @@ int PASCAL WinMain(HINSTANCE inst,HINSTANCE previous,LPSTR cmd,int show)
     for(;;){
         if(playing&&!paused){
             servicePlayback();
-            if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE)){Yield();continue;}
+            /* Check input each batch, but restore lookahead before yielding.
+               The finite ending queue must be allowed to drain as well. */
+            if(playing&&!paused&&(ending||debug(0)>=TCB_CAPACITY-BB_BATCH))Yield();
+            if(!PeekMessage(&msg,NULL,0,0,PM_REMOVE|PM_NOYIELD))continue;
             if(msg.message==WM_QUIT)break;
         }else if(!GetMessage(&msg,NULL,0,0))break;
         if(msg.message==WM_KEYDOWN){

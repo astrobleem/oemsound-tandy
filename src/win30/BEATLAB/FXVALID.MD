@@ -1,8 +1,9 @@
 # Integration validation status
 
 The Effects integration and foreground-refill correction are implemented.
-Current source compiles with MSC6 /G0 and LINK4 for Windows 3.0 real mode.
-Full native acceptance of the final foreground-refill correction is pending.
+The preceding candidate compiles with MSC6 /G0 and LINK4 for Windows3.0
+real mode. The latest refill/repaint source passes a Win16 syntax check; its
+MSC6 rebuild and full native acceptance are pending the shared emulator slot.
 Do not publish or describe the candidate as native-qualified yet.
 
 Passing host checks include:
@@ -27,22 +28,24 @@ The rebuilt MIDIMAP.DRV and MMLFIDL.EXE are byte-identical to the shipped
 authoring kit. SOUND.DRV, RAWCLK, MIDI banks and existing driver source were
 not changed. The new merger source is shared with libtandy and libwintandy.
 
-Three private HX 8088 / 7.16 MHz / 640 KB / Windows 3.0 runs exercised the preceding
-candidate. Native checks passed in-app relative and absolute FXP import,
+Private HX8088 /7.16MHz /640KB /Windows3.0 runs exercised preceding
+candidates. Native checks passed in-app relative and absolute FXP import,
 target rejection, embedded song save/load after deleting the source FXP,
 the mixed demo's initial queue/speaker claim, replay, deactivate, failure
 release and close. Native playback/pause assertions failed after the queue
-drained: `sent512->512 error4 run0`. Actual emulator audio contained the
-prepared PSG/PIT sound, but this was not a continuous playback pass.
+drained: earlier `sent512->512 error4 run0`, latest `sent160->160 error4 run0`.
+Those recordings are diagnostic evidence, not continuous playback passes.
 
-That trace identified the WM_TIMER-only refill bug. The current message loop
-services prepared audio through PeekMessage/Yield even when the GUI timer is
-delayed, in 16-state batches, with 128 prepared startup frames. The GUI-stall
-test now measures RAWCLK cycles and buffers diagnostic output in memory.
-This correction has passed host reproduction and native compilation; it
-must still complete the guarded actual 8088 UI/playback acceptance.
+The final source restores512 prepared startup frames, uses PM_NOYIELD for
+input checks, restores queue lookahead before cooperative Yield, and updates
+only five one-pixel play marks instead of repainting40 text cells every step.
+Native diagnostics now measure maximum service gap and full-paint cycles.
+The GUI-stall assertion measures RAWCLK cycles and buffers its output in RAM.
+The producer/actual-RAWCLK host model passes with the current512-frame policy.
+Independent review resolved launcher specialization, native-test reentry,
+shutdown close refusal and extracted-source launcher validation findings.
 
 Private build/run directories and source-pinned receipts are retained in the
 task workspace. Earlier failed receipts remain unchanged. FXPACK.PY requires
-matching host, clock and native PASS receipts, and refuses an unqualified
+matching host, clock, native and recorded-audio PASS receipts, and refuses an unqualified
 consumer kit. No release or publication operation has been performed.

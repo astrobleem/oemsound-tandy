@@ -16,7 +16,7 @@ from owned_job import OwnedJob,stop_owned
 here=Path(__file__).resolve().parent;repo=here.parents[2]
 out=a.out.resolve();out.mkdir();build=a.build.resolve();offset=17408
 def pin(b):return dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
-r=dict(status='NOT_RUN',fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),actions=[],bound_seconds=a.bound)
+r=dict(status='NOT_RUN',fixture='Tandy HX 8088 7.16 MHz, 640 KB, Windows 3.0 real mode, 320x200',runtime=pin((build/'BEATS.EXE').read_bytes()),harness=pin(Path(__file__).read_bytes()),capture_rates=dict(psg=48000,speaker=49716),actions=[],bound_seconds=a.bound)
 assert shutil.disk_usage(out).free>1024**3
 assert (a.seed/'DISK.IMG').stat().st_size<100*1024**2
 shutil.copyfile(a.seed/'DISK.IMG',out/'DISK.IMG')
@@ -123,7 +123,12 @@ try:
    rest(15);shot('EDITOR')
    for unused in range(5):key(0x20) # D cycles to Effects groove.
    prep=re.search(r'prepare (\d+) ms',text);ready_wait=max(2,(int(prep[1])/1000+2) if prep else 15)
-   key(0x3f);rest(min(ready_wait,55));shot('PLAYING');mark('PLAYING_BEGIN');rest(3);mark('PLAYING_END')
+   key(0x3f);rest(min(ready_wait,55));shot('PLAYING');begin=mark('PLAYING_BEGIN')
+   # Measured emulated time, not a host sleep, must exceed startup lookahead.
+   limit=time.monotonic()+40
+   while any((out/(n+'.s16le')).stat().st_size//4-begin[n+'_frames']<11*rate for n,rate in r['capture_rates'].items()):
+    assert time.monotonic()<limit,'Capture did not advance11 emulated seconds';rest(1)
+   mark('PLAYING_END')
    key(0x40);rest(.5);shot('PAUSED');mark('PAUSED_BEGIN');rest(1);assert mark('PAUSED_END')['gate']==0
    key(0x40);rest(1);mark('RESUMED_BEGIN');rest(2);mark('RESUMED_END')
    key(0x01);rest(.5);shot('STOPPED');mark('STOPPED_BEGIN');rest(1);assert mark('STOPPED_END')['gate']==0

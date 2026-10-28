@@ -34,11 +34,13 @@ replace the song's current speaker divisor, then restore its current note.
 Noise control is emitted only for a real attack, mode change or restore;
 level-only rows do not reset the LFSR. `FXBytes` is never called by Beats.
 
-Beats owns one RAWCLK session. It opens TC[B/X], prepares128 bursts
-(2.1 seconds), then starts the existing timer/bridge. The main PeekMessage
-loop replenishes in16-state batches, yielding between batches and building
-up to512 bursts (8.5 seconds). It also services messages while WM_TIMER is
-delayed. UI timing never controls notes or refills. RAWCLK emits only
+Beats owns one RAWCLK session. It opens TC[B/X], prepares512 bursts
+(8.5 seconds), then starts the existing timer/bridge. The main PeekMessage
+loop checks messages between16-state preparation batches. It uses PM_NOYIELD
+and restores lookahead before yielding, also yielding while the finite final
+queue drains. The moving play marks update five one-pixel strips rather than
+repainting40 text cells. It services audio while WM_TIMER is delayed.
+GUI timer timing never controls note deadlines. RAWCLK emits only
 prepared bytes/PIT values, with its existing bounded IRQ path. No additional
 driver, MIDI owner, timer, callbacks into the app, PCM or consumer preparation
 is introduced. An exhausted queue or timing error fails silent and releases
@@ -69,5 +71,9 @@ streaming with no GUI timer, a350ms foreground gap and pause/resume.
 `HOSTTEST.PY` retains all five original demo/MML, transactional
 save, current/archived mapper and actual PIT core regressions. `FXNATIVE.PY`
 accepts private licensed fixture paths and reuses the shared emulator lease,
-process inventory, private disk, bounded audio and owned cleanup. Host checks
+process inventory, private disk, bounded audio and owned cleanup.
+`FXAUDIO.PY --native <run>` verifies sustained PSG and speaker activity in three
+parts of a12-second playback interval, resumed activity, and pause/stop silence.
+`FXPACK.PY` requires that audio receipt and verifies its recording hashes.
+Host checks
 alone do not establish Win16 ABI, memory use, native timing or audible quality.

@@ -1,6 +1,6 @@
 """Build Tandy Beats Lab, its mapper and matching Fiddle with the shared native lease."""
 from pathlib import Path
-import argparse,hashlib,importlib.util,json,shutil,struct
+import argparse,hashlib,importlib.util,json,runpy,shutil,struct
 from importlib.machinery import SourceFileLoader
 HERE=Path(__file__).resolve().parent
 p=argparse.ArgumentParser(description=__doc__)
@@ -10,11 +10,13 @@ for n in ('BIN/CL.EXE','BIN/LINK4.EXE','BIN/MASM.EXE','LIB/SLIBCE.LIB','LIB/SLIB
  if not (tool/n).is_file():p.error('Missing external toolchain input: '+n)
 if any(c in str(out)+str(tool) for c in ('"','\n','\r')):p.error('Invalid mount path')
 if not a.lease.is_file():p.error('Existing shared lease required')
+runpy.run_path(str(HERE.parent/'EFFECTS/LAUNCPIN.PY'))['validate'](HERE.parent/'EFFECTS')
 out.mkdir(parents=True,exist_ok=False)
 files={n:HERE/n for n in ('BEATS.C','BEATPAT.C','BEATPAT.H','BEATEXP.C','BEATEXP.H','MIDIAPI.H','BEATS.DEF','BEATS.RSP','BUILD.BAT','MIDIMAP.C','MIDIMAP.DEF','MIDIMAP.RSP','ENTRY.ASM','INSTR.C','INSTR.H','PERIODS.H','BEATPLAY.C','BEATPLAY.H','BTSTART.C','BTSTART.RSP')}
 for n in ('FXCORE.C','FXCORE.H'):files[n]=HERE.parent/'EFFECTS'/n
 for n in ('FXMERGE.C','FXMERGE.H','TIMECLK.H','TCBURST.H','TCXBASS.H','PITLINK.H'):files[n]=HERE.parents[2]/'experimental/WINLIB30/SOURCE'/n
-for n in ('TPLAY.C','TPLAYPOL.H','SOUNDID.H','DOSSTAT.ASM'):files[n]=HERE.parent/'LAUNCH'/n
+for n in ('TPLAYPOL.H','SOUNDID.H','DOSSTAT.ASM'):files[n]=HERE.parent/'LAUNCH'/n
+files['TPLAY.C']=HERE.parent/'EFFECTS/TPLAY.C'
 for n in ('MMLFIDL.C','MMLFIDL.DEF','MMLFIDL.RSP','MMLCORE.C','MMLCORE.H'):files[n]=HERE.parent/'FIDDLE'/n
 if (HERE.parent/'FIDDLE/MIDIAPI.H').read_bytes()!=(HERE/'MIDIAPI.H').read_bytes():p.error('Fiddle and Beats MIDI headers differ')
 originals={n:path.read_bytes() for n,path in files.items()}

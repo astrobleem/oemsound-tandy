@@ -2,16 +2,23 @@
 No upload, release update, or publication operation is performed.
 """
 from pathlib import Path
-import argparse,hashlib,json,shutil,zipfile
+import argparse,hashlib,json,runpy,shutil,zipfile
 p=argparse.ArgumentParser(description=__doc__)
 for n in ('build','host','clock','native','out'):p.add_argument('--'+n,type=Path,required=True)
 a=p.parse_args();here=Path(__file__).resolve().parent;repo=here.parents[2]
+runpy.run_path(str(here.parent/'EFFECTS/LAUNCPIN.PY'))['validate'](here.parent/'EFFECTS')
 out=a.out.resolve();out.mkdir();kit=out/'BEATSFX';kit.mkdir()
 def pin(b):return dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
 build=json.loads((a.build/'BUILD.JSON').read_bytes())
 host=json.loads((a.host/'RESULT.JSON').read_bytes());native=json.loads((a.native/'RESULT.JSON').read_bytes())
 clock=json.loads((a.clock/'RESULT.JSON').read_bytes())
-assert host['status']==clock['status']==native['status']=='PASS'
+audio=json.loads((a.native/'AUDIO.JSON').read_bytes())
+assert host['status']==clock['status']==native['status']==audio['status']=='PASS'
+assert audio['runtime']==native['runtime']
+assert audio['validator']==pin((here/'FXAUDIO.PY').read_bytes())
+assert audio['native_result']==pin((a.native/'RESULT.JSON').read_bytes())
+assert native['harness']==pin((here/'FXNATIVE.PY').read_bytes())
+for name,wanted in audio['recordings'].items():assert pin((a.native/name).read_bytes())==wanted,name
 assert native['runtime']==build['runtimes']['BEATS.EXE']
 assert native['owned_child_stopped'] and native['lease_released'] and native['inventory_after']=='0'
 for name,relative in build['source_paths'].items():
@@ -40,11 +47,11 @@ with zipfile.ZipFile(repo/'artifacts/win30/EFFECTS.ZIP') as z:
    dest=kit/name[len('EFFECTS/'):];dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(z.read(name))
 for name in ('TWXT2.ZIP','TWSETUP.EXE'):shutil.copyfile(repo/'artifacts/win30'/name,kit/name)
 for name in ('FXGROOVE.BTS',):shutil.copyfile(a.host/name,kit/name)
-for name in ('README.MD','FXINTEG.MD','BUILD.PY','FXTEST.PY','FXCLOCK.PY','FXNATIVE.PY','FXPACK.PY'):
+for name in ('README.MD','FXINTEG.MD','BUILD.PY','FXTEST.PY','FXCLOCK.PY','FXNATIVE.PY','FXAUDIO.PY','FXPACK.PY'):
  dest=kit/'SOURCE/src/win30/BEATLAB'/name;dest.write_bytes((here/name).read_bytes())
 for path in (here/'TESTS').iterdir():
  if path.is_file():(kit/'SOURCE/src/win30/BEATLAB/TESTS').mkdir(exist_ok=True);shutil.copyfile(path,kit/'SOURCE/src/win30/BEATLAB/TESTS'/path.name)
-for relative in ('src/win30/LAUNCH/RUNDOS.PY','src/win30/DRIVER/PITCORE.H'):
+for relative in ('src/win30/LAUNCH/RUNDOS.PY','src/win30/LAUNCH/TPLAY.C','src/win30/DRIVER/PITCORE.H'):
  dest=kit/'SOURCE'/relative;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes((repo/relative).read_bytes())
 for path in (here.parent/'EFFECTS').iterdir():
  if path.is_file():
@@ -61,7 +68,7 @@ shutil.copyfile(repo/'LICENSE',kit/'LICENSE.TXT')
 go=b'@ECHO OFF\r\nIF "%1"=="" GOTO DEFAULT\r\nBTSTART %1\r\nGOTO END\r\n:DEFAULT\r\nBTSTART C:\\WINDOWS\r\n:END\r\n'
 (kit/'GO.BAT').write_bytes(go);(kit/'GOFX.BAT').write_bytes(go.replace(b'BTSTART',b'FXSTART'))
 e=kit/'EVIDENCE';e.mkdir()
-for path,name in ((a.build/'BUILD.JSON','BUILD.JSN'),(a.build/'PROCESS.JSON','BLDPROC.JSN'),(a.host/'RESULT.JSON','HOST.JSN'),(a.host/'TEST.LOG','HOST.LOG'),(a.clock/'RESULT.JSON','CLOCK.JSN'),(a.clock/'TEST.LOG','CLOCK.LOG'),(a.native/'RESULT.JSON','NATIVE.JSN'),(a.native/'BEATS.LOG','NATIVE.LOG')):shutil.copyfile(path,e/name)
+for path,name in ((a.build/'BUILD.JSON','BUILD.JSN'),(a.build/'PROCESS.JSON','BLDPROC.JSN'),(a.host/'RESULT.JSON','HOST.JSN'),(a.host/'TEST.LOG','HOST.LOG'),(a.clock/'RESULT.JSON','CLOCK.JSN'),(a.clock/'TEST.LOG','CLOCK.LOG'),(a.native/'RESULT.JSON','NATIVE.JSN'),(a.native/'AUDIO.JSON','AUDIO.JSN'),(a.native/'BEATS.LOG','NATIVE.LOG')):shutil.copyfile(path,e/name)
 for name in ('EDITOR','PLAYING','PAUSED','STOPPED'):
  if (a.native/(name+'.PNG')).is_file():shutil.copyfile(a.native/(name+'.PNG'),e/(name+'.PNG'))
 manifest={str(path.relative_to(kit)).replace('\\','/'):pin(path.read_bytes()) for path in kit.rglob('*') if path.is_file()}

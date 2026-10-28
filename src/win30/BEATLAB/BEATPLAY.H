@@ -6,7 +6,7 @@
 /* RAWCLK's literal-burst horizon is <2^31 PIT cycles. 25 minutes/session. */
 #define BB_LIMIT 90000UL
 #define BB_BATCH 16U
-#define BB_PREFILL 128U
+#define BB_PREFILL 512U
 typedef struct {
     unsigned long at;
     unsigned count,pit;
