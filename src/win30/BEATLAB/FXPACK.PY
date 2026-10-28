@@ -33,11 +33,17 @@ for evidence in (host,clock):
 for name,wanted in build['runtimes'].items():
  data=(a.build/name).read_bytes();assert pin(data)==wanted,name;(kit/name).write_bytes(data)
 release=json.loads((repo/'tools/WINAMP/RELEASE.JSN').read_bytes())
-for name in ('TWXT2.ZIP','TWSETUP.EXE','EFFECTS.ZIP'):
+for name in ('TWXT2.ZIP','TWSETUP.EXE'):
  assert pin((repo/'artifacts/win30'/name).read_bytes())==release['assets'][name],name
 with zipfile.ZipFile(repo/'artifacts/win30/TWXT2.ZIP') as z:
  for name in ('RAWCLK.DLL','TBRIDGE.EXE','RESERVE.COM'):(kit/name).write_bytes(z.read('TWXT2/'+name))
+# Effects is independently published, outside the Winamp release ledger.
+# Preserve the exact artifact tracked on current main2257b575.
+assert pin((repo/'artifacts/win30/EFFECTS.ZIP').read_bytes())==dict(bytes=1061628,sha256='41992e5ba39d50a33bef7ae241f3c5679187d3919607b17fb43556656576e2e0')
 with zipfile.ZipFile(repo/'artifacts/win30/EFFECTS.ZIP') as z:
+ effects_manifest=json.loads(z.read('EFFECTS/MANIFEST.JSN'))
+ assert effects_manifest['native']['status']=='PASS'
+ for relative,wanted in effects_manifest['files'].items():assert pin(z.read('EFFECTS/'+relative))==wanted,relative
  for name in ('RAWCLK.DLL','TBRIDGE.EXE','RESERVE.COM'):
   assert z.read('EFFECTS/'+name)==(kit/name).read_bytes(),name
  for name in ('EFFECTS.EXE','FXSTART.EXE','FXPLAY.H','MIT.TXT','COIN.FXP','COINSP.FXP','LASER.FXP','LASERSP.FXP','BOOM.FXP','BOOMSP.FXP','JUMP.FXP','JUMPSP.FXP','BLIP.FXP','BLIPSP.FXP'):
@@ -56,10 +62,12 @@ for relative in ('src/win30/LAUNCH/RUNDOS.PY','src/win30/LAUNCH/TPLAY.C','src/wi
  dest=kit/'SOURCE'/relative;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes((repo/relative).read_bytes())
 for path in (here.parent/'EFFECTS').iterdir():
  if path.is_file():
-  dest=kit/'SOURCE/src/win30/EFFECTS'/path.name;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(path.read_bytes())
+  dest=kit/'SOURCE/src/win30/EFFECTS'/path.name;dest.parent.mkdir(parents=True,exist_ok=True)
+  if not dest.exists():dest.write_bytes(path.read_bytes())
 for path in (here.parent/'FIDDLE').iterdir():
  if path.is_file():
-  dest=kit/'SOURCE/src/win30/FIDDLE'/path.name;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(path.read_bytes())
+  dest=kit/'SOURCE/src/win30/FIDDLE'/path.name;dest.parent.mkdir(parents=True,exist_ok=True)
+  if not dest.exists():dest.write_bytes(path.read_bytes())
 for relative in ('BEATMML/MIDIMAP.C','BEATMML/INSTR.C','BEATMML/INSTR.H','BEATMML/MIDIAPI.H','BEATMML/PERIODS.H','MMLFIDL/MMLCORE.C','MMLFIDL/MMLCORE.H'):
  source=repo/'experimental/PITPUBLIC/MML3AUTH/SOURCE/src/win30'/relative
  dest=kit/'SOURCE/src/win30'/relative;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(source.read_bytes())
