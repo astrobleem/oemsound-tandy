@@ -47,7 +47,7 @@ with zipfile.ZipFile(repo/'artifacts/win30/EFFECTS.ZIP') as z:
    dest=kit/name[len('EFFECTS/'):];dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(z.read(name))
 for name in ('TWXT2.ZIP','TWSETUP.EXE'):shutil.copyfile(repo/'artifacts/win30'/name,kit/name)
 for name in ('FXGROOVE.BTS',):shutil.copyfile(a.host/name,kit/name)
-for name in ('README.MD','FXINTEG.MD','BUILD.PY','FXTEST.PY','FXCLOCK.PY','FXNATIVE.PY','FXAUDIO.PY','FXPACK.PY'):
+for name in ('README.MD','FXINTEG.MD','FXVALID.MD','REFERENCE.MD','BUILD.PY','FXTEST.PY','FXCLOCK.PY','FXNATIVE.PY','FXAUDIO.PY','FXPACK.PY'):
  dest=kit/'SOURCE/src/win30/BEATLAB'/name;dest.write_bytes((here/name).read_bytes())
 for path in (here/'TESTS').iterdir():
  if path.is_file():(kit/'SOURCE/src/win30/BEATLAB/TESTS').mkdir(exist_ok=True);shutil.copyfile(path,kit/'SOURCE/src/win30/BEATLAB/TESTS'/path.name)
@@ -64,7 +64,9 @@ for relative in ('BEATMML/MIDIMAP.C','BEATMML/INSTR.C','BEATMML/INSTR.H','BEATMM
  dest=kit/'SOURCE/src/win30'/relative;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(source.read_bytes())
 shutil.copyfile(here/'FXINTEG.MD',kit/'DETAILS.TXT')
 shutil.copyfile(repo/'LICENSE',kit/'LICENSE.TXT')
-(kit/'README.TXT').write_bytes((here/'README.MD').read_bytes())
+readme=(here/'README.MD').read_bytes().replace(b'[Integration and source details](FXINTEG.MD) - [Original demo reference](REFERENCE.MD)',b'More details: DETAILS.TXT. Original demo reference: REFDEMOS.TXT.')
+(kit/'README.TXT').write_bytes(readme)
+shutil.copyfile(here/'REFERENCE.MD',kit/'REFDEMOS.TXT')
 go=b'@ECHO OFF\r\nIF "%1"=="" GOTO DEFAULT\r\nBTSTART %1\r\nGOTO END\r\n:DEFAULT\r\nBTSTART C:\\WINDOWS\r\n:END\r\n'
 (kit/'GO.BAT').write_bytes(go);(kit/'GOFX.BAT').write_bytes(go.replace(b'BTSTART',b'FXSTART'))
 e=kit/'EVIDENCE';e.mkdir()
