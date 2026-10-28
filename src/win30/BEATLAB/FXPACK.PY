@@ -67,7 +67,11 @@ shutil.copyfile(here/'FXINTEG.MD',kit/'DETAILS.TXT')
 shutil.copyfile(repo/'LICENSE',kit/'LICENSE.TXT')
 readme=(here/'README.MD').read_bytes().replace(b'[Integration and source details](FXINTEG.MD) - [Original demo reference](REFERENCE.MD)',b'More details: DETAILS.TXT. Original demo reference: REFDEMOS.TXT.')
 (kit/'README.TXT').write_bytes(readme)
-shutil.copyfile(here/'REFERENCE.MD',kit/'REFDEMOS.TXT')
+reference=(here/'REFERENCE.MD').read_text(encoding='utf-8')
+reference=reference[reference.index('## The grid'):]
+reference=reference.replace('requests supported by the existing shared SOUND service (D1 is 37 Hz).','frequencies in the normal-note table (D1 is37 Hz).')
+reference='Original demos and normal-note reference\n\nRead README.TXT for current setup, imported patches, pause and the complete kit.\nThese notes describe normal-note patterns; FX steps use embedded BTS playback.\n\n'+reference
+(kit/'REFDEMOS.TXT').write_bytes(reference.replace('\r\n','\n').replace('\n','\r\n').encode('utf-8'))
 go=b'@ECHO OFF\r\nIF "%1"=="" GOTO DEFAULT\r\nBTSTART %1\r\nGOTO END\r\n:DEFAULT\r\nBTSTART C:\\WINDOWS\r\n:END\r\n'
 (kit/'GO.BAT').write_bytes(go);(kit/'GOFX.BAT').write_bytes(go.replace(b'BTSTART',b'FXSTART'))
 e=kit/'EVIDENCE';e.mkdir()
