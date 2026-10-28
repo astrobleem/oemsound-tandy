@@ -1,0 +1,27 @@
+{
+  "capture_frame": "PLAYING.png",
+  "font_source": "C:\\Users\\chad\\Documents\\Codex\\2026-10-25\\task-4\\oemdisplay-cga\\src\\cga\\CGAFONT.PY",
+  "comparisons": {
+    "Space: pause": {
+      "x": 45,
+      "y": 72,
+      "pixel_errors": 0,
+      "total_pixels": 175,
+      "exact": true
+    },
+    "?????????": {
+      "x": 43,
+      "y": 82,
+      "pixel_errors": 47,
+      "total_pixels": 180,
+      "exact": false
+    },
+    "A:Auto B:PC P:PSG": {
+      "x": 45,
+      "y": 79,
+      "pixel_errors": 0,
+      "total_pixels": 270,
+      "exact": true
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "change": "No chord-root fills in melody rests; 58% articulation gates, long holds capped at one beat; weak repeated attacks and sixteenth passing notes removed; written riffs spaced without changing pitches or onset phase.",
+  "dropped": {
+    "sixteenth passing notes": 63,
+    "weak repeated attacks": 23,
+    "repeated bass pulses": 24
+  },
+  "chorus_clip": {
+    "before": {
+      "sounding_ms": 22652,
+      "sounding_percent": 95.3,
+      "attacks": 72,
+      "rests_over_100ms": 0,
+      "longest_rest_ms": 60
+    },
+    "after": {
+      "sounding_ms": 11054,
+      "sounding_percent": 46.5,
+      "attacks": 52,
+      "rests_over_100ms": 52,
+      "longest_rest_ms": 990
+    }
+  },
+  "events": 667,
+  "subjective_review": "Responds to Chad: first track too busy, never taking a break. Audio-input review unavailable to this agent; native waveform verification and user audition required."
+}

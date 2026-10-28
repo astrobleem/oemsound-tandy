@@ -1,0 +1,341 @@
+{
+  "exe": "DOSPLAY.EXE",
+  "bytes": 22900,
+  "sha256": "5fffde5dfa7b0354e78f24ac34568177dd4b1235d732f8a2932e507d64c92ff5",
+  "code_segments": [
+    [
+      0,
+      7
+    ],
+    [
+      16,
+      20551
+    ]
+  ],
+  "entry": "0x24ca",
+  "code_symbol_roots": 153,
+  "reachable_instructions_checked": 7705,
+  "post8088_suspects": [],
+  "indirect_branch_sites": [
+    {
+      "image_offset": "0x10e0",
+      "instruction": "jmp    *%ax"
+    },
+    {
+      "image_offset": "0x23a5",
+      "instruction": "call   *0x6a1a"
+    },
+    {
+      "image_offset": "0x3ae7",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x48b1",
+      "instruction": "call   *0x8a4"
+    },
+    {
+      "image_offset": "0x48be",
+      "instruction": "call   *0x8a4"
+    },
+    {
+      "image_offset": "0x48c2",
+      "instruction": "call   *0x8a6"
+    },
+    {
+      "image_offset": "0x48ce",
+      "instruction": "call   *0x8a4"
+    },
+    {
+      "image_offset": "0x48d2",
+      "instruction": "call   *0x8a6"
+    },
+    {
+      "image_offset": "0x1b1e",
+      "instruction": "call   *(%si)"
+    },
+    {
+      "image_offset": "0x1b30",
+      "instruction": "call   *(%si)"
+    },
+    {
+      "image_offset": "0x1bbb",
+      "instruction": "call   *(%si)"
+    },
+    {
+      "image_offset": "0x1c3d",
+      "instruction": "call   *(%si)"
+    },
+    {
+      "image_offset": "0x31c8",
+      "instruction": "call   *(%bx)"
+    },
+    {
+      "image_offset": "0x3bce",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x31ea",
+      "instruction": "lcall  *%es:(%bx)"
+    },
+    {
+      "image_offset": "0x3be9",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x3bfd",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x3c26",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x3c68",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x3c48",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x3c84",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x11f6",
+      "instruction": "call   *0x2(%bx)"
+    },
+    {
+      "image_offset": "0x444a",
+      "instruction": "call   *0x8a8"
+    },
+    {
+      "image_offset": "0x408a",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x3c98",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0x1332",
+      "instruction": "call   *0x4(%bx)"
+    },
+    {
+      "image_offset": "0x3cb5",
+      "instruction": "call   *-0x4(%bp)"
+    },
+    {
+      "image_offset": "0xed",
+      "instruction": "call   *0x6(%bx)"
+    }
+  ],
+  "far_transfer_sites": [
+    {
+      "image_offset": "0x31ea",
+      "instruction": "lcall  *%es:(%bx)"
+    }
+  ],
+  "io_and_interrupt_flag_sites": [
+    {
+      "image_offset": "0x1d2e",
+      "instruction": "pushf"
+    },
+    {
+      "image_offset": "0x1d2f",
+      "instruction": "cli"
+    },
+    {
+      "image_offset": "0x1d39",
+      "instruction": "popf"
+    },
+    {
+      "image_offset": "0x1d3f",
+      "instruction": "int    $0x10"
+    },
+    {
+      "image_offset": "0x1d4d",
+      "instruction": "int    $0x10"
+    },
+    {
+      "image_offset": "0x1d76",
+      "instruction": "out    %al,$0xc0"
+    },
+    {
+      "image_offset": "0x1d8c",
+      "instruction": "int    $0x16"
+    },
+    {
+      "image_offset": "0x1d92",
+      "instruction": "int    $0x16"
+    },
+    {
+      "image_offset": "0x1da2",
+      "instruction": "int    $0x2f"
+    },
+    {
+      "image_offset": "0x1daf",
+      "instruction": "int    $0x2f"
+    },
+    {
+      "image_offset": "0x1eb6",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x1eec",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x1f56",
+      "instruction": "in     (%dx),%al"
+    },
+    {
+      "image_offset": "0x1f5e",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x1f6b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x1f78",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x1f88",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x1f96",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2428",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2465",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2477",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x25ce",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2606",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x26f9",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x270e",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x271a",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x272a",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2758",
+      "instruction": "out    %al,(%dx)"
+    },
+    {
+      "image_offset": "0x275b",
+      "instruction": "cli"
+    },
+    {
+      "image_offset": "0x275d",
+      "instruction": "sti"
+    },
+    {
+      "image_offset": "0x289b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2e30",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x35df",
+      "instruction": "pushf"
+    },
+    {
+      "image_offset": "0x3a18",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x4858",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x486b",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x4f22",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2557",
+      "instruction": "sti"
+    },
+    {
+      "image_offset": "0x167e",
+      "instruction": "pushf"
+    },
+    {
+      "image_offset": "0x1683",
+      "instruction": "cli"
+    },
+    {
+      "image_offset": "0x1696",
+      "instruction": "popf"
+    },
+    {
+      "image_offset": "0x4fcb",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x29ae",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x502f",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x29ca",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x29e2",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x29f0",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2aa8",
+      "instruction": "int    $0x21"
+    },
+    {
+      "image_offset": "0x2ab3",
+      "instruction": "int    $0x21"
+    }
+  ],
+  "MZ_minimum_extra_paragraphs": 1831,
+  "MZ_maximum_extra_paragraphs": 65535,
+  "static_image_bss_stack_bytes": 52112,
+  "scope": "Control-flow reachability from MZ entry and all public CODE symbols including handlers, direct near calls and conditional branches. Runtime indirect targets, CRT dispatch tables, external BIOS/DOS instructions and unreachable bytes excluded. Build C16 -0 and WASM -0 complement this scoped audit; not hardware certification."
+}

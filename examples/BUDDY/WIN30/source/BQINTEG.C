@@ -5,6 +5,20 @@
 
 typedef unsigned long DWORD;
 typedef unsigned char BYTE;
+typedef unsigned short WORD;
+#define SP_CAPACITY 1024
+#define HFILE_ERROR (-1)
+typedef struct {DWORD at;WORD divisor;} SPSTATE;
+static SPSTATE prepared[SP_CAPACITY];
+#include "SPEAKER.H"
+static WORD loadedCount;
+static DWORD loadedEnd;
+static WORD clockLoad(SPSTATE *p,WORD n,DWORD end) {
+    CHECK(p==prepared&&n>1&&n<=SP_CAPACITY);
+    CHECK(p[0].at==0&&p[n-1].at==end&&!p[n-1].divisor);
+    loadedCount=n;loadedEnd=end;return 0;
+}
+static void _lclose(int f){CHECK(f==1);}
 typedef BQSTATE MUSICSTATE;
 #define MUSIC_HEADER 20
 #define RECORD_SIZE 14
@@ -14,13 +28,19 @@ typedef BQSTATE MUSICSTATE;
 
 static BQSCHED queue;
 static int mode=3,queueReady,queueBlocked,finished,lastError;
+static int speaker,serviceOpened,playing=1;
+static DWORD serviceNow;
+static unsigned speakerNote;
+static void speakerPlay(unsigned n){speakerNote=n;}
+static DWORD clockRead(void){return serviceNow;}
+static unsigned clockDebug(unsigned n){(void)n;return 0;}
 static int nextValid,musicFile=1;
 static DWORD timelineBase,playEnd,startTick,lastElapsed,wallNow;
 static DWORD eventCount,recordsRead,previousEvent;
 static DWORD appliedEvents,skippedEvents,maxLateness,totalLateness;
 static DWORD maxMusicRead,duration;
 static MUSICSTATE current,nextState;
-static BYTE musicBuffer[MUSIC_CHUNK*RECORD_SIZE],raw[8192];
+static BYTE musicBuffer[MUSIC_CHUNK*RECORD_SIZE],raw[16384];
 static unsigned bufferCount,bufferIndex;
 static unsigned offset,rawBytes,directCount;
 static DWORD directMessages[2048];
@@ -131,9 +151,37 @@ static void QueuedSource(void)
     CHECK(movieNow()==150);
     wallNow=2000;CHECK(movieNow()==500);
 }
-int main(void)
+static void SpeakerReconstruction(const char *filename)
 {
-    ImmediateBacklog();Reconstruction();QueuedSource();
+    FILE *f=fopen(filename,"rb");unsigned targets[8]={0,1,35652,63395,87174,100000,200365,241399};
+    unsigned t,i,n,wanted=0;DWORD target;MUSICSTATE seed;
+    CHECK(f!=NULL);rawBytes=(unsigned)fread(raw,1,sizeof(raw),f);fclose(f);
+    CHECK(rawBytes==9358);eventCount=longAt(raw+8);duration=longAt(raw+12);
+    CHECK(eventCount==667&&duration==241400);speaker=1;
+    for(t=0;t<8+eventCount;t++) {
+        target=t<8?targets[t]:longAt(raw+MUSIC_HEADER+(t-8)*RECORD_SIZE);
+        timelineBase=target;playEnd=duration;musicFile=1;
+        CHECK(musicAt(target,&seed));CHECK(prepareSpeaker(&seed));
+        CHECK(musicFile==HFILE_ERROR&&loadedEnd==duration-target);
+        wanted=0;n=1;
+        for(i=0;i<eventCount;i++) {
+            BYTE *p=raw+MUSIC_HEADER+i*RECORD_SIZE;DWORD at=longAt(p);
+            if(at<=target)wanted=speakerPeriods[p[5]];
+            else if(at<duration) {
+                CHECK(prepared[n].at==at-target);
+                CHECK(prepared[n++].divisor==speakerPeriods[p[5]]);
+            }
+        }
+        CHECK(prepared[0].divisor==wanted&&loadedCount==n+1);
+    }
+    serviceOpened=1;timelineBase=100;playEnd=500;serviceNow=123;
+    CHECK(movieNow()==223);serviceNow=600;CHECK(movieNow()==500);
+    serviceOpened=0;speaker=0;
+}
+int main(int argc,char **argv)
+{
+    CHECK(argc==2);
+    ImmediateBacklog();Reconstruction();QueuedSource();SpeakerReconstruction(argv[1]);
     printf("PASS: %u checks of actual TINYVID scheduling functions\n",
         checks);
     return 0;

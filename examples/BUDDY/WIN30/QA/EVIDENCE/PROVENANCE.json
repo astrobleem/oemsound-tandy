@@ -1,0 +1,157 @@
+{
+  "HOST-BQ.json": {
+    "original": "test-integrated-05\\RESULT.JSON",
+    "bytes": 297,
+    "sha256": "cc5f05712585e54b458e6ad087008a4c68df3d29a4c0aef3c22f5f2a9be91de7"
+  },
+  "HOST-SERVICE.json": {
+    "original": "test-services-03\\RESULT.JSON",
+    "bytes": 408,
+    "sha256": "a0b79f6214d56521d7c63527fccd36e5c007296c24aaaa1d1d6331967bf50dbe"
+  },
+  "HOST-INSTALL.json": {
+    "original": "test-installer-06\\RESULT.JSON",
+    "bytes": 4271,
+    "sha256": "49935f63bc03642526c0987ca057d2cec657850e17c97249ef9902f4d0620a2b"
+  },
+  "LAYOUT-ONLY.json": {
+    "original": "LAYOUT-ONLY-08.json",
+    "bytes": 637,
+    "sha256": "04c3196e28f0b0d628501232c2161728eb56d49791cdf7697d150e7da3415909"
+  },
+  "FINAL-BUILD.json": {
+    "original": "build-integrated-08\\RESULT.JSON",
+    "bytes": 4498,
+    "sha256": "b5b8194bd1406c137eedc1a3b0285e2ceb60955dcf79f9fc81c3465962b6f6bd"
+  },
+  "FAST-RESULT.json": {
+    "original": "native-integrated-fastfull-06\\RESULT.json",
+    "bytes": 19883,
+    "sha256": "bd7f26974c4b15660e0122f45b14aceb6e9a64c5dddc7c0bfa82a46c387643ea"
+  },
+  "FAST-PCM.json": {
+    "original": "native-integrated-fastfull-06\\PCM-FULL-CHECK.json",
+    "bytes": 105640,
+    "sha256": "1fc11251f5612dbc1f7ae758ccef72152a6fdd4567de1cd43ac0c162987e9e7c"
+  },
+  "FAST-SYNC.json": {
+    "original": "native-integrated-fastfull-06\\ABSOLUTE-SYNC-CHECK.json",
+    "bytes": 524,
+    "sha256": "208802892d47c7424cdf768a485ad8cbe6f4846b855cab918dd459ab8d9ec305"
+  },
+  "FAST-CONTENT.json": {
+    "original": "native-integrated-fastfull-06\\CONTENT-SAMPLES.json",
+    "bytes": 2033,
+    "sha256": "18f4b9900dd7ffa450fedb54657140ed4d20adf86e6f8f44c8acc8e915dcc1c1"
+  },
+  "FAST-TEXT.json": {
+    "original": "native-integrated-fastfull-06\\TEXT-NATURAL.json",
+    "bytes": 599,
+    "sha256": "65211fe46fbbcf31fc65b03b780ee7dfac5e820742a9b5d94c5632227a6eff62"
+  },
+  "FAST-NATURAL.LOG": {
+    "original": "native-integrated-fastfull-06\\NATURAL.LOG",
+    "bytes": 1080,
+    "sha256": "a8733629bbe7d775eb56a88a0045bc948bdc38cb3760f37b837cfee0d8b6e86e"
+  },
+  "FAST-BROKER.OUT": {
+    "original": "native-integrated-fastfull-06\\BROKER.OUT",
+    "bytes": 58,
+    "sha256": "f69241f0a880e369b0a93c9babd5436e643cb7924f52ce137ce48b48cf81116a"
+  },
+  "FAST-DONE.png": {
+    "original": "native-integrated-fastfull-06\\NATURAL.png",
+    "bytes": 2058,
+    "sha256": "a5e884b2d17034b4f31e235aa97d6dca2ca625afdce428005af0e9f863bae457"
+  },
+  "PSG-FULL.json": {
+    "original": "native-integrated-cardfull-04\\RESULT.json",
+    "bytes": 17158,
+    "sha256": "469bc8c3a81aac91f8183dcaa3639e38a120265dcd55716c760364a58b011ddf"
+  },
+  "PSG-PCM.json": {
+    "original": "native-integrated-cardfull-04\\PSG-PCM-CHECK.json",
+    "bytes": 222,
+    "sha256": "5a66c8dd2f667c58d31138039fce2cbf2e2291cdf615325e714bdf7e24268fe3"
+  },
+  "PSG-SILENT.json": {
+    "original": "native-integrated-cardfull-04\\PSG-SILENCE-CHECK.json",
+    "bytes": 562,
+    "sha256": "6e6ac3be72322a9d84d1fa75c4ceccc7190e0eeb02aea5a2dc9332388419e9cb"
+  },
+  "PSG08-RAW.json": {
+    "original": "native-integrated-card-01\\RESULT.json",
+    "bytes": 17237,
+    "sha256": "dea9415dd2229ea23f9f516a369eb60a8e8d9686e4907eb45978545f928561bb"
+  },
+  "PSG08-QUAL.json": {
+    "original": "native-integrated-card-01\\QUALIFICATION.json",
+    "bytes": 2014,
+    "sha256": "4b10238e916893b93f027b6e5d2810ed7fd2ff353976625a9ba3820db6560e4c"
+  },
+  "PSG08-TEXT.json": {
+    "original": "native-integrated-card-01\\TEXT-PLAYING.json",
+    "bytes": 594,
+    "sha256": "329fd6dbcc84d856d921dc06e522961a245f4f9aaf1d142975436264a17912cf"
+  },
+  "PSG08-PLAY.png": {
+    "original": "native-integrated-card-01\\PLAYING.png",
+    "bytes": 2222,
+    "sha256": "6f1819b3f07c47447728fbf42381e4f5b3fb52cc264c14a3f7a456022a4d6be8"
+  },
+  "INSTALL-FRESH.json": {
+    "original": "native-integrated-installed-02\\FRESH-QUALIFICATION.json",
+    "bytes": 1342,
+    "sha256": "065e80084510ccf4c332b1cca235b00f1a2382f9b4f9d0beba3db6ea41ee66f6"
+  },
+  "INSTALL-RAW.json": {
+    "original": "native-integrated-installed-02\\RESULT.json",
+    "bytes": 2815,
+    "sha256": "ed876e58ad9542fa148b391f22d34e52e0c6857e160abb5da8c915f9f8350ab6"
+  },
+  "STOCK-RAW.json": {
+    "original": "native-integrated-installed-03\\RESULT.json",
+    "bytes": 3367,
+    "sha256": "8768cc2ee8f299cdb7e9e7b488df2697f7663d1eaa35a2aa5d5cc4332e77e2b0"
+  },
+  "STOCK-QUAL.json": {
+    "original": "native-integrated-installed-03\\QUALIFICATION.json",
+    "bytes": 1982,
+    "sha256": "13baf6349ed49059292e927501681178386e36d6fe99bb3f5be1bd9345549fc2"
+  },
+  "STOCK-NATURAL.LOG": {
+    "original": "native-integrated-installed-03\\NATURAL.LOG",
+    "bytes": 1080,
+    "sha256": "2a31c7745714c6b9550e549ce3138ebf26390cf4df0f88dd0c652a0bbe25b1cf"
+  },
+  "MENU09-BUILD.json": {
+    "original": "build-integrated-09/RESULT.JSON",
+    "bytes": 4498,
+    "sha256": "43f5e5fc1cbc833db9618966b54564fd28efb892f566ac4fd5a46041600ff740"
+  },
+  "MENU-BEFORE.json": {
+    "original": "test-menu-before-01/RESULT.JSON",
+    "bytes": 328,
+    "sha256": "f057be76f574b775c4ea87a6f872abe61d68a1cb7e5de92d59eaaa25dd82bc09"
+  },
+  "MENU-AFTER.json": {
+    "original": "test-menu-after-01/RESULT.JSON",
+    "bytes": 327,
+    "sha256": "2ccf447b279b83c6d4875ba6fd00a9629fd6a7481b046feadc94563561720fc3"
+  },
+  "MENU-BEFORE.LOG": {
+    "original": "test-menu-before-01/TEST.LOG",
+    "bytes": 137,
+    "sha256": "afbf1c3a2c335f6350e35ae9d8f13a3a04f425fb03b7aacab7c041e47e3ede35"
+  },
+  "MENU-AFTER.LOG": {
+    "original": "test-menu-after-01/TEST.LOG",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "REVIEW-2d5ed.json": {
+    "original": "C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task-2\\BUDDY-REVIEW-2d5ed5ff.json",
+    "bytes": 2969,
+    "sha256": "d95073d87e934862e590d7d0ee585d229c8bfb0c2372d2747ee9eb296a0ee7c3"
+  }
+}

@@ -3,11 +3,13 @@ on:
   pull_request:
     paths:
       - 'examples/BUDDY/WIN30/source/**'
+      - 'examples/BUDDY/WIN30/host/TESTMENU.PY'
       - '.github/workflows/buddy-queue.yml'
   push:
     branches: [main]
     paths:
       - 'examples/BUDDY/WIN30/source/**'
+      - 'examples/BUDDY/WIN30/host/TESTMENU.PY'
       - '.github/workflows/buddy-queue.yml'
 permissions:
   contents: read
@@ -19,7 +21,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-          sparse-checkout: examples/BUDDY/WIN30/source
+          sparse-checkout: examples/BUDDY/WIN30
       - name: Test C89 client logic with a synthetic backend
         shell: pwsh
         run: |
@@ -35,4 +37,7 @@ jobs:
           python examples/BUDDY/WIN30/source/TESTBQ.PY `
             --cc $cc --out host-results
           if ($LASTEXITCODE -ne 0) { throw 'Client contract tests failed.' }
-      # Host logic only. No native driver, emulator, media or binary artifacts.
+          python examples/BUDDY/WIN30/host/TESTMENU.PY `
+            --cc $cc --out menu-results
+          if ($LASTEXITCODE -ne 0) { throw 'Menu pause regression failed.' }
+      # Host logic and the small written score only. No emulator or native build.

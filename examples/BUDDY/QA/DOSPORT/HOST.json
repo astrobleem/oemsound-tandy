@@ -1,0 +1,20 @@
+{
+  "status": "HOST_PASS_NATIVE_PENDING",
+  "psg_states": 1342,
+  "psg_bytes_identical": 10269,
+  "speaker_states": 667,
+  "speaker_ports_only": [
+    "0x42",
+    "0x43",
+    "0x61"
+  ],
+  "upper_port61_bits_preserved": true,
+  "silent_backend_writes": 0,
+  "modeled_max_late_ms": 8,
+  "exe_bytes": 22900,
+  "exe_sha256": "5fffde5dfa7b0354e78f24ac34568177dd4b1235d732f8a2932e507d64c92ff5",
+  "library_sources": {
+    "lt_chip.c": "277505ef3f6c0eaa6e0aa51c1f7577f6420bb25c0b33726431c7413fd9998148",
+    "lt_tick_dos.c": "0e300fb6a5b54573932a5fba5cffa361bb3f0cc7a5316e96bce22c9be3065843"
+  }
+}

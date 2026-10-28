@@ -1,0 +1,8 @@
+system windows dll
+name MIDIMAP.DRV
+option map=MIDIMAP.MAP
+option start=LibEntry
+segment type code fixed preload
+segment type data fixed preload
+file ENTRY.obj,MIDIMAP.obj
+export DRIVERPROC.1,MIDIMESSAGE.2,MODMESSAGE.3,WEP,DEBUGSTATE

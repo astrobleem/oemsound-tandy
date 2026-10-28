@@ -1,0 +1,24 @@
+{
+  "estimated_movie_epoch_seconds": 91.38127777777777,
+  "intro": {
+    "samples": 3072000,
+    "peak": 0,
+    "rms": 0.0,
+    "nonzero": 0
+  },
+  "song": {
+    "samples": 15360000,
+    "peak": 2895,
+    "rms": 1043.098081645889,
+    "nonzero": 13068690
+  },
+  "outro": {
+    "samples": 3552000,
+    "peak": 0,
+    "rms": 0.0,
+    "nonzero": 0
+  },
+  "post_close_peak": 0,
+  "method": "Actual C0 PSG mixer; safe interior windows avoid coarse USER-clock edge uncertainty. No inferred pitch or subjective quality claim.",
+  "passed": true
+}

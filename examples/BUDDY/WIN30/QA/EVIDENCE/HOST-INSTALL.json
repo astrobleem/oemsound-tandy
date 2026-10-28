@@ -1,0 +1,119 @@
+{
+  "passed": true,
+  "checks": 12,
+  "fixture": "C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b",
+  "files_retained": true,
+  "scope": "Actual installer C on host Windows; does not establish DOS ABI",
+  "cases": [
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "output": "Buddy Windows installer - fresh directory only\nVerified 16 files in C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\SOURCE\nInstalling 3082846 bytes to C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST\nVerified 16 files in C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST\nInstalled. In Windows, use File/Run and select TINYVID.EXE there.\nB = PC speaker; P = configured Tandy-compatible C0 card; A = Auto.\nNo system files, INI files, PATH or boot files were changed.\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "/CHECK",
+        "C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "output": "Buddy Windows installer - fresh directory only\nVerified 16 files in C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST"
+      ],
+      "exit": 4,
+      "expected": 4,
+      "output": "Buddy Windows installer - fresh directory only\nVerified 16 files in C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\SOURCE\nTarget exists. Choose a new directory; nothing overwritten.\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\BAD"
+      ],
+      "exit": 3,
+      "expected": 3,
+      "output": "Buddy Windows installer - fresh directory only\nContent mismatch: C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\SOURCE\\ATTRIB.TXT\nSource check failed; nothing installed.\n"
+    },
+    {
+      "exe": "FAULT",
+      "args": [
+        "C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\BAD"
+      ],
+      "exit": 5,
+      "expected": 5,
+      "output": "Buddy Windows installer - fresh directory only\nVerified 16 files in C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\SOURCE\nInstalling 3082846 bytes to C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\BAD\nInstall failed; new files rolled back.\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\"
+      ],
+      "exit": 2,
+      "expected": 2,
+      "output": "Buddy Windows installer - fresh directory only\nUse an absolute DOS 8.3 directory (no dots or spaces).\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\BAD\\..\\X"
+      ],
+      "exit": 2,
+      "expected": 2,
+      "output": "Buddy Windows installer - fresh directory only\nUse an absolute DOS 8.3 directory (no dots or spaces).\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\TOOLONG99"
+      ],
+      "exit": 2,
+      "expected": 2,
+      "output": "Buddy Windows installer - fresh directory only\nUse an absolute DOS 8.3 directory (no dots or spaces).\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "relative"
+      ],
+      "exit": 2,
+      "expected": 2,
+      "output": "Buddy Windows installer - fresh directory only\nUse an absolute DOS 8.3 directory (no dots or spaces).\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\BAD.EXT"
+      ],
+      "exit": 2,
+      "expected": 2,
+      "output": "Buddy Windows installer - fresh directory only\nUse an absolute DOS 8.3 directory (no dots or spaces).\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "C:\\A B"
+      ],
+      "exit": 2,
+      "expected": 2,
+      "output": "Buddy Windows installer - fresh directory only\nUse an absolute DOS 8.3 directory (no dots or spaces).\n"
+    },
+    {
+      "exe": "BUDSET",
+      "args": [
+        "/CHECK",
+        "C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST"
+      ],
+      "exit": 3,
+      "expected": 3,
+      "output": "Buddy Windows installer - fresh directory only\nContent mismatch: C:\\Users\\chad\\AppData\\Local\\Temp\\BW0da57b\\INST\\SPEAKER.WZM\n"
+    }
+  ]
+}

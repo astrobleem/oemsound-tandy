@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "models": {
+    "CLOCKQA": "PASS 160 checks; bounded resident state playback and teardown",
+    "FASTQA": "PASS 692 checks: 668 full-song states, 4629 broker callbacks, max late 0 ms, 1 DOS suspend; teardown clean",
+    "PSGQA": "PASS 27 checks; explicit hardware selection, shared lease and clean PSG release"
+  },
+  "scope": "Host models, not Win16 ABI or physical timing"
+}

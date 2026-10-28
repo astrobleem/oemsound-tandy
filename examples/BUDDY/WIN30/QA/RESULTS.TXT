@@ -1,0 +1,105 @@
+WINDOWS BUDDY - LOCAL INTEGRATION QUALIFICATION
+
+Final TINYVID.EXE: 75f5ad886312110526e401c09e2613effdb519077858e06cfb0b7a27cbaf73f0
+18,430 bytes; Open Watcom 1.9, 8086 small model, build-integrated-09.
+The final NE code segment is 14,568 bytes; minimum data is 12,896 bytes,
+with separate 2,048-byte heap and 4,096-byte stack. This is not total RAM use.
+All tests below are existing completed evidence; no repeat playback queued.
+Profiles: emulated IBM XT/8088 4.77 MHz, 640 KB, RAM-speed XTIDE, Windows
+3.0 real mode, CGA 160x100/16 colors with compact fonts. Explicit PSG uses
+an emulated ISA Tandy-compatible sound card at C0 independently of CGA.
+No physical-machine, protected-mode or slow/removable-media qualification.
+
+REVIEW FOLLOW-UP: build09 only adds WM_INITMENU pause/release to WndProc.
+It fixes mouse system-menu entry while focus remains on the player.
+The exact-source host regression fails before and passes after the change,
+covering mouse and keyboard entry, idempotence, dismissal without restart,
+and release-failure owner retention. Code grows 26 bytes, data is unchanged,
+and all four helper binaries are identical. Prior native metrics below
+remain version-pinned evidence; no native menu test or full replay is claimed.
+MENU09-BUILD.json is the final build; FINAL-BUILD.json preserves native08.
+The focused fix addresses the review finding; publication was approved
+by Chad on 2026-10-28. No new native menu behavior test is claimed.
+The runtime and installer CRC manifest are regenerated for build09; the
+native fresh-install receipt below qualifies the prior build08 payload and
+same CRC kernel, not a new native installation of build09.
+
+FULL FAST SPEAKER: native-integrated-fastfull-06, build07
+241400 ms, 940 rendered / 26 dropped frames, last source frame 965.
+668 prepared states, 0 skipped, 337 note-ons / 337 offs. Full controller:
+pause/resume, paused +/-seek, minimize, focus, Escape, close, normal DOS
+return and broker unload passed (QA_DONE 0000). Owner/timer/gate/hooks clear,
+IRQ0 restored, no cleanup/video/music errors. The exact same four helper
+binaries are used in final08; LAYOUT-ONLY.json compares 14 production
+audio/video function bodies byte-for-byte: final08 only changes font-aware
+window width/position and the paused status label relative to build07.
+Original mixer PCM at 49,716 Hz matches all 337 written pitches, 328 rests
+over 100 ms and eight continuous pitch changes. Maximum observed late
+attack after a rest is 3.83 ms, after anchoring the first written attack.
+This is audio event timing, not a 3.83-ms video sync claim. Absolute native
+clock versus last GUI trace (738 samples) spans -14.8..297.2 ms, median
+142.7 ms; traces can be stale while GDI is blitting. Video still uses USER.
+
+FULL C0 PSG: native-integrated-cardfull-04, build06
+241400 ms, 952 frames / 14 drops; one seeded state plus 1341 following
+states, none skipped. Maximum foreground event lateness 249 ms. All eight
+controller cases and normal DOS return passed; owner/mask/PSG lease clear.
+Actual synthesized PSG PCM is silent in intro, outro and after close.
+The exact mapper is retained in final08. The subsequent startup improvement
+paints the initial window/picture before starting any audio epoch.
+
+FINAL08 PSG SONG/CONTROLS: native-integrated-card-01
+35.652..200.365 s complete song, 648 frames / 12 drops, all due states
+applied in order, maximum lateness 273 ms. All controller actions and normal
+DOS return passed, QA_DONE 0000, owner/mask/lease clear. Tested restart
+lateness improved from the earlier 700..789 ms to 148..217 ms. Paused seek
+has no audio acquisition or applied events. Exact native status/device glyph
+comparison has zero pixel differences; no literal question-mark row remains.
+Raw observer RESULT.json is FAILED because it expected the older private
+demo H chorus endpoint. Integrated H is documented automatic song playback.
+QUALIFICATION.json records this correction; the failed receipt is unchanged.
+
+FINAL08 INSTALLED STOCK SPEAKER: native-integrated-installed-03
+Full 241400 ms, 965 frames / 1 drop, 668 states / 0 skipped, 337 ons/offs.
+Resident SYSTEM service maximum logical lateness 54 ms / service gap 55 ms.
+Natural end records owner/timer/gate zero, IRQ0 unchanged and no errors.
+This run was stopped at Chad's request, canceling remaining controller
+restarts. Raw RESULT is incomplete; full natural playback had already
+reached Done. No stock controller-suite or normal-DOS-return claim is made.
+Do not relabel the canceled receipt as a completed suite.
+
+NATIVE FRESH INSTALL: native-integrated-installed-02
+Optimized 8086 CRC kernel verified all 16 source files (3,082,846 bytes),
+copied to new C:\BWNEW2, verified all targets and returned success. All
+16 independent SHA256 readbacks match the package. AUTOEXEC wrote USER.DAT
+only after the IF ERRORLEVEL 1 success gate. The later redundant native
+CRC/negative commands were stopped, so that matrix remains unqualified.
+Twelve host filesystem/installer cases pass, including malformed source,
+existing target and failure rollback. The host uses the portable CRC C
+fallback; the actual assembly kernel is qualified by the native full-copy
+CRC check. It changes no global system/INI/boot/PATH files.
+
+HOST EVIDENCE
+test-integrated-05: 1029 synthetic queue/client checks and 457386 checks
+of actual production scheduling functions, including all speaker boundaries.
+test-services-03: CLOCK 160, FAST 692, PSG 27 ownership/failure checks.
+test-faults-09: CLEANUP, VIDEOIO, AUTO, PAUSESEEK, SELECTOR, STARTORDER pass.
+test-installer-06: all 12 filesystem cases pass. Host models do not prove
+Win16 calling conventions, hardware timing or subjective musical quality.
+
+SCOPE AND REVIEW
+Auto selects PSG only for recognized Tandy ROM; an idle lease is not card
+detection. Generic CGA defaults to the speaker, with explicit P for a known
+C0 card. The speaker is one fixed-amplitude PIT2 voice with written rests.
+Fast speaker uses the current libwintandy broker/hook with HiAudio(0), a
+strict known SYSTEM hook and one SOUND owner; stock prepared fallback does
+not reprogram IRQ0. PSG retains ordered USER dispatch and shared lease;
+the optional queue ABI is a source contract, not an implemented PSG bridge.
+AdLib and General MIDI are not implemented. No canonical SOUND/MIDI engine
+or driver replacement is included. Original video frames are preserved;
+WZP merely rearranges the approved WZV encoding into lossless native planes.
+Source review identified mouse-menu pause; the focused fix/regression is
+recorded above. Chad approved paired publication on 2026-10-28.
+Earlier failed/superseded runs and raw media remain preserved in the private
+workspace. EVIDENCE contains selected unmodified receipts, corrections,
+logs and genuine screenshots, with original-path/SHA256 provenance.

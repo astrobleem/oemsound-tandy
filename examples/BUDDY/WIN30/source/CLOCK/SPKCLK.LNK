@@ -1,0 +1,10 @@
+system windows dll
+name SPKCLK.DLL
+option map=SPKCLK.MAP
+option start=LibEntry
+segment type code fixed preload
+segment type data fixed preload
+file SPKENTRY.obj,SPKCLK.obj
+import CREATESYSTEMTIMER SYSTEM.2
+import KILLSYSTEMTIMER SYSTEM.3
+export WEP.1 resident

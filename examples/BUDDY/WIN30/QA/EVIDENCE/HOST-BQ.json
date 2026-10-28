@@ -1,0 +1,8 @@
+{
+  "pass": true,
+  "results": [
+    "PASS: 1029 synthetic queue/client contract checks",
+    "PASS: 457386 checks of actual TINYVID scheduling functions"
+  ],
+  "scope": "C89 scheduling logic with a synthetic backend; not Win16 ABI, native timing, hardware, or listening qualification"
+}

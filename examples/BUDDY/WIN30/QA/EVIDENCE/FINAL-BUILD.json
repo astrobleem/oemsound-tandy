@@ -1,0 +1,106 @@
+{
+  "pass_build": true,
+  "compiler": "Open Watcom / 8086 small model",
+  "scope": "App-local Buddy only; published SOUND/MIDI engine unchanged",
+  "inputs": {
+    "examples/BUDDY/WIN30/source/TINYVID.C": "e40cf3bd2da130b86a535f6487040f8e8c5744abe1ade611d333d0802d74d81f",
+    "examples/BUDDY/WIN30/source/TINYVID.LNK": "542eaf1ae177fd9958688e164263b9911f0dc58662731daca01b42f29c07511c",
+    "examples/BUDDY/WIN30/source/BQSCHED.C": "49b3163d883d36f0731ea649971927bf962597109eef2a7269d7f7668cf75873",
+    "examples/BUDDY/WIN30/source/BQSCHED.H": "5789b1cdbb5b88e880a336ef6368bdafd084b4654aae1a07ee7d4ff3d679213a",
+    "examples/BUDDY/WIN30/source/SPKAPI.H": "4325727765a78149e9d4f8472cafbd9c276c299e5b69541f6bbdeb9d65f6526b",
+    "examples/BUDDY/WIN30/source/SPEAKER.H": "a5c37f22a9c01c57591d70711263729ddaaa786be5749144751b8529df28d467",
+    "examples/BUDDY/WIN30/DRIVER/MIDIAPI.H": "9ccc2fb5e1d4fecebef362ffe3ec52cfac59e381a95aaa4e9e79702c16460713",
+    "examples/BUDDY/WIN30/source/CLOCK/SPKCLK.C": "e1135e3b35107d2642cc6ffce75698e03d9a2c2e8107e9e48b2af81dec912ebc",
+    "examples/BUDDY/WIN30/source/CLOCK/SPKENTRY.ASM": "23e608a995def7fa6fb03b2807302c2f578fe469d88a104e4b4103241957eaf8",
+    "examples/BUDDY/WIN30/source/CLOCK/SPKCLK.LNK": "c458cc0c52eb9cc69be5995d1588c8b0d4ede30da75c7359acb652ac25f9174b",
+    "examples/BUDDY/WIN30/source/CLOCK/SPKAPI.H": "4325727765a78149e9d4f8472cafbd9c276c299e5b69541f6bbdeb9d65f6526b",
+    "examples/BUDDY/WIN30/source/FASTCLK/FASTCLK.C": "6cc28a5caefd7d4ce8661de19ad927950c68f03ba0128c84c06a8e4efe6bf214",
+    "examples/BUDDY/WIN30/source/FASTCLK/FASTENT.ASM": "d8741c7153b32a0e0577e226eb5eca87091deca1f5a9eb5312076d12690e8c80",
+    "examples/BUDDY/WIN30/source/FASTCLK/SPKFAST.LNK": "6efdfabc72fcb907cfed3c9754b2367e83272a672fd46cc44eecc5f28e88db16",
+    "examples/BUDDY/WIN30/source/FASTCLK/SPKAPI.H": "4325727765a78149e9d4f8472cafbd9c276c299e5b69541f6bbdeb9d65f6526b",
+    "experimental/WINLIB30/SOURCE/WINHOOK.ASM": "6e44cbcb0ce6eb2a29f039aaebd5dc6534ba76d5f1648780c5010b2ae94a3520",
+    "examples/BUDDY/WIN30/DRIVER/MIDIMAP.C": "06797ed1bc7c8df8cdfe4d89e2f7b26b9cd4c449c3c1063bfdbe493a432c646f",
+    "examples/BUDDY/WIN30/DRIVER/PERIODS.H": "cd1d851db6e99a8537e5ba07bc151dd0b89c8d34423e9521f1ab164b26ac20e1",
+    "examples/BUDDY/WIN30/DRIVER/ENTRY.ASM": "c665e4a918c5b58894e512527a2f7a15fe718d41cc57f96064cf7715da6b99c2",
+    "examples/BUDDY/WIN30/DRIVER/MIDIMAP.LNK": "5f0938be634c2c41088f4ad049ce2f04b688959da3b50632c48cba567426b6d9",
+    "experimental/WINLIB30/SOURCE/TBRIDGE.ASM": "35589608781d651d8a42b31fdd84a2f2745baee3fc11c4b3acb1bfe65a4446af"
+  },
+  "binaries": {
+    "TINYVID.EXE": {
+      "bytes": 18404,
+      "sha256": "845d9476179dba5e8be865f9434701d519f6db2c17471e6d0be1361281f7947c",
+      "segments": [
+        {
+          "bytes": 14542,
+          "minimum": 14542,
+          "data": false,
+          "movable": false
+        },
+        {
+          "bytes": 2076,
+          "minimum": 12896,
+          "data": true,
+          "movable": false
+        }
+      ]
+    },
+    "SPKCLK.DLL": {
+      "bytes": 2384,
+      "sha256": "28e55f33c14b6080082505c2a50e72be94a4711e14649a0e023e8f87855e847d",
+      "segments": [
+        {
+          "bytes": 1812,
+          "minimum": 1812,
+          "data": false,
+          "movable": false
+        },
+        {
+          "bytes": 8,
+          "minimum": 6352,
+          "data": true,
+          "movable": false
+        }
+      ]
+    },
+    "SPKFAST.DLL": {
+      "bytes": 4660,
+      "sha256": "d95a5f34c5348fc8ce4a018a00cf894c8679cad052a9e41e305c8f3c54ebbbb7",
+      "segments": [
+        {
+          "bytes": 3960,
+          "minimum": 3960,
+          "data": false,
+          "movable": false
+        },
+        {
+          "bytes": 56,
+          "minimum": 6412,
+          "data": true,
+          "movable": false
+        }
+      ]
+    },
+    "MIDIMAP.DRV": {
+      "bytes": 2590,
+      "sha256": "6282d292ea232282b69f5a0d35ae2da1e29b1ff234758d93fe2e0513c5c3c385",
+      "segments": [
+        {
+          "bytes": 1960,
+          "minimum": 1960,
+          "data": false,
+          "movable": false
+        },
+        {
+          "bytes": 154,
+          "minimum": 258,
+          "data": true,
+          "movable": false
+        }
+      ]
+    },
+    "TBRIDGE.EXE": {
+      "bytes": 6219,
+      "sha256": "b188e1118b2480e3216ce495b6ee5e8d6352e05337da64dbe3f8c03391795bb3"
+    }
+  }
+}

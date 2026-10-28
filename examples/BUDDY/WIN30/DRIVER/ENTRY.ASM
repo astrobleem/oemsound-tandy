@@ -1,7 +1,8 @@
 .8086
 _TEXT SEGMENT WORD PUBLIC 'CODE'
 ASSUME CS:_TEXT
-PUBLIC LibEntry, _PsgByte
+PUBLIC LibEntry, _PsgByte, _small_code_
+_small_code_ LABEL BYTE
 LibEntry PROC FAR
     mov ax,1
     retf

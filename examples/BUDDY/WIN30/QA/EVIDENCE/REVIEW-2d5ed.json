@@ -1,0 +1,58 @@
+{
+  "outcome": "FINDINGS",
+  "reviewed_commit": "2d5ed5ff26b46d7ca80e928965a368f59dc88b65",
+  "findings": [
+    {
+      "priority": "P2",
+      "title": "Pause on mouse-opened system menu",
+      "path": "examples/BUDDY/WIN30/source/TINYVID.C",
+      "line": 652,
+      "evidence": "WndProc handles minimize/focus/activation and WM_SYSKEYDOWN, but has no WM_INITMENU, WM_SYSCOMMAND or WM_NCLBUTTONDOWN handler before DefWindowProc. Clicking the system-menu box keeps focus/activation on the player and does not generate WM_SYSKEYDOWN.",
+      "impact": "The documented system-menu pause/release guarantee misses ordinary mouse entry. Resident speaker service can continue while the modal menu tracks, unlike keyboard menu entry.",
+      "recommendation": "Pause before menu tracking on the Win3 menu initialization path and add a regression for mouse-opened system menu.",
+      "test_gap": "BUDQA.C phases 1..14 cover natural/pause/seek/minimize/focus/Escape/close, not opening system menu.",
+      "verification": "Source inspection only; not reproduced natively"
+    }
+  ],
+  "packages": {
+    "WINPLAY.ZIP": {
+      "bytes": 1021983,
+      "sha256": "3856b440fde7a212519dfc87f4f0731fd307a30b365fac09c947e23df44ab370",
+      "members": 18
+    },
+    "DOSPLAY.ZIP": {
+      "bytes": 2619328,
+      "sha256": "6edc702d85713f96f1799b176542f0170f9660109c548a86455897d202f789cc",
+      "members": 21
+    },
+    "WINSRC.ZIP": {
+      "bytes": 1147438,
+      "sha256": "dc4e2d8e02acc4fbec5652e89f22235f4d590cc60a9a81bead8334d177f292fa",
+      "members": 101
+    }
+  },
+  "checks": [
+    "Runtime ZIP manifests and corruption/duplicate-member checks pass",
+    "All final Windows build-input hashes and five runtime binary hashes match",
+    "DOS EXE matches qualified identity",
+    "Standalone WINSRC repository counterparts all byte identical",
+    "All selected Windows evidence provenance hashes match",
+    "SPEAKER.WZM, WEEZER.WZM and WEEZER.CUE identical across DOS high/low and Windows"
+  ],
+  "strengths": [
+    "Device choice independent of display; auto uses ROM rather than a lease query",
+    "Common release path; cleanup failure retains ownership and blocks close/device switch",
+    "Speaker clocks use resident bounded prepared storage; mute precedes timer/hook removal",
+    "DOS timer callback does no DOS/file/heap work; stop restores timer, sound, display and handlers",
+    "Native incomplete/canceled/observer-failed results explicitly scoped; no relabeling as completed suites"
+  ],
+  "limitations": [
+    "No new playback, emulator, or test suite execution",
+    "Mouse-menu finding is source-backed and needs targeted regression",
+    "Windows and DOS video quantizers differ as documented; shared music/cue verified",
+    "Physical hardware, slow-media and subjective audio remain unqualified"
+  ],
+  "emulator_started": false,
+  "playback_started": false,
+  "worktree_modified": false
+}

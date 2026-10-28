@@ -1,0 +1,7 @@
+system windows
+name TINYVID.EXE
+option map=TINYVID.MAP
+option stack=4096
+option heapsize=2048
+option description 'Buddy Holly CGA / PC speaker, Windows 3.0'
+file TINYVID.obj

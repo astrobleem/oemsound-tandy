@@ -1,0 +1,22 @@
+name: Buddy DOS host contracts
+on:
+  push:
+    paths: ['examples/BUDDY/DOS/**', 'examples/BUDDY/DOSPLAY.ZIP', '.github/workflows/buddy-dos.yml']
+  pull_request:
+    paths: ['examples/BUDDY/DOS/**', 'examples/BUDDY/DOSPLAY.ZIP', '.github/workflows/buddy-dos.yml']
+permissions:
+  contents: read
+jobs:
+  host:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: C89 backend and arrangement contracts
+        run: python3 examples/BUDDY/DOS/HOST/HOSTTEST.PY --cc gcc --out "$RUNNER_TEMP/buddy-dos-host"
+      - name: EOF, starvation, dense queue and cue regressions
+        run: python3 examples/BUDDY/DOS/HOST/TESTQUE.PY --cc gcc --out "$RUNNER_TEMP/buddy-dos-queue"
+      - name: Validator and scoped ISA audit negative cases
+        run: python3 examples/BUDDY/DOS/HOST/TESTTOOLS.PY --out "$RUNNER_TEMP/buddy-dos-tools"

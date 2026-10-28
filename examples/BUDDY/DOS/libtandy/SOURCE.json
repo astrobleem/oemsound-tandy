@@ -1,0 +1,31 @@
+{
+  "local_source": "C:\\Users\\chad\\Documents\\Codex\\2026-10-27\\task\\engine-main",
+  "source_revision": "d633d25b6bfd9f56105acdd2e86f960c8db3efb5",
+  "selection": "Current unchanged lt_chip and DOS lt_tick services. Other audio/score/synth modules intentionally excluded; existing WZM streaming retained.",
+  "files": {
+    "LICENSE": {
+      "bytes": 1084,
+      "sha256": "1c444f27b5b0d7397fa2e9c2812f89c2daab73c1f29fcbd91f0d8fc793e4cbd4"
+    },
+    "PROVENANCE.md": {
+      "bytes": 3842,
+      "sha256": "c4fe49e6f37a420d65c9619b456fac344d75fe23e40432119fa94f121dc13407"
+    },
+    "include\\lt_sound.h": {
+      "bytes": 1301,
+      "sha256": "dd2c3ea2c9a2ed56dbe7297367cc4c5e17ac8bc647895a3325bb2383a2382c60"
+    },
+    "include\\lt_tick_dos.h": {
+      "bytes": 3273,
+      "sha256": "394ba10e8fc19a26e6ab46a7491dff34d3ef80bba9bf2a4e081adfbb047d8e2f"
+    },
+    "src\\lt_chip.c": {
+      "bytes": 2656,
+      "sha256": "277505ef3f6c0eaa6e0aa51c1f7577f6420bb25c0b33726431c7413fd9998148"
+    },
+    "src\\lt_tick_dos.c": {
+      "bytes": 4923,
+      "sha256": "0e300fb6a5b54573932a5fba5cffa361bb3f0cc7a5316e96bce22c9be3065843"
+    }
+  }
+}

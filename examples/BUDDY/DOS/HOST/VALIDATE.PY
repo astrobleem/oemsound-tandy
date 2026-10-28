@@ -20,6 +20,14 @@ for row in struct.iter_unpack('<I4B4BBB',m[20:]):
 assert len(c)==16
 magic,dc,start,end=struct.unpack('<4sIII',c)
 assert magic==b'WZC1' and dc==d and 0<=start<end<=d
+s=(root/'SPEAKER.WZM').read_bytes()
+sm,sh,sr,sn,sd,sres=struct.unpack_from('<4sHHIII',s)
+assert (sm,sh,sr,sd,sres)==(b'WZM1',20,14,d,0) and 0<sn<=10000 and len(s)==20+14*sn
+last=-1
+for row in struct.iter_unpack('<I4B4BBB',s[20:]):
+ assert last<row[0]<=d and row[1]==row[3]==row[4]==row[5]==row[7]==row[8]==0 and row[9]&~2==0 and row[10]==0
+ assert (row[2]==row[6]==0) or (24<=row[2]<=96 and 1<=row[6]<=127)
+ last=row[0]
 # Same bank mapping as DOS, with non-overlapping scanlines and bounded offsets.
 ranges=[]
 for y in range(h):
@@ -29,5 +37,5 @@ for y in range(h):
  ranges.append((lo,hi))
 # Last-frame seek above 64K must retain all high words.
 lastoff=24+(n-1)*fs;assert v[lastoff:lastoff+fs] and lastoff+fs==len(v)
-result={'video':{'width':w,'height':h,'fps':fps,'frames':n,'bytes':len(v),'last_frame_offset':lastoff},'music':{'events':ne,'bytes':len(m)},'full_duration_ms':d,'song_range_ms':[start,end],'song_duration_ms':end-start,'Tandy_video_address_ranges_checked':len(ranges),'sha256':{name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ['WEEZER.WZV','WEEZER.WZM','WEEZER.CUE']}}
+result={'video':{'width':w,'height':h,'fps':fps,'frames':n,'bytes':len(v),'last_frame_offset':lastoff},'music':{'events':ne,'bytes':len(m)},'full_duration_ms':d,'song_range_ms':[start,end],'song_duration_ms':end-start,'Tandy_video_address_ranges_checked':len(ranges),'sha256':{name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ['WEEZER.WZV','WEEZER.WZM','SPEAKER.WZM','WEEZER.CUE']}}
 print(json.dumps(result,indent=2))

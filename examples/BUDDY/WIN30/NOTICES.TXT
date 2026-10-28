@@ -1,0 +1,15 @@
+PROGRAM AND LIBRARY NOTICES
+
+The Buddy app/mapper and installer are covered by the repository license
+in LICENSE.TXT. The reused libwintandy TBRIDGE/WINHOOK implementation is
+covered by the retained MIT notice in LIBWT.TXT (Copyright 2026 OpenAI).
+The current engine mirror is used without replacing the published SOUND
+provider or MIDI engine. No RAWFILE tracker decoder is included here.
+
+Video frames and the written musical arrangement remain third-party
+content as explained in ATTRIB.TXT. Code licensing does not grant rights
+to the underlying composition or video. No sampled soundtrack is included.
+
+The complete corresponding local source is in SOURCE.ZIP beside the
+runtime ZIP; source/BUILD.TXT describes the external compiler and build.
+No Windows, BIOS, compiler, SDK or emulator image is included.

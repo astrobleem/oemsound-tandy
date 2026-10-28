@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "compared_full_tested_build": "build-integrated-07",
+  "current_build": "build-integrated-08",
+  "identical_production_function_bodies": {
+    "releaseSound": true,
+    "openVideo": true,
+    "nativePlanar": true,
+    "fetchEvent": true,
+    "openMusic": true,
+    "musicAt": true,
+    "prepareSpeaker": true,
+    "acquireSound": true,
+    "applyState": true,
+    "play": true,
+    "updateMusic": true,
+    "updateVideo": true,
+    "movieNow": true,
+    "stop": true
+  },
+  "changed": "Only WinMain text-width/position calculation and paused status label; all four helper binaries unchanged."
+}
