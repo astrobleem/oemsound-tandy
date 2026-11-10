@@ -1,6 +1,9 @@
 # Downloads
 
-Start with **[TWSETUP.EXE — native DOS Setup](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE)**.
+For the full authoring suite, start with **[BEATSFX.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/BEATSFX.ZIP)**:
+current Beats Lab, Effects Lab and MML Fiddle, with shared Setup and source.
+
+For just the driver and music player, choose **[TWSETUP.EXE — native DOS Setup](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE)**.
 It installs the shared Windows sound driver, Winamp and the required helpers.
 [Installation instructions](INSTALL.MD).
 
@@ -9,13 +12,13 @@ It installs the shared Windows sound driver, Winamp and the required helpers.
 | [TWSETUP.EXE](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/TWSETUP.EXE) | The self-contained DOS installer. Run `TWSETUP`, then `C:\WINAMP\GO`. |
 | [TWXT2.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/TWXT2.ZIP) | The same driver/player as an expanded kit, with original example songs and source. Extract `TWXT2` and run its `SETUP.EXE`. |
 | [BEATSFX.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/BEATSFX.ZIP) | Beats Lab with Effects Lab patch import, per-step FX and embedded songs, plus Effects Lab, Fiddle, shared Setup and source. Extract `BEATSFX`, run its `TWSETUP`, then `GO` from DOS. |
-| [MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP) | Beats Lab and Fiddle: editable patterns, five-voice music and MML scores. Includes shared Setup. |
-| [PITEXPR.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITEXPR.ZIP) | The same Beats Lab, plus Mini Piano, JoyMIDI and MiniMIDI. Includes shared Setup. |
+| [MML3AUTH.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/MML3AUTH.ZIP) | Earlier Beats/Fiddle note-pattern kit. For the current editor with imported Effects patches, choose BEATSFX.ZIP. |
+| [PITEXPR.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITEXPR.ZIP) | Mini Piano, JoyMIDI and MiniMIDI, plus the earlier note-pattern Beats editor and shared Setup. Use BEATSFX.ZIP for the current Beats editor. |
 | [EFFECTS.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/EFFECTS.ZIP) | Effects Lab with PSG/speaker patches, C export and shared Setup. Extract `EFFECTS`, then follow its `GO C:\WINDOWS` instructions. |
 | [PITDOS.ZIP](https://github.com/astrobleem/oemdisplay-tandy/releases/download/windows-xt/PITDOS.ZIP) | A separate DOS sound test. Extract it, change to its folder and run `PSGTEST` or `PSGTEST /pit`. Windows is not needed. |
 
-The Windows apps share one installed `SOUND.DRV`. Choose the music kit by
-which companion apps you want; there is no different driver to select.
+The Windows apps share one installed `SOUND.DRV`. Keep each kit's app-local
+support files together; there is no different driver to select. Restart Windows before switching from an older kit.
 [Requirements](../README.md#requirements) · [App controls and launch paths](APPS.MD)
 
 ## Buddy Holly tiny video players

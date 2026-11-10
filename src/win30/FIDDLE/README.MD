@@ -1,14 +1,15 @@
 # MML Fiddle
 
 Write and play text scores through the shared Tandy sound driver. Fiddle
-is included with Beats Lab in **MML3AUTH.ZIP**.
+is included with Beats Lab and Effects Lab in **BEATSFX.ZIP**.
 
 [Download](../../../docs/DOWNLOADS.MD) · [Install](../../../docs/INSTALL.MD#add-music-tools)
 
 ## Start with a Beats score
 
-1. In Beats, choose a demo and click **Export** to create its `.MML` score.
-2. Start Fiddle from Program Manager: `C:\MML3AUTH\FIDDLE\MMLFIDL.EXE`.
+1. In Beats, choose a normal-note demo and click **Export** to create its `.MML` score.
+   Songs with active FX triggers use `.BTS`; their sound shapes cannot be exported as MML.
+2. Stop and close Beats, then start Fiddle from Program Manager: `C:\BEATSFX\MMLFIDL.EXE`.
 3. **Open** the exported file, edit the text, then choose **Play**.
 4. **Stop** or Esc releases sound. **Save** keeps your score for later.
 
