@@ -22,25 +22,50 @@ and video support. Close the player and exit Windows normally to return to DOS.
 If you prefer the full **TWXT2.ZIP**, extract its `TWXT2` folder and run
 `SETUP.EXE` inside it instead. Both choices install the same driver and player.
 
-## Add music tools
+<a id="add-music-tools"></a>
 
-Choose **MML3AUTH.ZIP** for Beats Lab and Fiddle, or **PITEXPR.ZIP** for Beats
-plus Mini Piano, JoyMIDI and MiniMIDI. Extract the complete folder, keeping
-its files and subfolders together. Each kit includes the same TWSETUP.EXE;
-run it once from DOS if shared sound is not already installed from the current kit.
+## Start the Beats + Effects suite
 
-Start with `C:\WINAMP\GO`, close the Winamp window, then use **File → Run**
-in Program Manager to open an app from its extracted folder. For example:
+Download **[BEATSFX.ZIP](https://raw.githubusercontent.com/astrobleem/oemsound-tandy/main/artifacts/win30/BEATSFX.ZIP)**
+for the current Beats editor with Effects patch import, Effects Lab and MML
+Fiddle. Extract the complete `BEATSFX` folder, keeping its files together.
+
+From DOS, using the example location `C:\BEATSFX`:
 
 ```dos
-C:\MML3AUTH\BEATS\BEATS.EXE
-C:\MML3AUTH\FIDDLE\MMLFIDL.EXE
-C:\PITEXPR\MINIPIAN.EXE
+CD \BEATSFX
+TWSETUP
+GO
 ```
 
-[The app guide](APPS.MD) lists every launch path and its first controls.
-Stop the current sound producer before playing another. Keep each kit intact;
-its app-local MIDI support files are already in the right place.
+Setup installs the shared sound driver and Winamp. `GO` starts Beats;
+`GOFX` starts the included Effects Lab. Both default to `C:\WINDOWS`.
+If Windows is elsewhere, use `GO C:\WIN30` or `GOFX C:\WIN30` with its
+actual directory.
+
+In Beats, click **Demo** to try a pattern, then **Play**. The final demo,
+**Effects groove**, combines imported effects with normal notes. To use
+Fiddle, stop and close Beats, then enter `C:\BEATSFX\MMLFIDL.EXE` in
+Program Manager's **File → Run**. Open an MML score exported from a normal
+Beats pattern. FX-trigger songs use `.BTS` rather than MML.
+
+Stop one sound app before playing another. When moving from an older kit,
+keep the current folder intact and restart Windows before using it so an
+older loaded audio DLL is not reused.
+
+## Add the companion instruments
+
+**PITEXPR.ZIP** adds Mini Piano, JoyMIDI and MiniMIDI. Extract its complete
+folder. It includes the shared Setup and an earlier note-pattern version of
+Beats; use **BEATSFX.ZIP** for the current Effects-capable editor.
+
+Start with `C:\WINAMP\GO`, close the Winamp window, then use **File → Run**
+in Program Manager, for example `C:\PITEXPR\MINIPIAN.EXE`. Keep each kit's
+app-local support files together. [The app guide](APPS.MD) lists the other
+launch paths.
+
+**MML3AUTH.ZIP** remains available for the earlier Beats/Fiddle pairing.
+New users should choose BEATSFX for the combined authoring suite.
 
 ## Start Effects Lab
 

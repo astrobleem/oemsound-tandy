@@ -6,17 +6,19 @@ All these Windows apps use the same shared sound installation.
 | App | Try it | Open after setup |
 | --- | --- | --- |
 | **Tandy Winamp** | Add an included song, choose Play, then try Default/Chamber for MIDI. | From DOS: `C:\WINAMP\GO` |
-| **Beats Lab** | Click Demo, Play, then edit a cell. Save `.BTS` patterns or export MML. | `C:\MML3AUTH\BEATS\BEATS.EXE`, or `C:\PITEXPR\BEATS.EXE` |
-| **Fiddle** | Open a Beats-exported `.MML` score, edit the text and Play. | `C:\MML3AUTH\FIDDLE\MMLFIDL.EXE` |
-| **Effects Lab** | Choose Coin/Laser/Boom/Jump/Blip, edit a field and preview. | From DOS in `C:\EFFECTS`: `GO C:\WINDOWS` |
+| **Beats Lab** | Click Demo, Play, then edit a cell. Import `.FXP` patches and save embedded `.BTS` songs; export normal-note patterns as MML. | From DOS in `C:\BEATSFX`: `GO` |
+| **Fiddle** | Open a Beats-exported `.MML` score, edit the text and Play. | `C:\BEATSFX\MMLFIDL.EXE` |
+| **Effects Lab** | Choose Coin/Laser/Boom/Jump/Blip, edit a field and preview. | From DOS in `C:\BEATSFX`: `GOFX` |
 | **Mini Piano** | Play the keys with the mouse or the PC keyboard. Esc/Panic releases notes. | `C:\PITEXPR\MINIPIAN.EXE` |
 | **JoyMIDI** | Choose the joystick port, collect Range, Center, then Arm. Button 1 plays; Esc/Panic mutes. | `C:\PITEXPR\JOYMIDI.EXE` |
 | **MiniMIDI** | Browse to a MIDI file and Play. Stop/Esc releases sound. | `C:\PITEXPR\MINIMIDI.EXE` |
 
 Paths assume you extracted each kit directly on C:. Use the matching path if
-you chose another folder. For the instruments and Fiddle, start Windows as
-described in [installation](INSTALL.MD#add-music-tools), then enter the EXE
-path in Program Manager's File → Run.
+you chose another folder. For Fiddle, stop and close Beats, then enter its EXE
+path in Program Manager's File → Run. For the companion instruments, follow
+[installation](INSTALL.MD#add-the-companion-instruments).
+`GO` and `GOFX` accept a Windows directory argument if it is not `C:\WINDOWS`.
+Stop one sound app before playing another.
 
 ## Which voices do I get?
 
